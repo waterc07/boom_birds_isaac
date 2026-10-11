@@ -36,3 +36,7 @@ class VelocityCommand:
     origin_epoch: int = 0
     clock_id: str = 'host_monotonic'
     schema_id: str = SCHEMA_ID
+
+    def __post_init__(self):
+        if not isinstance(self.velocity_enu_mps, tuple):
+            raise ValueError('velocity_enu_mps must be an immutable tuple')

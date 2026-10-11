@@ -1,0 +1,21 @@
+.........FF                                                              [100%]
+================================== FAILURES ===================================
+___________ test_public_command_rejects_mutable_velocity_container ____________
+
+    def test_public_command_rejects_mutable_velocity_container():
+>       with pytest.raises(ValueError):
+E       Failed: DID NOT RAISE ValueError
+
+tests\contracts\test_timebase.py:54: Failed
+____________ test_nonstring_clocks_never_match_by_python_coercion _____________
+
+    def test_nonstring_clocks_never_match_by_python_coercion():
+>       assert sample_age_s(0, 1, 1_000_000_000, True) is None
+E       assert 1.0 is None
+E        +  where 1.0 = sample_age_s(0, 1, 1000000000, True)
+
+tests\contracts\test_timebase.py:59: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/contracts/test_timebase.py::test_public_command_rejects_mutable_velocity_container
+FAILED tests/contracts/test_timebase.py::test_nonstring_clocks_never_match_by_python_coercion
+2 failed, 9 passed in 0.24s

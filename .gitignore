@@ -22,6 +22,7 @@ dist/
 /datasets/
 /cache/
 /artifacts/
+/outputs/
 /tmp/
 *.pt
 *.pth

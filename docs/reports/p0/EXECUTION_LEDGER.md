@@ -12,3 +12,10 @@
 - Ruling: VelocityCommand增加origin_epoch/clock_id/schema_id — 原点重置及时钟域切换必须可拒绝旧动作 — 未来适配器必须显式携带这些字段。
 - Task 2: complete；pytest RED因缺少boom_birds包，GREEN全套31 passed；标准库隔离在子进程验证，未安装项目包或新依赖。
 - Task 3–6: NOT RUN。
+
+- Final review: independent read-only review of Task 1/2 snapshot; no Critical findings.
+- Final: regraded mutable velocity container and nonstring clock equality from Minor to Important — public contract bypasses immutability/clock-domain guarantees, despite decode_action normal path being safe.
+- Final: fixed both findings — test_public_command_rejects_mutable_velocity_container and test_nonstring_clocks_never_match_by_python_coercion RED→GREEN; full suite 33/33 passed on both Isaac and default system Python.
+- Final: deferred minors: none.
+- Final: Ruling on review scope — Task 3–6 are the next unexecuted work, not missing functionality in the current P0 checkpoint; no G1/P1 completion claim — cost: full flight/PPO comparison still requires future execution.
+- Verification: pinned upstream/source hashes, official 100 samples and checkpoint hash matched; document audit PASS; outputs/weights/external ignored; no merge or push.

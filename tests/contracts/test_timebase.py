@@ -4,7 +4,7 @@ import pytest
 
 from boom_birds.contracts.frames import decode_action
 from boom_birds.contracts.timebase import command_is_valid, sample_age_s
-from boom_birds.contracts.types import ActionLimits
+from boom_birds.contracts.types import ActionLimits, VelocityCommand
 
 
 def test_expiry_boundary_epoch_origin_and_clock():
@@ -48,3 +48,14 @@ def test_invalid_physical_command_rejected():
 def test_decoder_requires_nonnegative_integer_time_and_epoch(now, epoch):
     with pytest.raises(ValueError):
         decode_action([0] * 4, 0, ActionLimits(), now, epoch)
+
+
+def test_public_command_rejects_mutable_velocity_container():
+    with pytest.raises(ValueError):
+        VelocityCommand([0.0, 0.0, 0.0], 0, 0, 150_000_000, 0)
+
+
+def test_nonstring_clocks_never_match_by_python_coercion():
+    assert sample_age_s(0, 1, 1_000_000_000, True) is None
+    cmd = decode_action([0] * 4, 0, ActionLimits(), 0, 0)
+    assert not command_is_valid(replace(cmd, clock_id=1), 1, 0, clock_id=True)

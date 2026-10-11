@@ -10,6 +10,7 @@
 | Isaac Sim | 5.1.0.0 |
 | Isaac Lab | 源码SHA `b4c321024792976150ca55fddb26fa34480d974e`；VERSION文本2.3.2；发行包isaaclab 0.54.4、tasks 0.11.16、rl 0.5.2，不能混为同一版本号 |
 | 源码现场状态 | tracked源码无修改；存在一个既有untracked文件 `2.7.0+cu128`，未删除。启动器存在且hash已保存 |
+| Windows启动器 | 在当前PowerShell进程临时前置已有venv Scripts后，`isaaclab.bat -p --version`选择同一解释器并返回Python 3.11.9；未全局改PATH |
 | PyTorch | 2.7.0+cu128，CUDA构建12.8；CUDA可用，GPU张量求和得到4.0 |
 | GPU | RTX 5080，nvidia-smi驱动610.88、显存16303MiB；Kit报告可用显存口径不同，不能混用 |
 | PPO | 锁定已有RSL-RL 5.0.1：当前Isaac Lab setup已固定此版本，官方短迭代通过；RNNModel代码支持GRU/LSTM，时序运行未验 |
@@ -24,9 +25,9 @@
 | 官方QuadcopterEnv原配置 | 1环境、100步、exit 0，有 `Failed to clone in Fabric` | 原错误日志保留，不因退出0掩盖 |
 | 官方类，关闭Fabric克隆 | 1环境、100步、exit 0，无Error/Traceback，观测[1,12]有限 | 仅运行/步进；不是稳定飞行和速度响应验收 |
 | 官方RSL-RL训练入口 | 8环境、seed 0、1迭代、192步、exit 0、生成model_0.pt，无Error/Traceback | 仅后端连接/更新/保存，未重放、未收敛、不是本项目训练 |
-| 合同测试 | RED：缺失boom_birds包；GREEN：31 passed | 坐标、水平向量限幅、非法动作、到期边界、任务/原点epoch、时钟域、不可变重发、标准库隔离 |
+| 合同测试 | RED：缺失boom_birds包；首次GREEN：31 passed，审查修复后33 passed | 坐标、水平向量限幅、非法动作、到期边界、任务/原点epoch、时钟域、不可变重发、标准库隔离 |
 
-日志：[原配置](official-quadcopter-smoke.log)、[USD克隆复测](official-quadcopter-usd-smoke.log)、[PPO兼容检查](official-rsl-rl-smoke.log)、[合同RED](contracts-red.log)、[合同GREEN](contracts-green.log)。步进结果：[官方100步](../../../env/manifests/official-quadcopter-usd-smoke.json)；模型路径和hash：[后端记录](../../../env/manifests/ppo-backend.json)。检查point仍在忽略的logs目录，此权重仅用于兼容诊断，不晋升为项目模型。
+日志：[启动器](launcher-python-version.log)、[原配置](official-quadcopter-smoke.log)、[USD克隆复测](official-quadcopter-usd-smoke.log)、[PPO兼容检查](official-rsl-rl-smoke.log)、[合同RED](contracts-red.log)、[合同GREEN](contracts-green.log)。步进结果：[官方100步](../../../env/manifests/official-quadcopter-usd-smoke.json)；模型路径和hash：[后端记录](../../../env/manifests/ppo-backend.json)。checkpoint仍在忽略的logs目录，此权重仅用于兼容诊断，不晋升为项目模型。Hydra生成的outputs目录也已忽略；原日志保留尾部空格，Git属性仅放宽日志的该项空白检查。
 
 依赖冲突原样登记：FastAPI 0.115.7要求Starlette <0.46，但现有0.49.1；IPython 9.15.0要求psutil≥7，但现有5.9.8；isaacsim-kernel要求click==8.1.7和typing_extensions==4.12.2，但现有8.4.2和4.16.0。当前未修改。最小处理顺序：若对应入口出现故障，先复现该组件调用，再评估局部版本约束；不运行全局升级修复。
 
@@ -42,6 +43,10 @@
 ```
 
 clone_in_fabric=False仅关闭场景Fabric克隆，不关闭PhysX或Fabric数据读写。官方资产质量约0.0282kg，重力[0,0,-9.81]m/s²，步进0.02s；官方动作是总推力和机体三轴力矩，本项目20Hz速度动作仍需Task 3外环，不直接使用原策略动作。USD资产仅记录URI，资产本体/依赖hash尚待W02追踪。
+
+## 独立审查与修复
+
+只读独立审查未发现Critical问题，确认范围与证据层级标注。发现可变速度列表和非字符串时钟域两项边界问题；作者按公开合同失效影响提升为应修复项。两条新增测试先失败（见[审查RED](review-fixes-red.log)），限制消息速度为tuple，并在年龄/命令校验中要求时钟ID是非空字符串后，全套33 passed（见[审查GREEN](review-fixes-green.log)）。同一测试套件在默认系统Python也33 passed，无Isaac/Torch依赖。
 
 ## 状态与下一项
 
