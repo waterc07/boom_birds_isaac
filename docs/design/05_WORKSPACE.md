@@ -94,7 +94,7 @@ PX4 SITL到P5再按当时兼容证据选择WSL2/Linux。若用WSL，源码与构
 
 ## 版本与运行记录
 
-P0建立Git（当前无HEAD，不伪造提交）。主干保持可运行基线，每个工作包独立分支；上游固定SHA，避免追随main。dirty运行允许调试，但不得晋升模型；正式run记录源码SHA、上游SHA、配置hash、资产hash、seed、环境、观测schema和结果。
+P0已建立Git并保存v1.2规划基线，后续提交记录以实际Git历史为准。主干保持可运行基线，每个工作包独立分支；上游固定SHA，避免追随main。后续提交标题描述与正文使用中文，保留docs:/feat:/fix:等类型前缀，具体规则见根目录AGENTS.md。dirty运行允许调试，但不得晋升模型；正式run记录源码SHA、上游SHA、配置hash、资产hash、seed、环境、观测schema和结果。
 
 每次运行有唯一run_id，目录内包括resolved_config、manifest、metrics、checkpoint索引、异常与可选视频。docs/reports保存可版本化摘要和外部产物hash；禁止只依赖被Git忽略的runs目录保存唯一结论。训练/验证/测试seed和场景分别登记。
 
