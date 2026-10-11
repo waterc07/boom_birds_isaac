@@ -1,0 +1,1125 @@
+{
+  "scope": "OFFICIAL_TASK_ZERO_ACTION_SMOKE_ONLY",
+  "status": "PASS",
+  "project_velocity_controller": "NOT RUN",
+  "task_source": "e:\\isaac\\isaaclab\\source\\isaaclab_tasks\\isaaclab_tasks\\direct\\quadcopter\\quadcopter_env.py",
+  "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+  "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd",
+  "steps": 100,
+  "num_envs": 1,
+  "seed": 0,
+  "observation_shape": [
+    1,
+    12
+  ],
+  "action_semantics": "total_body_thrust_and_three_body_moments",
+  "step_dt_s": 0.02,
+  "mass_kg": 0.028200002387166023,
+  "gravity_mps2": [
+    0.0,
+    0.0,
+    -9.81
+  ],
+  "samples": [
+    {
+      "step": 0,
+      "position_world_m": [
+        -3.432662487590221e-11,
+        6.994851919905898e-11,
+        0.4998527765274048
+      ],
+      "reward": 0.0023301532492041588,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 1,
+      "position_world_m": [
+        -7.155084857934924e-11,
+        1.9925559813227522e-10,
+        0.49950939416885376
+      ],
+      "reward": 0.0023298468440771103,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 2,
+      "position_world_m": [
+        7.284786662786757e-11,
+        1.47304446418417e-10,
+        0.4989696741104126
+      ],
+      "reward": 0.0023293476551771164,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 3,
+      "position_world_m": [
+        2.209003535647014e-10,
+        -1.7805694418893125e-11,
+        0.49823397397994995
+      ],
+      "reward": 0.0023286202922463417,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 4,
+      "position_world_m": [
+        8.632344838943595e-11,
+        3.4614006105826434e-11,
+        0.4973022937774658
+      ],
+      "reward": 0.002327700611203909,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 5,
+      "position_world_m": [
+        7.489752568146102e-11,
+        -1.1587565629245233e-10,
+        0.4961741268634796
+      ],
+      "reward": 0.0023265883792191744,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 6,
+      "position_world_m": [
+        -1.5805823316838996e-10,
+        -1.1158131363320223e-10,
+        0.49484971165657043
+      ],
+      "reward": 0.002325247973203659,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 7,
+      "position_world_m": [
+        7.135511626010782e-11,
+        -1.2675259453143184e-10,
+        0.4933292865753174
+      ],
+      "reward": 0.0023236970882862806,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 8,
+      "position_world_m": [
+        -4.0902906062179056e-11,
+        -2.697043109678443e-11,
+        0.49161261320114136
+      ],
+      "reward": 0.0023219536524266005,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 9,
+      "position_world_m": [
+        -3.796825354118738e-11,
+        6.836625709993882e-11,
+        0.4896996319293976
+      ],
+      "reward": 0.002319982275366783,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 10,
+      "position_world_m": [
+        3.023513384103893e-10,
+        -2.5686425209059394e-11,
+        0.4875905513763428
+      ],
+      "reward": 0.0023177824914455414,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 11,
+      "position_world_m": [
+        1.466304994091061e-10,
+        -1.0139521167129573e-11,
+        0.4852851629257202
+      ],
+      "reward": 0.00231537246145308,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 12,
+      "position_world_m": [
+        2.0089936658695962e-10,
+        -1.7434190202614275e-10,
+        0.4827836751937866
+      ],
+      "reward": 0.002312733791768551,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 13,
+      "position_world_m": [
+        1.0962002139347504e-10,
+        -1.7999812751412492e-10,
+        0.4800858795642853
+      ],
+      "reward": 0.0023098671808838844,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 14,
+      "position_world_m": [
+        -1.523817599879962e-10,
+        -2.337851856548667e-10,
+        0.4771919846534729
+      ],
+      "reward": 0.002306772628799081,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 15,
+      "position_world_m": [
+        1.26801902311513e-10,
+        -3.2704994268328846e-10,
+        0.4741019010543823
+      ],
+      "reward": 0.0023034317418932915,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 16,
+      "position_world_m": [
+        -1.2441762897719144e-10,
+        -4.5182654839770464e-10,
+        0.470815509557724
+      ],
+      "reward": 0.0022998445201665163,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 17,
+      "position_world_m": [
+        -7.869609131017086e-11,
+        -5.503301148124251e-10,
+        0.4673328995704651
+      ],
+      "reward": 0.0022960291244089603,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 18,
+      "position_world_m": [
+        3.493595343573297e-11,
+        -5.892532017881535e-10,
+        0.46365419030189514
+      ],
+      "reward": 0.0022919499315321445,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 19,
+      "position_world_m": [
+        1.0195114891198287e-10,
+        -6.863097867793044e-10,
+        0.4597792625427246
+      ],
+      "reward": 0.0022876067087054253,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 20,
+      "position_world_m": [
+        2.1776705438902866e-10,
+        -7.750725616872955e-10,
+        0.4557081460952759
+      ],
+      "reward": 0.0022829994559288025,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 21,
+      "position_world_m": [
+        8.744366342128274e-11,
+        -6.94954482849397e-10,
+        0.4514407217502594
+      ],
+      "reward": 0.0022781461011618376,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 22,
+      "position_world_m": [
+        1.0449317799920976e-10,
+        -6.081750103525962e-10,
+        0.4469774067401886
+      ],
+      "reward": 0.0022729928605258465,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 23,
+      "position_world_m": [
+        6.938676022638646e-11,
+        -7.134228763305828e-10,
+        0.4423176944255829
+      ],
+      "reward": 0.002267558127641678,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 24,
+      "position_world_m": [
+        8.031196541136154e-11,
+        -7.893890541232906e-10,
+        0.4374616742134094
+      ],
+      "reward": 0.0022618412040174007,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 25,
+      "position_world_m": [
+        9.832273883958464e-13,
+        -8.230429671129968e-10,
+        0.4324095547199249
+      ],
+      "reward": 0.002255806466564536,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 26,
+      "position_world_m": [
+        2.4806515175335164e-10,
+        -6.079604597530874e-10,
+        0.42716121673583984
+      ],
+      "reward": 0.0022494900040328503,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 27,
+      "position_world_m": [
+        1.6163489990894675e-10,
+        -6.137905739223015e-10,
+        0.42171669006347656
+      ],
+      "reward": 0.0022428559605032206,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 28,
+      "position_world_m": [
+        6.07274994179896e-11,
+        -5.784906997874373e-10,
+        0.41607603430747986
+      ],
+      "reward": 0.0022358866408467293,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 29,
+      "position_world_m": [
+        -1.381478542672454e-10,
+        -6.989147038893861e-10,
+        0.41023898124694824
+      ],
+      "reward": 0.002228599274531007,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 30,
+      "position_world_m": [
+        -3.9064210199946103e-11,
+        -6.00232974434789e-10,
+        0.4042057991027832
+      ],
+      "reward": 0.002220976399257779,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 31,
+      "position_world_m": [
+        1.2783356317935812e-10,
+        -6.079862169272587e-10,
+        0.39797648787498474
+      ],
+      "reward": 0.002213000552728772,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 32,
+      "position_world_m": [
+        1.6446770334521688e-10,
+        -5.518501211554394e-10,
+        0.39155086874961853
+      ],
+      "reward": 0.0022046708036214113,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 33,
+      "position_world_m": [
+        4.585060109363326e-11,
+        -7.315579808597761e-10,
+        0.3849291503429413
+      ],
+      "reward": 0.002195969922468066,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 34,
+      "position_world_m": [
+        2.448502789409446e-10,
+        -6.957748266422925e-10,
+        0.3781111240386963
+      ],
+      "reward": 0.002186915837228298,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 35,
+      "position_world_m": [
+        1.5497839123135293e-11,
+        -7.246310218533836e-10,
+        0.3710969388484955
+      ],
+      "reward": 0.002177454298362136,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 36,
+      "position_world_m": [
+        6.285596348964972e-11,
+        -8.103362980627082e-10,
+        0.3638867139816284
+      ],
+      "reward": 0.0021676039323210716,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 37,
+      "position_world_m": [
+        1.4175316476183752e-10,
+        -8.159814490760198e-10,
+        0.3564801514148712
+      ],
+      "reward": 0.0021573465783149004,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 38,
+      "position_world_m": [
+        2.844366409071597e-11,
+        -9.795537714296643e-10,
+        0.3488774597644806
+      ],
+      "reward": 0.002146681770682335,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 39,
+      "position_world_m": [
+        3.061258746495099e-10,
+        -9.332795647409853e-10,
+        0.3410784900188446
+      ],
+      "reward": 0.0021355922799557447,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 40,
+      "position_world_m": [
+        2.097543805312796e-10,
+        -9.703867709376368e-10,
+        0.3330833911895752
+      ],
+      "reward": 0.00212407810613513,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 41,
+      "position_world_m": [
+        1.1290841872568791e-10,
+        -1.0050859033938764e-09,
+        0.3248920142650604
+      ],
+      "reward": 0.0021121029276400805,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 42,
+      "position_world_m": [
+        -8.324745059962169e-11,
+        -8.830464137687954e-10,
+        0.31650447845458984
+      ],
+      "reward": 0.00209966697730124,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 43,
+      "position_world_m": [
+        -1.1191324256198953e-10,
+        -9.199117023683812e-10,
+        0.3079206049442291
+      ],
+      "reward": 0.0020867707207798958,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 44,
+      "position_world_m": [
+        -1.0900628316656835e-10,
+        -8.874770918154695e-10,
+        0.29914069175720215
+      ],
+      "reward": 0.0020733957644551992,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 45,
+      "position_world_m": [
+        8.983903898585055e-11,
+        -8.451622734995112e-10,
+        0.290164589881897
+      ],
+      "reward": 0.0020595421083271503,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 46,
+      "position_world_m": [
+        -1.5858278579194973e-10,
+        -9.13634612409453e-10,
+        0.2809922695159912
+      ],
+      "reward": 0.0020451738964766264,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 47,
+      "position_world_m": [
+        1.1422020274043376e-10,
+        -9.041143389509898e-10,
+        0.271623820066452
+      ],
+      "reward": 0.0020302915945649147,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 48,
+      "position_world_m": [
+        -1.6028801896883493e-10,
+        -9.44314404449642e-10,
+        0.2620590627193451
+      ],
+      "reward": 0.0020148949697613716,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 49,
+      "position_world_m": [
+        -2.39636227528095e-11,
+        -1.0861979093945706e-09,
+        0.25229811668395996
+      ],
+      "reward": 0.0019989663269370794,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 50,
+      "position_world_m": [
+        2.0143420265128498e-10,
+        -1.1386340759145241e-09,
+        0.2423410415649414
+      ],
+      "reward": 0.001982504967600107,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 51,
+      "position_world_m": [
+        -3.547622612343204e-11,
+        -1.079676126281015e-09,
+        0.2321876883506775
+      ],
+      "reward": 0.0019654761999845505,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 52,
+      "position_world_m": [
+        -1.413698741403735e-10,
+        -1.1888579010133071e-09,
+        0.22183816134929657
+      ],
+      "reward": 0.0019478967878967524,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 53,
+      "position_world_m": [
+        -1.58087765100845e-10,
+        -9.756421226470025e-10,
+        0.21129244565963745
+      ],
+      "reward": 0.0019297318067401648,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 54,
+      "position_world_m": [
+        6.040282163333188e-11,
+        -1.0043579301566297e-09,
+        0.20055052638053894
+      ],
+      "reward": 0.001910981023684144,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 55,
+      "position_world_m": [
+        7.444389549249308e-11,
+        -9.420086932721006e-10,
+        0.18961244821548462
+      ],
+      "reward": 0.0018916265107691288,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 56,
+      "position_world_m": [
+        -7.967036752543066e-11,
+        -8.847382826360217e-10,
+        0.17847810685634613
+      ],
+      "reward": 0.001871685846708715,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 57,
+      "position_world_m": [
+        -1.5935395364374827e-11,
+        -7.988143480019971e-10,
+        0.16714762151241302
+      ],
+      "reward": 0.001851123757660389,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 58,
+      "position_world_m": [
+        -7.535157220406319e-11,
+        -9.35359678599923e-10,
+        0.15562090277671814
+      ],
+      "reward": 0.001829940010793507,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 59,
+      "position_world_m": [
+        -2.4041935109408996e-11,
+        -9.999934214022232e-10,
+        0.14389795064926147
+      ],
+      "reward": 0.00180811679456383,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 60,
+      "position_world_m": [
+        -1.730301457669725e-10,
+        -8.605707813025276e-10,
+        0.1319788247346878
+      ],
+      "reward": 0.0017856539925560355,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 61,
+      "position_world_m": [
+        2.2675597510790624e-11,
+        -1.012189332350033e-09,
+        0.11986347287893295
+      ],
+      "reward": 0.0017625517211854458,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 62,
+      "position_world_m": [
+        1.811725075517856e-11,
+        -1.1027241342276284e-09,
+        0.10755196213722229
+      ],
+      "reward": 0.001738792285323143,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 63,
+      "position_world_m": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "reward": 0.001714375102892518,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "step": 64,
+      "position_world_m": [
+        -3.432662487590221e-11,
+        6.994851919905898e-11,
+        0.4998527765274048
+      ],
+      "reward": 0.0024010888300836086,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 65,
+      "position_world_m": [
+        -7.155084857934924e-11,
+        1.9925559813227522e-10,
+        0.49950939416885376
+      ],
+      "reward": 0.0024003710132092237,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 66,
+      "position_world_m": [
+        7.284786662786757e-11,
+        1.47304446418417e-10,
+        0.4989696741104126
+      ],
+      "reward": 0.0023992459755390882,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 67,
+      "position_world_m": [
+        2.209003535647014e-10,
+        -1.7805694418893125e-11,
+        0.49823397397994995
+      ],
+      "reward": 0.0023976603988558054,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 68,
+      "position_world_m": [
+        8.632344838943595e-11,
+        3.4614006105826434e-11,
+        0.4973022937774658
+      ],
+      "reward": 0.0023956678342074156,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 69,
+      "position_world_m": [
+        7.489752568146102e-11,
+        -1.1587565629245233e-10,
+        0.4961741268634796
+      ],
+      "reward": 0.002393214264884591,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 70,
+      "position_world_m": [
+        -1.5805823316838996e-10,
+        -1.1158131363320223e-10,
+        0.49484971165657043
+      ],
+      "reward": 0.0023903362452983856,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 71,
+      "position_world_m": [
+        7.135511626010782e-11,
+        -1.2675259453143184e-10,
+        0.4933292865753174
+      ],
+      "reward": 0.002387015148997307,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 72,
+      "position_world_m": [
+        -4.0902906062179056e-11,
+        -2.697043109678443e-11,
+        0.49161261320114136
+      ],
+      "reward": 0.002383268903940916,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 73,
+      "position_world_m": [
+        -3.796825354118738e-11,
+        6.836625709993882e-11,
+        0.4896996319293976
+      ],
+      "reward": 0.0023790623527020216,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 74,
+      "position_world_m": [
+        3.023513384103893e-10,
+        -2.5686425209059394e-11,
+        0.4875905513763428
+      ],
+      "reward": 0.002374430652707815,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 75,
+      "position_world_m": [
+        1.466304994091061e-10,
+        -1.0139521167129573e-11,
+        0.4852851629257202
+      ],
+      "reward": 0.0023693384137004614,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 76,
+      "position_world_m": [
+        2.0089936658695962e-10,
+        -1.7434190202614275e-10,
+        0.4827836751937866
+      ],
+      "reward": 0.0023638030979782343,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 77,
+      "position_world_m": [
+        1.0962002139347504e-10,
+        -1.7999812751412492e-10,
+        0.4800858795642853
+      ],
+      "reward": 0.00235780724324286,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 78,
+      "position_world_m": [
+        -1.523817599879962e-10,
+        -2.337851856548667e-10,
+        0.4771919846534729
+      ],
+      "reward": 0.0023513687774538994,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 79,
+      "position_world_m": [
+        1.26801902311513e-10,
+        -3.2704994268328846e-10,
+        0.4741019010543823
+      ],
+      "reward": 0.002344469539821148,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 80,
+      "position_world_m": [
+        -1.2441762897719144e-10,
+        -4.5182654839770464e-10,
+        0.470815509557724
+      ],
+      "reward": 0.0023371095303446054,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 81,
+      "position_world_m": [
+        -7.869609131017086e-11,
+        -5.503301148124251e-10,
+        0.4673328995704651
+      ],
+      "reward": 0.0023292885161936283,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 82,
+      "position_world_m": [
+        3.493595343573297e-11,
+        -5.892532017881535e-10,
+        0.46365419030189514
+      ],
+      "reward": 0.0023210071958601475,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 83,
+      "position_world_m": [
+        1.0195114891198287e-10,
+        -6.863097867793044e-10,
+        0.4597792625427246
+      ],
+      "reward": 0.002312229247763753,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 84,
+      "position_world_m": [
+        2.1776705438902866e-10,
+        -7.750725616872955e-10,
+        0.4557081460952759
+      ],
+      "reward": 0.0023030086886137724,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 85,
+      "position_world_m": [
+        8.744366342128274e-11,
+        -6.94954482849397e-10,
+        0.4514407217502594
+      ],
+      "reward": 0.002293291734531522,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 86,
+      "position_world_m": [
+        1.0449317799920976e-10,
+        -6.081750103525962e-10,
+        0.4469774067401886
+      ],
+      "reward": 0.0022830781526863575,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 87,
+      "position_world_m": [
+        6.938676022638646e-11,
+        -7.134228763305828e-10,
+        0.4423176944255829
+      ],
+      "reward": 0.002272403798997402,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 88,
+      "position_world_m": [
+        8.031196541136154e-11,
+        -7.893890541232906e-10,
+        0.4374616742134094
+      ],
+      "reward": 0.002261215355247259,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 89,
+      "position_world_m": [
+        9.832273883958464e-13,
+        -8.230429671129968e-10,
+        0.4324095547199249
+      ],
+      "reward": 0.00224954797886312,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 90,
+      "position_world_m": [
+        2.4806515175335164e-10,
+        -6.079604597530874e-10,
+        0.42716121673583984
+      ],
+      "reward": 0.0022373665124177933,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 91,
+      "position_world_m": [
+        1.6163489990894675e-10,
+        -6.137905739223015e-10,
+        0.42171669006347656
+      ],
+      "reward": 0.0022246884182095528,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 92,
+      "position_world_m": [
+        6.07274994179896e-11,
+        -5.784906997874373e-10,
+        0.41607603430747986
+      ],
+      "reward": 0.0022114962339401245,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 93,
+      "position_world_m": [
+        -1.381478542672454e-10,
+        -6.989147038893861e-10,
+        0.41023898124694824
+      ],
+      "reward": 0.002197789493948221,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 94,
+      "position_world_m": [
+        -3.9064210199946103e-11,
+        -6.00232974434789e-10,
+        0.4042057991027832
+      ],
+      "reward": 0.00218356866389513,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 95,
+      "position_world_m": [
+        1.2783356317935812e-10,
+        -6.079862169272587e-10,
+        0.39797648787498474
+      ],
+      "reward": 0.0021688155829906464,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 96,
+      "position_world_m": [
+        1.6446770334521688e-10,
+        -5.518501211554394e-10,
+        0.39155086874961853
+      ],
+      "reward": 0.0021535479463636875,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 97,
+      "position_world_m": [
+        4.585060109363326e-11,
+        -7.315579808597761e-10,
+        0.3849291503429413
+      ],
+      "reward": 0.0021377301309257746,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 98,
+      "position_world_m": [
+        2.448502789409446e-10,
+        -6.957748266422925e-10,
+        0.3781111240386963
+      ],
+      "reward": 0.002121398225426674,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "step": 99,
+      "position_world_m": [
+        1.5497839123135293e-11,
+        -7.246310218533836e-10,
+        0.3710969388484955
+      ],
+      "reward": 0.0021044982131570578,
+      "terminated": false,
+      "truncated": false
+    }
+  ]
+}

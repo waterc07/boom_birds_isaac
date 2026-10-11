@@ -1,6 +1,6 @@
 # v1.2 文件架构与工作区
 
-2026-10-11。主工作区E:\isaac\proj_boom_birds，当前实际存在docs/env/scripts/tmp、README、PROJECT_PLAN、.gitignore和BoomBirds.code-workspace。当前尚未初始化Git、没有业务包、没有训练任务；下方除上述已有项外均为实施蓝图，不创建空壳冒充实现。
+2026-10-11。主工作区E:\isaac\proj_boom_birds，已初始化独立Git并在p0-foundation分支推进，原v1.2资料已保存基线。已新增环境核查、标准库动作/时效合同及测试；本项目速度执行器、仿真任务和训练入口尚未实现。下方仍包含未实现目录蓝图，不创建空壳冒充实现。当前证据见[核查报告](../reports/p0/P0_ENVIRONMENT_REPORT.md)。
 
 ## 目录蓝图
 

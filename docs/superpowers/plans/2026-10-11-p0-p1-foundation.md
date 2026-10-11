@@ -1,6 +1,6 @@
 # Boom_Birds P0/P1 Foundation Implementation Plan
 
-> **For agentic workers:** Use `superpowers:executing-plans` to implement this plan task-by-task. Do not dispatch agents unless current instructions permit it. Steps use checkbox syntax; all unchecked steps are NOT RUN. 本文件是实施蓝图，命令中的业务入口均尚未实现。
+> **For agentic workers:** Use `superpowers:executing-plans` to implement this plan task-by-task. Do not dispatch agents unless current instructions permit it. Steps use checkbox syntax; all unchecked steps are NOT RUN. Task 1/2于2026-10-11按实际证据更新；Task 3–6业务入口尚未实现。
 
 **Goal:** 在现有Isaac Lab基础上建立可复现的无障碍到点、停止、速度接口和PPO研究基线。
 
@@ -37,12 +37,12 @@
 
 **Interfaces:** `collect_environment() -> dict`输出host/OS/Python/IsaacLab/IsaacSim/PyTorch/GPU/driver/launcher；未得到的字段标unknown，不填推测版本。上游记录repo/commit/license/core_paths/adaptation。
 
-- [ ] 只读确认当前解释器、启动器和Isaac/PyTorch版本；保存既有包清单，不先安装依赖。
-- [ ] 固定NavRL和DiffPhysDrone上游SHA，核对许可、网络/观测/动作/训练入口，填复用/移植/不采用表；未明许可不复制代码。
-- [ ] 运行本机版本对应官方四旋翼最小例，记录准确命令、退出码和日志；官方例失败时先定位而非构建新任务。
-- [ ] 选择当前集成中能支持所需观测、可扩展时序策略的一种PPO后端，登记具体版本及选择理由；不自行实现PPO。
-- [ ] 建立单包元数据和Git基线，保持env/外部权重不入库；不自动push远端。
-- [ ] 验证：`python scripts/preflight.py --output env/manifests/host.json`在已确认解释器运行；人工检查环境记录可追踪、无伪造值，并记录源码提交。
+- [x] 只读确认当前解释器、启动器和Isaac/PyTorch版本；保存既有包清单，不先安装依赖。
+- [x] 固定NavRL和DiffPhysDrone上游SHA，核对许可、网络/观测/动作/训练入口，填复用/移植/不采用表；未明许可不复制代码。
+- [x] 运行本机版本对应官方四旋翼最小例，记录准确命令、退出码和日志；官方例失败时先定位而非构建新任务。
+- [x] 选择当前集成中能支持所需观测、可扩展时序策略的一种PPO后端，登记具体版本及选择理由；不自行实现PPO。
+- [x] 建立单包元数据和Git基线，保持env/外部权重不入库；不自动push远端。
+- [x] 验证：`python scripts/preflight.py --output env/manifests/host.json`在已确认解释器运行；人工检查环境记录可追踪、无伪造值，并记录源码提交。
 
 **Deliverable:** G0环境部分通过，或明确最小阻塞与修复方案；不是算法通过。
 
@@ -52,12 +52,12 @@
 
 **Interfaces:** `decode_action(action, yaw_rad, limits, now_ns, mission_epoch) -> VelocityCommand`; `enu_to_ned(vector) -> tuple`; `command_is_valid(command, now_ns, mission_epoch) -> bool`。类型字段来自架构02。
 
-- [ ] 添加失败测试：yaw=0时动作[1,0,0,0]得到ENU[1,0,0]；yaw=π/2得到[0,1,0]；ENU[1,2,3]得到NED[2,1,-3]；yaw_rate 0.5转NED -0.5。
-- [ ] 添加失败测试：动作长度非4、NaN/Inf拒绝；有限越界值限幅；同一到期时间的重发不可续期。
-- [ ] 添加失败测试：水平上限1m/s、yaw=0、动作[1,1,0,0]得到ENU[1/√2,1/√2,0]，水平模长不超过1；训练与部署使用同一投影和缩放规则。
-- [ ] 添加失败测试：expiry-1ns有效、expiry无效；mission_epoch改变拒绝；时钟来源不匹配不能计算虚假capture年龄。
-- [ ] 运行 `python -m pytest tests/contracts -q`，确认失败原因对应未实现合同；实现最小逻辑后全部通过。
-- [ ] 检查contracts不导入Isaac/Torch/相机库，记录接口版本并提交本任务变更。
+- [x] 添加失败测试：yaw=0时动作[1,0,0,0]得到ENU[1,0,0]；yaw=π/2得到[0,1,0]；ENU[1,2,3]得到NED[2,1,-3]；yaw_rate 0.5转NED -0.5。
+- [x] 添加失败测试：动作长度非4、NaN/Inf拒绝；有限越界值限幅；同一到期时间的重发不可续期。
+- [x] 添加失败测试：水平上限1m/s、yaw=0、动作[1,1,0,0]得到ENU[1/√2,1/√2,0]，水平模长不超过1；训练与部署使用同一投影和缩放规则。
+- [x] 添加失败测试：expiry-1ns有效、expiry无效；mission_epoch改变拒绝；时钟来源不匹配不能计算虚假capture年龄。
+- [x] 运行 `python -m pytest tests/contracts -q`，确认失败原因对应未实现合同；实现最小逻辑后全部通过。
+- [x] 检查contracts不导入Isaac/Torch/相机库，记录接口版本并提交本任务变更。
 
 **Deliverable:** 单位、符号和时间合同可在无GPU环境测试。
 
@@ -127,4 +127,4 @@
 - [ ] 再编写P2静态避障具体实施计划，明确采用NavRL哪些文件/公式/设计，哪些属于本项目改动。
 - [ ] P3视觉传感、P4机库、P5部署、P6任务各自形成独立实施计划；依赖前一门实测，不在当前文件编造未来硬件接口。
 
-本次交付仅此计划。没有运行上述命令，没有初始化业务包或Git，也没有安装上游环境。
+原规划交付时仅有计划。2026-10-11接手后已初始化Git、完成Task 1/2；环境依赖冲突、官方Fabric克隆差异及验证边界见docs/reports/p0/P0_ENVIRONMENT_REPORT.md。未安装上游环境，Task 3–6仍NOT RUN。

@@ -1,0 +1,14 @@
+# PROPOSED simulation starting values, not aircraft acceptance limits.
+schema_id: boom_birds.velocity.v1
+frame: local_enu
+policy_frame: horizontal_flu_yaw_only
+horizontal_speed_mps: 1.0
+vertical_speed_mps: 0.5
+yaw_rate_rad_s: 0.5
+command_ttl_ns: 150000000
+policy_hz: 20
+gateway_hz: 50
+clock_id: host_monotonic
+origin_epoch: 0
+mission_epoch: 0
+# Simulation adapters must set a distinct clock id for each run/reset domain.

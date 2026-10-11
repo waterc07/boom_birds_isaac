@@ -1,7 +1,7 @@
 {
   "scope": "Current planning links (existence), fixed arithmetic anchors and local source hash integrity. No semantic/source applicability/flight proof.",
   "files_checked": 26,
-  "local_links_checked": 80,
+  "local_links_checked": 84,
   "checks": {
     "360 scenarios": true,
     "120mm mass 175.5g": true,
@@ -27,13 +27,13 @@
   },
   "status": "PASS",
   "file_sha256": {
-    "README.md": "48f546fd9a11ec6be99a26e9b74e0c9869cf08a6dc570068c6921b273468da05",
-    "PROJECT_PLAN.md": "8a0a08ec55810efd278a41ee5f654a84570dedb96a086d173d3fbc945f76c6fc",
+    "README.md": "3f0a985c740ebb00680b0619c109bc9cc6d20d50cba0a14c72dab327af7911e3",
+    "PROJECT_PLAN.md": "e9523cc6efed66d852bb482a02ff0453d4f2f5a9dd58fdc42c0acc8209f9f284",
     "docs\\design\\01_PROJECT_DESIGN.md": "d975709bd0a6f396727609c4aecfd87c3ab6c242e6b8763576705a2cf0a1d029",
-    "docs\\design\\02_ARCHITECTURE.md": "202f8c8c2eff50724b3c4af4d40b1836ec994406a99fb2ae204b761b64a16f26",
+    "docs\\design\\02_ARCHITECTURE.md": "d62f6f901a66e2df8ce6d58874476638541894fff94d1bbe3c3fa6239fe9f4ff",
     "docs\\design\\03_ROADMAP.md": "6ef88962e579ded6b7a8d50e5a5af24ab57f9705b02d73020b149ed3c32bc7e4",
     "docs\\design\\04_FIRST_TASK.md": "c989af214e3d2c1ab9683c50fd5d29e049ec163a70f63af11d0951c6f144014b",
-    "docs\\design\\05_WORKSPACE.md": "b1a59a0f200e071493ee3dcb8da0e187dccf8730bcae8dbc1eb22c817a1b2afc",
+    "docs\\design\\05_WORKSPACE.md": "ca31bd0650a74d42506c6d21a7473d808e4a73e7ef8f08b9a4ff452ab9ec135e",
     "docs\\design\\06_PARAMETERS_AND_RISKS.md": "6b058d5f03ad174930e84b912015d550cafdd6630a52630672f0a43301b7cd65",
     "docs\\design\\07_LEARNING_PATH.md": "fe3002ef8d0bfb3b082e27888967d5d01caef3191fb647141d2f03463d2656a2",
     "docs\\design\\08_EVALUATION.md": "c67eca49fdf71b3f4951d98f1ecb6d5f5252d1d50e569f8bb1833fb02471df55",
@@ -52,6 +52,6 @@
     "docs\\reports\\PLANNING_ACCEPTANCE.md": "a496b3e19e7b9eb9dab11711a2738f395aa945781aabbb2dd0a911f2ea30d14e",
     "docs\\research\\04_REPORT_REVIEW_20261009.md": "e0f0f7eeb507791428ffa0f78225d33195bd676987fcde0c40c2c9c3975a81ea",
     "docs\\superpowers\\plans\\2026-10-09-phase0-baseline.md": "c66f86364f16869323b15feff9f2c7eed5090cea55773e043b168d0d2bd1f7e1",
-    "docs\\superpowers\\plans\\2026-10-11-p0-p1-foundation.md": "a84f80eaaad27b427f537b4aa760bb0cb82b9d4652890ebe4d7bf809654aec3a"
+    "docs\\superpowers\\plans\\2026-10-11-p0-p1-foundation.md": "0858f6f90d859c0de30bd6bc371e841c9addc9a5c1e80568343eab55b4ba3b25"
   }
 }

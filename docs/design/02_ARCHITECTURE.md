@@ -1,6 +1,6 @@
 # v1.2 系统架构与接口
 
-2026-10-11。[需求](01_PROJECT_DESIGN.md)定义范围；以下为拟实现接口，尚无业务代码。
+2026-10-11。[需求](01_PROJECT_DESIGN.md)定义范围。P0已实现并单测速度解码、ENU/NED、时效和epoch合同；其余模块仍为拟实现接口，未验证飞行。见[当前核查报告](../reports/p0/P0_ENVIRONMENT_REPORT.md)。
 
 ## 分层与数据流
 
@@ -40,7 +40,7 @@ Isaac Lab负责物理、渲染、重置和向量环境；一个兼容的成熟PP
 | TaskCondition | task_mode, own_team, target_direction, target_valid, mission_epoch | mission；方向来源需记录 |
 | Observation | schema_id, image_or_features, state_vector, validity_mask, ages_s, task_condition | observations；actor允许字段白名单 |
 | PolicyOutput | normalized_action[4], next_hidden_state | policy；归一化输出，无直接飞控权限 |
-| VelocityCommand | velocity_enu_mps[3], yaw_rate_rad_s, created_ns, valid_until_ns, mission_epoch, source | runtime；绝对到期时间不可因重发延长 |
+| VelocityCommand | velocity_enu_mps[3], yaw_rate_rad_s, created_ns, valid_until_ns, mission_epoch, source, origin_epoch, clock_id, schema_id | runtime；绝对到期时间不可因重发延长；按origin与时钟域拒绝旧动作 |
 | TargetObservation | class_id, team, confidence, parent_id, pixel_roi, relative_geometry, geometry_valid, time_ns | perception；基地框不自动等于精确位姿 |
 | EpisodeResult | seed, scenario_id, success, collision, timeout, abort_reason, duration_s, minimum_clearance_m | evaluation；分母和原因保留 |
 | ModelManifest | schema_id, action_spec, preprocessing_id, frame_spec, weights_sha256, training_config_sha256, supported_runtime | models；部署前匹配合同 |

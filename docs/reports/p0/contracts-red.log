@@ -1,0 +1,27 @@
+
+=================================== ERRORS ====================================
+__________ ERROR collecting tests/contracts/test_action_contract.py ___________
+ImportError while importing test module 'E:\isaac\proj_boom_birds\tests\contracts\test_action_contract.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+E:\����\python\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contracts\test_action_contract.py:4: in <module>
+    from boom_birds.contracts.frames import decode_action, enu_to_ned, yaw_rate_enu_to_ned
+E   ModuleNotFoundError: No module named 'boom_birds'
+______________ ERROR collecting tests/contracts/test_timebase.py ______________
+ImportError while importing test module 'E:\isaac\proj_boom_birds\tests\contracts\test_timebase.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+E:\����\python\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contracts\test_timebase.py:5: in <module>
+    from boom_birds.contracts.frames import decode_action
+E   ModuleNotFoundError: No module named 'boom_birds'
+=========================== short test summary info ===========================
+ERROR tests/contracts/test_action_contract.py
+ERROR tests/contracts/test_timebase.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+2 errors in 0.29s

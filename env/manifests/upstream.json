@@ -1,0 +1,47 @@
+{
+  "observed_at_utc": "2026-10-11T10:13:54.440648+00:00",
+  "repositories": [
+    {
+      "name": "NavRL",
+      "repo": "https://github.com/Zhefan-Xu/NavRL",
+      "commit": "3725bcc2e7c1be4ecf1455d922299ae85042603a",
+      "license": "MIT",
+      "core_paths": {
+        "LICENSE": "53eb704daa6d699c158f38366be9ab009c7babcab8b5b4f63df330b7598403a4",
+        "README.md": "d86a61740e28dfd9014e760d0c569fc6704483bc88eab874553445f37644db61",
+        "isaac-training/training/scripts/env.py": "9521dbc7016463aa98c1494604f6dcb14ac24bfb8ca8dae72ae231dc0ba7eb79",
+        "isaac-training/training/scripts/ppo.py": "5bdd53a26b6385421506e125a04678650ff06f530c1a71a0d4059f4da8bedec0",
+        "isaac-training/training/scripts/train.py": "eb5b23d276f21b989e01419d07c728627ace1ffaf7fe2681cb4aedf80d95d22a",
+        "isaac-training/training/scripts/utils.py": "feaf04e1523432165466b319eccaa7ffb9faca868432b63f4e4ed98a833642ea",
+        "isaac-training/training/cfg/drone.yaml": "f2777a540e2140a2d0ae4fc117c63689358c9e46b058697460671612f456bfe8",
+        "isaac-training/training/cfg/ppo.yaml": "88e88a070846e264a86441eaa1decce6e73f8a3914b094ae16dcd29a20dfcbc3",
+        "isaac-training/third_party/OmniDrones/LICENSE": "5215cc1cd4f6d3852b1c7259a404171c7f9e6b6d6af0a84bea412f0e29e02702",
+        "isaac-training/third_party/OmniDrones/omni_drones/controllers/lee_position_controller.py": "cf752d41e839ca12e9a203da5770c058903f48c09b00a7e2e59c99a5367f9727",
+        "isaac-training/third_party/OmniDrones/omni_drones/utils/torchrl/transforms.py": "7aed184884d57fbf64e89f682e1f3ad5aaf99ca9a21ff4b91cbb8f1f06d33ff0"
+      },
+      "installed": false,
+      "executed": false,
+      "adaptation_report": "docs/reports/p0/UPSTREAM_REVIEW.md",
+      "checkout_mode": "selected git archive; original checkout blocked by Windows colon paths",
+      "license_scope": "root MIT; bundled third-party licenses separately applicable"
+    },
+    {
+      "name": "DiffPhysDrone",
+      "repo": "https://github.com/HenryHuYu/DiffPhysDrone",
+      "commit": "271936190b5c2a5e760230e718fa6b167718a5bf",
+      "license": "unknown_no_license_file_in_pinned_tree",
+      "core_paths": {
+        "README.md": "350bf3dba5006b83ea686e924396287d1e0978042b97ed068b9f73f93feb4d59",
+        "model.py": "4aa8d5cbc1fe69ee3739af3e318c4bb02fe983c26c3304bbd33e7a7a0ef03ed9",
+        "main_cuda.py": "86a978ff22b8503b72b73f5fb8268fc170ee3d8fd730533311826887f69a7458",
+        "env_cuda.py": "00d7a83af0a5d47a31ccbef67093c72748f37e279ca3993e9dc81aa1c066209e",
+        "src/setup.py": "6be6821cea7bfbf30a81fa2f23a9a7c9a89cbc6c3460f257535e86a58d882803"
+      },
+      "installed": false,
+      "executed": false,
+      "adaptation_report": "docs/reports/p0/UPSTREAM_REVIEW.md",
+      "checkout_mode": "shallow clone",
+      "license_scope": "no code copying permitted pending clarification"
+    }
+  ]
+}
