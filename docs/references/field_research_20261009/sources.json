@@ -1,0 +1,16 @@
+{
+  "retrieved_date": "2026-10-09",
+  "scope": "2026 historical official references; not final 2027 specification",
+  "sources": [
+    {
+      "url": "https://bbs-web-static.robomaster.com/c85923a9d793448288b5071f88a289721770635192667/RoboMaster%202026%20%E6%9C%BA%E7%94%B2%E5%A4%A7%E5%B8%88%E8%B6%85%E7%BA%A7%E5%AF%B9%E6%8A%97%E8%B5%9B%E6%AF%94%E8%B5%9B%E8%A7%84%E5%88%99%E6%89%8B%E5%86%8CV1.3.0%EF%BC%8820260209%EF%BC%89.pdf",
+      "file": "RMUC2026_rules_v1.3.0.pdf",
+      "sha256": "f36ccb556617b1980e5588e5d4bee310eee5a5d70a41839ceb4ead4782856343"
+    },
+    {
+      "url": "https://bbs-web-static.robomaster.com/715e2519e5384666a5d13edda17c6b831770696773838/RoboMaster%202026%20%E6%9C%BA%E7%94%B2%E5%A4%A7%E5%B8%88%E9%AB%98%E6%A0%A1%E7%B3%BB%E5%88%97%E8%B5%9B%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%88%B6%E4%BD%9C%E8%A7%84%E8%8C%83%E6%89%8B%E5%86%8CV1.3.0%EF%BC%8820260209%EF%BC%89.pdf",
+      "file": "RM2026_robot_spec_v1.3.0.pdf",
+      "sha256": "b90b34f7c89a11bf71337a07c8ef397312254f059519b061ac2c042ea9a5ada8"
+    }
+  ]
+}

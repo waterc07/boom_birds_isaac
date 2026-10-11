@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "Boom_Birds Learning",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "python.terminal.activateEnvironment": false,
+    "search.exclude": {
+      "**/__pycache__": true,
+      "**/.venv": true,
+      "**/runs": true,
+      "**/datasets": true,
+      "**/cache": true
+    },
+    "files.watcherExclude": {
+      "**/__pycache__/**": true,
+      "**/.venv/**": true,
+      "**/runs/**": true,
+      "**/datasets/**": true,
+      "**/cache/**": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python"
+    ]
+  }
+}

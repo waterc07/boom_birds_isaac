@@ -1,0 +1,17 @@
+[
+  {
+    "path": "发给另一个AI.txt",
+    "bytes": 1960,
+    "sha256": "ebe779b7b5cc289737db44e87034bc9c6390b4dcecda163b83995cd5c5139302"
+  },
+  {
+    "path": "项目目标与硬件背景.md",
+    "bytes": 15213,
+    "sha256": "eabfb2b6d8b72422a725edaa4bcb406f0368cda7225fffaa90b9a53a450d9f1b"
+  },
+  {
+    "path": "references\\RULE_BASELINE.md",
+    "bytes": 7943,
+    "sha256": "da82b908b429e85ef0ddb087d6ccd30d7df58e24239d10657eb4371815196d5f"
+  }
+]

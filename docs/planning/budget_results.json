@@ -1,0 +1,3016 @@
+{
+  "status": "ASSUMED sensitivity calculations; no hardware or recognition PASS",
+  "input_provenance": {
+    "target_150mm": "USER_PROVIDED approximate; enemy-base small armor confirmed 2026-10-10; exact mounting/geometry unverified",
+    "target_135mm": "2026 robot specification V1.3 p71, ordinary small armor only",
+    "route_14m": "28m historical field divided by two, not actual trajectory",
+    "mass_formula": "inherited 2027 preview snapshot, original PDF not obtained",
+    "stereo_baseline_m": "0.0676718 candidate calibration, not verified",
+    "hfov_disparity_error_velocity_acceleration_power": "ASSUMED examples, not measurements"
+  },
+  "pixel_sweep": [
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 23.160674741503232
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 16.377070166572924
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 11.580337370751618
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 7.720224913834411
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 5.459023388857641
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.860112456917206
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.632134948300647
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.275414033314585
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.3160674741503238
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.3160674741503233
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.6377070166572925
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.1580337370751619
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.6543339101073737
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.1697907261837803
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.827166955053687
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 25.7340830461147
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 18.196744629525472
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 12.867041523057354
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 8.578027682038234
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.065581543175157
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.289013841019118
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 5.14681660922294
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.6393489259050944
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.573408304611471
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.57340830461147
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.8196744629525472
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.2867041523057354
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.838148789008193
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.2997674735375337
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.9190743945040968
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 46.321349483006465
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 32.75414033314585
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 23.160674741503236
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 15.440449827668822
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 10.918046777715283
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 7.720224913834412
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 9.264269896601293
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.55082806662917
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.6321349483006475
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.632134948300647
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.275414033314585
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.3160674741503238
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.3086678202147475
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.3395814523675607
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.654333910107374
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 51.4681660922294
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 36.393489259050945
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 25.73408304611471
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 17.15605536407647
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 12.131163086350314
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 8.578027682038236
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 10.29363321844588
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 7.278697851810189
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 5.146816609222942
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 5.14681660922294
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.6393489259050944
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.573408304611471
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.676297578016386
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.5995349470750675
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.8381487890081936
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 92.64269896601293
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 65.5082806662917
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 46.32134948300647
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 30.880899655337643
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 21.836093555430566
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 15.440449827668823
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 18.528539793202587
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 13.10165613325834
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 9.264269896601295
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 9.264269896601293
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.55082806662917
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.6321349483006475
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.617335640429495
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.679162904735121
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.308667820214748
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 102.9363321844588
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 72.78697851810189
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 51.46816609222942
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 34.31211072815294
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 24.26232617270063
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 17.156055364076472
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 20.58726643689176
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 14.557395703620378
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 10.293633218445883
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 10.29363321844588
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 7.278697851810189
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 5.146816609222942
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 7.352595156032772
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 5.199069894150135
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.676297578016387
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 185.28539793202586
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 131.0165613325834
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 92.64269896601294
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 61.761799310675286
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 43.67218711086113
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 30.880899655337647
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 37.05707958640517
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 26.20331226651668
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 18.52853979320259
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 18.528539793202587
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 13.10165613325834
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 9.264269896601295
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 13.23467128085899
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 9.358325809470243
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 6.617335640429496
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 205.8726643689176
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 145.57395703620378
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 102.93633218445883
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 68.62422145630588
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 48.52465234540126
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 34.312110728152945
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 41.17453287378352
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 29.114791407240755
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 20.587266436891767
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 20.58726643689176
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 14.557395703620378
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 10.293633218445883
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 14.705190312065543
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 10.39813978830027
+    },
+    {
+      "hfov_deg": 50,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 7.352595156032774
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 15.423998472814839
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 10.906413913138326
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 7.711999236407421
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 5.141332824271613
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.635471304379442
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.570666412135807
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.084799694562968
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.1812827826276653
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.5423998472814842
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.542399847281484
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.0906413913138326
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.7711999236407421
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.1017141766296314
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 0.7790295652241662
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.5508570883148158
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 17.137776080905375
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 12.118237681264807
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 8.56888804045269
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 5.7125920269684585
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.039412560421602
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.8562960134842297
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.427555216181075
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.4236475362529615
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.7137776080905378
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.7137776080905376
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.2118237681264807
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.8568888040452689
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.2241268629218125
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 0.865588405804629
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.6120634314609064
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 30.847996945629678
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 21.812827826276653
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 15.423998472814842
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 10.282665648543226
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 7.270942608758884
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 5.141332824271614
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.169599389125936
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.362565565255331
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.0847996945629683
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.084799694562968
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.1812827826276653
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.5423998472814842
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.203428353259263
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.5580591304483324
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.1017141766296317
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 34.27555216181075
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 24.236475362529614
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 17.13777608090538
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 11.425184053936917
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 8.078825120843204
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 5.712592026968459
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.85511043236215
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.847295072505923
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.4275552161810756
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.427555216181075
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.4236475362529615
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.7137776080905378
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.448253725843625
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.731176811609258
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.2241268629218127
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 61.695993891259356
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 43.625655652553306
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 30.847996945629685
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 20.565331297086452
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 14.541885217517768
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 10.282665648543228
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 12.339198778251872
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 8.725131130510661
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 6.169599389125937
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.169599389125936
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.362565565255331
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.0847996945629683
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.406856706518526
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.116118260896665
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.2034283532592633
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 68.5511043236215
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 48.47295072505923
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 34.27555216181076
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 22.850368107873834
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 16.157650241686408
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 11.425184053936919
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 13.7102208647243
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 9.694590145011846
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 6.855110432362151
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.85511043236215
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.847295072505923
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.4275552161810756
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.89650745168725
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.462353623218516
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.4482537258436254
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 123.39198778251871
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 87.25131130510661
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 61.69599389125937
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 41.130662594172904
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 29.083770435035536
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 20.565331297086455
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 24.678397556503743
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 17.450262261021322
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 12.339198778251873
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 12.339198778251872
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 8.725131130510661
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 6.169599389125937
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 8.813713413037052
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.23223652179333
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.406856706518527
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 137.102208647243
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 96.94590145011846
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 68.55110432362152
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 45.70073621574767
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 32.315300483372816
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 22.850368107873837
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 27.4204417294486
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 19.389180290023692
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 13.710220864724302
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 13.7102208647243
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 9.694590145011846
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 6.855110432362151
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 9.7930149033745
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.924707246437032
+    },
+    {
+      "hfov_deg": 70,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.896507451687251
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 10.800000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 7.636753236814716
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 5.400000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.600000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.545584412271572
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.8000000000000007
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.1600000000000006
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.5273506473629432
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.0800000000000005
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.0800000000000003
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 0.7636753236814716
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.5400000000000003
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 0.7714285714285716
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 0.545482374058194
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.38571428571428584
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 12.000000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 8.485281374238571
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 6.000000000000003
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.000000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.8284271247461903
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.000000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.4000000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.6970562748477143
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.2000000000000006
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.2000000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 0.8485281374238571
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.6000000000000003
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 0.8571428571428573
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 0.6060915267313265
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 160,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.42857142857142877
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 21.600000000000005
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 15.273506473629432
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 10.800000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 7.200000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 5.091168824543144
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.6000000000000014
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.320000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.0547012947258865
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.160000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.1600000000000006
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.5273506473629432
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.0800000000000005
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.5428571428571431
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.090964748116388
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.7714285714285717
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 24.000000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 16.970562748477143
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 12.000000000000005
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 8.000000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 5.656854249492381
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.000000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.800000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.3941125496954285
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.4000000000000012
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 2.4000000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.6970562748477143
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.2000000000000006
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 1.7142857142857146
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 1.212183053462653
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 320,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 0.8571428571428575
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 43.20000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 30.547012947258864
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 21.60000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 14.400000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 10.182337649086287
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 7.200000000000003
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 8.640000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.109402589451773
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.320000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.320000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.0547012947258865
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.160000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.0857142857142863
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.181929496232776
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.5428571428571434
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 48.00000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 33.941125496954285
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 24.00000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 16.000000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 11.313708498984761
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 8.000000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 9.600000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.788225099390857
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.8000000000000025
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 4.800000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 3.3941125496954285
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 2.4000000000000012
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 3.4285714285714293
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 2.424366106925306
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 640,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 1.714285714285715
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 86.40000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 61.09402589451773
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 43.20000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 28.800000000000008
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 20.364675298172575
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 14.400000000000006
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 17.280000000000005
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 12.218805178903546
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 8.640000000000004
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 8.640000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.109402589451773
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.320000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.171428571428573
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.363858992465552
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.135,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.0857142857142867
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 0,
+      "projected_width_px": 96.00000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 45,
+      "projected_width_px": 67.88225099390857
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 1,
+      "obliquity_deg": 60,
+      "projected_width_px": 48.00000000000002
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 0,
+      "projected_width_px": 32.00000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 45,
+      "projected_width_px": 22.627416997969522
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 3,
+      "obliquity_deg": 60,
+      "projected_width_px": 16.000000000000007
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 0,
+      "projected_width_px": 19.200000000000003
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 45,
+      "projected_width_px": 13.576450198781714
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 5,
+      "obliquity_deg": 60,
+      "projected_width_px": 9.600000000000005
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 0,
+      "projected_width_px": 9.600000000000001
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 45,
+      "projected_width_px": 6.788225099390857
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 10,
+      "obliquity_deg": 60,
+      "projected_width_px": 4.8000000000000025
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 0,
+      "projected_width_px": 6.8571428571428585
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 45,
+      "projected_width_px": 4.848732213850612
+    },
+    {
+      "hfov_deg": 90,
+      "width_px": 1280,
+      "target_width_m": 0.15,
+      "distance_m": 14,
+      "obliquity_deg": 60,
+      "projected_width_px": 3.42857142857143
+    }
+  ],
+  "stereo": [
+    {
+      "distance_m": 1,
+      "disparity_px": 61.85302162089666,
+      "first_order_depth_sigma_m": 0.008083679453277964
+    },
+    {
+      "distance_m": 3,
+      "disparity_px": 20.61767387363222,
+      "first_order_depth_sigma_m": 0.07275311507950168
+    },
+    {
+      "distance_m": 5,
+      "disparity_px": 12.370604324179332,
+      "first_order_depth_sigma_m": 0.20209198633194908
+    },
+    {
+      "distance_m": 10,
+      "disparity_px": 6.185302162089666,
+      "first_order_depth_sigma_m": 0.8083679453277963
+    },
+    {
+      "distance_m": 14,
+      "disparity_px": 4.41807297292119,
+      "first_order_depth_sigma_m": 1.584401172842481
+    }
+  ],
+  "mass": [
+    {
+      "max_edge_mm": 118,
+      "max_mass_g": 177.95,
+      "min_mass_g": 150
+    },
+    {
+      "max_edge_mm": 120,
+      "max_mass_g": 175.5,
+      "min_mass_g": 150
+    }
+  ],
+  "geometry": {
+    "prop_diameter_mm": 55.88,
+    "square_coplanar_no_overlap_min_side_mm": 111.76,
+    "total_guard_and_gap_room_at_120mm": 8.239999999999995,
+    "limitation": "axis-aligned square layout; excludes deformation and motor/guard clearance"
+  },
+  "navigation": {
+    "cross_track_14m": [
+      {
+        "yaw_error_deg": 1,
+        "error_m": 0.24433369012196915
+      },
+      {
+        "yaw_error_deg": 3,
+        "error_m": 0.7327033874012137
+      },
+      {
+        "yaw_error_deg": 5,
+        "error_m": 1.2201803984672144
+      }
+    ],
+    "velocity_bias_0_05mps_for_10s_m": 0.5
+  },
+  "flight_time": [
+    {
+      "speed_mps": 0.5,
+      "one_way_s": 41.0,
+      "round_trip_s": 69.0,
+      "reconnaissance_round_trip_with_10s_dwell_s": 79.0
+    },
+    {
+      "speed_mps": 1,
+      "one_way_s": 27.0,
+      "round_trip_s": 41.0,
+      "reconnaissance_round_trip_with_10s_dwell_s": 51.0
+    },
+    {
+      "speed_mps": 1.5,
+      "one_way_s": 22.333333333333336,
+      "round_trip_s": 31.666666666666668,
+      "reconnaissance_round_trip_with_10s_dwell_s": 41.66666666666667
+    },
+    {
+      "speed_mps": 2,
+      "one_way_s": 20.0,
+      "round_trip_s": 27.0,
+      "reconnaissance_round_trip_with_10s_dwell_s": 37.0
+    }
+  ],
+  "time_assumptions": "13s = takeoff3 + alignment4 + landing3 + reserve3; hypothetical, accelerations/detours omitted",
+  "energy": {
+    "nominal_3s_300mah_Wh": 3.3299999999999996,
+    "consumption_30s": [
+      {
+        "average_power_W": 60,
+        "energy_Wh": 0.5
+      },
+      {
+        "average_power_W": 100,
+        "energy_Wh": 0.8333333333333334
+      },
+      {
+        "average_power_W": 150,
+        "energy_Wh": 1.25
+      }
+    ],
+    "limitation": "nominal voltage/label capacity; no discharge, peak current or return proof"
+  },
+  "stopping": [
+    {
+      "speed_mps": 0.5,
+      "distance_m": 0.49750000000000005
+    },
+    {
+      "speed_mps": 1,
+      "distance_m": 0.7600000000000001
+    },
+    {
+      "speed_mps": 2,
+      "distance_m": 1.6600000000000001
+    }
+  ],
+  "stopping_assumptions": "latency0.15s, deceleration2m/s2, position bound0.2m, radius0.06m, margin0.1m; all proposed",
+  "velocity_yaw_rate_type_mask": 1479
+}

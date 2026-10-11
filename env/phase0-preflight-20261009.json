@@ -1,0 +1,19 @@
+{
+  "observed_date": "2026-10-09",
+  "timezone": "Asia/Shanghai",
+  "scope": "read_only_host_preflight",
+  "workspace": "E:\\isaac\\proj_boom_birds",
+  "wsl": {
+    "executable_found": true,
+    "list_command": "wsl --list --verbose",
+    "exit_code_unsigned": 4294967295,
+    "reported_error": "Wsl/WSL_E_DEFAULT_DISTRO_NOT_FOUND",
+    "installed_distribution_available": false,
+    "wsl2_kernel_and_virtualization_verified": false
+  },
+  "windows_commands_found": ["git", "cmake", "ninja", "python"],
+  "linux_toolchain_verified": false,
+  "px4_sitl": "NOT RUN",
+  "environment_installation": "NOT RUN",
+  "hardware_actions": "NOT RUN"
+}

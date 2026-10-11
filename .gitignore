@@ -1,0 +1,38 @@
+# Local paths and environments
+configs/local.yaml
+configs/local.json
+.venv/
+.env
+.env.*
+!.env.example
+
+# Python and tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
+
+# Experiment outputs: canonical storage lives outside the repository
+/runs/
+/logs/
+/datasets/
+/cache/
+/artifacts/
+/tmp/
+*.pt
+*.pth
+*.onnx
+*.mp4
+*.avi
+
+# Local editor and operating-system files
+.vscode/settings.json
+.DS_Store
+Thumbs.db
+
+# Pinned upstream checkouts are indexed by env manifests
+/external/

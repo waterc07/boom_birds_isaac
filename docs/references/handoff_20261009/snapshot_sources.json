@@ -1,0 +1,37 @@
+[
+  {
+    "path": "发给另一个AI.txt",
+    "sha256": "ebe779b7b5cc289737db44e87034bc9c6390b4dcecda163b83995cd5c5139302",
+    "bytes": 1960,
+    "source": "E:\\系统\\系统\\GMaster\\plane\\isaac_lab_branch_20261009\\发给另一个AI.txt",
+    "verified": true
+  },
+  {
+    "path": "项目目标与硬件背景.md",
+    "sha256": "eabfb2b6d8b72422a725edaa4bcb406f0368cda7225fffaa90b9a53a450d9f1b",
+    "bytes": 15213,
+    "source": "E:\\系统\\系统\\GMaster\\plane\\isaac_lab_branch_20261009\\项目目标与硬件背景.md",
+    "verified": true
+  },
+  {
+    "path": "manifest.json",
+    "sha256": "24a6a04c4ceb06f8f3639ee84a0571a3344b3928b6bc73227737c2485afb0b14",
+    "bytes": 475,
+    "source": "E:\\系统\\系统\\GMaster\\plane\\isaac_lab_branch_20261009\\manifest.json",
+    "verified": true
+  },
+  {
+    "path": "references\\RULE_BASELINE.md",
+    "sha256": "da82b908b429e85ef0ddb087d6ccd30d7df58e24239d10657eb4371815196d5f",
+    "bytes": 7943,
+    "source": "E:\\系统\\系统\\GMaster\\plane\\isaac_lab_branch_20261009\\references\\RULE_BASELINE.md",
+    "verified": true
+  },
+  {
+    "path": "环境与任务路线评估_20261009.md",
+    "sha256": "bee7bda6decc15ff63386e2ba86eb0f9fb26a954031123c4e87d2c8ba537bb22",
+    "bytes": 9550,
+    "source": "E:\\系统\\系统\\GMaster\\plane\\isaac_lab_branch_20261009\\环境与任务路线评估_20261009.md",
+    "verified": true
+  }
+]

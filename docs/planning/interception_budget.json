@@ -1,0 +1,89 @@
+{
+  "status": "ASSUMED sensitivity, no interception performance PASS",
+  "source": "2026 V1.3 historical nominal 42.5mm projectile; speed scenarios not 2027 final rule",
+  "hfov_deg": 70,
+  "image_width_px": 1280,
+  "projectile_diameter_m": 0.0425,
+  "camera_fps_requested": 60,
+  "policy_hz_candidate": 20,
+  "scenarios": [
+    {
+      "speed_mps_assumed": 12,
+      "distance_m": 3,
+      "pixel_diameter_px": 12.948541927795175,
+      "constant_speed_remaining_s": 0.25,
+      "travel_one_frame_m": 0.2,
+      "travel_one_policy_tick_m": 0.6
+    },
+    {
+      "speed_mps_assumed": 12,
+      "distance_m": 5,
+      "pixel_diameter_px": 7.769125156677104,
+      "constant_speed_remaining_s": 0.4166666666666667,
+      "travel_one_frame_m": 0.2,
+      "travel_one_policy_tick_m": 0.6
+    },
+    {
+      "speed_mps_assumed": 12,
+      "distance_m": 10,
+      "pixel_diameter_px": 3.884562578338552,
+      "constant_speed_remaining_s": 0.8333333333333334,
+      "travel_one_frame_m": 0.2,
+      "travel_one_policy_tick_m": 0.6
+    },
+    {
+      "speed_mps_assumed": 16.5,
+      "distance_m": 3,
+      "pixel_diameter_px": 12.948541927795175,
+      "constant_speed_remaining_s": 0.18181818181818182,
+      "travel_one_frame_m": 0.275,
+      "travel_one_policy_tick_m": 0.825
+    },
+    {
+      "speed_mps_assumed": 16.5,
+      "distance_m": 5,
+      "pixel_diameter_px": 7.769125156677104,
+      "constant_speed_remaining_s": 0.30303030303030304,
+      "travel_one_frame_m": 0.275,
+      "travel_one_policy_tick_m": 0.825
+    },
+    {
+      "speed_mps_assumed": 16.5,
+      "distance_m": 10,
+      "pixel_diameter_px": 3.884562578338552,
+      "constant_speed_remaining_s": 0.6060606060606061,
+      "travel_one_frame_m": 0.275,
+      "travel_one_policy_tick_m": 0.825
+    },
+    {
+      "speed_mps_assumed": 25,
+      "distance_m": 3,
+      "pixel_diameter_px": 12.948541927795175,
+      "constant_speed_remaining_s": 0.12,
+      "travel_one_frame_m": 0.4166666666666667,
+      "travel_one_policy_tick_m": 1.25
+    },
+    {
+      "speed_mps_assumed": 25,
+      "distance_m": 5,
+      "pixel_diameter_px": 7.769125156677104,
+      "constant_speed_remaining_s": 0.2,
+      "travel_one_frame_m": 0.4166666666666667,
+      "travel_one_policy_tick_m": 1.25
+    },
+    {
+      "speed_mps_assumed": 25,
+      "distance_m": 10,
+      "pixel_diameter_px": 3.884562578338552,
+      "constant_speed_remaining_s": 0.4,
+      "travel_one_frame_m": 0.4166666666666667,
+      "travel_one_policy_tick_m": 1.25
+    }
+  ],
+  "translation_example": {
+    "distance_m": 0.5,
+    "acceleration_mps2_assumed": 2,
+    "from_rest_min_motion_s": 0.7071067811865476,
+    "limits": "optimistic kinematic example; excludes latency, speed limit, settling; not measured"
+  }
+}

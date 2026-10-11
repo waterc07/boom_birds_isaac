@@ -1,0 +1,455 @@
+
+Boom_Birds 微型四旋翼自主系统技术路线深度研究与工程决策报告
+决策摘要
+检索日期：2026-10-09。 本次检索以英文原始论文、作者官方代码仓库、PX4/NVIDIA/Raspberry Pi 官方文档与项目发布记录为主，同时检索了中文资料与 2026 年维护状态。评价重点不是论文指标，而是“能否减少 Boom_Birds 的学习、集成和返工成本”。本次公开检索没有找到足以取代你给出的 2026-09-09 赛事规则快照的、可独立核验的更新官方规则文本，因此以下所有质量、30 s、悬停等数值仍只按“项目背景”处理，不把它们写成正式规则。
+
+结论先行：我最推荐的不是 PPO，也不是先搭 Isaac↔PX4 联合训练系统，而是“PX4-first 的经典闭环 + 学习感知”路线。结论置信度：高。
+
+推荐主线是：
+
+PX4 继续负责状态估计与速度以下控制 → Pi 只做目标感知/相对定位/任务逻辑 → 有界三轴速度＋偏航角速度 Offboard → 先用几何/标记目标和传统视觉伺服建立完整纵向闭环 → 第一个真正的学习任务训练“小型目标检测/关键点/相对位姿感知网络”，而不是训练飞行控制器。
+
+这条路线与现有架构约束高度一致。PX4 的 Offboard 本来就支持位置、速度、加速度、姿态、角速度及推力/力矩等层级；保持在速度层意味着 PX4 内部的速度、姿态、角速度控制及电机分配仍然全部保留，不需要重复实现一套飞控。PX4 目前文档中的稳定版本为 v1.17。
+
+首个纵向任务建议仍然使用“目标相对估计 → 速度指令 → 到达并保持”，但第一轮不要让 RL 参与。 最先用已知几何目标或视觉标记产生相对位姿，以一个有限幅、有限加速度的经典比例/速度规划器输出 vx, vy, vz, yaw_rate。这个任务恰好一次暴露最重要的工程问题：相机标定、坐标变换、目标丢失、时延、PX4 Offboard、估计器有效性、指令饱和、日志以及失联处理，却不把奖励设计、sim-to-real、网络泛化等新变量同时加入。
+
+第一个学习任务建议是监督学习的目标感知，而非 PPO。 更具体地说，优先训练一个低分辨率的目标检测器或关键点网络，由几何/PnP/双目负责将检测结果转换为相对位姿；只有目标本身缺少可靠几何结构时，才考虑直接学习相对位姿回归。PULP-Frontnet 已经给出了很强的方向性证据：作者在 Crazyflie 2.1 级 nano-UAV 上实现了完全机载的人—无人机相对位姿深度网络，并公开训练/测试脚本、数据集、量化流程与预训练 checkpoint；其输入甚至只有 160×96 或 80×48。它不能直接拿来识别你的目标，但它说明“小型学习感知 + 非学习底层飞行”不是一个保守但落后的设想，而是已有真实 nano-UAV 闭环证据的路线。
+
+仿真工具安排建议修改为：
+
+PX4 官方 Gazebo SITL = 主集成验证器；Isaac Lab = 学习、合成数据和可选 RL 的训练器；两者通过明确的 observation/action contract 和模型文件交接，而不是第一天就运行时桥接。
+
+PX4 官方 Gazebo SITL 与飞控按锁步机制同步，PX4 的 Gazebo Bridge 会随仿真步设置 PX4 时间；官方 SIH 则能在 PX4 进程内部直接由执行器输出生成传感器数据，非常适合快速验证状态机、Offboard、failsafe 和控制逻辑。
+
+Isaac Lab 已经装好并能运行，这仍然很有价值，但价值主要在大规模训练、视觉域随机化、合成数据、策略实验，而不是作为 PX4 正确性的最终证据。Pegasus Simulator 确实已经提供 Isaac Sim↔真实 PX4 SITL 的 MAVLink 后端和 lockstep，而不是只有 setpoint 转发；当前 Pegasus v5.1.0 对应 Isaac Sim 5.1.0，并采用 BSD-3-Clause。
+ 但是它的文档明确说当前组合是在 Ubuntu 22.04 上测试，开发时使用的是 PX4 v1.14.3，Windows 未测试；这与你的 Windows 原生 Isaac、Ubuntu 24.04/Pi5、计划使用的新 PX4 固件并不是一条低风险直通链。
+ 因此，不建议现在自建 Isaac↔PX4 桥，也不建议为了 Pegasus 立即重做操作系统。
+
+当前 Isaac Sim 5.1.0 还有一个时间维度风险：NVIDIA 文档现已把 5.1 系列标为不再支持的旧版本；与此同时，较新的 Isaac Sim 版本已经改善 Windows ROS 2 工作流。
+ 所以最省返工的策略是：把现有 5.1 环境冻结成一个能工作的研究环境，而不是再围绕它增加大量自定义基础设施。
+
+Pi 5 路线也不要先作“肯定能跑”的结论。 官方 Raspberry Pi 5 是 2.4 GHz 四核 Cortex-A76 CPU 平台，官方建议 5 V/5 A 电源并建议主动散热；它没有你可以默认使用的 CUDA GPU/NPU。USB 设备功耗还与整机电源预算共享。
+ ONNX Runtime 官方提供 ARM CPU 支持，因此它适合作为第一部署后端；但这只说明“软件可运行”，完全不证明你的 MJPEG 解码 + 左右拆分 + 矫正 + 推理 + 状态估计 + 通信能达到实时预算。
+
+有明确触发条件的备选路线是：
+
+当经典目标伺服/局部规划在真实可部署观测下已经稳定工作，但在遮挡、局部死胡同、动态障碍或部分可观测环境中出现“明确、可重复、传统规则难以处理”的性能瓶颈时，再启用速度层视觉 RL/模仿学习策略；actor 仍然只输出有界 vx, vy, vz, yaw_rate，PX4 继续负责底层控制。
+
+SIGN 这类近期工作证明了“视觉/IMU → 连续速度 → PX4”的研究方向确实存在，而且其真实实验使用 PX4 执行速度参考。
+ 但它目前不是 Boom_Birds 的主线模板：论文真实实验把图像通过 Wi-Fi 发给 RTX 3060 笔记本做规划，并使用 D435i/VIO；论文在当前版本还明确写着代码和模型“接受后发布”，因此既没有 Pi5 算力证据，也没有现在即可核验的完整代码链。
+
+因此，当前草案应作如下取舍：
+
+当前想法	决策	核心理由
+保留 PX4，Pi 输出速度/偏航角速度	保留，作为主接口	与 PX4 的成熟控制分层匹配，减少重写和 sim-to-real 变量。
+Isaac Lab 向量化训练	保留，但降级为训练工具而非系统主干	已经可用；适合训练/域随机化，但无需决定真实 PX4 链路。
+自建受限飞控代理	仅在训练需要时做最小版	只需要近似“速度指令→运动”的闭环，不需要复刻 PX4 内部每个控制环。
+Isaac↔PX4 自建桥	暂缓	Pegasus 已经存在；官方 Gazebo 已能更低成本验证真实 PX4。
+Pegasus	条件启用	只有在“必须在 Isaac 视觉场景里闭环运行真实 PX4”时才值得承担版本/Linux适配成本。
+PPO 作为首任务	暂缓	目前最大的未知不是最优策略，而是传感器、定位、时延、质量/能源和 PX4 链路。
+直接 motor/RPM RL	淘汰为首版路线	会绕过已经确定保留的 PX4 控制环，迁移成本与安全验证成本明显增加。
+VIO 第一阶段必装	暂缓	短距离悬停和目标相对任务首先可验证光流+测距；VIO 应由任务范围触发。
+ROS 2 作为第一版必需依赖	不建议	简单 Offboard＋telemetry 可以先由 MAVSDK 完成，减少依赖；复杂多节点需求出现后再引入。
+
+候选对比与证据等级
+这里把候选按四种证据分开：A 表示官方文档/代码与真实工程证据都比较强；B 表示作者论文＋官方代码＋实飞，但迁移条件明显不同；C 表示论文有实机结果但开放复现链不足；D 表示只是本报告的工程推断或拟议方案。GitHub 星数不参与等级判断。
+
+路线	来源、年份与公开产物	场景与真实平台	学习观测与动作层级	PX4关系	本项目判定
+PX4 + 几何目标定位 + 经典视觉伺服	PX4 官方 Offboard、Precision Landing、MAVLink LANDING_TARGET；持续维护。
+通用 PX4 多旋翼；不是特定论文场景	图像→几何相对位姿；上位机输出速度或目标位置；无学习 actor	原生匹配	主线基线，证据 A
+PULP-Frontnet — Palossi et al., 2021	IEEE IoT Journal；官方 Apache-2.0 仓库；训练/测试脚本、数据、校验和、多个 checkpoint、量化导出均公开。
+Crazyflie 2.1 + AI-deck + Flow-deck，真实 nano-UAV	小灰度图→人—机相对位姿估计；学习只在感知层	非 PX4	最值得借鉴的首个 ML 模块，证据 B
+PULP-DroNet v3 / PULP-Detector	当前官方仓库发布代码、硬件设计、数据、训练网络；DroNet 代码 Apache-2.0，v3 数据 CC BY-NC-SA 4.0。
+Crazyflie/AI-deck；视觉避障、转向、房间探索/目标检测；真实 onboard	小图像→转向/碰撞信号；PULP-Detector 以 MobileNetV2-SSD + ToF + 状态机实现自主探索	非 PX4	强烈建议借鉴“学习感知 + ToF + 状态机”的系统分层，不直接移植，证据 B
+SIGN — Safety-Aware Image-Goal Navigation, 2025	arXiv 预印本；论文称代码/checkpoint 待接受后发布，目前公开复现链不完整。
+D435i + onboard VIO + PX4；真实实验计算实际在 RTX 3060 笔记本，经 Wi-Fi 传图。
+RGB、视觉/IMU相关状态、深度安全模块→连续速度；约 20 Hz 实验环路	真实 PX4，动作层与 Boom_Birds 很接近	未来速度层 RL 的重要参考，不是 Pi5 首版方案，证据 C
+Learning to Fly in Seconds — Eschmann et al., 2024	RA-L；官方代码仍维护，模拟器已上游到 RLtools；L2F Python simulator 为 MIT。
+Crazyflie 实机；高度优化动力学训练	状态→四电机 RPM，端到端底层控制	绕过 PX4 的速度/姿态/率控制	复现质量很高但学习层级错误；只借鉴训练与 sim-to-real 方法，证据 A/B
+Agile Autonomy / Learning High-Speed Flight in the Wild — UZH, 2021	官方 GPL-3.0 代码和数据；依赖 Ubuntu 20.04、ROS Noetic、gcc 7.5、Flightmare。
+高速森林/自然障碍飞行，高性能平台	学习规划/视觉导航，面向高速任务	非 Boom_Birds 的简单 PX4 velocity-first 方案	研究参考，不适合首轮集成
+
+PULP-Frontnet 在复现性方面尤其值得重视。官方仓库没有只给一个演示脚本，而是分开提供全精度训练、测试、量化训练、量化测试与导出脚本；提供三种 80×48/160×96 模型尺寸、预训练 checkpoint，以及数据文件校验和。
+ 它的直接代码依赖却相当老：Ubuntu 20.04、CUDA 11.1、Python 3.7.10、GAP SDK 3.9.1。
+ 因此不应把整个 GAP8 部署栈搬进 Boom_Birds；应复用的是其任务定义、低分辨率思想、训练/测试分离方式以及“小网络做相对感知”的系统分层。
+
+PULP-DroNet/PULP-Detector 给出另一个重要工程信号：真正的 nano-UAV 系统并不一定需要“一个网络包办全部自主性”。PULP-Detector 明确采用 MobileNetV2-SSD 做目标检测，ToF 做障碍感知，探索策略则是轻量的 bio-inspired state machine；作者公开说明系统完全机载、不依赖远程笔记本或特殊外部定位。
+ 这比“全端到端 RL”更接近 Boom_Birds 对低算力、失效可解释和模块可验证的需求。
+
+SIGN 是目前找到的最接近“视觉导航＋速度动作＋PX4”的近期实例之一。论文在 Gazebo/PX4 环境做了障碍安全模块验证，并让 PX4 接收线速度和角速度参考。
+ 但它也恰好展示了论文标题容易掩盖的部署前提：真实实验中 D435i 提供视觉/惯性能力，VIO 在机上运行，而导航图像通过 Wi-Fi 送到 RTX 3060 笔记本；因此“real drone”并不等于“微型机载 CPU 完成全部策略”。
+ 这正是本项目不应直接采用它作为主线的原因。
+
+Learning to Fly in Seconds 则是一个很好的“强候选但应明确排除”案例。它目前仍有官方维护链，代码支持 Docker，模拟器已进入 RLtools；论文证明 direct-RPM RL 可以从仿真迁移到真实 Crazyflie。
+ 但是它学习的是电机 RPM，本质上替代了 PX4 中你已经决定保留的大量闭环。把这样的策略改成速度接口不是“套一个适配器”：状态空间、动作动力学、控制带宽、奖励、随机化范围全部改变，基本需要重新定义任务并重训。其真正值得带走的是非对称 actor-critic、课程学习、系统辨识、时延/电机动态建模和极快训练环境的设计思想，而不是策略本身。
+
+Agile Autonomy 同样有真实飞行和公开数据，但公开代码仍锁在 Ubuntu 20.04、ROS Noetic 和 gcc 7.5 一代工具栈。
+ 其仓库近年的 issue 还出现 Flightmare 资源/旧依赖获取困难等复现摩擦。
+ 对 Boom_Birds 这种“首要成本是工程时间”的项目，它更适合阅读方法和评估协议，而不是成为软件依赖。
+
+还有一个容易误选的官方旧项目是 PX4-Avoidance。它曾提供 companion-computer 障碍检测/规避，但 PX4 官方仓库已经在 2024-08-01 归档，并明确标注不再维护；官方旧 Vision Kit 文档同样警告 avoidance software 已停止支持。
+ 所以不要为了“看起来最 PX4 原生”而把它重新捡成 Boom_Birds 的规划主干。
+
+综合九个决策维度，结论不是简单的性能打分，而是：
+
+决策维度	PX4经典基线＋学习感知	PULP式感知/混合	SIGN式速度RL	Direct-RPM RL
+任务/传感器适配	高	高	中	低
+PX4学习层级兼容	最高	高	高	致命不匹配
+公开复现证据	最高	高	低	高
+Pi5证据	传统部分高；网络待测	思路强、Pi5本身待测	低	不相关
+新知识依赖	最低	中	高	高
+集成/维护成本	最低	中	高	高
+数据成本	低→中	中	高仿真成本	中
+需求变化返工	低	低/中	高	很高
+sim-to-real风险	最低	中	高	高
+
+这里没有给虚假的“总分”，因为像 direct-RPM 与既定 PX4 架构不兼容这种问题不应该被其他分项平均掉。
+
+推荐路线深挖
+Boom_Birds 实际上需要解决的是三个互相不同的状态估计问题，必须从现在开始分开设计。
+
+第一类：PX4 自己为了稳定飞行需要的状态。 速度 Offboard 并不是“不给位置就不需要定位”。PX4 的速度闭环仍需要有效的姿态、水平/垂直速度和高度估计。PX4 官方把 optical flow 定义为配合向下距离传感器的二维速度估计方案，特别适用于 GNSS denied 场景。
+ 你的 MTF-02P 厂商资料称其输出频率 50 Hz、包含光流和 ToF，并声称支持 PX4；厂商还给出了不同环境光下的量程，但这些都是制造商规格，不是 Boom_Birds 的验收结果。
+
+因此首轮应该把 MTF-02P 定位为：
+
+短距离悬停和速度控制的候选状态传感器，而不是“整场全局定位系统”。
+
+光流＋测距能够提供速度和高度约束，但它不会凭空得到无漂移的场地全局位置。即使 PX4 EKF 积分形成局部位置，长期漂移问题也仍然存在。PX4 官方把 VIO 单独定义为估计相对本地起点的三维 pose、orientation 和 velocity，用于无 GPS 场景。
+
+第二类：任务目标的相对定位。 这个状态应该由 Pi 负责，不必等同于飞机的全局位置。例如目标位于机体前方 0.8 m、左侧 0.1 m、偏航误差 5°。这可以由标记、已知目标几何、关键点网络、双目等产生。它与 PX4 EKF 是两个不同坐标状态，不应该把视觉目标位置硬塞进飞控全局定位再取回来。
+
+第三类：返库所需的导航定位。 如果任务只要求最终几米内找到机库，最省风险的方法是“粗略返回某个区域＋视觉目标重新捕获＋相对引导”。PX4 自己有 Precision Landing 功能，并且 MAVLink LANDING_TARGET 协议就是为外部定位系统向飞控提供降落目标相对位置而设计的；PX4 还提供目标丢失 timeout 等参数。
+ 这意味着未来机库阶段完全可以评估两种实现：继续由 companion 输出 velocity visual servo，或把相对目标观测交给 PX4 Precision Landing。现在不需要提前冻结二者。
+
+只有当“从任意比赛区域返回机库附近”无法靠任务几何、短距离光流和目标重新捕获完成时，才应该引入 VIO。VIO 不是免费模块：它把相机—IMU外参、时间同步、IMU噪声、初始化、CPU占用和漂移全部带进系统。OpenVINS 本身仍是成熟的 filter-based VIO 研究实现，也支持 ROS-free 构建。
+ 但截至本次检索，它的官方老安装页主要列出 Ubuntu 16.04/18.04/20.04；Ubuntu 24.04/ROS 2 Jazzy 支持在 2026 年仍能看到尚未合并/持续讨论的 PR 和 issue。
+ 这进一步支持“不要因为原工程有 OpenVINS 就把 VIO 继承成新支线的第一依赖”。
+
+ORB-SLAM3 支持 mono、stereo、RGB-D 与 visual-inertial 模式，公开代码和 EuRoC/TUM-VI 示例完善。
+ 但它是更完整的 SLAM 系统，不意味着在 Pi5 微型无人机上就自动比轻量 VIO 更划算。对你的项目，是否需要回环、地图重用和长期一致性应该由任务触发，而不是“既然有双目就上 SLAM”。
+
+前向双目同样应先当候选传感器而非既成能力。 你给出的 67.6718 mm 基线目前只是候选标定；USB 同帧左右拼接和 60 FPS 请求不证明左右快门同步，也不证明 Pi5 能实时 MJPEG 解码、拆分、矫正和做 dense stereo。第一版避障甚至可以先采用更低维的信息：例如前方目标区域的稀疏深度、几个视场扇区的最小安全距离，或未来增加小型 ToF，而不是一开始构建 dense depth → 3D map → planner。
+
+这与 PULP-Detector 的工程结构相吻合：该系统没有要求神经网络解决全部几何，而是 CNN 负责检测、ToF 负责近场障碍、状态机负责高层探索。
+
+学习模块建议明确限定如下：
+
+第一版监督学习 actor 的输入应只有真实机载可获得图像，可加过去几帧或显式目标类别；输出优先为 bbox/keypoints/confidence，而不是直接电机或速度。PnP/已知目标尺寸/经过验收的双目再把这些像素量转成目标相对位姿。训练时可以使用标记位置、仿真真值或人工标签作为 supervision，这不违反部署约束，因为那些真值不会进入 actor。
+
+基线必须是同一套数据上的几何/传统视觉或简单检测器。推荐的性能判断不是“网络准确率更高就采用”，而是它是否在遮挡、姿态变化、光照变化、目标非理想外观下提供传统方案没有的收益。
+
+如果第二阶段需要障碍学习，优先学一个collision risk / free-space / depth summary，并把它放在速度命令前作为安全修正或速度上限，而不是第一天训练一个端到端 navigator。SIGN 的一个值得借鉴之处就是把学习导航与单独的 collision predictor / action correction 结合，而不是让策略的 reward 单独承担所有安全责任。
+
+什么时候才切换到速度层 RL？ 我建议同时满足以下条件：
+
+一是，同一个可部署 observation schema 已经能从真实或录制硬件数据稳定产生；二是经典控制在 PX4 SITL 和真实感知回放中已经通过；三是剩余失败具有“需要历史信息/探索/复杂障碍交互”的结构，而不是标定错误或时延；四是 Pi5 全链预算已经测完；五是训练仿真中可以对传感器丢帧、延迟、视场、控制饱和做现实分布随机化。
+
+届时才采用一个 SIGN 式但更受限的 actor：
+
+RGB/目标特征 + 可用深度摘要 + PX4估计速度/姿态 + 上一动作 → bounded body-frame velocity + yaw_rate
+
+而不是 image → motor RPM。
+
+模拟方面推荐两个工具分工。
+
+PX4 官方 Gazebo/SIH负责回答：“我的 Offboard API、坐标、估计器、模式转换、failsafe 和真实 PX4 行为是否正确？”官方 Gazebo/PX4 本来就提供锁步同步；SIH甚至把执行器输出直接馈入 PX4 内部动态模型生成传感器。
+
+Isaac Lab负责回答：“这个视觉/学习问题是否值得训练？策略对场景变化如何？能否生成足够多传感器样本？”这不要求 Isaac 中的飞行控制模型精确复制 PX4，只要求它在策略看到的 observation→action→motion 带宽范围内足够合理，然后再由真正 PX4 SITL验证。
+
+Pegasus是第三层、条件性的选择。它已经具有 MAVLink PX4 backend、默认 lockstep 和 rotor-level simulator coupling，因此如果日后确实需要“Isaac 的视觉传感器和物理世界，同时跑真实 PX4 SITL”，应该先试 Pegasus，再考虑自己写桥。
+ 但它当前文档仍以 PX4 v1.14.3 和 Ubuntu 22.04 为测试组合，Windows 未测试；这就是启用它的明确成本。
+
+特别不建议把“自定义飞控代理”做成第二套 PX4。若 Isaac 训练只输出速度，训练代理只需要逼近：
+
+v_setpoint → 有带宽/加速度/延迟/饱和的实际机体速度
+
+再叠加姿态耦合和观测延迟即可。它的参数应该从 PX4 SITL 和实机阶跃响应辨识，而不是去复制 PX4 的所有内部 PID、控制分配和电机驱动细节。否则你会同时维护“近似 PX4”和“真 PX4”，返工成本非常高。
+
+最小可行架构
+建议把系统冻结成下面三个清晰的计算域，而不是一个大 ROS/Isaac/PX4 软件图。
+
+text
+复制
+┌──────────────────── 训练工作站 ────────────────────┐
+│                                                    │
+│  真实录制数据 ─┐                                   │
+│                ├→ 数据集/标注 → 监督学习           │
+│  Isaac Lab ────┘                     │             │
+│                                      ├→ ONNX/模型  │
+│  可选RL训练：deployable obs → velocity policy ─────┤
+│                                                    │
+│  PX4 Gazebo/SIH：验证 Offboard、坐标、failsafe      │
+└─────────────────────────┬──────────────────────────┘
+                          │
+              model + manifest + config
+                          │
+┌──────────────────── Raspberry Pi 5 ────────────────┐
+│                                                    │
+│ USB Camera → timestamp → decode/split/resize        │
+│                          │                         │
+│                target detector/keypoints           │
+│                          │                         │
+│          geometry/PnP/stereo + quality gate        │
+│                          │                         │
+│               target-relative state                │
+│                          │                         │
+│              bounded classical guidance            │
+│           （未来可替换为 velocity-level policy）    │
+│                          │                         │
+│ PX4 telemetry ───────→ safety/freshness gate       │
+│                          │                         │
+│                   MAVSDK Offboard                  │
+│             vx, vy, vz, yaw_rate + timestamp       │
+└─────────────────────────┬──────────────────────────┘
+                          │ serial/MAVLink
+┌──────────────────────── PX4 ───────────────────────┐
+│ IMU + optical flow + range                         │
+│          ↓                                         │
+│        EKF2 / validity                             │
+│          ↓                                         │
+│ velocity ctrl → attitude ctrl → rate ctrl → mixer  │
+│          ↓                                         │
+│        motor/ESC                                   │
+│                                                    │
+│ 独立 failsafe：Offboard loss / estimator / battery │
+└────────────────────────────────────────────────────┘
+这张图最重要的地方并不是模块名称，而是只有一套飞行控制权：Pi 产生参考，PX4 控制飞机。训练真值从不跨越“model + manifest”进入真实 actor。
+
+首版建议不用 ROS 2 作为强制依赖。MAVSDK 官方 Offboard API正是为 companion computer 的速度/yaw setpoint 场景准备的；它还自动以约 20 Hz 重发最后一个 setpoint，而 PX4 的 Offboard proof-of-life 最低要求仅为持续超过 2 Hz，并且在进入 Offboard 前需要先稳定发送一段时间。
+
+这里隐藏着一个必须在第一阶段修掉的安全陷阱：
+
+MAVSDK 持续重发最后一条命令，并不等价于策略还活着。
+
+如果神经网络线程冻结，但发送线程或 MAVSDK 仍在运行，PX4看到的 Offboard heartbeat 并没有丢，因此 PX4 内建 COM_OF_LOSS_T 未必触发。这个结论是根据 MAVSDK“自动重发最后 setpoint”和 PX4“检测 proof-of-life 丢失”的官方行为做出的工程推断。
+
+所以 Pi 端必须有与策略线程独立的command freshness gate。建议每个感知结果、状态估计和动作都带 monotonic timestamp，并拒绝将过期策略输出继续刷新成“新命令”。
+
+一个适合台架验证的初始策略是：
+
+PROPOSED：正常 guidance 目标频率 20 Hz；不是因为 PX4 只需要 20 Hz，而是给微型机足够的任务层更新频率。
+PROPOSED：感知/策略数据年龄超过 150 ms 时，不再使用旧目标速度，切换为预定义 safe command。
+PROPOSED：持续超过约 0.5 s 无新任务状态时，sender 停止 Offboard proof-of-life，让 PX4 进入已经台架验证过的 COM_OF_LOSS_T/COM_OBL_RC_ACT 动作。
+safe command 到底是零水平速度、Hold 还是 Land 不能现在武断冻结；PX4 支持 Hold/Return/Land 等 Offboard-loss 动作，但具体选择依赖你的本地位置估计是否仍有效、下方是否安全，以及规则要求。
+PX4 层还应该向 Pi 明确提供一个简化健康状态，而不是只发位置数字。例如：
+
+estimator_valid / velocity_valid / height_valid / offboard_active / armed / failsafe / battery / link_age
+
+只有在这些标志符合前提时，Pi 才允许发运动指令。
+
+坐标接口应尽早冻结。 推荐应用层只暴露一个明确的 body-relative target 状态和一个 body-frame guidance action，再在单一 adapter 内转换成 PX4 所需坐标。相机 optical frame、机体 FRD、PX4 NED/FRD、仿真世界坐标不能由各模块各自“顺手转换”。坐标方向和时间戳应该在日志里完整记录。
+
+如果以后采用 ROS 2/uXRCE-DDS，要注意 PX4 官方明确存在消息版本兼容要求；不同 uORB message 版本可能需要 translation node，未版本化消息则要求匹配。
+ 这也是不值得在首个 velocity-only prototype 就增加 ROS 2 的原因。
+
+Pi5 部署建议先形成一个非常小的运行时。 Raspberry Pi 官方推荐 Pi 5 使用足够的 5 V/5 A 供电并主动散热；这不是说 Pi 一定消耗 25 W，而是说明不能把 companion compute 的电气和热成本当作“免费”。
+ 结合你的 3S 300 mAh 开发电池、USB 双目、飞控和最终质量约束，这项风险甚至比“到底 PPO 还是 SAC”更应该先实测。
+
+部署后端优先顺序建议为：
+
+ONNX Runtime CPU → 如果 profiling 表明网络本身是主要瓶颈，再评估 NCNN/量化 → 最后才考虑增加 NPU/换计算板。
+
+ONNX Runtime 有官方 Arm CPU 包，适合作为可移植基线。
+ 不建议第一天为几十毫秒的理论优化引入复杂编译链；必须先知道真正瓶颈是不是模型，而不是 MJPEG decode、rectification 或内存复制。
+
+一个合理的全链 profiling 项目应同时测：
+
+USB dequeue → MJPEG decode → stereo split → resize/rectify → model → geometry/filter → guidance → MAVLink enqueue
+
+而不是只打印 model.forward()。
+
+PROPOSED 的首个性能门槛可设为：在最终候选分辨率上连续运行 10 分钟，任务层完整 pipeline 的 p95 延迟不高于 50 ms、p99 不高于 75 ms，无持续 thermal throttling，且没有超过 100 ms 的未解释输入帧空洞。这个数字不是论文指标或赛事规则；它只是为了让 20 Hz guidance loop 有可测试的工程余量。如果实际飞行速度和机体动态证明更慢的闭环已经足够，应重新校准而不是盲目守数字。
+
+开工前补证与最小验证顺序
+最需要提前补证的不是算法超参数，而是那些一旦错了会推翻整体架构的事实。
+
+现在必须确定的事项：
+
+问题	为什么现在就重要	最便宜的验证	失败后的路线
+PX4 target / 固件 hash / 输出配置	决定飞控、ESC、SITL行为是否一致	实机到手后记录 ver all、target、参数导出	不做任何 RL 前先固定一套通过台架的固件
+MicoAir H743v2 电机输出可靠性	属于“飞机能否基本飞”的硬门槛	无桨台架，冷启动/USB断开/电池重启反复测试四电机	若 BDShot 不可靠，先用已验证 DShot 配置
+MTF-02P 的真实融合有效域	velocity interface 依赖本地速度	不同高度、地面纹理、光照，记录 EKF/flow/range	失败则优先更换/补充状态传感器或启用 VIO
+全机质量与电源	可能直接淘汰 Pi5/双目组合	称重+BEC输入/5V电流记录	减计算/相机/保护结构，必要时换 compute
+相机同步和米制标定	决定 stereo depth 能否进入架构	运动标定板＋已知距离验收	降级成 monocular target + 独立 range/ToF
+Offboard stale-command 行为	直接关系失控模式	SITL 中冻结策略线程、冻结 sender、断链分别试	重构 watchdog/failsafe，不进入实飞
+
+这里有一个需要特别提醒的硬件事实。MicoAir 官方资料列出了 micoair_h743-v2 PX4 target，并称从 PX4 1.16.0 起获得支持；板卡资料也列有 BMI088＋BMI270 和集成 ESC。
+ 但是 2026 年 PX4 的 MICOAIR_H743_V2 issue 中出现过 BDShot 在重启后导致部分电机不工作的实测问题；报告者在 PX4 1.16.1 以及当时 1.17 开发分支上都复现过，随后 7 月有人提交并报告了针对 H743v2 AIO 的修复。
+
+这不能推导为“你的板现在一定有 bug”，也不能推导为“1.17 已经完全修好”。正确工程结论是：BDShot 不能作为默认可信能力；必须在你最终 board revision、ESC firmware 和 PX4 commit 上冷启动实测。 首个版本甚至没有理由为了 RPM telemetry 强行启用它。
+
+可以用假设推进、不必现在冻结的事项包括：
+
+质量可以暂时用你给出的 160 g 参考模型做仿真，但所有动力学结论都必须标注“假设”；推力/惯量可以先用粗略参数做低速任务；视觉场景可以自建桌面、隧道、障碍研究环境，但不能称作正式比赛场；dock 可以先用一个平面视觉目标抽象，不必提前设计充电机械。
+
+到硬件阶段才决定的事项包括最终网络分辨率、Pi5 governor/线程亲和、相机曝光、VIO、最终速度/加速度限制、Precision Landing 是否优于 companion visual servo，以及是否需要额外 NPU。
+
+最小验证顺序建议严格做成纵向闭环，避免横向铺工具：
+
+验证链 A：纯 PX4，不碰机器学习。
+
+在官方 PX4 Gazebo/SIH 中让一个最简单的 companion 程序稳定完成：arm → enter Offboard → 起飞/保持 → body/NED velocity step → 停止 → Land。PX4 Offboard 的 heartbeat 和 loss timeout 行为应该一起测试。
+
+PROPOSED 停止条件： 如果官方 PX4 Gazebo＋官方/最薄的 MAVSDK 程序都还没有稳定工作，不允许去调 Isaac-PX4 bridge、PPO 或视觉模型。
+
+验证链 B：构造“完美目标相对状态”，但仍不训练。
+
+给控制器一个人工的 (dx,dy,dz,yaw_error)，让经典 guidance 产生 velocity。此时重点验证 body/NED 坐标、限速、目标停止区、超调、失联和饱和。
+
+PROPOSED 首个任务判据： 在至少 100 次不同初始位置的仿真 trial 中，≥95% 在设定任务时间内进入 0.15 m 目标球并连续保持 2 s，且无碰撞、无连续 command saturation。数字是研究门限，不是赛事规定。
+
+验证链 C：接真实视觉算法，但仍保持传统控制器。
+
+先用 fiducial/已知几何建立“oracle-like baseline”。这里的 oracle 不是仿真真值，而是一个真实相机可以部署的确定性视觉算法。把同一视频喂给未来 ML 模型，直接比较目标丢失率、误差、延迟和恢复时间。
+
+这样做之后，若 ML 出现问题，你能知道是“看错了”，而不是控制器、坐标或 PX4 出错。
+
+验证链 D：第一个监督学习模型。
+
+建议只训练 target detector/keypoints/confidence。训练和评估要保存数据 split、随机种子、配置、checkpoint hash、preprocess manifest。PULP-Frontnet 的代码结构就是很好的参考：训练、测试和量化测试是分离脚本，预训练模型和数据校验和都公开。
+
+模型必须在从未进入训练集的真实目标、背景、照明和姿态上评估，成功率分母必须包括“完全没检测出来”的帧或 trial，不能只在 successful detections 上计算 pose error。
+
+验证链 E：Pi5 全链回放。
+
+硬件到手后，不先装到飞机上。将真实 USB 摄像头录制的连续流在 Pi5 上运行完整 pipeline，记录各阶段 monotonic timestamp、p50/p95/p99、CPU、RSS、温度、频率、5 V 电流和 frame drop。
+
+这一步若失败，首先降低图像分辨率和模型尺寸，再改 runtime；不应立刻更换整套算法。PULP-Frontnet 80×48/160×96 能工作的事实至少说明“视觉任务必须保持相机原始 1280×960 才能学”并不是一个合理默认前提。
+
+验证链 F：状态估计。
+
+无桨/安全台架先核实 MTF-02P 的 range 和 flow；然后在低风险条件验证 PX4 的 optical-flow position/velocity hold。PX4 官方确实支持 optical flow + range 的 GNSS-denied velocity estimation，但你自己的地面材质、灯光、振动和高度才决定它是否可用。
+
+只有这一步失败或返库半径证明需要更强状态，才启动 VIO 支线。
+
+验证链 G：真实目标接近。
+
+第一次真实自主飞行也保持传统 visual servo。只有它已经稳定后，才把监督感知模型替换进去。
+
+验证链 H：决定是否需要 RL。
+
+如果剩余问题只是“网络漏检”“双目标定飘”“Pi太慢”“光流失效”，不许用 PPO 掩盖。如果剩余问题确实是“复杂障碍和长期决策”，才开始速度层 RL。
+
+仿真到现实的随机化也应按这个顺序建立。最值得随机化的不是“所有参数 ±50%”，而是从实测得到的 distributions：相机延迟/掉帧、目标检测误差、速度跟踪延迟、速度/加速度饱和、质量、电池状态以及视觉光照/纹理。低层 motor thrust、torque、motor delay 对 direct-RPM RL 极关键；对于本项目 velocity-level actor，它们的重要性被 PX4 内环显著隔离，但仍会通过速度响应包络体现出来。这正是保持 PX4 分层能够降低 sim-to-real 维度的主要收益。
+
+学习与工作量安排
+以下时间不是文献结论，而是用于技术选择的单人工程量级估计。假设已经具备 Python/C++ 基础、不包含机械加工和硬件采购等待，也不把“安装成功”等同于“研究完成”。
+
+阶段	必须学的内容	可直接复用	暂缓内容	工程量级	置信度
+PX4 SITL / Offboard 基线	PX4 modes、NED/FRD、MAVLink、failsafe	PX4 Gazebo/SIH、MAVSDK	ROS2、Isaac桥、RL	约 1–3 人日	高
+目标相对经典闭环	相机模型、frame transform、简单 visual servo	OpenCV类几何工具、PX4 velocity loop	深度学习优化	约 2–5 人日	中高
+可复现数据/监督学习	dataset split、augmentation、small CNN、export	PyTorch、PULP-Frontnet范式	PPO奖励调参	约 3–10 人日	中
+Pi5 pipeline	ARM profiling、ONNX、线程/缓存/热管理	ONNX Runtime ARM	NPU专用SDK	约 2–7 人日/模型	中
+MTF/PX4真实估计验收	EKF2、flow/range质量、日志	PX4 EKF/flow支持	VIO内部数学	约 2–7 人日＋飞行条件	中低
+VIO（如触发）	相机-IMU标定、时间同步、估计器调参	OpenVINS/ORB-SLAM3等	loop closure若不需要	约 1–3 周或更多	低
+Pegasus Isaac↔PX4	Linux/Isaac/PX4/MAVLink lockstep	Pegasus	自建桥	约数日至两周，强版本相关	低
+自建完整 Isaac↔PX4 bridge	仿真接口、时钟、reset、多实例、sensor injection	可复用极少	—	数周级且持续维护	低
+速度层视觉 RL	POMDP、PPO/SAC、reward、domain randomization、eval	Isaac Lab/SKRL、PX4验证链	direct motor RL	首次研究通常数周级	低
+
+这张表里最值得注意的是：现在没有必要同时学 ROS 2、VIO、PX4内部控制、Isaac bridge、PPO 和 Pi 优化。
+
+第一阶段真正必须掌握的知识只有四块：
+
+PX4 Offboard 与 failsafe；相机/机体系坐标；目标相对 visual servo；实验日志与复现。
+
+第二阶段才是“小网络监督学习＋ONNX 部署”。
+
+第三阶段由证据决定进入 VIO、stereo obstacle 或 RL 中的哪一个，而不是三条都开。
+
+Isaac Lab 已有环境应继续利用，但先只学两件事：如何定义 observation/action/reward，以及如何固定随机种子/配置并保存 checkpoint。不要先投入自定义多实例 PX4 管理。
+
+轻量 RL 环境也值得知道，但不建议再并行建设一套主平台。例如 gym-pybullet-drones 目前仍提供很简洁的 PyBullet/Gymnasium 与 PPO 示例，但现有 SITL 重点更偏 Betaflight，而不是 Boom_Birds 的 PX4 验证目标。
+ 它适合几小时级的算法 sanity check，不值得成为第三套正式仿真基础设施。
+
+关于 PPO 本身： 没有证据表明 PPO 是 Boom_Birds 首任务最合适的算法。甚至 SIGN 自己也指出 continuous velocity action 会扩大探索空间、提高训练难度。
+ 学习任务确定后再比较 PPO/SAC/BC 才有意义。
+
+监督学习对第一个感知任务的优势是标签含义明确、训练失败容易定位、可以离线复用真实数据；模仿学习适合未来把成熟 planner/controller 的行为蒸馏成轻量策略；RL 的优势在于复杂长期决策和难以直接监督的行为优化，但代价是奖励设计、探索、sim-to-real 和安全验证显著增加。
+
+因此推荐的学习顺序是：
+
+监督感知 → 必要时模仿成熟行为 → 最后才是受限速度层 RL。
+
+而不是从 PPO 开始，再倒着补定位和感知。
+
+需求变化与返工分析
+如果 Pi5 算力不足：主线的大部分软件都可以保留。 因为学习模块的接口只输出 target observation 或 velocity recommendation。可以依次降低输入分辨率、降低网络频率、改变模型、量化、换 ONNX/NCNN，最后甚至更换 companion compute，而 PX4 Offboard、日志、数据集、视觉几何、任务逻辑都不需要重写。Pi5 本身只是实现，不应该成为 observation/action API 的一部分。
+
+如果双目标定或同步不可靠：也不应推翻主线。 首个目标任务可以回退到单目已知目标几何/marker；避障先使用低维 range/ToF 或保守场景。只会推迟 stereo depth 和复杂 obstacle policy。
+
+如果最终机体超质量预算：这是最危险的系统级变化。 你给出的规则快照在 D=120 mm 时允许上限约 175.5 g，这还没有正式规则复核。Pi5、双目、线束、电源转换和散热都是不可忽略的系统项。此时最可能需要更换 companion compute 或削减感知硬件，而不是改变 PX4 控制接口。
+PROPOSED： 如果后续正式规则确认同一质量上限，研发阶段不要把 175.5 g 当设计目标；应在全部硬件称重后留下至少约 10 g 级机械/线束/制造余量，再决定 Pi5 是否还能保留。这是工程裕量建议，不是规则要求。
+
+如果 MTF-02P 无法提供稳定速度估计：速度接口主线本身仍然可以保留，但“谁提供速度状态”必须替换。 可选路径依次是更可靠的光流/距离模块、视觉里程计/VIO，或者赛场允许的其他本地定位。不能在 velocity estimator 不可靠时期待 RL 自己弥补 PX4 底层状态闭环。
+
+如果 VIO 最终必须上： 仍然不要把 VIO 输出直接写入学习策略的隐藏真值；应把它作为 PX4 local state 或 companion 的明确估计输入，并记录 validity/covariance。PX4 有标准的 external vision/VIO 接入和 EKF 融合路径。
+
+如果正式规则禁止/限制场地标记： 首个 marker baseline 仍然没有浪费。它已经帮你验证相机、坐标、速度闭环、Pi latency、日志和安全链；真正比赛只需更换 target observation provider 为自然目标 detector/keypoints。正因为接口隔离，这种需求变化才不会导致整体推倒。
+
+如果 SITL 与 Isaac 运行时桥一直不成熟：几乎没有返工。 主线本来就把 PX4 Gazebo 作为真实飞控验证器、Isaac 作为训练器。模型文件和 observation/action schema 是二者交界。只有明确证明“必须在 Isaac 的 photorealistic camera 内让真实 PX4 同步闭环”时才用 Pegasus。
+
+如果未来 Pegasus 已经验证支持目标 PX4 版本和你的 OS： 就把它升级成联合验证层，而不是推翻前两层。它目前有 real PX4 SITL/MAVLink backend、lockstep、BSD-3-Clause 许可，已经明显比从零造桥更合理。
+
+如果学习路线最终要求高速敏捷飞行： 当前 velocity-level 分层可能开始成为性能瓶颈。届时才重新讨论 attitude/thrust 或 body-rate action。SimpleFlight、Learning to Fly in Seconds 等工作说明更低层 action 对敏捷性能很有价值，但那将是一个新的控制研究问题，而不再只是当前任务的“接口优化”。
+
+如果正式比赛任务只需要 30 s 内非常短的目标动作： 反而进一步削弱建设完整 SLAM、全局地图和大规模 end-to-end navigation 的必要性。这里仍须强调：30 s 是你提供的规则快照，而不是本次重新核验的官方规则。
+
+最值得现在冻结的是：
+
+observation schema、action schema、frame conventions、timestamp/freshness semantics、PX4/companion 权责边界、日志格式、模型预处理 manifest。
+
+最不应该现在冻结的是：
+
+神经网络架构、PPO与否、Isaac版本、VIO实现、最终摄像头分辨率、精确 guidance Hz、dock 几何、domain randomization 数值和最终速度门限。
+
+证据边界、未决事项与最终清单
+本报告能给出的最高置信度结论来自几组相互独立、方向一致的证据。
+
+第一，PX4 自身已经提供了成熟的速度 Offboard、光流速度估计、VIO 外部状态接入、Precision Landing 和明确的 Offboard-loss failsafe，因此没有工程理由在 Boom_Birds 第一版重写低层控制。
+
+第二，PULP-Frontnet、PULP-DroNet/PULP-Detector 证明了微型、低算力无人机完全可以采用“很小的深度网络解决最有价值的感知问题，再让经典控制/状态机负责其他部分”，而不是只能走 end-to-end RL。
+
+第三，近期 SIGN 表明 velocity-level learning 与 PX4 确实可以组合，但同时暴露出其真实部署依赖 RTX 3060 笔记本、D435i/VIO 和未公开代码的问题；这正好说明“论文动作接口相似”远远不等于“Pi5 上可复用”。
+
+第四，Learning to Fly in Seconds 证明低层 RL 本身并非“不成熟”，但其 direct-RPM control 与你明确保留 PX4 的架构选择冲突；因此排除它不是因为 RL 做不到，而是因为它解决了一个你目前没有必要重新解决的问题。
+
+第五，官方 PX4 Gazebo/SIH 和 Pegasus 已经覆盖了大部分“真实 PX4 与仿真动力学闭环”的需求。前者版本一致性和维护风险最低；后者适合 Isaac 联合仿真但存在当前测试版本/OS 差距。因此自己写桥只能排在第三顺位。
+
+对几个关键事实，目前公开证据仍不足：
+
+未决事实	当前置信度	缺失证据	对路线的影响
+Pi5 能否承担现有 USB stereo + ML 全链	低	实际 camera、MJPEG decode、模型、温度/功耗 profiling	可能换模型、分辨率或 compute，不改变 PX4接口
+MTF-02P 在实际场地是否足够稳定	低	地板、光照、高度、振动下 PX4 log	失败将触发 VIO/其他定位
+67.6718 mm stereo 标定是否米制可信	低	独立已知距离测试与同步测试	决定 stereo depth 是否进入安全链
+MicoAir H743v2 当前目标固件的 BDShot 状态	中低	具体 revision、ESC FW、PX4 commit 台架测试	不影响普通 DShot 主线，但必须在飞行前确认
+最终全机质量/推重比	低	称重与实测 thrust curve	可能迫使计算/电源/结构改型
+3S300 mAh 的真实电源预算	低	电池内阻、电压跌落、Pi5/BEC/相机功耗	可能成为比算力更早的硬约束
+Precision Landing 是否适合最终机库	中	dock 几何、目标类型、规则	只影响终端模块
+是否真的需要 VIO	中	场地尺度、光流验收、返库策略	决定后续复杂度
+是否真的需要 RL	目前偏低	传统基线的系统性失败证据	没有失败证据前不投入
+最新赛事正式规则	未核实	官方最终规则/版本号	可改变质量、标记和任务设计
+
+建议采用
+
+PX4 v1.17 级官方链路作为基准；MAVSDK 的 velocity/yaw-rate Offboard 作为第一 companion API；PX4 Gazebo/SIH 作为主飞控验证工具；MTF-02P＋PX4 EKF 作为首先验收的短距离状态方案；已知目标几何/marker＋经典 visual servo 作为第一个完整任务；小型监督视觉模型作为第一个机器学习成果；ONNX Runtime ARM 作为 Pi5 首个 deployment baseline；Isaac Lab 保留用于合成数据、域随机化和未来策略训练。 PX4 stable、MAVSDK Offboard、Gazebo lockstep 与 ARM ONNX Runtime 都有官方公开支持链。
+
+建议暂缓
+
+PPO；VIO；dense stereo obstacle map；ROS 2 全栈；Pegasus 运行时联合仿真；Isaac 版本升级；NPU/Jetson 改型；完整机库状态机。
+
+它们都可能未来需要，但现在没有一个是完成首个“目标相对状态→速度→到达保持”纵向闭环的必要条件。
+
+建议淘汰或明确不作为主线
+
+自建完整 Isaac↔PX4 桥；复制 PX4 的第二套飞控；direct-motor/direct-RPM RL；复活已归档的 PX4-Avoidance；把 motion-capture/world truth 当 actor 观测；用桌面 GPU inference 结果推断 Pi5 性能；把 simulator 中的完美 depth 当真实 stereo 能力；仅因视频成功或 GitHub 星数采用某仓库。 PX4-Avoidance 已被官方归档，而 direct-RPM RL 的学习层级与当前 PX4约束不同。
+
+最后，真正需要在进入硬件阶段前补充给项目的最少信息只有五项：
+
+一， MicoAir743v2 的确切 revision、ver all、PX4 git hash、ESC firmware 与 motor output 配置；
+二， 装齐 Pi、相机、飞控、线束、桨保和电池后的真实全机质量，以及 Pi 5 V rail 与整机电池侧功耗；
+三， MTF-02P 在目标地面/光照/高度下的 PX4 日志；
+四， USB stereo 的准确型号、曝光/快门/同步信息和独立米制标定验收结果；
+五， 最终正式赛事规则版本，以及目标/机库是否允许使用人工视觉标记。
+
+在这五项出现之前，最稳健的 Boom_Birds 开工决策不是等待，而是把研究工作集中在PX4官方纵向闭环、统一 observation/action 接口、经典目标伺服、日志/失效机制，以及一个很小的监督学习感知任务上。这样即使之后 Pi、相机、定位方案、规则或学习算法发生变化，已经完成的绝大部分工作仍然保留，而不是跟着某个仿真器、RL算法或视觉栈一起推倒重来。
