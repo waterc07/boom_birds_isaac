@@ -1,0 +1,285 @@
+{
+  "scope": "PROJECT_VELOCITY_OUTER_LOOP_TO_BODY_THRUST_MOMENT_IN_PHYSX",
+  "evidence_domain": "SIMULATION_MODEL",
+  "status": "PASS",
+  "gate": "BB22:G4_PRECURSOR_ONLY_NOT_A_GATE_PASS",
+  "flight_or_sitl_acceptance": false,
+  "kinematic_reference_note": "kinematic_reference rows are KINEMATIC and excluded from dynamics acceptance",
+  "proposed_not_frozen": true,
+  "checks": {
+    "forward_moves_east": true,
+    "left_moves_north": true,
+    "up_climbs": true,
+    "positive_yaw_rate_is_ccw": true,
+    "combined_direction_within_45deg_of_commanded": true,
+    "forward_at_yaw90_moves_north": true,
+    "expired_command_rejected_and_not_renewed": true,
+    "motion_stops_after_expiry": true,
+    "reset_old_action_rejected": true,
+    "hover_holds_altitude": true,
+    "all_recorded_values_finite": true
+  },
+  "task_source": "e:\\isaac\\isaaclab\\source\\isaaclab_tasks\\isaaclab_tasks\\direct\\quadcopter\\quadcopter_env.py",
+  "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+  "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd",
+  "config": "configs\\vehicles\\sim_reference.yaml",
+  "config_sha256": "23fd7ca7cfbfa3e98de840c8257242f916df05de0b2b225cd495d8ffc0dd8eec",
+  "seed": 0,
+  "num_envs": 1,
+  "step_dt_s": 0.05,
+  "control_hz": 20.0,
+  "action_semantics": "normalized_total_thrust_plus_three_body_moments",
+  "mass_kg": 0.028200002387166023,
+  "inertia_kgm2": [
+    1.6571999367442913e-05,
+    1.665600029809866e-05,
+    2.9262002499308437e-05
+  ],
+  "thrust_to_weight": 1.9,
+  "moment_scale_nm": 0.01,
+  "max_tilt_rad": 0.2,
+  "gains": {
+    "kp_velocity_xy": 2.0,
+    "ki_velocity_xy": 0.5,
+    "kp_velocity_z": 3.0,
+    "ki_velocity_z": 1.0,
+    "k_attitude": 6.0,
+    "k_yaw": 2.0,
+    "k_rate": 20.0,
+    "integral_limit": 0.5
+  },
+  "ttl_s": 0.15,
+  "scenarios": [
+    {
+      "scenario": "hover_trim",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        1.321433240608627e-10,
+        4.792165275713245e-10,
+        -0.012558460235595703
+      ],
+      "delta_east_m": 1.321433240608627e-10,
+      "delta_north_m": 4.792165275713245e-10,
+      "delta_up_m": -0.012558460235595703,
+      "yaw_change_rad": 0.0,
+      "peak_speed_mps": 0.07357484847307205,
+      "final_velocity_world_mps": [
+        -6.942479369165255e-10,
+        -1.9165845299706774e-10,
+        0.005341741256415844
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "forward_step",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        0.5460556150047522,
+        8.230637643658056e-09,
+        -0.010980367660522461
+      ],
+      "delta_east_m": 0.5460556150047522,
+      "delta_north_m": 8.230637643658056e-09,
+      "delta_up_m": -0.010980367660522461,
+      "yaw_change_rad": -4.433003478977612e-11,
+      "peak_speed_mps": 0.5251661100999124,
+      "final_velocity_world_mps": [
+        0.03162093833088875,
+        -3.5829381683782913e-09,
+        0.003736963262781501
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "left_step",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        -1.6738750580058692e-08,
+        0.4370304049042516,
+        -0.01154327392578125
+      ],
+      "delta_east_m": -1.6738750580058692e-08,
+      "delta_north_m": 0.4370304049042516,
+      "delta_up_m": -0.01154327392578125,
+      "yaw_change_rad": 3.615998019495721e-10,
+      "peak_speed_mps": 0.42021818051879795,
+      "final_velocity_world_mps": [
+        9.797664901611824e-10,
+        0.025272803381085396,
+        0.004311826080083847
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "up_step",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        1.1868506177847848e-10,
+        7.830102954908824e-10,
+        0.20168787240982056
+      ],
+      "delta_east_m": 1.1868506177847848e-10,
+      "delta_north_m": 7.830102954908824e-10,
+      "delta_up_m": 0.20168787240982056,
+      "yaw_change_rad": 0.0,
+      "peak_speed_mps": 0.21247243881225586,
+      "final_velocity_world_mps": [
+        -7.140023017271346e-10,
+        2.3187154973847157e-10,
+        0.010744038969278336
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "yaw_step",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        -4.6493053115770344e-07,
+        -2.307108076526898e-07,
+        -0.012559950351715088
+      ],
+      "delta_east_m": -4.6493053115770344e-07,
+      "delta_north_m": -2.307108076526898e-07,
+      "delta_up_m": -0.012559950351715088,
+      "yaw_change_rad": 0.5042467075821279,
+      "peak_speed_mps": 0.07357484847307205,
+      "final_velocity_world_mps": [
+        -4.967206450601225e-07,
+        -4.2103198438780964e-07,
+        0.005341366399079561
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "combined_step",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        0.41131478553697876,
+        0.36725309500968983,
+        0.14466118812561035
+      ],
+      "delta_east_m": 0.41131478553697876,
+      "delta_north_m": 0.36725309500968983,
+      "delta_up_m": 0.14466118812561035,
+      "yaw_change_rad": 0.30570784760484554,
+      "peak_speed_mps": 0.4130501304678911,
+      "final_velocity_world_mps": [
+        0.10901600122451782,
+        0.12143571674823761,
+        0.026608113199472427
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "heading_yaw90_forward",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        8.063856439255446e-07,
+        0.5460547806623166,
+        -0.010980665683746338
+      ],
+      "delta_east_m": 8.063856439255446e-07,
+      "delta_north_m": 0.5460547806623166,
+      "delta_up_m": -0.010980665683746338,
+      "yaw_change_rad": -1.3496118925537814e-05,
+      "peak_speed_mps": 0.5251664067690713,
+      "final_velocity_world_mps": [
+        -7.729154276603367e-07,
+        0.03161909431219101,
+        0.0037368021439760923
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "expiry_single_command",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        0.07511974131748492,
+        1.0787987531069021e-08,
+        -0.02005833387374878
+      ],
+      "delta_east_m": 0.07511974131748492,
+      "delta_north_m": 1.0787987531069021e-08,
+      "delta_up_m": -0.02005833387374878,
+      "yaw_change_rad": 1.3232431258870865e-11,
+      "peak_speed_mps": 0.127831115469088,
+      "final_velocity_world_mps": [
+        4.743352474179119e-05,
+        -4.0530094835844466e-09,
+        -9.675847832113504e-05
+      ],
+      "expired_rejected_steps": 37,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "reset_old_epoch",
+      "label": "DYNAMIC",
+      "delta_position_world_m": [
+        0.2886991500854492,
+        -2.3140747096306313e-09,
+        0.0010696053504943848
+      ],
+      "delta_east_m": 0.2886991500854492,
+      "delta_north_m": -2.3140747096306313e-09,
+      "delta_up_m": 0.0010696053504943848,
+      "yaw_change_rad": -1.187843269040572e-10,
+      "peak_speed_mps": 0.5105081984071929,
+      "final_velocity_world_mps": [
+        0.519157886505127,
+        -5.824509319296567e-09,
+        -0.001441393280401826
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 1,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    },
+    {
+      "scenario": "kinematic_reference",
+      "label": "KINEMATIC",
+      "delta_position_world_m": [
+        0.4999999106495123,
+        1.9364090886320184e-10,
+        -0.0294305682182312
+      ],
+      "delta_east_m": 0.4999999106495123,
+      "delta_north_m": 1.9364090886320184e-10,
+      "delta_up_m": -0.0294305682182312,
+      "yaw_change_rad": 0.0,
+      "peak_speed_mps": 0.5006011119946323,
+      "final_velocity_world_mps": [
+        -1.8569971116377815e-09,
+        -1.2303745695885215e-11,
+        -0.024524947628378868
+      ],
+      "expired_rejected_steps": 0,
+      "rejected_old_epoch_steps": 0,
+      "rows": 40,
+      "no_basis_for_flight_acceptance": true
+    }
+  ],
+  "row_count": 400
+}

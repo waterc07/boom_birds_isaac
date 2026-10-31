@@ -1,0 +1,10 @@
+[stage] import isaac modules
+[stage] read config
+[stage] build env config
+[stage] create env
+[stage] reset env
+[stage] read plant parameters
+[stage] run scenarios
+[stage] evaluate checks
+[stage] write result
+BOOM_BIRDS_SIM_VELOCITY_CHAIN_PASS
