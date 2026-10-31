@@ -1,0 +1,16 @@
+stages: ["imports", "import isaac modules", "read config", "build env config", "spawn layered assets", "create env", "reset env", "read plant parameters", "run layered evaluation", "build layered scene"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 825, in <module>
+    _, _, terminated, _, _ = env.step(
+                             ^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/envs/direct_rl_env.py", line 377, in step
+    self.sim.step(render=False)
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sim/simulation_context.py", line 555, in step
+    raise exception_to_raise
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sensors/sensor_base.py", line 303, in _initialize_callback
+    self._initialize_impl()
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sensors/contact_sensor/contact_sensor.py", line 272, in _initialize_impl
+    raise RuntimeError(
+RuntimeError: Sensor at path '/World/envs/env_0/Robot' could not find any bodies with contact reporter API.
+HINT: Make sure to enable 'activate_contact_sensors' in the corresponding asset spawn configuration.

@@ -1,0 +1,15 @@
+stages: ["imports", "import isaac modules", "read config", "build env config", "spawn layered assets", "create env", "reset env", "read plant parameters", "run layered evaluation", "build layered scene"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 829, in <module>
+    evidence = layered_scene.contact_evidence(step=step)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\isaac\proj_boom_birds\src\boom_birds\sim\isaac_layered_scene.py", line 150, in contact_evidence
+    data = self.sensor.data
+           ^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sensors/contact_sensor/contact_sensor.py", line 107, in data
+    self._update_outdated_buffers()
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sensors/sensor_base.py", line 356, in _update_outdated_buffers
+    outdated_env_ids = self._is_outdated.nonzero().squeeze(-1)
+                       ^^^^^^^^^^^^^^^^^
+AttributeError: 'ContactSensor' object has no attribute '_is_outdated'

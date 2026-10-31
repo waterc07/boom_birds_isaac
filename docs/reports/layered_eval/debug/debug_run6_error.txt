@@ -1,0 +1,8 @@
+stages: ["imports", "import isaac modules", "read config", "build env config", "spawn layered assets", "create env", "reset env", "read plant parameters", "run layered evaluation", "build layered scene"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 792, in <module>
+    injector.begin(scenario.disturbance)
+  File "E:\isaac\proj_boom_birds\src\boom_birds\sim\isaac_layered_scene.py", line 198, in begin
+    raise ValueError('spec must be a DisturbanceSpec or None')
+ValueError: spec must be a DisturbanceSpec or None

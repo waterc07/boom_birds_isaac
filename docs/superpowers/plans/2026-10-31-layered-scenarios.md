@@ -1,6 +1,6 @@
 # 分层场景合同与五类自然场景评价实施计划（2026-10-31）
 
-> **状态：** IN PROGRESS
+> **状态：** DONE（仿真评价扩展；非 Gate 放行）
 > **来源章节：** docs/design/RMUC2027_UAV_V2_2.md §12.2、§13.2–13.5、§20.2、§20.9、§20.11；HANDOFF_20261031_GUIDANCE.md §6
 > **证据域：** 单元测试 + 仿真模型（Isaac Lab/PhysX，ORACLE 观测）；不含真实感知、SITL/HIL、实机
 > **Gate：** 仿真评价扩展；不是 BB22:G4 放行，不提升任何 Gate

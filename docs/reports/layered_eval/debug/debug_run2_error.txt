@@ -1,0 +1,17 @@
+stages: ["imports", "import isaac modules", "read config", "build env config", "spawn layered assets", "create env", "reset env", "read plant parameters", "run layered evaluation", "build layered scene"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 751, in <module>
+    layered_scene = LayeredScene(
+                    ^^^^^^^^^^^^^
+  File "E:\isaac\proj_boom_birds\src\boom_birds\sim\isaac_layered_scene.py", line 98, in __init__
+    self._park()
+  File "E:\isaac\proj_boom_birds\src\boom_birds\sim\isaac_layered_scene.py", line 102, in _park
+    self.rigid_views[path].set_world_poses(
+  File "e:/isaac/env_isaaclab/lib/site-packages/isaacsim/exts/isaacsim.core.prims/isaacsim/core/prims/impl/rigid_prim.py", line 304, in set_world_poses
+    positions = self._backend_utils.move_data(positions, self._device)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/env_isaaclab/lib/site-packages/isaacsim/exts/isaacsim.core.utils/isaacsim/core/utils/torch/tensor.py", line 65, in move_data
+    return data.to(device=device)
+           ^^^^^^^
+AttributeError: 'list' object has no attribute 'to'

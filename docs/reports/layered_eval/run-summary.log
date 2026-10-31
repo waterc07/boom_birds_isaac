@@ -1,0 +1,21 @@
+layered_final_run2.log: [stage] import isaac modules
+layered_final_run2.log: [stage] read config
+layered_final_run2.log: [stage] build env config
+layered_final_run2.log: [stage] spawn layered assets
+layered_final_run2.log: [stage] create env
+layered_final_run2.log: [stage] reset env
+layered_final_run2.log: [stage] read plant parameters
+layered_final_run2.log: [stage] run layered evaluation
+layered_final_run2.log: [stage] layered freeze verified
+layered_final_run2.log: [stage] build layered scene
+layered_final_run2.log: BOOM_BIRDS_LAYERED_EVAL_PASS
+layered_debug_full1.log: [stage] import isaac modules
+layered_debug_full1.log: [stage] read config
+layered_debug_full1.log: [stage] build env config
+layered_debug_full1.log: [stage] spawn layered assets
+layered_debug_full1.log: [stage] create env
+layered_debug_full1.log: [stage] reset env
+layered_debug_full1.log: [stage] read plant parameters
+layered_debug_full1.log: [stage] run layered evaluation
+layered_debug_full1.log: [stage] build layered scene
+layered_debug_full1.log: BOOM_BIRDS_LAYERED_EVAL_DEBUG_INCOMPLETE

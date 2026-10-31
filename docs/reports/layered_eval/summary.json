@@ -1,0 +1,452 @@
+{
+  "overall": {
+    "schema_version": "boom_birds.evaluation.v2",
+    "total_episodes": 125,
+    "valid_episodes": 125,
+    "invalid_episodes": 0,
+    "valid_denominator": 125,
+    "success": 77,
+    "collision": 25,
+    "timeout": 3,
+    "out_of_bounds": 20,
+    "success_rate_of_valid": 0.616,
+    "success_rate_of_total": 0.616,
+    "collision_rate_of_valid": 0.2,
+    "timeout_rate_of_valid": 0.024,
+    "out_of_bounds_rate_of_valid": 0.16,
+    "invalid_rate_of_total": 0.0,
+    "mean_duration_s": 2.8928,
+    "mean_final_distance_m": 1.1305227399210307,
+    "worst_final_distance_m": 8.648282735252227,
+    "failure_cases": [
+      "proportional-B_static-7000-000",
+      "proportional-B_static-7000-001",
+      "proportional-B_static-7000-002",
+      "proportional-B_static-7000-003",
+      "proportional-B_static-7000-004",
+      "proportional-B_static-7000-005",
+      "proportional-B_static-7000-006",
+      "proportional-B_static-7000-007",
+      "proportional-B_static-7000-008",
+      "proportional-B_static-7000-009",
+      "proportional-B_static-7000-010",
+      "proportional-B_static-7000-011",
+      "proportional-B_static-7000-012",
+      "proportional-B_static-7000-013",
+      "proportional-B_static-7000-014",
+      "proportional-B_static-7000-015",
+      "proportional-B_static-7000-016",
+      "proportional-B_static-7000-017",
+      "proportional-B_static-7000-018",
+      "proportional-B_static-7000-019",
+      "proportional-B_static-7000-020",
+      "proportional-B_static-7000-021",
+      "proportional-B_static-7000-022",
+      "proportional-B_static-7000-023",
+      "proportional-B_static-7000-024",
+      "proportional-C_dynamic-8000-021",
+      "proportional-E_disturbance-10000-001",
+      "proportional-E_disturbance-10000-002",
+      "proportional-E_disturbance-10000-003",
+      "proportional-E_disturbance-10000-004",
+      "proportional-E_disturbance-10000-007",
+      "proportional-E_disturbance-10000-008",
+      "proportional-E_disturbance-10000-009",
+      "proportional-E_disturbance-10000-010",
+      "proportional-E_disturbance-10000-011",
+      "proportional-E_disturbance-10000-012",
+      "proportional-E_disturbance-10000-013",
+      "proportional-E_disturbance-10000-014",
+      "proportional-E_disturbance-10000-015",
+      "proportional-E_disturbance-10000-016",
+      "proportional-E_disturbance-10000-017",
+      "proportional-E_disturbance-10000-018",
+      "proportional-E_disturbance-10000-019",
+      "proportional-E_disturbance-10000-020",
+      "proportional-E_disturbance-10000-021",
+      "proportional-E_disturbance-10000-022",
+      "proportional-E_disturbance-10000-023",
+      "proportional-E_disturbance-10000-024"
+    ],
+    "method": "proportional",
+    "success_ci95": [
+      0.5284885300554436,
+      0.6965940519677538
+    ],
+    "mean_time_to_goal_s": 3.4103896103896107,
+    "median_time_to_goal_s": 3.4000000000000004,
+    "methods": [
+      "proportional"
+    ]
+  },
+  "classes": {
+    "A_clear": {
+      "schema_version": "boom_birds.evaluation.v2",
+      "total_episodes": 25,
+      "valid_episodes": 25,
+      "invalid_episodes": 0,
+      "valid_denominator": 25,
+      "success": 25,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "success_rate_of_valid": 1.0,
+      "success_rate_of_total": 1.0,
+      "collision_rate_of_valid": 0.0,
+      "timeout_rate_of_valid": 0.0,
+      "out_of_bounds_rate_of_valid": 0.0,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 3.198,
+      "mean_final_distance_m": 0.025502725559868687,
+      "worst_final_distance_m": 0.04086193516912059,
+      "failure_cases": [],
+      "method": "proportional",
+      "success_ci95": [
+        0.8668035060468213,
+        1.0
+      ],
+      "mean_time_to_goal_s": 3.198,
+      "median_time_to_goal_s": 3.1500000000000004,
+      "collision_with_contact": 0,
+      "collision_without_contact": 0,
+      "contact_evidence_samples": 0,
+      "degradation_invalid_steps_total": 0,
+      "disturbance_samples": 0,
+      "termination_reasons": {
+        "HOLD_SATISFIED": 25
+      }
+    },
+    "B_static": {
+      "schema_version": "boom_birds.evaluation.v2",
+      "total_episodes": 25,
+      "valid_episodes": 25,
+      "invalid_episodes": 0,
+      "valid_denominator": 25,
+      "success": 0,
+      "collision": 25,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "success_rate_of_valid": 0.0,
+      "success_rate_of_total": 0.0,
+      "collision_rate_of_valid": 1.0,
+      "timeout_rate_of_valid": 0.0,
+      "out_of_bounds_rate_of_valid": 0.0,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 0.37000000000000005,
+      "mean_final_distance_m": 1.3469573967633315,
+      "worst_final_distance_m": 1.9079890548854306,
+      "failure_cases": [
+        "proportional-B_static-7000-000",
+        "proportional-B_static-7000-001",
+        "proportional-B_static-7000-002",
+        "proportional-B_static-7000-003",
+        "proportional-B_static-7000-004",
+        "proportional-B_static-7000-005",
+        "proportional-B_static-7000-006",
+        "proportional-B_static-7000-007",
+        "proportional-B_static-7000-008",
+        "proportional-B_static-7000-009",
+        "proportional-B_static-7000-010",
+        "proportional-B_static-7000-011",
+        "proportional-B_static-7000-012",
+        "proportional-B_static-7000-013",
+        "proportional-B_static-7000-014",
+        "proportional-B_static-7000-015",
+        "proportional-B_static-7000-016",
+        "proportional-B_static-7000-017",
+        "proportional-B_static-7000-018",
+        "proportional-B_static-7000-019",
+        "proportional-B_static-7000-020",
+        "proportional-B_static-7000-021",
+        "proportional-B_static-7000-022",
+        "proportional-B_static-7000-023",
+        "proportional-B_static-7000-024"
+      ],
+      "method": "proportional",
+      "success_ci95": [
+        0.0,
+        0.13319649395317873
+      ],
+      "mean_time_to_goal_s": null,
+      "median_time_to_goal_s": null,
+      "collision_with_contact": 25,
+      "collision_without_contact": 0,
+      "contact_evidence_samples": 25,
+      "degradation_invalid_steps_total": 0,
+      "disturbance_samples": 0,
+      "termination_reasons": {
+        "COLLISION": 25
+      }
+    },
+    "C_dynamic": {
+      "schema_version": "boom_birds.evaluation.v2",
+      "total_episodes": 25,
+      "valid_episodes": 25,
+      "invalid_episodes": 0,
+      "valid_denominator": 25,
+      "success": 24,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 1,
+      "success_rate_of_valid": 0.96,
+      "success_rate_of_total": 0.96,
+      "collision_rate_of_valid": 0.0,
+      "timeout_rate_of_valid": 0.0,
+      "out_of_bounds_rate_of_valid": 0.04,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 3.5899999999999994,
+      "mean_final_distance_m": 0.07035418225753584,
+      "worst_final_distance_m": 1.0922953459773208,
+      "failure_cases": [
+        "proportional-C_dynamic-8000-021"
+      ],
+      "method": "proportional",
+      "success_ci95": [
+        0.8045552759497747,
+        0.9929039496133008
+      ],
+      "mean_time_to_goal_s": 3.4145833333333333,
+      "median_time_to_goal_s": 3.4000000000000004,
+      "collision_with_contact": 0,
+      "collision_without_contact": 0,
+      "contact_evidence_samples": 0,
+      "degradation_invalid_steps_total": 0,
+      "disturbance_samples": 0,
+      "termination_reasons": {
+        "ENV_ALTITUDE_LIMIT": 1,
+        "HOLD_SATISFIED": 24
+      }
+    },
+    "D_observation": {
+      "schema_version": "boom_birds.evaluation.v2",
+      "total_episodes": 25,
+      "valid_episodes": 25,
+      "invalid_episodes": 0,
+      "valid_denominator": 25,
+      "success": 25,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "success_rate_of_valid": 1.0,
+      "success_rate_of_total": 1.0,
+      "collision_rate_of_valid": 0.0,
+      "timeout_rate_of_valid": 0.0,
+      "out_of_bounds_rate_of_valid": 0.0,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 3.6759999999999997,
+      "mean_final_distance_m": 0.034512013791043315,
+      "worst_final_distance_m": 0.07521720257945465,
+      "failure_cases": [],
+      "method": "proportional",
+      "success_ci95": [
+        0.8668035060468213,
+        1.0
+      ],
+      "mean_time_to_goal_s": 3.676,
+      "median_time_to_goal_s": 3.85,
+      "collision_with_contact": 0,
+      "collision_without_contact": 0,
+      "contact_evidence_samples": 0,
+      "degradation_invalid_steps_total": 248,
+      "disturbance_samples": 0,
+      "termination_reasons": {
+        "HOLD_SATISFIED": 25
+      }
+    },
+    "E_disturbance": {
+      "schema_version": "boom_birds.evaluation.v2",
+      "total_episodes": 25,
+      "valid_episodes": 25,
+      "invalid_episodes": 0,
+      "valid_denominator": 25,
+      "success": 3,
+      "collision": 0,
+      "timeout": 3,
+      "out_of_bounds": 19,
+      "success_rate_of_valid": 0.12,
+      "success_rate_of_total": 0.12,
+      "collision_rate_of_valid": 0.0,
+      "timeout_rate_of_valid": 0.12,
+      "out_of_bounds_rate_of_valid": 0.76,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 3.63,
+      "mean_final_distance_m": 4.1752873812333755,
+      "worst_final_distance_m": 8.648282735252227,
+      "failure_cases": [
+        "proportional-E_disturbance-10000-001",
+        "proportional-E_disturbance-10000-002",
+        "proportional-E_disturbance-10000-003",
+        "proportional-E_disturbance-10000-004",
+        "proportional-E_disturbance-10000-007",
+        "proportional-E_disturbance-10000-008",
+        "proportional-E_disturbance-10000-009",
+        "proportional-E_disturbance-10000-010",
+        "proportional-E_disturbance-10000-011",
+        "proportional-E_disturbance-10000-012",
+        "proportional-E_disturbance-10000-013",
+        "proportional-E_disturbance-10000-014",
+        "proportional-E_disturbance-10000-015",
+        "proportional-E_disturbance-10000-016",
+        "proportional-E_disturbance-10000-017",
+        "proportional-E_disturbance-10000-018",
+        "proportional-E_disturbance-10000-019",
+        "proportional-E_disturbance-10000-020",
+        "proportional-E_disturbance-10000-021",
+        "proportional-E_disturbance-10000-022",
+        "proportional-E_disturbance-10000-023",
+        "proportional-E_disturbance-10000-024"
+      ],
+      "method": "proportional",
+      "success_ci95": [
+        0.04166741357068093,
+        0.2995619218337349
+      ],
+      "mean_time_to_goal_s": 2.9333333333333336,
+      "median_time_to_goal_s": 3.1,
+      "collision_with_contact": 0,
+      "collision_without_contact": 0,
+      "contact_evidence_samples": 0,
+      "degradation_invalid_steps_total": 0,
+      "disturbance_samples": 25,
+      "termination_reasons": {
+        "HOLD_SATISFIED": 3,
+        "OUT_OF_BOUNDS": 19,
+        "TIMEOUT": 3
+      }
+    }
+  },
+  "missing_classes": [],
+  "coverage": {
+    "min_required_valid_per_class": 20,
+    "classes_meeting_minimum": [
+      "A_clear",
+      "B_static",
+      "C_dynamic",
+      "D_observation",
+      "E_disturbance"
+    ],
+    "classes_below_minimum": [],
+    "missing_classes": [],
+    "total_valid_episodes": 125,
+    "total_meets_requested_minimum": true
+  },
+  "schema_version": "boom_birds.layered_evaluation.v1",
+  "evaluation_version": "boom_birds.evaluation.v2",
+  "task": "layered_natural_evaluation",
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "gate": "SIMULATION_EVALUATION_EXTENSION_ONLY_NOT_G4",
+  "manifest_sha256": "850da12ed072189d0a006f502fc15c47de931ada8ed7c98f52f077c0b2d84414",
+  "guidance_params": {
+    "proportional": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "gain_per_m": 1.0,
+      "arrival_radius_m": 0.25,
+      "max_yaw_rate_radps": 0.0
+    },
+    "braking": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "deceleration_mps2": 1.2,
+      "velocity_feedback_gain": 0.4,
+      "arrival_radius_m": 0.25
+    }
+  },
+  "thresholds": {
+    "success_distance_m": 0.3,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "timeout_s": 12.0,
+    "collision_height_m": 0.1,
+    "max_abs_position_m": 5.0,
+    "contact_threshold_n": 0.02,
+    "evaluation_version": "boom_birds.evaluation.v2"
+  },
+  "classes_run": [
+    "A_clear",
+    "B_static",
+    "C_dynamic",
+    "D_observation",
+    "E_disturbance"
+  ],
+  "scenario_count": 125,
+  "total_episodes": 125,
+  "class_scenario_counts": {
+    "A_clear": 25,
+    "B_static": 25,
+    "C_dynamic": 25,
+    "D_observation": 25,
+    "E_disturbance": 25
+  },
+  "min_valid_per_class": 20,
+  "min_valid_total": 100,
+  "scenario_family": "layered_v2",
+  "class_specs": {
+    "A_clear": {
+      "description": "Obstacle-free randomized reach/stop",
+      "capability_requirement": "velocity outer loop + stop at goal",
+      "input_permission": "ORACLE position/velocity/attitude",
+      "expected_outcomes": "high success rate; short time to goal",
+      "boundary": "does not demonstrate perception or obstacle avoidance"
+    },
+    "B_static": {
+      "description": "Two static cuboid obstacles blocking the direct path",
+      "capability_requirement": "same baseline; no avoidance capability",
+      "input_permission": "ORACLE position/velocity/attitude",
+      "expected_outcomes": "possible PhysX collisions; collision rate measures limits",
+      "boundary": "not an obstacle-avoidance acceptance test"
+    },
+    "C_dynamic": {
+      "description": "One kinematic crossing entity and one dynamic sphere",
+      "capability_requirement": "same baseline; no dynamic avoidance",
+      "input_permission": "ORACLE position/velocity/attitude + entity poses",
+      "expected_outcomes": "possible collisions and timing failures",
+      "boundary": "kinematic and dynamic entities are recorded separately"
+    },
+    "D_observation": {
+      "description": "Controller input noise, delay and dropout; evaluation uses truth",
+      "capability_requirement": "same baseline with degraded input interface",
+      "input_permission": "degraded ORACLE-derived observation; eval uses raw truth",
+      "expected_outcomes": "success rate/time degradation, stale-input holds",
+      "boundary": "not a real camera or perception-pipeline validation"
+    },
+    "E_disturbance": {
+      "description": "Body-frame external force/torque window applied through the wrench interface",
+      "capability_requirement": "same baseline with physical disturbance",
+      "input_permission": "ORACLE position/velocity/attitude",
+      "expected_outcomes": "tracking deviation, possible timeout",
+      "boundary": "not a wind-field model; forces are body-frame, in N and N*m"
+    }
+  },
+  "quota": {
+    "distance_bins": [
+      "near",
+      "mid",
+      "far"
+    ],
+    "bearing_bins": [
+      "front",
+      "side",
+      "rear"
+    ],
+    "quota": [
+      [
+        3,
+        3,
+        2
+      ],
+      [
+        3,
+        3,
+        2
+      ],
+      [
+        3,
+        3,
+        3
+      ]
+    ]
+  },
+  "coverage_ok": true,
+  "status": "PASS"
+}

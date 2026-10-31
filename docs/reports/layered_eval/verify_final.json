@@ -1,0 +1,32 @@
+{
+  "run_dir": "outputs\\layered_eval\\final_run2",
+  "episode_count": 125,
+  "step_count": 7232,
+  "checks": {
+    "episode_count": true,
+    "class_counts": true,
+    "no_duplicate_episodes": true,
+    "episode_values_finite": true,
+    "step_values_finite": true,
+    "scenario_manifest_hash": true,
+    "outputs_hash_match": true,
+    "evaluation_version": true,
+    "scenario_quota": true,
+    "expected_outcomes": true,
+    "invalid_reasons_present": true,
+    "class_statistics_recompute": true,
+    "overall_statistics_recompute": true,
+    "coverage_claim": true,
+    "status_consistent": true,
+    "gate_scope": true,
+    "obstacle_contact_evidence": true,
+    "degradation_interface_evidence": true,
+    "disturbance_interface_evidence": true,
+    "entity_motion_evidence": true,
+    "freeze_config_hash": true,
+    "freeze_scenario_hash": true,
+    "freeze_sample_minimums": true,
+    "freeze_evaluation_version": true
+  },
+  "status": "PASS"
+}

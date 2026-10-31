@@ -1,0 +1,13 @@
+stages: ["imports", "import isaac modules", "read config", "build env config", "spawn layered assets", "create env", "reset env", "read plant parameters", "run layered evaluation", "build layered scene"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 1002, in <module>
+    'class_metrics': {
+                     ^
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 1003, in <dictcomp>
+    name: {key: value[name][key] for key in
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 1003, in <dictcomp>
+    name: {key: value[name][key] for key in
+                ^^^^^
+NameError: name 'value' is not defined
