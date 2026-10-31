@@ -1407,6 +1407,7 @@ try:
             },
             'seeds': {'seed': args.seed},
             'command': ' '.join(sys.argv),
+            'started_at': datetime.datetime.now().astimezone().isoformat(),
             'exit_code': 0,
             'outputs_sha256': outputs_sha256,
             'evidence_domain': 'SIMULATION_MODEL',

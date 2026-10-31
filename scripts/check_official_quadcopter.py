@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--steps', type=int, default=100)
 parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--clone-in-usd', action='store_true', help='Disable Fabric cloning only; keep physics/Fabric I/O')
+parser.add_argument('--code-commit', default='WORKTREE')
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 if args.steps < 1:
@@ -43,6 +44,9 @@ try:
                                 'truncated': truncated.item()})
         source = Path(inspect.getfile(QuadcopterEnv))
         result = {'scope': 'OFFICIAL_TASK_ZERO_ACTION_SMOKE_ONLY', 'status': 'PASS',
+                  'code_commit': args.code_commit,
+                  'gui_mode': not bool(getattr(args, 'headless', False)),
+                  'command': ' '.join(sys.argv),
                   'project_velocity_controller': 'NOT RUN', 'task_source': str(source),
                   'task_source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
                   'asset_uri': cfg.robot.spawn.usd_path, 'steps': args.steps, 'num_envs': 1,
