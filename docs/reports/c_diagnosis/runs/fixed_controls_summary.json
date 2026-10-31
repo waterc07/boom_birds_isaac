@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "mode": "replay",
+    "config": "configs\\vehicles\\sim_reference.yaml",
+    "dt_s": 0.05,
+    "mass_kg": 0.028200002387166023,
+    "inertia_kgm2": [
+      1.6571999367442913e-05,
+      1.665600029809866e-05,
+      2.9262002499308437e-05
+    ],
+    "gravity_mps2": 9.81,
+    "thrust_to_weight": 1.9,
+    "moment_scale_nm": 0.01,
+    "max_tilt_rad": 0.2,
+    "hover_action_thrust": 0.05263157894736836,
+    "disturbance_com_offset_body_m": null
+  },
+  "episodes": [
+    {
+      "episode": "C_dynamic-8000-019_distr0",
+      "scenario_id": "C_dynamic-8000-019",
+      "disturbance_on": true,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "HOLD_SATISFIED",
+      "steps": 71,
+      "final_distance_m": 0.023542502838666365,
+      "disturbance": null
+    },
+    {
+      "episode": "C_dynamic-8000-019_distr1",
+      "scenario_id": "C_dynamic-8000-019",
+      "disturbance_on": true,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "reason": "HOLD_SATISFIED",
+      "steps": 71,
+      "final_distance_m": 0.023542502838666365,
+      "disturbance": null
+    },
+    {
+      "episode": "C_dynamic-8000-020_distr0",
+      "scenario_id": "C_dynamic-8000-020",
+      "disturbance_on": true,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "HOLD_SATISFIED",
+      "steps": 70,
+      "final_distance_m": 0.022131757644824612,
+      "disturbance": null
+    },
+    {
+      "episode": "C_dynamic-8000-020_distr1",
+      "scenario_id": "C_dynamic-8000-020",
+      "disturbance_on": true,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "reason": "HOLD_SATISFIED",
+      "steps": 70,
+      "final_distance_m": 0.022131757644824612,
+      "disturbance": null
+    }
+  ],
+  "row_count": 282
+}

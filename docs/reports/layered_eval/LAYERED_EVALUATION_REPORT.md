@@ -5,6 +5,8 @@
 > **证据域：** 单元测试 + 仿真模型（Isaac Lab/PhysX，ORACLE 观测）；不含真实感知、SITL/HIL、实机
 > **最后核对：** 2026-10-31
 
+> **2026-10-31 修订（全部层级结果的 episode 边界适用性）：** 在 C 类诊断中发现，QuadcopterEnv 在整环境 reset 时会随机化 episode_length_buf（训练去同步），而评价运行器只读取 terminated、忽略 truncated；因此本报告及之前所有分层运行中，部分 episode 在飞行途中被静默 auto-reset，随后记录的轨迹/结果不再是原始初始条件下的行为。识别到 final_run2 有 8 个、final_run3 有 9 个受影响 episode（C-000/C-006/C-021、D-000/D-011/D-023、E-004/E-022/E-024）。修复（清零 episode 边界、读取 truncated、独立核验加入 no_silent_auto_reset）后的 clean 运行见 [final_run4 证据](../c_diagnosis/C_DIAGNOSIS_REPORT.md)：125 场景中 success 100、B 碰撞 25、C 25/25、无越界/无效。旧文件与数字保留，但 C/D/E 的逐 episode 时间与 C-021 旧越界不应用作控制器结论。
+
 > **2026-10-31 修订（E 类结果适用性）：** 本报告 E 类的 19/25 越界已被证实由扰动注入实现缺陷（横向力逐策略步累计 + 外力施加点与整机质心的杠杆力矩未补偿）污染，仅作为缺陷证据保留，**不能用于控制器扰动鲁棒性结论**。修复、最小回放与修复后冻结集回归见 [E 类诊断与修复报告](../e_diagnosis/E_DIAGNOSIS_REPORT.md)。A/B/C/D 类结论不受该缺陷影响（修复前后逐项一致）。
 
 ## 结论

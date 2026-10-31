@@ -1,0 +1,22 @@
+{
+  "docs\\reports\\c_diagnosis\\after_fix\\episodes.jsonl": "803facaa6053697bb71b93fe9ee2111178eec97104f557f966850e5cbc18ed56",
+  "docs\\reports\\c_diagnosis\\after_fix\\manifest.json": "1119fd7ad0c9d99a912c1cedb74bac954b83d8cc396a5791115fa8879bc0db58",
+  "docs\\reports\\c_diagnosis\\after_fix\\scenario_manifest.json": "fedb6b2fedfb2a5a0cb4094ede98fe509b113edf4239420e8a8b9337de7eb7d2",
+  "docs\\reports\\c_diagnosis\\after_fix\\summary.json": "eeaad46678f5763be79baaaa52cd56acdd281c762f722b179efe9c724616b88d",
+  "docs\\reports\\c_diagnosis\\CONTAMINATION_METRICS.json": "2a030fadb8af93ae2e8998d88e308188b2e9f2f763beecc408111e2b0a10d97f",
+  "docs\\reports\\c_diagnosis\\replay\\trace_reset.txt": "5f911b1833c459bfe97e28bca96d5eea6e6a4093a3512e5e7edd9c1eabcf81d0",
+  "docs\\reports\\c_diagnosis\\runs\\fixed_controls_summary.json": "68abbdb5edc0dd2628cee847fcd809728850d82d0515abe7ef2ba26a7181781e",
+  "docs\\reports\\c_diagnosis\\runs\\fixed_nocollision_summary.json": "66979b233b0086973d1a2e0fbf9716019ae7ac5c6b6263af767de3f935adaff7",
+  "docs\\reports\\c_diagnosis\\runs\\fixed_removed_summary.json": "66979b233b0086973d1a2e0fbf9716019ae7ac5c6b6263af767de3f935adaff7",
+  "docs\\reports\\c_diagnosis\\runs\\fixed_static_summary.json": "66979b233b0086973d1a2e0fbf9716019ae7ac5c6b6263af767de3f935adaff7",
+  "docs\\reports\\c_diagnosis\\runs\\legacy_nocollision_summary.json": "4a6136c492724a493ea90069f8d7222d7f0292d010f23d5dc4080b6f4b2fd76d",
+  "docs\\reports\\c_diagnosis\\runs\\legacy_original_r3_summary.json": "0ea729aae233f588925e8d1e6dae5f9d733dd134425a260c63d048c138785ce3",
+  "docs\\reports\\c_diagnosis\\runs\\legacy_removed_summary.json": "4a6136c492724a493ea90069f8d7222d7f0292d010f23d5dc4080b6f4b2fd76d",
+  "docs\\reports\\c_diagnosis\\runs\\legacy_static_summary.json": "4a6136c492724a493ea90069f8d7222d7f0292d010f23d5dc4080b6f4b2fd76d",
+  "docs\\reports\\c_diagnosis\\runs\\replay_021_trace1_summary.json": "912829f8abd36fb5c3b4c08b12a515831b219daa4719baf6320c9d7c46da48d6",
+  "docs\\reports\\c_diagnosis\\runs\\replay_021_trace2_summary.json": "912829f8abd36fb5c3b4c08b12a515831b219daa4719baf6320c9d7c46da48d6",
+  "docs\\reports\\c_diagnosis\\runs\\replay_021_trace3_summary.json": "66979b233b0086973d1a2e0fbf9716019ae7ac5c6b6263af767de3f935adaff7",
+  "docs\\reports\\c_diagnosis\\verify_after_fix.json": "3f1aacff4d5edf7fd8194e5a360f936e0ec6a5e7268dc67a7b59eff60a647877",
+  "outputs/layered_eval/final_run4/steps.jsonl": "e4e00d641a0015b4a2927dec67d0a0c1fd2a2666c40d4dbb85f520c5ceb15b66",
+  "outputs/c_diagnosis/replay_021_trace2/steps.jsonl": "da67fc961dd62d7abdb0e95c2ee7363c6b889ccdf0d13465978dca372affc6c4"
+}

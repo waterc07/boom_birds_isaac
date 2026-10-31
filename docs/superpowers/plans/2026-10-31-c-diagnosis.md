@@ -1,6 +1,6 @@
 # C 类动态实体残留越界诊断计划（2026-10-31）
 
-> **状态：** IN PROGRESS
+> **状态：** DONE（根因为评价 episode 边界缺陷；已修复并回归）
 > **来源章节：** docs/design/RMUC2027_UAV_V2_2.md §8.6、§13.5、§20.2、§20.11；HANDOFF_20261031_E_DIAGNOSIS.md §6
 > **证据域：** 单元测试 + 仿真模型；不含真实感知、SITL/HIL、实机
 > **Gate：** 不提升任何 Gate；本轮只处理 C 类残留 OUT_OF_BOUNDS 诊断与证据支持的最小修复

@@ -1,0 +1,5 @@
+MAX_EPISODE_LENGTH 1200 episode_length_s 60.0
+POST_RESET_BUF C_dynamic-8000-021 1168 max 1200
+TRACE C_dynamic-8000-021_distr0 29 {'env_terminated': False, 'env_truncated': False, 'episode_length_buf': 1198, 'reset_terminated': False, 'reset_time_outs': False} [0.106, -0.22, 0.819] [0.137, -0.209, 0.819]
+TRACE C_dynamic-8000-021_distr0 30 {'env_terminated': False, 'env_truncated': True, 'episode_length_buf': 532, 'reset_terminated': False, 'reset_time_outs': True} [0.137, -0.209, 0.819] [0.0, 0.0, 0.5]
+TRACE C_dynamic-8000-021_distr0 31 {'env_terminated': False, 'env_truncated': False, 'episode_length_buf': 533, 'reset_terminated': False, 'reset_time_outs': False} [0.0, 0.0, 0.5] [0.0, 0.0, 0.501]

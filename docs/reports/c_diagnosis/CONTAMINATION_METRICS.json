@@ -1,0 +1,215 @@
+{
+  "final_run2_spawn_rows": [
+    {
+      "scenario_id": "C_dynamic-8000-000",
+      "step": 13
+    },
+    {
+      "scenario_id": "C_dynamic-8000-006",
+      "step": 49
+    },
+    {
+      "scenario_id": "C_dynamic-8000-021",
+      "step": 30
+    },
+    {
+      "scenario_id": "C_dynamic-8000-021",
+      "step": 155
+    },
+    {
+      "scenario_id": "D_observation-9000-000",
+      "step": 34
+    },
+    {
+      "scenario_id": "D_observation-9000-011",
+      "step": 5
+    },
+    {
+      "scenario_id": "D_observation-9000-023",
+      "step": 25
+    },
+    {
+      "scenario_id": "E_disturbance-10000-004",
+      "step": 50
+    },
+    {
+      "scenario_id": "E_disturbance-10000-024",
+      "step": 10
+    }
+  ],
+  "final_run3_spawn_rows": [
+    {
+      "scenario_id": "C_dynamic-8000-000",
+      "step": 13
+    },
+    {
+      "scenario_id": "C_dynamic-8000-006",
+      "step": 49
+    },
+    {
+      "scenario_id": "C_dynamic-8000-021",
+      "step": 30
+    },
+    {
+      "scenario_id": "C_dynamic-8000-021",
+      "step": 155
+    },
+    {
+      "scenario_id": "D_observation-9000-000",
+      "step": 34
+    },
+    {
+      "scenario_id": "D_observation-9000-011",
+      "step": 5
+    },
+    {
+      "scenario_id": "D_observation-9000-023",
+      "step": 25
+    },
+    {
+      "scenario_id": "E_disturbance-10000-004",
+      "step": 50
+    },
+    {
+      "scenario_id": "E_disturbance-10000-022",
+      "step": 61
+    },
+    {
+      "scenario_id": "E_disturbance-10000-024",
+      "step": 10
+    }
+  ],
+  "final_run4_spawn_rows": [],
+  "final_run2_affected_episodes": [
+    "C_dynamic-8000-000",
+    "C_dynamic-8000-006",
+    "C_dynamic-8000-021",
+    "D_observation-9000-000",
+    "D_observation-9000-011",
+    "D_observation-9000-023",
+    "E_disturbance-10000-004",
+    "E_disturbance-10000-024"
+  ],
+  "final_run3_affected_episodes": [
+    "C_dynamic-8000-000",
+    "C_dynamic-8000-006",
+    "C_dynamic-8000-021",
+    "D_observation-9000-000",
+    "D_observation-9000-011",
+    "D_observation-9000-023",
+    "E_disturbance-10000-004",
+    "E_disturbance-10000-022",
+    "E_disturbance-10000-024"
+  ],
+  "run3_vs_run4_episode_differences": [
+    {
+      "scenario_id": "C_dynamic-8000-000",
+      "old_outcome": "SUCCESS",
+      "old_steps": 66,
+      "new_outcome": "SUCCESS",
+      "new_steps": 54
+    },
+    {
+      "scenario_id": "C_dynamic-8000-006",
+      "old_outcome": "SUCCESS",
+      "old_steps": 139,
+      "new_outcome": "SUCCESS",
+      "new_steps": 54
+    },
+    {
+      "scenario_id": "C_dynamic-8000-021",
+      "old_outcome": "OUT_OF_BOUNDS",
+      "old_steps": 156,
+      "new_outcome": "SUCCESS",
+      "new_steps": 71
+    },
+    {
+      "scenario_id": "D_observation-9000-000",
+      "old_outcome": "SUCCESS",
+      "old_steps": 103,
+      "new_outcome": "SUCCESS",
+      "new_steps": 57
+    },
+    {
+      "scenario_id": "D_observation-9000-011",
+      "old_outcome": "SUCCESS",
+      "old_steps": 78,
+      "new_outcome": "SUCCESS",
+      "new_steps": 74
+    },
+    {
+      "scenario_id": "D_observation-9000-023",
+      "old_outcome": "SUCCESS",
+      "old_steps": 97,
+      "new_outcome": "SUCCESS",
+      "new_steps": 83
+    },
+    {
+      "scenario_id": "E_disturbance-10000-004",
+      "old_outcome": "SUCCESS",
+      "old_steps": 91,
+      "new_outcome": "SUCCESS",
+      "new_steps": 54
+    },
+    {
+      "scenario_id": "E_disturbance-10000-022",
+      "old_outcome": "SUCCESS",
+      "old_steps": 141,
+      "new_outcome": "SUCCESS",
+      "new_steps": 79
+    },
+    {
+      "scenario_id": "E_disturbance-10000-024",
+      "old_outcome": "SUCCESS",
+      "old_steps": 89,
+      "new_outcome": "SUCCESS",
+      "new_steps": 70
+    }
+  ],
+  "run3_vs_run4_episode_difference_count": 9,
+  "final_run4_overall": {
+    "success": 100,
+    "collision": 25,
+    "timeout": 0,
+    "out_of_bounds": 0,
+    "invalid_episodes": 0,
+    "success_rate_of_valid": 0.8
+  },
+  "final_run4_classes": {
+    "A_clear": {
+      "success": 25,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "invalid_episodes": 0
+    },
+    "B_static": {
+      "success": 0,
+      "collision": 25,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "invalid_episodes": 0
+    },
+    "C_dynamic": {
+      "success": 25,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "invalid_episodes": 0
+    },
+    "D_observation": {
+      "success": 25,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "invalid_episodes": 0
+    },
+    "E_disturbance": {
+      "success": 25,
+      "collision": 0,
+      "timeout": 0,
+      "out_of_bounds": 0,
+      "invalid_episodes": 0
+    }
+  }
+}
