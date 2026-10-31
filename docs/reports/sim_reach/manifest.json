@@ -1,0 +1,30 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "38159ee7ec5b2a951c680e3790a24b3c0444b3fd",
+  "working_tree": "recorded by the operator when invoking the script",
+  "config_sha256": {
+    "configs\\vehicles\\sim_reference.yaml": "23fd7ca7cfbfa3e98de840c8257242f916df05de0b2b225cd495d8ffc0dd8eec"
+  },
+  "asset_versions": {
+    "isaac_sim": "5.1.0.0 (host manifest)",
+    "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+    "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd"
+  },
+  "seeds": {
+    "episodes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "command": "scripts/run_sim_baseline.py --task reach --config configs/vehicles/sim_reference.yaml --episodes 6 --timeout-s 20 --goal 1.5,1.0,0.75 --code-commit 38159ee7ec5b2a951c680e3790a24b3c0444b3fd --headless --device cuda:0 --clone-in-usd --output outputs/sim_reach/run2/reach_summary.json --csv outputs/sim_reach/run2/reach.csv",
+  "started_at": "2026-10-31T17:10:51.853500+08:00",
+  "exit_code": 0,
+  "outputs_sha256": {
+    "reach_summary.json": "af7a381645f492b6ce1f0855b70a6b2ff9dee511c2d8454919f5448ce1d646de"
+  },
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE"
+}

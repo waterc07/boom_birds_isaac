@@ -1,0 +1,40 @@
+{
+  "schema_version": "boom_birds.evaluation.v1",
+  "total_episodes": 6,
+  "valid_episodes": 6,
+  "invalid_episodes": 0,
+  "valid_denominator": 6,
+  "success": 6,
+  "collision": 0,
+  "timeout": 0,
+  "success_rate_of_valid": 1.0,
+  "success_rate_of_total": 1.0,
+  "collision_rate_of_valid": 0.0,
+  "timeout_rate_of_valid": 0.0,
+  "invalid_rate_of_total": 0.0,
+  "mean_duration_s": 4.283333333333334,
+  "mean_final_distance_m": 0.026899575214402907,
+  "worst_final_distance_m": 0.029219595551548346,
+  "failure_cases": [],
+  "status": "INCOMPLETE",
+  "sample_size_rule": "INCOMPLETE below the PROPOSED 100-episode frozen sample in V2.2 20.11",
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "task": "obstacle_free_reach_stop",
+  "proposed_thresholds": {
+    "success_distance_m": 0.3,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "timeout_s": 20.0,
+    "collision_height_m": 0.1,
+    "arrival_radius_m": 0.25
+  },
+  "frozen_threshold": null,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}
