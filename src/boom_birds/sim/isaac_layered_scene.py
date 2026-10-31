@@ -17,7 +17,7 @@ from .contact_evidence import (
     contact_evidence_from_forces,
     restrict_contact_evidence,
 )
-from .disturbance import DisturbanceSpec, wrench_at
+from .disturbance import DisturbanceSpec, compose_actor_wrench, wrench_at
 from .layered import (
     DYNAMIC_MASS_KG,
     nearby_asset_names,
@@ -216,7 +216,16 @@ class LayeredScene:
 
 
 class DisturbanceInjector:
-    """Adds body-frame force/torque through the env wrench path."""
+    """Applies a body-frame external wrench through the actuator wrench path.
+
+    Two implementation constraints are handled explicitly:
+    * the env rewrites only the body-z thrust, so lateral disturbance
+      components are ASSIGNED each step (never accumulated);
+    * a point force applied at the base-link centre of mass creates a lever-arm
+      torque about the whole-articulation centre of mass, so a compensating
+      body torque is added to keep the scenario force a pure force plus the
+      recorded disturbance torque.
+    """
 
     def __init__(self, env):
         self.env = env
@@ -225,24 +234,58 @@ class DisturbanceInjector:
         self.applied = False
         self.last_force = (0.0, 0.0, 0.0)
         self.last_torque = (0.0, 0.0, 0.0)
+        raw = env._body_id[0]
+        self._body_id = int(raw.item()) if hasattr(raw, 'item') else int(raw)
+        try:
+            from isaaclab.utils.math import quat_rotate_inverse
+            self._quat_rotate_inverse = quat_rotate_inverse
+        except Exception:
+            self._quat_rotate_inverse = None
+        try:
+            self._masses = env._robot.root_physx_view.get_masses()[0].to(
+                env.device).clone()
+        except Exception:
+            self._masses = None
+        self.com_offset_body_m = None
         self._original_pre_physics_step = env._pre_physics_step
 
         def patched(actions):
             self._original_pre_physics_step(actions)
+            base_thrust = tuple(float(value)
+                                for value in self.env._thrust[0, 0, :].tolist())
+            base_moment = tuple(float(value)
+                                for value in self.env._moment[0, 0, :].tolist())
             if self.spec is None:
-                return
-            force, torque = wrench_at(self.spec, self.time_s)
+                force, torque = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
+            else:
+                force, torque = wrench_at(self.spec, self.time_s)
             self.last_force = force
             self.last_torque = torque
-            if force == (0.0, 0.0, 0.0) and torque == (0.0, 0.0, 0.0):
-                return
-            self.env._thrust[0, 0, 0] += force[0]
-            self.env._thrust[0, 0, 1] += force[1]
-            self.env._thrust[0, 0, 2] += force[2]
-            self.env._moment[0, 0, 0] += torque[0]
-            self.env._moment[0, 0, 1] += torque[1]
-            self.env._moment[0, 0, 2] += torque[2]
-            self.applied = True
+            delta_body_m = (0.0, 0.0, 0.0)
+            if self._masses is not None and force != (0.0, 0.0, 0.0):
+                try:
+                    data = self.env._robot.data
+                    positions = data.body_com_pos_w[0]
+                    total = (positions * self._masses.unsqueeze(-1)).sum(dim=0) \
+                        / self._masses.sum()
+                    delta_world = total - positions[self._body_id]
+                    delta_body = self._quat_rotate_inverse(
+                        data.root_quat_w[0], delta_world)
+                    delta = tuple(float(value) for value in delta_body.tolist())
+                    self.com_offset_body_m = delta
+                    delta_body_m = delta
+                except Exception:
+                    delta_body_m = (0.0, 0.0, 0.0)
+            composed_force, composed_moment = compose_actor_wrench(
+                base_thrust, base_moment, force, torque, delta_body_m)
+            self.env._thrust[0, 0, 0] = composed_force[0]
+            self.env._thrust[0, 0, 1] = composed_force[1]
+            self.env._thrust[0, 0, 2] = composed_force[2]
+            self.env._moment[0, 0, 0] = composed_moment[0]
+            self.env._moment[0, 0, 1] = composed_moment[1]
+            self.env._moment[0, 0, 2] = composed_moment[2]
+            if force != (0.0, 0.0, 0.0) or torque != (0.0, 0.0, 0.0):
+                self.applied = True
 
         env._pre_physics_step = patched
 

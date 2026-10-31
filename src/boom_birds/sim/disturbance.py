@@ -57,3 +57,26 @@ def wrench_at(spec, time_s):
     force = tuple(scale * value for value in spec.force_body_n)
     torque = tuple(scale * value for value in spec.torque_body_nm)
     return force, torque
+
+def compose_actor_wrench(base_thrust_body_n, base_moment_body_nm, force_body_n,
+                         torque_body_nm, com_delta_body_m=(0.0, 0.0, 0.0)):
+    """Compose the actuator wrench with an external body-frame disturbance.
+
+    Two implementation rules are regression-tested: lateral force components
+    are ASSIGNED, not added, so repeated policy steps cannot accumulate
+    residue; and the force is applied at the base-link COM while the
+    articulation COM is offset by com_delta_body_m, so the lever-arm torque is
+    cancelled to keep the scenario force a pure force plus its recorded torque.
+    """
+    base_thrust = _triple(base_thrust_body_n, 'base_thrust_body_n')
+    base_moment = _triple(base_moment_body_nm, 'base_moment_body_nm')
+    force = _triple(force_body_n, 'force_body_n')
+    torque = _triple(torque_body_nm, 'torque_body_nm')
+    delta = _triple(com_delta_body_m, 'com_delta_body_m')
+    compensation = (delta[1] * force[2] - delta[2] * force[1],
+                    delta[2] * force[0] - delta[0] * force[2],
+                    delta[0] * force[1] - delta[1] * force[0])
+    composed_force = (force[0], force[1], base_thrust[2] + force[2])
+    composed_moment = tuple(base_moment[index] + torque[index]
+                            + compensation[index] for index in range(3))
+    return composed_force, composed_moment

@@ -3,7 +3,9 @@ import math
 
 import pytest
 
-from boom_birds.sim.disturbance import DisturbanceSpec, is_active, wrench_at
+from boom_birds.sim.disturbance import (
+    DisturbanceSpec, compose_actor_wrench, is_active, wrench_at,
+)
 
 
 def spec(**overrides):
@@ -53,3 +55,31 @@ def test_force_magnitude_is_recorded_in_newtons():
     item = spec(force_body_n=(0.03, 0.04, 0.0))
     force, _torque = wrench_at(item, 1.2)
     assert math.hypot(force[0], force[1]) == pytest.approx(0.05)
+
+def test_actor_wrench_assigns_lateral_force_without_accumulation():
+    base_thrust = (0.0, 0.0, 0.277)
+    base_moment = (0.0, 0.0, 0.0)
+    force = (0.02, -0.01, 0.0)
+    torque = (0.0, 0.0, 0.0001)
+    first = compose_actor_wrench(base_thrust, base_moment, force, torque)
+    second = compose_actor_wrench(base_thrust, base_moment, force, torque)
+    assert first == second
+    assert first[0] == pytest.approx((0.02, -0.01, 0.277))
+    assert first[1] == pytest.approx((0.0, 0.0, 0.0001))
+
+
+def test_actor_wrench_zero_force_clears_lateral_residue():
+    composed_force, composed_moment = compose_actor_wrench(
+        (0.0, 0.0, 0.277), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0))
+    assert composed_force == pytest.approx((0.0, 0.0, 0.277))
+    assert composed_moment == pytest.approx((0.0, 0.0, 0.0))
+
+
+def test_actor_wrench_cancels_com_lever_arm():
+    # 2 mm system-COM offset above the base-link COM and 0.02 N forward force
+    # would otherwise create a nose-down pitch torque.
+    composed_force, composed_moment = compose_actor_wrench(
+        (0.0, 0.0, 0.277), (0.0, 0.0, 0.0), (0.02, 0.0, 0.0),
+        (0.0, 0.0, 0.0), (0.0, 0.0, 0.002))
+    assert composed_force == pytest.approx((0.02, 0.0, 0.277))
+    assert composed_moment == pytest.approx((0.0, 0.00004, 0.0))
