@@ -66,6 +66,7 @@ try:
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
     from boom_birds.evaluation.csv_io import write_rows_csv
+    from boom_birds.evaluation.episodes import write_manifest
     from boom_birds.evaluation.episode_boundary import EpisodeBoundary
     from boom_birds.sim.velocity_control import (
         VehicleParams, VehicleState, VelocityExecutor, VelocityGains, VelocitySetpoint,

@@ -38,9 +38,9 @@ if args.velocity_json is not None and args.velocity_csv is not None:
         boundary_keys.issubset(row.keys()) for row in rows)
     if checks['velocity_boundary_fields_present']:
         checks['velocity_no_truncation'] = all(
-            row['env_truncated'] == 'false' for row in rows)
+            row['env_truncated'].strip().lower() == 'false' for row in rows)
         checks['velocity_no_termination'] = all(
-            row['env_terminated'] == 'false' for row in rows)
+            row['env_terminated'].strip().lower() == 'false' for row in rows)
         groups = {}
         for row in rows:
             groups.setdefault(row['scenario'], []).append(row)
@@ -79,9 +79,9 @@ for reach_path in args.reach_csv:
         terminal_seen = False
         previous_time = None
         for row in group:
-            if row.get('env_truncated') == 'true':
+            if str(row.get('env_truncated', '')).strip().lower() == 'true':
                 boundary_ok = False
-            terminal = row.get('env_terminated') == 'true'
+            terminal = str(row.get('env_terminated', '')).strip().lower() == 'true'
             has_terminal_fields = 'env_terminated' in row
             if not has_terminal_fields:
                 boundary_ok = False
