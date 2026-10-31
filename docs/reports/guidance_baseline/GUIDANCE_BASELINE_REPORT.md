@@ -44,6 +44,8 @@
 | 工作树差异 | status SHA-256 `207b67be9cae856a5091162b3e67b1de0270087d5421ff1e1d6a66f83b6d2af7`；未暂存 diff SHA-256 `34df07a3ec41fdff64db22a0498c5b3511e3d96a6877ffe38f88a0146657d898` |
 | 用户未提交设计正文 SHA-256 | `a96276a328aebca90177c48b55046a4a85ba6c292efbf0ca2dced60d44340a94`（保留未提交） |
 
+上述 worktree hash 为证据收集时点值；收尾（含 PROJECT_PLAN/README/AGENTS 本地状态同步）后为 status SHA-256 @@08be1dd0d5cbb83910f345afc1ebc297e9041c6aa80b54944b4536809a6f438b@@、未暂存 diff SHA-256 @@8c581eb613c99a4452107c0f8e418df9f3f24320b157f64d80d718541c7716f1@@，以现场 git status 为准。
+
 场景抽样范围（configs/scenarios/*.json 内逐条记录实际值）：起点 xy ∈ [−0.5, 0.5] m、z ∈ [0.65, 0.85] m、yaw ∈ [−π, π]；目标 x ∈ [0.9, 1.6] m、y ∈ [−1.0, 1.0] m、z ∈ [0.65, 0.95] m；目标距离 ∈ [0.8, 2.5] m。
 
 ## 调参过程（仅调参集）
