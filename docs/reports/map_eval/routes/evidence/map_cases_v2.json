@@ -1,0 +1,821 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "z_min": -0.1,
+      "z_max": 2,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027,
+      "cell_count": 40,
+      "usable_cells": 40,
+      "validity": "route_probe1: all cells usable (>=0.55 m horizontal, >=1.2 m upward clearance at +0.4/1.0/1.6 m above local ground)"
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "z_min": -0.1,
+      "z_max": 2,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515,
+      "cell_count": 42,
+      "usable_cells": 42,
+      "validity": "route_probe1: all cells usable"
+    },
+    {
+      "region_id": "S",
+      "x_min": -6.2,
+      "x_max": -1.8,
+      "y_min": -7.2,
+      "y_max": -5.7,
+      "z_min": -0.05,
+      "z_max": 2,
+      "ground_z_min": 0.013,
+      "ground_z_max": 0.0523,
+      "cell_count": 36,
+      "usable_cells": 36,
+      "validity": "route_probe1: all cells usable"
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "south",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ]
+      ],
+      "sample_count": 119,
+      "blocked_count": 0,
+      "clearance_margin_m": 0.5,
+      "body_radius_m": 0.35,
+      "probe": "route_probe1 at z-0.25/0/+0.25 around 1.0 m; 8 horizontal rays 1.5 m; no blocked points"
+    },
+    {
+      "route_id": "north",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ]
+      ],
+      "sample_count": 115,
+      "blocked_count": 0,
+      "clearance_margin_m": 0.5,
+      "body_radius_m": 0.35,
+      "probe": "route_probe1; no blocked points"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "local_W1",
+      "kind": "local_reach",
+      "region_id": "W",
+      "goal_region_id": "W",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        -1.8,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        -10.2,
+        0,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_W2",
+      "kind": "local_reach",
+      "region_id": "W",
+      "goal_region_id": "W",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.3,
+        1.8,
+        0.512
+      ],
+      "start_yaw_rad": 1.5708,
+      "goal_position_world_m": [
+        -9.3,
+        -0.2,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_W3",
+      "kind": "local_reach",
+      "region_id": "W",
+      "goal_region_id": "W",
+      "ground_z_m": -0.044,
+      "start_position_world_m": [
+        -10.3,
+        1.6,
+        0.506
+      ],
+      "start_yaw_rad": -0.5,
+      "goal_position_world_m": [
+        -9.2,
+        -1.2,
+        0.542
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_W4",
+      "kind": "local_reach",
+      "region_id": "W",
+      "goal_region_id": "W",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.2,
+        -1.8,
+        0.512
+      ],
+      "start_yaw_rad": 2,
+      "goal_position_world_m": [
+        -10.2,
+        1.4,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_E1",
+      "kind": "local_reach",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        8.5,
+        -1.2,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        8.5,
+        0.8,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_E2",
+      "kind": "local_reach",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        10,
+        1.2,
+        0.512
+      ],
+      "start_yaw_rad": 3.1416,
+      "goal_position_world_m": [
+        10,
+        -0.8,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_E3",
+      "kind": "local_reach",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        8.4,
+        1.2,
+        0.512
+      ],
+      "start_yaw_rad": -0.7,
+      "goal_position_world_m": [
+        10,
+        -1,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_E4",
+      "kind": "local_reach",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        10.2,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 1,
+      "goal_position_world_m": [
+        8.5,
+        1,
+        0.549
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_S1",
+      "kind": "local_reach",
+      "region_id": "S",
+      "goal_region_id": "S",
+      "ground_z_m": 0.03,
+      "start_position_world_m": [
+        -5.8,
+        -6.2,
+        0.58
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        -5.8,
+        -7,
+        0.582
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_S2",
+      "kind": "local_reach",
+      "region_id": "S",
+      "goal_region_id": "S",
+      "ground_z_m": 0.03,
+      "start_position_world_m": [
+        -2.2,
+        -6.5,
+        0.58
+      ],
+      "start_yaw_rad": 3.1416,
+      "goal_position_world_m": [
+        -2.2,
+        -7.1,
+        0.582
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_S3",
+      "kind": "local_reach",
+      "region_id": "S",
+      "goal_region_id": "S",
+      "ground_z_m": 0.03,
+      "start_position_world_m": [
+        -5.8,
+        -7,
+        0.58
+      ],
+      "start_yaw_rad": -0.5,
+      "goal_position_world_m": [
+        -2.5,
+        -6,
+        0.582
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "local_S4",
+      "kind": "local_reach",
+      "region_id": "S",
+      "goal_region_id": "S",
+      "ground_z_m": 0.03,
+      "start_position_world_m": [
+        -2.5,
+        -6,
+        0.58
+      ],
+      "start_yaw_rad": 2,
+      "goal_position_world_m": [
+        -5.5,
+        -7,
+        0.582
+      ],
+      "timeout_s": 10,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_south_R1",
+      "kind": "route",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_south_R2",
+      "kind": "route",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_south_R3",
+      "kind": "route",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.3,
+        1.8,
+        0.512
+      ],
+      "start_yaw_rad": -0.3,
+      "goal_position_world_m": [
+        9.2,
+        1.2,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.3,
+          1.8,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.2,
+          1.2,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_south_R4",
+      "kind": "route",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.6,
+        1,
+        0.512
+      ],
+      "start_yaw_rad": 0.2,
+      "goal_position_world_m": [
+        10.2,
+        -1.2,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.6,
+          1,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          10.2,
+          -1.2,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_north_R1",
+      "kind": "route",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_north_R2",
+      "kind": "route",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_north_R3",
+      "kind": "route",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.3,
+        1.8,
+        0.512
+      ],
+      "start_yaw_rad": -0.3,
+      "goal_position_world_m": [
+        9.2,
+        1.2,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.3,
+          1.8,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.2,
+          1.2,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "route_north_R4",
+      "kind": "route",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.6,
+        1,
+        0.512
+      ],
+      "start_yaw_rad": 0.2,
+      "goal_position_world_m": [
+        10.2,
+        -1.2,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.6,
+          1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          10.2,
+          -1.2,
+          0.53
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1
+    },
+    {
+      "case_id": "contact_wall14_A",
+      "kind": "contact",
+      "ground_z_m": 0,
+      "start_position_world_m": [
+        -4,
+        0,
+        1
+      ],
+      "start_yaw_rad": 0,
+      "command_forward_left_up_yawrate": [
+        0.6,
+        0,
+        0,
+        0
+      ],
+      "timeout_s": 8,
+      "repeats": 2,
+      "contact_prim": "/World/RMUC2027/Collisions/collision_014"
+    },
+    {
+      "case_id": "contact_ground_A",
+      "kind": "contact",
+      "ground_z_m": -0.001,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0,
+      "command_forward_left_up_yawrate": [
+        0.0,
+        0.0,
+        -0.35,
+        0.0
+      ],
+      "timeout_s": 8.0,
+      "repeats": 2,
+      "contact_prim": "/World/RMUC2027/Collisions/collision_005"
+    }
+  ],
+  "notes": "Local reaches start airborne in verified regions (ORACLE state). Routes are offline waypoints; no online planning/avoidance. Contact cases use two distinct map collision prims with PhysX contact sensors."
+}

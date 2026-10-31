@@ -1,0 +1,19 @@
+{
+  "docs\\reports\\map_eval\\routes\\contact_ground_A-r0_contact.png": "144731b7edce06304b204250ff5445b4d74a7dc16d4058e9dbcb9c7d412b6312",
+  "docs\\reports\\map_eval\\routes\\contact_wall14_A-r0_contact.png": "66e094be952811da39aa9dca4da56eb21462078022dbc118f2134040d2ebd4ea",
+  "docs\\reports\\map_eval\\routes\\evidence\\collision_meshes.json": "610444b753495201c17ed78064aa412d68cb99c814ba61e5cc70c0f938320670",
+  "docs\\reports\\map_eval\\routes\\evidence\\episodes.jsonl": "6d648a6513eef8c99ce1d42ed6c7c7613a03a13e53bec91c8b8e128f99bc6f0b",
+  "docs\\reports\\map_eval\\routes\\evidence\\manifest.json": "4ebe18eb571c9c924c114914cd0fe13b8d9a76e95a0400c4190d0387604cfbb9",
+  "docs\\reports\\map_eval\\routes\\evidence\\map_cases_v2.json": "882126ae886c11bc05b69596656232c06d6ad59fb7a136d4da88f364c484fef7",
+  "docs\\reports\\map_eval\\routes\\evidence\\map_freeze_v2.json": "c76f1263346ecbffe3ada510057b2b6497d233d045f53aa0422bfe891b1f3fed",
+  "docs\\reports\\map_eval\\routes\\evidence\\route_probe.json": "05010f1f87e37317a0d3101247f155ee76a4757ab95986c437b200b7fd9f0a24",
+  "docs\\reports\\map_eval\\routes\\evidence\\summary.json": "32b3273dcd06b990634e32173cc7a5377d08fbce3c7350d0fcf2f5bca8bcd098",
+  "docs\\reports\\map_eval\\routes\\evidence\\visual_meshes.json": "39efd3e2ee9b26e141fc136be71ef329de97827e0b7759c578ae6c958c0353e0",
+  "docs\\reports\\map_eval\\routes\\local_E1-r0_goal.png": "2573677352c99bd448cbb67e7e0c44395a7327497293fdb1e5b415d4bdbf0a90",
+  "docs\\reports\\map_eval\\routes\\local_S1-r0_goal.png": "4b1ff909e8687c929f12fe9db6114f2b9bfa82c10dc88855b3cff21c900b80af",
+  "docs\\reports\\map_eval\\routes\\local_W1-r0_goal.png": "44afdda0f8c4024d84c3abf937bf7b3aebc2940d5fda598ea9521a5186047688",
+  "docs\\reports\\map_eval\\routes\\route_north_R1-r0_route_goal.png": "683646f83b18c54261916fc69d77788d56b4504ab43d747883c001551c4fa554",
+  "docs\\reports\\map_eval\\routes\\route_probe_overview.png": "ba5f45ec9f8bc674a7134f376fabbcdcda413a3e700f8497fb41f5546c26eb7f",
+  "docs\\reports\\map_eval\\routes\\route_south_R1-r0_route_goal.png": "7af747c293d38c7fb12e1298476d28f3405e87079ae1207ddb8a39f14c345c2d",
+  "outputs/map_eval/final_run3/steps.jsonl": "4d91c5ac2865a89c9ceb7d12f25794472b8e3973535f605cc7806e7a7d925562"
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "680f9b6bfef63f02c77d908a2659e014f571b0aa",
+  "working_tree": "clean at 680f9b6 plus committed cases/freeze ddb1c51; untracked logs/evidence",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NVIDIA 581.80 (observed via nvidia-smi)",
+  "isaac_sim": "5.1.0.0",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "882126ae886c11bc05b69596656232c06d6ad59fb7a136d4da88f364c484fef7",
+  "command": "scripts/run_map_eval.py --mode run --cases configs/scenarios/map_cases_v2.json --freeze configs/scenarios/map_freeze_v2.json --screenshots --kit_args=--/app/vulkan=false --device cuda:0 --code-commit 680f9b6bfef63f02c77d908a2659e014f571b0aa --working-tree clean at 680f9b6 plus committed cases/freeze ddb1c51; untracked logs/evidence --gpu-driver NVIDIA 581.80 (observed via nvidia-smi) --output outputs/map_eval/final_run3",
+  "started_at": "2026-10-31T22:56:25.788629+08:00",
+  "outputs_sha256": {
+    "summary.json": "32b3273dcd06b990634e32173cc7a5377d08fbce3c7350d0fcf2f5bca8bcd098",
+    "episodes.jsonl": "6d648a6513eef8c99ce1d42ed6c7c7613a03a13e53bec91c8b8e128f99bc6f0b",
+    "steps.jsonl": "4d91c5ac2865a89c9ceb7d12f25794472b8e3973535f605cc7806e7a7d925562"
+  }
+}

@@ -1,0 +1,3962 @@
+{
+  "status": "PASS",
+  "scope": "MAP_GEOMETRY_REGION_ROUTE_RAYCAST_GUI",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "regions": {
+    "W": {
+      "box": {
+        "x": [
+          -10.6,
+          -8.9
+        ],
+        "y": [
+          -2.3,
+          2.3
+        ]
+      },
+      "cell_count": 40,
+      "usable_cells": 40,
+      "min_ground_z": -0.05872676521539688,
+      "max_ground_z": -0.0027363249100744724,
+      "cells": [
+        {
+          "x": -10.6,
+          "y": -2.3,
+          "ground_z": -0.05872676149010658,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": -1.7999999999999998,
+          "ground_z": -0.04563380405306816,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": -1.2999999999999998,
+          "ground_z": -0.031540848314762115,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": -0.7999999999999998,
+          "ground_z": -0.01944788172841072,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.8209642767906189,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.1047099828720093,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": -0.2999999999999998,
+          "ground_z": -0.006354919634759426,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.584017813205719,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": 0.20000000000000018,
+          "ground_z": -0.0027363253757357597,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.5849875807762146,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.8068311810493469,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": 0.7000000000000002,
+          "ground_z": -0.016829293221235275,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.8834489583969116,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.1056524515151978,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": 1.2000000000000002,
+          "ground_z": -0.0299222469329834,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.060054063796997,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.306510329246521,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": 1.7000000000000002,
+          "ground_z": -0.04301521182060242,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.6,
+          "y": 2.2,
+          "ground_z": -0.056108176708221436,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.4927148818969727,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": -2.3,
+          "ground_z": -0.058726754039525986,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": -1.7999999999999998,
+          "ground_z": -0.04563380032777786,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": -1.2999999999999998,
+          "ground_z": -0.03254084661602974,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": -0.7999999999999998,
+          "ground_z": -0.01944788172841072,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": -0.2999999999999998,
+          "ground_z": -0.006354920100420713,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.0840177536010742,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": 0.20000000000000018,
+          "ground_z": -0.0027363249100744724,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.0849876403808594,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.306830883026123,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": 0.7000000000000002,
+          "ground_z": -0.01682928577065468,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": 1.2000000000000002,
+          "ground_z": -0.029922248795628548,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": 1.7000000000000002,
+          "ground_z": -0.04301520809531212,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -10.1,
+          "y": 2.2,
+          "ground_z": -0.056108176708221436,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": -2.3,
+          "ground_z": -0.058726754039525986,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": -1.7999999999999998,
+          "ground_z": -0.04563380032777786,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": -1.2999999999999998,
+          "ground_z": -0.032540835440158844,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": -0.7999999999999998,
+          "ground_z": -0.01944788172841072,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": -0.2999999999999998,
+          "ground_z": -0.006354921963065863,
+          "ground_prim": "/World/Terrain/Collisions/collision_009",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": 0.20000000000000018,
+          "ground_z": -0.0037363285664469004,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": 0.7000000000000002,
+          "ground_z": -0.016829287633299828,
+          "ground_prim": "/World/Terrain/Collisions/collision_010",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": 1.2000000000000002,
+          "ground_z": -0.029922248795628548,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": 1.7000000000000002,
+          "ground_z": -0.04301521182060242,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.6,
+          "y": 2.2,
+          "ground_z": -0.056108176708221436,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": -2.3,
+          "ground_z": -0.05872676521539688,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": -1.7999999999999998,
+          "ground_z": -0.045633796602487564,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": -1.2999999999999998,
+          "ground_z": -0.03254083916544914,
+          "ground_prim": "/World/Terrain/Collisions/collision_005",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": -0.7999999999999998,
+          "ground_z": -0.01944787986576557,
+          "ground_prim": "/World/Terrain/Collisions/collision_009",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": -0.2999999999999998,
+          "ground_z": -0.0063549187034368515,
+          "ground_prim": "/World/Terrain/Collisions/collision_009",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": 0.20000000000000018,
+          "ground_z": -0.0037363283336162567,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": 0.7000000000000002,
+          "ground_z": -0.016829289495944977,
+          "ground_prim": "/World/Terrain/Collisions/collision_010",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": 1.2000000000000002,
+          "ground_z": -0.029922250658273697,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": 1.7000000000000002,
+          "ground_z": -0.04301521182060242,
+          "ground_prim": "/World/Terrain/Collisions/collision_006",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -9.1,
+          "y": 2.2,
+          "ground_z": -0.056108176708221436,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        }
+      ]
+    },
+    "E": {
+      "box": {
+        "x": [
+          7.9,
+          10.6
+        ],
+        "y": [
+          -1.6,
+          1.6
+        ]
+      },
+      "cell_count": 42,
+      "usable_cells": 42,
+      "min_ground_z": -0.040396641939878464,
+      "max_ground_z": 0.15150004625320435,
+      "cells": [
+        {
+          "x": 7.9,
+          "y": -1.6,
+          "ground_z": -0.04039663448929787,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 7.9,
+          "y": -1.1,
+          "ground_z": -0.02730364352464676,
+          "ground_prim": "/World/Terrain/Collisions/collision_018",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 7.9,
+          "y": -0.6000000000000001,
+          "ground_z": 0.09979475289583206,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 7.9,
+          "y": -0.10000000000000009,
+          "ground_z": 0.15150004625320435,
+          "ground_prim": "/World/Terrain/Collisions/collision_023",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 7.9,
+          "y": 0.3999999999999999,
+          "ground_z": 0.13615603744983673,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 7.9,
+          "y": 0.8999999999999999,
+          "ground_z": 0.029900023713707924,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 7.9,
+          "y": 1.4,
+          "ground_z": -0.03515943884849548,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": -1.6,
+          "ground_z": -0.04039663076400757,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": -1.1,
+          "ground_z": -0.027303587645292282,
+          "ground_prim": "/World/Terrain/Collisions/collision_018",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": -0.6000000000000001,
+          "ground_z": -0.014110663905739784,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": -0.10000000000000009,
+          "ground_z": 0.03318499028682709,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": 0.3999999999999999,
+          "ground_z": -0.008973515592515469,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": 0.8999999999999999,
+          "ground_z": -0.022066472098231316,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.4,
+          "y": 1.4,
+          "ground_z": -0.035159435123205185,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": -1.6,
+          "ground_z": -0.04039661958813667,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": -1.1,
+          "ground_z": -0.027303650975227356,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": -0.6000000000000001,
+          "ground_z": -0.014210827648639679,
+          "ground_prim": "/World/Terrain/Collisions/collision_018",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": -0.10000000000000009,
+          "ground_z": -0.0011177387787029147,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": 0.3999999999999999,
+          "ground_z": -0.008973515592515469,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": 0.8999999999999999,
+          "ground_z": -0.022066472098231316,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 8.9,
+          "y": 1.4,
+          "ground_z": -0.035159435123205185,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": -1.6,
+          "ground_z": -0.04039663076400757,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": -1.1,
+          "ground_z": -0.027303658425807953,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": -0.6000000000000001,
+          "ground_z": -0.014210706576704979,
+          "ground_prim": "/World/Terrain/Collisions/collision_018",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": -0.10000000000000009,
+          "ground_z": -0.0011177388951182365,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": 0.3999999999999999,
+          "ground_z": -0.00897352397441864,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": 0.8999999999999999,
+          "ground_z": -0.022066472098231316,
+          "ground_prim": "/World/Terrain/Collisions/collision_024",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.4,
+          "y": 1.4,
+          "ground_z": -0.03515943884849548,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": -1.6,
+          "ground_z": -0.04039663076400757,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": -1.1,
+          "ground_z": -0.02730366215109825,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": -0.6000000000000001,
+          "ground_z": -0.014210700057446957,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": -0.10000000000000009,
+          "ground_z": -0.0011177393607795238,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.3272985219955444,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.4846047163009644,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": 0.3999999999999999,
+          "ground_z": -0.008973512798547745,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.3858433961868286,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": 0.8999999999999999,
+          "ground_z": -0.021066486835479736,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 9.9,
+          "y": 1.4,
+          "ground_z": -0.03515942767262459,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": -1.6,
+          "ground_z": -0.040396641939878464,
+          "ground_prim": "/World/Terrain/Collisions/collision_022",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": -1.1,
+          "ground_z": -0.02730366215109825,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.1069990396499634,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.3765829801559448,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": -0.6000000000000001,
+          "ground_z": -0.014210700057446957,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.103531002998352,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": -0.10000000000000009,
+          "ground_z": -0.0011177391279488802,
+          "ground_prim": "/World/Terrain/Collisions/collision_027",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.8272984623908997,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.9846045970916748,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": 0.3999999999999999,
+          "ground_z": -0.008973512798547745,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.8858430981636047,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": 0.8999999999999999,
+          "ground_z": -0.022066473960876465,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.1620383262634277,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": 10.4,
+          "y": 1.4,
+          "ground_z": -0.03515943884849548,
+          "ground_prim": "/World/Terrain/Collisions/collision_028",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.340624213218689,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        }
+      ]
+    },
+    "S": {
+      "box": {
+        "x": [
+          -6.2,
+          -1.8
+        ],
+        "y": [
+          -7.2,
+          -5.7
+        ]
+      },
+      "cell_count": 36,
+      "usable_cells": 36,
+      "min_ground_z": 0.013030797243118286,
+      "max_ground_z": 0.052309758961200714,
+      "cells": [
+        {
+          "x": -6.2,
+          "y": -7.2,
+          "ground_z": 0.013030797243118286,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -6.2,
+          "y": -6.7,
+          "ground_z": 0.026123756542801857,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -6.2,
+          "y": -6.2,
+          "ground_z": 0.03921671211719513,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -6.2,
+          "y": -5.7,
+          "ground_z": 0.05230966955423355,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": -7.2,
+          "ground_z": 0.013030811212956905,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": -6.7,
+          "ground_z": 0.026123767718672752,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": -6.2,
+          "ground_z": 0.039216723293066025,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": -5.7,
+          "ground_z": 0.052309684455394745,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": -7.2,
+          "ground_z": 0.013030821457505226,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": -6.7,
+          "ground_z": 0.026123778894543648,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": -6.2,
+          "ground_z": 0.03921673074364662,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": -5.7,
+          "ground_z": 0.05230969190597534,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": -7.2,
+          "ground_z": 0.013030830770730972,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": -6.7,
+          "ground_z": 0.026123790070414543,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": -6.2,
+          "ground_z": 0.039216745644807816,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": -5.7,
+          "ground_z": 0.05230969935655594,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": -7.2,
+          "ground_z": 0.013030843809247017,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": -6.7,
+          "ground_z": 0.02612379938364029,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": -6.2,
+          "ground_z": 0.03921676054596901,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": -5.7,
+          "ground_z": 0.05230971425771713,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": -7.2,
+          "ground_z": 0.013030853122472763,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": -6.7,
+          "ground_z": 0.026123812422156334,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": -6.2,
+          "ground_z": 0.039216767996549606,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": -5.7,
+          "ground_z": 0.05230972170829773,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": -7.2,
+          "ground_z": 0.013030868023633957,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": -6.7,
+          "ground_z": 0.02612382173538208,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": -6.2,
+          "ground_z": 0.0392167754471302,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": -5.7,
+          "ground_z": 0.05230973660945892,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": -7.2,
+          "ground_z": 0.013030875474214554,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": -6.7,
+          "ground_z": 0.026123832911252975,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": -6.2,
+          "ground_z": 0.0392167903482914,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": -5.7,
+          "ground_z": 0.05230974778532982,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": -7.2,
+          "ground_z": 0.013030890375375748,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": -6.7,
+          "ground_z": 0.02612384222447872,
+          "ground_prim": "/World/Terrain/Collisions/collision_008",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": -6.2,
+          "ground_z": 0.03921680152416229,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": -5.7,
+          "ground_z": 0.052309758961200714,
+          "ground_prim": "/World/Terrain/Collisions/collision_013",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        }
+      ]
+    },
+    "N": {
+      "box": {
+        "x": [
+          -6.2,
+          -1.8
+        ],
+        "y": [
+          5.7,
+          7.2
+        ]
+      },
+      "cell_count": 36,
+      "usable_cells": 36,
+      "min_ground_z": -0.1608518660068512,
+      "max_ground_z": 0.05230966955423355,
+      "cells": [
+        {
+          "x": -6.2,
+          "y": 5.7,
+          "ground_z": 0.05230966955423355,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -6.2,
+          "y": 6.2,
+          "ground_z": 0.03921671584248543,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -6.2,
+          "y": 6.7,
+          "ground_z": 0.02612375095486641,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -6.2,
+          "y": 7.2,
+          "ground_z": 0.013030781410634518,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": 5.7,
+          "ground_z": 0.05230966955423355,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": 6.2,
+          "ground_z": 0.03921670466661453,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": 6.7,
+          "ground_z": 0.02612374722957611,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.7,
+          "y": 7.2,
+          "ground_z": 0.01303078606724739,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": 5.7,
+          "ground_z": 0.05230966955423355,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": 6.2,
+          "ground_z": 0.03921670839190483,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": 6.7,
+          "ground_z": 0.026123743504285812,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -5.2,
+          "y": 7.2,
+          "ground_z": 0.013030785135924816,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": 5.7,
+          "ground_z": 0.052309662103652954,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": 6.2,
+          "ground_z": 0.03921670466661453,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": 6.7,
+          "ground_z": 0.026123743504285812,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.7,
+          "y": 7.2,
+          "ground_z": 0.013030786998569965,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": 5.7,
+          "ground_z": -0.11354599893093109,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": 6.2,
+          "ground_z": -0.005592836067080498,
+          "ground_prim": "/World/Terrain/Collisions/collision_011",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": 6.7,
+          "ground_z": 0.026123743504285812,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -4.2,
+          "y": 7.2,
+          "ground_z": 0.01303078606724739,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": 5.7,
+          "ground_z": -0.14775890111923218,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": 6.2,
+          "ground_z": -0.1608518660068512,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": 6.7,
+          "ground_z": 0.02612374536693096,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.7,
+          "y": 7.2,
+          "ground_z": 0.013030786998569965,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": 5.7,
+          "ground_z": -0.14775890111923218,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": 6.2,
+          "ground_z": -0.16085185110569,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": 6.7,
+          "ground_z": 0.02612374722957611,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -3.2,
+          "y": 7.2,
+          "ground_z": 0.01303078792989254,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": 5.7,
+          "ground_z": -0.14775888621807098,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": 6.2,
+          "ground_z": -0.1608518660068512,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": 6.7,
+          "ground_z": 0.02612374722957611,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.7,
+          "y": 7.2,
+          "ground_z": 0.01303078606724739,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": 5.7,
+          "ground_z": -0.14775893092155457,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.096225619316101,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": 6.2,
+          "ground_z": -0.1608518660068512,
+          "ground_prim": "/World/Terrain/Collisions/collision_007",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 0.927038848400116,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": 6.7,
+          "ground_z": 0.02612374536693096,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        },
+        {
+          "x": -2.2,
+          "y": 7.2,
+          "ground_z": 0.01303078792989254,
+          "ground_prim": "/World/Terrain/Collisions/collision_016",
+          "samples": [
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            },
+            {
+              "up_m": 4.0,
+              "min_horizontal_m": 1.5,
+              "blocked_prim": ""
+            }
+          ],
+          "usable": true
+        }
+      ]
+    }
+  },
+  "routes": {
+    "south": {
+      "waypoints": [
+        [
+          -10.0,
+          0.0,
+          1.0
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "sample_count": 119,
+      "blocked_count": 0,
+      "blocked_examples": []
+    },
+    "north": {
+      "waypoints": [
+        [
+          -10.0,
+          0.0,
+          1.0
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "sample_count": 115,
+      "blocked_count": 0,
+      "blocked_examples": []
+    },
+    "center_high": {
+      "waypoints": [
+        [
+          -10.0,
+          0.0,
+          1.0
+        ],
+        [
+          -6.0,
+          0.5,
+          1.0
+        ],
+        [
+          -3.0,
+          2.5,
+          1.0
+        ],
+        [
+          3.0,
+          2.5,
+          1.0
+        ],
+        [
+          7.0,
+          0.5,
+          1.0
+        ],
+        [
+          9.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "sample_count": 86,
+      "blocked_count": 0,
+      "blocked_examples": []
+    },
+    "west_south": {
+      "waypoints": [
+        [
+          -10.0,
+          0.0,
+          1.0
+        ],
+        [
+          -10.0,
+          -3.5,
+          1.0
+        ],
+        [
+          -7.0,
+          -5.8,
+          1.0
+        ],
+        [
+          -3.0,
+          -6.2,
+          1.0
+        ]
+      ],
+      "sample_count": 48,
+      "blocked_count": 0,
+      "blocked_examples": []
+    },
+    "east_north": {
+      "waypoints": [
+        [
+          9.5,
+          0.0,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          6.0,
+          5.8,
+          1.0
+        ],
+        [
+          0.0,
+          5.8,
+          1.0
+        ]
+      ],
+      "sample_count": 57,
+      "blocked_count": 0,
+      "blocked_examples": []
+    }
+  },
+  "visual_meshes": 46,
+  "collision_meshes": 34,
+  "visual_bbox": [
+    -14.000493049621582,
+    -8.001565933227539,
+    -0.3009999990463257,
+    14.000499725341797,
+    8.001565933227539,
+    3.497683048248291
+  ],
+  "collision_bbox": [
+    -14.002496719360352,
+    -8.004066467285156,
+    -0.3034999966621399,
+    14.002496719360352,
+    8.004066467285156,
+    3.4997735023498535
+  ],
+  "geometry_note": "visual and collision checked as independent prim/bounds lists; no visual-mesh intersection performed",
+  "screenshot_exists": true
+}

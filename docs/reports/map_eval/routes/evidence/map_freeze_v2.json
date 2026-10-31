@@ -1,0 +1,189 @@
+{
+  "schema_version": "boom_birds.map_freeze.v1",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "882126ae886c11bc05b69596656232c06d6ad59fb7a136d4da88f364c484fef7",
+  "case_ids": [
+    "local_W1",
+    "local_W2",
+    "local_W3",
+    "local_W4",
+    "local_E1",
+    "local_E2",
+    "local_E3",
+    "local_E4",
+    "local_S1",
+    "local_S2",
+    "local_S3",
+    "local_S4",
+    "route_south_R1",
+    "route_south_R2",
+    "route_south_R3",
+    "route_south_R4",
+    "route_north_R1",
+    "route_north_R2",
+    "route_north_R3",
+    "route_north_R4",
+    "contact_wall14_A",
+    "contact_ground_A"
+  ],
+  "counts": {
+    "local_reach": 12,
+    "route": 8,
+    "contact": 4
+  },
+  "case_repeats": {
+    "local_W1": 1,
+    "local_W2": 1,
+    "local_W3": 1,
+    "local_W4": 1,
+    "local_E1": 1,
+    "local_E2": 1,
+    "local_E3": 1,
+    "local_E4": 1,
+    "local_S1": 1,
+    "local_S2": 1,
+    "local_S3": 1,
+    "local_S4": 1,
+    "route_south_R1": 1,
+    "route_south_R2": 1,
+    "route_south_R3": 1,
+    "route_south_R4": 1,
+    "route_north_R1": 1,
+    "route_north_R2": 1,
+    "route_north_R3": 1,
+    "route_north_R4": 1,
+    "contact_wall14_A": 2,
+    "contact_ground_A": 2
+  },
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "z_min": -0.1,
+      "z_max": 2,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027,
+      "cell_count": 40,
+      "usable_cells": 40,
+      "validity": "route_probe1: all cells usable (>=0.55 m horizontal, >=1.2 m upward clearance at +0.4/1.0/1.6 m above local ground)"
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "z_min": -0.1,
+      "z_max": 2,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515,
+      "cell_count": 42,
+      "usable_cells": 42,
+      "validity": "route_probe1: all cells usable"
+    },
+    {
+      "region_id": "S",
+      "x_min": -6.2,
+      "x_max": -1.8,
+      "y_min": -7.2,
+      "y_max": -5.7,
+      "z_min": -0.05,
+      "z_max": 2,
+      "ground_z_min": 0.013,
+      "ground_z_max": 0.0523,
+      "cell_count": 36,
+      "usable_cells": 36,
+      "validity": "route_probe1: all cells usable"
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "south",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ]
+      ],
+      "sample_count": 119,
+      "blocked_count": 0,
+      "clearance_margin_m": 0.5,
+      "body_radius_m": 0.35,
+      "probe": "route_probe1 at z-0.25/0/+0.25 around 1.0 m; 8 horizontal rays 1.5 m; no blocked points"
+    },
+    {
+      "route_id": "north",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ]
+      ],
+      "sample_count": 115,
+      "blocked_count": 0,
+      "clearance_margin_m": 0.5,
+      "body_radius_m": 0.35,
+      "probe": "route_probe1; no blocked points"
+    }
+  ],
+  "cases_file": "configs\\scenarios\\map_cases_v2.json",
+  "map_config_file": "configs\\maps\\rmuc2027.yaml",
+  "total_episodes": 24,
+  "evaluation": {
+    "version": "boom_birds.map_eval.v1",
+    "success_distance_m": 0.2,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "contact_force_threshold_n": 0.02,
+    "takeoff_landing": {
+      "hover_altitude_m": 1.0,
+      "hover_time_s": 1.0,
+      "landing_speed_max_mps": 0.25
+    }
+  },
+  "code_commit": "680f9b6bfef63f02c77d908a2659e014f571b0aa",
+  "frozen_at": "2026-10-31T22:50:00+08:00",
+  "notes": "Frozen map dynamics cases; failures remain valid evidence."
+}

@@ -6,6 +6,8 @@
 > **地图资产：** @E:\isaac\boom_birds_storage\assets\RMUC2027_IsaacSim`（原始资产未修改；本地路径仅在忽略配置）
 > **最后核对：** 2026-10-31
 
+> **2026-10-31 多区域与跨路线扩展：** 本报告的单区域 10 episode 仍有效；后续工作包将验证扩展到 3 个区域、2 条跨区路线与墙体/地面两类接触（24 episode），见 [MAP_ROUTES_REPORT.md](MAP_ROUTES_REPORT.md)。旧证据与 hash 保留。
+
 ## 结论
 
 - RMUC2027 场地通过**配置引用**接入项目动力学评价：使用 @assets/rmuc2027_terrain.usdc`，禁用官方环境默认的 z=0 平面，保留场地原始高度（最低点约 −0.301 m）；未复制大资产进 Git，未改写原始资产。

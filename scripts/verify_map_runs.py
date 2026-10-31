@@ -164,6 +164,26 @@ for item in episodes:
         if not all(-20 <= value <= 20 for point in spec.get('waypoints', [])
                    for value in point):
             route_ok = False
+route_defs = {item['route_id']: item for item in freeze.get('routes', [])}
+corridor_ok = True
+for item in episodes:
+    if item['kind'] != 'route':
+        continue
+    spec = case_specs.get(item['case_id'], {})
+    route_def = route_defs.get(spec.get('route_id'))
+    if route_def is None:
+        corridor_ok = False
+        continue
+    expected = route_def.get('corridor_waypoints', [])
+    actual = spec.get('waypoints', [])[1:-1]
+    if len(expected) != len(actual):
+        corridor_ok = False
+        continue
+    for left, right in zip(actual, expected):
+        if any(abs(float(left[i]) - float(right[i])) > 1e-9 for i in range(3)):
+            corridor_ok = False
+checks['route_corridor_contract'] = corridor_ok
+
 checks['region_membership'] = region_ok
 checks['route_waypoint_sequence'] = route_ok
 checks['contact_geometry_diversity'] = (
