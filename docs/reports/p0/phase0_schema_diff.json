@@ -1,0 +1,1356 @@
+{
+  "schema_diff_id": "bb22-g0-phase0-schema-diff-20261031",
+  "generated_at": "2026-10-31",
+  "timezone": "Asia/Shanghai",
+  "generator": "phase0-scout (delegated subagent)",
+  "scope": "src/boom_birds/contracts 现有 boom_birds.velocity.v1 ↔ docs/design/RMUC2027_UAV_V2_2.md MessageHeader(§16.3)/ActionEnvelope(§16.6)/NormalVelocityAction(§10.4) 逐字段差异与迁移要求",
+  "snapshot": {
+    "repo": "E:\\isaac\\proj_boom_birds",
+    "branch": "codex/review-rmuc2027-v2-route",
+    "head_commit": "d01e156（盘点开始 HEAD）",
+    "tracked_state": "已跟踪文件相对 HEAD 有未提交修改；本盘点只读，不改变源码或 V2.2 正文",
+    "v1_source_files": [
+      "src/boom_birds/contracts/types.py",
+      "src/boom_birds/contracts/frames.py",
+      "src/boom_birds/contracts/timebase.py",
+      "configs/runtime/default.yaml"
+    ],
+    "v1_evidence": "tests/contracts/test_action_contract.py、test_timebase.py（33 条回归，历史报告记录 exit 0）",
+    "concurrent_work_note": "盘点开始时 src 仅 v1 三模块；盘点期间 G2.6 工作包提交 c730c75（v2 合同实现）与 533708e（证据报告），新增 src/boom_birds/contracts/{versions,reasons,context,action_v2,admission,ownership,lifecycle}.py 与 v2 测试。本文件仍以 v1 为迁移前基线做逐字段对照，不重复验收 v2 实现；v2 实现状态以 docs/reports/g2_6/G2_6_CONTRACTS_REPORT.md 为准（该报告自评 INCOMPLETE）。",
+    "observed_head_at_write": "533708e（撰写时 HEAD；盘点期间 BB22:G2.6 提交了 c730c75、533708e）"
+  },
+  "schema_ids": {
+    "v1": "boom_birds.velocity.v1",
+    "v2_design": "Action Schema v2.0（§10.4，尚无显式字符串 schema id）",
+    "v2_field": "MessageHeader.schema_version: uint32（§16.3） vs NormalVelocityAction.schema_version: \"2.0\"（§10.4）：类型冲突，见 gaps",
+    "v2_implemented": "boom_birds.message.v2.0 / boom_birds.action.v2.0（G2.6 实现，见 docs/reports/g2_6/G2_6_CONTRACTS_REPORT.md）"
+  },
+  "v1_fields": [
+    {
+      "name": "velocity_enu_mps",
+      "type": "tuple[float,float,float]",
+      "semantics": "ENU 三轴速度（已由 yaw 旋转后的中间表示）",
+      "evidence": "src/boom_birds/contracts/types.py L30"
+    },
+    {
+      "name": "yaw_rate_rad_s",
+      "type": "float",
+      "semantics": "ENU 逆时针偏航率，发 NED 前取负",
+      "evidence": "types.py L31; frames.py L49-50"
+    },
+    {
+      "name": "created_ns",
+      "type": "int",
+      "semantics": "动作创建时刻（发送方不得刷新）",
+      "evidence": "types.py L32"
+    },
+    {
+      "name": "valid_until_ns",
+      "type": "int",
+      "semantics": "到期时刻，now >= valid_until_ns 即拒绝",
+      "evidence": "types.py L33; timebase.py L33"
+    },
+    {
+      "name": "mission_epoch",
+      "type": "int",
+      "semantics": "任务/架次级 epoch",
+      "evidence": "types.py L34"
+    },
+    {
+      "name": "source",
+      "type": "str ('policy')",
+      "semantics": "动作来源（单一字符串）",
+      "evidence": "types.py L35"
+    },
+    {
+      "name": "origin_epoch",
+      "type": "int",
+      "semantics": "原点重置代际（v1 自定义）",
+      "evidence": "types.py L36"
+    },
+    {
+      "name": "clock_id",
+      "type": "str ('host_monotonic')",
+      "semantics": "时钟域名（字符串）",
+      "evidence": "types.py L37"
+    },
+    {
+      "name": "schema_id",
+      "type": "str ('boom_birds.velocity.v1')",
+      "semantics": "版本标签（类默认值）",
+      "evidence": "types.py L5, L38"
+    }
+  ],
+  "v1_module_constants": [
+    {
+      "name": "SCHEMA_ID",
+      "value": "boom_birds.velocity.v1",
+      "evidence": "types.py L5"
+    }
+  ],
+  "v2_structures": {
+    "MessageHeader": {
+      "ref": "§16.3",
+      "fields": [
+        {
+          "name": "system_boot_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "Companion 进程/系统启动标识"
+        },
+        {
+          "name": "px4_boot_id",
+          "type": "uint64",
+          "required": "飞控相关状态/动作必填",
+          "notes": "PX4 单独重启必须更换并作废旧映射"
+        },
+        {
+          "name": "clock_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "有版本的时钟域标识（v1 为字符串，迁移需注册表）"
+        },
+        {
+          "name": "mission_epoch",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "单架次"
+        },
+        {
+          "name": "localization_epoch",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "碰撞/定位重置递增"
+        },
+        {
+          "name": "control_epoch",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "控制所有权交接递增"
+        },
+        {
+          "name": "sequence_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "序号（动作侧按 boot_id/control_epoch/source 严格递增）"
+        },
+        {
+          "name": "capture_timestamp_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "采集时刻；年龄判断基准"
+        },
+        {
+          "name": "receive_timestamp_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "接收时刻"
+        },
+        {
+          "name": "publish_timestamp_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "发布时刻"
+        },
+        {
+          "name": "source_id",
+          "type": "uint32",
+          "required": "必需",
+          "notes": "消息源标识"
+        },
+        {
+          "name": "schema_version",
+          "type": "uint32",
+          "required": "必需",
+          "notes": "与 v1 字符串 schema_id 类型不一致"
+        },
+        {
+          "name": "sync_generation",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "跨设备时间映射代际"
+        },
+        {
+          "name": "timestamp_uncertainty_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "误差界；年龄取最坏值"
+        },
+        {
+          "name": "sync_valid",
+          "type": "bool",
+          "required": "必需",
+          "notes": "同步质量是否可信"
+        },
+        {
+          "name": "quarantine",
+          "type": "bool",
+          "required": "必需",
+          "notes": "碰撞不确定区间内的数据隔离标记"
+        },
+        {
+          "name": "valid",
+          "type": "bool",
+          "required": "必需",
+          "notes": "消息级有效性（不得以 0 伪装有效）"
+        }
+      ]
+    },
+    "ActionEnvelope": {
+      "ref": "§16.6",
+      "fields": [
+        {
+          "name": "header",
+          "type": "MessageHeader",
+          "required": "必需",
+          "notes": "承载 §16.3 header，含 clock_id/px4_boot_id/sync_generation"
+        },
+        {
+          "name": "observation_id",
+          "type": "id",
+          "required": "必需",
+          "notes": "动作溯源到观测"
+        },
+        {
+          "name": "input_capture_interval_ns",
+          "type": "[start,end]",
+          "required": "必需",
+          "notes": "输入采集时间范围"
+        },
+        {
+          "name": "earliest_input_safe_deadline_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "由输入年龄+误差界推导的最早安全截止"
+        },
+        {
+          "name": "action_id",
+          "type": "id",
+          "required": "必需",
+          "notes": "动作身份，重发必须完全一致"
+        },
+        {
+          "name": "action_type",
+          "type": "enum",
+          "required": "必需",
+          "notes": "例如 BODY_VELOCITY"
+        },
+        {
+          "name": "coordinate_frame",
+          "type": "enum",
+          "required": "必需",
+          "notes": "例如 COMPOSITE_BODY_HEADING_FLU_WORLD_UP"
+        },
+        {
+          "name": "units",
+          "type": "声明",
+          "required": "必需",
+          "notes": "物理单位 m/s、rad/s，禁止归一化混用"
+        },
+        {
+          "name": "issued_at_monotonic_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 expires 同一单调域"
+        },
+        {
+          "name": "expires_at_monotonic_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "= min(issued+ttl, earliest_input_safe_deadline)"
+        },
+        {
+          "name": "max_age_ms",
+          "type": "number",
+          "required": "必需",
+          "notes": "最大允许年龄（与 TTL 分离）"
+        },
+        {
+          "name": "sequence_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "ADMIT_NEW 严格递增；SEND_CACHED 不递增"
+        },
+        {
+          "name": "source",
+          "type": "enum(STUDENT/RECOVERY/SAFETY)",
+          "required": "必需",
+          "notes": "控制所有权来源"
+        },
+        {
+          "name": "policy_version",
+          "type": "版本",
+          "required": "必需",
+          "notes": "模型/策略版本"
+        },
+        {
+          "name": "payload",
+          "type": "object",
+          "required": "必需",
+          "notes": "具体动作载荷"
+        },
+        {
+          "name": "validity_mask",
+          "type": "mask",
+          "required": "必需",
+          "notes": "载荷有效性（不替代逐轴 validity）"
+        }
+      ]
+    },
+    "NormalVelocityAction": {
+      "ref": "§10.4",
+      "fields": [
+        {
+          "name": "schema_version",
+          "type": "str '2.0'（示例）",
+          "required": "必需",
+          "notes": "与 header.schema_version(uint32) 类型不一致，需统一"
+        },
+        {
+          "name": "action_type",
+          "type": "enum 'BODY_VELOCITY'",
+          "required": "必需",
+          "notes": "动作类型"
+        },
+        {
+          "name": "clock_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "px4_boot_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "sync_generation",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "observation_id",
+          "type": "id",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        },
+        {
+          "name": "input_capture_interval_ns",
+          "type": "range",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        },
+        {
+          "name": "earliest_input_safe_deadline_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        },
+        {
+          "name": "frame",
+          "type": "enum 'COMPOSITE_BODY_HEADING_FLU_WORLD_UP'",
+          "required": "必需",
+          "notes": "v1 无；显式声明 vx/vy 随航向、vz 世界 Up"
+        },
+        {
+          "name": "component_frames",
+          "type": "object{vx_forward,vy_left,vz_up,yaw_rate_ccw_world}",
+          "required": "必需",
+          "notes": "逐分量坐标系声明"
+        },
+        {
+          "name": "vx_forward_mps",
+          "type": "float",
+          "required": "必需",
+          "notes": "水平前向速度（BODY_HEADING_FLU）"
+        },
+        {
+          "name": "vy_left_mps",
+          "type": "float",
+          "required": "必需",
+          "notes": "水平左向速度"
+        },
+        {
+          "name": "vz_up_mps",
+          "type": "float",
+          "required": "必需",
+          "notes": "世界 Up 速度"
+        },
+        {
+          "name": "yaw_rate_ccw_world_radps",
+          "type": "float",
+          "required": "必需",
+          "notes": "绕世界 Up 逆时针偏航率"
+        },
+        {
+          "name": "axis_validity",
+          "type": "object{vx,vy,vz,yaw_rate}",
+          "required": "必需",
+          "notes": "逐轴有效性；v1 完全缺失"
+        },
+        {
+          "name": "system_boot_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "mission_epoch",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "localization_epoch",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "control_epoch",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header 重复定义"
+        },
+        {
+          "name": "sequence_id",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 header/envelope 重复定义"
+        },
+        {
+          "name": "issued_at_monotonic_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        },
+        {
+          "name": "expires_at_monotonic_ns",
+          "type": "uint64",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        },
+        {
+          "name": "policy_version",
+          "type": "版本",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        },
+        {
+          "name": "source",
+          "type": "enum",
+          "required": "必需",
+          "notes": "与 envelope 重复定义"
+        }
+      ]
+    }
+  },
+  "field_diffs": [
+    {
+      "field": "velocity_enu_mps",
+      "scope": "payload",
+      "v1_present": true,
+      "v2_name": "frame + component_frames + vx_forward_mps/vy_left_mps/vz_up_mps",
+      "change_type": "split_reframe",
+      "severity": "critical",
+      "migration_action": "v2 载荷改存 BODY_HEADING_FLU 物理速度；ENU 仅作为 v1 中间表示保留在旧适配层；禁止对 v2 载荷再次 yaw 旋转（防止二次旋转）",
+      "spec_ref": "§10.4, §10.4.1"
+    },
+    {
+      "field": "yaw_rate_rad_s",
+      "scope": "payload",
+      "v1_present": true,
+      "v2_name": "yaw_rate_ccw_world_radps + component_frames.yaw_rate_ccw_world",
+      "change_type": "rename_semantics_declared",
+      "severity": "medium",
+      "migration_action": "重命名并显式声明坐标系；到 NED 仍取负号，需 SITL 单测覆盖正负方向",
+      "spec_ref": "§10.4, §10.4.1, §27.6"
+    },
+    {
+      "field": "created_ns",
+      "scope": "time",
+      "v1_present": true,
+      "v2_name": "issued_at_monotonic_ns",
+      "change_type": "rename",
+      "severity": "low",
+      "migration_action": "同义重命名；Sender 不得刷新 issued_at，重发必须沿用原值",
+      "spec_ref": "§16.6 TTL 规则 2"
+    },
+    {
+      "field": "valid_until_ns",
+      "scope": "time",
+      "v1_present": true,
+      "v2_name": "expires_at_monotonic_ns + max_age_ms + earliest_input_safe_deadline_ns",
+      "change_type": "semantic_change",
+      "severity": "critical",
+      "migration_action": "到期不再固定为 created+ttl，必须取 min(issued+action_ttl, earliest_input_safe_deadline)；边界仍为 now >= expires 拒绝",
+      "spec_ref": "§16.6 TTL 规则 4、10.4.2"
+    },
+    {
+      "field": "mission_epoch",
+      "scope": "context",
+      "v1_present": true,
+      "v2_name": "mission_epoch（保留）+ system_boot_id/localization_epoch/control_epoch",
+      "change_type": "extends_to_quartet",
+      "severity": "critical",
+      "migration_action": "从单 epoch 扩展为四级上下文；消费者必须逐项校验，不得只校验 mission_epoch",
+      "spec_ref": "§16.2, §27.2"
+    },
+    {
+      "field": "source",
+      "scope": "identity",
+      "v1_present": true,
+      "v2_name": "source ∈ {STUDENT, RECOVERY, SAFETY} + header.source_id",
+      "change_type": "enum_change",
+      "severity": "medium",
+      "migration_action": "v1 'policy' 映射为 STUDENT 且必须显式赋值；所有权与 source 必须一致（§16.8）",
+      "spec_ref": "§16.6, §16.8"
+    },
+    {
+      "field": "origin_epoch",
+      "scope": "context",
+      "v1_present": true,
+      "v2_name": "localization_epoch + control_epoch",
+      "change_type": "split",
+      "severity": "critical",
+      "migration_action": "v1 origin_epoch 语义拆分为定位代际与控制代际；迁移需在 ADR 中记录映射，禁止继续用单一 origin_epoch 代替两者",
+      "spec_ref": "§16.2, §16.4"
+    },
+    {
+      "field": "clock_id",
+      "scope": "time",
+      "v1_present": true,
+      "v2_name": "clock_id(uint64) + sync_generation + timestamp_uncertainty_ns + sync_valid",
+      "change_type": "type_change_split",
+      "severity": "critical",
+      "migration_action": "v1 字符串时钟域名改为版本化 uint64 时钟域注册表；新增映射代际与误差界；跨域比较前必须验证映射有效，无法证明年龄则拒绝",
+      "spec_ref": "§16.3, §16.3.2"
+    },
+    {
+      "field": "schema_id",
+      "scope": "version",
+      "v1_present": true,
+      "v2_name": "header.schema_version(uint32) + §27.1 兼容矩阵",
+      "change_type": "type_change",
+      "severity": "medium",
+      "migration_action": "'boom_birds.velocity.v1' 常量不得改为 v2 标签；新增独立 v2 schema 标识与 schema_version 数值，旧对象显式转换",
+      "spec_ref": "§27.1, §25"
+    },
+    {
+      "field": "system_boot_id",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "system_boot_id",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "px4_boot_id",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "px4_boot_id",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "clock_id",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "clock_id",
+      "change_type": "missing_in_v1",
+      "severity": "high",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "mission_epoch",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "mission_epoch",
+      "change_type": "missing_in_v1",
+      "severity": "high",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "localization_epoch",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "localization_epoch",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "control_epoch",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "control_epoch",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "sequence_id",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "sequence_id",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "capture_timestamp_ns",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "capture_timestamp_ns",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "receive_timestamp_ns",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "receive_timestamp_ns",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "publish_timestamp_ns",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "publish_timestamp_ns",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "source_id",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "source_id",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "schema_version",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "schema_version",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "sync_generation",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "sync_generation",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "timestamp_uncertainty_ns",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "timestamp_uncertainty_ns",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "sync_valid",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "sync_valid",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "quarantine",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "quarantine",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "valid",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "valid",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增 header 字段并要求消费者校验；v1 无对应字段，迁移必须显式提供，禁止默认 0",
+      "spec_ref": "§16.3"
+    },
+    {
+      "field": "axis_validity",
+      "scope": "payload",
+      "v1_present": false,
+      "v2_name": "axis_validity{vx,vy,vz,yaw_rate}",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "新增逐轴有效性；v_xy_valid=false 拒绝水平速度；v_z_valid=false 拒绝整个正常速度动作（1511 默认拒绝）",
+      "spec_ref": "§10.4.2, §10.4.3, §26.6"
+    },
+    {
+      "field": "observation_id",
+      "scope": "provenance",
+      "v1_present": false,
+      "v2_name": "observation_id",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "动作必须绑定观测身份；推理结果必须复制输入 header，禁止推理结束时读取当前 epoch",
+      "spec_ref": "§16.3.1, §16.6"
+    },
+    {
+      "field": "input_capture_interval_ns",
+      "scope": "provenance",
+      "v1_present": false,
+      "v2_name": "input_capture_interval_ns",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "记录输入采集区间；供最早安全截止计算与日志审计",
+      "spec_ref": "§16.3.2, §16.6"
+    },
+    {
+      "field": "earliest_input_safe_deadline_ns",
+      "scope": "provenance",
+      "v1_present": false,
+      "v2_name": "earliest_input_safe_deadline_ns",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "参与 expires_at 计算；不得只用推理完成时刻起算 TTL",
+      "spec_ref": "§16.6, §27.5"
+    },
+    {
+      "field": "quarantine",
+      "scope": "context",
+      "v1_present": false,
+      "v2_name": "header.quarantine",
+      "change_type": "missing_in_v1",
+      "severity": "critical",
+      "migration_action": "碰撞不确定区间内的图像/状态一律隔离；消费端返回 REJECT_QUARANTINE",
+      "spec_ref": "§16.3.1, §27.2"
+    },
+    {
+      "field": "sequence_id",
+      "scope": "identity",
+      "v1_present": false,
+      "v2_name": "sequence_id（ActionEnvelope/header）",
+      "change_type": "missing_in_v1",
+      "severity": "high",
+      "migration_action": "新接纳严格递增（按 boot_id/control_epoch/source）；合法重发不递增且身份/摘要完全一致；乱序与序号复用拒绝",
+      "spec_ref": "§16.6 TTL 规则 5, §27.3"
+    },
+    {
+      "field": "action_id",
+      "scope": "identity",
+      "v1_present": false,
+      "v2_name": "action_id",
+      "change_type": "missing_in_v1",
+      "severity": "high",
+      "migration_action": "新增动作身份；重发必须精确匹配 action_id 与 payload 摘要",
+      "spec_ref": "§16.6"
+    },
+    {
+      "field": "validity_mask",
+      "scope": "envelope",
+      "v1_present": false,
+      "v2_name": "validity_mask",
+      "change_type": "missing_in_v1",
+      "severity": "medium",
+      "migration_action": "新增载荷有效性掩码；不得替代 axis_validity 的语义检查",
+      "spec_ref": "§16.6, §10.4.2"
+    },
+    {
+      "field": "max_age_ms",
+      "scope": "envelope",
+      "v1_present": false,
+      "v2_name": "max_age_ms",
+      "change_type": "missing_in_v1",
+      "severity": "medium",
+      "migration_action": "新增最大允许年龄；与 TTL、COM_OF_LOSS_T 共同冻结",
+      "spec_ref": "§16.6, §27.5"
+    },
+    {
+      "field": "policy_version",
+      "scope": "envelope",
+      "v1_present": false,
+      "v2_name": "policy_version",
+      "change_type": "missing_in_v1",
+      "severity": "medium",
+      "migration_action": "新增模型/策略版本声明；纳入 §27.1 兼容矩阵与 release 冻结",
+      "spec_ref": "§27.1, §28.7"
+    },
+    {
+      "field": "capture/receive/publish_timestamp_ns",
+      "scope": "message_header",
+      "v1_present": false,
+      "v2_name": "三时间戳分离",
+      "change_type": "missing_in_v1",
+      "severity": "high",
+      "migration_action": "新增采集/接收/发布三时刻；年龄只按 capture_timestamp 计算",
+      "spec_ref": "§16.1, §16.3.2"
+    },
+    {
+      "field": "duplicate_context_ownership",
+      "scope": "spec_consistency",
+      "v1_present": false,
+      "v2_name": "同一上下文在 NormalVelocityAction 与 Header/Envelope 各出现一次",
+      "change_type": "duplicate_owner",
+      "severity": "high",
+      "migration_action": "实现前必须确定唯一权威来源（建议 header 唯一持有上下文，action 仅引用）；规范文本需在 SPEC_DISCREPANCIES 登记后统一，禁止两处各自赋值",
+      "spec_ref": "§10.4 vs §16.3/§16.6"
+    }
+  ],
+  "migration_requirements": [
+    {
+      "id": "MIG-01",
+      "requirement": "新增独立 v2 模块与 schema 标识，不修改 v1 行为；v1 33 条回归测试必须继续通过",
+      "spec_ref": "§25, §27.1",
+      "verification": "全新 schema id + schema_version；v1 文件不改语义"
+    },
+    {
+      "id": "MIG-02",
+      "requirement": "v1→v2 转换必须显式传参：system_boot_id、px4_boot_id、localization_epoch、control_epoch、clock_id(clock domain registry)、sync_generation、observation_id、input_capture_interval_ns、earliest_input_safe_deadline_ns、axis_validity、sequence_id",
+      "spec_ref": "§16.3, §16.6, §10.4",
+      "verification": "缺任一项即拒绝转换，禁止用 0/当前时刻/默认字符串补齐"
+    },
+    {
+      "id": "MIG-03",
+      "requirement": "轴有效性不得从速度数值推断：v_xy_valid=false 拒绝水平速度；v_z_valid=false 拒绝整个正常速度动作，1511 默认拒绝",
+      "spec_ref": "§10.4.2, §10.4.3",
+      "verification": "单元测试覆盖四轴组合与 default-deny"
+    },
+    {
+      "id": "MIG-04",
+      "requirement": "TTL 语义改为 expires_at = min(issued_at + action_ttl, earliest_input_safe_deadline_ns)，Sender 不得刷新 issued_at",
+      "spec_ref": "§16.6, §27.5",
+      "verification": "边界测试 now>=expires；慢推理场景测试"
+    },
+    {
+      "id": "MIG-05",
+      "requirement": "序号与重发：ADMIT_NEW 严格递增；SEND_CACHED 要求 action_id/payload 摘要/源时间/上下文完全一致且仍为当前缓存动作，不递增、不续期",
+      "spec_ref": "§16.6 规则 5, §27.3",
+      "verification": "乱序/复用/回滚缓存拒绝测试"
+    },
+    {
+      "id": "MIG-06",
+      "requirement": "时钟域：字符串 clock_id 改为版本化 uint64 域 + sync_generation + 误差界；跨域比较需有效映射，否则拒绝并标 UNKNOWN",
+      "spec_ref": "§16.1, §16.3.2",
+      "verification": "不同类型/域不匹配测试；最坏年龄计算测试"
+    },
+    {
+      "id": "MIG-07",
+      "requirement": "坐标系单向链：策略 4D 归一化 → v2 载荷(BODY_HEADING_FLU 物理单位) → PX4 Adapter(LOCAL_NED, 有效 yaw) ；禁止二次旋转与在 v2 载荷重做 ENU 中间层",
+      "spec_ref": "§10.4.1, §10.4.2, §26.3",
+      "verification": "四航向、vz 符号、yaw-rate 符号 SITL 单测计划（未运行）"
+    },
+    {
+      "id": "MIG-08",
+      "requirement": "Epoch：origin_epoch 拆分为 localization_epoch + control_epoch；任何交接必须递增 control_epoch（含 PENDING→ACTIVE 过程）",
+      "spec_ref": "§16.2, §16.4, §16.8",
+      "verification": "交接期间动作到达测试；旧 owner 发包拒绝测试"
+    },
+    {
+      "id": "MIG-09",
+      "requirement": "PX4 单独重启：生成新 px4_boot_id、作废时间映射/状态缓存/在途动作与推理，递增 epoch 并退出正常控制",
+      "spec_ref": "§16.3.2",
+      "verification": "boot_id 变化拒绝对应动作；与 Companion 重启区分测试"
+    },
+    {
+      "id": "MIG-10",
+      "requirement": "日志最小字段按 §27.7 输出，含 reject_reason 与实际 MAVLink message ID；不得只记录成功发送",
+      "spec_ref": "§27.7",
+      "verification": "日志字段 schema 测试（未实现）"
+    },
+    {
+      "id": "MIG-11",
+      "requirement": "版本矩阵：Schema/Producer/Consumer/Firmware/Model/Map 版本声明，不兼容拒绝启动或显式降级",
+      "spec_ref": "§27.1",
+      "verification": "启动检查测试（未实现）"
+    },
+    {
+      "id": "MIG-12",
+      "requirement": "规范歧义登记：NormalVelocityAction 与 Header/Envelope 的上下文重复、schema_version 字符串 vs uint32，先登记再实现",
+      "spec_ref": "§10.4 vs §16.3/§16.6",
+      "verification": "SPEC_DISCREPANCIES 条目 + 决策记录"
+    }
+  ],
+  "gaps": [
+    {
+      "id": "GAP-R01",
+      "category": "rule",
+      "item": "RMUC 2027 正式比赛规则手册原文（版本、条款号、PDF/SHA256）",
+      "current_status": "未取得：规则中心页面仅返回框架/标题",
+      "evidence_domain": "文档 + 官方网页",
+      "label": "RULE-CHECK",
+      "how_to_close": "用户登录官方论坛下载并归档；按 §24.5 记录 Rule ID/Manual Version/Section/URL/日期",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-R02",
+      "category": "rule",
+      "item": "RMUC 2027 机器人制作规范手册原文",
+      "current_status": "未取得",
+      "evidence_domain": "文档 + 官方网页",
+      "label": "RULE-CHECK",
+      "how_to_close": "同上；至少归档尺寸/重量/桨保/电池相关条款页",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-R03",
+      "category": "rule",
+      "item": "官方规则答疑原文（轻流面板 ID/日期/链接）",
+      "current_status": "未取得；仅有第三方索引与 V2.2 转述口径",
+      "evidence_domain": "文档",
+      "label": "RULE-CHECK",
+      "how_to_close": "逐条导出答疑原文截图/链接，补 Official Q&A ID 与日期",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-R04",
+      "category": "rule",
+      "item": "4Wh 单机供电容量口径与电池计算方式",
+      "current_status": "V2.2 §2.2 转述；官方原文未取得",
+      "evidence_domain": "文档",
+      "label": "RULE-CHECK",
+      "how_to_close": "规则原文条款 + 官方答疑原文双证据；再结合铭牌复算",
+      "owner": "用户/规则"
+    },
+    {
+      "id": "GAP-R05",
+      "category": "rule",
+      "item": "机库 300Wh 台账、触点充电许可、飞行期间可见光通信",
+      "current_status": "V2.2 转述；官方原文未取得",
+      "evidence_domain": "文档",
+      "label": "RULE-CHECK",
+      "how_to_close": "规则手册/制作规范对应章节 + 答疑原文",
+      "owner": "用户/规则"
+    },
+    {
+      "id": "GAP-R06",
+      "category": "rule",
+      "item": "10s 悬停、紧急停桨接收机与安全员、桨叶全包围/柔性要求",
+      "current_status": "V2.2 §2.2 转述；官方原文未取得",
+      "evidence_domain": "文档",
+      "label": "RULE-CHECK",
+      "how_to_close": "规则原文；另需接收机实物与安全员流程",
+      "owner": "用户/规则"
+    },
+    {
+      "id": "GAP-H01",
+      "category": "hardware",
+      "item": "电池铭牌照片/型号/C 倍率/质量/满充电压/化学体系",
+      "current_status": "无照片、无采购单据、无称重",
+      "evidence_domain": "仓库文件（仅型号记录）+ 未验证",
+      "label": "RULE-CHECK",
+      "how_to_close": "提供铭牌正反面照片与称重记录；确认为 LiHV 后按 11.4V×0.35Ah=3.99Wh 复算",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H02",
+      "category": "hardware",
+      "item": "RK3576 核心板/载板型号、BSP、CSI/USB/串口资源",
+      "current_status": "锁定 RK3576，但板卡型号待定",
+      "evidence_domain": "文档",
+      "label": "TBD",
+      "how_to_close": "提供板卡型号/照片/BSP 版本；补 CSI lane 与 NPU 运行记录",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H03",
+      "category": "hardware",
+      "item": "MicoAir743V2-AIO 实板 revision、称重、BEC 带载",
+      "current_status": "仅厂商页面（10g/5V2A 口径，来自历史登记）",
+      "evidence_domain": "仓库文件 + 官方网页",
+      "label": "BASELINE",
+      "how_to_close": "实板称重与照片；记录 revision 丝印",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H04",
+      "category": "hardware",
+      "item": "OV9782/OV9281 模组型号、镜头、FOV、lane 数、帧率、像素格式",
+      "current_status": "仅有芯片级属性；模组/镜头待确认",
+      "evidence_domain": "官方网页 + 文档",
+      "label": "PROVISIONAL",
+      "how_to_close": "提供模组型号与镜头参数；实测帧率/曝光/丢帧",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H05",
+      "category": "hardware",
+      "item": "MTF-02P 接口/电平/协议/时间戳/质量字段/安装倾角",
+      "current_status": "厂商页面存在；具体接口未验证",
+      "evidence_domain": "官方网页 + 文档",
+      "label": "PROVISIONAL",
+      "how_to_close": "按 §4.2.3 12 项接口清单实测；附手册页",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H06",
+      "category": "hardware",
+      "item": "VL53L8CX 模组总线、地址、电压、最大稳定更新率、Zone 布局",
+      "current_status": "芯片级资料；模组待定",
+      "evidence_domain": "官方网页 + 文档",
+      "label": "PROVISIONAL",
+      "how_to_close": "模组手册 + 实测更新率/无效 Zone 统计",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H07",
+      "category": "hardware",
+      "item": "整机重量闭合、推力台数据、功耗曲线（BB22:G0.5）",
+      "current_status": "无实测；160g 仅参考",
+      "evidence_domain": "文档",
+      "label": "UNKNOWN",
+      "how_to_close": "逐件称重+推力台+功率计，形成 G0.5 报告",
+      "owner": "用户/团队"
+    },
+    {
+      "id": "GAP-H08",
+      "category": "hardware",
+      "item": "紧急停桨遥控器/接收机型号与独立链路",
+      "current_status": "仅规则口径，无实物记录",
+      "evidence_domain": "文档",
+      "label": "RULE-CHECK",
+      "how_to_close": "提供接收机型号与接线；验证独立于 RK3576",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-H09",
+      "category": "hardware",
+      "item": "机库触点接口与 DockLink 协议",
+      "current_status": "物理方式 LOCKED；协议 TBD",
+      "evidence_domain": "文档",
+      "label": "TBD",
+      "how_to_close": "提供机库接口定义；先做触点电阻/数据完整性台架",
+      "owner": "用户/团队"
+    },
+    {
+      "id": "GAP-F01",
+      "category": "firmware",
+      "item": "实际刷写 PX4 固件 tag/commit",
+      "current_status": "仅有用户确认 1.17；无 tag/commit/构建 SHA",
+      "evidence_domain": "文档（用户确认转述）",
+      "label": "UNKNOWN",
+      "how_to_close": "PX4 控制台 `ver all`（待验证命令）或 QGC MAVLink Console 输出；自定义构建需 build SHA；归档 .px4/.bin + SHA256",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-F02",
+      "category": "firmware",
+      "item": "PX4 参数全量导出与冻结参数表",
+      "current_status": "无参数文件",
+      "evidence_domain": "未验证",
+      "label": "UNKNOWN",
+      "how_to_close": "QGC 参数导出或 PX4 shell 参数 dump；至少含 COM_OF_LOSS_T/COM_OBL_RC_ACT/COM_POSCTL_NAVL/COM_RC_IN_MODE/EKF2_*",
+      "owner": "用户"
+    },
+    {
+      "id": "GAP-F03",
+      "category": "firmware",
+      "item": "v_xy_valid/v_z_valid 等有效性映射到实际固件消息/健康位",
+      "current_status": "V2.2 §16.9 要求；仓库无映射记录",
+      "evidence_domain": "文档 + 未验证",
+      "label": "UNKNOWN",
+      "how_to_close": "列出实际可用消息（ODOMETRY/ESTIMATOR_STATUS/LOCAL_POSITION_NED 等）、reset counter、time stamp；做故障注入",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-F04",
+      "category": "firmware",
+      "item": "type_mask 1479/1511 在实际固件接收路径的接受与失效行为",
+      "current_status": "仅在 PX4 v1.16.0 源码核对 LOCAL_NED 分支；未做实机/SITL",
+      "evidence_domain": "官方网页（源码）+ 未验证",
+      "label": "PROVISIONAL",
+      "how_to_close": "SITL/HIL 注入 1479/1511，记录模式、推力来源、失效行为",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-F05",
+      "category": "firmware",
+      "item": "PX4 失效参数与模式行为（Offboard Loss / Position Loss / Kill Switch）",
+      "current_status": "仅有官方文档口径；无实机记录",
+      "evidence_domain": "官方网页 + 文档",
+      "label": "UNKNOWN",
+      "how_to_close": "故障注入矩阵 + 参数快照；按 §17.4/§28.5",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-S01",
+      "category": "schema",
+      "item": "v2 合同实现（MessageHeader/ActionEnvelope/NormalVelocityAction/仲裁/所有权/Epoch）",
+      "current_status": "v2 合同已由 G2.6 提交（c730c75，101 passed）；本报告未复跑其测试，Gate 仍自评 INCOMPLETE",
+      "evidence_domain": "仓库文件 + 文档（G2.6 报告）",
+      "label": "IN PROGRESS",
+      "how_to_close": "复核 G2.6 报告与测试证据；按 §28.3 完成板端/固件复检后才可重评 Gate",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-S02",
+      "category": "schema",
+      "item": "上下文/时间字段唯一权威来源（action 与 header 重复）",
+      "current_status": "V2.2 §10.4 与 §16.3/§16.6 重复定义",
+      "evidence_domain": "文档",
+      "label": "TBD",
+      "how_to_close": "SPEC_DISCREPANCIES 登记 + 决策记录后统一",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-S03",
+      "category": "schema",
+      "item": "schema_version 类型冲突（§10.4 字符串 '2.0' vs §16.3 uint32）",
+      "current_status": "文档内部不一致",
+      "evidence_domain": "文档",
+      "label": "TBD",
+      "how_to_close": "规范修订或实现侧统一映射；登记后禁止两边并存",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-S04",
+      "category": "schema",
+      "item": "MAVLink common 字段正文未完整提取（页面体积）",
+      "current_status": "页面可达但正文未取得",
+      "evidence_domain": "官方网页（部分）",
+      "label": "未验证",
+      "how_to_close": "以 MAVLink common.xml 或本地 pymavlink 方言核对 type_mask/字段单位；记录版本",
+      "owner": "团队"
+    },
+    {
+      "id": "GAP-S05",
+      "category": "schema",
+      "item": "v1 origin_epoch 到 localization/control 的语义映射决策",
+      "current_status": "v1 自定义字段，v2 无对应单字段",
+      "evidence_domain": "文档",
+      "label": "TBD",
+      "how_to_close": "ADR 记录映射与失效条件",
+      "owner": "团队"
+    }
+  ],
+  "evidence_index": [
+    {
+      "id": "EV-01",
+      "kind": "仓库文件",
+      "ref": "src/boom_birds/contracts/types.py / frames.py / timebase.py（v1 合同）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-02",
+      "kind": "仓库文件",
+      "ref": "tests/contracts/test_action_contract.py / test_timebase.py（v1 33 条回归来源）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-03",
+      "kind": "仓库文件",
+      "ref": "configs/runtime/default.yaml（PROPOSED 仿真初值）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-04",
+      "kind": "文档",
+      "ref": "docs/design/RMUC2027_UAV_V2_2.md §2/§4/§10.4/§16/§19/§20/§24/§26–28",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-05",
+      "kind": "文档",
+      "ref": "docs/reports/ROUTE_V2_2_REVIEW_20261031.md（V2.2 验收与限制）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-06",
+      "kind": "文档",
+      "ref": "docs/reports/p0/P0_ENVIRONMENT_REPORT.md / UPSTREAM_REVIEW.md / third_party/NOTICE.md",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-07",
+      "kind": "文档",
+      "ref": "docs/planning/10_CURRENT_FACTS_AND_ANALYSIS_20261011.md、01_INPUTS_AND_GATES.md、07_SOURCE_REGISTER.md、09_TARGET_TEAM_AND_INTERCEPTION.md（用户确认/历史模型）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-08",
+      "kind": "文档",
+      "ref": "docs/decisions/ADR-001_PX4_OFFBOARD.md（速度接口与 20Hz/50Hz/150ms PROPOSED）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-09",
+      "kind": "官方网页",
+      "ref": "https://www.robomaster.com/zh-CN/robo/rm?type=rm-process（2027 赛季页，含规则/资料中心入口）",
+      "url": "https://www.robomaster.com/zh-CN/robo/rm?type=rm-process",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-10",
+      "kind": "官方网页",
+      "ref": "https://bbs.robomaster.com/wiki/20204847/1969149?source=7（规则中心页面；仅框架/标题）",
+      "url": "https://bbs.robomaster.com/wiki/20204847/1969149?source=7",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-11",
+      "kind": "官方网页",
+      "ref": "https://bbs.robomaster.com/wiki/20204847/809871?source=7（规则文件目录；仅框架/标题）",
+      "url": "https://bbs.robomaster.com/wiki/20204847/809871?source=7",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-12",
+      "kind": "官方网页",
+      "ref": "https://bbs.robomaster.com/article/1970956（RMU 2027 场地图纸公告；SSR 标题+描述提到规则手册 V1.0.0）",
+      "url": "https://bbs.robomaster.com/article/1970956",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-13",
+      "kind": "官方网页",
+      "ref": "https://docs.px4.io/v1.16/en/flight_modes/offboard（Offboard 模式页，标题可读）",
+      "url": "https://docs.px4.io/v1.16/en/flight_modes/offboard",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-14",
+      "kind": "官方网页",
+      "ref": "https://raw.githubusercontent.com/PX4/PX4-user_guide/main/en/flight_modes/offboard.md（2Hz、>1s、COM_OF_LOSS_T、COM_OBL_RC_ACT、支持消息组合）",
+      "url": "https://raw.githubusercontent.com/PX4/PX4-user_guide/main/en/flight_modes/offboard.md",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-15",
+      "kind": "官方网页",
+      "ref": "https://raw.githubusercontent.com/PX4/PX4-Autopilot/v1.16.0/src/modules/mavlink/mavlink_receiver.cpp（LOCAL_NED type_mask→trajectory_setpoint，忽略字段置 NaN）",
+      "url": "https://raw.githubusercontent.com/PX4/PX4-Autopilot/v1.16.0/src/modules/mavlink/mavlink_receiver.cpp",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-16",
+      "kind": "官方网页",
+      "ref": "https://docs.px4.io/v1.16/zh/config/safety（Safety 配置页，标题可读）",
+      "url": "https://docs.px4.io/v1.16/zh/config/safety",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-17",
+      "kind": "官方网页",
+      "ref": "https://mavlink.io/en/messages/common.html（页面可达，标题可读；正文因体积未完整提取）",
+      "url": "https://mavlink.io/en/messages/common.html",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-18",
+      "kind": "官方网页",
+      "ref": "https://mavlink.io/en/services/offboard_control.html（Offboard Control Protocol；消息清单可读）",
+      "url": "https://mavlink.io/en/services/offboard_control.html",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-19",
+      "kind": "官方网页",
+      "ref": "https://github.com/PX4/PX4-Autopilot/releases/tag/v1.17.0（标题为 v1.17.0 Stable Release）",
+      "url": "https://github.com/PX4/PX4-Autopilot/releases/tag/v1.17.0",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-20",
+      "kind": "官方网页",
+      "ref": "http://www.rock-chips.com/a/en/products/RK35_Series/2024/1212/2033.html（RK3576：4×A72+4×A53 ≤2.2GHz、6TOPS NPU、LPDDR4/4x/5）",
+      "url": "http://www.rock-chips.com/a/en/products/RK35_Series/2024/1212/2033.html",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-21",
+      "kind": "官方网页",
+      "ref": "https://github.com/airockchip/rknn-toolkit2（官方工具链 README：支持 RK3576 Series；最新 v2.5.0）",
+      "url": "https://github.com/airockchip/rknn-toolkit2",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-22",
+      "kind": "官方网页",
+      "ref": "https://www.ovt.com/products/ov9782/ 与 https://www.ovt.com/products/ov9281/（OVT 官方产品页，标题可读）",
+      "url": "https://www.ovt.com/products/ov9782/",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-23",
+      "kind": "官方网页",
+      "ref": "https://www.st.com/en/imaging-and-photonics-solutions/vl53l8cx.html（ST 官方产品页，标题可读）",
+      "url": "https://www.st.com/en/imaging-and-photonics-solutions/vl53l8cx.html",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-24",
+      "kind": "官方网页",
+      "ref": "https://micoair.com/optical_range_sensor_mtf-02p/ 与 https://micoair.com/flightcontroller_micoair743v2_aio_45a/（厂商产品页，标题可读）",
+      "url": "https://micoair.com/optical_range_sensor_mtf-02p/",
+      "retrieved_at": "2026-10-31"
+    },
+    {
+      "id": "EV-25",
+      "kind": "文档+仓库文件",
+      "ref": "docs/reports/g2_6/G2_6_CONTRACTS_REPORT.md 与提交 c730c75/533708e（G2.6 v2 合同实现与证据）",
+      "url": null,
+      "retrieved_at": "2026-10-31"
+    }
+  ],
+  "not_verified": [
+    "PX4 实际刷写固件的 tag/commit、参数导出、状态消息有效性映射：UNKNOWN（仅用户确认 1.17）",
+    "type_mask 1479/1511 在实际固件/SITL 的接受与失效行为：PROVISIONAL，未测试",
+    "RMUC 2027 规则手册/制作规范/答疑原文：RULE-CHECK，未取得",
+    "电池铭牌、化学体系、C 倍率、质量、4Wh 合规：RULE-CHECK/UNKNOWN",
+    "所有传感器模组的接口、帧率、标定：PROVISIONAL",
+    "整机重量、推力、功耗、温度：UNKNOWN（BB22:G0.5 未验收）",
+    "v2 合同实现：已由 G2.6 提交（c730c75/533708e），但本报告未复跑其测试；其 Gate 自评 INCOMPLETE，见 docs/reports/g2_6/G2_6_CONTRACTS_REPORT.md"
+  ],
+  "summary": {
+    "v1_field_count": 9,
+    "message_header_field_count": 17,
+    "action_envelope_field_count": 16,
+    "normal_velocity_action_field_count": 24,
+    "diff_entry_count": 38,
+    "missing_in_v1_count": 28,
+    "renamed_or_semantic_change_count": 9,
+    "duplicate_owner_count": 1,
+    "migration_requirement_count": 12,
+    "gap_count": 25
+  }
+}
