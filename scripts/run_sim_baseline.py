@@ -665,7 +665,7 @@ try:
             from boom_birds.evaluation.comparison import layered_summary
             from boom_birds.evaluation.episodes import (
                 EVALUATION_SCHEMA_ID_V2, MANIFEST_SCHEMA_ID, EpisodeResult,
-                write_manifest)
+                clear_episode_buffers, write_manifest)
             from boom_birds.sim.disturbance import DisturbanceSpec
             from boom_birds.sim.isaac_layered_scene import (
                 DisturbanceInjector, LayeredScene)
@@ -764,6 +764,7 @@ try:
                 for scenario in scenarios:
                     injector.begin(None)
                     env.reset(seed=scenario.seed)
+                    clear_episode_buffers(env)
                     layered_scene.reset_scenario(scenario)
                     start = scenario.start_position_world_m
                     yaw = scenario.start_yaw_rad
@@ -826,7 +827,7 @@ try:
                             expires_at_s=step * dt + ttl_layered, control_epoch=0)
                         control = executor.step(setpoint, truth, step * dt)
                         action = control.to_actuator_action(params)
-                        _, _, terminated, _, _ = env.step(
+                        _, _, terminated, truncated, _ = env.step(
                             torch.tensor([action], dtype=torch.float32,
                                          device=env.device))
                         layered_scene.update(scenario, elapsed)
@@ -839,6 +840,7 @@ try:
                         peak_speed = max(peak_speed, speed)
                         min_z = min(min_z, after.position_world_m[2])
                         env_terminated = bool(terminated[0].item())
+                        env_truncated = bool(truncated[0].item())
                         if evidence.contact:
                             contact_seen = True
                             max_contact_force_n = max(max_contact_force_n,
@@ -882,6 +884,9 @@ try:
                         })
                         if decision.terminated:
                             outcome, reason = decision.outcome, decision.reason
+                            break
+                        if env_truncated:
+                            outcome, reason = 'INVALID', 'ENV_TRUNCATED'
                             break
                         if env_terminated:
                             outcome, reason = 'OUT_OF_BOUNDS', 'ENV_ALTITUDE_LIMIT'

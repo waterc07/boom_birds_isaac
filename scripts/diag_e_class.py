@@ -23,6 +23,11 @@ parser.add_argument('--timeout-s', type=float, default=12.0)
 parser.add_argument('--probe-force-n', type=float, default=0.02)
 parser.add_argument('--probe-torque-nm', type=float, default=0.0002)
 parser.add_argument('--probe-window', default='0.5,1.5')
+parser.add_argument('--entities', choices=['original', 'removed', 'static',
+                                            'no_collision'], default='original')
+parser.add_argument('--substep-contacts', action='store_true')
+parser.add_argument('--legacy-episode-buffer', action='store_true')
+parser.add_argument('--trace-steps', type=int, default=0)
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 app = AppLauncher(args).app
@@ -34,10 +39,12 @@ try:
         QuadcopterEnv, QuadcopterEnvCfg)
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+    from boom_birds.evaluation.episodes import clear_episode_buffers
     from boom_birds.sim.disturbance import DisturbanceSpec
     from boom_birds.sim.guidance import BrakingGuidanceSpec, make_guidance
     from boom_birds.sim.isaac_layered_scene import (
-        DisturbanceInjector, LayeredScene, spawn_layered_assets)
+        BALL_PATH, MOVER_PATH, DisturbanceInjector, LayeredScene,
+        spawn_layered_assets)
     from boom_birds.sim.layered import (
         DegradationSpec, LayeredScenario, layered_scenarios_from_manifest,
         load_layered_manifest)
@@ -68,6 +75,18 @@ try:
             raise RuntimeError('robot spawn config lacks contact sensors')
         cfg.robot.spawn.activate_contact_sensors = True
         spawn_layered_assets()
+        if args.entities == 'no_collision':
+            import omni.usd
+            from pxr import UsdPhysics
+            stage = omni.usd.get_context().get_stage()
+            root = stage.GetPrimAtPath('/World/layered_assets')
+            for prim in ([root] + list(root.GetChildren())):
+                attr = prim.GetAttribute('physics:collisionEnabled')
+                if attr.IsValid():
+                    attr.Set(False)
+                if not prim.HasAPI(UsdPhysics.CollisionAPI):
+                    prim.ApplyAPI(UsdPhysics.CollisionAPI)
+                prim.GetAttribute('physics:collisionEnabled').Set(False)
     env = QuadcopterEnv(cfg)
     env.reset(seed=0)
     try:
@@ -181,6 +200,7 @@ try:
             with torch.inference_mode():
                 for name, _mag, force, torque, yaw in probes:
                     env.reset(seed=0)
+                    clear_episode_buffers(env)
                     reset_pose(0.0, 0.0, 0.75, yaw)
                     spec = None
                     if name != 'probe_none':
@@ -219,6 +239,9 @@ try:
             selected = [scenario_by_id[item] for item in args.scenario_id]
             scene = LayeredScene(env, contact_threshold_n=0.02)
             injector = DisturbanceInjector(env)
+            if args.trace_steps > 0:
+                print('MAX_EPISODE_LENGTH', int(env.max_episode_length),
+                      'episode_length_s', env.cfg.episode_length_s, flush=True)
             metadata['disturbance_com_offset_body_m'] = \
                 getattr(injector, 'com_offset_body_m', None)
             proportional_spec = GuidanceSpec(**{
@@ -235,6 +258,12 @@ try:
                     for disturbance_on in variants:
                         for repeat in range(args.repeats):
                             env.reset(seed=scenario.seed)
+                            if not args.legacy_episode_buffer:
+                                clear_episode_buffers(env)
+                            if args.trace_steps > 0:
+                                print('POST_RESET_BUF', scenario.scenario_id,
+                                      int(env.episode_length_buf[0].item()),
+                                      'max', int(env.max_episode_length), flush=True)
                             scene.reset_scenario(scenario)
                             start = scenario.start_position_world_m
                             reset_pose(start[0], start[1], start[2],
@@ -257,6 +286,13 @@ try:
                             label = '{}{}r{}'.format(
                                 scenario.scenario_id,
                                 '_dist' if disturbance_on else '_nodist', repeat)
+                            if args.entities == 'removed':
+                                scene._park()
+                            elif args.entities == 'static':
+                                scene._place(MOVER_PATH, scenario.kinematic_entity.center_world_m)
+                                scene._place(BALL_PATH, scenario.dynamic_entity.center_world_m)
+                                scene.rigid_views[BALL_PATH].set_velocities(
+                                    scene._tensor([[0.0] * 6]))
                             outcome, reason = 'RUNNING', 'RUNNING'
                             decision = None
                             steps = 0
@@ -279,12 +315,37 @@ try:
                                 control = executor.step(setpoint, truth, step * dt)
                                 action = control.to_actuator_action(params)
                                 before = truth
-                                env.step(torch.tensor([action], dtype=torch.float32,
-                                                      device=env.device))
-                                scene.update(scenario, elapsed)
+                                _obs, _rew, env_terminated, env_truncated, _extras = env.step(
+                                    torch.tensor([action], dtype=torch.float32,
+                                                 device=env.device))
+                                if args.entities == 'original':
+                                    scene.update(scenario, elapsed)
+                                elif args.entities == 'static':
+                                    scene._place(MOVER_PATH,
+                                                 scenario.kinematic_entity.center_world_m)
+                                    scene._place(BALL_PATH,
+                                                 scenario.dynamic_entity.center_world_m)
+                                    scene.rigid_views[BALL_PATH].set_velocities(
+                                        scene._tensor([[0.0] * 6]))
                                 after = read_state()
                                 evidence = scene.contact_evidence(
                                     scenario, after.position_world_m, step=step)
+                                reset_diag = {
+                                    'env_terminated': bool(env_terminated.item()),
+                                    'env_truncated': bool(env_truncated.item()),
+                                    'episode_length_buf': int(
+                                        env.episode_length_buf[0].item()),
+                                    'reset_terminated': bool(
+                                        env.reset_terminated[0].item()),
+                                    'reset_time_outs': bool(
+                                        env.reset_time_outs[0].item()),
+                                }
+                                if args.trace_steps > 0 and step < args.trace_steps:
+                                    print('TRACE', label, step, reset_diag,
+                                          [round(value, 3) for value in
+                                           before.position_world_m],
+                                          [round(value, 3) for value in
+                                           after.position_world_m], flush=True)
                                 speed = math.sqrt(sum(value * value
                                                       for value in after.velocity_world_mps))
                                 env_terminated = False
@@ -335,7 +396,11 @@ try:
                                             evidence.contacting_obstacles),
                                         'outcome': decision.outcome,
                                         'reason': decision.reason,
+                                        **reset_diag,
                                     }))
+                                if env_truncated.item():
+                                    outcome, reason = 'INVALID', 'ENV_TRUNCATED'
+                                    break
                                 if decision.terminated:
                                     outcome, reason = decision.outcome, decision.reason
                                     break

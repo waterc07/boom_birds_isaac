@@ -148,3 +148,17 @@ def write_manifest(run_dir, metadata, *, allow_overwrite=False):
     path.write_text(json.dumps(metadata, indent=2, ensure_ascii=False) + '\n',
                     encoding='utf-8')
     return path
+
+def clear_episode_buffers(env):
+    """Clear the Isaac task's episode bookkeeping before an evaluation episode.
+
+    The Quadcopter task randomises episode_length_buf when all envs are reset
+    (training trick to desynchronise resets). Left as-is, a fresh evaluation
+    episode can inherit a near-limit buffer, time out mid-episode and be
+    silently auto-reset by the env; the runner then records the reset
+    trajectory. Evaluation episodes must start from a clean buffer.
+    """
+    env.episode_length_buf.zero_()
+    env.reset_terminated.zero_()
+    env.reset_time_outs.zero_()
+    return env
