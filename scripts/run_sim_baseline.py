@@ -5,6 +5,7 @@ actuator or flight behaviour. The KINEMATIC scenario writes velocity directly
 and is a reference only; it is never used for dynamics or transfer acceptance.
 """
 import argparse
+import datetime
 import hashlib
 import inspect
 import json
@@ -16,17 +17,19 @@ from pathlib import Path
 from isaaclab.app import AppLauncher
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--task', default='velocity_step', choices=['velocity_step'])
+parser.add_argument('--task', default='velocity_step', choices=['velocity_step', 'reach'])
 parser.add_argument('--config', type=Path, required=True)
 parser.add_argument('--scenarios', default='all')
 parser.add_argument('--seed', type=int, default=0)
 parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--csv', type=Path, default=None)
+parser.add_argument('--episodes', type=int, default=6)
+parser.add_argument('--goal', default='1.5,1.0,0.75')
+parser.add_argument('--timeout-s', type=float, default=20.0)
+parser.add_argument('--code-commit', default='WORKTREE')
 parser.add_argument('--clone-in-usd', action='store_true')
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
-if args.task != 'velocity_step':
-    parser.error('only the velocity_step task is implemented')
 app = AppLauncher(args).app
 
 STAGES = ['imports']
@@ -125,6 +128,137 @@ try:
         def yaw_of(state):
             w, x, y, z = state.quat_wxyz
             return math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+
+        if args.task == 'reach':
+            mark('run reach episodes')
+            from boom_birds.evaluation.episodes import (
+                MANIFEST_SCHEMA_ID, EpisodeResult, summarize, write_manifest)
+            from boom_birds.sim.reach import (
+                OUTCOME_RUNNING, GuidanceSpec, ReachEvaluator, ReachSpec, guidance_command)
+
+            goal = tuple(float(value) for value in args.goal.split(','))
+            if len(goal) != 3:
+                raise RuntimeError('--goal needs three comma separated values')
+            spec = ReachSpec(goal_position_world_m=goal, timeout_s=args.timeout_s)
+            guidance = GuidanceSpec()
+            evaluator = ReachEvaluator(spec, dt)
+            reach_ttl = float(controller_cfg['ttl_s'])
+            started_at = datetime.datetime.now().astimezone().isoformat()
+            results = []
+            episode_rows = []
+            max_steps = int(math.ceil(args.timeout_s / dt))
+            with torch.inference_mode():
+                for episode_index in range(args.episodes):
+                    env.reset(seed=episode_index)
+                    reset_pose(0.0)
+                    state = read_state()
+                    executor.reset(state)
+                    evaluator.reset()
+                    episode_peak = 0.0
+                    outcome, reason = OUTCOME_RUNNING, 'RUNNING'
+                    steps = 0
+                    decision = None
+                    for step in range(max_steps):
+                        elapsed = (step + 1) * dt
+                        state = read_state()
+                        command = guidance_command(
+                            position_world_m=state.position_world_m,
+                            quat_wxyz=state.quat_wxyz,
+                            goal_position_world_m=goal, spec=guidance)
+                        setpoint = VelocitySetpoint(
+                            *command, issued_at_s=step * dt,
+                            expires_at_s=step * dt + reach_ttl, control_epoch=0)
+                        control = executor.step(setpoint, state, step * dt)
+                        action = control.to_actuator_action(params)
+                        _, _, terminated, _, _ = env.step(
+                            torch.tensor([action], dtype=torch.float32, device=env.device))
+                        after = read_state()
+                        speed = math.sqrt(sum(value * value
+                                              for value in after.velocity_world_mps))
+                        episode_peak = max(episode_peak, speed)
+                        env_terminated = bool(terminated[0].item())
+                        collision = (env_terminated
+                                     and after.position_world_m[2] <= spec.collision_height_m)
+                        decision = evaluator.update(
+                            position_world_m=after.position_world_m, speed_mps=speed,
+                            now_s=elapsed, collision=collision)
+                        steps = step + 1
+                        episode_rows.append({
+                            'episode': episode_index, 'step': step,
+                            'time_s': round(elapsed, 4),
+                            'command': list(command),
+                            'position_world_m': list(after.position_world_m),
+                            'velocity_world_mps': list(after.velocity_world_mps),
+                            'yaw_rad': yaw_of(after), 'speed_mps': speed,
+                            'outcome': decision.outcome, 'reason': decision.reason,
+                            'distance_m': decision.distance_m,
+                            'hold_time_s': decision.hold_time_s,
+                        })
+                        if decision.outcome == OUTCOME_RUNNING and env_terminated:
+                            outcome, reason = 'INVALID', 'ENV_TERMINATED_ALTITUDE'
+                            break
+                        if decision.terminated:
+                            outcome, reason = decision.outcome, decision.reason
+                            break
+                    results.append(EpisodeResult(
+                        episode_id='reach-' + str(episode_index), seed=episode_index,
+                        outcome=outcome, steps=steps, duration_s=steps * dt,
+                        final_distance_m=decision.distance_m if decision else float('nan'),
+                        peak_speed_mps=episode_peak, reason=reason))
+            summary = summarize(results)
+            summary.update({
+                'status': 'INCOMPLETE' if args.episodes < 100 else 'PASS',
+                'sample_size_rule': ('INCOMPLETE below the PROPOSED 100-episode '
+                                     'frozen sample in V2.2 20.11'),
+                'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+                'task': 'obstacle_free_reach_stop',
+                'proposed_thresholds': {
+                    'success_distance_m': spec.success_distance_m,
+                    'success_speed_mps': spec.success_speed_mps,
+                    'hold_time_s': spec.hold_time_s,
+                    'timeout_s': spec.timeout_s,
+                    'collision_height_m': spec.collision_height_m,
+                    'arrival_radius_m': guidance.arrival_radius_m,
+                },
+                'frozen_threshold': None,
+                'seeds': list(range(args.episodes)),
+            })
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
+            if args.csv:
+                args.csv.parent.mkdir(parents=True, exist_ok=True)
+                columns = ['episode', 'step', 'time_s', 'command', 'position_world_m',
+                           'velocity_world_mps', 'yaw_rad', 'speed_mps', 'outcome',
+                           'reason', 'distance_m', 'hold_time_s']
+                with args.csv.open('w', encoding='utf-8') as handle:
+                    handle.write(','.join(columns) + '\n')
+                    for row in episode_rows:
+                        handle.write(','.join(json.dumps(row[column])
+                                              for column in columns) + '\n')
+            summary_sha = hashlib.sha256(args.output.read_bytes()).hexdigest()
+            manifest = {
+                'schema_version': MANIFEST_SCHEMA_ID,
+                'code_commit': args.code_commit,
+                'working_tree': 'recorded by the operator when invoking the script',
+                'config_sha256': {
+                    str(args.config): hashlib.sha256(args.config.read_bytes()).hexdigest()},
+                'asset_versions': {
+                    'isaac_sim': '5.1.0.0 (host manifest)',
+                    'task_source_sha256': hashlib.sha256(
+                        Path(inspect.getfile(QuadcopterEnv)).read_bytes()).hexdigest(),
+                    'asset_uri': str(getattr(cfg.robot.spawn, 'usd_path', None)),
+                },
+                'seeds': {'episodes': list(range(args.episodes))},
+                'command': ' '.join(sys.argv),
+                'started_at': started_at,
+                'exit_code': 0,
+                'outputs_sha256': {args.output.name: summary_sha},
+                'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+            }
+            write_manifest(args.output.parent, manifest)
+            print('BOOM_BIRDS_SIM_REACH_' + summary['status'], flush=True)
+            print(json.dumps(summary, indent=2), flush=True)
+            raise SystemExit(0)
 
         scenarios = [
             {'name': 'hover_trim', 'yaw_rad': 0.0,
