@@ -1,0 +1,78 @@
+{
+  "schema_version": "boom_birds.freeze.v1",
+  "frozen_at": "2026-10-31T17:40:00+08:00",
+  "config": "configs\\vehicles\\sim_reference.yaml",
+  "config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+  "final_scenarios": "configs\\scenarios\\final_20261031.json",
+  "scenario_sha256": "0db366b63305335e1503cfda85a933f7cf2f5c003392c21dcd607e8fbb15ffd2",
+  "scenario_count": 30,
+  "tuning_scenarios": "configs\\scenarios\\tuning_20261031.json",
+  "tuning_scenario_sha256": "961024239962cdc13b65c34f6cb65dc00bb85ba1753fb15340dc4f6c545bd070",
+  "guidance": {
+    "proportional": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "gain_per_m": 1.0,
+      "arrival_radius_m": 0.25,
+      "max_yaw_rate_radps": 0.0
+    },
+    "braking": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "deceleration_mps2": 1.2,
+      "velocity_feedback_gain": 0.4,
+      "arrival_radius_m": 0.25
+    }
+  },
+  "thresholds": {
+    "success_distance_m": 0.3,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "timeout_s": 20.0,
+    "collision_height_m": 0.1,
+    "max_abs_position_m": 5.0
+  },
+  "tuning_evidence": [
+    {
+      "summary": "outputs/guidance_compare/tuning_run1/summary.json",
+      "methods": {
+        "proportional": {
+          "success": 8,
+          "total_episodes": 8,
+          "valid_episodes": 8,
+          "mean_time_to_goal_s": 3.1875,
+          "mean_final_distance_m": 0.0238052225507898
+        },
+        "braking": {
+          "success": 8,
+          "total_episodes": 8,
+          "valid_episodes": 8,
+          "mean_time_to_goal_s": 3.31875,
+          "mean_final_distance_m": 0.10428240762485527
+        }
+      }
+    },
+    {
+      "summary": "outputs/guidance_compare/tuning_run2/summary.json",
+      "methods": {
+        "proportional": {
+          "success": 8,
+          "total_episodes": 8,
+          "valid_episodes": 8,
+          "mean_time_to_goal_s": 3.1875,
+          "mean_final_distance_m": 0.0238052225507898
+        },
+        "braking": {
+          "success": 8,
+          "total_episodes": 8,
+          "valid_episodes": 8,
+          "mean_time_to_goal_s": 3.3062500000000004,
+          "mean_final_distance_m": 0.11090968858564122
+        }
+      }
+    }
+  ],
+  "selected_candidate": "braking:a=1.2,k_fb=0.4 (candidate B)",
+  "selection_criterion": "highest valid success rate, then lowest mean time to goal among successes, then lowest mean final distance",
+  "notes": "PROPOSED parameters frozen before the final comparison; not a BB22:G4 acceptance freeze"
+}

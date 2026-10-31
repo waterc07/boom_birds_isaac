@@ -1,0 +1,191 @@
+{
+  "schema_version": "boom_birds.scenarios.v1",
+  "base_seed": 1000,
+  "count": 8,
+  "generated_at": "2026-10-31T17:30:00+08:00",
+  "spec": {
+    "start_xy_range_m": [
+      -0.5,
+      0.5
+    ],
+    "start_z_range_m": [
+      0.65,
+      0.85
+    ],
+    "start_yaw_range_rad": [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    "goal_xy_range_m": [
+      [
+        0.9,
+        1.6
+      ],
+      [
+        -1.0,
+        1.0
+      ]
+    ],
+    "goal_z_range_m": [
+      0.65,
+      0.95
+    ],
+    "min_goal_distance_m": 0.8,
+    "max_goal_distance_m": 2.5
+  },
+  "scenarios": [
+    {
+      "scenario_id": "sc-1000-000",
+      "seed": 1000,
+      "start_position_world_m": [
+        0.2773566427005639,
+        0.16982555955924972,
+        0.6698279207849634
+      ],
+      "start_yaw_rad": -0.9238135238122034,
+      "goal_position_world_m": [
+        1.2275354200305895,
+        0.06936748294175499,
+        0.9434927182737192
+      ],
+      "distance_m": 0.9938933320183965,
+      "bearing_rad": 0.8184793835139752,
+      "distance_bin": "short",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-1000-001",
+      "seed": 1001,
+      "start_position_world_m": [
+        -0.369684649841341,
+        0.17124346823026626,
+        0.7228458831894751
+      ],
+      "start_yaw_rad": -0.0701473207248613,
+      "goal_position_world_m": [
+        1.0421085475138376,
+        0.3323967511427184,
+        0.7182989093620796
+      ],
+      "distance_m": 1.4209683626537244,
+      "bearing_rad": 0.18380332618175288,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-1000-002",
+      "seed": 1002,
+      "start_position_world_m": [
+        -0.04193594170323689,
+        -0.45927760244504257,
+        0.8448579590755657
+      ],
+      "start_yaw_rad": -0.07869014614181458,
+      "goal_position_world_m": [
+        1.2231297045461518,
+        0.4282943116164004,
+        0.7747184448499917
+      ],
+      "distance_m": 1.5469630064765207,
+      "bearing_rad": 0.6904901125660676,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-1000-003",
+      "seed": 1003,
+      "start_position_world_m": [
+        0.38801168800152896,
+        -0.4767065512762283,
+        0.8167012535569093
+      ],
+      "start_yaw_rad": -0.19795338046334443,
+      "goal_position_world_m": [
+        1.4680358688509956,
+        0.8911829772317446,
+        0.9449265134584697
+      ],
+      "distance_m": 1.74757423610505,
+      "bearing_rad": 1.1004101226232708,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-1000-004",
+      "seed": 1004,
+      "start_position_world_m": [
+        -0.3238179244214694,
+        0.198655759576308,
+        0.6717711422624766
+      ],
+      "start_yaw_rad": -2.134625913551651,
+      "goal_position_world_m": [
+        0.9650021918172125,
+        -0.3718758402143192,
+        0.6549616053016002
+      ],
+      "distance_m": 1.409555305376125,
+      "bearing_rad": 1.7178780844191968,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-1000-005",
+      "seed": 1005,
+      "start_position_world_m": [
+        0.15859822353790765,
+        -0.26847896458777076,
+        0.7738860673990707
+      ],
+      "start_yaw_rad": 2.4839857444700515,
+      "goal_position_world_m": [
+        1.5086039459987783,
+        -0.41238612866309543,
+        0.7874614425741648
+      ],
+      "distance_m": 1.357721994135929,
+      "bearing_rad": -2.5901821663591664,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-1000-006",
+      "seed": 1006,
+      "start_position_world_m": [
+        -0.015020202128880888,
+        -0.21961173064127748,
+        0.7157913892701201
+      ],
+      "start_yaw_rad": 3.0425848837563585,
+      "goal_position_world_m": [
+        0.908360896544612,
+        -0.7141984634134295,
+        0.8455931649634013
+      ],
+      "distance_m": 1.0555080248841446,
+      "bearing_rad": 2.7488600097955906,
+      "distance_bin": "short",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-1000-007",
+      "seed": 1007,
+      "start_position_world_m": [
+        -0.42500682005306756,
+        -0.20792129771889123,
+        0.8086885944383541
+      ],
+      "start_yaw_rad": 2.5861157239289874,
+      "goal_position_world_m": [
+        1.1592742457126808,
+        -0.5894355776266731,
+        0.9140243980354034
+      ],
+      "distance_m": 1.6329713018411696,
+      "bearing_rad": -2.8224285705685017,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    }
+  ],
+  "content_sha256": "961024239962cdc13b65c34f6cb65dc00bb85ba1753fb15340dc4f6c545bd070"
+}

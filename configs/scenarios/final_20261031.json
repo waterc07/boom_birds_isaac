@@ -1,0 +1,609 @@
+{
+  "schema_version": "boom_birds.scenarios.v1",
+  "base_seed": 2000,
+  "count": 30,
+  "generated_at": "2026-10-31T17:30:00+08:00",
+  "spec": {
+    "start_xy_range_m": [
+      -0.5,
+      0.5
+    ],
+    "start_z_range_m": [
+      0.65,
+      0.85
+    ],
+    "start_yaw_range_rad": [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    "goal_xy_range_m": [
+      [
+        0.9,
+        1.6
+      ],
+      [
+        -1.0,
+        1.0
+      ]
+    ],
+    "goal_z_range_m": [
+      0.65,
+      0.95
+    ],
+    "min_goal_distance_m": 0.8,
+    "max_goal_distance_m": 2.5
+  },
+  "scenarios": [
+    {
+      "scenario_id": "sc-2000-000",
+      "seed": 2000,
+      "start_position_world_m": [
+        -0.0515429820894715,
+        0.4471637142340874,
+        0.744894665401517
+      ],
+      "start_yaw_rad": 1.6853575040656565,
+      "goal_position_world_m": [
+        1.4536315994996627,
+        0.8682023115766357,
+        0.7262173199008484
+      ],
+      "distance_m": 1.563065214490156,
+      "bearing_rad": -1.4126015853069773,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-001",
+      "seed": 2001,
+      "start_position_world_m": [
+        0.29592084274231534,
+        0.07461634007680662,
+        0.6777953993971426
+      ],
+      "start_yaw_rad": 1.6044411674830616,
+      "goal_position_world_m": [
+        1.0315296648056254,
+        0.639688069394593,
+        0.6938122403646788
+      ],
+      "distance_m": 0.9277299917358194,
+      "bearing_rad": -0.9494130832201089,
+      "distance_bin": "short",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-002",
+      "seed": 2002,
+      "start_position_world_m": [
+        0.15782180888203823,
+        0.21357596916427513,
+        0.7187633909623169
+      ],
+      "start_yaw_rad": -0.48051494866408184,
+      "goal_position_world_m": [
+        1.5758044833072455,
+        -0.5872122536286366,
+        0.888612344655282
+      ],
+      "distance_m": 1.6373103889624865,
+      "bearing_rad": -0.03357271392712491,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-003",
+      "seed": 2003,
+      "start_position_world_m": [
+        0.3503492401027827,
+        0.10429926690274083,
+        0.7686634953348521
+      ],
+      "start_yaw_rad": -0.3596218628728791,
+      "goal_position_world_m": [
+        1.5702149394682894,
+        0.4085843270025167,
+        0.9344464180440073
+      ],
+      "distance_m": 1.2681268468691966,
+      "bearing_rad": 0.604074756076098,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-004",
+      "seed": 2004,
+      "start_position_world_m": [
+        0.23062954054268314,
+        0.41143416597052784,
+        0.746448030612706
+      ],
+      "start_yaw_rad": 2.3942672544867714,
+      "goal_position_world_m": [
+        1.3077286552588894,
+        0.9697057118417709,
+        0.715763096952175
+      ],
+      "distance_m": 1.2135696053402352,
+      "bearing_rad": -1.9160789499758553,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-005",
+      "seed": 2005,
+      "start_position_world_m": [
+        -0.37738024977869444,
+        -0.046648312968262884,
+        0.6605571602868013
+      ],
+      "start_yaw_rad": 0.07655420716551564,
+      "goal_position_world_m": [
+        1.0377479134139302,
+        -0.06375530933310136,
+        0.9176895045707731
+      ],
+      "distance_m": 1.438400990705488,
+      "bearing_rad": -0.08864227351116227,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-006",
+      "seed": 2006,
+      "start_position_world_m": [
+        0.3213491220584125,
+        -0.21692307213529682,
+        0.7785278497721637
+      ],
+      "start_yaw_rad": -1.2558047949242745,
+      "goal_position_world_m": [
+        1.297086048280815,
+        -0.9930429310692268,
+        0.6848962255710934
+      ],
+      "distance_m": 1.2502765556772215,
+      "bearing_rad": 0.5838632880690171,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-007",
+      "seed": 2007,
+      "start_position_world_m": [
+        -0.391904360615554,
+        0.014675128567386841,
+        0.6943206566682334
+      ],
+      "start_yaw_rad": -1.9075877568058945,
+      "goal_position_world_m": [
+        0.9083360132024232,
+        0.8626192663407053,
+        0.6870741143801344
+      ],
+      "distance_m": 1.5523165923437081,
+      "bearing_rad": 2.485468803564145,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-2000-008",
+      "seed": 2008,
+      "start_position_world_m": [
+        -0.35254928733982505,
+        -0.36604471274753336,
+        0.831006343449956
+      ],
+      "start_yaw_rad": -1.607626960581849,
+      "goal_position_world_m": [
+        1.4552964503573174,
+        -0.8234415814797935,
+        0.8927238662679309
+      ],
+      "distance_m": 1.8658314927823971,
+      "bearing_rad": 1.3598205822916647,
+      "distance_bin": "long",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-009",
+      "seed": 2009,
+      "start_position_world_m": [
+        0.06744977461569368,
+        0.3459768111655569,
+        0.7782486410862847
+      ],
+      "start_yaw_rad": 1.8097951950340212,
+      "goal_position_world_m": [
+        1.054396858237252,
+        -0.9871610337282166,
+        0.7455538080254613
+      ],
+      "distance_m": 1.6590328542455055,
+      "bearing_rad": -2.7433151916883465,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-2000-010",
+      "seed": 2010,
+      "start_position_world_m": [
+        -0.1690192235327742,
+        0.3478962631348045,
+        0.6804134404487525
+      ],
+      "start_yaw_rad": -1.3454817822434306,
+      "goal_position_world_m": [
+        1.2760599672328357,
+        -0.1804830895688796,
+        0.8731904874884109
+      ],
+      "distance_m": 1.5506777865864605,
+      "bearing_rad": 0.9949419188541366,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-011",
+      "seed": 2011,
+      "start_position_world_m": [
+        0.09605875886019466,
+        0.38500449668106496,
+        0.7195308047567914
+      ],
+      "start_yaw_rad": 0.6474023276596865,
+      "goal_position_world_m": [
+        1.1985720115732348,
+        -0.7128741550736009,
+        0.8810811325834756
+      ],
+      "distance_m": 1.5642798709973353,
+      "bearing_rad": -1.43069423257862,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-012",
+      "seed": 2012,
+      "start_position_world_m": [
+        0.3907516014017366,
+        -0.4801183372579212,
+        0.6923893048809713
+      ],
+      "start_yaw_rad": 0.4124112004864413,
+      "goal_position_world_m": [
+        1.4324827642675586,
+        0.29357672504197985,
+        0.7685622330747652
+      ],
+      "distance_m": 1.2998500606233947,
+      "bearing_rad": 0.22640233578535973,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-013",
+      "seed": 2013,
+      "start_position_world_m": [
+        0.20984921911989662,
+        -0.15327380369682564,
+        0.7298152514875389
+      ],
+      "start_yaw_rad": 2.4205861594192246,
+      "goal_position_world_m": [
+        1.014568104469495,
+        -0.5303129546547345,
+        0.7128752516550719
+      ],
+      "distance_m": 0.8888295502444126,
+      "bearing_rad": -2.858746627276976,
+      "distance_bin": "short",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-2000-014",
+      "seed": 2014,
+      "start_position_world_m": [
+        0.43679885983628475,
+        0.09418579816438721,
+        0.7103102218898341
+      ],
+      "start_yaw_rad": -2.86646491146883,
+      "goal_position_world_m": [
+        1.241447487790698,
+        -0.7637673796048838,
+        0.6745539855943476
+      ],
+      "distance_m": 1.1767844229710591,
+      "bearing_rad": 2.049016802665731,
+      "distance_bin": "short",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-015",
+      "seed": 2015,
+      "start_position_world_m": [
+        0.13414170830838734,
+        0.21386370345361583,
+        0.840119731884352
+      ],
+      "start_yaw_rad": 0.9228778123669903,
+      "goal_position_world_m": [
+        1.1993499829972025,
+        -0.9255188224194308,
+        0.690015362985889
+      ],
+      "distance_m": 1.5669692180425154,
+      "bearing_rad": -1.741908648770765,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-016",
+      "seed": 2016,
+      "start_position_world_m": [
+        0.2602591465830304,
+        -0.2954733550210473,
+        0.7530467950397545
+      ],
+      "start_yaw_rad": -0.33329524501364105,
+      "goal_position_world_m": [
+        1.0639860128801186,
+        0.6363365349683598,
+        0.6846853700769046
+      ],
+      "distance_m": 1.2324446564096743,
+      "bearing_rad": 1.1923600977037392,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-017",
+      "seed": 2017,
+      "start_position_world_m": [
+        -0.3083286019703909,
+        0.24341483968183042,
+        0.6810863538278662
+      ],
+      "start_yaw_rad": 0.6928289396928227,
+      "goal_position_world_m": [
+        1.438938043304831,
+        -0.8312799276718357,
+        0.7486514310506831
+      ],
+      "distance_m": 2.052431390407193,
+      "bearing_rad": -1.2442571343790134,
+      "distance_bin": "long",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-018",
+      "seed": 2018,
+      "start_position_world_m": [
+        0.029144085950398524,
+        -0.38743309932749836,
+        0.7617991567556701
+      ],
+      "start_yaw_rad": -2.633760020977255,
+      "goal_position_world_m": [
+        1.3458438708135536,
+        0.4394330664514079,
+        0.8648227022702882
+      ],
+      "distance_m": 1.5582104577042832,
+      "bearing_rad": -3.0886831766320215,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-2000-019",
+      "seed": 2019,
+      "start_position_world_m": [
+        -0.49982241559151486,
+        -0.2624605004019881,
+        0.7957466597143615
+      ],
+      "start_yaw_rad": 1.5716784063243265,
+      "goal_position_world_m": [
+        1.1117991328926498,
+        0.8728886168756667,
+        0.6837303610279301
+      ],
+      "distance_m": 1.974560529538929,
+      "bearing_rad": -0.9579545555224822,
+      "distance_bin": "long",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-020",
+      "seed": 2020,
+      "start_position_world_m": [
+        -0.2653157113743655,
+        0.04527741074322733,
+        0.7934472379471986
+      ],
+      "start_yaw_rad": 1.7928465284912365,
+      "goal_position_world_m": [
+        1.200805634717807,
+        0.3196998658656556,
+        0.7889722023368976
+      ],
+      "distance_m": 1.491589592108452,
+      "bearing_rad": -1.60781177361278,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-021",
+      "seed": 2021,
+      "start_position_world_m": [
+        0.4931473272900113,
+        0.12172902123088625,
+        0.7149447958421474
+      ],
+      "start_yaw_rad": 2.840049851387561,
+      "goal_position_world_m": [
+        1.2489857783476501,
+        -0.8715736226416326,
+        0.8767199224959319
+      ],
+      "distance_m": 1.258615548142162,
+      "bearing_rad": 2.5228017950297783,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-2000-022",
+      "seed": 2022,
+      "start_position_world_m": [
+        0.02935560763251377,
+        -0.43184727690602986,
+        0.7372428451445705
+      ],
+      "start_yaw_rad": -0.08911289522069321,
+      "goal_position_world_m": [
+        1.4646559219462287,
+        0.004972749881743788,
+        0.6586975847773644
+      ],
+      "distance_m": 1.502354181276197,
+      "bearing_rad": 0.38454703465333173,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-023",
+      "seed": 2023,
+      "start_position_world_m": [
+        -0.42743810931359427,
+        -0.15876781049194677,
+        0.702644548133053
+      ],
+      "start_yaw_rad": 0.45783716405764263,
+      "goal_position_world_m": [
+        1.054012765541295,
+        0.4179930294056695,
+        0.6531110144812239
+      ],
+      "distance_m": 1.5905355488022759,
+      "bearing_rad": -0.08657005439173826,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-024",
+      "seed": 2024,
+      "start_position_world_m": [
+        -0.43935755111160857,
+        0.4882643037049119,
+        0.6809925551385302
+      ],
+      "start_yaw_rad": 2.401265304843256,
+      "goal_position_world_m": [
+        1.1282119950189613,
+        -0.3129952615758662,
+        0.7482596953143177
+      ],
+      "distance_m": 1.761765035712019,
+      "bearing_rad": -2.87379124888282,
+      "distance_bin": "medium",
+      "bearing_bin": "rear"
+    },
+    {
+      "scenario_id": "sc-2000-025",
+      "seed": 2025,
+      "start_position_world_m": [
+        0.4763718052937612,
+        -0.3584719476105952,
+        0.7355522428782124
+      ],
+      "start_yaw_rad": 2.2235122315493943,
+      "goal_position_world_m": [
+        1.4090904275849339,
+        -0.32336610370359953,
+        0.9030301445764127
+      ],
+      "distance_m": 0.9482854508018129,
+      "bearing_rad": -2.185891796219951,
+      "distance_bin": "short",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-026",
+      "seed": 2026,
+      "start_position_world_m": [
+        0.4354223505758733,
+        0.0868812264815092,
+        0.7126728602503837
+      ],
+      "start_yaw_rad": 1.00318996152376,
+      "goal_position_world_m": [
+        1.536496835027633,
+        0.13168812476590142,
+        0.8519446658051565
+      ],
+      "distance_m": 1.1107516888427686,
+      "bearing_rad": -0.9625186079682315,
+      "distance_bin": "short",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-027",
+      "seed": 2027,
+      "start_position_world_m": [
+        -0.3725770773774595,
+        0.4780502999225247,
+        0.7810403662624443
+      ],
+      "start_yaw_rad": -1.3144874056095384,
+      "goal_position_world_m": [
+        0.9023199380555147,
+        -0.5659217776533025,
+        0.7387769533734205
+      ],
+      "distance_m": 1.6483404668899329,
+      "bearing_rad": 0.6283471401481577,
+      "distance_bin": "medium",
+      "bearing_bin": "front"
+    },
+    {
+      "scenario_id": "sc-2000-028",
+      "seed": 2028,
+      "start_position_world_m": [
+        0.04324856608400851,
+        -0.11192831820427729,
+        0.8111318869025479
+      ],
+      "start_yaw_rad": 0.9116363011372455,
+      "goal_position_world_m": [
+        1.2381703144359941,
+        -0.10366104297826695,
+        0.6977348845715363
+      ],
+      "distance_m": 1.2003187962628463,
+      "bearing_rad": -0.9047177365296619,
+      "distance_bin": "medium",
+      "bearing_bin": "side"
+    },
+    {
+      "scenario_id": "sc-2000-029",
+      "seed": 2029,
+      "start_position_world_m": [
+        -0.35014805806858984,
+        -0.47788021220152144,
+        0.7247757788208822
+      ],
+      "start_yaw_rad": 2.146394845740047,
+      "goal_position_world_m": [
+        1.2801895794718803,
+        0.4834076339963529,
+        0.9211132018210795
+      ],
+      "distance_m": 1.9027936092228048,
+      "bearing_rad": -1.6136389429072602,
+      "distance_bin": "long",
+      "bearing_bin": "side"
+    }
+  ],
+  "content_sha256": "0db366b63305335e1503cfda85a933f7cf2f5c003392c21dcd607e8fbb15ffd2"
+}

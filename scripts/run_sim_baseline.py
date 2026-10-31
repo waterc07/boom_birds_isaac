@@ -17,7 +17,7 @@ from pathlib import Path
 from isaaclab.app import AppLauncher
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--task', default='velocity_step', choices=['velocity_step', 'reach'])
+parser.add_argument('--task', default='velocity_step', choices=['velocity_step', 'reach', 'compare'])
 parser.add_argument('--config', type=Path, required=True)
 parser.add_argument('--scenarios', default='all')
 parser.add_argument('--seed', type=int, default=0)
@@ -27,6 +27,15 @@ parser.add_argument('--episodes', type=int, default=6)
 parser.add_argument('--goal', default='1.5,1.0,0.75')
 parser.add_argument('--timeout-s', type=float, default=20.0)
 parser.add_argument('--code-commit', default='WORKTREE')
+parser.add_argument('--working-tree', default='recorded by the operator')
+parser.add_argument('--scenario-manifest', type=Path, default=None)
+parser.add_argument('--methods', default='proportional')
+parser.add_argument('--run-kind', default='final', choices=['tuning', 'final', 'fault'])
+parser.add_argument('--fault', default='none')
+parser.add_argument('--fault-step', type=int, default=10)
+parser.add_argument('--fault-timeout-s', type=float, default=1.5)
+parser.add_argument('--scenario-limit', type=int, default=0)
+parser.add_argument('--freeze', type=Path, default=None)
 parser.add_argument('--clone-in-usd', action='store_true')
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
@@ -259,6 +268,390 @@ try:
             print('BOOM_BIRDS_SIM_REACH_' + summary['status'], flush=True)
             print(json.dumps(summary, indent=2), flush=True)
             raise SystemExit(0)
+
+        if args.task == 'compare':
+            mark('run guidance comparison')
+            from boom_birds.evaluation.comparison import (
+                method_summary, paired_comparison, stratified_summary)
+            from boom_birds.evaluation.episodes import (
+                MANIFEST_SCHEMA_ID, EpisodeResult, write_manifest)
+            from boom_birds.sim.faults import (
+                COLLISION_CONTACT, COLLISION_FLAG, FAULT_NONE, INVALID_OBSERVATION,
+                TIMEOUT, FaultSpec, apply_observation_fault, collision_flag,
+                effective_timeout_s)
+            from boom_birds.sim.guidance import (
+                METHODS, BrakingGuidanceSpec, make_guidance)
+            from boom_birds.sim.reach import GuidanceSpec, ReachEvaluator, ReachSpec
+            from boom_birds.sim.scenarios import (
+                load_scenario_manifest, scenarios_from_manifest)
+
+            if args.scenario_manifest is None:
+                raise RuntimeError('--scenario-manifest is required for --task compare')
+            scenario_manifest = load_scenario_manifest(args.scenario_manifest)
+            scenarios = list(scenarios_from_manifest(scenario_manifest))
+            if args.scenario_limit > 0:
+                scenarios = scenarios[:args.scenario_limit]
+            requested_methods = [item.strip() for item in args.methods.split(',')
+                                 if item.strip()]
+            for name in requested_methods:
+                if name not in METHODS:
+                    raise RuntimeError('unknown guidance method: ' + name)
+            guidance_cfg = config.get('guidance', {})
+            proportional_spec = GuidanceSpec(**{
+                key: float(value)
+                for key, value in guidance_cfg.get('proportional', {}).items()})
+            braking_spec = BrakingGuidanceSpec(**{
+                key: float(value)
+                for key, value in guidance_cfg.get('braking', {}).items()})
+            guidance_params = {
+                'proportional': {
+                    key: float(value)
+                    for key, value in guidance_cfg.get('proportional', {}).items()},
+                'braking': {
+                    key: float(value)
+                    for key, value in guidance_cfg.get('braking', {}).items()},
+            }
+            threshold_spec = ReachSpec()
+            thresholds = {
+                'success_distance_m': threshold_spec.success_distance_m,
+                'success_speed_mps': threshold_spec.success_speed_mps,
+                'hold_time_s': threshold_spec.hold_time_s,
+                'timeout_s': args.timeout_s,
+                'collision_height_m': threshold_spec.collision_height_m,
+                'max_abs_position_m': threshold_spec.max_abs_position_m,
+            }
+            fault_kinds = [item.strip() for item in args.fault.split(',') if item.strip()]
+            faults = []
+            for kind in fault_kinds:
+                if kind == FAULT_NONE:
+                    faults.append(FaultSpec())
+                elif kind == TIMEOUT:
+                    faults.append(FaultSpec(TIMEOUT, step=0, timeout_s=args.fault_timeout_s))
+                else:
+                    faults.append(FaultSpec(kind, step=args.fault_step))
+            if args.freeze is not None:
+                freeze = json.loads(args.freeze.read_text(encoding='utf-8'))
+                if freeze.get('config_sha256') != hashlib.sha256(
+                        args.config.read_bytes()).hexdigest():
+                    raise RuntimeError('frozen config hash mismatch')
+                if freeze.get('scenario_sha256') != scenario_manifest['content_sha256']:
+                    raise RuntimeError('frozen scenario hash mismatch')
+                if freeze.get('guidance') != guidance_params:
+                    raise RuntimeError('frozen guidance parameters mismatch')
+                if freeze.get('thresholds') != thresholds:
+                    raise RuntimeError('frozen thresholds mismatch')
+                mark('freeze verified')
+
+            def reset_scenario(scenario):
+                start = scenario.start_position_world_m
+                yaw = scenario.start_yaw_rad
+                quat = (math.cos(yaw / 2.0), 0.0, 0.0, math.sin(yaw / 2.0))
+                pose = torch.tensor([[origin[0] + start[0], origin[1] + start[1],
+                                      origin[2] + start[2], quat[0], quat[1],
+                                      quat[2], quat[3]]],
+                                    dtype=torch.float32, device=env.device)
+                env._robot.write_root_pose_to_sim(pose, index)
+                env._robot.write_root_velocity_to_sim(zero_velocity, index)
+
+            original_dones = env._get_dones
+            results = []
+            episode_records = []
+            started_at = datetime.datetime.now().astimezone().isoformat()
+            ttl_compare = float(controller_cfg['ttl_s'])
+            effect_scope = {
+                COLLISION_FLAG: 'CONTRACT_PATH_ONLY',
+                COLLISION_CONTACT: 'PHYSX_CONTACT',
+                TIMEOUT: 'TIMEOUT_TRUNCATION',
+                INVALID_OBSERVATION: 'INTERFACE_LAYER',
+                FAULT_NONE: 'NATURAL',
+            }
+            expected_outcome = {
+                COLLISION_FLAG: 'COLLISION',
+                COLLISION_CONTACT: 'COLLISION',
+                TIMEOUT: 'TIMEOUT',
+                INVALID_OBSERVATION: 'INVALID',
+                FAULT_NONE: 'SUCCESS',
+            }
+            with torch.inference_mode():
+                for fault in faults:
+                    if fault.kind == COLLISION_CONTACT:
+                        env._get_dones = lambda: (
+                            torch.zeros(env.num_envs, dtype=torch.bool,
+                                        device=env.device),
+                            env.episode_length_buf >= env.max_episode_length - 1)
+                    else:
+                        env._get_dones = original_dones
+                    for scenario in scenarios:
+                        for method_name in requested_methods:
+                            env.reset(seed=scenario.seed)
+                            reset_scenario(scenario)
+                            state = read_state()
+                            executor.reset(state)
+                            timeout_s = effective_timeout_s(args.timeout_s, fault)
+                            spec = ReachSpec(
+                                goal_position_world_m=scenario.goal_position_world_m,
+                                timeout_s=timeout_s)
+                            evaluator = ReachEvaluator(spec, dt)
+                            guidance = make_guidance(
+                                method_name, scenario.goal_position_world_m,
+                                proportional_spec=proportional_spec,
+                                braking_spec=braking_spec)
+                            outcome, reason = 'RUNNING', 'RUNNING'
+                            steps = 0
+                            peak_speed = 0.0
+                            min_z = state.position_world_m[2]
+                            last_position = state.position_world_m
+                            decision = None
+                            contact_observed = False
+                            plateau = 0
+                            last_z = None
+                            injected = False
+                            max_steps = int(math.ceil(timeout_s / dt)) + 5
+                            for step in range(max_steps):
+                                elapsed = (step + 1) * dt
+                                state = read_state()
+                                last_position = state.position_world_m
+                                observation = apply_observation_fault(
+                                    state.position_world_m, state.velocity_world_mps,
+                                    state.quat_wxyz, fault, step)
+                                if fault.kind == COLLISION_CONTACT:
+                                    command = (0.0, 0.0, -0.3, 0.0)
+                                else:
+                                    try:
+                                        command = guidance.command(
+                                            position_world_m=observation[0],
+                                            velocity_world_mps=observation[1],
+                                            quat_wxyz=observation[2])
+                                    except ValueError:
+                                        outcome, reason = 'INVALID', 'NONFINITE'
+                                        injected = True
+                                        break
+                                setpoint = VelocitySetpoint(
+                                    *command, issued_at_s=step * dt,
+                                    expires_at_s=step * dt + ttl_compare,
+                                    control_epoch=0)
+                                control = executor.step(setpoint, state, step * dt)
+                                action = control.to_actuator_action(params)
+                                _, _, terminated, _, _ = env.step(
+                                    torch.tensor([action], dtype=torch.float32,
+                                                 device=env.device))
+                                after = read_state()
+                                last_position = after.position_world_m
+                                speed = math.sqrt(sum(value * value
+                                                      for value in after.velocity_world_mps))
+                                peak_speed = max(peak_speed, speed)
+                                min_z = min(min_z, after.position_world_m[2])
+                                steps = step + 1
+                                if fault.kind == COLLISION_CONTACT:
+                                    if (last_z is not None
+                                            and abs(after.position_world_m[2] - last_z) < 1e-5
+                                            and after.position_world_m[2] < 0.2):
+                                        plateau += 1
+                                    else:
+                                        plateau = 0
+                                    last_z = after.position_world_m[2]
+                                    if after.position_world_m[2] <= 0.02 or plateau >= 3:
+                                        contact_observed = True
+                                        decision = evaluator.update(
+                                            position_world_m=after.position_world_m,
+                                            speed_mps=speed, now_s=elapsed,
+                                            collision=True)
+                                        outcome, reason = decision.outcome, decision.reason
+                                        break
+                                    if bool(terminated[0].item()):
+                                        decision = evaluator.update(
+                                            position_world_m=after.position_world_m,
+                                            speed_mps=speed, now_s=elapsed,
+                                            collision=True)
+                                        outcome, reason = decision.outcome, decision.reason
+                                        break
+                                    continue
+                                collision = collision_flag(fault, step) or (
+                                    bool(terminated[0].item())
+                                    and after.position_world_m[2] <= spec.collision_height_m)
+                                decision = evaluator.update(
+                                    position_world_m=after.position_world_m,
+                                    speed_mps=speed, now_s=elapsed, collision=collision)
+                                if decision.terminated:
+                                    outcome, reason = decision.outcome, decision.reason
+                                    break
+                                if bool(terminated[0].item()):
+                                    outcome, reason = 'INVALID', 'ENV_TERMINATED_ALTITUDE'
+                                    break
+                            if outcome == 'RUNNING':
+                                outcome, reason = 'INVALID', 'NO_TERMINAL_OBSERVED'
+                            distance = math.sqrt(sum(
+                                (scenario.goal_position_world_m[i] - last_position[i]) ** 2
+                                for i in range(3)))
+                            if decision is not None and math.isfinite(decision.distance_m):
+                                distance = decision.distance_m
+                            results.append(EpisodeResult(
+                                episode_id='{}-{}-{}'.format(fault.kind, method_name,
+                                                             scenario.scenario_id),
+                                seed=scenario.seed, outcome=outcome, steps=steps,
+                                duration_s=steps * dt, final_distance_m=distance,
+                                peak_speed_mps=peak_speed, reason=reason,
+                                method=method_name, scenario_id=scenario.scenario_id,
+                                distance_bin=scenario.distance_bin,
+                                bearing_bin=scenario.bearing_bin,
+                                time_to_goal_s=(steps * dt if outcome == 'SUCCESS'
+                                                else None)))
+                            episode_records.append({
+                                'run_kind': args.run_kind,
+                                'fault': fault.kind,
+                                'fault_effect_scope': effect_scope[fault.kind],
+                                'expected_outcome': expected_outcome[fault.kind],
+                                'method': method_name,
+                                'scenario_id': scenario.scenario_id,
+                                'seed': scenario.seed,
+                                'outcome': outcome,
+                                'reason': reason,
+                                'steps': steps,
+                                'duration_s': steps * dt,
+                                'time_to_goal_s': (steps * dt if outcome == 'SUCCESS'
+                                                   else None),
+                                'final_distance_m': distance,
+                                'peak_speed_mps': peak_speed,
+                                'min_z_m': min_z,
+                                'contact_observed': contact_observed,
+                                'injected_observation_step': (fault.step if injected
+                                                              else None),
+                                'distance_bin': scenario.distance_bin,
+                                'bearing_bin': scenario.bearing_bin,
+                                'start_position_world_m': list(
+                                    scenario.start_position_world_m),
+                                'start_yaw_rad': scenario.start_yaw_rad,
+                                'goal_position_world_m': list(
+                                    scenario.goal_position_world_m),
+                            })
+            env._get_dones = original_dones
+            fault_kinds_present = sorted({item.kind for item in faults})
+            summary = {
+                'schema_version': 'boom_birds.comparison.v1',
+                'task': 'guidance_compare',
+                'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+                'run_kind': args.run_kind,
+                'methods': requested_methods,
+                'scenarios': {
+                    'manifest': str(args.scenario_manifest),
+                    'content_sha256': scenario_manifest['content_sha256'],
+                    'count': len(scenarios),
+                    'spec': scenario_manifest['spec'],
+                },
+                'guidance_params': guidance_params,
+                'thresholds': thresholds,
+                'faults': fault_kinds_present,
+                'total_episodes': len(results),
+                'episodes_per_method': {name: sum(1 for item in results
+                                                  if item.method == name)
+                                        for name in requested_methods},
+                'natural_performance_rates_excluded': any(
+                    item != FAULT_NONE for item in fault_kinds_present),
+                'proposed_not_frozen': False,
+            }
+            if fault_kinds_present == [FAULT_NONE]:
+                summary['methods_summary'] = {
+                    name: method_summary([item for item in results
+                                          if item.method == name])
+                    for name in requested_methods}
+                summary['strata'] = {
+                    stratum: {
+                        name: stratified_summary(
+                            [item for item in results if item.method == name], stratum)
+                        for name in requested_methods}
+                    for stratum in ('distance_bin', 'bearing_bin')}
+                if len(requested_methods) == 2:
+                    summary['paired'] = paired_comparison(
+                        [item for item in results
+                         if item.method == requested_methods[0]],
+                        [item for item in results
+                         if item.method == requested_methods[1]])
+                    summary['pair_rows'] = [
+                        {
+                            'scenario_id': scenario.scenario_id,
+                            'distance_bin': scenario.distance_bin,
+                            'bearing_bin': scenario.bearing_bin,
+                            **{'{}_{}'.format(name, key): value
+                               for name in requested_methods
+                               for key, value in next(
+                                   (record for record in episode_records
+                                    if record['scenario_id'] == scenario.scenario_id
+                                    and record['method'] == name), {}).items()
+                               if key in ('outcome', 'time_to_goal_s',
+                                          'final_distance_m')},
+                        }
+                        for scenario in scenarios]
+                summary['status'] = ('INCOMPLETE'
+                                     if len(scenarios) * len(requested_methods) < 100
+                                     else 'PASS')
+                summary['sample_size_rule'] = (
+                    'INCOMPLETE below the PROPOSED 100 valid-episode sample in V2.2 20.11')
+            else:
+                fault_summary = {}
+                for kind in fault_kinds_present:
+                    subset = [item for item in results
+                              if item.episode_id.startswith(kind + '-')]
+                    counts = {outcome: sum(1 for item in subset
+                                           if item.outcome == outcome)
+                              for outcome in ('SUCCESS', 'COLLISION', 'TIMEOUT',
+                                              'INVALID')}
+                    fault_summary[kind] = {
+                        'samples': len(subset),
+                        'counts': counts,
+                        'expected_outcome': expected_outcome[kind],
+                        'effect_scope': effect_scope[kind],
+                        'classification_ok': bool(subset) and all(
+                            item.outcome == expected_outcome[kind] for item in subset),
+                        'contact_observed_samples': sum(
+                            1 for item in subset if item.get('contact_observed')),
+                    }
+                summary['fault_summary'] = fault_summary
+                summary['status'] = ('PASS'
+                                     if all(value['classification_ok']
+                                            for value in fault_summary.values())
+                                     else 'FAIL')
+            out_dir = Path(args.output)
+            out_dir.mkdir(parents=True, exist_ok=True)
+            summary_path = out_dir / 'summary.json'
+            episodes_path = out_dir / 'episodes.jsonl'
+            summary_path.write_text(json.dumps(summary, indent=2) + '\n',
+                                    encoding='utf-8')
+            with episodes_path.open('w', encoding='utf-8') as handle:
+                for record in episode_records:
+                    handle.write(json.dumps(record, ensure_ascii=False) + '\n')
+            (out_dir / 'scenario_manifest.json').write_text(
+                json.dumps(scenario_manifest, indent=2, ensure_ascii=False) + '\n',
+                encoding='utf-8')
+            manifest = {
+                'schema_version': MANIFEST_SCHEMA_ID,
+                'code_commit': args.code_commit,
+                'working_tree': args.working_tree,
+                'config_sha256': {
+                    str(args.config): hashlib.sha256(
+                        args.config.read_bytes()).hexdigest()},
+                'asset_versions': {
+                    'isaac_sim': '5.1.0.0 (host manifest)',
+                    'task_source_sha256': hashlib.sha256(
+                        Path(inspect.getfile(QuadcopterEnv)).read_bytes()).hexdigest(),
+                    'asset_uri': str(getattr(cfg.robot.spawn, 'usd_path', None)),
+                },
+                'seeds': {'scenario_seeds': [item.seed for item in scenarios]},
+                'command': ' '.join(sys.argv),
+                'started_at': started_at,
+                'exit_code': 0,
+                'outputs_sha256': {
+                    'summary.json': hashlib.sha256(summary_path.read_bytes()).hexdigest(),
+                    'episodes.jsonl': hashlib.sha256(episodes_path.read_bytes()).hexdigest(),
+                },
+                'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+                'scenario_sha256': scenario_manifest['content_sha256'],
+            }
+            write_manifest(out_dir, manifest)
+            print('BOOM_BIRDS_GUIDANCE_COMPARE_' + summary['status'], flush=True)
+            print(json.dumps({key: value for key, value in summary.items()
+                              if key not in ('strata', 'pair_rows')}, indent=2),
+                  flush=True)
+            raise SystemExit(0 if summary['status'] != 'FAIL' else 1)
 
         scenarios = [
             {'name': 'hover_trim', 'yaw_rad': 0.0,

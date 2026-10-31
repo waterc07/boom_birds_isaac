@@ -30,6 +30,11 @@ class EpisodeResult:
     peak_speed_mps: float
     reason: str = ''
     schema_version: str = EVALUATION_SCHEMA_ID
+    method: str = 'unknown'
+    scenario_id: str = ''
+    distance_bin: str = ''
+    bearing_bin: str = ''
+    time_to_goal_s: float | None = None
 
     def __post_init__(self):
         if not isinstance(self.episode_id, str) or not self.episode_id:
@@ -46,6 +51,14 @@ class EpisodeResult:
             value = getattr(self, name)
             if not isinstance(value, (int, float)) or isinstance(value, bool):
                 raise ValueError(name + ' must be numeric')
+        for name in ('method', 'scenario_id', 'distance_bin', 'bearing_bin'):
+            value = getattr(self, name)
+            if not isinstance(value, str):
+                raise ValueError(name + ' must be a string')
+        if self.time_to_goal_s is not None:
+            value = self.time_to_goal_s
+            if not isinstance(value, (int, float)) or isinstance(value, bool):
+                raise ValueError('time_to_goal_s must be numeric or None')
 
     @property
     def success(self):
