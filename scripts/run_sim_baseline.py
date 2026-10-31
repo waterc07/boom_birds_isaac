@@ -17,7 +17,7 @@ from pathlib import Path
 from isaaclab.app import AppLauncher
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--task', default='velocity_step', choices=['velocity_step', 'reach', 'compare'])
+parser.add_argument('--task', default='velocity_step', choices=['velocity_step', 'reach', 'compare', 'layered'])
 parser.add_argument('--config', type=Path, required=True)
 parser.add_argument('--scenarios', default='all')
 parser.add_argument('--seed', type=int, default=0)
@@ -36,13 +36,20 @@ parser.add_argument('--fault-step', type=int, default=10)
 parser.add_argument('--fault-timeout-s', type=float, default=1.5)
 parser.add_argument('--scenario-limit', type=int, default=0)
 parser.add_argument('--freeze', type=Path, default=None)
+parser.add_argument('--classes', default='all')
+parser.add_argument('--limit-per-class', type=int, default=0)
+parser.add_argument('--min-valid-per-class', type=int, default=20)
+parser.add_argument('--min-valid-total', type=int, default=100)
+parser.add_argument('--contact-threshold-n', type=float, default=0.02)
+parser.add_argument('--require-coverage', action='store_true')
 parser.add_argument('--clone-in-usd', action='store_true')
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 app = AppLauncher(args).app
 
 STAGES = ['imports']
-error_path = (Path(args.output) / 'summary.error.txt' if args.task == 'compare'
+error_path = (Path(args.output) / 'summary.error.txt'
+              if args.task in ('compare', 'layered')
               else args.output.with_suffix('.error.txt'))
 
 
@@ -79,6 +86,14 @@ try:
     if args.clone_in_usd:
         cfg.scene.clone_in_fabric = False
 
+    layered_paths = None
+    if args.task == 'layered':
+        if not hasattr(cfg.robot.spawn, 'activate_contact_sensors'):
+            raise RuntimeError('robot spawn config lacks activate_contact_sensors')
+        cfg.robot.spawn.activate_contact_sensors = True
+        mark('spawn layered assets')
+        from boom_birds.sim.isaac_layered_scene import spawn_layered_assets
+        layered_paths = spawn_layered_assets()
     mark('create env')
     env = QuadcopterEnv(cfg)
     try:
@@ -642,6 +657,364 @@ try:
             print(json.dumps({key: value for key, value in summary.items()
                               if key not in ('strata', 'pair_rows')}, indent=2),
                   flush=True)
+            raise SystemExit(0 if summary['status'] != 'FAIL' else 1)
+
+        if args.task == 'layered':
+            mark('run layered evaluation')
+            from collections import Counter
+            from boom_birds.evaluation.comparison import layered_summary
+            from boom_birds.evaluation.episodes import (
+                EVALUATION_SCHEMA_ID_V2, MANIFEST_SCHEMA_ID, EpisodeResult,
+                write_manifest)
+            from boom_birds.sim.disturbance import DisturbanceSpec
+            from boom_birds.sim.isaac_layered_scene import (
+                DisturbanceInjector, LayeredScene)
+            from boom_birds.sim.layered import (
+                SCENE_CLASSES, layered_scenarios_from_manifest, load_layered_manifest)
+            from boom_birds.sim.observation_interface import ObservationInterface
+            from boom_birds.sim.reach import GuidanceSpec, ReachEvaluator, ReachSpec
+
+            if args.scenario_manifest is None:
+                raise RuntimeError('--scenario-manifest is required for --task layered')
+            if layered_paths is None:
+                raise RuntimeError('layered assets were not spawned')
+            layered_manifest = load_layered_manifest(args.scenario_manifest)
+            by_class = layered_scenarios_from_manifest(layered_manifest)
+            if args.classes.strip() in ('all', ''):
+                classes = list(SCENE_CLASSES)
+            else:
+                classes = [item.strip() for item in args.classes.split(',')
+                           if item.strip()]
+            for name in classes:
+                if name not in SCENE_CLASSES:
+                    raise RuntimeError('unknown scene class: ' + name)
+            scenarios = []
+            for name in classes:
+                subset = list(by_class[name])
+                if args.limit_per_class > 0:
+                    subset = subset[:args.limit_per_class]
+                scenarios.extend(subset)
+            if not scenarios:
+                raise RuntimeError('no layered scenarios selected')
+            requested_methods = [item.strip() for item in args.methods.split(',')
+                                 if item.strip()]
+            from boom_birds.sim.guidance import METHODS, make_guidance
+            for name in requested_methods:
+                if name not in METHODS:
+                    raise RuntimeError('unknown guidance method: ' + name)
+            guidance_cfg = config.get('guidance', {})
+            from boom_birds.sim.guidance import BrakingGuidanceSpec
+            proportional_spec = GuidanceSpec(**{
+                key: float(value)
+                for key, value in guidance_cfg.get('proportional', {}).items()})
+            braking_spec = BrakingGuidanceSpec(**{
+                key: float(value)
+                for key, value in guidance_cfg.get('braking', {}).items()})
+            guidance_params = {
+                'proportional': {key: float(value) for key, value in
+                                 guidance_cfg.get('proportional', {}).items()},
+                'braking': {key: float(value) for key, value in
+                            guidance_cfg.get('braking', {}).items()},
+            }
+            threshold_spec = ReachSpec()
+            thresholds = {
+                'success_distance_m': float(threshold_spec.success_distance_m),
+                'success_speed_mps': float(threshold_spec.success_speed_mps),
+                'hold_time_s': float(threshold_spec.hold_time_s),
+                'timeout_s': float(args.timeout_s),
+                'collision_height_m': float(threshold_spec.collision_height_m),
+                'max_abs_position_m': float(threshold_spec.max_abs_position_m),
+                'contact_threshold_n': float(args.contact_threshold_n),
+                'evaluation_version': EVALUATION_SCHEMA_ID_V2,
+            }
+            if args.freeze is not None:
+                freeze = json.loads(args.freeze.read_text(encoding='utf-8'))
+                if freeze.get('schema_version') != 'boom_birds.layered_freeze.v1':
+                    raise RuntimeError('not a layered freeze file')
+                if freeze.get('config_sha256') != hashlib.sha256(
+                        args.config.read_bytes()).hexdigest():
+                    raise RuntimeError('frozen config hash mismatch')
+                if freeze.get('scenario_sha256') != layered_manifest['content_sha256']:
+                    raise RuntimeError('frozen scenario hash mismatch')
+                if freeze.get('guidance') != guidance_params:
+                    raise RuntimeError('frozen guidance parameters mismatch')
+                if freeze.get('thresholds') != thresholds:
+                    raise RuntimeError('frozen thresholds mismatch')
+                if freeze.get('evaluation_version') != EVALUATION_SCHEMA_ID_V2:
+                    raise RuntimeError('frozen evaluation version mismatch')
+                if freeze.get('class_counts') != {
+                        name: len(by_class[name]) for name in SCENE_CLASSES}:
+                    raise RuntimeError('frozen class counts mismatch')
+                if freeze.get('min_valid_per_class') != args.min_valid_per_class \
+                        or freeze.get('min_valid_total') != args.min_valid_total:
+                    raise RuntimeError('frozen minimum sample settings mismatch')
+                mark('layered freeze verified')
+
+            mark('build layered scene')
+            layered_scene = LayeredScene(
+                env, contact_threshold_n=args.contact_threshold_n)
+            injector = DisturbanceInjector(env)
+            results = []
+            episode_records = []
+            step_records = []
+            started_at = datetime.datetime.now().astimezone().isoformat()
+            ttl_layered = float(controller_cfg['ttl_s'])
+            max_steps = int(math.ceil(args.timeout_s / dt))
+            with torch.inference_mode():
+                for scenario in scenarios:
+                    injector.begin(None)
+                    env.reset(seed=scenario.seed)
+                    layered_scene.reset_scenario(scenario)
+                    start = scenario.start_position_world_m
+                    yaw = scenario.start_yaw_rad
+                    quat = (math.cos(yaw / 2.0), 0.0, 0.0, math.sin(yaw / 2.0))
+                    pose = torch.tensor([[origin[0] + start[0], origin[1] + start[1],
+                                          origin[2] + start[2], quat[0], quat[1],
+                                          quat[2], quat[3]]],
+                                        dtype=torch.float32, device=env.device)
+                    env._robot.write_root_pose_to_sim(pose, index)
+                    env._robot.write_root_velocity_to_sim(zero_velocity, index)
+                    truth = read_state()
+                    executor.reset(truth)
+                    degradation = scenario.degradation
+                    if degradation is None:
+                        from boom_birds.sim.layered import DegradationSpec
+                        degradation = DegradationSpec()
+                    interface = ObservationInterface(degradation, dt,
+                                                     seed=scenario.seed)
+                    spec = ReachSpec(
+                        goal_position_world_m=scenario.goal_position_world_m,
+                        timeout_s=args.timeout_s)
+                    evaluator = ReachEvaluator(spec, dt)
+                    guidance = make_guidance(
+                        'proportional', scenario.goal_position_world_m,
+                        proportional_spec=proportional_spec,
+                        braking_spec=braking_spec)
+                    injector.begin(scenario.disturbance)
+                    outcome, reason = 'RUNNING', 'RUNNING'
+                    steps = 0
+                    peak_speed = 0.0
+                    decision = None
+                    invalid_steps = 0
+                    max_observation_age_s = 0.0
+                    contact_seen = False
+                    contact_step = None
+                    max_contact_force_n = 0.0
+                    min_z = truth.position_world_m[2]
+                    last_position = truth.position_world_m
+                    for step in range(max_steps):
+                        elapsed = (step + 1) * dt
+                        injector.tick(step * dt)
+                        truth = read_state()
+                        last_position = truth.position_world_m
+                        observation = interface.observe(
+                            position=truth.position_world_m,
+                            velocity=truth.velocity_world_mps,
+                            quat_wxyz=truth.quat_wxyz, step_index=step)
+                        max_observation_age_s = max(max_observation_age_s,
+                                                    observation.age_s)
+                        if observation.valid:
+                            command = guidance.command(
+                                position_world_m=observation.position,
+                                velocity_world_mps=observation.velocity,
+                                quat_wxyz=observation.quat_wxyz)
+                        else:
+                            command = (0.0, 0.0, 0.0, 0.0)
+                            invalid_steps += 1
+                        setpoint = VelocitySetpoint(
+                            *command, issued_at_s=step * dt,
+                            expires_at_s=step * dt + ttl_layered, control_epoch=0)
+                        control = executor.step(setpoint, truth, step * dt)
+                        action = control.to_actuator_action(params)
+                        _, _, terminated, _, _ = env.step(
+                            torch.tensor([action], dtype=torch.float32,
+                                         device=env.device))
+                        layered_scene.update(scenario, elapsed)
+                        after = read_state()
+                        evidence = layered_scene.contact_evidence(
+                            scenario, after.position_world_m, step=step)
+                        last_position = after.position_world_m
+                        speed = math.sqrt(sum(value * value
+                                              for value in after.velocity_world_mps))
+                        peak_speed = max(peak_speed, speed)
+                        min_z = min(min_z, after.position_world_m[2])
+                        env_terminated = bool(terminated[0].item())
+                        if evidence.contact:
+                            contact_seen = True
+                            max_contact_force_n = max(max_contact_force_n,
+                                                      evidence.force_n)
+                            if contact_step is None:
+                                contact_step = step
+                        collision = evidence.contact or (
+                            env_terminated
+                            and after.position_world_m[2] <= spec.collision_height_m)
+                        decision = evaluator.update(
+                            position_world_m=after.position_world_m,
+                            speed_mps=speed, now_s=elapsed, collision=collision)
+                        steps = step + 1
+                        step_records.append({
+                            'scenario_id': scenario.scenario_id,
+                            'scene_class': scenario.scene_class,
+                            'seed': scenario.seed,
+                            'method': 'proportional',
+                            'step': step,
+                            'time_s': round(elapsed, 4),
+                            'position_world_m': list(after.position_world_m),
+                            'velocity_world_mps': list(after.velocity_world_mps),
+                            'yaw_rad': yaw_of(after),
+                            'speed_mps': speed,
+                            'quat_wxyz': list(after.quat_wxyz),
+                            'angular_velocity_body_radps': list(
+                                after.angular_velocity_body_radps),
+                            'disturbance_force_body_n': list(injector.last_force),
+                            'disturbance_torque_body_nm': list(injector.last_torque),
+                            'observation_valid': observation.valid,
+                            'observation_age_s': observation.age_s,
+                            'observation_reason': observation.reason,
+                            'command': list(command),
+                            'contact_evidence': evidence.contact,
+                            'contact_force_n': evidence.force_n,
+                            'contacting_obstacles': list(evidence.contacting_obstacles),
+                            'entity_poses': layered_scene.entity_states(),
+                            'outcome': decision.outcome,
+                            'reason': decision.reason,
+                            'distance_m': decision.distance_m,
+                        })
+                        if decision.terminated:
+                            outcome, reason = decision.outcome, decision.reason
+                            break
+                        if env_terminated:
+                            outcome, reason = 'OUT_OF_BOUNDS', 'ENV_ALTITUDE_LIMIT'
+                            break
+                    if outcome == 'RUNNING':
+                        outcome, reason = 'INVALID', 'NO_TERMINAL_OBSERVED'
+                    distance = math.sqrt(sum(
+                        (scenario.goal_position_world_m[i] - last_position[i]) ** 2
+                        for i in range(3)))
+                    if decision is not None and math.isfinite(decision.distance_m):
+                        distance = decision.distance_m
+                    results.append(EpisodeResult(
+                        episode_id='proportional-' + scenario.scenario_id,
+                        seed=scenario.seed, outcome=outcome, steps=steps,
+                        duration_s=steps * dt, final_distance_m=distance,
+                        peak_speed_mps=peak_speed, reason=reason,
+                        schema_version=EVALUATION_SCHEMA_ID_V2,
+                        method='proportional', scenario_id=scenario.scenario_id,
+                        distance_bin=scenario.distance_bin,
+                        bearing_bin=scenario.bearing_bin,
+                        time_to_goal_s=(steps * dt if outcome == 'SUCCESS' else None),
+                        scene_class=scenario.scene_class,
+                        contact_evidence=contact_seen,
+                        contact_force_n=max_contact_force_n,
+                        degradation_invalid_steps=invalid_steps,
+                        disturbance_applied=bool(injector.applied)))
+                    episode_records.append({
+                        'scenario_id': scenario.scenario_id,
+                        'scene_class': scenario.scene_class,
+                        'seed': scenario.seed,
+                        'method': 'proportional',
+                        'outcome': outcome,
+                        'reason': reason,
+                        'steps': steps,
+                        'duration_s': steps * dt,
+                        'time_to_goal_s': (steps * dt if outcome == 'SUCCESS' else None),
+                        'final_distance_m': distance,
+                        'peak_speed_mps': peak_speed,
+                        'min_z_m': min_z,
+                        'contact_evidence': contact_seen,
+                        'contact_force_n': max_contact_force_n,
+                        'contact_step': contact_step,
+                        'degradation_invalid_steps': invalid_steps,
+                        'max_observation_age_s': max_observation_age_s,
+                        'disturbance_applied': bool(injector.applied),
+                        'scenario': scenario.to_dict(),
+                    })
+            summary = layered_summary(
+                results, expected_classes=classes,
+                min_valid_per_class=args.min_valid_per_class)
+            summary.update({
+                'schema_version': 'boom_birds.layered_evaluation.v1',
+                'evaluation_version': EVALUATION_SCHEMA_ID_V2,
+                'task': 'layered_natural_evaluation',
+                'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+                'gate': 'SIMULATION_EVALUATION_EXTENSION_ONLY_NOT_G4',
+                'manifest_sha256': layered_manifest['content_sha256'],
+                'guidance_params': guidance_params,
+                'thresholds': thresholds,
+                'classes_run': classes,
+                'scenario_count': len(scenarios),
+                'class_scenario_counts': {
+                    name: sum(1 for item in scenarios if item.scene_class == name)
+                    for name in classes},
+                'min_valid_per_class': args.min_valid_per_class,
+                'min_valid_total': args.min_valid_total,
+                'scenario_family': 'layered_v2',
+                'class_specs': layered_manifest['class_specs'],
+                'quota': layered_manifest['quota'],
+            })
+            coverage_ok = (
+                not summary['coverage']['classes_below_minimum']
+                and summary['coverage']['total_valid_episodes'] >= args.min_valid_total)
+            summary['coverage_ok'] = bool(coverage_ok)
+            summary['status'] = ('PASS' if coverage_ok and args.require_coverage
+                                 else ('DEBUG_INCOMPLETE' if not args.require_coverage
+                                       else 'FAIL'))
+            out_dir = Path(args.output)
+            out_dir.mkdir(parents=True, exist_ok=True)
+            episodes_path = out_dir / 'episodes.jsonl'
+            steps_path = out_dir / 'steps.jsonl'
+            summary_path = out_dir / 'summary.json'
+            summary_path.write_text(json.dumps(summary, indent=2) + '\n',
+                                    encoding='utf-8')
+            with episodes_path.open('w', encoding='utf-8') as handle:
+                for record in episode_records:
+                    handle.write(json.dumps(record, ensure_ascii=False) + '\n')
+            with steps_path.open('w', encoding='utf-8') as handle:
+                for record in step_records:
+                    handle.write(json.dumps(record, ensure_ascii=False) + '\n')
+            (out_dir / 'scenario_manifest.json').write_text(
+                json.dumps(layered_manifest, indent=2, ensure_ascii=False) + '\n',
+                encoding='utf-8')
+            manifest = {
+                'schema_version': MANIFEST_SCHEMA_ID,
+                'code_commit': args.code_commit,
+                'working_tree': args.working_tree,
+                'config_sha256': {
+                    str(args.config): hashlib.sha256(
+                        args.config.read_bytes()).hexdigest()},
+                'asset_versions': {
+                    'isaac_sim': '5.1.0.0 (host manifest)',
+                    'task_source_sha256': hashlib.sha256(
+                        Path(inspect.getfile(QuadcopterEnv)).read_bytes()).hexdigest(),
+                    'asset_uri': str(getattr(cfg.robot.spawn, 'usd_path', None)),
+                },
+                'seeds': {'scenario_seeds': [item.seed for item in scenarios]},
+                'command': ' '.join(sys.argv),
+                'started_at': started_at,
+                'exit_code': 0,
+                'outputs_sha256': {
+                    'summary.json': hashlib.sha256(summary_path.read_bytes()).hexdigest(),
+                    'episodes.jsonl': hashlib.sha256(episodes_path.read_bytes()).hexdigest(),
+                    'steps.jsonl': hashlib.sha256(steps_path.read_bytes()).hexdigest(),
+                },
+                'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+                'scenario_sha256': layered_manifest['content_sha256'],
+                'evaluation_version': EVALUATION_SCHEMA_ID_V2,
+            }
+            write_manifest(out_dir, manifest)
+            print('BOOM_BIRDS_LAYERED_EVAL_' + summary['status'], flush=True)
+            print(json.dumps({
+                'status': summary['status'],
+                'evaluation_version': EVALUATION_SCHEMA_ID_V2,
+                'coverage': summary['coverage'],
+                'class_metrics': {
+                    name: {key: summary['classes'][name][key] for key in
+                           ('total_episodes', 'valid_episodes', 'invalid_episodes',
+                            'success', 'collision', 'timeout',
+                            'success_rate_of_valid', 'mean_time_to_goal_s',
+                            'collision_with_contact', 'collision_without_contact')}
+                    for name in summary['classes']},
+            }, indent=2), flush=True)
             raise SystemExit(0 if summary['status'] != 'FAIL' else 1)
 
         scenarios = [

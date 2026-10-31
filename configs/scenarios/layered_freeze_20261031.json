@@ -1,0 +1,45 @@
+{
+  "schema_version": "boom_birds.layered_freeze.v1",
+  "frozen_at": "2026-10-31T18:30:00+08:00",
+  "config": "configs\\vehicles\\sim_reference.yaml",
+  "config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+  "scenario_manifest": "configs\\scenarios\\layered_final_20261031.json",
+  "scenario_sha256": "850da12ed072189d0a006f502fc15c47de931ada8ed7c98f52f077c0b2d84414",
+  "evaluation_version": "boom_birds.evaluation.v2",
+  "guidance": {
+    "proportional": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "gain_per_m": 1.0,
+      "arrival_radius_m": 0.25,
+      "max_yaw_rate_radps": 0.0
+    },
+    "braking": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "deceleration_mps2": 1.2,
+      "velocity_feedback_gain": 0.4,
+      "arrival_radius_m": 0.25
+    }
+  },
+  "thresholds": {
+    "success_distance_m": 0.3,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "timeout_s": 12.0,
+    "collision_height_m": 0.1,
+    "max_abs_position_m": 5.0,
+    "contact_threshold_n": 0.02,
+    "evaluation_version": "boom_birds.evaluation.v2"
+  },
+  "class_counts": {
+    "A_clear": 25,
+    "B_static": 25,
+    "C_dynamic": 25,
+    "D_observation": 25,
+    "E_disturbance": 25
+  },
+  "min_valid_per_class": 20,
+  "min_valid_total": 100,
+  "notes": "PROPOSED layered simulation evaluation; not a BB22:G4 acceptance freeze"
+}

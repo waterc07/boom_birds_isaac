@@ -6,6 +6,7 @@ import pytest
 from boom_birds.sim.reach import (
     OUTCOME_COLLISION,
     OUTCOME_INVALID,
+    OUTCOME_OUT_OF_BOUNDS,
     OUTCOME_RUNNING,
     OUTCOME_SUCCESS,
     OUTCOME_TIMEOUT,
@@ -76,7 +77,7 @@ def test_invalid_states_are_explicit_not_zero_filled():
                               speed_mps=0.0, now_s=0.05).reason == 'NONFINITE'
     out_of_bounds = evaluator(max_abs_position_m=2.0).update(
         position_world_m=(3.0, 0.0, 0.75), speed_mps=0.0, now_s=0.05)
-    assert out_of_bounds.outcome == OUTCOME_INVALID
+    assert out_of_bounds.outcome == OUTCOME_OUT_OF_BOUNDS
     assert out_of_bounds.reason == 'OUT_OF_BOUNDS'
 
 

@@ -6,6 +6,8 @@ silently dropped or promoted to success.
 import math
 import statistics
 
+from boom_birds.sim.layered import SCENE_CLASSES
+
 from .episodes import summarize
 
 VALID_STRATA = ('distance_bin', 'bearing_bin')
@@ -162,3 +164,62 @@ def fault_classification_summary(records, *, expected_outcomes, effect_scopes):
                 1 for item in items if item.get('contact_observed')),
         }
     return summary
+
+def layered_summary(results, *, expected_classes=SCENE_CLASSES,
+                    min_valid_per_class=20):
+    """Per-scene-class denominators, contact evidence and coverage checks."""
+    results = list(results)
+    if not results:
+        raise ValueError('cannot summarize an empty result set')
+    for item in results:
+        if item.scene_class not in SCENE_CLASSES:
+            raise ValueError('unknown scene_class: ' + str(item.scene_class))
+    overall = method_summary(results)
+    overall['methods'] = sorted({item.method for item in results})
+    classes = {}
+    present = []
+    for name in SCENE_CLASSES:
+        subset = [item for item in results if item.scene_class == name]
+        if not subset:
+            continue
+        present.append(name)
+        summary = method_summary(subset)
+        summary['collision_with_contact'] = sum(
+            1 for item in subset
+            if item.outcome == 'COLLISION' and item.contact_evidence)
+        summary['collision_without_contact'] = sum(
+            1 for item in subset
+            if item.outcome == 'COLLISION' and not item.contact_evidence)
+        summary['contact_evidence_samples'] = sum(
+            1 for item in subset if item.contact_evidence)
+        summary['degradation_invalid_steps_total'] = sum(
+            item.degradation_invalid_steps for item in subset)
+        summary['disturbance_samples'] = sum(
+            1 for item in subset if item.disturbance_applied)
+        summary['out_of_bounds'] = sum(
+            1 for item in subset if item.outcome == 'OUT_OF_BOUNDS')
+        reasons = {}
+        for item in subset:
+            key = item.reason or 'UNSPECIFIED'
+            reasons[key] = reasons.get(key, 0) + 1
+        summary['termination_reasons'] = dict(sorted(reasons.items()))
+        classes[name] = summary
+    missing = [name for name in expected_classes if name not in present]
+    coverage = {
+        'min_required_valid_per_class': min_valid_per_class,
+        'classes_meeting_minimum': [
+            name for name in present
+            if classes[name]['valid_episodes'] >= min_valid_per_class],
+        'classes_below_minimum': [
+            name for name in present
+            if classes[name]['valid_episodes'] < min_valid_per_class],
+        'missing_classes': missing,
+        'total_valid_episodes': overall['valid_denominator'],
+        'total_meets_requested_minimum': overall['valid_denominator'] >= 100,
+    }
+    return {
+        'overall': overall,
+        'classes': classes,
+        'missing_classes': missing,
+        'coverage': coverage,
+    }

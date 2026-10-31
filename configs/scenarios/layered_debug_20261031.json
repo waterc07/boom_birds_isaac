@@ -1,0 +1,5443 @@
+{
+  "schema_version": "boom_birds.scenarios.v2",
+  "generated_at": "2026-10-31T18:00:00+08:00",
+  "spec": {
+    "start_xy_range_m": [
+      -0.5,
+      0.5
+    ],
+    "start_z_range_m": [
+      0.65,
+      0.85
+    ],
+    "start_yaw_range_rad": [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    "distance_range_m": [
+      0.8,
+      2.0
+    ],
+    "vertical_offset_range_m": [
+      -0.15,
+      0.15
+    ],
+    "goal_z_range_m": [
+      0.6,
+      1.0
+    ],
+    "position_noise_range_m": [
+      0.02,
+      0.08
+    ],
+    "velocity_noise_range_mps": [
+      0.02,
+      0.06
+    ],
+    "dropout_probability_range": [
+      0.05,
+      0.2
+    ],
+    "disturbance_force_range_n": [
+      0.004,
+      0.012
+    ],
+    "disturbance_torque_range_nm": [
+      0.0,
+      0.0001
+    ],
+    "disturbance_start_range_s": [
+      0.2,
+      0.5
+    ],
+    "disturbance_duration_range_s": [
+      0.2,
+      0.5
+    ],
+    "delay_steps_choices": [
+      1,
+      2,
+      3
+    ],
+    "max_stale_s": 0.3
+  },
+  "class_specs": {
+    "A_clear": {
+      "description": "Obstacle-free randomized reach/stop",
+      "capability_requirement": "velocity outer loop + stop at goal",
+      "input_permission": "ORACLE position/velocity/attitude",
+      "expected_outcomes": "high success rate; short time to goal",
+      "boundary": "does not demonstrate perception or obstacle avoidance"
+    },
+    "B_static": {
+      "description": "Two static cuboid obstacles blocking the direct path",
+      "capability_requirement": "same baseline; no avoidance capability",
+      "input_permission": "ORACLE position/velocity/attitude",
+      "expected_outcomes": "possible PhysX collisions; collision rate measures limits",
+      "boundary": "not an obstacle-avoidance acceptance test"
+    },
+    "C_dynamic": {
+      "description": "One kinematic crossing entity and one dynamic sphere",
+      "capability_requirement": "same baseline; no dynamic avoidance",
+      "input_permission": "ORACLE position/velocity/attitude + entity poses",
+      "expected_outcomes": "possible collisions and timing failures",
+      "boundary": "kinematic and dynamic entities are recorded separately"
+    },
+    "D_observation": {
+      "description": "Controller input noise, delay and dropout; evaluation uses truth",
+      "capability_requirement": "same baseline with degraded input interface",
+      "input_permission": "degraded ORACLE-derived observation; eval uses raw truth",
+      "expected_outcomes": "success rate/time degradation, stale-input holds",
+      "boundary": "not a real camera or perception-pipeline validation"
+    },
+    "E_disturbance": {
+      "description": "Body-frame external force/torque window applied through the wrench interface",
+      "capability_requirement": "same baseline with physical disturbance",
+      "input_permission": "ORACLE position/velocity/attitude",
+      "expected_outcomes": "tracking deviation, possible timeout",
+      "boundary": "not a wind-field model; forces are body-frame, in N and N*m"
+    }
+  },
+  "quota": {
+    "distance_bins": [
+      "near",
+      "mid",
+      "far"
+    ],
+    "bearing_bins": [
+      "front",
+      "side",
+      "rear"
+    ],
+    "quota": [
+      [
+        3,
+        3,
+        2
+      ],
+      [
+        3,
+        3,
+        2
+      ],
+      [
+        3,
+        3,
+        3
+      ]
+    ]
+  },
+  "classes": {
+    "A_clear": [
+      {
+        "scenario_id": "A_clear-5000-000",
+        "scene_class": "A_clear",
+        "seed": 5000,
+        "start_position_world_m": [
+          -0.2669345262202476,
+          0.28301446435408883,
+          0.7410610260230668
+        ],
+        "start_yaw_rad": 0.010648470727990134,
+        "goal_position_world_m": [
+          0.8676719662956471,
+          0.30393452483152666,
+          0.6940156105231989
+        ],
+        "distance_m": 1.1357741029399975,
+        "bearing_rad": 0.0077876041548515795,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-001",
+        "scene_class": "A_clear",
+        "seed": 5001,
+        "start_position_world_m": [
+          0.15896487123871372,
+          0.3731670916172163,
+          0.7888989890813468
+        ],
+        "start_yaw_rad": -1.2662968839644468,
+        "goal_position_world_m": [
+          0.9375283843597862,
+          -0.5116827387417854,
+          0.8268631681902721
+        ],
+        "distance_m": 1.1792207787964029,
+        "bearing_rad": 0.4170889503632387,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-002",
+        "scene_class": "A_clear",
+        "seed": 5002,
+        "start_position_world_m": [
+          0.01430351851721412,
+          0.21126229835568777,
+          0.8167738006514191
+        ],
+        "start_yaw_rad": 1.1297229516040135,
+        "goal_position_world_m": [
+          0.608551908434103,
+          0.7632663679678019,
+          0.9020052721858697
+        ],
+        "distance_m": 0.8155391134256398,
+        "bearing_rad": -0.38116240593088324,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-003",
+        "scene_class": "A_clear",
+        "seed": 5003,
+        "start_position_world_m": [
+          0.33482438470927567,
+          0.3009470675220175,
+          0.6941929649942327
+        ],
+        "start_yaw_rad": 2.7619639680860875,
+        "goal_position_world_m": [
+          0.15563365628214249,
+          -0.48033432987605673,
+          0.7913563719325911
+        ],
+        "distance_m": 0.8074346207108061,
+        "bearing_rad": 1.7249693851713523,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-004",
+        "scene_class": "A_clear",
+        "seed": 5004,
+        "start_position_world_m": [
+          -0.25153005617281443,
+          -0.3072408333958362,
+          0.7843565269970948
+        ],
+        "start_yaw_rad": -2.3758355442504238,
+        "goal_position_world_m": [
+          0.06764621074047938,
+          -1.063663806047836,
+          0.6615820522164316
+        ],
+        "distance_m": 0.830134190702962,
+        "bearing_rad": 1.2043276864887156,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-005",
+        "scene_class": "A_clear",
+        "seed": 5005,
+        "start_position_world_m": [
+          0.011824494284117026,
+          -0.07249505868854367,
+          0.829138589585241
+        ],
+        "start_yaw_rad": 1.2999615761386636,
+        "goal_position_world_m": [
+          -0.7182551007161335,
+          0.4502134305179153,
+          0.9001535484606633
+        ],
+        "distance_m": 0.9007127755884817,
+        "bearing_rad": 1.2202731844863959,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-006",
+        "scene_class": "A_clear",
+        "seed": 5006,
+        "start_position_world_m": [
+          -0.26217504717257933,
+          -0.16585566749074843,
+          0.7787190558973277
+        ],
+        "start_yaw_rad": 2.719995836016957,
+        "goal_position_world_m": [
+          0.6773945180594803,
+          0.05726524395792798,
+          0.7090764011752295
+        ],
+        "distance_m": 0.9682065938593845,
+        "bearing_rad": -2.4868430969813047,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-007",
+        "scene_class": "A_clear",
+        "seed": 5007,
+        "start_position_world_m": [
+          -0.2423900159565292,
+          0.2765707879432111,
+          0.8421585823465458
+        ],
+        "start_yaw_rad": -2.6590425855193045,
+        "goal_position_world_m": [
+          0.5642731902500532,
+          0.6524071988967304,
+          0.7899560273157413
+        ],
+        "distance_m": 0.8914503030442303,
+        "bearing_rad": 3.0950522448472446,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-008",
+        "scene_class": "A_clear",
+        "seed": 5008,
+        "start_position_world_m": [
+          0.38949161255585707,
+          -0.2918028428769941,
+          0.7781640661588425
+        ],
+        "start_yaw_rad": -1.6385730450285565,
+        "goal_position_world_m": [
+          0.07546729686752235,
+          -1.548497696284688,
+          0.7113412930955471
+        ],
+        "distance_m": 1.2970576349664575,
+        "bearing_rad": -0.1770900533723493,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-009",
+        "scene_class": "A_clear",
+        "seed": 5009,
+        "start_position_world_m": [
+          0.2770160622735357,
+          0.01948966162420318,
+          0.8331156834046213
+        ],
+        "start_yaw_rad": 1.5880198726625974,
+        "goal_position_world_m": [
+          -0.6878447059682825,
+          1.0445076894175336,
+          0.9344976976279945
+        ],
+        "distance_m": 1.4113456600710927,
+        "bearing_rad": 0.7379522025823446,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-010",
+        "scene_class": "A_clear",
+        "seed": 5010,
+        "start_position_world_m": [
+          -0.13607682894391393,
+          -0.36132167961178463,
+          0.7772589386808538
+        ],
+        "start_yaw_rad": -0.20958933956770087,
+        "goal_position_world_m": [
+          1.2333283309628156,
+          -0.39032376905016103,
+          0.7075995788462771
+        ],
+        "distance_m": 1.3714824240884498,
+        "bearing_rad": 0.18841390126791624,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-011",
+        "scene_class": "A_clear",
+        "seed": 5011,
+        "start_position_world_m": [
+          -0.006162714150678927,
+          -0.16176637526424487,
+          0.7031238467744793
+        ],
+        "start_yaw_rad": 2.1323003058056207,
+        "goal_position_world_m": [
+          -1.1426808559939405,
+          -0.9964886415573696,
+          0.8387035898115213
+        ],
+        "distance_m": 1.4166215497818677,
+        "bearing_rad": 1.642770677149001,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-012",
+        "scene_class": "A_clear",
+        "seed": 5012,
+        "start_position_world_m": [
+          0.17952042812512414,
+          -0.1761540181435236,
+          0.7076882015838798
+        ],
+        "start_yaw_rad": 1.7841485077754928,
+        "goal_position_world_m": [
+          -1.2295263801649134,
+          -0.5957366055578182,
+          0.6844531339539687
+        ],
+        "distance_m": 1.470374892325553,
+        "bearing_rad": 1.6468608030240692,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-013",
+        "scene_class": "A_clear",
+        "seed": 5013,
+        "start_position_world_m": [
+          -0.18714950278770737,
+          0.2675220682321814,
+          0.8175533206615553
+        ],
+        "start_yaw_rad": -0.8420371484512175,
+        "goal_position_world_m": [
+          0.9971176399861102,
+          0.7895079543164703,
+          0.9363577916281309
+        ],
+        "distance_m": 1.2996431945139826,
+        "bearing_rad": 1.2571864424736723,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-014",
+        "scene_class": "A_clear",
+        "seed": 5014,
+        "start_position_world_m": [
+          -0.1822849734134515,
+          0.035302501429256616,
+          0.6545846236974805
+        ],
+        "start_yaw_rad": 2.132988580210723,
+        "goal_position_world_m": [
+          0.5618642848447238,
+          -1.343006533629859,
+          0.6070653362839917
+        ],
+        "distance_m": 1.5670839152285585,
+        "bearing_rad": 3.0744563551561592,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-015",
+        "scene_class": "A_clear",
+        "seed": 5015,
+        "start_position_world_m": [
+          -0.3209625342590283,
+          -0.3169486375354299,
+          0.685455226867334
+        ],
+        "start_yaw_rad": 2.9764293134375723,
+        "goal_position_world_m": [
+          0.8696136165627906,
+          -0.6793325652692929,
+          0.8098951360936136
+        ],
+        "distance_m": 1.2507113867690518,
+        "bearing_rad": 3.0112885094140553,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-016",
+        "scene_class": "A_clear",
+        "seed": 5016,
+        "start_position_world_m": [
+          -0.24951131503785018,
+          -0.2941859941161661,
+          0.6922063360885936
+        ],
+        "start_yaw_rad": -0.16147158999998368,
+        "goal_position_world_m": [
+          1.5006209089006224,
+          0.24427112019659025,
+          0.774828729239216
+        ],
+        "distance_m": 1.8329553527218772,
+        "bearing_rad": 0.45994697624185554,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-017",
+        "scene_class": "A_clear",
+        "seed": 5017,
+        "start_position_world_m": [
+          0.4992262095700787,
+          -0.15245533188866156,
+          0.7720751242972763
+        ],
+        "start_yaw_rad": 2.7973449297677275,
+        "goal_position_world_m": [
+          -1.3576558579672344,
+          0.36532450494011526,
+          0.8916120055742299
+        ],
+        "distance_m": 1.9314233192527999,
+        "bearing_rad": 0.07231159364546857,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-018",
+        "scene_class": "A_clear",
+        "seed": 5018,
+        "start_position_world_m": [
+          -0.028088381020298314,
+          -0.3756946869622815,
+          0.7962809988657643
+        ],
+        "start_yaw_rad": 2.104707035544723,
+        "goal_position_world_m": [
+          -1.3581413611836108,
+          0.9899928286686883,
+          0.8070090734975519
+        ],
+        "distance_m": 1.9063731040845346,
+        "bearing_rad": 0.23826939446044948,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-019",
+        "scene_class": "A_clear",
+        "seed": 5019,
+        "start_position_world_m": [
+          -0.34686164189880664,
+          -0.07475889985381778,
+          0.821872825138577
+        ],
+        "start_yaw_rad": -2.7256537111799677,
+        "goal_position_world_m": [
+          -0.0908637502593384,
+          -2.021612856683529,
+          0.8971322750006125
+        ],
+        "distance_m": 1.9650545118497076,
+        "bearing_rad": 1.285600408087015,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-020",
+        "scene_class": "A_clear",
+        "seed": 5020,
+        "start_position_world_m": [
+          0.3836525080498113,
+          0.3497213543328297,
+          0.6839808540579937
+        ],
+        "start_yaw_rad": -1.6984264169318166,
+        "goal_position_world_m": [
+          1.7089496298212428,
+          -1.0156279328691384,
+          0.6346283339164719
+        ],
+        "distance_m": 1.9034250203995118,
+        "bearing_rad": 0.8981436490833665,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-021",
+        "scene_class": "A_clear",
+        "seed": 5021,
+        "start_position_world_m": [
+          -0.21731429944868208,
+          -0.4601780969203486,
+          0.7786855226315522
+        ],
+        "start_yaw_rad": -0.5591790591505519,
+        "goal_position_world_m": [
+          1.7079197565438056,
+          0.029440699585017216,
+          0.6568291098151088
+        ],
+        "distance_m": 1.9902516729271047,
+        "bearing_rad": 0.8082161709955711,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-022",
+        "scene_class": "A_clear",
+        "seed": 5022,
+        "start_position_world_m": [
+          0.07951624267549973,
+          0.23885085985420884,
+          0.7777231172467473
+        ],
+        "start_yaw_rad": -2.3893902461683494,
+        "goal_position_world_m": [
+          1.199202288623964,
+          1.616165733221163,
+          0.8532170201762326
+        ],
+        "distance_m": 1.7766238857082448,
+        "bearing_rad": -3.0055853788048146,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-023",
+        "scene_class": "A_clear",
+        "seed": 5023,
+        "start_position_world_m": [
+          0.1205521418734461,
+          -0.32538729644619657,
+          0.8186605312954582
+        ],
+        "start_yaw_rad": 0.19018432941364694,
+        "goal_position_world_m": [
+          -0.8242548327508562,
+          -1.6270781688453546,
+          0.6757035358897137
+        ],
+        "distance_m": 1.6147743028427985,
+        "bearing_rad": -2.3888330197869423,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "A_clear-5000-024",
+        "scene_class": "A_clear",
+        "seed": 5024,
+        "start_position_world_m": [
+          0.14466521195071347,
+          -0.005070268646034215,
+          0.7906901158733748
+        ],
+        "start_yaw_rad": -1.1503509545819186,
+        "goal_position_world_m": [
+          -1.3224643943301986,
+          0.811699768970766,
+          0.730937789345184
+        ],
+        "distance_m": 1.6802240673493714,
+        "bearing_rad": -2.49922418584193,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      }
+    ],
+    "B_static": [
+      {
+        "scenario_id": "B_static-6000-000",
+        "scene_class": "B_static",
+        "seed": 6000,
+        "start_position_world_m": [
+          -0.10218556461248385,
+          -0.33997192826931777,
+          0.6737646006518597
+        ],
+        "start_yaw_rad": 0.7301399265014377,
+        "goal_position_world_m": [
+          0.09633951490576242,
+          0.7454021561654095,
+          0.6629610384165302
+        ],
+        "distance_m": 1.1034336533372637,
+        "bearing_rad": 0.6597468428934965,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.041186001295353845,
+              0.18020905240686363,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.04856728267775858,
+              0.06326204466023123,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-001",
+        "scene_class": "B_static",
+        "seed": 6001,
+        "start_position_world_m": [
+          0.13102105709598966,
+          -0.29672652237819863,
+          0.675101111030262
+        ],
+        "start_yaw_rad": -0.4590201983468578,
+        "goal_position_world_m": [
+          0.914190319004593,
+          -0.6819293425606825,
+          0.6537894729212961
+        ],
+        "distance_m": 0.8730346450135258,
+        "bearing_rad": 0.001912773390121747,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.48738416474211466,
+              -0.4674993538760437,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.4823377561124971,
+              -0.4326403825447838,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-002",
+        "scene_class": "B_static",
+        "seed": 6002,
+        "start_position_world_m": [
+          0.028094219061866044,
+          0.25211356474331237,
+          0.760186182903005
+        ],
+        "start_yaw_rad": -0.6441788275276448,
+        "goal_position_world_m": [
+          0.9001237644380564,
+          -0.0807030567559256,
+          0.9055675231838373
+        ],
+        "distance_m": 0.9446365256843625,
+        "bearing_rad": 0.27958425278715127,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.4088803939333886,
+              0.1105221441373626,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.5044137600397544,
+              0.08367960585516569,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-003",
+        "scene_class": "B_static",
+        "seed": 6003,
+        "start_position_world_m": [
+          0.12164043501099897,
+          -0.025267556595287677,
+          0.7276127174988871
+        ],
+        "start_yaw_rad": 1.2240734841303658,
+        "goal_position_world_m": [
+          -0.8235893695544175,
+          0.08505384524318031,
+          0.7276997270858008
+        ],
+        "distance_m": 0.9516460490713174,
+        "bearing_rad": 1.8013310012202262,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.3214127194841831,
+              -0.00796187655125754,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.4369177833490094,
+              0.07500074185054616,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-004",
+        "scene_class": "B_static",
+        "seed": 6004,
+        "start_position_world_m": [
+          0.428049693744432,
+          0.20686276494847344,
+          0.809057111688767
+        ],
+        "start_yaw_rad": -2.1359853680183827,
+        "goal_position_world_m": [
+          1.018917986718456,
+          -0.5336185247471014,
+          0.7185742357420479
+        ],
+        "distance_m": 0.9516433317534716,
+        "bearing_rad": 1.2386797624674681,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.7166384667623544,
+              -0.18915535452246118,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.6663268851306542,
+              -0.10005733840606233,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-005",
+        "scene_class": "B_static",
+        "seed": 6005,
+        "start_position_world_m": [
+          -0.3343856277896641,
+          -0.2503894856638751,
+          0.6620783251106486
+        ],
+        "start_yaw_rad": 2.5855073292027413,
+        "goal_position_world_m": [
+          -1.1974680804616953,
+          -0.621755291661817,
+          0.6872154572939878
+        ],
+        "distance_m": 0.9399232720755842,
+        "bearing_rad": 0.962418383148042,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.8130051028263101,
+              -0.45324616515956595,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.7657838302809384,
+              -0.45833235171562936,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-006",
+        "scene_class": "B_static",
+        "seed": 6006,
+        "start_position_world_m": [
+          0.15109260224112908,
+          0.32362886426610593,
+          0.8086614145513888
+        ],
+        "start_yaw_rad": 0.30493718048406304,
+        "goal_position_world_m": [
+          -0.353748501141533,
+          -0.48028456597234714,
+          0.6889259160640971
+        ],
+        "distance_m": 0.9568061102336147,
+        "bearing_rad": -2.436472470760581,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.06378085058421079,
+              -0.043116162564103735,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.027828442490197745,
+              -0.010008461531148614,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-007",
+        "scene_class": "B_static",
+        "seed": 6007,
+        "start_position_world_m": [
+          -0.1277228535387478,
+          -0.3445098081326581,
+          0.7561154990403105
+        ],
+        "start_yaw_rad": 3.0572187175872214,
+        "goal_position_world_m": [
+          0.6064985762095034,
+          -0.6857731818804051,
+          0.7870590327252975
+        ],
+        "distance_m": 0.8102464442625926,
+        "bearing_rad": 2.7908764490368325,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.22151659521495343,
+              -0.4573101258658845,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.26424607245556964,
+              -0.5363878462263284,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-008",
+        "scene_class": "B_static",
+        "seed": 6008,
+        "start_position_world_m": [
+          0.06785625643176119,
+          -0.4604972570212724,
+          0.8439771699930416
+        ],
+        "start_yaw_rad": -0.5916804680306926,
+        "goal_position_world_m": [
+          0.7079792841354735,
+          -1.7757413165592941,
+          0.7725312753539751
+        ],
+        "distance_m": 1.464489311196022,
+        "bearing_rad": -0.5261685949964813,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.38743990703337916,
+              -1.0644243626297405,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.4749016783184662,
+              -1.371645516663444,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-009",
+        "scene_class": "B_static",
+        "seed": 6009,
+        "start_position_world_m": [
+          0.28661121901113185,
+          0.4913126627311105,
+          0.6515825627683116
+        ],
+        "start_yaw_rad": -0.4480319936499284,
+        "goal_position_world_m": [
+          1.8042283081903747,
+          0.3002216460878514,
+          0.7866294467832918
+        ],
+        "distance_m": 1.535550411706756,
+        "bearing_rad": 0.32277600851155963,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.7689673669224976,
+              0.4472476590062373,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              1.4576194348650922,
+              0.3651563206586863,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-010",
+        "scene_class": "B_static",
+        "seed": 6010,
+        "start_position_world_m": [
+          -0.45705781639093335,
+          0.051251562616448365,
+          0.6721565683583107
+        ],
+        "start_yaw_rad": 2.206205691871274,
+        "goal_position_world_m": [
+          -1.6102866132337337,
+          0.6201296123507333,
+          0.6556328598125075
+        ],
+        "distance_m": 1.286013968151623,
+        "bearing_rad": 0.47712048033115173,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.8498877404392282,
+              0.285801781664888,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.9270192870532961,
+              0.26407077676078966,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-011",
+        "scene_class": "B_static",
+        "seed": 6011,
+        "start_position_world_m": [
+          0.1910555786870437,
+          -0.2786965475790999,
+          0.8043205667572336
+        ],
+        "start_yaw_rad": -1.0164597359298453,
+        "goal_position_world_m": [
+          1.0427258568111846,
+          0.9884067186134791,
+          0.8410764760972748
+        ],
+        "distance_m": 1.5271686045448178,
+        "bearing_rad": 1.9954740723693738,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.5822747538093223,
+              0.2495302789761188,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.7238525313180996,
+              0.506169673228329,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-012",
+        "scene_class": "B_static",
+        "seed": 6012,
+        "start_position_world_m": [
+          -0.4651698626766094,
+          0.26999681827284194,
+          0.7402367632073789
+        ],
+        "start_yaw_rad": -2.790396302755784,
+        "goal_position_world_m": [
+          -0.03915523565456552,
+          -0.8815554050673683,
+          0.7476066688829276
+        ],
+        "distance_m": 1.227849869090753,
+        "bearing_rad": 1.5739342972890518,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.19597123561325486,
+              -0.46908334537818386,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.37188097921229446,
+              -0.10052631631392966,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-013",
+        "scene_class": "B_static",
+        "seed": 6013,
+        "start_position_world_m": [
+          0.07952832530995324,
+          -0.14709841053858497,
+          0.7498975599587541
+        ],
+        "start_yaw_rad": -2.9369226400372463,
+        "goal_position_world_m": [
+          0.6020362502820026,
+          -1.5837641250343717,
+          0.8616869127708577
+        ],
+        "distance_m": 1.5328143287001317,
+        "bearing_rad": 1.7149489738090493,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.19733231306060414,
+              -0.5155825737720351,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.23723645410122804,
+              -0.669851228553559,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-014",
+        "scene_class": "B_static",
+        "seed": 6014,
+        "start_position_world_m": [
+          -0.0024524900014682993,
+          -0.42872222085245604,
+          0.8201700368029161
+        ],
+        "start_yaw_rad": 1.3237411697721617,
+        "goal_position_world_m": [
+          -0.46736368761178315,
+          -1.6047652445902627,
+          0.8511468322190596
+        ],
+        "distance_m": 1.2649818880917127,
+        "bearing_rad": 3.0121839823701784,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.22949991344563872,
+              -0.9465621088220385,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.18372787360001863,
+              -1.0219583979867881,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-015",
+        "scene_class": "B_static",
+        "seed": 6015,
+        "start_position_world_m": [
+          0.03548238322501174,
+          -0.38255759427978686,
+          0.7728769892026512
+        ],
+        "start_yaw_rad": 1.8836091728865334,
+        "goal_position_world_m": [
+          0.07915100171604698,
+          -1.9536973408741276,
+          0.8868202472478838
+        ],
+        "distance_m": 1.5758712249493634,
+        "bearing_rad": 2.8565668829931377,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.047543899956417265,
+              -0.9228999458786786,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.06338955836194665,
+              -0.7716359711075067,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-016",
+        "scene_class": "B_static",
+        "seed": 6016,
+        "start_position_world_m": [
+          -0.41350375242528936,
+          -0.3093056516734405,
+          0.7060702576224419
+        ],
+        "start_yaw_rad": 0.3866198164441288,
+        "goal_position_world_m": [
+          0.4212291037318684,
+          1.1546254566385248,
+          0.687708179744158
+        ],
+        "distance_m": 1.6852923772852573,
+        "bearing_rad": 0.6659573812473691,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.030147035925448935,
+              0.4393703775008198,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.19132975655623857,
+              0.7054231927070184,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-017",
+        "scene_class": "B_static",
+        "seed": 6017,
+        "start_position_world_m": [
+          -0.04207616818358739,
+          0.10994422991442754,
+          0.8202741426951593
+        ],
+        "start_yaw_rad": 0.9211262441761576,
+        "goal_position_world_m": [
+          0.022378973132773372,
+          2.015687243690805,
+          0.8067249065599384
+        ],
+        "distance_m": 1.906880825222025,
+        "bearing_rad": 0.6158614415532684,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.03971612562349866,
+              0.8554693143249406,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.0663177912611523,
+              0.4786650870197494,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-018",
+        "scene_class": "B_static",
+        "seed": 6018,
+        "start_position_world_m": [
+          -0.3056018525214802,
+          0.013718336440328383,
+          0.7861494320358211
+        ],
+        "start_yaw_rad": 1.5110114569392703,
+        "goal_position_world_m": [
+          -0.8701793460526853,
+          1.9101518859771534,
+          0.7717344517159005
+        ],
+        "distance_m": 1.9787409496112527,
+        "bearing_rad": 0.34913470791619194,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.5362656979885663,
+              0.6305826371688321,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.602631324806731,
+              0.8752777456157921,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-019",
+        "scene_class": "B_static",
+        "seed": 6019,
+        "start_position_world_m": [
+          0.07954697879034711,
+          -0.08151121813081319,
+          0.7460858952774047
+        ],
+        "start_yaw_rad": -2.634618424597041,
+        "goal_position_world_m": [
+          1.4132489054275312,
+          -1.4698265184836474,
+          0.6264051588161097
+        ],
+        "distance_m": 1.9288607209929478,
+        "bearing_rad": 1.8291593861988162,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              1.0571428015646978,
+              -1.1127088098463374,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.9891572447374093,
+              -1.0242870182752724,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-020",
+        "scene_class": "B_static",
+        "seed": 6020,
+        "start_position_world_m": [
+          0.3720083310514062,
+          -0.03167044179030554,
+          0.7925180297563407
+        ],
+        "start_yaw_rad": -1.0923930788020706,
+        "goal_position_world_m": [
+          1.1399054507173045,
+          1.7308380796741292,
+          0.9060930565699818
+        ],
+        "distance_m": 1.925876829223938,
+        "bearing_rad": 2.2523040588970025,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.5377673824611374,
+              0.432170686104674,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              0.5098073275383594,
+              0.385682571722849,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-021",
+        "scene_class": "B_static",
+        "seed": 6021,
+        "start_position_world_m": [
+          -0.10309351098700115,
+          -0.41980459176525764,
+          0.7591780077992747
+        ],
+        "start_yaw_rad": 0.9729312787333475,
+        "goal_position_world_m": [
+          -1.6106745437864052,
+          0.8873642060162362,
+          0.7594311777891275
+        ],
+        "distance_m": 1.9953673597724,
+        "bearing_rad": 1.4543439849874495,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.7336985136613872,
+              0.13683893206737183,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.6940380575220815,
+              0.13903632214255923,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-022",
+        "scene_class": "B_static",
+        "seed": 6022,
+        "start_position_world_m": [
+          -0.342231317171241,
+          0.11242140597667516,
+          0.7497926650773913
+        ],
+        "start_yaw_rad": 0.4867229298161839,
+        "goal_position_world_m": [
+          -2.0217087388403225,
+          -0.2176894355106745,
+          0.7267254894370299
+        ],
+        "distance_m": 1.711767996007559,
+        "bearing_rad": 2.848951262982844,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.7784006015288408,
+              0.03340197411016872,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -1.6157834872056214,
+              -0.1788951956427625,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-023",
+        "scene_class": "B_static",
+        "seed": 6023,
+        "start_position_world_m": [
+          -0.2859415725892913,
+          0.4550314755656166,
+          0.840535973805824
+        ],
+        "start_yaw_rad": 0.5355917406028943,
+        "goal_position_world_m": [
+          -1.9609337259621211,
+          0.17091464158659164,
+          0.8077562615903805
+        ],
+        "distance_m": 1.6992338269772476,
+        "bearing_rad": 2.7740244276498753,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.7288278099716822,
+              0.34663308041550556,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -1.5310815360816958,
+              0.2480435909904369,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "B_static-6000-024",
+        "scene_class": "B_static",
+        "seed": 6024,
+        "start_position_world_m": [
+          -0.12420233400906844,
+          0.1005701777191449,
+          0.8297381450185153
+        ],
+        "start_yaw_rad": -0.3129950196972371,
+        "goal_position_world_m": [
+          -2.099987002723333,
+          0.38824338150461357,
+          0.7698493696108804
+        ],
+        "distance_m": 1.9975153553157883,
+        "bearing_rad": -2.9731811328161983,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.5252935479871658,
+              0.13879156269985152,
+              0.5
+            ],
+            "size_m": [
+              0.35,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "static",
+            "center_world_m": [
+              -0.5544484354292568,
+              0.15659394247228678,
+              0.45
+            ],
+            "size_m": [
+              0.3,
+              0.3,
+              0.9
+            ],
+            "velocity_world_mps": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": null
+      }
+    ],
+    "C_dynamic": [
+      {
+        "scenario_id": "C_dynamic-7000-000",
+        "scene_class": "C_dynamic",
+        "seed": 7000,
+        "start_position_world_m": [
+          -0.4094556664248674,
+          0.25629884686076043,
+          0.7789088274316593
+        ],
+        "start_yaw_rad": -1.27779135017121,
+        "goal_position_world_m": [
+          -0.1431350738007115,
+          -0.890527500972761,
+          0.9202142072101661
+        ],
+        "distance_m": 1.1857927898647396,
+        "bearing_rad": -0.06482536366511416,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.6936838070712774,
+            -0.07325162824798379,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.3874211440078809,
+            -0.08996848464653966,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.8648438550630737,
+            -0.43517914359053667,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.4141188698438815,
+            0.10591420275957208,
+            0.1786912825573321
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-001",
+        "scene_class": "C_dynamic",
+        "seed": 7001,
+        "start_position_world_m": [
+          -0.13175943976437987,
+          0.44866804655723413,
+          0.811402418106998
+        ],
+        "start_yaw_rad": 2.523497532015206,
+        "goal_position_world_m": [
+          -0.938887719318164,
+          0.8364036639394024,
+          0.9275640332842983
+        ],
+        "distance_m": 0.9029332696732255,
+        "bearing_rad": 0.1702589662888927,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -1.0047027858315976,
+            -0.24138189177692726,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.10312317407491933,
+            0.21466593818533963,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.31187704242973324,
+            1.2008360145325367,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.20866776754347333,
+            -0.4730343663032787,
+            0.10589386422623513
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-002",
+        "scene_class": "C_dynamic",
+        "seed": 7002,
+        "start_position_world_m": [
+          0.28569999635281285,
+          0.33253009091046515,
+          0.8355581078961399
+        ],
+        "start_yaw_rad": 0.461053621477578,
+        "goal_position_world_m": [
+          1.0442548290033593,
+          0.5978939258276065,
+          0.84820304833305
+        ],
+        "distance_m": 0.8037308588937491,
+        "bearing_rad": -0.1245319047258917,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.33693678049373854,
+            1.4098784076076565,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.0981684913504386,
+            -0.2806191866768141,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.8652662423424262,
+            -0.10037586891092887,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.14310312235178405,
+            0.5128295653745247,
+            0.2631238029446097
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-003",
+        "scene_class": "C_dynamic",
+        "seed": 7003,
+        "start_position_world_m": [
+          -0.12730896494885224,
+          -0.47213929301868085,
+          0.7067209596346763
+        ],
+        "start_yaw_rad": 1.8526847155529627,
+        "goal_position_world_m": [
+          -1.2835532424270415,
+          -0.36802230065853014,
+          0.653571845915886
+        ],
+        "distance_m": 1.162138548361716,
+        "bearing_rad": 1.199102572110165,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.6146292011150208,
+            0.575788809459705,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.0280754643666975,
+            -0.31178479396760994,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.758124722970303,
+            -1.0177635226610449,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.04728911709269093,
+            0.5020097543657516,
+            0.26119535578988295
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-004",
+        "scene_class": "C_dynamic",
+        "seed": 7004,
+        "start_position_world_m": [
+          0.10415173158471935,
+          -0.061107171621409995,
+          0.8382193496998164
+        ],
+        "start_yaw_rad": 1.3696927635428446,
+        "goal_position_world_m": [
+          -0.48584779846785753,
+          0.6176551547191043,
+          0.9708552347213445
+        ],
+        "distance_m": 0.9090709648409702,
+        "bearing_rad": 0.9166553600269636,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.5861979359245244,
+            0.9086362221705925,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.22531152212488176,
+            -0.19584718687292355,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.6213722379931244,
+            -0.1410181376376728,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.3044838995738052,
+            0.31463200945662373,
+            0.2056396135692
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-005",
+        "scene_class": "C_dynamic",
+        "seed": 7005,
+        "start_position_world_m": [
+          -0.09788738792895235,
+          -0.4149654352327884,
+          0.8496686423369272
+        ],
+        "start_yaw_rad": -2.7584334881337673,
+        "goal_position_world_m": [
+          0.45685423184210594,
+          -1.143188772662792,
+          0.8432622576891796
+        ],
+        "distance_m": 0.915471755789421,
+        "bearing_rad": 1.8386311561329427,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.6022411585032197,
+            -1.403114033226374,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.2804211592442752,
+            0.21361755398590138,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.6705298066740527,
+            -0.43355017756666825,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.36479850784094725,
+            -0.3203674687615432,
+            0.10064552045851582
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-006",
+        "scene_class": "C_dynamic",
+        "seed": 7006,
+        "start_position_world_m": [
+          -0.46648128144719603,
+          -0.49288848196075896,
+          0.793718030944803
+        ],
+        "start_yaw_rad": 1.1153715802084871,
+        "goal_position_world_m": [
+          -1.0897261514472523,
+          -1.1572449033567451,
+          0.9429486454763827
+        ],
+        "distance_m": 0.9230782192993946,
+        "bearing_rad": 2.8435371836242287,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -1.5005228345957067,
+            -0.13353786326806028,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.23598121801936542,
+            -0.2213782825157215,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.33362332723878035,
+            -1.2282275634708906,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.37836511091653424,
+            0.2839131595690163,
+            0.29623857026745515
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-007",
+        "scene_class": "C_dynamic",
+        "seed": 7007,
+        "start_position_world_m": [
+          0.04341214902252022,
+          0.017430686224754854,
+          0.7342855778181945
+        ],
+        "start_yaw_rad": -1.2743791411108065,
+        "goal_position_world_m": [
+          0.2650079068083244,
+          1.0741961758575953,
+          0.691602424225484
+        ],
+        "distance_m": 1.0805923521607121,
+        "bearing_rad": 2.6384778398522157,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.8173894104119677,
+            0.7849708950206831,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.3389295761135782,
+            -0.07107097742281891,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.7485529776942903,
+            0.45660457955566813,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.41051114853995163,
+            0.11643713778933693,
+            0.1760340145052421
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-008",
+        "scene_class": "C_dynamic",
+        "seed": 7008,
+        "start_position_world_m": [
+          -0.22971029257666675,
+          -0.23990140225299605,
+          0.8197889715824351
+        ],
+        "start_yaw_rad": -0.21443671113364315,
+        "goal_position_world_m": [
+          0.9110998936857913,
+          -0.6965348245108555,
+          0.7313112569142279
+        ],
+        "distance_m": 1.231986310555445,
+        "bearing_rad": -0.1663034070183107,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.06701684078393727,
+            -1.3821565987248028,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.13475838062756704,
+            0.3366677203434072,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.5275554621178994,
+            0.10326717132265639,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.18343984528882917,
+            -0.4906205430986606,
+            0.17241817762764283
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-009",
+        "scene_class": "C_dynamic",
+        "seed": 7009,
+        "start_position_world_m": [
+          0.20674368685301503,
+          -0.13968168036869066,
+          0.8193578297960764
+        ],
+        "start_yaw_rad": 2.214198826179249,
+        "goal_position_world_m": [
+          -0.1123400861016739,
+          1.302941741349443,
+          0.671840416510534
+        ],
+        "distance_m": 1.4848360779140548,
+        "bearing_rad": -0.4257240910226952,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            1.0306516036748652,
+            0.7657268584550737,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.2910238494386926,
+            -0.06436952741838886,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.5315907307328223,
+            0.42018541581118585,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.5063893791249932,
+            0.12741961870724547,
+            0.2985318107221746
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-010",
+        "scene_class": "C_dynamic",
+        "seed": 7010,
+        "start_position_world_m": [
+          0.4280120533981715,
+          -0.04825553860075993,
+          0.6940836223648286
+        ],
+        "start_yaw_rad": -2.185250057701481,
+        "goal_position_world_m": [
+          0.5139983930449081,
+          -1.3449152811775535,
+          0.6453468432544568
+        ],
+        "distance_m": 1.3004212441602196,
+        "bearing_rad": 0.6806705080685278,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.5238332061972879,
+            -0.8075415296100158,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.2943047913444205,
+            0.019516447466714326,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            1.0726603460370403,
+            -0.7016720926878496,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.4875846964902249,
+            -0.03437202721874596,
+            0.13033753592025749
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-011",
+        "scene_class": "C_dynamic",
+        "seed": 7011,
+        "start_position_world_m": [
+          -0.07405163331903164,
+          0.14063470742604256,
+          0.7027034486362795
+        ],
+        "start_yaw_rad": -1.9849133368698486,
+        "goal_position_world_m": [
+          1.1596329847044466,
+          -0.5037469510366045,
+          0.7409438311108931
+        ],
+        "distance_m": 1.3923605084038444,
+        "bearing_rad": 1.5035673484571215,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            1.0072658024155272,
+            0.7040316660508845,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.17067345786699975,
+            -0.32675855513600277,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.26650957558335797,
+            -0.7141644460610362,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.22724207688275735,
+            0.43398362102491395,
+            0.23497556511575898
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-012",
+        "scene_class": "C_dynamic",
+        "seed": 7012,
+        "start_position_world_m": [
+          0.053586497594637184,
+          -0.12468003267396566,
+          0.6837560903341271
+        ],
+        "start_yaw_rad": -0.4497427210034699,
+        "goal_position_world_m": [
+          0.08602331607904382,
+          1.2005480005696696,
+          0.6625034422098208
+        ],
+        "distance_m": 1.3257952942820697,
+        "bearing_rad": 1.9960675286137406,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            1.069309373028098,
+            0.5054522466909402,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.2268338859136877,
+            0.00555207813215811,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.5302115666789695,
+            0.5446027695306176,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.41403100410738736,
+            -0.010180999159725566,
+            0.16800586146675206
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-013",
+        "scene_class": "C_dynamic",
+        "seed": 7013,
+        "start_position_world_m": [
+          0.008252345375951653,
+          -0.016815199790417235,
+          0.6707264949772059
+        ],
+        "start_yaw_rad": 1.644754690237872,
+        "goal_position_world_m": [
+          -1.211187078094392,
+          -0.7299373574072137,
+          0.6421796365663137
+        ],
+        "distance_m": 1.41293688547042,
+        "bearing_rad": 2.0260023368191566,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.07055832510655091,
+            -1.2213441693932399,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.12984558595772508,
+            0.222036049208756,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.8782578135996264,
+            0.15982256068970851,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.24336631992523852,
+            -0.4289905669738403,
+            0.22374246680221738
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-014",
+        "scene_class": "C_dynamic",
+        "seed": 7014,
+        "start_position_world_m": [
+          -0.20602673243594272,
+          -0.3997872578663052,
+          0.677965234420814
+        ],
+        "start_yaw_rad": -1.1478220834891804,
+        "goal_position_world_m": [
+          -1.3676674448467692,
+          0.6748625663680533,
+          0.7667895363168464
+        ],
+        "distance_m": 1.5849830112857954,
+        "bearing_rad": -2.7402887003035734,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.058609502476816844,
+            0.8261255649793458,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.26725513980790916,
+            -0.28888894224041767,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -1.1451486831268587,
+            -0.3483669249550666,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.33017395755173634,
+            0.31470743770773235,
+            0.2678756732183195
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-015",
+        "scene_class": "C_dynamic",
+        "seed": 7015,
+        "start_position_world_m": [
+          0.2587939823009682,
+          0.3915636872951028,
+          0.6774641996185921
+        ],
+        "start_yaw_rad": 0.21806642340006377,
+        "goal_position_world_m": [
+          -0.775825790443984,
+          1.0244351907555729,
+          0.7197853337224677
+        ],
+        "distance_m": 1.2135713792105394,
+        "bearing_rad": 2.3745519822883496,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -0.7471322297196095,
+            -0.16536669306757223,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.1362412191246673,
+            0.22272745478113146,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.08776773074308214,
+            1.199529660513679,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.2662856230549448,
+            -0.45554158679105605,
+            0.23906005043780737
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-016",
+        "scene_class": "C_dynamic",
+        "seed": 7016,
+        "start_position_world_m": [
+          0.1957945032149785,
+          0.13397558405560683,
+          0.7450090053870266
+        ],
+        "start_yaw_rad": -1.6630532725263258,
+        "goal_position_world_m": [
+          1.0462287832389943,
+          -1.4562480565984894,
+          0.6337330744518149
+        ],
+        "distance_m": 1.8067739274022727,
+        "bearing_rad": 0.5833469742762665,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            1.5424835567072148,
+            -0.26369504967771634,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.34542303959091597,
+            -0.1847284787298078,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.1315726144953322,
+            -1.0182348519060533,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.3990312010465241,
+            0.22140151479444362,
+            0.21010662527866017
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-017",
+        "scene_class": "C_dynamic",
+        "seed": 7017,
+        "start_position_world_m": [
+          -0.4800778777133451,
+          0.2355743550652778,
+          0.7004871459034061
+        ],
+        "start_yaw_rad": 0.8529574661808286,
+        "goal_position_world_m": [
+          -0.41739037198255974,
+          1.9665944432048428,
+          0.726224343002204
+        ],
+        "distance_m": 1.7323460024579262,
+        "bearing_rad": 0.681640480548837,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -1.4462263759691825,
+            1.1884332353459162,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.3763073080577325,
+            -0.01362766769261407,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.1527254803133825,
+            1.1305284748288438,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.44565041666604627,
+            0.018230544187500895,
+            0.23190041931405983
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-018",
+        "scene_class": "C_dynamic",
+        "seed": 7018,
+        "start_position_world_m": [
+          -0.27949363501638647,
+          0.3223531651104323,
+          0.7619730938116112
+        ],
+        "start_yaw_rad": 0.19024633401509838,
+        "goal_position_world_m": [
+          1.6718731281857315,
+          0.36660050440798375,
+          0.6505581323037432
+        ],
+        "distance_m": 1.955045617169232,
+        "bearing_rad": -0.16757516881061774,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.6187607882295835,
+            1.3429781751565257,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.006202350443432825,
+            -0.2735319388959619,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.655031545286007,
+            -0.2566106570696043,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.01140907925328304,
+            0.4426219563522475,
+            0.27971351599741734
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-019",
+        "scene_class": "C_dynamic",
+        "seed": 7019,
+        "start_position_world_m": [
+          0.14086725522462573,
+          -0.04264782256830413,
+          0.7586331573471046
+        ],
+        "start_yaw_rad": 2.2556989728205137,
+        "goal_position_world_m": [
+          -0.9997246253973313,
+          -1.6387589892564054,
+          0.8433613269184361
+        ],
+        "distance_m": 1.9635935315859272,
+        "bearing_rad": 1.836227948303043,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -1.2774008904418044,
+            -0.307377863960261,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.2519611470277733,
+            -0.18005314700503672,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.024374944940751764,
+            -1.2376357176836508,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.34361003560715214,
+            0.34559252924061495,
+            0.12337814447352423
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-020",
+        "scene_class": "C_dynamic",
+        "seed": 7020,
+        "start_position_world_m": [
+          -0.39972740353894576,
+          0.038461736388889944,
+          0.7238806080963208
+        ],
+        "start_yaw_rad": 0.2923553046535661,
+        "goal_position_world_m": [
+          -1.0956560052994482,
+          1.8348569279974087,
+          0.7688333232018354
+        ],
+        "distance_m": 1.9270114295919192,
+        "bearing_rad": 1.6480408340329062,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.1949955476452695,
+            1.2715330383023091,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.2051809907963666,
+            -0.07948769886479849,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -1.2969596285811504,
+            0.6935453635797486,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.44459948854894504,
+            0.17224792633064082,
+            0.1753132048899872
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-021",
+        "scene_class": "C_dynamic",
+        "seed": 7021,
+        "start_position_world_m": [
+          -0.143745833066945,
+          0.15981450305956957,
+          0.7851604859341204
+        ],
+        "start_yaw_rad": -1.6019721774412008,
+        "goal_position_world_m": [
+          1.6494539545863303,
+          -0.22748042215591768,
+          0.7737643480713394
+        ],
+        "distance_m": 1.8345824346416295,
+        "bearing_rad": 1.3892596997368372,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.9396170491592575,
+            0.9488878132844543,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.05144646338531134,
+            -0.23820035123549105,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.6018378223300016,
+            -0.615051186140597,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.11363428984681395,
+            0.4505261878146006,
+            0.10664051506865653
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-022",
+        "scene_class": "C_dynamic",
+        "seed": 7022,
+        "start_position_world_m": [
+          -0.31018825279416873,
+          -0.3511914237749538,
+          0.8182573638427528
+        ],
+        "start_yaw_rad": 2.784452281386102,
+        "goal_position_world_m": [
+          1.5388790387914524,
+          -0.5597388828381558,
+          0.6959465788716669
+        ],
+        "distance_m": 1.8648061077800406,
+        "bearing_rad": -2.8967628889986083,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            0.7812937861180902,
+            0.5320456896604129,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            -0.02289125230847602,
+            -0.2029632300348919,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.6019743488828118,
+            -1.0578739747973933,
+            1.1
+          ],
+          "velocity_world_mps": [
+            0.05363775309797665,
+            0.5626675976100284,
+            0.21752126954334977
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-023",
+        "scene_class": "C_dynamic",
+        "seed": 7023,
+        "start_position_world_m": [
+          -0.06234360220810009,
+          0.48842487303851356,
+          0.8427354418412876
+        ],
+        "start_yaw_rad": -0.5080087908224353,
+        "goal_position_world_m": [
+          -1.7552881874006454,
+          1.4225960154765938,
+          0.8459779109719152
+        ],
+        "distance_m": 1.93358413458088,
+        "bearing_rad": -3.1378099372930923,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -1.3846366392848357,
+            0.07592854863443899,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.12171487277281888,
+            0.22057685732012575,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            -0.6116286781958926,
+            1.4768063777448561,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.19861733600318765,
+            -0.5151304645371162,
+            0.20024083421111627
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      },
+      {
+        "scenario_id": "C_dynamic-7000-024",
+        "scene_class": "C_dynamic",
+        "seed": 7024,
+        "start_position_world_m": [
+          -0.31321264893414213,
+          -0.41500144566997865,
+          0.7606570022491532
+        ],
+        "start_yaw_rad": 1.1147285394667312,
+        "goal_position_world_m": [
+          0.03524006307162386,
+          -2.2989366888175806,
+          0.6866791441486879
+        ],
+        "distance_m": 1.9173168794873008,
+        "bearing_rad": -2.5026317512356386,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": {
+          "kind": "kinematic",
+          "center_world_m": [
+            -1.1210007135576516,
+            -1.5459117458803675,
+            0.45
+          ],
+          "size_m": [
+            0.3,
+            0.3,
+            0.9
+          ],
+          "velocity_world_mps": [
+            0.20512943231498473,
+            0.03794074518343703,
+            0.0
+          ]
+        },
+        "dynamic_entity": {
+          "radius_m": 0.1,
+          "mass_kg": 0.05,
+          "center_world_m": [
+            0.45231388311813586,
+            -1.254911436796504,
+            1.1
+          ],
+          "velocity_world_mps": [
+            -0.5218896070909474,
+            -0.074870496576232,
+            0.2770775284717051
+          ]
+        },
+        "degradation": null,
+        "disturbance": null
+      }
+    ],
+    "D_observation": [
+      {
+        "scenario_id": "D_observation-8000-000",
+        "scene_class": "D_observation",
+        "seed": 8000,
+        "start_position_world_m": [
+          -0.40196170503069995,
+          -0.18886991033528655,
+          0.7589604313928131
+        ],
+        "start_yaw_rad": 1.6671506234077302,
+        "goal_position_world_m": [
+          -0.869751125676776,
+          0.5172010848849928,
+          0.8107066269623078
+        ],
+        "distance_m": 0.8485522147255664,
+        "bearing_rad": 0.4887752543958652,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.05268482353859816,
+          "velocity_noise_std_mps": 0.04899144768651345,
+          "delay_steps": 1,
+          "dropout_probability": 0.11692161499933452,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-001",
+        "scene_class": "D_observation",
+        "seed": 8001,
+        "start_position_world_m": [
+          0.27641887489704464,
+          -0.24013704394708568,
+          0.6908211821603482
+        ],
+        "start_yaw_rad": 1.1975543899571797,
+        "goal_position_world_m": [
+          0.8932598043287356,
+          0.29989099483104964,
+          0.7472310621631872
+        ],
+        "distance_m": 0.8217694868091943,
+        "bearing_rad": -0.4784561373679109,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.07728369174296332,
+          "velocity_noise_std_mps": 0.03718608663525608,
+          "delay_steps": 2,
+          "dropout_probability": 0.09704177757589022,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-002",
+        "scene_class": "D_observation",
+        "seed": 8002,
+        "start_position_world_m": [
+          -0.056473132213776034,
+          -0.4216839373289488,
+          0.6814704574090368
+        ],
+        "start_yaw_rad": -2.7416588293752415,
+        "goal_position_world_m": [
+          -0.587961746580273,
+          -1.2418067646962925,
+          0.8038669140092477
+        ],
+        "distance_m": 0.9849175050523328,
+        "bearing_rad": 0.5958524462847077,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.0704992065542984,
+          "velocity_noise_std_mps": 0.026010313986228606,
+          "delay_steps": 3,
+          "dropout_probability": 0.19745544658384162,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-003",
+        "scene_class": "D_observation",
+        "seed": 8003,
+        "start_position_world_m": [
+          0.48672341051631474,
+          -0.3414839019310437,
+          0.8093700078390118
+        ],
+        "start_yaw_rad": -0.794995680169543,
+        "goal_position_world_m": [
+          0.6770581572178085,
+          0.4409362173634388,
+          0.9339965864874531
+        ],
+        "distance_m": 0.8148253450797478,
+        "bearing_rad": 2.1271629680867847,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.07148915711626257,
+          "velocity_noise_std_mps": 0.02423829263961946,
+          "delay_steps": 2,
+          "dropout_probability": 0.11100792928560496,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-004",
+        "scene_class": "D_observation",
+        "seed": 8004,
+        "start_position_world_m": [
+          -0.2937031393053059,
+          0.01722040649057166,
+          0.8340537637207468
+        ],
+        "start_yaw_rad": 0.014469379233440716,
+        "goal_position_world_m": [
+          -0.368191277572172,
+          1.0976539197712354,
+          0.6964990927671181
+        ],
+        "distance_m": 1.0916988352396566,
+        "bearing_rad": 1.625160851670107,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.03856646163786273,
+          "velocity_noise_std_mps": 0.051879363154084646,
+          "delay_steps": 2,
+          "dropout_probability": 0.15863493529710004,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-005",
+        "scene_class": "D_observation",
+        "seed": 8005,
+        "start_position_world_m": [
+          -0.2994046845956393,
+          -0.30922484925446936,
+          0.8234744447640485
+        ],
+        "start_yaw_rad": 2.652723445412417,
+        "goal_position_world_m": [
+          -0.32282262019234254,
+          -1.3179900733196663,
+          0.8789227633730223
+        ],
+        "distance_m": 1.0105593466132905,
+        "bearing_rad": 2.0364552481081732,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.04518083804280361,
+          "velocity_noise_std_mps": 0.03781713319490045,
+          "delay_steps": 2,
+          "dropout_probability": 0.09715157900395532,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-006",
+        "scene_class": "D_observation",
+        "seed": 8006,
+        "start_position_world_m": [
+          -0.01693109864460418,
+          0.3565110692376229,
+          0.7360860993391561
+        ],
+        "start_yaw_rad": 1.7929395669959565,
+        "goal_position_world_m": [
+          0.28552639861664775,
+          -0.5919299113039046,
+          0.8700332237610598
+        ],
+        "distance_m": 1.0044713352609975,
+        "bearing_rad": -3.055031407751819,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.05395661597617547,
+          "velocity_noise_std_mps": 0.026384989489812116,
+          "delay_steps": 3,
+          "dropout_probability": 0.1033338521942958,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-007",
+        "scene_class": "D_observation",
+        "seed": 8007,
+        "start_position_world_m": [
+          0.17170720871279088,
+          -0.4577072965956165,
+          0.820092916988125
+        ],
+        "start_yaw_rad": -3.1238651614536073,
+        "goal_position_world_m": [
+          0.9185420879310175,
+          0.11106640734950157,
+          0.9154024860844894
+        ],
+        "distance_m": 0.943583476475551,
+        "bearing_rad": -2.5084496179053333,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.03787082838376313,
+          "velocity_noise_std_mps": 0.0519265077065853,
+          "delay_steps": 1,
+          "dropout_probability": 0.05461928611838257,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-008",
+        "scene_class": "D_observation",
+        "seed": 8008,
+        "start_position_world_m": [
+          0.38413652046092694,
+          -0.1316791600844036,
+          0.6808581037932315
+        ],
+        "start_yaw_rad": -2.427971317997469,
+        "goal_position_world_m": [
+          -1.1770040267978308,
+          -0.40106470361569885,
+          0.7158362833624108
+        ],
+        "distance_m": 1.5845983252562772,
+        "bearing_rad": -0.5427471703295359,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.07372203462355235,
+          "velocity_noise_std_mps": 0.04744450410738582,
+          "delay_steps": 3,
+          "dropout_probability": 0.1549925324829651,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-009",
+        "scene_class": "D_observation",
+        "seed": 8009,
+        "start_position_world_m": [
+          0.21444791174624833,
+          0.35090604903509914,
+          0.785068591500352
+        ],
+        "start_yaw_rad": -1.2268709434706087,
+        "goal_position_world_m": [
+          1.0944851846356731,
+          -0.6953504204775457,
+          0.8917086421686103
+        ],
+        "distance_m": 1.3713097031955432,
+        "bearing_rad": 0.35539635481953313,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.0723095787281361,
+          "velocity_noise_std_mps": 0.05494353165616678,
+          "delay_steps": 3,
+          "dropout_probability": 0.1206714842512326,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-010",
+        "scene_class": "D_observation",
+        "seed": 8010,
+        "start_position_world_m": [
+          -0.3014310246194214,
+          -0.12262698053739707,
+          0.7212442220644464
+        ],
+        "start_yaw_rad": -2.260950371314482,
+        "goal_position_world_m": [
+          -1.7491367344726851,
+          -0.7079565058505566,
+          0.8530278845897957
+        ],
+        "distance_m": 1.5671086143767017,
+        "bearing_rad": -0.4964213890071099,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.045978600947446824,
+          "velocity_noise_std_mps": 0.032859439619968414,
+          "delay_steps": 2,
+          "dropout_probability": 0.1250327927193594,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-011",
+        "scene_class": "D_observation",
+        "seed": 8011,
+        "start_position_world_m": [
+          -0.030221173182565453,
+          -0.10150652612007072,
+          0.7878600803185232
+        ],
+        "start_yaw_rad": 2.123134441626937,
+        "goal_position_world_m": [
+          -1.1657701470613764,
+          -0.581926322415304,
+          0.8914464341445392
+        ],
+        "distance_m": 1.2373377814681576,
+        "bearing_rad": 1.4186953064302843,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.028663636083371725,
+          "velocity_noise_std_mps": 0.0482717501566159,
+          "delay_steps": 1,
+          "dropout_probability": 0.18600641034284554,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-012",
+        "scene_class": "D_observation",
+        "seed": 8012,
+        "start_position_world_m": [
+          0.39668968599041954,
+          -0.34192811910144216,
+          0.7631285128848894
+        ],
+        "start_yaw_rad": 2.387164089310536,
+        "goal_position_world_m": [
+          -0.18858482815692668,
+          -1.5313684692700646,
+          0.6823151265902399
+        ],
+        "distance_m": 1.328098417634806,
+        "bearing_rad": 1.8679504524152468,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.054439384729648,
+          "velocity_noise_std_mps": 0.04860530698420609,
+          "delay_steps": 1,
+          "dropout_probability": 0.19702301062626726,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-013",
+        "scene_class": "D_observation",
+        "seed": 8013,
+        "start_position_world_m": [
+          -0.34460470110651575,
+          0.2834867147561225,
+          0.6577351106652789
+        ],
+        "start_yaw_rad": 1.80855343066695,
+        "goal_position_world_m": [
+          -1.4727551932494416,
+          -0.580871332544555,
+          0.728403785100556
+        ],
+        "distance_m": 1.422966067199849,
+        "bearing_rad": 1.9868107332361944,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.02991018820328509,
+          "velocity_noise_std_mps": 0.04326126130701176,
+          "delay_steps": 3,
+          "dropout_probability": 0.07460273512896606,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-014",
+        "scene_class": "D_observation",
+        "seed": 8014,
+        "start_position_world_m": [
+          -0.2848656634930177,
+          0.24423141657482428,
+          0.7954690483149461
+        ],
+        "start_yaw_rad": 2.7853612042077476,
+        "goal_position_world_m": [
+          0.7930833522612953,
+          -0.39780345289630836,
+          0.9381380540177385
+        ],
+        "distance_m": 1.2627498958110153,
+        "bearing_rad": 2.960640401453087,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.06594371132908981,
+          "velocity_noise_std_mps": 0.027947910287216743,
+          "delay_steps": 3,
+          "dropout_probability": 0.1231533602683355,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-015",
+        "scene_class": "D_observation",
+        "seed": 8015,
+        "start_position_world_m": [
+          0.3309342241085058,
+          0.20596588540133887,
+          0.6827143461495114
+        ],
+        "start_yaw_rad": -0.7122285233751042,
+        "goal_position_world_m": [
+          -0.5907725307809969,
+          1.4845630793256062,
+          0.6922887735358083
+        ],
+        "distance_m": 1.5762124844004135,
+        "bearing_rad": 2.9076229006537027,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.024207843278206215,
+          "velocity_noise_std_mps": 0.02211054970219588,
+          "delay_steps": 3,
+          "dropout_probability": 0.14541060510061,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-016",
+        "scene_class": "D_observation",
+        "seed": 8016,
+        "start_position_world_m": [
+          0.25101321212816496,
+          0.027469299120298385,
+          0.760489248538724
+        ],
+        "start_yaw_rad": -2.370009070799251,
+        "goal_position_world_m": [
+          -1.4230120123938015,
+          -0.663770992501665,
+          0.7987237184376067
+        ],
+        "distance_m": 1.811528489366338,
+        "bearing_rad": -0.3799882138491158,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.048926967951026544,
+          "velocity_noise_std_mps": 0.03120920078541283,
+          "delay_steps": 1,
+          "dropout_probability": 0.0703468033161348,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-017",
+        "scene_class": "D_observation",
+        "seed": 8017,
+        "start_position_world_m": [
+          0.42864535061517084,
+          -0.39484022511864225,
+          0.7035430257713121
+        ],
+        "start_yaw_rad": 1.4867859760264786,
+        "goal_position_world_m": [
+          0.4830977410624444,
+          1.404800991380087,
+          0.6308626201549317
+        ],
+        "distance_m": 1.8019311896704076,
+        "bearing_rad": 0.05376222026633848,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.07629905995651022,
+          "velocity_noise_std_mps": 0.03926009770592977,
+          "delay_steps": 2,
+          "dropout_probability": 0.0679636660677021,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-018",
+        "scene_class": "D_observation",
+        "seed": 8018,
+        "start_position_world_m": [
+          -0.4027559157710662,
+          -0.3252090963542241,
+          0.6598516528353896
+        ],
+        "start_yaw_rad": 2.631320476895284,
+        "goal_position_world_m": [
+          -1.9465723812671336,
+          0.21614640255586104,
+          0.7954469929867927
+        ],
+        "distance_m": 1.6415910427410756,
+        "bearing_rad": 0.1730090337467316,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.07966996112185203,
+          "velocity_noise_std_mps": 0.04850666098582349,
+          "delay_steps": 1,
+          "dropout_probability": 0.11994777332916501,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-019",
+        "scene_class": "D_observation",
+        "seed": 8019,
+        "start_position_world_m": [
+          -0.4799003248438102,
+          0.08834635762919796,
+          0.6772239688945607
+        ],
+        "start_yaw_rad": -0.8777277375858952,
+        "goal_position_world_m": [
+          1.153810118146545,
+          1.1568615089809535,
+          0.7850381681121996
+        ],
+        "distance_m": 1.9550852517874886,
+        "bearing_rad": 1.4569391480436429,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.05061080323692432,
+          "velocity_noise_std_mps": 0.03222113559333108,
+          "delay_steps": 3,
+          "dropout_probability": 0.07486376521681538,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-020",
+        "scene_class": "D_observation",
+        "seed": 8020,
+        "start_position_world_m": [
+          -0.17967306163738694,
+          -0.3240462094702543,
+          0.6734962373592069
+        ],
+        "start_yaw_rad": 2.6502600447007723,
+        "goal_position_world_m": [
+          -0.08076435913074946,
+          -2.255362901389814,
+          0.759836475832126
+        ],
+        "distance_m": 1.9357741946565512,
+        "bearing_rad": 2.113297326031354,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.03891095251571632,
+          "velocity_noise_std_mps": 0.044823313073583636,
+          "delay_steps": 1,
+          "dropout_probability": 0.17556286761445078,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-021",
+        "scene_class": "D_observation",
+        "seed": 8021,
+        "start_position_world_m": [
+          0.4241030481025362,
+          0.07237810552389301,
+          0.7238129694737853
+        ],
+        "start_yaw_rad": 2.1960860986858153,
+        "goal_position_world_m": [
+          -1.3257415430603672,
+          0.07510631829285672,
+          0.8089561606586033
+        ],
+        "distance_m": 1.7519169213670254,
+        "bearing_rad": 0.9439474389847,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.06616709044926126,
+          "velocity_noise_std_mps": 0.024833999520160455,
+          "delay_steps": 3,
+          "dropout_probability": 0.12019735171802419,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-022",
+        "scene_class": "D_observation",
+        "seed": 8022,
+        "start_position_world_m": [
+          -0.2184896291571471,
+          0.35391364680082804,
+          0.6854364010162883
+        ],
+        "start_yaw_rad": 0.7424872073651705,
+        "goal_position_world_m": [
+          -0.5375603895480633,
+          -1.4708036394000548,
+          0.6786943595995675
+        ],
+        "distance_m": 1.8524159305672192,
+        "bearing_rad": -2.486393727447603,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.07288933832445862,
+          "velocity_noise_std_mps": 0.03837353458558844,
+          "delay_steps": 1,
+          "dropout_probability": 0.09434453982937624,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-023",
+        "scene_class": "D_observation",
+        "seed": 8023,
+        "start_position_world_m": [
+          0.17006538584314979,
+          -0.2214583129149149,
+          0.804930584809591
+        ],
+        "start_yaw_rad": 0.7333586190728192,
+        "goal_position_world_m": [
+          -0.7846103693652986,
+          -1.7741782387610647,
+          0.9129880858394103
+        ],
+        "distance_m": 1.8259302804957542,
+        "bearing_rad": -2.855415482033381,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.043155460157222755,
+          "velocity_noise_std_mps": 0.040814808790214735,
+          "delay_steps": 3,
+          "dropout_probability": 0.10190230383190725,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      },
+      {
+        "scenario_id": "D_observation-8000-024",
+        "scene_class": "D_observation",
+        "seed": 8024,
+        "start_position_world_m": [
+          0.4862575201649283,
+          -0.05570375254399462,
+          0.6770979368952977
+        ],
+        "start_yaw_rad": 2.6648731983802634,
+        "goal_position_world_m": [
+          1.8169845578545147,
+          -1.4884247188651658,
+          0.7591077460182736
+        ],
+        "distance_m": 1.9571023031427766,
+        "bearing_rad": 2.7960224773138234,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": {
+          "position_noise_std_m": 0.029963491849150974,
+          "velocity_noise_std_mps": 0.050050780002289144,
+          "delay_steps": 3,
+          "dropout_probability": 0.054904429159441805,
+          "max_stale_s": 0.3
+        },
+        "disturbance": null
+      }
+    ],
+    "E_disturbance": [
+      {
+        "scenario_id": "E_disturbance-9000-000",
+        "scene_class": "E_disturbance",
+        "seed": 9000,
+        "start_position_world_m": [
+          -0.1456721502129048,
+          -0.14950012073251429,
+          0.6712295077226629
+        ],
+        "start_yaw_rad": -0.6104273422719988,
+        "goal_position_world_m": [
+          0.6639389153911138,
+          -0.7050421403627134,
+          0.7641959374750882
+        ],
+        "distance_m": 0.9862757069826813,
+        "bearing_rad": 0.009034285997409186,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.0038697592639240796,
+            0.007334234901853309,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            3.2522536875198376e-05
+          ],
+          "start_s": 0.38957253411042,
+          "duration_s": 0.34658371218827333,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-001",
+        "scene_class": "E_disturbance",
+        "seed": 9001,
+        "start_position_world_m": [
+          0.28976048632284257,
+          0.08960405333698362,
+          0.8293357320341881
+        ],
+        "start_yaw_rad": -2.5412108645840825,
+        "goal_position_world_m": [
+          -0.8875634599708236,
+          0.23498100658332918,
+          0.9495368327607844
+        ],
+        "distance_m": 1.1923399002245822,
+        "bearing_rad": -0.7232407194852806,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.0028156340044032456,
+            -0.007632163718373925,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            7.484006123606476e-05
+          ],
+          "start_s": 0.37888527910592146,
+          "duration_s": 0.2571583554686514,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-002",
+        "scene_class": "E_disturbance",
+        "seed": 9002,
+        "start_position_world_m": [
+          0.2577292264399894,
+          0.009178531460734884,
+          0.7563621720500234
+        ],
+        "start_yaw_rad": -1.6484903731117726,
+        "goal_position_world_m": [
+          0.34691505928918254,
+          -0.9231424448995785,
+          0.7500078455019772
+        ],
+        "distance_m": 0.9365985763433188,
+        "bearing_rad": 0.17306385711540062,
+        "distance_bin": "near",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.009430994982489851,
+            0.005092830640026856,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            3.194139476869389e-05
+          ],
+          "start_s": 0.28511637278243696,
+          "duration_s": 0.4085749337933118,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-003",
+        "scene_class": "E_disturbance",
+        "seed": 9003,
+        "start_position_world_m": [
+          0.019449382406422133,
+          -0.2232749655341395,
+          0.7698857994221531
+        ],
+        "start_yaw_rad": -0.5099037761220391,
+        "goal_position_world_m": [
+          0.6434066385412041,
+          0.4255976899211762,
+          0.8170626126600103
+        ],
+        "distance_m": 0.9014344303321002,
+        "bearing_rad": 1.3148742464883205,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            6.66830540195392e-05,
+            -0.005089663912077943,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            7.604320945327293e-05
+          ],
+          "start_s": 0.29532077236058696,
+          "duration_s": 0.24776598986546727,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-004",
+        "scene_class": "E_disturbance",
+        "seed": 9004,
+        "start_position_world_m": [
+          -0.3611135648750178,
+          0.3562518928099705,
+          0.8111884289198187
+        ],
+        "start_yaw_rad": 2.5827010757853746,
+        "goal_position_world_m": [
+          -0.48772713341657337,
+          -0.6853647372495462,
+          0.7907033620097372
+        ],
+        "distance_m": 1.0494836052657908,
+        "bearing_rad": 2.00872646916993,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.008720252407155174,
+            -0.005900424667066161,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            5.6412207013484494e-05
+          ],
+          "start_s": 0.2898337974643985,
+          "duration_s": 0.2219346001659076,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-005",
+        "scene_class": "E_disturbance",
+        "seed": 9005,
+        "start_position_world_m": [
+          -0.37079631768568866,
+          -0.020226541962604427,
+          0.8157929374248241
+        ],
+        "start_yaw_rad": 2.3064379029680335,
+        "goal_position_world_m": [
+          -1.1752286216951902,
+          -0.8196230745306273,
+          0.8138421701273346
+        ],
+        "distance_m": 1.1340855141958484,
+        "bearing_rad": 1.6174130809035105,
+        "distance_bin": "near",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.007744405621553257,
+            0.0030374513156016737,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            3.561897928056709e-05
+          ],
+          "start_s": 0.2665374557197989,
+          "duration_s": 0.49519788568596945,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-006",
+        "scene_class": "E_disturbance",
+        "seed": 9006,
+        "start_position_world_m": [
+          0.4043984090431244,
+          0.432168344179811,
+          0.8393760433349591
+        ],
+        "start_yaw_rad": -1.8736828733441213,
+        "goal_position_world_m": [
+          1.0393432915503698,
+          0.9379083934299671,
+          0.7313660479669177
+        ],
+        "distance_m": 0.8188981379494609,
+        "bearing_rad": 2.5462922381768793,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.0016325701706773404,
+            0.005950458686888944,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            5.344955299284958e-05
+          ],
+          "start_s": 0.4265730376526742,
+          "duration_s": 0.28449474323585755,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-007",
+        "scene_class": "E_disturbance",
+        "seed": 9007,
+        "start_position_world_m": [
+          0.4347069711091708,
+          -0.18134240999696094,
+          0.7805796007831981
+        ],
+        "start_yaw_rad": -2.95285845262681,
+        "goal_position_world_m": [
+          1.210934768956266,
+          0.11481026091475577,
+          0.8517616087118101
+        ],
+        "distance_m": 0.8338482337280828,
+        "bearing_rad": -2.965845289419419,
+        "distance_bin": "near",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.008041811559853777,
+            0.0006917590850601574,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            6.511247167999192e-05
+          ],
+          "start_s": 0.3534242770672315,
+          "duration_s": 0.3671178830243958,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-008",
+        "scene_class": "E_disturbance",
+        "seed": 9008,
+        "start_position_world_m": [
+          0.1833107541689084,
+          -0.16718949532533078,
+          0.7335436980834253
+        ],
+        "start_yaw_rad": -1.3411852683915002,
+        "goal_position_world_m": [
+          -0.3408488427186964,
+          -1.3041668302132505,
+          0.6826593563155938
+        ],
+        "distance_m": 1.2530163443847644,
+        "bearing_rad": -0.6615843033612194,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.008831037217152976,
+            0.007487901324530857,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            7.158625168710841e-05
+          ],
+          "start_s": 0.40875257415438726,
+          "duration_s": 0.2772142292349938,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-009",
+        "scene_class": "E_disturbance",
+        "seed": 9009,
+        "start_position_world_m": [
+          0.2795899893176441,
+          -0.17738051970230295,
+          0.8266459576587536
+        ],
+        "start_yaw_rad": 0.45596951127496865,
+        "goal_position_world_m": [
+          1.472350142007699,
+          -0.496237353297796,
+          0.7731109178667384
+        ],
+        "distance_m": 1.2358043788000102,
+        "bearing_rad": -0.7171881703919327,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.010367086958546174,
+            0.002843705560037378,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            4.9685980798304846e-05
+          ],
+          "start_s": 0.20305426773258967,
+          "duration_s": 0.3421634038728242,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-010",
+        "scene_class": "E_disturbance",
+        "seed": 9010,
+        "start_position_world_m": [
+          0.28182942743333017,
+          0.06933680677136933,
+          0.7230497379710934
+        ],
+        "start_yaw_rad": 3.0258651182790555,
+        "goal_position_world_m": [
+          -1.1530791582819633,
+          0.15651418289366287,
+          0.6308649262673417
+        ],
+        "distance_m": 1.4405070578709038,
+        "bearing_rad": 0.05504746623979784,
+        "distance_bin": "mid",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.003816647135990974,
+            -0.003272859190753961,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            8.240339710101679e-05
+          ],
+          "start_s": 0.201618196570862,
+          "duration_s": 0.3717570590467033,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-011",
+        "scene_class": "E_disturbance",
+        "seed": 9011,
+        "start_position_world_m": [
+          0.11494996587560802,
+          -0.4102556145672859,
+          0.821091504054936
+        ],
+        "start_yaw_rad": -0.6327406713584875,
+        "goal_position_world_m": [
+          -0.0027976362004389493,
+          1.1739008283115706,
+          0.7205308097859632
+        ],
+        "distance_m": 1.5917061872535108,
+        "bearing_rad": 2.2777288362451955,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.0025071604573179917,
+            0.007441215530587482,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            7.715812517107657e-06
+          ],
+          "start_s": 0.48566660810054746,
+          "duration_s": 0.4534945195097889,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-012",
+        "scene_class": "E_disturbance",
+        "seed": 9012,
+        "start_position_world_m": [
+          0.4357653993911692,
+          0.04729331619990518,
+          0.7894756768822472
+        ],
+        "start_yaw_rad": 2.082002438732789,
+        "goal_position_world_m": [
+          -0.9538471509048769,
+          0.25705152309945656,
+          0.8523664230557934
+        ],
+        "distance_m": 1.4067610995674644,
+        "bearing_rad": 0.9097739806040905,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.008675323593971074,
+            -0.006331079416416802,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            2.2985893951902204e-06
+          ],
+          "start_s": 0.24110114535694546,
+          "duration_s": 0.43014329277539565,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-013",
+        "scene_class": "E_disturbance",
+        "seed": 9013,
+        "start_position_world_m": [
+          -0.407067964397692,
+          -0.01026377664727518,
+          0.8374895957218877
+        ],
+        "start_yaw_rad": -0.4093512812575395,
+        "goal_position_world_m": [
+          0.5489392408677691,
+          0.814187647559526,
+          0.7588707987501045
+        ],
+        "distance_m": 1.2648521030671496,
+        "bearing_rad": 1.1209947677932128,
+        "distance_bin": "mid",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.004041019174217582,
+            -0.005514593591190303,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            3.1223095471285213e-06
+          ],
+          "start_s": 0.3127480135109423,
+          "duration_s": 0.20709328848697559,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-014",
+        "scene_class": "E_disturbance",
+        "seed": 9014,
+        "start_position_world_m": [
+          -0.1480348560238015,
+          0.33547879417685167,
+          0.728113446164338
+        ],
+        "start_yaw_rad": 0.5129772884402564,
+        "goal_position_world_m": [
+          -1.742411858414823,
+          0.3336149267928571,
+          0.6225502279697129
+        ],
+        "distance_m": 1.597868922280739,
+        "bearing_rad": 2.629784390124266,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.005388796472002657,
+            0.004525588647116509,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            5.822215144248562e-05
+          ],
+          "start_s": 0.4037212701354804,
+          "duration_s": 0.3243593239686669,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-015",
+        "scene_class": "E_disturbance",
+        "seed": 9015,
+        "start_position_world_m": [
+          -0.35947009886507186,
+          0.15185357426837742,
+          0.8439506712585885
+        ],
+        "start_yaw_rad": 0.0964271976267721,
+        "goal_position_world_m": [
+          -1.6220415992232986,
+          0.6038485574183787,
+          0.8422458032738052
+        ],
+        "distance_m": 1.3410403293281077,
+        "bearing_rad": 2.701385482354021,
+        "distance_bin": "mid",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.005066984170619272,
+            -7.583816992028595e-05,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            9.844697744502456e-05
+          ],
+          "start_s": 0.44430498290159065,
+          "duration_s": 0.44262459866142695,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-016",
+        "scene_class": "E_disturbance",
+        "seed": 9016,
+        "start_position_world_m": [
+          -0.10788061077188116,
+          0.365114365804905,
+          0.8058746163110173
+        ],
+        "start_yaw_rad": -1.4312803092124693,
+        "goal_position_world_m": [
+          0.08432424519099524,
+          -1.420439465599797,
+          0.8519166942127576
+        ],
+        "distance_m": 1.796459035001141,
+        "bearing_rad": -0.03228452886357114,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.004165968148468043,
+            0.005725194701205246,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            6.397790311894531e-05
+          ],
+          "start_s": 0.3711069447051394,
+          "duration_s": 0.4805371531444297,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-017",
+        "scene_class": "E_disturbance",
+        "seed": 9017,
+        "start_position_world_m": [
+          0.28237989639414185,
+          0.2594068441476577,
+          0.7586720959057764
+        ],
+        "start_yaw_rad": 1.4924370898639623,
+        "goal_position_world_m": [
+          1.6818509583530767,
+          1.663728921143118,
+          0.709648973267645
+        ],
+        "distance_m": 1.9831901108442698,
+        "bearing_rad": -0.705308766659537,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.0049233810495744506,
+            0.006462189607879519,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            5.770442105846996e-06
+          ],
+          "start_s": 0.324982021808396,
+          "duration_s": 0.22970951411703064,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-018",
+        "scene_class": "E_disturbance",
+        "seed": 9018,
+        "start_position_world_m": [
+          0.015895062692780515,
+          -0.2997220447376119,
+          0.6992334374988756
+        ],
+        "start_yaw_rad": -0.6051480008273478,
+        "goal_position_world_m": [
+          1.841805259531822,
+          -0.28713090063323576,
+          0.6339463722530029
+        ],
+        "distance_m": 1.8271204078327905,
+        "bearing_rad": 0.6120437093635969,
+        "distance_bin": "far",
+        "bearing_bin": "front",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.0021294009150158106,
+            -0.010440167718823294,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            4.083605196733355e-05
+          ],
+          "start_s": 0.24857967803543274,
+          "duration_s": 0.42755559389766634,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-019",
+        "scene_class": "E_disturbance",
+        "seed": 9019,
+        "start_position_world_m": [
+          -0.2106145971954384,
+          -0.44445140270040406,
+          0.7343952496806175
+        ],
+        "start_yaw_rad": 2.1189356794251593,
+        "goal_position_world_m": [
+          -1.6514980066538327,
+          -1.2333504688660373,
+          0.6047568297009844
+        ],
+        "distance_m": 1.647820638353662,
+        "bearing_rad": 1.5235869959791781,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.006625514944574289,
+            -0.009170917328364803,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            8.861694475305829e-05
+          ],
+          "start_s": 0.4002729949351572,
+          "duration_s": 0.27711558973449,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-020",
+        "scene_class": "E_disturbance",
+        "seed": 9020,
+        "start_position_world_m": [
+          -0.11390298705018764,
+          -0.44232127703032287,
+          0.6615890786677667
+        ],
+        "start_yaw_rad": 3.08781820547412,
+        "goal_position_world_m": [
+          -1.1501986691533972,
+          -1.8249570413372522,
+          0.7746627023783625
+        ],
+        "distance_m": 1.7315819477764858,
+        "bearing_rad": 0.9813850300226558,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.008269511766086762,
+            -0.00759961315673302,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            7.266123495996327e-05
+          ],
+          "start_s": 0.3884930882970003,
+          "duration_s": 0.4572562179809999,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-021",
+        "scene_class": "E_disturbance",
+        "seed": 9021,
+        "start_position_world_m": [
+          -0.21258526312021642,
+          -0.2540486500285497,
+          0.7305758643531618
+        ],
+        "start_yaw_rad": 0.20862178660138087,
+        "goal_position_world_m": [
+          -0.9816968753862548,
+          1.5374768292471417,
+          0.8016173217526033
+        ],
+        "distance_m": 1.9509339055144583,
+        "bearing_rad": 1.767686264428352,
+        "distance_bin": "far",
+        "bearing_bin": "side",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.010374081520234966,
+            -0.0015387130630731185,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            9.903286039346375e-05
+          ],
+          "start_s": 0.2157511776038789,
+          "duration_s": 0.385227088957157,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-022",
+        "scene_class": "E_disturbance",
+        "seed": 9022,
+        "start_position_world_m": [
+          0.4060362007596118,
+          -0.1927979018861179,
+          0.7005814334905437
+        ],
+        "start_yaw_rad": -2.305694381409102,
+        "goal_position_world_m": [
+          2.2400301913937866,
+          -0.07392360361080309,
+          0.8485328103938549
+        ],
+        "distance_m": 1.843788129477001,
+        "bearing_rad": 2.370421007073853,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.004331344470341635,
+            -0.010069536856945666,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            8.542531155102773e-06
+          ],
+          "start_s": 0.34245734559290864,
+          "duration_s": 0.47295676379690316,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-023",
+        "scene_class": "E_disturbance",
+        "seed": 9023,
+        "start_position_world_m": [
+          -0.3140620955852327,
+          0.21521629580811485,
+          0.7832171875963218
+        ],
+        "start_yaw_rad": -1.4201245519234957,
+        "goal_position_world_m": [
+          -1.255594585073955,
+          1.6134320554975257,
+          0.8787218838631636
+        ],
+        "distance_m": 1.6883755170031602,
+        "bearing_rad": -2.6996275569100696,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            0.005723173406930556,
+            -0.006081344805015098,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            7.781514031262312e-05
+          ],
+          "start_s": 0.45291256523259055,
+          "duration_s": 0.24701031203348678,
+          "ramp_s": 0.1
+        }
+      },
+      {
+        "scenario_id": "E_disturbance-9000-024",
+        "scene_class": "E_disturbance",
+        "seed": 9024,
+        "start_position_world_m": [
+          -0.05337506404591885,
+          0.35031719728169053,
+          0.8096275889805862
+        ],
+        "start_yaw_rad": -2.131761268803944,
+        "goal_position_world_m": [
+          0.0040107300367334744,
+          1.9520452029308217,
+          0.882485742460263
+        ],
+        "distance_m": 1.6044108089799531,
+        "bearing_rad": -2.61643982151296,
+        "distance_bin": "far",
+        "bearing_bin": "rear",
+        "obstacles": [],
+        "kinematic_entity": null,
+        "dynamic_entity": null,
+        "degradation": null,
+        "disturbance": {
+          "force_body_n": [
+            -0.0066336354567624305,
+            -0.006638634386382926,
+            0.0
+          ],
+          "torque_body_nm": [
+            0.0,
+            0.0,
+            5.75249919131694e-06
+          ],
+          "start_s": 0.4237737573596363,
+          "duration_s": 0.2685916934316417,
+          "ramp_s": 0.1
+        }
+      }
+    ]
+  },
+  "content_sha256": "968d100c250c7c0705071902a4a4d9b6ab0da6c31ecb09eff25de08882c692c9"
+}

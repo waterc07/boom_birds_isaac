@@ -8,8 +8,10 @@ from dataclasses import dataclass
 from pathlib import Path
 
 EVALUATION_SCHEMA_ID = 'boom_birds.evaluation.v1'
-SUPPORTED_EVALUATION_SCHEMAS = frozenset({EVALUATION_SCHEMA_ID})
-OUTCOMES = ('SUCCESS', 'COLLISION', 'TIMEOUT', 'INVALID')
+EVALUATION_SCHEMA_ID_V2 = 'boom_birds.evaluation.v2'
+SUPPORTED_EVALUATION_SCHEMAS = frozenset({EVALUATION_SCHEMA_ID,
+                                          EVALUATION_SCHEMA_ID_V2})
+OUTCOMES = ('SUCCESS', 'COLLISION', 'TIMEOUT', 'OUT_OF_BOUNDS', 'INVALID')
 
 MANIFEST_SCHEMA_ID = 'boom_birds.manifest.v1'
 REQUIRED_MANIFEST_KEYS = (
@@ -35,6 +37,11 @@ class EpisodeResult:
     distance_bin: str = ''
     bearing_bin: str = ''
     time_to_goal_s: float | None = None
+    scene_class: str = ''
+    contact_evidence: bool = False
+    contact_force_n: float = 0.0
+    degradation_invalid_steps: int = 0
+    disturbance_applied: bool = False
 
     def __post_init__(self):
         if not isinstance(self.episode_id, str) or not self.episode_id:
@@ -59,6 +66,21 @@ class EpisodeResult:
             value = self.time_to_goal_s
             if not isinstance(value, (int, float)) or isinstance(value, bool):
                 raise ValueError('time_to_goal_s must be numeric or None')
+        if not isinstance(self.scene_class, str):
+            raise ValueError('scene_class must be a string')
+        if not isinstance(self.contact_evidence, bool):
+            raise ValueError('contact_evidence must be a bool')
+        if not isinstance(self.disturbance_applied, bool):
+            raise ValueError('disturbance_applied must be a bool')
+        if not isinstance(self.contact_force_n, (int, float)) \
+                or isinstance(self.contact_force_n, bool) \
+                or not self.contact_force_n == self.contact_force_n \
+                or self.contact_force_n < 0:
+            raise ValueError('contact_force_n must be a nonnegative number')
+        if not isinstance(self.degradation_invalid_steps, int) \
+                or isinstance(self.degradation_invalid_steps, bool) \
+                or self.degradation_invalid_steps < 0:
+            raise ValueError('degradation_invalid_steps must be a nonnegative integer')
 
     @property
     def success(self):
@@ -89,10 +111,13 @@ def summarize(results):
         'success': success,
         'collision': counts['COLLISION'],
         'timeout': counts['TIMEOUT'],
+        'out_of_bounds': counts['OUT_OF_BOUNDS'],
         'success_rate_of_valid': (success / valid) if valid else None,
         'success_rate_of_total': success / total,
         'collision_rate_of_valid': (counts['COLLISION'] / valid) if valid else None,
         'timeout_rate_of_valid': (counts['TIMEOUT'] / valid) if valid else None,
+        'out_of_bounds_rate_of_valid': ((counts['OUT_OF_BOUNDS'] / valid)
+                                        if valid else None),
         'invalid_rate_of_total': invalid / total,
         'mean_duration_s': sum(result.duration_s for result in results) / total,
         'mean_final_distance_m': sum(result.final_distance_m for result in results) / total,

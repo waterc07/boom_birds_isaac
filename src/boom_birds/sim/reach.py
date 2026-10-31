@@ -11,9 +11,11 @@ OUTCOME_RUNNING = 'RUNNING'
 OUTCOME_SUCCESS = 'SUCCESS'
 OUTCOME_COLLISION = 'COLLISION'
 OUTCOME_TIMEOUT = 'TIMEOUT'
+OUTCOME_OUT_OF_BOUNDS = 'OUT_OF_BOUNDS'
 OUTCOME_INVALID = 'INVALID'
 
-TERMINAL_OUTCOMES = (OUTCOME_SUCCESS, OUTCOME_COLLISION, OUTCOME_TIMEOUT, OUTCOME_INVALID)
+TERMINAL_OUTCOMES = (OUTCOME_SUCCESS, OUTCOME_COLLISION, OUTCOME_TIMEOUT,
+                     OUTCOME_OUT_OF_BOUNDS, OUTCOME_INVALID)
 
 
 def _finite(value, name):
@@ -89,7 +91,7 @@ class ReachEvaluator:
         if (any(abs(position_world_m[index]) > self.spec.max_abs_position_m
                 for index in range(3))
                 or position_world_m[2] < -1.0):
-            return ReachDecision(True, False, OUTCOME_INVALID, 'OUT_OF_BOUNDS',
+            return ReachDecision(True, False, OUTCOME_OUT_OF_BOUNDS, 'OUT_OF_BOUNDS',
                                  distance, speed_mps,
                                  self.hold_steps * self.dt_s)
         if collision or position_world_m[2] <= self.spec.collision_height_m:
