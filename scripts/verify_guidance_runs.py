@@ -150,6 +150,20 @@ else:
         'PASS' if all(summary['fault_summary'][kind]['classification_ok']
                       for kind in summary['fault_summary']) else 'FAIL')
 
+boundary_present = all(item.get('env_truncated') is not None for item in episodes)
+checks['episode_boundary_fields_present'] = boundary_present
+if boundary_present:
+    checks['no_environment_truncation'] = all(
+        not item['env_truncated'] for item in episodes)
+    checks['boundary_counter_clean'] = all(
+        item['boundary_count_ok'] or item['env_terminated'] for item in episodes)
+    checks['duration_matches_steps'] = all(
+        abs(item['duration_s'] - item['steps'] * 0.05) < 1e-6 for item in episodes)
+    if len(methods) == 2 and summary['faults'] == ['none']:
+        checks['paired_scenario_sets_equal'] = (
+            {item['scenario_id'] for item in by_method[methods[0]]}
+            == {item['scenario_id'] for item in by_method[methods[1]]})
+
 result = {
     'run_dir': str(args.run_dir),
     'episode_count': len(episodes),

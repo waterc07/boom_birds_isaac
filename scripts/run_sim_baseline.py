@@ -65,6 +65,7 @@ try:
     from isaaclab_tasks.direct.quadcopter.quadcopter_env import QuadcopterEnv, QuadcopterEnvCfg
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+    from boom_birds.evaluation.episode_boundary import EpisodeBoundary
     from boom_birds.sim.velocity_control import (
         VehicleParams, VehicleState, VelocityExecutor, VelocityGains, VelocitySetpoint,
     )
@@ -172,9 +173,10 @@ try:
             results = []
             episode_rows = []
             max_steps = int(math.ceil(args.timeout_s / dt))
+            boundary = EpisodeBoundary(env)
             with torch.inference_mode():
                 for episode_index in range(args.episodes):
-                    env.reset(seed=episode_index)
+                    boundary.start(episode_index)
                     reset_pose(0.0)
                     state = read_state()
                     executor.reset(state)
@@ -195,19 +197,75 @@ try:
                             expires_at_s=step * dt + reach_ttl, control_epoch=0)
                         control = executor.step(setpoint, state, step * dt)
                         action = control.to_actuator_action(params)
-                        _, _, terminated, _, _ = env.step(
+                        before_state = state
+                        _, _, terminated, truncated, _ = env.step(
                             torch.tensor([action], dtype=torch.float32, device=env.device))
+                        boundary_state = boundary.after_step(
+                            terminated[0].item(), truncated[0].item())
                         after = read_state()
                         speed = math.sqrt(sum(value * value
                                               for value in after.velocity_world_mps))
                         episode_peak = max(episode_peak, speed)
-                        env_terminated = bool(terminated[0].item())
-                        collision = (env_terminated
-                                     and after.position_world_m[2] <= spec.collision_height_m)
+                        boundary_fields = {
+                            'env_terminated': boundary_state['terminated'],
+                            'env_truncated': boundary_state['truncated'],
+                            'episode_length_buf': boundary_state['episode_length_buf'],
+                            'boundary_count_ok': boundary_state['count_ok'],
+                        }
+                        steps = step + 1
+                        if boundary_state['truncated']:
+                            outcome, reason = 'INVALID', 'ENV_TRUNCATED'
+                            episode_rows.append({
+                                'episode': episode_index, 'step': step,
+                                'time_s': round(elapsed, 4),
+                                'command': list(command),
+                                'position_world_m': list(before_state.position_world_m),
+                                'velocity_world_mps': list(before_state.velocity_world_mps),
+                                'yaw_rad': yaw_of(before_state), 'speed_mps': speed,
+                                'outcome': outcome, 'reason': reason,
+                                'distance_m': None, 'hold_time_s': None,
+                                **boundary_fields,
+                            })
+                            break
+                        if boundary_state['unexpected_reset']:
+                            outcome, reason = 'INVALID', 'ENV_UNEXPECTED_RESET'
+                            episode_rows.append({
+                                'episode': episode_index, 'step': step,
+                                'time_s': round(elapsed, 4),
+                                'command': list(command),
+                                'position_world_m': list(before_state.position_world_m),
+                                'velocity_world_mps': list(before_state.velocity_world_mps),
+                                'yaw_rad': yaw_of(before_state), 'speed_mps': speed,
+                                'outcome': outcome, 'reason': reason,
+                                'distance_m': None, 'hold_time_s': None,
+                                **boundary_fields,
+                            })
+                            break
+                        if boundary_state['terminated']:
+                            terminal_z = before_state.position_world_m[2]
+                            collision = terminal_z <= spec.collision_height_m
+                            decision = evaluator.update(
+                                position_world_m=before_state.position_world_m,
+                                speed_mps=speed, now_s=elapsed, collision=collision)
+                            outcome = ('COLLISION' if collision
+                                       else 'OUT_OF_BOUNDS')
+                            reason = 'ENV_TERMINATED_ALTITUDE'
+                            episode_rows.append({
+                                'episode': episode_index, 'step': step,
+                                'time_s': round(elapsed, 4),
+                                'command': list(command),
+                                'position_world_m': list(before_state.position_world_m),
+                                'velocity_world_mps': list(before_state.velocity_world_mps),
+                                'yaw_rad': yaw_of(before_state), 'speed_mps': speed,
+                                'outcome': outcome, 'reason': reason,
+                                'distance_m': None,
+                                'hold_time_s': None,
+                                **boundary_fields,
+                            })
+                            break
                         decision = evaluator.update(
                             position_world_m=after.position_world_m, speed_mps=speed,
-                            now_s=elapsed, collision=collision)
-                        steps = step + 1
+                            now_s=elapsed, collision=False)
                         episode_rows.append({
                             'episode': episode_index, 'step': step,
                             'time_s': round(elapsed, 4),
@@ -218,10 +276,8 @@ try:
                             'outcome': decision.outcome, 'reason': decision.reason,
                             'distance_m': decision.distance_m,
                             'hold_time_s': decision.hold_time_s,
+                            **boundary_fields,
                         })
-                        if decision.outcome == OUTCOME_RUNNING and env_terminated:
-                            outcome, reason = 'INVALID', 'ENV_TERMINATED_ALTITUDE'
-                            break
                         if decision.terminated:
                             outcome, reason = decision.outcome, decision.reason
                             break
@@ -254,7 +310,9 @@ try:
                 args.csv.parent.mkdir(parents=True, exist_ok=True)
                 columns = ['episode', 'step', 'time_s', 'command', 'position_world_m',
                            'velocity_world_mps', 'yaw_rad', 'speed_mps', 'outcome',
-                           'reason', 'distance_m', 'hold_time_s']
+                           'reason', 'distance_m', 'hold_time_s',
+                           'env_terminated', 'env_truncated', 'episode_length_buf',
+                           'boundary_count_ok']
                 with args.csv.open('w', encoding='utf-8') as handle:
                     handle.write(','.join(columns) + '\n')
                     for row in episode_rows:
@@ -279,6 +337,7 @@ try:
                 'exit_code': 0,
                 'outputs_sha256': {args.output.name: summary_sha},
                 'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
+                'gui_mode': not bool(getattr(args, 'headless', False)),
             }
             write_manifest(args.output.parent, manifest)
             print('BOOM_BIRDS_SIM_REACH_' + summary['status'], flush=True)
@@ -389,6 +448,7 @@ try:
                 INVALID_OBSERVATION: 'INVALID',
                 FAULT_NONE: 'SUCCESS',
             }
+            boundary = EpisodeBoundary(env)
             with torch.inference_mode():
                 for fault in faults:
                     if fault.kind == COLLISION_CONTACT:
@@ -400,7 +460,7 @@ try:
                         env._get_dones = original_dones
                     for scenario in scenarios:
                         for method_name in requested_methods:
-                            env.reset(seed=scenario.seed)
+                            boundary.start(scenario.seed)
                             reset_scenario(scenario)
                             state = read_state()
                             executor.reset(state)
@@ -423,6 +483,7 @@ try:
                             plateau = 0
                             last_z = None
                             injected = False
+                            boundary_state = None
                             max_steps = int(math.ceil(timeout_s / dt)) + 5
                             for step in range(max_steps):
                                 elapsed = (step + 1) * dt
@@ -449,9 +510,12 @@ try:
                                     control_epoch=0)
                                 control = executor.step(setpoint, state, step * dt)
                                 action = control.to_actuator_action(params)
-                                _, _, terminated, _, _ = env.step(
+                                before_state = state
+                                _, _, terminated, truncated, _ = env.step(
                                     torch.tensor([action], dtype=torch.float32,
                                                  device=env.device))
+                                boundary_state = boundary.after_step(
+                                    terminated[0].item(), truncated[0].item())
                                 after = read_state()
                                 last_position = after.position_world_m
                                 speed = math.sqrt(sum(value * value
@@ -459,6 +523,28 @@ try:
                                 peak_speed = max(peak_speed, speed)
                                 min_z = min(min_z, after.position_world_m[2])
                                 steps = step + 1
+                                if boundary_state['truncated']:
+                                    outcome, reason = 'INVALID', 'ENV_TRUNCATED'
+                                    break
+                                if boundary_state['unexpected_reset']:
+                                    outcome, reason = 'INVALID', 'ENV_UNEXPECTED_RESET'
+                                    break
+                                if boundary_state['terminated']:
+                                    is_contact = (
+                                        fault.kind == COLLISION_CONTACT
+                                        or collision_flag(fault, step)
+                                        or before_state.position_world_m[2]
+                                        <= spec.collision_height_m)
+                                    decision = evaluator.update(
+                                        position_world_m=before_state.position_world_m,
+                                        speed_mps=speed, now_s=elapsed,
+                                        collision=is_contact)
+                                    outcome = ('COLLISION' if is_contact
+                                               else 'OUT_OF_BOUNDS')
+                                    reason = 'ENV_TERMINATED_ALTITUDE'
+                                    if fault.kind == COLLISION_CONTACT:
+                                        contact_observed = True
+                                    break
                                 if fault.kind == COLLISION_CONTACT:
                                     if (last_z is not None
                                             and abs(after.position_world_m[2] - last_z) < 1e-5
@@ -533,6 +619,14 @@ try:
                                 'contact_observed': contact_observed,
                                 'injected_observation_step': (fault.step if injected
                                                               else None),
+                                'env_terminated': (None if boundary_state is None
+                                                   else bool(boundary_state['terminated'])),
+                                'env_truncated': (None if boundary_state is None
+                                                  else bool(boundary_state['truncated'])),
+                                'episode_length_buf': (None if boundary_state is None
+                                                       else boundary_state['episode_length_buf']),
+                                'boundary_count_ok': (None if boundary_state is None
+                                                      else bool(boundary_state['count_ok'])),
                                 'distance_bin': scenario.distance_bin,
                                 'bearing_bin': scenario.bearing_bin,
                                 'start_position_world_m': list(
@@ -1006,6 +1100,7 @@ try:
                 'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
                 'scenario_sha256': layered_manifest['content_sha256'],
                 'evaluation_version': EVALUATION_SCHEMA_ID_V2,
+                'gui_mode': not bool(getattr(args, 'headless', False)),
             }
             write_manifest(out_dir, manifest)
             print('BOOM_BIRDS_LAYERED_EVAL_' + summary['status'], flush=True)
@@ -1056,12 +1151,16 @@ try:
         rows = []
         summaries = []
         mark('run scenarios')
+        boundary = EpisodeBoundary(env)
         with torch.inference_mode():
             for scenario in scenarios:
-                env.reset(seed=args.seed)
+                boundary.start(args.seed)
                 reset_pose(scenario['yaw_rad'])
                 for _ in range(3):
-                    env.step(torch.zeros((1, 4), device=env.device))
+                    _, _, warm_terminated, warm_truncated, _ = env.step(
+                        torch.zeros((1, 4), device=env.device))
+                    boundary.after_step(warm_terminated[0].item(),
+                                        warm_truncated[0].item())
                 state = read_state()
                 executor.reset(state)
                 executor.control_epoch = 0
@@ -1076,7 +1175,7 @@ try:
                 for step in range(total_steps):
                     now_s = step * dt
                     if 'reset_at' in scenario and now_s >= scenario['reset_at'] and epoch == 0:
-                        env.reset(seed=args.seed)
+                        boundary.start(args.seed)
                         reset_pose(scenario['yaw_rad'])
                         state = read_state()
                         executor.reset(state)
@@ -1123,7 +1222,10 @@ try:
                             command[2], 0.0, 0.0, 0.0]],
                             dtype=torch.float32, device=env.device)
                         env._robot.write_root_velocity_to_sim(target, index)
-                        env.step(torch.zeros((1, 4), device=env.device))
+                        _, _, kin_terminated, kin_truncated, _ = env.step(
+                            torch.zeros((1, 4), device=env.device))
+                        boundary_state = boundary.after_step(
+                            kin_terminated[0].item(), kin_truncated[0].item())
                         output = {'reason': 'KINEMATIC_REFERENCE', 'degraded': False,
                                   'thrust_body_n': 0.0,
                                   'torque_body_nm': (0.0, 0.0, 0.0),
@@ -1131,13 +1233,28 @@ try:
                     else:
                         control = executor.step(setpoint, state, now_s)
                         action = control.to_actuator_action(params)
-                        env.step(torch.tensor([action], dtype=torch.float32,
-                                              device=env.device))
+                        _, _, dyn_terminated, dyn_truncated, _ = env.step(
+                            torch.tensor([action], dtype=torch.float32,
+                                         device=env.device))
+                        boundary_state = boundary.after_step(
+                            dyn_terminated[0].item(), dyn_truncated[0].item())
                         output = {'reason': control.reason,
                                   'degraded': control.degraded,
                                   'thrust_body_n': control.thrust_body_n,
                                   'torque_body_nm': control.torque_body_nm,
                                   'action': action}
+                    boundary_fields = {
+                        'env_terminated': boundary_state['terminated'],
+                        'env_truncated': boundary_state['truncated'],
+                        'episode_length_buf': boundary_state['episode_length_buf'],
+                        'boundary_count_ok': boundary_state['count_ok'],
+                    }
+                    if (boundary_state['truncated']
+                            or boundary_state['unexpected_reset']
+                            or boundary_state['terminated']):
+                        raise RuntimeError(
+                            'EPISODE_BOUNDARY_VIOLATION scenario={} step={} state={}'.format(
+                                scenario['name'], step, boundary_fields))
                     if output['reason'] == 'ACTION_EXPIRED':
                         expired_steps += 1
                     if output['reason'] == 'REJECT_CONTROL_EPOCH':
@@ -1157,6 +1274,7 @@ try:
                         'velocity_world_mps': list(after.velocity_world_mps),
                         'quat_wxyz': list(after.quat_wxyz),
                         'yaw_rad': yaw_of(after),
+                        **boundary_fields,
                     }
                     for key, value in row.items():
                         if isinstance(value, float) and not math.isfinite(value):
@@ -1257,6 +1375,10 @@ try:
             'ttl_s': ttl_s,
             'scenarios': summaries,
             'row_count': len(rows),
+            'code_commit': args.code_commit,
+            'working_tree': args.working_tree,
+            'gui_mode': not bool(getattr(args, 'headless', False)),
+            'command': ' '.join(sys.argv),
         }
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
@@ -1265,11 +1387,38 @@ try:
             columns = ['scenario', 'step', 'time_s', 'phase', 'reason', 'degraded',
                        'command_forward_left_up_yawrate', 'setpoint_issued_s',
                        'setpoint_expires_s', 'thrust_body_n', 'torque_body_nm', 'action',
-                       'position_world_m', 'velocity_world_mps', 'quat_wxyz', 'yaw_rad']
+                       'position_world_m', 'velocity_world_mps', 'quat_wxyz', 'yaw_rad',
+                       'env_terminated', 'env_truncated', 'episode_length_buf',
+                       'boundary_count_ok']
             with args.csv.open('w', encoding='utf-8') as handle:
                 handle.write(','.join(columns) + '\n')
                 for row in rows:
                     handle.write(','.join(json.dumps(row[column]) for column in columns) + '\n')
+        outputs_sha256 = {
+            args.output.name: hashlib.sha256(args.output.read_bytes()).hexdigest()}
+        if args.csv:
+            outputs_sha256[args.csv.name] = hashlib.sha256(
+                args.csv.read_bytes()).hexdigest()
+        manifest = {
+            'schema_version': MANIFEST_SCHEMA_ID,
+            'code_commit': args.code_commit,
+            'working_tree': args.working_tree,
+            'config_sha256': {
+                str(args.config): hashlib.sha256(args.config.read_bytes()).hexdigest()},
+            'asset_versions': {
+                'isaac_sim': '5.1.0.0 (host manifest)',
+                'task_source_sha256': hashlib.sha256(
+                    Path(inspect.getfile(QuadcopterEnv)).read_bytes()).hexdigest(),
+                'asset_uri': str(getattr(cfg.robot.spawn, 'usd_path', None)),
+            },
+            'seeds': {'seed': args.seed},
+            'command': ' '.join(sys.argv),
+            'exit_code': 0,
+            'outputs_sha256': outputs_sha256,
+            'evidence_domain': 'SIMULATION_MODEL',
+            'gui_mode': not bool(getattr(args, 'headless', False)),
+        }
+        write_manifest(args.output.parent, manifest)
         print('BOOM_BIRDS_SIM_VELOCITY_CHAIN_' + result['status'], flush=True)
         print(json.dumps({'checks': checks, 'scenarios': summaries}, indent=2), flush=True)
         raise SystemExit(0 if result['status'] == 'PASS' else 1)
