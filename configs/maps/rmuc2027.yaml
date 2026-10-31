@@ -1,0 +1,53 @@
+contract_version: boom_birds.map_contract.v1
+asset_id: rmuc2027-isaacsim-20261028
+assets:
+  preview_rel: rmuc2027_preview.usda
+  terrain_rel: assets/rmuc2027_terrain.usdc
+  preview_sha256: b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8
+  terrain_sha256: f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa
+coordinate_contract:
+  units: m
+  meters_per_unit: 1.0
+  up_axis: Z
+  world_frame: X_EAST_Y_NORTH_Z_UP
+  body_frame: FLU
+  conversion: identity_translation
+  source: rmuc2027_preview.usda header (metersPerUnit=1, upAxis=Z)
+bounds_m:
+  min: [-14.0005, -8.0016, -0.3010]
+  max: [14.0005, 8.0016, 3.4977]
+physics:
+  terrain_collision: static_triangle_mesh
+  default_plane: disabled
+  collision_prims_root: /World/RMUC2027
+  friction: 0.8
+  restitution: 0.0
+  source: assets/rmuc2027_terrain.usdc (PhysicsCollisionAPI triangle meshes, no RigidBody)
+evaluation:
+  version: boom_birds.map_eval.v1
+  success_distance_m: 0.2
+  success_speed_mps: 0.2
+  hold_time_s: 0.5
+  default_timeout_s: 15.0
+  takeoff_landing:
+    hover_altitude_m: 1.0
+    hover_time_s: 1.0
+    landing_speed_max_mps: 0.25
+    ground_tolerance_m: 0.25
+  contact_force_threshold_n: 0.02
+sites:
+  takeoff_landing: {x: -10.0, y: 0.0, ground_z_m: -0.001}
+  reach_pairs:
+    - {id: reach_A, start: [-10.0, -1.5, 0.512], goal: [-10.0, 0.0, 0.549], yaw_rad: 0.0}
+    - {id: reach_B, start: [-9.5, 1.5, 0.512], goal: [-9.5, -0.25, 0.545], yaw_rad: 1.5708}
+    - {id: reach_C, start: [-10.5, 1.75, 0.506], goal: [-9.25, 0.5, 0.538], yaw_rad: -0.5}
+  contact:
+    start: [-4.0, 0.0, 1.0]
+    yaw_rad: 0.0
+    command_forward_mps: 0.6
+    wall_expected_prim: /World/RMUC2027/Collisions/collision_014
+provenance:
+  upstream: CosmosMount/rmuc2027_mjarena
+  upstream_commit: ffd1eb7d1d1a2d1654125d8f316fdb0fdac6d001
+  local_license: source/LICENSE (MIT); terrain redistribution terms remain RULE-CHECK
+  notes: source/upstream_provenance.json; original assets unmodified
