@@ -21,8 +21,10 @@ args = parser.parse_args()
 
 contract = load_map_contract(args.map_config, args.local_config)
 cases = load_map_cases(args.cases, contract)
-counts = {kind: sum(case.repeats for case in cases if case.kind == kind)
-          for kind in ('reach', 'takeoff_landing', 'contact')}
+case_payload = json.loads(args.cases.read_text(encoding='utf-8'))
+counts = {}
+for case in cases:
+    counts[case.kind] = counts.get(case.kind, 0) + case.repeats
 payload = {
     'schema_version': 'boom_birds.map_freeze.v1',
     'map_asset_id': contract.asset_id,
@@ -32,6 +34,11 @@ payload = {
     'cases_sha256': hashlib.sha256(args.cases.read_bytes()).hexdigest(),
     'case_ids': [case.case_id for case in cases],
     'counts': counts,
+    'case_repeats': {case.case_id: case.repeats for case in cases},
+    'regions': case_payload.get('regions', []),
+    'routes': case_payload.get('routes', []),
+    'cases_file': str(args.cases),
+    'map_config_file': str(args.map_config),
     'total_episodes': sum(counts.values()),
     'evaluation': {
         'version': contract.evaluator_version,

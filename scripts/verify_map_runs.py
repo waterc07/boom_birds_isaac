@@ -38,9 +38,16 @@ checks['summary_status_pass'] = summary.get('status') == 'PASS'
 checks['episode_count'] = len(episodes) == freeze['total_episodes']
 checks['counts_match_freeze'] = summary['counts'] == freeze['counts']
 expected_cases = freeze['case_ids']
+cases_path = Path(freeze.get('cases_file', 'configs/scenarios/map_cases_v1.json'))
+cases_payload = (json.loads(cases_path.read_text(encoding='utf-8'))
+                 if cases_path.exists() else {'cases': []})
+case_specs = {item['case_id']: item for item in cases_payload.get('cases', [])}
+regions = {item['region_id']: item for item in freeze.get('regions', [])}
+expected_repeats = freeze.get('case_repeats', {cid: 2 for cid in expected_cases})
 per_case = Counter(item['case_id'] for item in episodes)
-checks['case_repeats'] = (sorted(per_case) == sorted(expected_cases)
-                          and all(count == 2 for count in per_case.values()))
+checks['case_repeats'] = (
+    sorted(per_case) == sorted(expected_cases)
+    and all(per_case[cid] == expected_repeats.get(cid, 1) for cid in per_case))
 checks['manifest_commit_recorded'] = (
     manifest.get('code_commit') not in (None, '', 'WORKTREE'))
 checks['gui_mode'] = manifest.get('gui_mode') is True
@@ -55,8 +62,9 @@ checks['outputs_hash_match'] = all(
     sha(args.run_dir / name) == digest
     for name, digest in manifest['outputs_sha256'].items())
 checks['freeze_files_hash_match'] = (
-    sha(Path('configs/maps/rmuc2027.yaml')) == freeze['map_config_sha256']
-    and sha(Path('configs/scenarios/map_cases_v1.json')) == freeze['cases_sha256'])
+    sha(Path(freeze.get('map_config_file', 'configs/maps/rmuc2027.yaml')))
+    == freeze['map_config_sha256']
+    and sha(cases_path) == freeze['cases_sha256'])
 
 steps_by_episode = {}
 for row in steps:
@@ -111,12 +119,64 @@ checks['outcome_counts_match_summary'] = all(
     sum(1 for item in episodes if item['kind'] == kind and item['outcome'] == outcome)
     for kind in summary['outcomes'] for outcome in summary['outcomes'][kind])
 
+# Region and route contract checks for v2 map plans.
+def _in_region(point, region_id):
+    region = regions.get(region_id)
+    if region is None:
+        return False
+    return (region['x_min'] <= point[0] <= region['x_max']
+            and region['y_min'] <= point[1] <= region['y_max'])
+
+region_ok = True
+route_ok = True
+contact_geometry_ok = True
+contact_prims = set()
+for item in episodes:
+    spec = case_specs.get(item['case_id'])
+    if spec is None:
+        region_ok = False
+        continue
+    if item['kind'] in ('local_reach', 'route'):
+        if not _in_region(spec['start_position_world_m'], spec.get('region_id')):
+            region_ok = False
+        if spec.get('goal_position_world_m') is not None and not _in_region(
+                spec['goal_position_world_m'], spec.get('goal_region_id')):
+            region_ok = False
+    if item['kind'] == 'contact':
+        contact_prims.add(item.get('expected_contact_prim'))
+        if item.get('contact_prim') != item.get('expected_contact_prim'):
+            contact_geometry_ok = False
+    if item['kind'] == 'route':
+        seq = steps_by_episode[item['episode_id']]
+        indices = [row.get('waypoint_index') for row in seq]
+        if any(index is None for index in indices):
+            route_ok = False
+        elif any(right < left for left, right in zip(indices, indices[1:])):
+            route_ok = False
+        elif item['outcome'] == 'SUCCESS':
+            waypoints = spec.get('waypoints', [])
+            if not waypoints or indices[-1] != len(waypoints) - 1:
+                route_ok = False
+            if item.get('waypoints_completed') != len(waypoints):
+                route_ok = False
+            if not seq[-1].get('final_waypoint'):
+                route_ok = False
+        if not all(-20 <= value <= 20 for point in spec.get('waypoints', [])
+                   for value in point):
+            route_ok = False
+checks['region_membership'] = region_ok
+checks['route_waypoint_sequence'] = route_ok
+checks['contact_geometry_diversity'] = (
+    len(contact_prims) >= 2 and contact_geometry_ok)
+
 # Deterministic repeats: same case, same final state and outcome.
 repeat_ok = True
 by_case = {}
 for item in episodes:
     by_case.setdefault(item['case_id'], []).append(item)
 for case_id, items in by_case.items():
+    if expected_repeats.get(case_id, 1) < 2:
+        continue
     if len(items) < 2:
         repeat_ok = False
         continue

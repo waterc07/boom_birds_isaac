@@ -52,6 +52,7 @@ try:
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
     from boom_birds.evaluation.episode_boundary import EpisodeBoundary
+    from boom_birds.evaluation.waypoints import WaypointConfig, WaypointRunner
     from boom_birds.evaluation.map_eval import (
         MapReachEvaluator, MapReachSpec, TakeoffLandingEvaluator)
     from boom_birds.sim.guidance import GuidanceSpec, make_guidance
@@ -199,24 +200,13 @@ try:
                                         (1.0, 0.0, 0.0), 6.0)
             return str(hit.get('collision', '')) if hit.get('hit') else ''
 
-        takeoff_case = next((item for item in cases
-                             if item.kind == 'takeoff_landing'), None)
-        contact_case = next((item for item in cases if item.kind == 'contact'), None)
-        ground_prim = find_ground_prim(
-            takeoff_case.start_position_world_m[0],
-            takeoff_case.start_position_world_m[1]) if takeoff_case else ''
-        wall_prim = find_wall_prim(
-            contact_case.start_position_world_m[0],
-            contact_case.start_position_world_m[1],
-            contact_case.start_position_world_m[2]) if contact_case else ''
-        if not wall_prim:
-            wall_prim = '/World/RMUC2027/Collisions/collision_014'
-        wall_prim_valid = bool(wall_prim) and stage.GetPrimAtPath(wall_prim).IsValid()
-        print('[map] ground prim=' + ground_prim + ' wall prim=' + wall_prim
-              + ' valid=' + str(wall_prim_valid), flush=True)
+        contact_prims = sorted({item.contact_prim for item in cases
+                                if item.kind == 'contact' and item.contact_prim})
+        print('[map] contact prims=' + json.dumps(contact_prims), flush=True)
         sensors = []
-        for prim in (ground_prim, wall_prim):
-            if not prim:
+        for prim in contact_prims:
+            if not prim or not stage.GetPrimAtPath(prim).IsValid():
+                print('[map] contact prim missing: ' + str(prim), flush=True)
                 continue
             sensor_cfg = ContactSensorCfg(
                 prim_path=robot_root + '/body',
@@ -328,7 +318,7 @@ try:
                     set_pose(case.start_position_world_m, case.start_yaw_rad)
                     state = read_state()
                     executor.reset(state)
-                    if case.kind == 'reach':
+                    if case.kind in ('reach', 'local_reach'):
                         spec = MapReachSpec(
                             goal_position_world_m=case.goal_position_world_m,
                             bounds_min_m=contract.bounds_min_m,
@@ -340,12 +330,26 @@ try:
                         guidance = make_guidance(
                             'proportional', case.goal_position_world_m,
                             proportional_spec=proportional, braking_spec=None)
+                        waypoint_runner = None
+                    elif case.kind == 'route':
+                        evaluator = None
+                        guidance = None
+                        waypoint_runner = WaypointRunner(
+                            case.waypoints,
+                            WaypointConfig(arrival_radius_m=0.25,
+                                           arrival_speed_mps=0.2,
+                                           intermediate_hold_s=0.2,
+                                           final_hold_s=0.5,
+                                           segment_timeout_s=25.0, dt_s=dt),
+                            timeout_s=case.timeout_s)
                     elif case.kind == 'takeoff_landing':
                         evaluator = TakeoffLandingEvaluator(case, case.timeout_s)
                         guidance = None
+                        waypoint_runner = None
                     else:
                         evaluator = None
                         guidance = None
+                        waypoint_runner = None
                     outcome, reason = 'RUNNING', 'RUNNING'
                     contact_max = 0.0
                     contact_prim = ''
@@ -356,8 +360,17 @@ try:
                     for step in range(max_steps):
                         elapsed = (step + 1) * dt
                         state = read_state()
-                        if case.kind == 'reach':
+                        if case.kind in ('reach', 'local_reach'):
                             command = guidance.command(
+                                position_world_m=state.position_world_m,
+                                velocity_world_mps=state.velocity_world_mps,
+                                quat_wxyz=state.quat_wxyz)
+                        elif case.kind == 'route':
+                            target = waypoint_runner.waypoints[waypoint_runner.index]
+                            route_guidance = make_guidance(
+                                'proportional', target,
+                                proportional_spec=proportional, braking_spec=None)
+                            command = route_guidance.command(
                                 position_world_m=state.position_world_m,
                                 velocity_world_mps=state.velocity_world_mps,
                                 quat_wxyz=state.quat_wxyz)
@@ -397,12 +410,28 @@ try:
                             outcome, reason = 'INVALID', 'ENV_TRUNCATED'
                         elif boundary_state['unexpected_reset']:
                             outcome, reason = 'INVALID', 'ENV_UNEXPECTED_RESET'
-                        elif case.kind == 'reach':
+                        elif case.kind in ('reach', 'local_reach'):
                             decision = evaluator.update(
                                 after.position_world_m, speed, elapsed,
                                 collision=contact_force > 0.02)
                             outcome, reason = decision['outcome'], decision['reason']
                             phase = 'REACH'
+                        elif case.kind == 'route':
+                            decision = waypoint_runner.update(
+                                after.position_world_m, speed, elapsed,
+                                contact=contact_force > 0.02)
+                            outcome, reason = decision['outcome'], decision['reason']
+                            phase = ('FINAL' if decision['final_waypoint']
+                                     else 'INTERMEDIATE')
+                            if outcome == 'RUNNING':
+                                bounds = contract
+                                if (not (bounds.bounds_min_m[0] <= after.position_world_m[0]
+                                         <= bounds.bounds_max_m[0])
+                                        or not (bounds.bounds_min_m[1] <= after.position_world_m[1]
+                                                <= bounds.bounds_max_m[1])
+                                        or after.position_world_m[2]
+                                        < bounds.bounds_min_m[2] - 0.2):
+                                    outcome, reason = 'OUT_OF_BOUNDS', 'MAP_BOUNDS'
                         elif case.kind == 'takeoff_landing':
                             decision = evaluator.update(
                                 after.position_world_m, speed, contact_force, elapsed)
@@ -432,6 +461,15 @@ try:
                                 after.angular_velocity_body_radps),
                             'command': list(command),
                             'phase': phase,
+                            'waypoint_index': (waypoint_runner.index
+                                               if case.kind == 'route' else None),
+                            'waypoint_count': (len(waypoint_runner.waypoints)
+                                               if case.kind == 'route' else None),
+                            'waypoint_distance_m': (decision.get('waypoint_distance_m')
+                                                    if (case.kind == 'route'
+                                                        and decision is not None) else None),
+                            'final_waypoint': (decision.get('final_waypoint')
+                                               if case.kind == 'route' else None),
                             'contact_force_n': contact_force,
                             'contact_prim': contact_prim if contact_step is not None else '',
                             'outcome': outcome, 'reason': reason,
@@ -448,8 +486,10 @@ try:
                         capture(episode_id + '_landed')
                     if case.kind == 'contact' and contact_step is not None:
                         capture(episode_id + '_contact')
-                    if case.kind == 'reach' and outcome == 'SUCCESS':
+                    if case.kind in ('reach', 'local_reach') and outcome == 'SUCCESS':
                         capture(episode_id + '_goal')
+                    if case.kind == 'route' and outcome == 'SUCCESS':
+                        capture(episode_id + '_route_goal')
                     last = read_state()
                     results.append({
                         'episode_id': episode_id, 'case_id': case.case_id,
@@ -463,6 +503,12 @@ try:
                         'contact_max_force_n': contact_max,
                         'contact_step': contact_step,
                         'contact_prim': contact_prim,
+                        'region_id': case.region_id,
+                        'goal_region_id': case.goal_region_id,
+                        'route_id': case.route_id,
+                        'waypoints_completed': (waypoint_runner.waypoints_completed
+                                               if case.kind == 'route' else None),
+                        'expected_contact_prim': case.contact_prim,
                         'start_position_world_m': list(case.start_position_world_m),
                         'goal_position_world_m': (None if case.goal_position_world_m
                                                   is None
@@ -492,13 +538,13 @@ try:
             },
             'counts': {
                 kind: sum(1 for item in results if item['kind'] == kind)
-                for kind in ('reach', 'takeoff_landing', 'contact')},
+                for kind in sorted({item['kind'] for item in results})},
             'outcomes': {
                 kind: {outcome: sum(1 for item in results
                                     if item['kind'] == kind and item['outcome'] == outcome)
                        for outcome in ('SUCCESS', 'COLLISION', 'TIMEOUT',
                                        'OUT_OF_BOUNDS', 'INVALID')}
-                for kind in ('reach', 'takeoff_landing', 'contact')},
+                for kind in sorted({item['kind'] for item in results})},
             'episodes': results,
             'invalid_episodes': invalid_episodes,
             'gui_mode': not bool(getattr(args, 'headless', False)),

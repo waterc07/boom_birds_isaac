@@ -40,6 +40,11 @@ class MapCase:
     timeout_s: float
     repeats: int
     command_forward_left_up_yawrate: tuple = (0.0, 0.0, 0.0, 0.0)
+    region_id: str | None = None
+    goal_region_id: str | None = None
+    route_id: str | None = None
+    waypoints: tuple = ()
+    contact_prim: str | None = None
     hover_altitude_m: float = 1.0
     hover_time_s: float = 1.0
     landing_speed_max_mps: float = 0.25
@@ -89,13 +94,16 @@ def load_map_contract(config_path, local_path=None):
 
 def load_map_cases(path, contract=None):
     payload = json.loads(Path(path).read_text(encoding='utf-8'))
-    if payload.get('schema_version') != 'boom_birds.map_cases.v1':
+    if payload.get('schema_version') not in ('boom_birds.map_cases.v1',
+                                            'boom_birds.map_cases.v2'):
         raise ValueError('unsupported map case schema')
     cases = []
     for item in payload['cases']:
         kind = item['kind']
-        if kind not in ('reach', 'takeoff_landing', 'contact'):
+        if kind not in ('reach', 'local_reach', 'route', 'takeoff_landing',
+                        'contact'):
             raise ValueError('unknown map case kind: ' + str(kind))
+        regions = {item['region_id']: item for item in payload.get('regions', [])}
         start = tuple(float(value) for value in item['start_position_world_m'])
         if len(start) != 3:
             raise ValueError('start position must be three values')
@@ -112,6 +120,12 @@ def load_map_cases(path, contract=None):
             command_forward_left_up_yawrate=tuple(
                 float(value) for value in item.get(
                     'command_forward_left_up_yawrate', (0.0, 0.0, 0.0, 0.0))),
+            region_id=item.get('region_id'),
+            goal_region_id=item.get('goal_region_id'),
+            route_id=item.get('route_id'),
+            waypoints=tuple(tuple(float(value) for value in point)
+                            for point in item.get('waypoints', ())),
+            contact_prim=item.get('contact_prim'),
             hover_altitude_m=float(item.get('hover_altitude_m', 1.0)),
             hover_time_s=float(item.get('hover_time_s', 1.0)),
             landing_speed_max_mps=float(item.get('landing_speed_max_mps', 0.25)))
@@ -125,12 +139,40 @@ def load_map_cases(path, contract=None):
                         and low[1] <= point[1] <= high[1]
                         and low[2] - 0.5 <= point[2] <= high[2]):
                     raise ValueError(name + ' outside map bounds')
-        if kind in ('reach', 'contact') and goal is None and kind == 'reach':
+        if kind in ('reach', 'local_reach') and goal is None:
             raise ValueError('reach case needs a goal')
-        if kind == 'reach' and goal is None:
-            raise ValueError('reach case needs a goal')
-        if case.repeats < 2:
-            raise ValueError('frozen case needs at least two repeats')
+        if kind == 'local_reach' and case.region_id is None:
+            raise ValueError('local reach case needs region_id')
+        if kind == 'route':
+            if len(case.waypoints) < 2:
+                raise ValueError('route case needs at least two waypoints')
+            if case.region_id is None or case.goal_region_id is None:
+                raise ValueError('route case needs start/goal regions')
+            if case.route_id is None:
+                raise ValueError('route case needs route_id')
+        if kind == 'contact' and case.contact_prim is None:
+            raise ValueError('contact case needs contact_prim')
+        if case.region_id is not None and case.region_id not in regions:
+            raise ValueError('unknown region ' + case.region_id)
+        if case.goal_region_id is not None and case.goal_region_id not in regions:
+            raise ValueError('unknown goal region ' + case.goal_region_id)
+        if case.region_id is not None:
+            box = regions[case.region_id]
+            def inside(point):
+                return (box['x_min'] <= point[0] <= box['x_max']
+                        and box['y_min'] <= point[1] <= box['y_max'])
+            if not inside(start):
+                raise ValueError('start outside region ' + case.region_id)
+            if case.goal_region_id is not None and goal is not None:
+                box = regions[case.goal_region_id]
+                if not (box['x_min'] <= goal[0] <= box['x_max']
+                        and box['y_min'] <= goal[1] <= box['y_max']):
+                    raise ValueError('goal outside goal region')
+            for waypoint in case.waypoints:
+                if not all(-20 <= value <= 20 for value in waypoint):
+                    raise ValueError('waypoint outside plausible map bounds')
+        if case.repeats < 1:
+            raise ValueError('case needs at least one repeat')
         cases.append(case)
     return cases
 
@@ -146,6 +188,10 @@ def case_payload(case):
         'repeats': case.repeats,
         'command_forward_left_up_yawrate': list(
             case.command_forward_left_up_yawrate),
+        'region_id': case.region_id, 'goal_region_id': case.goal_region_id,
+        'route_id': case.route_id,
+        'waypoints': [list(point) for point in case.waypoints],
+        'contact_prim': case.contact_prim,
         'hover_altitude_m': case.hover_altitude_m,
         'hover_time_s': case.hover_time_s,
         'landing_speed_max_mps': case.landing_speed_max_mps,
