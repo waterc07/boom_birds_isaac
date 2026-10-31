@@ -797,24 +797,24 @@
       "contact_prim": "/World/RMUC2027/Collisions/collision_014"
     },
     {
-      "case_id": "contact_wall15_A",
+      "case_id": "contact_ground_A",
       "kind": "contact",
-      "ground_z_m": 0,
+      "ground_z_m": -0.001,
       "start_position_world_m": [
-        -4,
-        0,
-        1.2
+        -10.0,
+        0.0,
+        1.0
       ],
-      "start_yaw_rad": 0,
+      "start_yaw_rad": 0.0,
       "command_forward_left_up_yawrate": [
-        0.6,
-        0,
-        0,
-        0
+        0.0,
+        0.0,
+        -0.35,
+        0.0
       ],
-      "timeout_s": 8,
+      "timeout_s": 8.0,
       "repeats": 2,
-      "contact_prim": "/World/RMUC2027/Collisions/collision_015"
+      "contact_prim": "/World/RMUC2027/Collisions/collision_005"
     }
   ],
   "notes": "Local reaches start airborne in verified regions (ORACLE state). Routes are offline waypoints; no online planning/avoidance. Contact cases use two distinct map collision prims with PhysX contact sensors."
