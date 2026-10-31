@@ -1,0 +1,28 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "9c02dbd97e9997d469e7c2186c1f640d9fc3b811",
+  "working_tree": "clean at 9c02dbd97e9997d469e7c2186c1f640d9fc3b811 except untracked evidence",
+  "config_sha256": {
+    "configs\\vehicles\\sim_reference.yaml": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+  },
+  "asset_versions": {
+    "isaac_sim": "5.1.0.0 (host manifest)",
+    "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+    "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd"
+  },
+  "seeds": {
+    "scenario_seeds": [
+      2000,
+      2001
+    ]
+  },
+  "command": "scripts/run_sim_baseline.py --task compare --config configs/vehicles/sim_reference.yaml --scenario-manifest configs/scenarios/final_20261031.json --methods proportional,braking --run-kind fault --fault collision_flag,collision_contact,timeout,invalid_observation --fault-step 10 --fault-timeout-s 1.5 --scenario-limit 2 --timeout-s 20 --code-commit 9c02dbd97e9997d469e7c2186c1f640d9fc3b811 --working-tree clean at 9c02dbd97e9997d469e7c2186c1f640d9fc3b811 except untracked evidence --headless --device cuda:0 --clone-in-usd --output outputs/guidance_compare/faults_run4",
+  "started_at": "2026-10-31T17:33:54.310756+08:00",
+  "exit_code": 0,
+  "outputs_sha256": {
+    "summary.json": "1af2deb2473177fd7c008147016607e7b1bb5ca6683d89a606867e4b54c6de28",
+    "episodes.jsonl": "401a1a8a9b7f9a3ef52683718ef5963a848c085d2af125a1a2a79412604b9e51"
+  },
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "scenario_sha256": "0db366b63305335e1503cfda85a933f7cf2f5c003392c21dcd607e8fbb15ffd2"
+}

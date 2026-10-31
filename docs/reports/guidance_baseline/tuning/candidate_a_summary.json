@@ -1,0 +1,518 @@
+{
+  "schema_version": "boom_birds.comparison.v1",
+  "task": "guidance_compare",
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "run_kind": "tuning",
+  "methods": [
+    "proportional",
+    "braking"
+  ],
+  "scenarios": {
+    "manifest": "configs\\scenarios\\tuning_20261031.json",
+    "content_sha256": "961024239962cdc13b65c34f6cb65dc00bb85ba1753fb15340dc4f6c545bd070",
+    "count": 8,
+    "spec": {
+      "start_xy_range_m": [
+        -0.5,
+        0.5
+      ],
+      "start_z_range_m": [
+        0.65,
+        0.85
+      ],
+      "start_yaw_range_rad": [
+        -3.141592653589793,
+        3.141592653589793
+      ],
+      "goal_xy_range_m": [
+        [
+          0.9,
+          1.6
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "goal_z_range_m": [
+        0.65,
+        0.95
+      ],
+      "min_goal_distance_m": 0.8,
+      "max_goal_distance_m": 2.5
+    }
+  },
+  "guidance_params": {
+    "proportional": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "gain_per_m": 1.0,
+      "arrival_radius_m": 0.25,
+      "max_yaw_rate_radps": 0.0
+    },
+    "braking": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "deceleration_mps2": 0.8,
+      "velocity_feedback_gain": 0.8,
+      "arrival_radius_m": 0.25
+    }
+  },
+  "thresholds": {
+    "success_distance_m": 0.3,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "timeout_s": 20.0,
+    "collision_height_m": 0.1,
+    "max_abs_position_m": 5.0
+  },
+  "faults": [
+    "none"
+  ],
+  "total_episodes": 16,
+  "episodes_per_method": {
+    "proportional": 8,
+    "braking": 8
+  },
+  "natural_performance_rates_excluded": false,
+  "proposed_not_frozen": false,
+  "methods_summary": {
+    "proportional": {
+      "schema_version": "boom_birds.evaluation.v1",
+      "total_episodes": 8,
+      "valid_episodes": 8,
+      "invalid_episodes": 0,
+      "valid_denominator": 8,
+      "success": 8,
+      "collision": 0,
+      "timeout": 0,
+      "success_rate_of_valid": 1.0,
+      "success_rate_of_total": 1.0,
+      "collision_rate_of_valid": 0.0,
+      "timeout_rate_of_valid": 0.0,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 3.1875,
+      "mean_final_distance_m": 0.0238052225507898,
+      "worst_final_distance_m": 0.034336228755958625,
+      "failure_cases": [],
+      "method": "proportional",
+      "success_ci95": [
+        0.6755843804891231,
+        1.0
+      ],
+      "mean_time_to_goal_s": 3.1875,
+      "median_time_to_goal_s": 3.225
+    },
+    "braking": {
+      "schema_version": "boom_birds.evaluation.v1",
+      "total_episodes": 8,
+      "valid_episodes": 8,
+      "invalid_episodes": 0,
+      "valid_denominator": 8,
+      "success": 8,
+      "collision": 0,
+      "timeout": 0,
+      "success_rate_of_valid": 1.0,
+      "success_rate_of_total": 1.0,
+      "collision_rate_of_valid": 0.0,
+      "timeout_rate_of_valid": 0.0,
+      "invalid_rate_of_total": 0.0,
+      "mean_duration_s": 3.31875,
+      "mean_final_distance_m": 0.10428240762485527,
+      "worst_final_distance_m": 0.20424181243475956,
+      "failure_cases": [],
+      "method": "braking",
+      "success_ci95": [
+        0.6755843804891231,
+        1.0
+      ],
+      "mean_time_to_goal_s": 3.31875,
+      "median_time_to_goal_s": 3.35
+    }
+  },
+  "strata": {
+    "distance_bin": {
+      "proportional": {
+        "medium": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 6,
+          "valid_episodes": 6,
+          "invalid_episodes": 0,
+          "valid_denominator": 6,
+          "success": 6,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.3750000000000004,
+          "mean_final_distance_m": 0.026150824432712855,
+          "worst_final_distance_m": 0.034336228755958625,
+          "failure_cases": [],
+          "method": "proportional",
+          "success_ci95": [
+            0.6096569663469354,
+            0.9999999999999999
+          ],
+          "mean_time_to_goal_s": 3.375,
+          "median_time_to_goal_s": 3.325
+        },
+        "short": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 2,
+          "valid_episodes": 2,
+          "invalid_episodes": 0,
+          "valid_denominator": 2,
+          "success": 2,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 2.625,
+          "mean_final_distance_m": 0.01676841690502063,
+          "worst_final_distance_m": 0.0202685651424401,
+          "failure_cases": [],
+          "method": "proportional",
+          "success_ci95": [
+            0.34237195288961925,
+            1.0
+          ],
+          "mean_time_to_goal_s": 2.625,
+          "median_time_to_goal_s": 2.625
+        }
+      },
+      "braking": {
+        "medium": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 6,
+          "valid_episodes": 6,
+          "invalid_episodes": 0,
+          "valid_denominator": 6,
+          "success": 6,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.516666666666666,
+          "mean_final_distance_m": 0.08029503630491465,
+          "worst_final_distance_m": 0.13979158088240795,
+          "failure_cases": [],
+          "method": "braking",
+          "success_ci95": [
+            0.6096569663469354,
+            0.9999999999999999
+          ],
+          "mean_time_to_goal_s": 3.516666666666667,
+          "median_time_to_goal_s": 3.45
+        },
+        "short": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 2,
+          "valid_episodes": 2,
+          "invalid_episodes": 0,
+          "valid_denominator": 2,
+          "success": 2,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 2.7250000000000005,
+          "mean_final_distance_m": 0.17624452158467713,
+          "worst_final_distance_m": 0.20424181243475956,
+          "failure_cases": [],
+          "method": "braking",
+          "success_ci95": [
+            0.34237195288961925,
+            1.0
+          ],
+          "mean_time_to_goal_s": 2.7250000000000005,
+          "median_time_to_goal_s": 2.7250000000000005
+        }
+      }
+    },
+    "bearing_bin": {
+      "proportional": {
+        "front": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 2,
+          "valid_episodes": 2,
+          "invalid_episodes": 0,
+          "valid_denominator": 2,
+          "success": 2,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.325,
+          "mean_final_distance_m": 0.024362191113190004,
+          "worst_final_distance_m": 0.02468069670195137,
+          "failure_cases": [],
+          "method": "proportional",
+          "success_ci95": [
+            0.34237195288961925,
+            1.0
+          ],
+          "mean_time_to_goal_s": 3.325,
+          "median_time_to_goal_s": 3.325
+        },
+        "rear": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 3,
+          "valid_episodes": 3,
+          "invalid_episodes": 0,
+          "valid_denominator": 3,
+          "success": 3,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.1333333333333333,
+          "mean_final_distance_m": 0.023741918540994073,
+          "worst_final_distance_m": 0.034336228755958625,
+          "failure_cases": [],
+          "method": "proportional",
+          "success_ci95": [
+            0.43849391955098227,
+            1.0
+          ],
+          "mean_time_to_goal_s": 3.1333333333333333,
+          "median_time_to_goal_s": 3.1500000000000004
+        },
+        "side": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 3,
+          "valid_episodes": 3,
+          "invalid_episodes": 0,
+          "valid_denominator": 3,
+          "success": 3,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.15,
+          "mean_final_distance_m": 0.02349721418565205,
+          "worst_final_distance_m": 0.030419873637085176,
+          "failure_cases": [],
+          "method": "proportional",
+          "success_ci95": [
+            0.43849391955098227,
+            1.0
+          ],
+          "mean_time_to_goal_s": 3.1500000000000004,
+          "median_time_to_goal_s": 3.2
+        }
+      },
+      "braking": {
+        "front": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 2,
+          "valid_episodes": 2,
+          "invalid_episodes": 0,
+          "valid_denominator": 2,
+          "success": 2,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.45,
+          "mean_final_distance_m": 0.06268371396097606,
+          "worst_final_distance_m": 0.08276545944404154,
+          "failure_cases": [],
+          "method": "braking",
+          "success_ci95": [
+            0.34237195288961925,
+            1.0
+          ],
+          "mean_time_to_goal_s": 3.45,
+          "median_time_to_goal_s": 3.45
+        },
+        "rear": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 3,
+          "valid_episodes": 3,
+          "invalid_episodes": 0,
+          "valid_denominator": 3,
+          "success": 3,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.25,
+          "mean_final_distance_m": 0.10273456751625643,
+          "worst_final_distance_m": 0.1482472307345947,
+          "failure_cases": [],
+          "method": "braking",
+          "success_ci95": [
+            0.43849391955098227,
+            1.0
+          ],
+          "mean_time_to_goal_s": 3.25,
+          "median_time_to_goal_s": 3.25
+        },
+        "side": {
+          "schema_version": "boom_birds.evaluation.v1",
+          "total_episodes": 3,
+          "valid_episodes": 3,
+          "invalid_episodes": 0,
+          "valid_denominator": 3,
+          "success": 3,
+          "collision": 0,
+          "timeout": 0,
+          "success_rate_of_valid": 1.0,
+          "success_rate_of_total": 1.0,
+          "collision_rate_of_valid": 0.0,
+          "timeout_rate_of_valid": 0.0,
+          "invalid_rate_of_total": 0.0,
+          "mean_duration_s": 3.3000000000000003,
+          "mean_final_distance_m": 0.1335627101760403,
+          "worst_final_distance_m": 0.20424181243475956,
+          "failure_cases": [],
+          "method": "braking",
+          "success_ci95": [
+            0.43849391955098227,
+            1.0
+          ],
+          "mean_time_to_goal_s": 3.3000000000000003,
+          "median_time_to_goal_s": 3.35
+        }
+      }
+    }
+  },
+  "paired": {
+    "method_a": "proportional",
+    "method_b": "braking",
+    "pairs_total": 8,
+    "unpaired_a": 0,
+    "unpaired_b": 0,
+    "pairs_both_success": 8,
+    "a_only_success": 0,
+    "b_only_success": 0,
+    "neither_success": 0,
+    "time_pairs": 8,
+    "time_wins_a": 8,
+    "time_wins_b": 0,
+    "time_ties": 0,
+    "mean_time_delta_b_minus_a_s": 0.13124999999999998,
+    "median_time_delta_b_minus_a_s": 0.125,
+    "distance_pairs": 8,
+    "mean_final_distance_delta_b_minus_a_m": 0.08047718507406548
+  },
+  "pair_rows": [
+    {
+      "scenario_id": "sc-1000-000",
+      "distance_bin": "short",
+      "bearing_bin": "side",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 2.5500000000000003,
+      "proportional_final_distance_m": 0.0202685651424401,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 2.6500000000000004,
+      "braking_final_distance_m": 0.20424181243475956
+    },
+    {
+      "scenario_id": "sc-1000-001",
+      "distance_bin": "medium",
+      "bearing_bin": "front",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 3.25,
+      "proportional_final_distance_m": 0.02404368552442864,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 3.35,
+      "braking_final_distance_m": 0.04260196847791059
+    },
+    {
+      "scenario_id": "sc-1000-002",
+      "distance_bin": "medium",
+      "bearing_bin": "front",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 3.4000000000000004,
+      "proportional_final_distance_m": 0.02468069670195137,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 3.5500000000000003,
+      "braking_final_distance_m": 0.08276545944404154
+    },
+    {
+      "scenario_id": "sc-1000-003",
+      "distance_bin": "medium",
+      "bearing_bin": "side",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 3.7,
+      "proportional_final_distance_m": 0.030419873637085176,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 3.9000000000000004,
+      "braking_final_distance_m": 0.13979158088240795
+    },
+    {
+      "scenario_id": "sc-1000-004",
+      "distance_bin": "medium",
+      "bearing_bin": "side",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 3.2,
+      "proportional_final_distance_m": 0.01980320377743088,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 3.35,
+      "braking_final_distance_m": 0.05665473721095339
+    },
+    {
+      "scenario_id": "sc-1000-005",
+      "distance_bin": "medium",
+      "bearing_bin": "rear",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 3.1500000000000004,
+      "proportional_final_distance_m": 0.023621258199422433,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 3.25,
+      "braking_final_distance_m": 0.04513102539831029
+    },
+    {
+      "scenario_id": "sc-1000-006",
+      "distance_bin": "short",
+      "bearing_bin": "rear",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 2.7,
+      "proportional_final_distance_m": 0.013268268667601162,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 2.8000000000000003,
+      "braking_final_distance_m": 0.1482472307345947
+    },
+    {
+      "scenario_id": "sc-1000-007",
+      "distance_bin": "medium",
+      "bearing_bin": "rear",
+      "proportional_outcome": "SUCCESS",
+      "proportional_time_to_goal_s": 3.5500000000000003,
+      "proportional_final_distance_m": 0.034336228755958625,
+      "braking_outcome": "SUCCESS",
+      "braking_time_to_goal_s": 3.7,
+      "braking_final_distance_m": 0.11482544641586426
+    }
+  ],
+  "status": "INCOMPLETE",
+  "sample_size_rule": "INCOMPLETE below the PROPOSED 100 valid-episode sample in V2.2 20.11"
+}

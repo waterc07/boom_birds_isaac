@@ -1,0 +1,49 @@
+
+=================================== ERRORS ====================================
+_____________ ERROR collecting tests/sim/test_guidance_methods.py _____________
+ImportError while importing test module 'E:\isaac\proj_boom_birds\tests\sim\test_guidance_methods.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+E:\����\python\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\sim\test_guidance_methods.py:6: in <module>
+    from boom_birds.sim.guidance import (
+E   ModuleNotFoundError: No module named 'boom_birds.sim.guidance'
+________________ ERROR collecting tests/sim/test_scenarios.py _________________
+ImportError while importing test module 'E:\isaac\proj_boom_birds\tests\sim\test_scenarios.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+E:\����\python\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\sim\test_scenarios.py:7: in <module>
+    from boom_birds.sim.scenarios import (
+E   ModuleNotFoundError: No module named 'boom_birds.sim.scenarios'
+__________________ ERROR collecting tests/sim/test_faults.py __________________
+ImportError while importing test module 'E:\isaac\proj_boom_birds\tests\sim\test_faults.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+E:\����\python\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\sim\test_faults.py:6: in <module>
+    from boom_birds.sim.faults import (
+E   ModuleNotFoundError: No module named 'boom_birds.sim.faults'
+____________ ERROR collecting tests/evaluation/test_comparison.py _____________
+ImportError while importing test module 'E:\isaac\proj_boom_birds\tests\evaluation\test_comparison.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+E:\����\python\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\evaluation\test_comparison.py:6: in <module>
+    from boom_birds.evaluation.comparison import (
+E   ModuleNotFoundError: No module named 'boom_birds.evaluation.comparison'
+=========================== short test summary info ===========================
+ERROR tests/sim/test_guidance_methods.py
+ERROR tests/sim/test_scenarios.py
+ERROR tests/sim/test_faults.py
+ERROR tests/evaluation/test_comparison.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!
+4 errors in 0.35s

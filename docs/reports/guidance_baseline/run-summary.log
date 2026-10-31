@@ -1,0 +1,17 @@
+guidance_final_run1.log: [stage] import isaac modules
+guidance_final_run1.log: [stage] read config
+guidance_final_run1.log: [stage] build env config
+guidance_final_run1.log: [stage] create env
+guidance_final_run1.log: [stage] reset env
+guidance_final_run1.log: [stage] read plant parameters
+guidance_final_run1.log: [stage] run guidance comparison
+guidance_final_run1.log: [stage] freeze verified
+guidance_final_run1.log: BOOM_BIRDS_GUIDANCE_COMPARE_INCOMPLETE
+guidance_faults_run4.log: [stage] import isaac modules
+guidance_faults_run4.log: [stage] read config
+guidance_faults_run4.log: [stage] build env config
+guidance_faults_run4.log: [stage] create env
+guidance_faults_run4.log: [stage] reset env
+guidance_faults_run4.log: [stage] read plant parameters
+guidance_faults_run4.log: [stage] run guidance comparison
+guidance_faults_run4.log: BOOM_BIRDS_GUIDANCE_COMPARE_PASS

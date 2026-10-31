@@ -1,0 +1,7 @@
+stages: ["imports", "import isaac modules", "read config", "build env config", "create env", "reset env", "read plant parameters", "run guidance comparison"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_sim_baseline.py", line 602, in <module>
+    for value in fault_summary.values())
+                 ^^^^^^^^^^^^^
+NameError: name 'fault_summary' is not defined
