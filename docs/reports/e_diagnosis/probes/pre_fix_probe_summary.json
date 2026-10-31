@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "mode": "probes",
+    "config": "configs\\vehicles\\sim_reference.yaml",
+    "dt_s": 0.05,
+    "mass_kg": 0.028200002387166023,
+    "inertia_kgm2": [
+      1.6571999367442913e-05,
+      1.665600029809866e-05,
+      2.9262002499308437e-05
+    ],
+    "gravity_mps2": 9.81,
+    "thrust_to_weight": 1.9,
+    "moment_scale_nm": 0.01,
+    "max_tilt_rad": 0.2,
+    "hover_action_thrust": 0.05263157894736836
+  },
+  "episodes": [
+    {
+      "episode": "probe_none",
+      "steps": 40,
+      "force_body_n": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "torque_body_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_rad": 0.0,
+      "window_s": [
+        0.5,
+        1.5
+      ],
+      "final_position_world_m": [
+        1.0707190689629442e-10,
+        -1.309686137318522e-09,
+        0.7500002384185791
+      ],
+      "final_velocity_world_mps": [
+        -8.637371373687586e-10,
+        -9.293011360433923e-10,
+        3.0383480407181196e-06
+      ]
+    },
+    {
+      "episode": "probe_force_x_yaw0",
+      "steps": 40,
+      "force_body_n": [
+        0.02,
+        0.0,
+        0.0
+      ],
+      "torque_body_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_rad": 0.0,
+      "window_s": [
+        0.5,
+        1.5
+      ],
+      "final_position_world_m": [
+        0.44775131344795227,
+        7.627142806221343e-10,
+        0.652684211730957
+      ],
+      "final_velocity_world_mps": [
+        -0.42983585596084595,
+        3.6497624922304794e-09,
+        -1.278160572052002
+      ]
+    },
+    {
+      "episode": "probe_force_x_yaw90",
+      "steps": 40,
+      "force_body_n": [
+        0.02,
+        0.0,
+        0.0
+      ],
+      "torque_body_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_rad": 1.5707963267948966,
+      "window_s": [
+        0.5,
+        1.5
+      ],
+      "final_position_world_m": [
+        0.9311202764511108,
+        1.011930095273783e-08,
+        0.7257333397865295
+      ],
+      "final_velocity_world_mps": [
+        0.9271647334098816,
+        3.9064108392494745e-08,
+        -1.20088529586792
+      ]
+    },
+    {
+      "episode": "probe_torque_z",
+      "steps": 40,
+      "force_body_n": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "torque_body_nm": [
+        0.0,
+        0.0,
+        0.0002
+      ],
+      "yaw_rad": 0.0,
+      "window_s": [
+        0.5,
+        1.5
+      ],
+      "final_position_world_m": [
+        1.4420435428619385,
+        -2.6252501010894775,
+        0.81001216173172
+      ],
+      "final_velocity_world_mps": [
+        2.0399293899536133,
+        -4.7448201179504395,
+        1.2303508520126343
+      ]
+    }
+  ],
+  "row_count": 160
+}

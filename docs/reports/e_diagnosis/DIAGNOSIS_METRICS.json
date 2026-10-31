@@ -1,0 +1,278 @@
+{
+  "pre_fix_probe_x_yaw0": {
+    "max_applied_thrust_x_n": 0.3700000047683716,
+    "last_window_applied_thrust_x_n": 0.3700000047683716,
+    "max_abs_pitch_rate_radps": 19.598756790161133,
+    "max_tilt_rad": 3.0929245101068155,
+    "final_position_world_m": [
+      0.44775131344795227,
+      7.627142806221343e-10,
+      0.652684211730957
+    ],
+    "final_velocity_world_mps": [
+      -0.42983585596084595,
+      3.6497624922304794e-09,
+      -1.278160572052002
+    ]
+  },
+  "accumulation_fixed_probe": {
+    "max_applied_thrust_x_n": 0.019999999552965164,
+    "max_abs_pitch_rate_radps": 2.056884288787842,
+    "max_tilt_rad": 1.560944253253717,
+    "final_position_world_m": [
+      -5.881338471791508e-11,
+      -9.149947466369213e-11,
+      0.5
+    ]
+  },
+  "fixed_probe_x_yaw0": {
+    "max_applied_thrust_x_n": 0.019999999552965164,
+    "max_abs_pitch_rate_radps": 0.0010324249742552638,
+    "max_tilt_rad": 0.000976562509701277,
+    "delta_v_window_mps": [
+      0.6546908614829667,
+      9.226972122744481e-07,
+      8.29191860134415e-05
+    ],
+    "expected_delta_v_from_impulse_mps": 0.6737588082136832,
+    "final_velocity_world_mps": [
+      0.6518082618713379,
+      2.525181116652675e-06,
+      8.270612306660041e-05
+    ]
+  },
+  "fixed_probe_x_yaw90": {
+    "delta_v_window_mps": [
+      -1.7887530177895794e-07,
+      0.65472716045307,
+      8.007764591866362e-05
+    ],
+    "final_velocity_world_mps": [
+      -5.283934569888515e-07,
+      0.651896595954895,
+      7.997950888238847e-05
+    ]
+  },
+  "fixed_probe_torque_z": {
+    "max_horizontal_offset_m": 3.031251632858147e-07,
+    "max_abs_roll_pitch_rate_radps": 8.027146805034135e-07
+  },
+  "replay_repeat_consistency": {
+    "E_disturbance-10000-002_distr0": 0.0,
+    "E_disturbance-10000-002_nodistr0": 0.0,
+    "E_disturbance-10000-003_distr0": 0.0,
+    "E_disturbance-10000-003_nodistr0": 0.0,
+    "E_disturbance-10000-019_distr0": 0.0,
+    "E_disturbance-10000-019_nodistr0": 0.0,
+    "E_disturbance-10000-000_distr0": 0.0,
+    "E_disturbance-10000-000_nodistr0": 0.0
+  },
+  "replay_outcomes": [
+    {
+      "scenario_id": "E_disturbance-10000-002",
+      "disturbance_on": true,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 54
+    },
+    {
+      "scenario_id": "E_disturbance-10000-002",
+      "disturbance_on": true,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 54
+    },
+    {
+      "scenario_id": "E_disturbance-10000-002",
+      "disturbance_on": false,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 53
+    },
+    {
+      "scenario_id": "E_disturbance-10000-002",
+      "disturbance_on": false,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 53
+    },
+    {
+      "scenario_id": "E_disturbance-10000-003",
+      "disturbance_on": true,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 51
+    },
+    {
+      "scenario_id": "E_disturbance-10000-003",
+      "disturbance_on": true,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 51
+    },
+    {
+      "scenario_id": "E_disturbance-10000-003",
+      "disturbance_on": false,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 50
+    },
+    {
+      "scenario_id": "E_disturbance-10000-003",
+      "disturbance_on": false,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 50
+    },
+    {
+      "scenario_id": "E_disturbance-10000-019",
+      "disturbance_on": true,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 74
+    },
+    {
+      "scenario_id": "E_disturbance-10000-019",
+      "disturbance_on": true,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 74
+    },
+    {
+      "scenario_id": "E_disturbance-10000-019",
+      "disturbance_on": false,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 75
+    },
+    {
+      "scenario_id": "E_disturbance-10000-019",
+      "disturbance_on": false,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 75
+    },
+    {
+      "scenario_id": "E_disturbance-10000-000",
+      "disturbance_on": true,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 52
+    },
+    {
+      "scenario_id": "E_disturbance-10000-000",
+      "disturbance_on": true,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 52
+    },
+    {
+      "scenario_id": "E_disturbance-10000-000",
+      "disturbance_on": false,
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "steps": 52
+    },
+    {
+      "scenario_id": "E_disturbance-10000-000",
+      "disturbance_on": false,
+      "repeat": 1,
+      "outcome": "SUCCESS",
+      "steps": 52
+    }
+  ],
+  "replay_disturbance_force_max_n": {
+    "E_disturbance-10000-002_distr0": 0.009637517183982409,
+    "E_disturbance-10000-002_distr1": 0.009637517183982409,
+    "E_disturbance-10000-003_distr0": 0.004317406404602002,
+    "E_disturbance-10000-003_distr1": 0.004317406404602002,
+    "E_disturbance-10000-019_distr0": 0.0041485895753859605,
+    "E_disturbance-10000-019_distr1": 0.0041485895753859605,
+    "E_disturbance-10000-000_distr0": 0.00672430338624998,
+    "E_disturbance-10000-000_distr1": 0.00672430338624998
+  },
+  "pre_fix_selected_outcomes": [
+    {
+      "scenario_id": "E_disturbance-10000-000",
+      "outcome": "SUCCESS",
+      "steps": 73,
+      "final_distance_m": 0.2755013318854309
+    },
+    {
+      "scenario_id": "E_disturbance-10000-002",
+      "outcome": "OUT_OF_BOUNDS",
+      "steps": 56,
+      "final_distance_m": 5.769966792237134
+    },
+    {
+      "scenario_id": "E_disturbance-10000-003",
+      "outcome": "OUT_OF_BOUNDS",
+      "steps": 47,
+      "final_distance_m": 3.863787266583817
+    },
+    {
+      "scenario_id": "E_disturbance-10000-019",
+      "outcome": "OUT_OF_BOUNDS",
+      "steps": 34,
+      "final_distance_m": 4.207813366583902
+    }
+  ],
+  "post_fix_regression": {
+    "status": "PASS",
+    "classes": {
+      "A_clear": {
+        "success": 25,
+        "collision": 0,
+        "timeout": 0,
+        "out_of_bounds": 0,
+        "invalid_episodes": 0,
+        "success_rate_of_valid": 1.0
+      },
+      "B_static": {
+        "success": 0,
+        "collision": 25,
+        "timeout": 0,
+        "out_of_bounds": 0,
+        "invalid_episodes": 0,
+        "success_rate_of_valid": 0.0
+      },
+      "C_dynamic": {
+        "success": 24,
+        "collision": 0,
+        "timeout": 0,
+        "out_of_bounds": 1,
+        "invalid_episodes": 0,
+        "success_rate_of_valid": 0.96
+      },
+      "D_observation": {
+        "success": 25,
+        "collision": 0,
+        "timeout": 0,
+        "out_of_bounds": 0,
+        "invalid_episodes": 0,
+        "success_rate_of_valid": 1.0
+      },
+      "E_disturbance": {
+        "success": 25,
+        "collision": 0,
+        "timeout": 0,
+        "out_of_bounds": 0,
+        "invalid_episodes": 0,
+        "success_rate_of_valid": 1.0
+      }
+    },
+    "overall": {
+      "success": 99,
+      "collision": 25,
+      "timeout": 0,
+      "out_of_bounds": 1,
+      "valid_denominator": 125,
+      "success_rate_of_valid": 0.792
+    }
+  },
+  "pre_fix_e_summary": {
+    "out_of_bounds": 19,
+    "success": 3,
+    "timeout": 3
+  }
+}
