@@ -65,6 +65,7 @@ try:
     from isaaclab_tasks.direct.quadcopter.quadcopter_env import QuadcopterEnv, QuadcopterEnvCfg
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+    from boom_birds.evaluation.csv_io import write_rows_csv
     from boom_birds.evaluation.episode_boundary import EpisodeBoundary
     from boom_birds.sim.velocity_control import (
         VehicleParams, VehicleState, VelocityExecutor, VelocityGains, VelocitySetpoint,
@@ -307,17 +308,12 @@ try:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
             if args.csv:
-                args.csv.parent.mkdir(parents=True, exist_ok=True)
                 columns = ['episode', 'step', 'time_s', 'command', 'position_world_m',
                            'velocity_world_mps', 'yaw_rad', 'speed_mps', 'outcome',
                            'reason', 'distance_m', 'hold_time_s',
                            'env_terminated', 'env_truncated', 'episode_length_buf',
                            'boundary_count_ok']
-                with args.csv.open('w', encoding='utf-8') as handle:
-                    handle.write(','.join(columns) + '\n')
-                    for row in episode_rows:
-                        handle.write(','.join(json.dumps(row[column])
-                                              for column in columns) + '\n')
+                write_rows_csv(args.csv, columns, episode_rows)
             summary_sha = hashlib.sha256(args.output.read_bytes()).hexdigest()
             manifest = {
                 'schema_version': MANIFEST_SCHEMA_ID,
@@ -745,6 +741,7 @@ try:
                 },
                 'evidence_domain': 'SIMULATION_MODEL_ORACLE_STATE',
                 'scenario_sha256': scenario_manifest['content_sha256'],
+                'gui_mode': not bool(getattr(args, 'headless', False)),
             }
             write_manifest(out_dir, manifest)
             print('BOOM_BIRDS_GUIDANCE_COMPARE_' + summary['status'], flush=True)
@@ -1383,17 +1380,13 @@ try:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
         if args.csv:
-            args.csv.parent.mkdir(parents=True, exist_ok=True)
             columns = ['scenario', 'step', 'time_s', 'phase', 'reason', 'degraded',
                        'command_forward_left_up_yawrate', 'setpoint_issued_s',
                        'setpoint_expires_s', 'thrust_body_n', 'torque_body_nm', 'action',
                        'position_world_m', 'velocity_world_mps', 'quat_wxyz', 'yaw_rad',
                        'env_terminated', 'env_truncated', 'episode_length_buf',
                        'boundary_count_ok']
-            with args.csv.open('w', encoding='utf-8') as handle:
-                handle.write(','.join(columns) + '\n')
-                for row in rows:
-                    handle.write(','.join(json.dumps(row[column]) for column in columns) + '\n')
+            write_rows_csv(args.csv, columns, rows)
         outputs_sha256 = {
             args.output.name: hashlib.sha256(args.output.read_bytes()).hexdigest()}
         if args.csv:
