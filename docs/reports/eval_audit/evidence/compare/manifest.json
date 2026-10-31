@@ -1,0 +1,57 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "34f9717d2523c810361419daccf5e314e15a0b02",
+  "working_tree": "clean at 34f9717d2523c810361419daccf5e314e15a0b02 except untracked evidence",
+  "config_sha256": {
+    "configs\\vehicles\\sim_reference.yaml": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+  },
+  "asset_versions": {
+    "isaac_sim": "5.1.0.0 (host manifest)",
+    "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+    "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd"
+  },
+  "seeds": {
+    "scenario_seeds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029
+    ]
+  },
+  "command": "scripts/run_sim_baseline.py --task compare --config configs/vehicles/sim_reference.yaml --scenario-manifest configs/scenarios/final_20261031.json --methods proportional,braking --run-kind final --timeout-s 20 --freeze configs/scenarios/freeze_20261031.json --code-commit 34f9717d2523c810361419daccf5e314e15a0b02 --working-tree clean at 34f9717d2523c810361419daccf5e314e15a0b02 except untracked evidence --device cuda:0 --clone-in-usd --output outputs/eval_audit/compare_clean/final_run1",
+  "started_at": "2026-10-31T21:17:33.427099+08:00",
+  "exit_code": 0,
+  "outputs_sha256": {
+    "summary.json": "aa4c938dd3c5966cc92164c979b18de4ab37db4ef6e289754c74a373ebbe7b4b",
+    "episodes.jsonl": "b042ba68a3f41172f2b7e32470972326ae9a8300bb29252415b53991173a9a23"
+  },
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "scenario_sha256": "0db366b63305335e1503cfda85a933f7cf2f5c003392c21dcd607e8fbb15ffd2",
+  "gui_mode": true
+}

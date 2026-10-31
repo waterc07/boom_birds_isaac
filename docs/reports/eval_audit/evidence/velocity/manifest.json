@@ -1,0 +1,25 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "bc169eab335304b0717f99b85568f53ce1423d28",
+  "working_tree": "clean at bc169eab335304b0717f99b85568f53ce1423d28 except untracked evidence",
+  "config_sha256": {
+    "configs\\vehicles\\sim_reference.yaml": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+  },
+  "asset_versions": {
+    "isaac_sim": "5.1.0.0 (host manifest)",
+    "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+    "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd"
+  },
+  "seeds": {
+    "seed": 0
+  },
+  "command": "scripts/run_sim_baseline.py --task velocity_step --config configs/vehicles/sim_reference.yaml --scenarios all --code-commit bc169eab335304b0717f99b85568f53ce1423d28 --working-tree clean at bc169eab335304b0717f99b85568f53ce1423d28 except untracked evidence --device cuda:0 --clone-in-usd --output outputs/eval_audit/velocity_clean3/full.json --csv outputs/eval_audit/velocity_clean3/full.csv",
+  "started_at": "2026-10-31T21:31:36.738654+08:00",
+  "exit_code": 0,
+  "outputs_sha256": {
+    "full.json": "31993b0e0f2ef2c6455397abd28226c0945ff223f826a20bb50b6cbf9e7271a0",
+    "full.csv": "71c3abc53ee4bbf688d2bcde59ca022dc6d25056e626b4315cf58da20f6eb92a"
+  },
+  "evidence_domain": "SIMULATION_MODEL",
+  "gui_mode": true
+}

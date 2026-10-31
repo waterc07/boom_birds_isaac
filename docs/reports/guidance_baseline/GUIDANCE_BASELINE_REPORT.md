@@ -5,6 +5,8 @@
 > **证据域：** 单元测试 + 仿真模型（Isaac Lab/PhysX，ORACLE 观测权限）
 > **最后核对：** 2026-10-31
 
+> **2026-10-31 评价 episode 边界修订：** 本报告旧运行产生于边界修复前，逐 episode 记录无边界字段，无法排除静默 auto-reset；干净重跑（compare 60 + faults 16）见 [CLEAN_BASELINE_REPORT](../eval_audit/CLEAN_BASELINE_REPORT.md)。比例/制动均 30/30、制动更慢的配对方向不变，但绝对时间与末距数值被 clean 结果替代；tuning 数据不足，调参依据待重验。
+
 ## 结论
 
 - 已实现并验证两种传统到点制导，共用同一 ORACLE 位置/速度/姿态观测、同一四维动作约束、20 Hz 控制、同一动力学与同一成功判定/评价代码：

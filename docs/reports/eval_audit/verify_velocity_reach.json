@@ -1,0 +1,23 @@
+{
+  "velocity_json": "outputs\\eval_audit\\velocity_clean3\\full.json",
+  "velocity_csv": "outputs\\eval_audit\\velocity_clean3\\full.csv",
+  "reach_csv": [
+    "outputs\\eval_audit\\reach_clean\\run2\\reach.csv"
+  ],
+  "checks": {
+    "velocity_row_count": true,
+    "velocity_status_pass": true,
+    "velocity_checks_all_pass": true,
+    "velocity_boundary_fields_present": true,
+    "velocity_no_truncation": true,
+    "velocity_no_termination": true,
+    "velocity_counter_continuity": true,
+    "velocity_time_step": true,
+    "reach_run2_samples": true,
+    "reach_run2_no_truncation": true,
+    "reach_run2_terminal_classification": true,
+    "reach_run2_time_step": true,
+    "reach_run2_outcomes": true
+  },
+  "status": "PASS"
+}

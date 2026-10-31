@@ -1,0 +1,146 @@
+{
+  "defect_context": "QuadcopterEnv randomises episode_length_buf on full reset; historical runners read only terminated and ignored truncated. Runs created before commit c1d7583 are at risk.",
+  "runs": [
+    {
+      "run": "layered/final_run2",
+      "source": "outputs\\layered_eval\\final_run2\\steps.jsonl",
+      "method": "spawn pose/zero velocity in per-step record (auxiliary)",
+      "status": "CONFIRMED_POLLUTION",
+      "affected_episodes": [
+        "C_dynamic-8000-000",
+        "C_dynamic-8000-006",
+        "C_dynamic-8000-021",
+        "D_observation-9000-000",
+        "D_observation-9000-011",
+        "D_observation-9000-023",
+        "E_disturbance-10000-004",
+        "E_disturbance-10000-024"
+      ],
+      "hit_count": 9,
+      "limitations": "no episode counter/flags recorded in this historical run"
+    },
+    {
+      "run": "layered/final_run3",
+      "source": "outputs\\layered_eval\\final_run3\\steps.jsonl",
+      "method": "spawn pose/zero velocity in per-step record (auxiliary)",
+      "status": "CONFIRMED_POLLUTION",
+      "affected_episodes": [
+        "C_dynamic-8000-000",
+        "C_dynamic-8000-006",
+        "C_dynamic-8000-021",
+        "D_observation-9000-000",
+        "D_observation-9000-011",
+        "D_observation-9000-023",
+        "E_disturbance-10000-004",
+        "E_disturbance-10000-022",
+        "E_disturbance-10000-024"
+      ],
+      "hit_count": 10,
+      "limitations": "no episode counter/flags recorded in this historical run"
+    },
+    {
+      "run": "layered/final_run4",
+      "source": "outputs\\layered_eval\\final_run4\\steps.jsonl",
+      "method": "spawn pose/zero velocity in per-step record (auxiliary)",
+      "status": "CHECKED_NO_EVIDENCE",
+      "affected_episodes": [],
+      "hit_count": 0,
+      "limitations": "no episode counter/flags recorded in this historical run"
+    },
+    {
+      "run": "velocity_chain/full",
+      "source": "outputs\\sim_velocity_chain\\full.csv",
+      "method": "bracket-aware legacy parser; spawn pose/zero velocity at step>0; reset_old_epoch reset at 1.0 s allowed",
+      "status": "CHECKED_NO_EVIDENCE",
+      "hit_count": 0,
+      "unexpected_count": 0,
+      "unexpected_rows": [],
+      "limitations": "no episode counter/flags recorded; spawn signature is auxiliary"
+    },
+    {
+      "run": "reach/run1",
+      "source": "outputs\\sim_reach\\run1\\reach.csv",
+      "method": "csv module (quoted columns); spawn pose/zero velocity at step>0",
+      "status": "CHECKED_NO_EVIDENCE",
+      "unexpected_count": 0,
+      "unexpected_rows": [],
+      "limitations": "no episode counter/flags recorded; spawn signature is auxiliary"
+    },
+    {
+      "run": "reach/run2",
+      "source": "outputs\\sim_reach\\run2\\reach.csv",
+      "method": "csv module (quoted columns); spawn pose/zero velocity at step>0",
+      "status": "CHECKED_NO_EVIDENCE",
+      "unexpected_count": 0,
+      "unexpected_rows": [],
+      "limitations": "no episode counter/flags recorded; spawn signature is auxiliary"
+    },
+    {
+      "run": "compare/tuning_run1",
+      "source": "outputs\\guidance_compare\\tuning_run1\\episodes.jsonl",
+      "method": "episode-level records only",
+      "status": "INSUFFICIENT_DATA",
+      "episode_count": 16,
+      "limitations": "no per-step records; cannot prove or exclude a silent auto-reset. Run predates the evaluation-boundary fix, so its per-episode values are unverified."
+    },
+    {
+      "run": "compare/tuning_run2",
+      "source": "outputs\\guidance_compare\\tuning_run2\\episodes.jsonl",
+      "method": "episode-level records only",
+      "status": "INSUFFICIENT_DATA",
+      "episode_count": 16,
+      "limitations": "no per-step records; cannot prove or exclude a silent auto-reset. Run predates the evaluation-boundary fix, so its per-episode values are unverified."
+    },
+    {
+      "run": "compare/final_run1",
+      "source": "outputs\\guidance_compare\\final_run1\\episodes.jsonl",
+      "method": "episode-level records only",
+      "status": "INSUFFICIENT_DATA",
+      "episode_count": 60,
+      "limitations": "no per-step records; cannot prove or exclude a silent auto-reset. Run predates the evaluation-boundary fix, so its per-episode values are unverified."
+    },
+    {
+      "run": "compare/faults_run2",
+      "source": "outputs\\guidance_compare\\faults_run2\\episodes.jsonl",
+      "method": "episode-level records only",
+      "status": "INSUFFICIENT_DATA",
+      "episode_count": 16,
+      "limitations": "no per-step records; cannot prove or exclude a silent auto-reset. Run predates the evaluation-boundary fix, so its per-episode values are unverified."
+    },
+    {
+      "run": "compare/faults_run4",
+      "source": "outputs\\guidance_compare\\faults_run4\\episodes.jsonl",
+      "method": "episode-level records only",
+      "status": "INSUFFICIENT_DATA",
+      "episode_count": 16,
+      "limitations": "no per-step records; cannot prove or exclude a silent auto-reset. Run predates the evaluation-boundary fix, so its per-episode values are unverified."
+    },
+    {
+      "run": "c_diagnosis/legacy_original_r3",
+      "source": "outputs\\c_diagnosis\\legacy_original_r3\\summary.json",
+      "method": "legacy mode without boundary clearing (3 repeats)",
+      "status": "CONFIRMED_POLLUTION",
+      "episodes": [
+        {
+          "scenario_id": "C_dynamic-8000-021",
+          "outcome": "INVALID",
+          "reason": "ENV_TRUNCATED",
+          "steps": 31
+        },
+        {
+          "scenario_id": "C_dynamic-8000-021",
+          "outcome": "INVALID",
+          "reason": "ENV_TRUNCATED",
+          "steps": 31
+        },
+        {
+          "scenario_id": "C_dynamic-8000-021",
+          "outcome": "INVALID",
+          "reason": "ENV_TRUNCATED",
+          "steps": 31
+        }
+      ],
+      "limitations": "intentionally reproduces the old defect for evidence"
+    }
+  ]
+}

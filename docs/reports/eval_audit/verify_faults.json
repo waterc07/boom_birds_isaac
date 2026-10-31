@@ -1,0 +1,28 @@
+{
+  "run_dir": "outputs\\eval_audit\\faults_clean\\run1",
+  "episode_count": 16,
+  "checks": {
+    "episode_count_matches_summary": true,
+    "no_duplicate_method_scenario": true,
+    "all_numeric_fields_finite": true,
+    "scenario_hash_matches": true,
+    "fault_collision_flag_samples": true,
+    "fault_collision_flag_classification": true,
+    "fault_collision_flag_is_contract_only": true,
+    "fault_collision_contact_samples": true,
+    "fault_collision_contact_classification": true,
+    "fault_collision_contact_is_physx": true,
+    "fault_timeout_samples": true,
+    "fault_timeout_classification": true,
+    "fault_invalid_observation_samples": true,
+    "fault_invalid_observation_classification": true,
+    "fault_invalid_is_interface_layer": true,
+    "fault_natural_rates_excluded": true,
+    "fault_status_rule": true,
+    "episode_boundary_fields_present": true,
+    "no_environment_truncation": true,
+    "boundary_counter_clean": true,
+    "duration_matches_steps": true
+  },
+  "status": "PASS"
+}

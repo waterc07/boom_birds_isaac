@@ -1,0 +1,31 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "adefaded8805af80f12e499533cf8932132cb97c",
+  "working_tree": "clean at adefaded8805af80f12e499533cf8932132cb97c except untracked evidence",
+  "config_sha256": {
+    "configs\\vehicles\\sim_reference.yaml": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+  },
+  "asset_versions": {
+    "isaac_sim": "5.1.0.0 (host manifest)",
+    "task_source_sha256": "01b36ac09a88e5b4e9522870efba22636aa07765f36d646ba4d40fce25c9bd02",
+    "asset_uri": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Robots/Bitcraze/Crazyflie/cf2x.usd"
+  },
+  "seeds": {
+    "episodes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "command": "scripts/run_sim_baseline.py --task reach --config configs/vehicles/sim_reference.yaml --episodes 6 --timeout-s 20 --goal 1.5,1.0,0.75 --code-commit adefaded8805af80f12e499533cf8932132cb97c --working-tree clean at adefaded8805af80f12e499533cf8932132cb97c except untracked evidence --device cuda:0 --clone-in-usd --output outputs/eval_audit/reach_clean/run2/reach_summary.json --csv outputs/eval_audit/reach_clean/run2/reach.csv",
+  "started_at": "2026-10-31T21:28:43.822905+08:00",
+  "exit_code": 0,
+  "outputs_sha256": {
+    "reach_summary.json": "40a2b14a4db23747638225ec2e799d05777fd0ca3d68f79503b9d78fb59119b6"
+  },
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "gui_mode": true
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": "boom_birds.comparison.v1",
+  "task": "guidance_compare",
+  "evidence_domain": "SIMULATION_MODEL_ORACLE_STATE",
+  "run_kind": "fault",
+  "methods": [
+    "proportional",
+    "braking"
+  ],
+  "scenarios": {
+    "manifest": "configs\\scenarios\\final_20261031.json",
+    "content_sha256": "0db366b63305335e1503cfda85a933f7cf2f5c003392c21dcd607e8fbb15ffd2",
+    "count": 2,
+    "spec": {
+      "start_xy_range_m": [
+        -0.5,
+        0.5
+      ],
+      "start_z_range_m": [
+        0.65,
+        0.85
+      ],
+      "start_yaw_range_rad": [
+        -3.141592653589793,
+        3.141592653589793
+      ],
+      "goal_xy_range_m": [
+        [
+          0.9,
+          1.6
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "goal_z_range_m": [
+        0.65,
+        0.95
+      ],
+      "min_goal_distance_m": 0.8,
+      "max_goal_distance_m": 2.5
+    }
+  },
+  "guidance_params": {
+    "proportional": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "gain_per_m": 1.0,
+      "arrival_radius_m": 0.25,
+      "max_yaw_rate_radps": 0.0
+    },
+    "braking": {
+      "max_horizontal_mps": 0.6,
+      "max_vertical_mps": 0.3,
+      "deceleration_mps2": 1.2,
+      "velocity_feedback_gain": 0.4,
+      "arrival_radius_m": 0.25
+    }
+  },
+  "thresholds": {
+    "success_distance_m": 0.3,
+    "success_speed_mps": 0.2,
+    "hold_time_s": 0.5,
+    "timeout_s": 20.0,
+    "collision_height_m": 0.1,
+    "max_abs_position_m": 5.0
+  },
+  "faults": [
+    "collision_contact",
+    "collision_flag",
+    "invalid_observation",
+    "timeout"
+  ],
+  "total_episodes": 16,
+  "episodes_per_method": {
+    "proportional": 8,
+    "braking": 8
+  },
+  "natural_performance_rates_excluded": true,
+  "proposed_not_frozen": false,
+  "fault_summary": {
+    "collision_contact": {
+      "samples": 4,
+      "counts": {
+        "SUCCESS": 0,
+        "COLLISION": 4,
+        "TIMEOUT": 0,
+        "INVALID": 0
+      },
+      "expected_outcome": "COLLISION",
+      "effect_scope": "PHYSX_CONTACT",
+      "classification_ok": true,
+      "contact_observed_samples": 4
+    },
+    "collision_flag": {
+      "samples": 4,
+      "counts": {
+        "SUCCESS": 0,
+        "COLLISION": 4,
+        "TIMEOUT": 0,
+        "INVALID": 0
+      },
+      "expected_outcome": "COLLISION",
+      "effect_scope": "CONTRACT_PATH_ONLY",
+      "classification_ok": true,
+      "contact_observed_samples": 0
+    },
+    "invalid_observation": {
+      "samples": 4,
+      "counts": {
+        "SUCCESS": 0,
+        "COLLISION": 0,
+        "TIMEOUT": 0,
+        "INVALID": 4
+      },
+      "expected_outcome": "INVALID",
+      "effect_scope": "INTERFACE_LAYER",
+      "classification_ok": true,
+      "contact_observed_samples": 0
+    },
+    "timeout": {
+      "samples": 4,
+      "counts": {
+        "SUCCESS": 0,
+        "COLLISION": 0,
+        "TIMEOUT": 4,
+        "INVALID": 0
+      },
+      "expected_outcome": "TIMEOUT",
+      "effect_scope": "TIMEOUT_TRUNCATION",
+      "classification_ok": true,
+      "contact_observed_samples": 0
+    }
+  },
+  "status": "PASS"
+}
