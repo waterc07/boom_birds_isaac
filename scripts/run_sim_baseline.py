@@ -599,7 +599,7 @@ try:
                                    if kind in fault_kinds_present})
                 summary['status'] = ('PASS'
                                      if all(value['classification_ok']
-                                            for value in fault_summary.values())
+                                            for value in summary['fault_summary'].values())
                                      else 'FAIL')
             out_dir = Path(args.output)
             out_dir.mkdir(parents=True, exist_ok=True)
