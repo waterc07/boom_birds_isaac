@@ -42,7 +42,8 @@ args = parser.parse_args()
 app = AppLauncher(args).app
 
 STAGES = ['imports']
-error_path = args.output.with_suffix('.error.txt')
+error_path = (Path(args.output) / 'summary.error.txt' if args.task == 'compare'
+              else args.output.with_suffix('.error.txt'))
 
 
 def mark(name):
@@ -272,7 +273,8 @@ try:
         if args.task == 'compare':
             mark('run guidance comparison')
             from boom_birds.evaluation.comparison import (
-                method_summary, paired_comparison, stratified_summary)
+                fault_classification_summary, method_summary, paired_comparison,
+                stratified_summary)
             from boom_birds.evaluation.episodes import (
                 MANIFEST_SCHEMA_ID, EpisodeResult, write_manifest)
             from boom_birds.sim.faults import (
@@ -587,25 +589,14 @@ try:
                 summary['sample_size_rule'] = (
                     'INCOMPLETE below the PROPOSED 100 valid-episode sample in V2.2 20.11')
             else:
-                fault_summary = {}
-                for kind in fault_kinds_present:
-                    subset = [item for item in results
-                              if item.episode_id.startswith(kind + '-')]
-                    counts = {outcome: sum(1 for item in subset
-                                           if item.outcome == outcome)
-                              for outcome in ('SUCCESS', 'COLLISION', 'TIMEOUT',
-                                              'INVALID')}
-                    fault_summary[kind] = {
-                        'samples': len(subset),
-                        'counts': counts,
-                        'expected_outcome': expected_outcome[kind],
-                        'effect_scope': effect_scope[kind],
-                        'classification_ok': bool(subset) and all(
-                            item.outcome == expected_outcome[kind] for item in subset),
-                        'contact_observed_samples': sum(
-                            1 for item in subset if item.get('contact_observed')),
-                    }
-                summary['fault_summary'] = fault_summary
+                summary['fault_summary'] = fault_classification_summary(
+                    episode_records,
+                    expected_outcomes={kind: value
+                                       for kind, value in expected_outcome.items()
+                                       if kind in fault_kinds_present},
+                    effect_scopes={kind: value
+                                   for kind, value in effect_scope.items()
+                                   if kind in fault_kinds_present})
                 summary['status'] = ('PASS'
                                      if all(value['classification_ok']
                                             for value in fault_summary.values())

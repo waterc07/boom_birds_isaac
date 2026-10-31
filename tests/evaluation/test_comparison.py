@@ -4,6 +4,7 @@ import math
 import pytest
 
 from boom_birds.evaluation.comparison import (
+    fault_classification_summary,
     method_summary,
     paired_comparison,
     stratified_summary,
@@ -81,3 +82,37 @@ def test_paired_comparison_uses_same_scenario_ids():
     assert paired['mean_time_delta_b_minus_a_s'] == pytest.approx(-0.5)
     with pytest.raises(ValueError):
         paired_comparison(a, b[:2])
+
+def test_fault_classification_groups_by_fault_kind():
+    records = [
+        {'fault': 'collision_flag', 'outcome': 'COLLISION', 'contact_observed': False},
+        {'fault': 'collision_flag', 'outcome': 'COLLISION', 'contact_observed': False},
+        {'fault': 'collision_contact', 'outcome': 'COLLISION', 'contact_observed': True},
+        {'fault': 'collision_contact', 'outcome': 'COLLISION', 'contact_observed': True},
+        {'fault': 'timeout', 'outcome': 'TIMEOUT', 'contact_observed': False},
+        {'fault': 'invalid_observation', 'outcome': 'INVALID', 'contact_observed': False},
+    ]
+    summary = fault_classification_summary(
+        records,
+        expected_outcomes={'collision_flag': 'COLLISION',
+                           'collision_contact': 'COLLISION',
+                           'timeout': 'TIMEOUT',
+                           'invalid_observation': 'INVALID'},
+        effect_scopes={'collision_flag': 'CONTRACT_PATH_ONLY',
+                       'collision_contact': 'PHYSX_CONTACT',
+                       'timeout': 'TIMEOUT_TRUNCATION',
+                       'invalid_observation': 'INTERFACE_LAYER'})
+    assert summary['collision_flag']['samples'] == 2
+    assert summary['collision_flag']['contact_observed_samples'] == 0
+    assert summary['collision_contact']['contact_observed_samples'] == 2
+    assert summary['collision_contact']['effect_scope'] == 'PHYSX_CONTACT'
+    assert summary['timeout']['counts']['TIMEOUT'] == 1
+    assert summary['invalid_observation']['classification_ok'] is True
+    assert all(item['classification_ok'] for item in summary.values())
+    with pytest.raises(ValueError):
+        fault_classification_summary([], expected_outcomes={}, effect_scopes={})
+    with pytest.raises(ValueError):
+        fault_classification_summary(
+            [{'fault': 'alien', 'outcome': 'COLLISION'}],
+            expected_outcomes={'collision_flag': 'COLLISION'},
+            effect_scopes={'collision_flag': 'CONTRACT_PATH_ONLY'})

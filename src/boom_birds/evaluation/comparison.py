@@ -133,3 +133,32 @@ def paired_comparison(results_a, results_b):
         'distance_pairs': len(distance_deltas),
         'mean_final_distance_delta_b_minus_a_m': _mean(distance_deltas),
     }
+
+FAULT_OUTCOMES = ('SUCCESS', 'COLLISION', 'TIMEOUT', 'INVALID')
+
+
+def fault_classification_summary(records, *, expected_outcomes, effect_scopes):
+    """Group fault run records by fault kind and check the expected outcome."""
+    if not records:
+        raise ValueError('fault classification needs at least one record')
+    groups = {}
+    for record in records:
+        kind = record.get('fault')
+        if kind not in expected_outcomes:
+            raise ValueError('unknown fault kind in record: ' + str(kind))
+        groups.setdefault(kind, []).append(record)
+    summary = {}
+    for kind, items in sorted(groups.items()):
+        counts = {outcome: sum(1 for item in items if item['outcome'] == outcome)
+                  for outcome in FAULT_OUTCOMES}
+        expected = expected_outcomes[kind]
+        summary[kind] = {
+            'samples': len(items),
+            'counts': counts,
+            'expected_outcome': expected,
+            'effect_scope': effect_scopes[kind],
+            'classification_ok': all(item['outcome'] == expected for item in items),
+            'contact_observed_samples': sum(
+                1 for item in items if item.get('contact_observed')),
+        }
+    return summary
