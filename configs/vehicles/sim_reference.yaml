@@ -1,0 +1,17 @@
+# Simulation velocity-chain reference parameters (PROPOSED, not aircraft limits).
+# Mass and inertia are read from the running asset, never copied here.
+vehicle:
+  thrust_to_weight: 1.9
+  moment_scale_nm: 0.01
+  max_tilt_rad: 0.2
+controller:
+  ttl_s: 0.15
+gains:
+  kp_velocity_xy: 2.0
+  ki_velocity_xy: 0.5
+  kp_velocity_z: 3.0
+  ki_velocity_z: 1.0
+  k_attitude: 6.0
+  k_yaw: 2.0
+  k_rate: 20.0
+  integral_limit: 0.5
