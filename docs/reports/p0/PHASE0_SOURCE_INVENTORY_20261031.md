@@ -1,11 +1,11 @@
 # Phase 0 来源与 Schema 差异盘点（2026-10-31）
 
-> **状态：** BASELINE（盘点结论；不改变任何 LOCKED/TBD，不产生 PASS）  
-> **来源章节：** [RMUC2027_UAV_V2_2.md](../../design/RMUC2027_UAV_V2_2.md) §2、§4、§10.4、§16、§19、§20、§24、§26–28  
-> **证据域：** 文档 / 官方网页 / 仓库文件 / 未验证（逐条标注）  
-> **最后核对：** 2026-10-31  
-> **盘点对象：** `E:\isaac\proj_boom_birds`；盘点开始 HEAD `d01e156`，撰写时 HEAD `533708e`（盘点期间 BB22:G2.6 提交 c730c75、533708e）；V2.2 文档修订仍未提交  
-> **执行边界：** 只读盘点；Web 检索/抓取日期均为 2026-10-31；未运行 pytest/SITL/HIL/训练/固件；未安装依赖；未改 V2.2 正文、src、tests、configs；未执行 git add/commit  
+> **状态：** BASELINE（盘点结论；不改变任何 LOCKED/TBD，不产生 PASS）
+> **来源章节：** [RMUC2027_UAV_V2_2.md](../../design/RMUC2027_UAV_V2_2.md) §2、§4、§10.4、§16、§19、§20、§24、§26–28
+> **证据域：** 文档 / 官方网页 / 仓库文件 / 未验证（逐条标注）
+> **最后核对：** 2026-10-31
+> **盘点对象：** `E:\isaac\proj_boom_birds`；盘点开始 HEAD `d01e156`，撰写时 HEAD `533708e`（盘点期间 BB22:G2.6 提交 c730c75、533708e）；V2.2 文档修订仍未提交
+> **执行边界：** 只读盘点；Web 检索/抓取日期均为 2026-10-31；未运行 pytest/SITL/HIL/训练/固件；未安装依赖；未改 V2.2 正文、src、tests、configs；未执行 git add/commit
 
 本报告对应共享任务 `task-1`（BB22:G0 新 Phase 0 来源与 Schema 差异盘点），是 [BB22:G2.6 合同实施计划](../../superpowers/plans/2026-10-31-bb22-g2-6-contracts.md) 的输入。机器可读差异见 [phase0_schema_diff.json](phase0_schema_diff.json)。
 
