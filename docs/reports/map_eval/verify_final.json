@@ -1,0 +1,38 @@
+{
+  "run_dir": "outputs\\map_eval\\final_run1",
+  "checks": {
+    "summary_status_pass": true,
+    "episode_count": true,
+    "counts_match_freeze": true,
+    "case_repeats": true,
+    "manifest_commit_recorded": true,
+    "gui_mode": true,
+    "map_hash_matches_freeze": true,
+    "config_hash_matches_freeze": true,
+    "cases_hash_matches_freeze": true,
+    "outputs_hash_match": true,
+    "freeze_files_hash_match": true,
+    "step_record_count": true,
+    "episode_boundary_clean": true,
+    "step_time_continuity": true,
+    "phase_and_contact_rules": true,
+    "outcome_counts_match_summary": true,
+    "repeats_deterministic": true,
+    "screenshots_present": true,
+    "screenshots_nonempty": true,
+    "asset_hash_on_disk": true
+  },
+  "screenshots": [
+    "outputs\\map_eval\\final_run1\\screenshots\\contact_A-r0_contact.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\contact_A-r1_contact.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\reach_A-r0_goal.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\reach_A-r1_goal.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\reach_B-r0_goal.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\reach_B-r1_goal.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\reach_C-r0_goal.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\reach_C-r1_goal.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\takeoff_A-r0_landed.png",
+    "outputs\\map_eval\\final_run1\\screenshots\\takeoff_A-r1_landed.png"
+  ],
+  "status": "PASS"
+}

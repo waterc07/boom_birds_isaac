@@ -1,0 +1,139 @@
+{
+  "status": "PASS",
+  "samples": 441,
+  "ground_z_min_m": -0.07051043212413788,
+  "ground_z_max_m": 1.2613754272460938,
+  "ground_z_by_site": {
+    "(-11.5, 0.5)": 0.4017597436904907,
+    "(-11.5, 1.5)": -0.03777802363038063
+  },
+  "wall_rays": [
+    {
+      "y": -1.5,
+      "z": 0.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": -1.5,
+      "z": 1.0,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": -1.5,
+      "z": 1.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": -0.75,
+      "z": 0.5,
+      "hit": true,
+      "distance_m": 2.7404603958129883,
+      "prim": "/World/Terrain/Collisions/collision_014"
+    },
+    {
+      "y": -0.75,
+      "z": 1.0,
+      "hit": true,
+      "distance_m": 3.1050426959991455,
+      "prim": "/World/Terrain/Collisions/collision_014"
+    },
+    {
+      "y": -0.75,
+      "z": 1.5,
+      "hit": true,
+      "distance_m": 2.907053232192993,
+      "prim": "/World/Terrain/Collisions/collision_014"
+    },
+    {
+      "y": 0.0,
+      "z": 0.5,
+      "hit": true,
+      "distance_m": 3.446476936340332,
+      "prim": "/World/Terrain/Collisions/collision_014"
+    },
+    {
+      "y": 0.0,
+      "z": 1.0,
+      "hit": true,
+      "distance_m": 3.6130404472351074,
+      "prim": "/World/Terrain/Collisions/collision_014"
+    },
+    {
+      "y": 0.0,
+      "z": 1.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": 0.75,
+      "z": 0.5,
+      "hit": true,
+      "distance_m": 3.968648910522461,
+      "prim": "/World/Terrain/Collisions/collision_019"
+    },
+    {
+      "y": 0.75,
+      "z": 1.0,
+      "hit": true,
+      "distance_m": 4.421488285064697,
+      "prim": "/World/Terrain/Collisions/collision_019"
+    },
+    {
+      "y": 0.75,
+      "z": 1.5,
+      "hit": true,
+      "distance_m": 4.731388568878174,
+      "prim": "/World/Terrain/Collisions/collision_019"
+    },
+    {
+      "y": 1.5,
+      "z": 0.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": 1.5,
+      "z": 1.0,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": 1.5,
+      "z": 1.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": 2.25,
+      "z": 0.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": 2.25,
+      "z": 1.0,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    },
+    {
+      "y": 2.25,
+      "z": 1.5,
+      "hit": false,
+      "distance_m": null,
+      "prim": ""
+    }
+  ],
+  "screenshot_exists": true
+}

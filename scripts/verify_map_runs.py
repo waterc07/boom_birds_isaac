@@ -72,7 +72,7 @@ for item in episodes:
     seq = steps_by_episode[item['episode_id']]
     duration_ok = abs(item['duration_s'] - item['steps'] * 0.05) < 1e-6
     time_ok = time_ok and duration_ok
-    previous = -0.05
+    previous = None
     for index, row in enumerate(seq):
         if row.get('env_truncated') or row.get('env_terminated'):
             boundary_ok = False
@@ -80,7 +80,10 @@ for item in episodes:
             boundary_ok = False
         if not row.get('boundary_count_ok'):
             boundary_ok = False
-        if abs(row['time_s'] - previous - 0.05) > 1e-6:
+        if previous is None:
+            if abs(row['time_s'] - 0.05) > 1e-6:
+                time_ok = False
+        elif abs(row['time_s'] - previous - 0.05) > 1e-6:
             time_ok = False
         previous = row['time_s']
     phases = [row['phase'] for row in seq]

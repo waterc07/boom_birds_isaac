@@ -1,0 +1,172 @@
+{
+  "status": "PASS",
+  "scope": "MAP_GEOMETRY_RAYCAST_GUI_PROBE",
+  "preview": "E:\\isaac\\boom_birds_storage\\assets\\RMUC2027_IsaacSim\\rmuc2027_preview.usda",
+  "terrain": "E:\\isaac\\boom_birds_storage\\assets\\RMUC2027_IsaacSim\\assets\\rmuc2027_terrain.usdc",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "bounds_min_m": [
+    -14.000493049621582,
+    -8.001565933227539,
+    -0.3009999990463257
+  ],
+  "bounds_max_m": [
+    14.000499725341797,
+    8.001565933227539,
+    3.497683048248291
+  ],
+  "samples": 112,
+  "ground_z_min_m": -0.19493459165096283,
+  "ground_z_max_m": 2.6684999465942383,
+  "ground_z_median_m": 0.03139297664165497,
+  "flat_clear_samples": 34,
+  "flat_clear_sample_examples": [
+    {
+      "x": -13.500493049621582,
+      "y": 0.49843406677246094,
+      "ground_z": -0.01155109889805317,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_002"
+    },
+    {
+      "x": -9.500493049621582,
+      "y": -7.501565933227539,
+      "ground_z": 0.0026404294185340405,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_004"
+    },
+    {
+      "x": -9.500493049621582,
+      "y": -5.501565933227539,
+      "ground_z": 0.0575057677924633,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_004"
+    },
+    {
+      "x": -9.500493049621582,
+      "y": 0.49843406677246094,
+      "ground_z": -0.01155109889805317,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_010"
+    },
+    {
+      "x": -9.500493049621582,
+      "y": 6.498434066772461,
+      "ground_z": 0.031401924788951874,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_007"
+    },
+    {
+      "x": -7.500493049621582,
+      "y": -7.501565933227539,
+      "ground_z": 0.01829840987920761,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_008"
+    },
+    {
+      "x": -7.500493049621582,
+      "y": -5.501565933227539,
+      "ground_z": 0.07375701516866684,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_008"
+    },
+    {
+      "x": -7.500493049621582,
+      "y": 6.498434066772461,
+      "ground_z": 0.031401924788951874,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_011"
+    },
+    {
+      "x": -5.500493049621582,
+      "y": -7.501565933227539,
+      "ground_z": 0.002633304102346301,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_013"
+    },
+    {
+      "x": -5.500493049621582,
+      "y": -5.501565933227539,
+      "ground_z": 0.05750585347414017,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_013"
+    },
+    {
+      "x": -5.500493049621582,
+      "y": 0.49843406677246094,
+      "ground_z": -0.011551099829375744,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_010"
+    },
+    {
+      "x": -5.500493049621582,
+      "y": 4.498434066772461,
+      "ground_z": 0.07651151716709137,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_011"
+    },
+    {
+      "x": -5.500493049621582,
+      "y": 6.498434066772461,
+      "ground_z": 0.03140192851424217,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_011"
+    },
+    {
+      "x": -3.500493049621582,
+      "y": -7.501565933227539,
+      "ground_z": 0.0026333078276365995,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_013"
+    },
+    {
+      "x": -3.500493049621582,
+      "y": -5.501565933227539,
+      "ground_z": 0.057505905628204346,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_013"
+    },
+    {
+      "x": -3.500493049621582,
+      "y": 6.498434066772461,
+      "ground_z": 0.03140192851424217,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_016"
+    },
+    {
+      "x": -1.500493049621582,
+      "y": -7.501565933227539,
+      "ground_z": 0.0026333120185881853,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_013"
+    },
+    {
+      "x": -1.500493049621582,
+      "y": -5.501565933227539,
+      "ground_z": 0.05750594660639763,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_013"
+    },
+    {
+      "x": 2.499506950378418,
+      "y": -7.501565933227539,
+      "ground_z": 0.0026326614897698164,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_022"
+    },
+    {
+      "x": 2.499506950378418,
+      "y": 6.498434066772461,
+      "ground_z": 0.03135661035776138,
+      "clearance_m": 6.0,
+      "collision_prim": "/World/Terrain/Collisions/collision_025"
+    }
+  ],
+  "screenshot": "outputs\\map_eval\\probe3\\map_probe_overview.png",
+  "screenshot_exists": true,
+  "gui_mode": true,
+  "backend": "directx",
+  "limitations": [
+    "diagnostic raycasts only; no robot or dynamic contact in this probe"
+  ]
+}

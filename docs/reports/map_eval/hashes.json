@@ -1,0 +1,19 @@
+{
+  "docs\\reports\\map_eval\\evidence\\cases.json": "322b47f9e0d3c58de713c42a24d4041830b2ae5370dd1d21b4624a51f32b07c0",
+  "docs\\reports\\map_eval\\evidence\\episodes.jsonl": "9f182d5235752c64970ee25088616957077afdddde8cf0d26d6c66ee71467d21",
+  "docs\\reports\\map_eval\\evidence\\manifest.json": "69215c9a3d152544dce9572ff8bfe8ec97cb341877aa1e8a7cc97a962cd55a13",
+  "docs\\reports\\map_eval\\evidence\\map_cases_v1.json": "a8bc5ce96da7a2f7774e4d76b6e1d625b384e7e50908344013e9ecde4b976275",
+  "docs\\reports\\map_eval\\evidence\\map_freeze_v1.json": "a5c40eb3d7c05f51554099661337b0d0cfc68ff91154f8f79564f856416c5b41",
+  "docs\\reports\\map_eval\\evidence\\map_probe.json": "a355e02d76d8290843136461df5eb8417afc15456f89941b35c7025f511deec4",
+  "docs\\reports\\map_eval\\evidence\\official_smoke_directx.json": "c607270d29bf31e120012b3dd561e4c512b315181dddabf3cf6f4bccf0e27653",
+  "docs\\reports\\map_eval\\evidence\\rmuc2027.yaml": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "docs\\reports\\map_eval\\evidence\\site_probe.json": "03a050e39da69ebaea2e67b6555a80091c43e6319d46480d2a434b5903b8f9a7",
+  "docs\\reports\\map_eval\\evidence\\summary.json": "abf1eba68e463980c4c4d14a0bf62ecf6c7c88da2d826a828e7e1375f5a019f1",
+  "docs\\reports\\map_eval\\screenshots\\contact_A-r0_contact.png": "c22c05519732f3bd4f7d9fb979d78446d35499099cb11cd18c03d7050668c7da",
+  "docs\\reports\\map_eval\\screenshots\\map_probe_overview.png": "08ed33c1d12c364c96da4c75c72a2bc480d958ea03eee4ef46cc8c37d77cde5d",
+  "docs\\reports\\map_eval\\screenshots\\reach_A-r0_goal.png": "2fd7cc22b796966597318cda7f363326dadeb9cf061e7452795766661f2567a5",
+  "docs\\reports\\map_eval\\screenshots\\takeoff_A-r0_landed.png": "de639457e676736ef2f703c019951f8d28ad8f0c69c0abd932fd14d8e8b0f482",
+  "docs\\reports\\map_eval\\verify_final.json": "420cd3ad3dc1918fdf798449b3029484646cc76e64841c40e96a7c5cfc73a125",
+  "outputs/map_eval/final_run1/steps.jsonl": "e62ecc5b921a91d53efc917c9a239540bac44be28255ccd0f058b48fbb4533f3",
+  "outputs/map_eval/final_run1/screenshots/contact_A-r0_contact.png": "c22c05519732f3bd4f7d9fb979d78446d35499099cb11cd18c03d7050668c7da"
+}
