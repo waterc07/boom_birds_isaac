@@ -943,6 +943,7 @@ try:
                 'thresholds': thresholds,
                 'classes_run': classes,
                 'scenario_count': len(scenarios),
+                'total_episodes': len(results),
                 'class_scenario_counts': {
                     name: sum(1 for item in scenarios if item.scene_class == name)
                     for name in classes},

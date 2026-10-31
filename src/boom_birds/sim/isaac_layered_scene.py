@@ -28,6 +28,7 @@ from .layered import (
 )
 
 PARK_Z_M = 50.0
+BALL_PARK_XY_M = 300.0
 LAYERED_ROOT = '/World/layered_assets'
 OBSTACLE_PATHS = ('{}/obs0'.format(LAYERED_ROOT), '{}/obs1'.format(LAYERED_ROOT))
 MOVER_PATH = '{}/mover'.format(LAYERED_ROOT)
@@ -132,8 +133,9 @@ class LayeredScene:
 
     def _park(self):
         for path in ALL_PATHS:
+            park_xy = (BALL_PARK_XY_M if path == BALL_PATH else 0.0)
             self.rigid_views[path].set_world_poses(
-                positions=self._tensor([[0.0, 0.0, PARK_Z_M]]),
+                positions=self._tensor([[park_xy, park_xy, PARK_Z_M]]),
                 orientations=self._tensor([[1.0, 0.0, 0.0, 0.0]]))
             try:
                 self.rigid_views[path].set_velocities(
