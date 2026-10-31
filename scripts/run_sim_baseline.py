@@ -318,7 +318,7 @@ try:
             manifest = {
                 'schema_version': MANIFEST_SCHEMA_ID,
                 'code_commit': args.code_commit,
-                'working_tree': 'recorded by the operator when invoking the script',
+                'working_tree': args.working_tree,
                 'config_sha256': {
                     str(args.config): hashlib.sha256(args.config.read_bytes()).hexdigest()},
                 'asset_versions': {
@@ -1393,7 +1393,7 @@ try:
             outputs_sha256[args.csv.name] = hashlib.sha256(
                 args.csv.read_bytes()).hexdigest()
         manifest = {
-            'schema_version': MANIFEST_SCHEMA_ID,
+            'schema_version': 'boom_birds.manifest.v1',
             'code_commit': args.code_commit,
             'working_tree': args.working_tree,
             'config_sha256': {
