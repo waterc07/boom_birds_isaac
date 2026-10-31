@@ -1,0 +1,21 @@
+# V2.2 Action Schema v2.0 runtime defaults. PROPOSED values, not aircraft limits.
+# Schema / frame / unit ids are contract constants; motion limits are proposed.
+schema:
+  message: boom_birds.message.v2.0
+  action: boom_birds.action.v2.0
+frame: COMPOSITE_BODY_HEADING_FLU_WORLD_UP
+units: m/s,rad/s
+action_ttl_ns: 150000000
+max_age_ms: 150
+allowed_observation_age_ns: 250000000
+require_vertical_integrity: true
+allow_partial_axes: false
+
+# MAVLink mapping candidates from V2.2 10.4.1/26.3; not verified on firmware.
+mavlink:
+  normal_velocity_message: SET_POSITION_TARGET_LOCAL_NED
+  coordinate_frame: MAV_FRAME_LOCAL_NED
+  type_mask_full_axis: 1479
+  type_mask_ignore_vertical: 1511
+  type_mask_status: PROPOSED
+  firmware_verification: NOT RUN

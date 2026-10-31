@@ -57,6 +57,10 @@ def test_contract_modules_do_not_import_training_or_sensor_libraries():
     source = str(Path(__file__).resolve().parents[2] / 'src')
     script = ('import sys; sys.path.insert(0, ' + repr(source) + '); '
               'import boom_birds.contracts.frames, boom_birds.contracts.timebase; '
+              'import boom_birds.contracts.reasons, boom_birds.contracts.versions; '
+              'import boom_birds.contracts.context, boom_birds.contracts.action_v2; '
+              'import boom_birds.contracts.admission, boom_birds.contracts.ownership; '
+              'import boom_birds.contracts.lifecycle; '
               'assert not any(m.split(".")[0] in {"torch", "isaaclab", "isaacsim", "numpy", "cv2"} '
               'for m in sys.modules)')
     subprocess.run([sys.executable, '-c', script], check=True)
