@@ -21,6 +21,8 @@ parser.add_argument('--methods', default='follow_only,supervisor')
 parser.add_argument('--execution-path', default='v2', choices=('v1', 'v2'))
 parser.add_argument('--obs-delay-s', type=float, default=0.0)
 parser.add_argument('--action-delay-s', type=float, default=0.0)
+parser.add_argument('--clock-offset-ms', type=float, default=0.0)
+parser.add_argument('--sync-fail-step', type=int, default=-1)
 parser.add_argument('--stop-distance-m', type=float, default=1.1)
 parser.add_argument('--only-cases', default='')
 parser.add_argument('--limit-cases', type=int, default=0)
@@ -316,7 +318,9 @@ try:
                         set_obstacle_pose(obstacle_position)
                         observation_t = max(0.0, elapsed - args.obs_delay_s)
                         observation = obstacle_spec.observation_at(observation_t)
-                        observation['age_s'] = float(observation.get('age_s', 0.0)) + args.obs_delay_s
+                        observation['age_s'] = (float(observation.get('age_s', 0.0))
+                                                + args.obs_delay_s
+                                                + args.clock_offset_ms / 1000.0)
                         target = runner.waypoints[runner.index]
                         decision = supervisor.update(
                             state.position_world_m, target,
@@ -379,6 +383,8 @@ try:
                             action = v2_gate.build(
                                 command, now_ns, step, observation_id,
                                 observation_time_ns=now_ns)
+                            if args.sync_fail_step >= 0 and step == args.sync_fail_step:
+                                v2_gate.bump_context(sync=True)
                             context = v2_gate.context()
                             v2_observation_id = observation_id
                             v2_context_record = {'system_boot_id': context.system_boot_id,
