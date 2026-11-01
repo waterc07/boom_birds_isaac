@@ -1,0 +1,410 @@
+{
+  "status": "PASS",
+  "checks": {
+    "counts": true,
+    "status": true,
+    "gui": true,
+    "commit": true,
+    "hashes": true,
+    "freeze_cases": true,
+    "coverage": true,
+    "brake_metrics": true,
+    "physical_outcomes": true,
+    "v2_ttl_no_degrade_normal": true,
+    "post_fault_degraded": true,
+    "fault_types": true,
+    "status_final": true
+  },
+  "ranges": {
+    "brake_stop_distance_m": [
+      0.18513260786830507,
+      0.5846594375783718
+    ],
+    "brake_stop_time_s": [
+      1.25,
+      3.25
+    ],
+    "brake_initial_speed_mps": [
+      0.24785347654001066,
+      0.8514284648524023
+    ],
+    "brake_episodes": 36
+  },
+  "fault_metrics": [
+    {
+      "case_id": "fault_A_s0.4",
+      "fault_type": "A",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.2911639852653459,
+      "lateral_m": 0.4810197571264925,
+      "time_s": 1.4500000000000002,
+      "initial_speed_mps": 0.34890367274469375,
+      "final_speed_mps": 0.010937693107848376
+    },
+    {
+      "case_id": "fault_A_s0.8",
+      "fault_type": "A",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.6094417588229495,
+      "lateral_m": 0.47827997924052285,
+      "time_s": 1.5499999999999998,
+      "initial_speed_mps": 0.7566834495769565,
+      "final_speed_mps": 0.009478685033648222
+    },
+    {
+      "case_id": "fault_B_s0.4",
+      "fault_type": "B",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.2911639852653459,
+      "lateral_m": 0.4810197571264925,
+      "time_s": 1.4500000000000002,
+      "initial_speed_mps": 0.34890367274469375,
+      "final_speed_mps": 0.010937693107848376
+    },
+    {
+      "case_id": "fault_B_s0.8",
+      "fault_type": "B",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.6094417588229495,
+      "lateral_m": 0.47827997924052285,
+      "time_s": 1.5499999999999998,
+      "initial_speed_mps": 0.7566834495769565,
+      "final_speed_mps": 0.009478685033648222
+    },
+    {
+      "case_id": "fault_C_s0.4",
+      "fault_type": "C",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.2911639852653459,
+      "lateral_m": 0.4810197571264925,
+      "time_s": 1.4500000000000002,
+      "initial_speed_mps": 0.34890367274469375,
+      "final_speed_mps": 0.010937693107848376
+    },
+    {
+      "case_id": "fault_C_s0.8",
+      "fault_type": "C",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.6094417588229495,
+      "lateral_m": 0.47827997924052285,
+      "time_s": 1.5499999999999998,
+      "initial_speed_mps": 0.7566834495769565,
+      "final_speed_mps": 0.009478685033648222
+    },
+    {
+      "case_id": "fault_D_s0.4",
+      "fault_type": "D",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.22051686550343033,
+      "lateral_m": 0.48117191981754065,
+      "time_s": 1.35,
+      "initial_speed_mps": 0.34890367274469375,
+      "final_speed_mps": 0.014129692668425266
+    },
+    {
+      "case_id": "fault_D_s0.8",
+      "fault_type": "D",
+      "physical_outcome": "STOPPED",
+      "along_m": 0.4678460584045534,
+      "lateral_m": 0.47966372765226895,
+      "time_s": 1.4499999999999997,
+      "initial_speed_mps": 0.7566834495769565,
+      "final_speed_mps": 0.011114721057213544
+    }
+  ],
+  "brake_metrics": [
+    {
+      "case_id": "brake_s0.3_h0.00_forward_r0",
+      "along_m": 0.18652766871980173,
+      "lateral_m": 0.4063617594572523,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24785347654001066,
+      "final_speed_mps": 0.07795105060224741
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_forward_r1",
+      "along_m": 0.1853104795172234,
+      "lateral_m": 0.3068827453531974,
+      "time_s": 3.25,
+      "initial_speed_mps": 0.24785347654001066,
+      "final_speed_mps": 0.06650088391798965
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_side_r0",
+      "along_m": 0.1868339193944671,
+      "lateral_m": 0.4063541317710643,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24804010644268187,
+      "final_speed_mps": 0.07794584501384828
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_side_r1",
+      "along_m": 0.1868339193944671,
+      "lateral_m": 0.4063541317710643,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24804010644268187,
+      "final_speed_mps": 0.07794584501384828
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_diagonal_r0",
+      "along_m": 0.18669612215895706,
+      "lateral_m": 0.4063579436631503,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24793475097700313,
+      "final_speed_mps": 0.07794705535524389
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_diagonal_r1",
+      "along_m": 0.18669612215895706,
+      "lateral_m": 0.4063579436631503,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24793475097700313,
+      "final_speed_mps": 0.07794705535524389
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_forward_r0",
+      "along_m": 0.18683181803529073,
+      "lateral_m": 0.4063550643796976,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24804050960284207,
+      "final_speed_mps": 0.0779454348360664
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_forward_r1",
+      "along_m": 0.18513260786830507,
+      "lateral_m": 0.30688345354313135,
+      "time_s": 3.25,
+      "initial_speed_mps": 0.24804050960284207,
+      "final_speed_mps": 0.0664997920165698
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_side_r0",
+      "along_m": 0.186515126569519,
+      "lateral_m": 0.4063616233029462,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24785438602875434,
+      "final_speed_mps": 0.07795093639844035
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_side_r1",
+      "along_m": 0.186515126569519,
+      "lateral_m": 0.4063616233029462,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24785438602875434,
+      "final_speed_mps": 0.07795093639844035
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_diagonal_r0",
+      "along_m": 0.18669520043486657,
+      "lateral_m": 0.40635769345368433,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24793487825260252,
+      "final_speed_mps": 0.07794699889450735
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_diagonal_r1",
+      "along_m": 0.18669520043486657,
+      "lateral_m": 0.40635769345368433,
+      "time_s": 1.25,
+      "initial_speed_mps": 0.24793487825260252,
+      "final_speed_mps": 0.07794699889450735
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_forward_r0",
+      "along_m": 0.3829625739663839,
+      "lateral_m": 0.27883586853669634,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.54718248054286,
+      "final_speed_mps": 0.06750365207462329
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_forward_r1",
+      "along_m": 0.38977711838312157,
+      "lateral_m": 0.30676298500278515,
+      "time_s": 3.25,
+      "initial_speed_mps": 0.54718248054286,
+      "final_speed_mps": 0.06670289788046366
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_side_r0",
+      "along_m": 0.3831631505250137,
+      "lateral_m": 0.27881144004593206,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5474173999834508,
+      "final_speed_mps": 0.06752095047832633
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_side_r1",
+      "along_m": 0.3831631505250137,
+      "lateral_m": 0.27881144004593206,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5474173999834508,
+      "final_speed_mps": 0.06752095047832633
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_diagonal_r0",
+      "along_m": 0.3831122550389785,
+      "lateral_m": 0.2788240848429774,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5472998662201303,
+      "final_speed_mps": 0.06751242664413874
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_diagonal_r1",
+      "along_m": 0.3831122550389785,
+      "lateral_m": 0.2788240848429774,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5472998662201303,
+      "final_speed_mps": 0.06751242664413874
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_forward_r0",
+      "along_m": 0.3831655379902337,
+      "lateral_m": 0.27881371591155774,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5474249130151224,
+      "final_speed_mps": 0.06752045334793182
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_forward_r1",
+      "along_m": 0.3831655379902337,
+      "lateral_m": 0.27881371591155774,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5474249130151224,
+      "final_speed_mps": 0.06752045334793182
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_side_r0",
+      "along_m": 0.3829783098355716,
+      "lateral_m": 0.27883819383195113,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5471783072139835,
+      "final_speed_mps": 0.06750224927627604
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_side_r1",
+      "along_m": 0.3829783098355716,
+      "lateral_m": 0.27883819383195113,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5471783072139835,
+      "final_speed_mps": 0.06750224927627604
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_diagonal_r0",
+      "along_m": 0.38310555551883324,
+      "lateral_m": 0.2788257693141455,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5472995486154322,
+      "final_speed_mps": 0.06751232737349529
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_diagonal_r1",
+      "along_m": 0.38310555551883324,
+      "lateral_m": 0.2788257693141455,
+      "time_s": 2.8,
+      "initial_speed_mps": 0.5472995486154322,
+      "final_speed_mps": 0.06751232737349529
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_forward_r0",
+      "along_m": 0.584635044449534,
+      "lateral_m": 0.27511115464706337,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8510699522909186,
+      "final_speed_mps": 0.06697392541794951
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_forward_r1",
+      "along_m": 0.584635044449534,
+      "lateral_m": 0.27511115464706337,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8510699522909186,
+      "final_speed_mps": 0.06697392541794951
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_side_r0",
+      "along_m": 0.5841401744312371,
+      "lateral_m": 0.2751081919888098,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8514276871723162,
+      "final_speed_mps": 0.06698341848776762
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_side_r1",
+      "along_m": 0.5841401744312371,
+      "lateral_m": 0.2751081919888098,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8514276871723162,
+      "final_speed_mps": 0.06698341848776762
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_diagonal_r0",
+      "along_m": 0.5844392144432462,
+      "lateral_m": 0.2751085461903762,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8512556309923563,
+      "final_speed_mps": 0.06697843475114369
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_diagonal_r1",
+      "along_m": 0.5844392144432462,
+      "lateral_m": 0.2751085461903762,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8512556309923563,
+      "final_speed_mps": 0.06697843475114369
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_forward_r0",
+      "along_m": 0.5841544006037412,
+      "lateral_m": 0.27510787797399344,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8514284648524023,
+      "final_speed_mps": 0.06698360681795906
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_forward_r1",
+      "along_m": 0.5841544006037412,
+      "lateral_m": 0.27510787797399344,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8514284648524023,
+      "final_speed_mps": 0.06698360681795906
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_side_r0",
+      "along_m": 0.5846594375783718,
+      "lateral_m": 0.27511209578492807,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8510735300873904,
+      "final_speed_mps": 0.06697365390649562
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_side_r1",
+      "along_m": 0.5846594375783718,
+      "lateral_m": 0.27511209578492807,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8510735300873904,
+      "final_speed_mps": 0.06697365390649562
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_diagonal_r0",
+      "along_m": 0.58444603006265,
+      "lateral_m": 0.27510956758585203,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8512547882958835,
+      "final_speed_mps": 0.06697888981619342
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_diagonal_r1",
+      "along_m": 0.58444603006265,
+      "lateral_m": 0.27510956758585203,
+      "time_s": 2.85,
+      "initial_speed_mps": 0.8512547882958835,
+      "final_speed_mps": 0.06697888981619342
+    }
+  ],
+  "coverage": {
+    "cells": 18,
+    "episodes": 36
+  },
+  "command_latency_note": "No separate command/actuation latency probe; setpoint issued and stepped at the same 0.05 s tick."
+}

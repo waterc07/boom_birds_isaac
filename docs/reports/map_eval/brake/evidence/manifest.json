@@ -1,0 +1,20 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "ec23997d19eedd5b2e46b8c24aa78a679ac6fb0b",
+  "working_tree": "clean at ec23997 plus freeze 7b6acd8",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NVIDIA 581.80 (observed)",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "1bee33ce2351f9d69394cbd8dda85ef30f371b0d2c68b668b9161165562514ad",
+  "command": "scripts/run_brake_eval.py --cases configs/scenarios/brake_cases_v1.json --freeze configs/scenarios/brake_freeze_v1.json --screenshots --kit_args=--/app/vulkan=false --device cuda:0 --code-commit ec23997d19eedd5b2e46b8c24aa78a679ac6fb0b --working-tree clean at ec23997 plus freeze 7b6acd8 --gpu-driver NVIDIA 581.80 (observed) --output outputs/map_eval/brake_final4",
+  "started_at": "2026-11-01T22:12:38.658139+08:00",
+  "outputs_sha256": {
+    "summary.json": "156de761fbe51b2595ed8143c968442e8fe2a7979c4034746da373abb8a2c82a",
+    "episodes.jsonl": "498ae4ab2388ef55634c1ff0f6cf5d686a22d8699d3a22d321aec18f98813ae7",
+    "steps.jsonl": "e11244c4163e03fcca2400c4fe2d03ff3dc81de48ddacf445aa79a9b9bf969e1"
+  }
+}
