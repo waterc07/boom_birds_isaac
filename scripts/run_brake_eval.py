@@ -192,6 +192,7 @@ try:
                                            'velocity': list(state.velocity_world_mps)}
                             business_outcome = 'ABORT'
                             phase_name = 'FAULT_OBSERVE'
+                            capture(case_id + '_fault_start')
                             fault_done = False
                             if case['fault_type'] == 'D':
                                 gate.bump_context(control=True)
@@ -223,7 +224,9 @@ try:
                         if speed <= float(params_cfg['stop_speed_mps']):
                             stop_hold += dt
                             if stop_hold >= float(params_cfg['stop_hold_s']):
-                                physical_outcome = 'STOPPED'; break
+                                physical_outcome = 'STOPPED'
+                                capture(case_id + '_fault_stopped')
+                                break
                         else:
                             stop_hold = 0.0
                         if fault_start is not None:
