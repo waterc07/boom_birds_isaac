@@ -1,0 +1,23 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "358d011af77ec936156ff2380efa1868b0e2dadc",
+  "working_tree": "clean at 358d011 plus freeze ecfacbb",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NVIDIA 581.80 (observed)",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "cb13e8be0ebf03a307456f7e56ef206aedc764caca8f11f34ff1f6c3d5a4603c",
+  "methods": [
+    "supervisor"
+  ],
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/map_v2_regression_cases_v1.json --freeze configs/scenarios/map_v2_regression_freeze_v1.json --methods supervisor --execution-path v2 --screenshots --kit_args=--/app/vulkan=false --device cuda:0 --code-commit 358d011af77ec936156ff2380efa1868b0e2dadc --working-tree clean at 358d011 plus freeze ecfacbb --gpu-driver NVIDIA 581.80 (observed) --output outputs/map_eval/final_v2_regression1",
+  "started_at": "2026-11-01T20:39:28.985759+08:00",
+  "outputs_sha256": {
+    "summary.json": "f71dd20a6b800ed047520d19d63f94bd9fabd3539933762da6169f749dd39747",
+    "episodes.jsonl": "085c973b1fb3540b0b3bd6f84fef3cc0cb77c0ecd5bc93a4e7426d75001b3812",
+    "steps.jsonl": "002fda247189eb6ed34bb5767e40ab2c77eb6685ba3e5f3b3b3605ae760b3b58"
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "status": "PASS",
+  "checks": {
+    "dynamic_status": true,
+    "dynamic_execution_path": true,
+    "dynamic_denominator": true,
+    "dynamic_gui": true,
+    "dynamic_commit": true,
+    "dynamic_hashes": true,
+    "dynamic_step_count": true,
+    "dynamic_admission": true,
+    "dynamic_execution": true,
+    "dynamic_trace": true,
+    "dynamic_boundary": true,
+    "dynamic_time": true,
+    "dynamic_action_ttl": true,
+    "dynamic_admission_counts": true,
+    "dynamic_outcomes": true,
+    "v1_parity": true,
+    "fault_step_count": true,
+    "fault_admission": true,
+    "fault_execution": true,
+    "fault_trace": true,
+    "fault_boundary": true,
+    "fault_time": true,
+    "fault_action_ttl": true,
+    "fault_expected": true,
+    "fault_denominator": true,
+    "fault_no_execution_after_reject": true,
+    "fault_status": true,
+    "fault_gui": true,
+    "fault_commit": true,
+    "fault_hashes": true,
+    "regression_status": true,
+    "regression_gui": true,
+    "regression_commit": true,
+    "regression_step_count": true,
+    "regression_admission": true,
+    "regression_execution": true,
+    "regression_trace": true,
+    "regression_boundary": true,
+    "regression_time": true,
+    "regression_action_ttl": true,
+    "regression_success": true,
+    "regression_hashes": true,
+    "status": true
+  },
+  "notes": {
+    "v1_comparison": {
+      "cases": 20,
+      "outcome_differences": [],
+      "duration_differences": [
+        {
+          "case_id": "dynamic_A_north_0",
+          "v1_s": 47.75,
+          "v2_s": 47.75,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_A_north_1",
+          "v1_s": 52.25,
+          "v2_s": 52.25,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_A_south_0",
+          "v1_s": 52.5,
+          "v2_s": 52.5,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_A_south_1",
+          "v1_s": 48.0,
+          "v2_s": 48.0,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_B_north_0",
+          "v1_s": 54.7,
+          "v2_s": 54.7,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_B_north_1",
+          "v1_s": 59.050000000000004,
+          "v2_s": 59.050000000000004,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_B_south_0",
+          "v1_s": 59.7,
+          "v2_s": 59.7,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_B_south_1",
+          "v1_s": 55.1,
+          "v2_s": 55.1,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_C_north_0",
+          "v1_s": 22.400000000000002,
+          "v2_s": 22.400000000000002,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_C_north_1",
+          "v1_s": 24.75,
+          "v2_s": 24.75,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_C_south_0",
+          "v1_s": 24.700000000000003,
+          "v2_s": 24.700000000000003,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_C_south_1",
+          "v1_s": 22.25,
+          "v2_s": 22.25,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_D_north_0",
+          "v1_s": 22.400000000000002,
+          "v2_s": 22.400000000000002,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_D_north_1",
+          "v1_s": 24.75,
+          "v2_s": 24.75,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_D_south_0",
+          "v1_s": 24.700000000000003,
+          "v2_s": 24.700000000000003,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_D_south_1",
+          "v1_s": 22.25,
+          "v2_s": 22.25,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_E_north_0",
+          "v1_s": 9.9,
+          "v2_s": 9.9,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_E_north_1",
+          "v1_s": 9.9,
+          "v2_s": 9.9,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_E_south_0",
+          "v1_s": 9.9,
+          "v2_s": 9.9,
+          "delta_s": 0.0
+        },
+        {
+          "case_id": "dynamic_E_south_1",
+          "v1_s": 9.9,
+          "v2_s": 9.9,
+          "delta_s": 0.0
+        }
+      ]
+    },
+    "fault_table": [
+      {
+        "episode_id": "fault_ttl_expiry_0-supervisor",
+        "fault_type": "ttl_expiry",
+        "outcome": "ABORT",
+        "reason": "REJECT_TTL_EXPIRED",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_ttl_expiry_1-supervisor",
+        "fault_type": "ttl_expiry",
+        "outcome": "ABORT",
+        "reason": "REJECT_TTL_EXPIRED",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_cache_resend_0-supervisor",
+        "fault_type": "cache_resend",
+        "outcome": "ABORT",
+        "reason": "ACTION_EXPIRED",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_cache_resend_1-supervisor",
+        "fault_type": "cache_resend",
+        "outcome": "ABORT",
+        "reason": "ACTION_EXPIRED",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_out_of_order_0-supervisor",
+        "fault_type": "out_of_order",
+        "outcome": "ABORT",
+        "reason": "REJECT_SUPERSEDED",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_out_of_order_1-supervisor",
+        "fault_type": "out_of_order",
+        "outcome": "ABORT",
+        "reason": "REJECT_SUPERSEDED",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_context_reset_0-supervisor",
+        "fault_type": "context_reset",
+        "outcome": "ABORT",
+        "reason": "REJECT_MISSION_EPOCH",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_context_reset_1-supervisor",
+        "fault_type": "context_reset",
+        "outcome": "ABORT",
+        "reason": "REJECT_MISSION_EPOCH",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_px4_boot_change_0-supervisor",
+        "fault_type": "px4_boot_change",
+        "outcome": "ABORT",
+        "reason": "REJECT_SYNC_OR_PX4_BOOT",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_px4_boot_change_1-supervisor",
+        "fault_type": "px4_boot_change",
+        "outcome": "ABORT",
+        "reason": "REJECT_SYNC_OR_PX4_BOOT",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_clock_sync_mismatch_0-supervisor",
+        "fault_type": "clock_sync_mismatch",
+        "outcome": "ABORT",
+        "reason": "REJECT_CLOCK_DOMAIN",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_clock_sync_mismatch_1-supervisor",
+        "fault_type": "clock_sync_mismatch",
+        "outcome": "ABORT",
+        "reason": "REJECT_CLOCK_DOMAIN",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_ownership_revoke_0-supervisor",
+        "fault_type": "ownership_revoke",
+        "outcome": "ABORT",
+        "reason": "REJECT_CONTROL_EPOCH",
+        "executed": false,
+        "admission": "REJECTED"
+      },
+      {
+        "episode_id": "fault_ownership_revoke_1-supervisor",
+        "fault_type": "ownership_revoke",
+        "outcome": "ABORT",
+        "reason": "REJECT_CONTROL_EPOCH",
+        "executed": false,
+        "admission": "REJECTED"
+      }
+    ]
+  },
+  "dynamic_outcomes": {
+    "supervisor": {
+      "SUCCESS": 8,
+      "COLLISION": 0,
+      "TIMEOUT": 0,
+      "OUT_OF_BOUNDS": 0,
+      "ABORT": 12,
+      "INVALID": 0
+    }
+  },
+  "fault_outcomes": {
+    "supervisor": {
+      "SUCCESS": 0,
+      "COLLISION": 0,
+      "TIMEOUT": 0,
+      "OUT_OF_BOUNDS": 0,
+      "ABORT": 14,
+      "INVALID": 0
+    }
+  },
+  "regression_outcomes": {
+    "supervisor": {
+      "SUCCESS": 8,
+      "COLLISION": 0,
+      "TIMEOUT": 0,
+      "OUT_OF_BOUNDS": 0,
+      "ABORT": 0,
+      "INVALID": 0
+    }
+  },
+  "fault_table": [
+    {
+      "episode_id": "fault_ttl_expiry_0-supervisor",
+      "fault_type": "ttl_expiry",
+      "outcome": "ABORT",
+      "reason": "REJECT_TTL_EXPIRED",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_ttl_expiry_1-supervisor",
+      "fault_type": "ttl_expiry",
+      "outcome": "ABORT",
+      "reason": "REJECT_TTL_EXPIRED",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_cache_resend_0-supervisor",
+      "fault_type": "cache_resend",
+      "outcome": "ABORT",
+      "reason": "ACTION_EXPIRED",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_cache_resend_1-supervisor",
+      "fault_type": "cache_resend",
+      "outcome": "ABORT",
+      "reason": "ACTION_EXPIRED",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_out_of_order_0-supervisor",
+      "fault_type": "out_of_order",
+      "outcome": "ABORT",
+      "reason": "REJECT_SUPERSEDED",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_out_of_order_1-supervisor",
+      "fault_type": "out_of_order",
+      "outcome": "ABORT",
+      "reason": "REJECT_SUPERSEDED",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_context_reset_0-supervisor",
+      "fault_type": "context_reset",
+      "outcome": "ABORT",
+      "reason": "REJECT_MISSION_EPOCH",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_context_reset_1-supervisor",
+      "fault_type": "context_reset",
+      "outcome": "ABORT",
+      "reason": "REJECT_MISSION_EPOCH",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_px4_boot_change_0-supervisor",
+      "fault_type": "px4_boot_change",
+      "outcome": "ABORT",
+      "reason": "REJECT_SYNC_OR_PX4_BOOT",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_px4_boot_change_1-supervisor",
+      "fault_type": "px4_boot_change",
+      "outcome": "ABORT",
+      "reason": "REJECT_SYNC_OR_PX4_BOOT",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_clock_sync_mismatch_0-supervisor",
+      "fault_type": "clock_sync_mismatch",
+      "outcome": "ABORT",
+      "reason": "REJECT_CLOCK_DOMAIN",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_clock_sync_mismatch_1-supervisor",
+      "fault_type": "clock_sync_mismatch",
+      "outcome": "ABORT",
+      "reason": "REJECT_CLOCK_DOMAIN",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_ownership_revoke_0-supervisor",
+      "fault_type": "ownership_revoke",
+      "outcome": "ABORT",
+      "reason": "REJECT_CONTROL_EPOCH",
+      "executed": false,
+      "admission": "REJECTED"
+    },
+    {
+      "episode_id": "fault_ownership_revoke_1-supervisor",
+      "fault_type": "ownership_revoke",
+      "outcome": "ABORT",
+      "reason": "REJECT_CONTROL_EPOCH",
+      "executed": false,
+      "admission": "REJECTED"
+    }
+  ]
+}

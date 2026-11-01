@@ -77,3 +77,25 @@ def test_reset_clears_state_and_timers():
     assert supervisor.state == 'FOLLOW'
     assert supervisor.wait_s == 0.0
     assert supervisor.transitions == 0
+
+
+def test_wait_timer_is_cumulative_and_not_reset_by_resume():
+    supervisor = RouteSupervisor(_config(max_wait_s=1.0, release_hold_s=0.1))
+    robot = (0.0, 0.0, 1.0)
+    target = (2.0, 0.0, 1.0)
+    # First blocked interval.
+    for step in range(8):
+        decision = supervisor.update(robot, target, 0.0, _obs(0.8), step * 0.05, 0.05)
+    assert decision['state'] in ('HOLD', 'WAIT')
+    first_wait = decision['wait_s']
+    assert first_wait > 0.0
+    # Clear long enough to enter RESUME/FOLLOW.
+    for step in range(8, 20):
+        decision = supervisor.update(robot, target, 0.0, _obs(3.0), step * 0.05, 0.05)
+    assert decision['state'] in ('RESUME', 'FOLLOW')
+    # Block again; cumulative wait must not be reset by the resume.
+    for step in range(20, 45):
+        decision = supervisor.update(robot, target, 0.0, _obs(0.8), step * 0.05, 0.05)
+    assert decision['state'] == 'ABORT'
+    assert decision['abort_reason'] == 'MAX_WAIT_EXCEEDED'
+    assert decision['wait_s'] > first_wait

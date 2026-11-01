@@ -1,0 +1,20 @@
+{
+  "docs\\reports\\map_eval\\v2\\dynamic_A_south_0-supervisor_success.png": "24bbe5f392b00a476a1f8726172a993f6cf198f3303c11aa2462680575223410",
+  "docs\\reports\\map_eval\\v2\\dynamic_B_south_0-supervisor_success.png": "ebdb6bc53d49afcf0aa12b43fbfdfc04dfc23daf65bcdeddfce5a38fa3404227",
+  "docs\\reports\\map_eval\\v2\\evidence\\dynamic_episodes.jsonl": "5e1a132ec9b9acd0b6cca9c8d715911c6d480c98a5e2c154f07d9135dd3d8a6b",
+  "docs\\reports\\map_eval\\v2\\evidence\\dynamic_manifest.json": "e26e32d4aa5fc94829bcdae6cb07b6de419b1ab11592c6f0052824a121c2d257",
+  "docs\\reports\\map_eval\\v2\\evidence\\dynamic_summary.json": "572936665487012e7263c5844a019756fa94244fd0a46f85739d7246e95b1a42",
+  "docs\\reports\\map_eval\\v2\\evidence\\fault_episodes.jsonl": "fec864e1cda03817ef4b38b30dd571ea03f783200da5d0d717acb96068bec536",
+  "docs\\reports\\map_eval\\v2\\evidence\\fault_manifest.json": "db29f913a3b7ef35c0dc129b8db744ad6659d8dcb0885ebe3d7e54807a786f67",
+  "docs\\reports\\map_eval\\v2\\evidence\\fault_summary.json": "9f90d242975f88146e98dfd4f8baf18e1057319fb556fec464406e802a8016c8",
+  "docs\\reports\\map_eval\\v2\\evidence\\map_v2_fault_freeze_v1.json": "8e917fe0344deed1b4c6228a8edd5e12ee9b8d735bdd27593be394ec0fea11c5",
+  "docs\\reports\\map_eval\\v2\\evidence\\map_v2_freeze_v1.json": "e45d5e1f03fd1f4dec19b4d6c7c02920884c9eb5030261d66ef77460d2438153",
+  "docs\\reports\\map_eval\\v2\\evidence\\map_v2_regression_freeze_v1.json": "8cab09a000dbf4673bf44db3b285ba8f3fd803b3898d2700ac7fa70c7762f9f9",
+  "docs\\reports\\map_eval\\v2\\evidence\\regression_episodes.jsonl": "085c973b1fb3540b0b3bd6f84fef3cc0cb77c0ecd5bc93a4e7426d75001b3812",
+  "docs\\reports\\map_eval\\v2\\evidence\\regression_manifest.json": "63569aa156ac85eb7d94c91786d5f15b56ed47cff84a16207d5d676cffc10b72",
+  "docs\\reports\\map_eval\\v2\\evidence\\regression_summary.json": "f71dd20a6b800ed047520d19d63f94bd9fabd3539933762da6169f749dd39747",
+  "docs\\reports\\map_eval\\v2\\verify_v2_final.json": "cc19d3e81000ad8f2eba6ce8ddde12dbe028aa6c6192f49ca3ab8c0fd5ecaba3",
+  "outputs\\map_eval\\final_v2_dynamic1\\steps.jsonl": "daffde9edba8a0518a5fee86116d9428d675020f027adb1ead1629f7c8a64f9c",
+  "outputs\\map_eval\\final_v2_fault1\\steps.jsonl": "3b567fbc1864ee14428c94db605083ac718c0227ec7057afb26e8105dde6dc21",
+  "outputs\\map_eval\\final_v2_regression1\\steps.jsonl": "002fda247189eb6ed34bb5767e40ab2c77eb6685ba3e5f3b3b3605ae760b3b58"
+}

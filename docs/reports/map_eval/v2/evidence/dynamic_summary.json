@@ -1,0 +1,1932 @@
+{
+  "schema_version": "boom_birds.dynamic_eval.v1",
+  "status": "PASS",
+  "scope": "ORACLE_DYNAMIC_OBSTACLE_STOP_WAIT_RESUME",
+  "execution_path": "v2",
+  "map": {
+    "asset_id": "rmuc2027-isaacsim-20261028",
+    "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+    "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+    "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+    "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0"
+  },
+  "methods": [
+    "supervisor"
+  ],
+  "case_count": 20,
+  "counts": {
+    "supervisor": 20
+  },
+  "outcomes": {
+    "supervisor": {
+      "SUCCESS": 8,
+      "COLLISION": 0,
+      "TIMEOUT": 0,
+      "OUT_OF_BOUNDS": 0,
+      "ABORT": 12,
+      "INVALID": 0
+    }
+  },
+  "class_counts": {
+    "A": 4,
+    "B": 4,
+    "C": 4,
+    "D": 4,
+    "E": 4
+  },
+  "episodes": [
+    {
+      "episode_id": "dynamic_A_south_0-supervisor",
+      "case_id": "dynamic_A_south_0",
+      "method": "supervisor",
+      "scenario_class": "A",
+      "route_id": "south",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1050,
+      "duration_s": 52.5,
+      "route_active_s": 52.499999999999154,
+      "wait_total_s": 0.0,
+      "state_transitions": 0,
+      "states": [
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "NO_STOP_EXPECTED",
+      "obstacle": {
+        "obstacle_id": "obs_A",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          -8.7,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.7,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 14,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 1050,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_A_south_1-supervisor",
+      "case_id": "dynamic_A_south_1",
+      "method": "supervisor",
+      "scenario_class": "A",
+      "route_id": "south",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 960,
+      "duration_s": 48.0,
+      "route_active_s": 47.99999999999941,
+      "wait_total_s": 0.0,
+      "state_transitions": 0,
+      "states": [
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "NO_STOP_EXPECTED",
+      "obstacle": {
+        "obstacle_id": "obs_A",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          -8.7,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.7,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 14,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 960,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_A_north_0-supervisor",
+      "case_id": "dynamic_A_north_0",
+      "method": "supervisor",
+      "scenario_class": "A",
+      "route_id": "north",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 955,
+      "duration_s": 47.75,
+      "route_active_s": 47.749999999999424,
+      "wait_total_s": 0.0,
+      "state_transitions": 0,
+      "states": [
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "NO_STOP_EXPECTED",
+      "obstacle": {
+        "obstacle_id": "obs_A",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          3.3,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.7,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 14,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 955,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_A_north_1-supervisor",
+      "case_id": "dynamic_A_north_1",
+      "method": "supervisor",
+      "scenario_class": "A",
+      "route_id": "north",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1045,
+      "duration_s": 52.25,
+      "route_active_s": 52.24999999999917,
+      "wait_total_s": 0.0,
+      "state_transitions": 0,
+      "states": [
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "NO_STOP_EXPECTED",
+      "obstacle": {
+        "obstacle_id": "obs_A",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          3.3,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.7,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 14,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 1045,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_B_south_0-supervisor",
+      "case_id": "dynamic_B_south_0",
+      "method": "supervisor",
+      "scenario_class": "B",
+      "route_id": "south",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1194,
+      "duration_s": 59.7,
+      "route_active_s": 52.499999999999154,
+      "wait_total_s": 7.199999999999982,
+      "state_transitions": 5,
+      "states": [
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "RESUME",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "STOP_WAIT_RESUME",
+      "obstacle": {
+        "obstacle_id": "obs_B",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          -14.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.4,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 80,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 1194,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_B_south_1-supervisor",
+      "case_id": "dynamic_B_south_1",
+      "method": "supervisor",
+      "scenario_class": "B",
+      "route_id": "south",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1102,
+      "duration_s": 55.1,
+      "route_active_s": 47.99999999999941,
+      "wait_total_s": 7.099999999999983,
+      "state_transitions": 5,
+      "states": [
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "RESUME",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "STOP_WAIT_RESUME",
+      "obstacle": {
+        "obstacle_id": "obs_B",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          -14.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.4,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 80,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 1102,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_B_north_0-supervisor",
+      "case_id": "dynamic_B_north_0",
+      "method": "supervisor",
+      "scenario_class": "B",
+      "route_id": "north",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1094,
+      "duration_s": 54.7,
+      "route_active_s": 47.749999999999424,
+      "wait_total_s": 6.949999999999983,
+      "state_transitions": 5,
+      "states": [
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "RESUME",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "STOP_WAIT_RESUME",
+      "obstacle": {
+        "obstacle_id": "obs_B",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          -2.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.4,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 80,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 1094,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_B_north_1-supervisor",
+      "case_id": "dynamic_B_north_1",
+      "method": "supervisor",
+      "scenario_class": "B",
+      "route_id": "north",
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1181,
+      "duration_s": 59.050000000000004,
+      "route_active_s": 52.24999999999917,
+      "wait_total_s": 6.799999999999984,
+      "state_transitions": 5,
+      "states": [
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "RESUME",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "STOP_WAIT_RESUME",
+      "obstacle": {
+        "obstacle_id": "obs_B",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          -2.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.4,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 80,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 1181,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_C_south_0-supervisor",
+      "case_id": "dynamic_C_south_0",
+      "method": "supervisor",
+      "scenario_class": "C",
+      "route_id": "south",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 494,
+      "duration_s": 24.700000000000003,
+      "route_active_s": 16.050000000000093,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "ABORT",
+      "obstacle": {
+        "obstacle_id": "obs_C",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          -6.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 494,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_C_south_1-supervisor",
+      "case_id": "dynamic_C_south_1",
+      "method": "supervisor",
+      "scenario_class": "C",
+      "route_id": "south",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 445,
+      "duration_s": 22.25,
+      "route_active_s": 13.600000000000058,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "ABORT",
+      "obstacle": {
+        "obstacle_id": "obs_C",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          -6.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 445,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_C_north_0-supervisor",
+      "case_id": "dynamic_C_north_0",
+      "method": "supervisor",
+      "scenario_class": "C",
+      "route_id": "north",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 448,
+      "duration_s": 22.400000000000002,
+      "route_active_s": 13.75000000000006,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "ABORT",
+      "obstacle": {
+        "obstacle_id": "obs_C",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          5.8,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 448,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_C_north_1-supervisor",
+      "case_id": "dynamic_C_north_1",
+      "method": "supervisor",
+      "scenario_class": "C",
+      "route_id": "north",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 495,
+      "duration_s": 24.75,
+      "route_active_s": 16.100000000000094,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "ABORT",
+      "obstacle": {
+        "obstacle_id": "obs_C",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          5.8,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 495,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_D_south_0-supervisor",
+      "case_id": "dynamic_D_south_0",
+      "method": "supervisor",
+      "scenario_class": "D",
+      "route_id": "south",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 494,
+      "duration_s": 24.700000000000003,
+      "route_active_s": 16.050000000000093,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "HYSTERESIS_NO_CHATTER",
+      "obstacle": {
+        "obstacle_id": "obs_D",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "oscillate",
+        "start_position_world_m": [
+          -2,
+          -6.2,
+          1
+        ],
+        "oscillation_center_world_m": [
+          -2,
+          -6.2,
+          1
+        ],
+        "oscillation_axis_world": [
+          0,
+          1,
+          0
+        ],
+        "oscillation_amplitude_m": 0.8,
+        "oscillation_period_s": 1.2,
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 494,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_D_south_1-supervisor",
+      "case_id": "dynamic_D_south_1",
+      "method": "supervisor",
+      "scenario_class": "D",
+      "route_id": "south",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 445,
+      "duration_s": 22.25,
+      "route_active_s": 13.600000000000058,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "HYSTERESIS_NO_CHATTER",
+      "obstacle": {
+        "obstacle_id": "obs_D",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "oscillate",
+        "start_position_world_m": [
+          2,
+          -6.2,
+          1
+        ],
+        "oscillation_center_world_m": [
+          2,
+          -6.2,
+          1
+        ],
+        "oscillation_axis_world": [
+          0,
+          1,
+          0
+        ],
+        "oscillation_amplitude_m": 0.8,
+        "oscillation_period_s": 1.2,
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 445,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_D_north_0-supervisor",
+      "case_id": "dynamic_D_north_0",
+      "method": "supervisor",
+      "scenario_class": "D",
+      "route_id": "north",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 448,
+      "duration_s": 22.400000000000002,
+      "route_active_s": 13.75000000000006,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "HYSTERESIS_NO_CHATTER",
+      "obstacle": {
+        "obstacle_id": "obs_D",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "oscillate",
+        "start_position_world_m": [
+          2,
+          5.8,
+          1
+        ],
+        "oscillation_center_world_m": [
+          2,
+          5.8,
+          1
+        ],
+        "oscillation_axis_world": [
+          0,
+          1,
+          0
+        ],
+        "oscillation_amplitude_m": 0.8,
+        "oscillation_period_s": 1.2,
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 448,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_D_north_1-supervisor",
+      "case_id": "dynamic_D_north_1",
+      "method": "supervisor",
+      "scenario_class": "D",
+      "route_id": "north",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "steps": 495,
+      "duration_s": 24.75,
+      "route_active_s": 16.100000000000094,
+      "wait_total_s": 8.649999999999988,
+      "state_transitions": 4,
+      "states": [
+        "ABORT",
+        "BRAKE",
+        "FOLLOW",
+        "HOLD",
+        "WAIT"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "HYSTERESIS_NO_CHATTER",
+      "obstacle": {
+        "obstacle_id": "obs_D",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "oscillate",
+        "start_position_world_m": [
+          -2,
+          5.8,
+          1
+        ],
+        "oscillation_center_world_m": [
+          -2,
+          5.8,
+          1
+        ],
+        "oscillation_axis_world": [
+          0,
+          1,
+          0
+        ],
+        "oscillation_amplitude_m": 0.8,
+        "oscillation_period_s": 1.2,
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 495,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_E_south_0-supervisor",
+      "case_id": "dynamic_E_south_0",
+      "method": "supervisor",
+      "scenario_class": "E",
+      "route_id": "south",
+      "outcome": "ABORT",
+      "reason": "OBSERVATION_STALE",
+      "steps": 198,
+      "duration_s": 9.9,
+      "route_active_s": 7.94999999999998,
+      "wait_total_s": 1.950000000000001,
+      "state_transitions": 2,
+      "states": [
+        "ABORT",
+        "DEGRADED",
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "OBSERVATION_DEGRADED",
+      "obstacle": {
+        "obstacle_id": "obs_E",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          -6.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.1,
+        "observation_dropout_windows_s": [
+          [
+            8,
+            60
+          ]
+        ],
+        "observation_max_age_s": 0.3
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 198,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_E_south_1-supervisor",
+      "case_id": "dynamic_E_south_1",
+      "method": "supervisor",
+      "scenario_class": "E",
+      "route_id": "south",
+      "outcome": "ABORT",
+      "reason": "OBSERVATION_STALE",
+      "steps": 198,
+      "duration_s": 9.9,
+      "route_active_s": 7.94999999999998,
+      "wait_total_s": 1.950000000000001,
+      "state_transitions": 2,
+      "states": [
+        "ABORT",
+        "DEGRADED",
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          -4.0,
+          1.0
+        ],
+        [
+          -6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          6.0,
+          -6.2,
+          1.0
+        ],
+        [
+          9.5,
+          -4.0,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "OBSERVATION_DEGRADED",
+      "obstacle": {
+        "obstacle_id": "obs_E",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          -6.2,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.1,
+        "observation_dropout_windows_s": [
+          [
+            8,
+            60
+          ]
+        ],
+        "observation_max_age_s": 0.3
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 198,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_E_north_0-supervisor",
+      "case_id": "dynamic_E_north_0",
+      "method": "supervisor",
+      "scenario_class": "E",
+      "route_id": "north",
+      "outcome": "ABORT",
+      "reason": "OBSERVATION_STALE",
+      "steps": 198,
+      "duration_s": 9.9,
+      "route_active_s": 7.94999999999998,
+      "wait_total_s": 1.950000000000001,
+      "state_transitions": 2,
+      "states": [
+        "ABORT",
+        "DEGRADED",
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "expected_behavior": "OBSERVATION_DEGRADED",
+      "obstacle": {
+        "obstacle_id": "obs_E",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          5.8,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.1,
+        "observation_dropout_windows_s": [
+          [
+            8,
+            60
+          ]
+        ],
+        "observation_max_age_s": 0.3
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 198,
+      "v2_rejected_count": 0
+    },
+    {
+      "episode_id": "dynamic_E_north_1-supervisor",
+      "case_id": "dynamic_E_north_1",
+      "method": "supervisor",
+      "scenario_class": "E",
+      "route_id": "north",
+      "outcome": "ABORT",
+      "reason": "OBSERVATION_STALE",
+      "steps": 198,
+      "duration_s": 9.9,
+      "route_active_s": 7.94999999999998,
+      "wait_total_s": 1.950000000000001,
+      "state_transitions": 2,
+      "states": [
+        "ABORT",
+        "DEGRADED",
+        "FOLLOW"
+      ],
+      "contact_max_force_n": 0.0,
+      "contact_prim": "",
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1.0,
+          0.512
+        ],
+        [
+          -10.0,
+          3.5,
+          1.0
+        ],
+        [
+          -6.0,
+          5.8,
+          1.0
+        ],
+        [
+          5.5,
+          5.8,
+          1.0
+        ],
+        [
+          9.5,
+          3.5,
+          1.0
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "expected_behavior": "OBSERVATION_DEGRADED",
+      "obstacle": {
+        "obstacle_id": "obs_E",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2,
+          5.8,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.1,
+        "observation_dropout_windows_s": [
+          [
+            8,
+            60
+          ]
+        ],
+        "observation_max_age_s": 0.3
+      },
+      "execution_path": "v2",
+      "fault_type": null,
+      "v2_reject_reason": "",
+      "v2_admitted_count": 198,
+      "v2_rejected_count": 0
+    }
+  ],
+  "gui_mode": true
+}

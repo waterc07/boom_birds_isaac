@@ -1,0 +1,43 @@
+{
+  "schema_version": "boom_birds.v2_execution_freeze.v1",
+  "evaluation_version": "boom_birds.dynamic_eval.v2_execution",
+  "kind": "regression",
+  "status": "FROZEN",
+  "frozen_at": "2026-11-01T12:21:18.027152+00:00",
+  "code_commit": "358d011af77ec936156ff2380efa1868b0e2dadc",
+  "execution_path": "v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "map_config_file": "configs\\maps\\rmuc2027.yaml",
+  "cases_sha256": "cb13e8be0ebf03a307456f7e56ef206aedc764caca8f11f34ff1f6c3d5a4603c",
+  "cases_file": "configs\\scenarios\\map_v2_regression_cases_v1.json",
+  "methods": [
+    "supervisor"
+  ],
+  "case_ids": [
+    "v2_reg_route_south_R1",
+    "v2_reg_route_south_R2",
+    "v2_reg_route_south_R3",
+    "v2_reg_route_south_R4",
+    "v2_reg_route_north_R1",
+    "v2_reg_route_north_R2",
+    "v2_reg_route_north_R3",
+    "v2_reg_route_north_R4"
+  ],
+  "counts": {
+    "supervisor": 8
+  },
+  "total_episodes": 8,
+  "fault_types": [],
+  "supervisor": {
+    "stop_distance_m": 1.1,
+    "release_distance_m": 1.6,
+    "prediction_horizon_s": 1.0,
+    "max_wait_s": 8.0,
+    "observation_max_age_s": 0.3
+  },
+  "simulated_px4_identity": true,
+  "note": "Simulation-only v2 gate; not a PX4 Sender or firmware validation."
+}
