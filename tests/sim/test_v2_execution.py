@@ -140,3 +140,16 @@ def test_simulated_identity_is_explicit_and_bounded():
     assert gate.config.simulated_px4_identity is True
     assert gate.config.px4_boot_id >= 0
     assert gate.config.clock_id == 'host_monotonic'
+
+def test_queued_action_is_rejected_if_it_expires_before_arrival():
+    from boom_birds.evaluation.dual_clock import EventQueue
+    gate = _gate(ttl_ns=100)
+    action = _build(gate, 0, ttl_ns=100)
+    queue = EventQueue()
+    queue.push(150, {'action': action}, duplicate_of=None)
+    due = queue.pop_due(200)
+    assert len(due) == 1
+    result = gate.admit(action, gate.context(), 200)
+    assert result.accepted is False
+    assert result.reason == reasons.REJECT_TTL_EXPIRED
+    assert gate.executed_actions == []
