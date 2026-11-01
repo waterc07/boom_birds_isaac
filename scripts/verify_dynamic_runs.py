@@ -80,7 +80,12 @@ contact_ok = True
 min_distances = {}
 for item in episodes:
     seq = steps_by_episode.get(item['episode_id'], [])
-    if len(seq) != item['steps']:
+    expected_records = item['steps']
+    if (item['method'] == 'supervisor' and item['outcome'] == 'ABORT'
+            and seq and seq[-1].get('supervisor_state') == 'ABORT'
+            and seq[-1].get('episode_length_buf') == 0):
+        expected_records += 1
+    if len(seq) != expected_records:
         step_count_ok = False
     previous = None
     for index, row in enumerate(seq):

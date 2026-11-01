@@ -1,0 +1,332 @@
+{
+  "schema_version": "boom_birds.map_eval.v1",
+  "status": "PASS",
+  "scope": "RMUC2027_MAP_DYNAMICS_SMOKE_AND_FROZEN_CASES",
+  "evidence_domain": "SIMULATION_MODEL_GUI_MAP",
+  "map": {
+    "asset_id": "rmuc2027-isaacsim-20261028",
+    "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+    "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+    "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+    "cases_sha256": "882126ae886c11bc05b69596656232c06d6ad59fb7a136d4da88f364c484fef7",
+    "bounds_min_m": [
+      -14.0005,
+      -8.0016,
+      -0.301
+    ],
+    "bounds_max_m": [
+      14.0005,
+      8.0016,
+      3.4977
+    ],
+    "world_frame": "X_EAST_Y_NORTH_Z_UP",
+    "body_frame": "FLU",
+    "units": "m"
+  },
+  "counts": {
+    "route": 8
+  },
+  "outcomes": {
+    "route": {
+      "SUCCESS": 8,
+      "COLLISION": 0,
+      "TIMEOUT": 0,
+      "OUT_OF_BOUNDS": 0,
+      "INVALID": 0
+    }
+  },
+  "episodes": [
+    {
+      "episode_id": "route_south_R1-r0",
+      "case_id": "route_south_R1",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1050,
+      "duration_s": 52.5,
+      "final_position_world_m": [
+        9.581536293029785,
+        0.42501968145370483,
+        0.5343745350837708
+      ],
+      "final_speed_mps": 0.01962356710279412,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "south",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_south_R2-r0",
+      "case_id": "route_south_R2",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 960,
+      "duration_s": 48.0,
+      "final_position_world_m": [
+        9.769122123718262,
+        -0.8605160713195801,
+        0.5380104780197144
+      ],
+      "final_speed_mps": 0.018977150193011865,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "south",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_south_R3-r0",
+      "case_id": "route_south_R3",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1116,
+      "duration_s": 55.800000000000004,
+      "final_position_world_m": [
+        9.19088363647461,
+        1.1269789934158325,
+        0.5331714749336243
+      ],
+      "final_speed_mps": 0.021885152897049863,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "south",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -10.3,
+        1.8,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.2,
+        1.2,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_south_R4-r0",
+      "case_id": "route_south_R4",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1014,
+      "duration_s": 50.7,
+      "final_position_world_m": [
+        10.158218383789062,
+        -1.2600475549697876,
+        0.5392439961433411
+      ],
+      "final_speed_mps": 0.018582563961921695,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "south",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -9.6,
+        1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        10.2,
+        -1.2,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_north_R1-r0",
+      "case_id": "route_north_R1",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 955,
+      "duration_s": 47.75,
+      "final_position_world_m": [
+        9.569596290588379,
+        0.5551629066467285,
+        0.5388354063034058
+      ],
+      "final_speed_mps": 0.019047861497349723,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "north",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_north_R2-r0",
+      "case_id": "route_north_R2",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 1045,
+      "duration_s": 52.25,
+      "final_position_world_m": [
+        9.778818130493164,
+        -0.736703634262085,
+        0.534600019454956
+      ],
+      "final_speed_mps": 0.0220596719434134,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "north",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -9.4,
+        -1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_north_R3-r0",
+      "case_id": "route_north_R3",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 891,
+      "duration_s": 44.550000000000004,
+      "final_position_world_m": [
+        9.163470268249512,
+        1.2609609365463257,
+        0.5406243205070496
+      ],
+      "final_speed_mps": 0.022055238413959947,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "north",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -10.3,
+        1.8,
+        0.512
+      ],
+      "goal_position_world_m": [
+        9.2,
+        1.2,
+        0.53
+      ]
+    },
+    {
+      "episode_id": "route_north_R4-r0",
+      "case_id": "route_north_R4",
+      "kind": "route",
+      "repeat": 0,
+      "outcome": "SUCCESS",
+      "reason": "ROUTE_COMPLETE",
+      "steps": 996,
+      "duration_s": 49.800000000000004,
+      "final_position_world_m": [
+        10.176395416259766,
+        -1.1340335607528687,
+        0.5337376594543457
+      ],
+      "final_speed_mps": 0.022860200503677732,
+      "phase": "FINAL",
+      "contact_max_force_n": 0.0,
+      "contact_step": null,
+      "contact_prim": "",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "route_id": "north",
+      "waypoints_completed": 6,
+      "expected_contact_prim": null,
+      "start_position_world_m": [
+        -9.6,
+        1.0,
+        0.512
+      ],
+      "goal_position_world_m": [
+        10.2,
+        -1.2,
+        0.53
+      ]
+    }
+  ],
+  "invalid_episodes": 0,
+  "gui_mode": true,
+  "screenshots": [
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_north_R1-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_north_R2-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_north_R3-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_north_R4-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_south_R1-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_south_R2-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_south_R3-r0_route_goal.png",
+    "outputs\\map_eval\\final_regression1\\screenshots\\route_south_R4-r0_route_goal.png"
+  ]
+}

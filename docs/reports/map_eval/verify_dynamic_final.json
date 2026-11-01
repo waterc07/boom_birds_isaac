@@ -1,0 +1,552 @@
+{
+  "run_dir": "outputs\\map_eval\\final_dynamic1",
+  "freeze": "configs\\scenarios\\map_dynamic_freeze_v1.json",
+  "checks": {
+    "summary_pass": true,
+    "episode_count": true,
+    "methods_match": true,
+    "counts_match": true,
+    "case_denominator": true,
+    "pairs_complete": true,
+    "class_denominator": true,
+    "manifest_commit": true,
+    "gui_mode": true,
+    "map_hash": true,
+    "cases_hash": true,
+    "outputs_hash": true,
+    "freeze_files": true,
+    "summary_outcomes_match": true,
+    "step_count": true,
+    "episode_boundary": true,
+    "time_continuity": true,
+    "obstacle_trajectory": true,
+    "observation_contract": true,
+    "supervisor_states": true,
+    "contact_evidence": true,
+    "expected_behaviors": {
+      "A": true,
+      "B": true,
+      "C": true,
+      "D": true,
+      "E": true
+    },
+    "paired_consistency": true,
+    "regression_routes": true,
+    "status": true
+  },
+  "behavior": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": true
+  },
+  "pairs": [
+    {
+      "case_id": "dynamic_A_south_0",
+      "class": "A",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 0.0,
+        "transitions": 0,
+        "states": [
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 7.501920251958345
+    },
+    {
+      "case_id": "dynamic_A_south_1",
+      "class": "A",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 0.0,
+        "transitions": 0,
+        "states": [
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 10.244771172814977
+    },
+    {
+      "case_id": "dynamic_A_north_0",
+      "class": "A",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 0.0,
+        "transitions": 0,
+        "states": [
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 10.68550484579764
+    },
+    {
+      "case_id": "dynamic_A_north_1",
+      "class": "A",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 0.0,
+        "transitions": 0,
+        "states": [
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 8.590131741161665
+    },
+    {
+      "case_id": "dynamic_B_south_0",
+      "class": "B",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 7.199999999999982,
+        "transitions": 5,
+        "states": [
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "RESUME",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.9412132537321051
+    },
+    {
+      "case_id": "dynamic_B_south_1",
+      "class": "B",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 7.099999999999983,
+        "transitions": 5,
+        "states": [
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "RESUME",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 2.3607055507753087
+    },
+    {
+      "case_id": "dynamic_B_north_0",
+      "class": "B",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 6.949999999999983,
+        "transitions": 5,
+        "states": [
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "RESUME",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 2.5634066069495804
+    },
+    {
+      "case_id": "dynamic_B_north_1",
+      "class": "B",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "SUCCESS",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "SUCCESS",
+        "reason": "ROUTE_COMPLETE",
+        "wait_s": 6.799999999999984,
+        "transitions": 5,
+        "states": [
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "RESUME",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 1.1715222615686136
+    },
+    {
+      "case_id": "dynamic_C_south_0",
+      "class": "C",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.28012057460497825
+    },
+    {
+      "case_id": "dynamic_C_south_1",
+      "class": "C",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.27321973947345496
+    },
+    {
+      "case_id": "dynamic_C_north_0",
+      "class": "C",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.2605763184514852
+    },
+    {
+      "case_id": "dynamic_C_north_1",
+      "class": "C",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.29213236304096374
+    },
+    {
+      "case_id": "dynamic_D_south_0",
+      "class": "D",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.2223137472983585
+    },
+    {
+      "case_id": "dynamic_D_south_1",
+      "class": "D",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.23001025206674255
+    },
+    {
+      "case_id": "dynamic_D_north_0",
+      "class": "D",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.2418452349232086
+    },
+    {
+      "case_id": "dynamic_D_north_1",
+      "class": "D",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "MAX_WAIT_EXCEEDED",
+        "wait_s": 8.649999999999988,
+        "transitions": 4,
+        "states": [
+          "ABORT",
+          "BRAKE",
+          "FOLLOW",
+          "HOLD",
+          "WAIT"
+        ]
+      },
+      "min_center_distance_m": 0.2730418216209262
+    },
+    {
+      "case_id": "dynamic_E_south_0",
+      "class": "E",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "OBSERVATION_STALE",
+        "wait_s": 1.950000000000001,
+        "transitions": 2,
+        "states": [
+          "ABORT",
+          "DEGRADED",
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 0.28012057460497825
+    },
+    {
+      "case_id": "dynamic_E_south_1",
+      "class": "E",
+      "route_id": "south",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "OBSERVATION_STALE",
+        "wait_s": 1.950000000000001,
+        "transitions": 2,
+        "states": [
+          "ABORT",
+          "DEGRADED",
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 0.27321973947345496
+    },
+    {
+      "case_id": "dynamic_E_north_0",
+      "class": "E",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "OBSERVATION_STALE",
+        "wait_s": 1.950000000000001,
+        "transitions": 2,
+        "states": [
+          "ABORT",
+          "DEGRADED",
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 0.2605763184514852
+    },
+    {
+      "case_id": "dynamic_E_north_1",
+      "class": "E",
+      "route_id": "north",
+      "follow_only": {
+        "outcome": "COLLISION",
+        "wait_s": 0.0,
+        "transitions": 0
+      },
+      "supervisor": {
+        "outcome": "ABORT",
+        "reason": "OBSERVATION_STALE",
+        "wait_s": 1.950000000000001,
+        "transitions": 2,
+        "states": [
+          "ABORT",
+          "DEGRADED",
+          "FOLLOW"
+        ]
+      },
+      "min_center_distance_m": 0.29213236304096374
+    }
+  ],
+  "min_center_distance_note": "center-to-center distance; not body surface clearance",
+  "min_center_distances_m": {
+    "dynamic_A_south_0-follow_only": 7.501920251958345,
+    "dynamic_A_south_0-supervisor": 7.501920251958345,
+    "dynamic_A_south_1-follow_only": 10.244771172814977,
+    "dynamic_A_south_1-supervisor": 10.244771172814977,
+    "dynamic_A_north_0-follow_only": 10.68550484579764,
+    "dynamic_A_north_0-supervisor": 10.68550484579764,
+    "dynamic_A_north_1-follow_only": 8.590131741161665,
+    "dynamic_A_north_1-supervisor": 8.590131741161665,
+    "dynamic_B_south_0-follow_only": 0.9412132537321051,
+    "dynamic_B_south_0-supervisor": 3.367661147908871,
+    "dynamic_B_south_1-follow_only": 2.3607055507753087,
+    "dynamic_B_south_1-supervisor": 4.733847878032563,
+    "dynamic_B_north_0-follow_only": 2.5634066069495804,
+    "dynamic_B_north_0-supervisor": 4.913383011727157,
+    "dynamic_B_north_1-follow_only": 1.1715222615686136,
+    "dynamic_B_north_1-supervisor": 3.501126093545224,
+    "dynamic_C_south_0-follow_only": 0.28012057460497825,
+    "dynamic_C_south_0-supervisor": 4.050657909174916,
+    "dynamic_C_south_1-follow_only": 0.27321973947345496,
+    "dynamic_C_south_1-supervisor": 8.055659082602121,
+    "dynamic_C_north_0-follow_only": 0.2605763184514852,
+    "dynamic_C_north_0-supervisor": 8.050221289476886,
+    "dynamic_C_north_1-follow_only": 0.29213236304096374,
+    "dynamic_C_north_1-supervisor": 4.0530049563962365,
+    "dynamic_D_south_0-follow_only": 0.2223137472983585,
+    "dynamic_D_south_0-supervisor": 4.051732902121567,
+    "dynamic_D_south_1-follow_only": 0.23001025206674255,
+    "dynamic_D_south_1-supervisor": 8.056146997705921,
+    "dynamic_D_north_0-follow_only": 0.2418452349232086,
+    "dynamic_D_north_0-supervisor": 8.054328383283977,
+    "dynamic_D_north_1-follow_only": 0.2730418216209262,
+    "dynamic_D_north_1-supervisor": 4.056029433469873,
+    "dynamic_E_south_0-follow_only": 0.28012057460497825,
+    "dynamic_E_south_0-supervisor": 8.316814899902258,
+    "dynamic_E_south_1-follow_only": 0.27321973947345496,
+    "dynamic_E_south_1-supervisor": 10.784848199741958,
+    "dynamic_E_north_0-follow_only": 0.2605763184514852,
+    "dynamic_E_north_0-supervisor": 10.819567842335369,
+    "dynamic_E_north_1-follow_only": 0.29213236304096374,
+    "dynamic_E_north_1-supervisor": 8.3340877542328
+  },
+  "regression": {
+    "episodes": 8,
+    "outcomes": {
+      "SUCCESS": 8
+    }
+  },
+  "status": "PASS"
+}

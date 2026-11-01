@@ -1,0 +1,14 @@
+{
+  "docs\\reports\\map_eval\\dynamic\\dynamic_A_south_0-supervisor_success.png": "4464bfb3941be39e249bab08843fbc3f539c092c5f5c0d78c179d25c0c264c18",
+  "docs\\reports\\map_eval\\dynamic\\dynamic_B_south_0-supervisor_success.png": "c834513cf142c4cd48d11b7dab5a81a4bcaa07977179a52a98e6639a275dcfa9",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\episodes.jsonl": "c15e2b8db1534a4f3dfc6059eae41f232efb53f25e07ec57829eafac066ccacd",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\manifest.json": "08673e0ad3928aacb800b43dbcb6c995d0d6d044595eb2eff6939a9edef51ceb",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\map_dynamic_cases_v1.json": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\map_dynamic_freeze_v1.json": "8332d8954c464bf6f614e3b361d7e56140e88df73008882dcd5e6c53e03a1643",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\regression_manifest.json": "ead771e04c4f1a645cf989762629b32c91a120d8a3d367042ff14bd9c64bf1fd",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\regression_summary.json": "c14ff69b2d63ef8a75705dbd8ceb736717b319f8bc94fd28121a8915a1c419ec",
+  "docs\\reports\\map_eval\\dynamic\\evidence\\summary.json": "5fa7fab860fbdebf1cbd52003219fcf8f540472f79ceda760ad64579715dcbfc",
+  "docs\\reports\\map_eval\\dynamic\\verify_dynamic_final.json": "e049d2741ea03df98b39ed79784d44a69fe1ce2a0d8e6c4e0bfabec194dce684",
+  "outputs/map_eval/final_dynamic1/steps.jsonl": "a60148fda68cbd6db41f270097ee45aeb7a4756ecb38882b10614bef7f600906",
+  "outputs/map_eval/final_regression1/steps.jsonl": "563345976d2efd634c8adbf7e9a62491a11052fd42c9f65dabc9adc4acd6eabf"
+}
