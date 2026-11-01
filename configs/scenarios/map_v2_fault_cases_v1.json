@@ -1,0 +1,1221 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "south",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ]
+      ],
+      "sample_count": 0,
+      "blocked_count": 0
+    },
+    {
+      "route_id": "north",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ]
+      ],
+      "sample_count": 0,
+      "blocked_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "fault_ttl_expiry_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_TTL_EXPIRY",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "ttl_expiry",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_ttl_expiry_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_TTL_EXPIRY",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "ttl_expiry",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_cache_resend_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_CACHE_RESEND",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "cache_resend",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_cache_resend_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_CACHE_RESEND",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "cache_resend",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_out_of_order_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_OUT_OF_ORDER",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "out_of_order",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_out_of_order_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_OUT_OF_ORDER",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "out_of_order",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_context_reset_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_CONTEXT_RESET",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "context_reset",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_context_reset_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_CONTEXT_RESET",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "context_reset",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_px4_boot_change_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_PX4_BOOT_CHANGE",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "px4_boot_change",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_px4_boot_change_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_PX4_BOOT_CHANGE",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "px4_boot_change",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_clock_sync_mismatch_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_CLOCK_SYNC_MISMATCH",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "clock_sync_mismatch",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_clock_sync_mismatch_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_CLOCK_SYNC_MISMATCH",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "clock_sync_mismatch",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_ownership_revoke_0",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_OWNERSHIP_REVOKE",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "ownership_revoke",
+        "step": 100
+      }
+    },
+    {
+      "case_id": "fault_ownership_revoke_1",
+      "kind": "dynamic_route",
+      "scenario_class": "FAULT",
+      "expected_behavior": "REJECT_OWNERSHIP_REVOKE",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 30,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "fault-park",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          50,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0
+      },
+      "fault": {
+        "type": "ownership_revoke",
+        "step": 100
+      }
+    }
+  ],
+  "notes": "14 v2 software-boundary fault episodes (7 types x2); obstacle parked far; fault injection before execution."
+}

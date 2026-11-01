@@ -18,6 +18,7 @@ parser.add_argument('--cases', type=Path,
                     default=Path('configs/scenarios/map_dynamic_cases_v1.json'))
 parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--methods', default='follow_only,supervisor')
+parser.add_argument('--execution-path', default='v2', choices=('v1', 'v2'))
 parser.add_argument('--only-cases', default='')
 parser.add_argument('--limit-cases', type=int, default=0)
 parser.add_argument('--freeze', type=Path, default=None)
@@ -57,6 +58,7 @@ try:
     from boom_birds.sim.dynamic_obstacle import load_obstacle_spec
     from boom_birds.sim.guidance import GuidanceSpec, make_guidance
     from boom_birds.sim.map_contract import load_map_cases, load_map_contract
+    from boom_birds.sim.v2_execution import V2ActionGate, V2ExecutionConfig
     from boom_birds.sim.velocity_control import (
         VehicleParams, VehicleState, VelocityExecutor, VelocityGains,
         VelocitySetpoint)
@@ -273,7 +275,23 @@ try:
                                        segment_timeout_s=60.0, dt_s=dt),
                         timeout_s=case.timeout_s)
                     supervisor = RouteSupervisor(supervisor_config)
+                    v2_gate = (V2ActionGate(V2ExecutionConfig(
+                        ttl_ns=150_000_000, max_age_ms=150,
+                        allowed_observation_age_ns=250_000_000))
+                        if args.execution_path == 'v2' else None)
                     outcome, reason = 'RUNNING', 'RUNNING'
+                    v2_action_id = ''
+                    v2_admission = ''
+                    v2_reject_reason = ''
+                    v2_executed = False
+                    v2_issued_ns = 0
+                    v2_expires_ns = 0
+                    v2_observation_id = ''
+                    v2_context_record = None
+                    v2_owner = ''
+                    v2_pending_owner = None
+                    v2_action_source = ''
+                    fault_recorded = None
                     route_active_s = 0.0
                     wait_total = 0.0
                     states = []
@@ -345,9 +363,130 @@ try:
                                 position_world_m=state.position_world_m,
                                 velocity_world_mps=state.velocity_world_mps,
                                 quat_wxyz=state.quat_wxyz)
+                        if v2_gate is not None:
+                            now_ns = int(round(elapsed * 1_000_000_000))
+                            observation_id = 'state-' + episode_id + '-' + str(step)
+                            action = v2_gate.build(
+                                command, now_ns, step, observation_id,
+                                observation_time_ns=now_ns)
+                            context = v2_gate.context()
+                            v2_observation_id = observation_id
+                            v2_context_record = {'system_boot_id': context.system_boot_id,
+                                                 'mission_epoch': context.mission_epoch,
+                                                 'localization_epoch': context.localization_epoch,
+                                                 'control_epoch': context.control_epoch,
+                                                 'clock_id': context.clock_id,
+                                                 'px4_boot_id': context.px4_boot_id,
+                                                 'sync_generation': context.sync_generation}
+                            v2_owner = context.control_owner
+                            v2_pending_owner = context.pending_owner
+                            v2_action_source = action.source
+                            fault = case.fault
+                            result = None
+                            if fault is not None and step >= int(fault.get('step', 100)):
+                                fault_type = fault.get('type')
+                                if fault_type == 'ttl_expiry':
+                                    fault_action = v2_gate.build(
+                                        command, now_ns, step + 1,
+                                        observation_id + '-short', ttl_ns=10)
+                                    result = v2_gate.admit(fault_action, context, now_ns + 1000)
+                                elif fault_type == 'cache_resend':
+                                    first = v2_gate.admit(action, context, now_ns)
+                                    result = v2_gate.send_cached(action, context,
+                                                                 now_ns + 400_000_000)
+                                elif fault_type == 'out_of_order':
+                                    v2_gate.admit(action, context, now_ns)
+                                    stale = v2_gate.build(
+                                        command, now_ns, max(0, step - 1),
+                                        observation_id + '-stale')
+                                    result = v2_gate.admit(stale, context, now_ns)
+                                elif fault_type == 'context_reset':
+                                    v2_gate.bump_context(mission=True)
+                                    result = v2_gate.admit(action, v2_gate.context(), now_ns)
+                                elif fault_type == 'px4_boot_change':
+                                    v2_gate.bump_context(px4_boot=True)
+                                    result = v2_gate.admit(action, v2_gate.context(), now_ns)
+                                elif fault_type == 'clock_sync_mismatch':
+                                    bad = v2_gate.build(
+                                        command, now_ns, step, observation_id + '-clock',
+                                        header_overrides={'clock_id': 'px4_boot_clock'})
+                                    result = v2_gate.admit(bad, context, now_ns)
+                                elif fault_type == 'ownership_revoke':
+                                    v2_gate.revoke_ownership(now_ns=now_ns)
+                                    result = v2_gate.admit(action, v2_gate.context(), now_ns)
+                                else:
+                                    raise RuntimeError('unknown fault type: ' + str(fault_type))
+                                if result is None or not result.accepted:
+                                    v2_admission = 'REJECTED'
+                                    v2_reject_reason = (result.reason if result is not None
+                                                        else 'REJECTED')
+                                    outcome, reason = 'ABORT', 'V2_' + v2_reject_reason
+                                    records.append({
+                                        'episode_id': episode_id, 'case_id': case.case_id,
+                                        'method': method, 'scenario_class': case.scenario_class,
+                                        'step': step, 'time_s': round(elapsed, 4),
+                                        'position_world_m': list(state.position_world_m),
+                                        'velocity_world_mps': list(state.velocity_world_mps),
+                                        'speed_mps': math.sqrt(sum(value * value for value in state.velocity_world_mps)),
+                                        'command': [0.0, 0.0, 0.0, 0.0],
+                                        'obstacle_position_world_m': list(obstacle_position),
+                                        'obstacle_velocity_world_mps': list(obstacle_velocity),
+                                        'observation_valid': bool(observation.get('valid')),
+                                        'observation_reason': observation.get('reason'),
+                                        'observation_age_s': float(observation.get('age_s', 0.0)),
+                                        'supervisor_state': decision['state'],
+                                        'supervisor_action': decision['action'],
+                                        'supervisor_wait_s': decision['wait_s'],
+                                        'route_active_s': route_active_s,
+                                        'contact_force_n': 0.0, 'contact_prim': '',
+                                        'outcome': outcome, 'reason': reason,
+                                        'env_terminated': False, 'env_truncated': False,
+                                        'episode_length_buf': 0, 'boundary_count_ok': True,
+                                        'execution_path': 'v2', 'v2_admission': 'REJECTED',
+                                        'v2_reject_reason': v2_reject_reason,
+                                        'v2_action_id': '', 'v2_executed': False,
+                                        'v2_fault_type': fault.get('type'),
+                                        'v2_observation_id': v2_observation_id,
+                                        'v2_context': v2_context_record,
+                                        'v2_context_owner': v2_owner,
+                                        'v2_pending_owner': v2_pending_owner,
+                                        'v2_action_source': v2_action_source,
+                                        'v2_action_id': '',
+                                    })
+                                    fault_recorded = fault.get('type')
+                                    break
+                                else:
+                                    v2_admission = 'ADMITTED'
+                                    v2_action_id = action.action_id
+                                    v2_issued_ns = action.issued_at_monotonic_ns
+                                    v2_expires_ns = action.expires_at_monotonic_ns
+                                    command = (action.payload.vx_forward_mps,
+                                               action.payload.vy_left_mps,
+                                               action.payload.vz_up_mps,
+                                               action.payload.yaw_rate_ccw_world_radps)
+                            else:
+                                result = v2_gate.admit(action, context, now_ns)
+                                if not result.accepted:
+                                    v2_admission = 'REJECTED'
+                                    v2_reject_reason = result.reason
+                                    outcome, reason = 'ABORT', 'V2_' + result.reason
+                                    break
+                                v2_admission = 'ADMITTED'
+                                v2_action_id = action.action_id
+                                v2_issued_ns = action.issued_at_monotonic_ns
+                                v2_expires_ns = action.expires_at_monotonic_ns
+                                command = (action.payload.vx_forward_mps,
+                                           action.payload.vy_left_mps,
+                                           action.payload.vz_up_mps,
+                                           action.payload.yaw_rate_ccw_world_radps)
+                            v2_gate.mark_executed(action, now_ns)
+                            v2_executed = True
+                        setpoint_expires_s = ((v2_expires_ns / 1_000_000_000.0)
+                                              if v2_gate is not None
+                                              else step * dt + float(controller_cfg['ttl_s']))
                         setpoint = VelocitySetpoint(
                             *command, issued_at_s=step * dt,
-                            expires_at_s=step * dt + float(controller_cfg['ttl_s']),
+                            expires_at_s=setpoint_expires_s,
                             control_epoch=0)
                         control = executor.step(setpoint, state, step * dt)
                         action = control.to_actuator_action(params)
@@ -406,6 +545,19 @@ try:
                             'velocity_world_mps': list(after.velocity_world_mps),
                             'speed_mps': speed,
                             'command': list(command),
+                            'execution_path': args.execution_path,
+                            'v2_admission': v2_admission,
+                            'v2_action_id': v2_action_id,
+                            'v2_reject_reason': v2_reject_reason,
+                            'v2_executed': v2_executed,
+                            'v2_issued_at_ns': v2_issued_ns,
+                            'v2_expires_at_ns': v2_expires_ns,
+                            'v2_fault_type': (case.fault.get('type') if case.fault else None),
+                            'v2_observation_id': v2_observation_id,
+                            'v2_context': v2_context_record,
+                            'v2_context_owner': v2_owner,
+                            'v2_pending_owner': v2_pending_owner,
+                            'v2_action_source': v2_action_source,
                             'obstacle_position_world_m': list(obstacle_position),
                             'obstacle_velocity_world_mps': list(obstacle_velocity),
                             'observation_valid': bool(observation.get('valid')),
@@ -449,6 +601,13 @@ try:
                         'waypoints': [list(point) for point in case.waypoints],
                         'expected_behavior': case.expected_behavior,
                         'obstacle': case.obstacle,
+                        'execution_path': args.execution_path,
+                        'fault_type': (case.fault.get('type') if case.fault else None),
+                        'v2_reject_reason': v2_reject_reason,
+                        'v2_admitted_count': (len(v2_gate.accepted_actions)
+                                              if v2_gate is not None else 0),
+                        'v2_rejected_count': (len(v2_gate.rejections)
+                                              if v2_gate is not None else 0),
                     })
                     print('[episode] ' + episode_id + ' ' + outcome + ' ' + reason,
                           flush=True)
@@ -459,6 +618,7 @@ try:
             'status': 'PASS' if all(item['outcome'] != 'INVALID' for item in results)
             else 'FAIL',
             'scope': 'ORACLE_DYNAMIC_OBSTACLE_STOP_WAIT_RESUME',
+            'execution_path': args.execution_path,
             'map': {
                 'asset_id': contract.asset_id,
                 'terrain_sha256': contract.terrain_sha256,

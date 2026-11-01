@@ -48,6 +48,7 @@ class MapCase:
     obstacle: dict | None = None
     scenario_class: str | None = None
     expected_behavior: str | None = None
+    fault: dict | None = None
     hover_altitude_m: float = 1.0
     hover_time_s: float = 1.0
     landing_speed_max_mps: float = 0.25
@@ -132,6 +133,7 @@ def load_map_cases(path, contract=None):
             obstacle=item.get('obstacle'),
             scenario_class=item.get('scenario_class'),
             expected_behavior=item.get('expected_behavior'),
+            fault=item.get('fault'),
             hover_altitude_m=float(item.get('hover_altitude_m', 1.0)),
             hover_time_s=float(item.get('hover_time_s', 1.0)),
             landing_speed_max_mps=float(item.get('landing_speed_max_mps', 0.25)))
@@ -208,6 +210,7 @@ def case_payload(case):
         'obstacle': case.obstacle,
         'scenario_class': case.scenario_class,
         'expected_behavior': case.expected_behavior,
+        'fault': case.fault,
         'hover_altitude_m': case.hover_altitude_m,
         'hover_time_s': case.hover_time_s,
         'landing_speed_max_mps': case.landing_speed_max_mps,
