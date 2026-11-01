@@ -168,3 +168,15 @@ def test_heading_extraction_and_kinematic_label():
     assert result['label'] == 'KINEMATIC'
     assert result['reason'] == reasons.ACCEPT
     assert ControlOutput.__dataclass_fields__['degraded']
+
+def test_executor_epoch_reset_restores_new_episode_qualification():
+    executor = VelocityExecutor(params())
+    command = setpoint(control_epoch=0)
+    assert executor.step(command, state(), 0.10).reason == reasons.ACCEPT
+    executor.control_epoch = 1
+    stale = executor.step(command, state(), 0.15)
+    assert stale.reason == reasons.REJECT_CONTROL_EPOCH and stale.degraded
+    executor.control_epoch = 0
+    fresh = executor.step(setpoint(control_epoch=0, issued_at_s=0.15,
+                                    expires_at_s=0.30), state(), 0.20)
+    assert fresh.reason == reasons.ACCEPT
