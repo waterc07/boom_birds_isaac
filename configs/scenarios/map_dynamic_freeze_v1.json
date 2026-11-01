@@ -1,0 +1,169 @@
+{
+  "schema_version": "boom_birds.dynamic_freeze.v1",
+  "evaluation_version": "boom_birds.dynamic_eval.v1",
+  "status": "FROZEN",
+  "frozen_at": "2026-11-01T11:21:19.680407+00:00",
+  "code_commit": "92757f01680f3c9ecd879cc6f6eecb1750634e5e",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "map_config_file": "configs\\maps\\rmuc2027.yaml",
+  "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+  "cases_file": "configs\\scenarios\\map_dynamic_cases_v1.json",
+  "methods": [
+    "follow_only",
+    "supervisor"
+  ],
+  "case_ids": [
+    "dynamic_A_south_0",
+    "dynamic_A_south_1",
+    "dynamic_A_north_0",
+    "dynamic_A_north_1",
+    "dynamic_B_south_0",
+    "dynamic_B_south_1",
+    "dynamic_B_north_0",
+    "dynamic_B_north_1",
+    "dynamic_C_south_0",
+    "dynamic_C_south_1",
+    "dynamic_C_north_0",
+    "dynamic_C_north_1",
+    "dynamic_D_south_0",
+    "dynamic_D_south_1",
+    "dynamic_D_north_0",
+    "dynamic_D_north_1",
+    "dynamic_E_south_0",
+    "dynamic_E_south_1",
+    "dynamic_E_north_0",
+    "dynamic_E_north_1"
+  ],
+  "scenario_classes": {
+    "A": [
+      "dynamic_A_south_0",
+      "dynamic_A_south_1",
+      "dynamic_A_north_0",
+      "dynamic_A_north_1"
+    ],
+    "B": [
+      "dynamic_B_south_0",
+      "dynamic_B_south_1",
+      "dynamic_B_north_0",
+      "dynamic_B_north_1"
+    ],
+    "C": [
+      "dynamic_C_south_0",
+      "dynamic_C_south_1",
+      "dynamic_C_north_0",
+      "dynamic_C_north_1"
+    ],
+    "D": [
+      "dynamic_D_south_0",
+      "dynamic_D_south_1",
+      "dynamic_D_north_0",
+      "dynamic_D_north_1"
+    ],
+    "E": [
+      "dynamic_E_south_0",
+      "dynamic_E_south_1",
+      "dynamic_E_north_0",
+      "dynamic_E_north_1"
+    ]
+  },
+  "counts": {
+    "follow_only": 20,
+    "supervisor": 20
+  },
+  "total_episodes": 40,
+  "supervisor": {
+    "stop_distance_m": 1.1,
+    "release_distance_m": 1.6,
+    "prediction_horizon_s": 1.0,
+    "prediction_step_s": 0.1,
+    "observation_max_age_s": 0.3,
+    "max_stale_s": 2.0,
+    "max_wait_s": 8.0,
+    "min_hold_s": 0.5,
+    "release_hold_s": 0.5,
+    "resume_hold_s": 0.3,
+    "stop_speed_mps": 0.12,
+    "scope": "PROPOSED_ORACLE_SIM"
+  },
+  "routes": [
+    {
+      "route_id": "south",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ]
+      ],
+      "corridor_y": -6.2,
+      "sample_count": 0,
+      "blocked_count": 0
+    },
+    {
+      "route_id": "north",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ]
+      ],
+      "corridor_y": 5.8,
+      "sample_count": 0,
+      "blocked_count": 0
+    }
+  ],
+  "obstacle_model": "KINEMATIC_CUBOID_WITH_REAL_COLLISION",
+  "observation_model": "ORACLE_POSITION_VELOCITY_WITH_DELAY_AND_DROPOUT",
+  "regression": {
+    "cases_file": "configs/scenarios/map_cases_v2.json",
+    "case_ids": [
+      "route_south_R1",
+      "route_south_R2",
+      "route_south_R3",
+      "route_south_R4",
+      "route_north_R1",
+      "route_north_R2",
+      "route_north_R3",
+      "route_north_R4"
+    ],
+    "episodes": 8
+  }
+}
