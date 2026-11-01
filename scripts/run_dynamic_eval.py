@@ -19,6 +19,9 @@ parser.add_argument('--cases', type=Path,
 parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--methods', default='follow_only,supervisor')
 parser.add_argument('--execution-path', default='v2', choices=('v1', 'v2'))
+parser.add_argument('--obs-delay-s', type=float, default=0.0)
+parser.add_argument('--action-delay-s', type=float, default=0.0)
+parser.add_argument('--stop-distance-m', type=float, default=1.1)
 parser.add_argument('--only-cases', default='')
 parser.add_argument('--limit-cases', type=int, default=0)
 parser.add_argument('--freeze', type=Path, default=None)
@@ -52,6 +55,7 @@ try:
     from isaacsim.core.prims import RigidPrim
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+    from boom_birds.evaluation.action_transport import DelayedVelocityExecutor
     from boom_birds.evaluation.episode_boundary import EpisodeBoundary
     from boom_birds.evaluation.supervisor import RouteSupervisor, SupervisorConfig
     from boom_birds.evaluation.waypoints import WaypointConfig, WaypointRunner
@@ -152,6 +156,8 @@ try:
             gravity_mps2=float(gravity),
             max_tilt_rad=float(vehicle_cfg['max_tilt_rad']))
         executor = VelocityExecutor(params, gains, dt_s=dt, control_epoch=0)
+        if args.action_delay_s > 0:
+            executor = DelayedVelocityExecutor(executor, args.action_delay_s)
         zero_velocity = torch.zeros((1, 6), device=env.device)
         index = torch.tensor([0], device=env.device)
         stage = omni.usd.get_context().get_stage()
@@ -251,7 +257,7 @@ try:
                 print('[dynamic] screenshot warning: ' + repr(error), flush=True)
                 return None
 
-        supervisor_config = SupervisorConfig()
+        supervisor_config = SupervisorConfig(stop_distance_m=args.stop_distance_m)
         boundary = EpisodeBoundary(env)
         results = []
         records = []
@@ -279,6 +285,8 @@ try:
                         ttl_ns=150_000_000, max_age_ms=150,
                         allowed_observation_age_ns=250_000_000))
                         if args.execution_path == 'v2' else None)
+                    if hasattr(executor, 'clear'):
+                        executor.clear()
                     outcome, reason = 'RUNNING', 'RUNNING'
                     v2_action_id = ''
                     v2_admission = ''
@@ -306,7 +314,9 @@ try:
                         state = read_state()
                         obstacle_position, obstacle_velocity = obstacle_spec.pose_at(elapsed)
                         set_obstacle_pose(obstacle_position)
-                        observation = obstacle_spec.observation_at(elapsed)
+                        observation_t = max(0.0, elapsed - args.obs_delay_s)
+                        observation = obstacle_spec.observation_at(observation_t)
+                        observation['age_s'] = float(observation.get('age_s', 0.0)) + args.obs_delay_s
                         target = runner.waypoints[runner.index]
                         decision = supervisor.update(
                             state.position_world_m, target,
