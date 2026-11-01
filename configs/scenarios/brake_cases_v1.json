@@ -1,0 +1,774 @@
+{
+  "schema_version": "boom_birds.brake_cases.v1",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "parameters": {
+    "ttl_ms": 150,
+    "stop_speed_mps": 0.08,
+    "stop_hold_s": 0.5,
+    "max_brake_time_s": 4.0,
+    "max_fault_observation_s": 5.0,
+    "acceleration_timeout_s": 6.0,
+    "target_speed_tolerance": 0.06,
+    "body_envelope_note": "center-to-center only; no surface clearance"
+  },
+  "brake_cases": [
+    {
+      "case_id": "brake_s0.3_h0.00_forward_r0",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_forward_r1",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_side_r0",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_side_r1",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_diagonal_r0",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.3_h0.00_diagonal_r1",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_forward_r0",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_forward_r1",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_side_r0",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_side_r1",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_diagonal_r0",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.3_h1.57_diagonal_r1",
+      "kind": "brake",
+      "speed_mps": 0.3,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_forward_r0",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_forward_r1",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_side_r0",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_side_r1",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_diagonal_r0",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.6_h0.00_diagonal_r1",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_forward_r0",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_forward_r1",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_side_r0",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_side_r1",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_diagonal_r0",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.6_h1.57_diagonal_r1",
+      "kind": "brake",
+      "speed_mps": 0.6,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_forward_r0",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_forward_r1",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_side_r0",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_side_r1",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_diagonal_r0",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.9_h0.00_diagonal_r1",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 0.0,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_forward_r0",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_forward_r1",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_side_r0",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_side_r1",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.0,
+        1.0
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_diagonal_r0",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 0,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    },
+    {
+      "case_id": "brake_s0.9_h1.57_diagonal_r1",
+      "kind": "brake",
+      "speed_mps": 0.9,
+      "heading_rad": 1.5707963267948966,
+      "direction_world": [
+        0.70710678,
+        0.70710678
+      ],
+      "repeat": 1,
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 1.5707963267948966
+    }
+  ],
+  "fault_cases": [
+    {
+      "case_id": "fault_A_s0.4",
+      "kind": "fault",
+      "fault_type": "A",
+      "fault_label": "NO_NEW_ACTION",
+      "target_speed_mps": 0.4,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_A_s0.8",
+      "kind": "fault",
+      "fault_type": "A",
+      "fault_label": "NO_NEW_ACTION",
+      "target_speed_mps": 0.8,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_B_s0.4",
+      "kind": "fault",
+      "fault_type": "B",
+      "fault_label": "CACHE_RESEND",
+      "target_speed_mps": 0.4,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_B_s0.8",
+      "kind": "fault",
+      "fault_type": "B",
+      "fault_label": "CACHE_RESEND",
+      "target_speed_mps": 0.8,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_C_s0.4",
+      "kind": "fault",
+      "fault_type": "C",
+      "fault_label": "NEW_REJECTED_OLD_CACHE",
+      "target_speed_mps": 0.4,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_C_s0.8",
+      "kind": "fault",
+      "fault_type": "C",
+      "fault_label": "NEW_REJECTED_OLD_CACHE",
+      "target_speed_mps": 0.8,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_D_s0.4",
+      "kind": "fault",
+      "fault_type": "D",
+      "fault_label": "OWNERSHIP_REVOKED",
+      "target_speed_mps": 0.4,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    },
+    {
+      "case_id": "fault_D_s0.8",
+      "kind": "fault",
+      "fault_type": "D",
+      "fault_label": "OWNERSHIP_REVOKED",
+      "target_speed_mps": 0.8,
+      "heading_rad": 0.0,
+      "direction_world": [
+        1.0,
+        0.0
+      ],
+      "start_position_world_m": [
+        -10.0,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0
+    }
+  ]
+}
