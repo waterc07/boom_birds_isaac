@@ -45,6 +45,9 @@ class MapCase:
     route_id: str | None = None
     waypoints: tuple = ()
     contact_prim: str | None = None
+    obstacle: dict | None = None
+    scenario_class: str | None = None
+    expected_behavior: str | None = None
     hover_altitude_m: float = 1.0
     hover_time_s: float = 1.0
     landing_speed_max_mps: float = 0.25
@@ -100,8 +103,8 @@ def load_map_cases(path, contract=None):
     cases = []
     for item in payload['cases']:
         kind = item['kind']
-        if kind not in ('reach', 'local_reach', 'route', 'takeoff_landing',
-                        'contact'):
+        if kind not in ('reach', 'local_reach', 'route', 'dynamic_route',
+                        'takeoff_landing', 'contact'):
             raise ValueError('unknown map case kind: ' + str(kind))
         regions = {item['region_id']: item for item in payload.get('regions', [])}
         start = tuple(float(value) for value in item['start_position_world_m'])
@@ -126,6 +129,9 @@ def load_map_cases(path, contract=None):
             waypoints=tuple(tuple(float(value) for value in point)
                             for point in item.get('waypoints', ())),
             contact_prim=item.get('contact_prim'),
+            obstacle=item.get('obstacle'),
+            scenario_class=item.get('scenario_class'),
+            expected_behavior=item.get('expected_behavior'),
             hover_altitude_m=float(item.get('hover_altitude_m', 1.0)),
             hover_time_s=float(item.get('hover_time_s', 1.0)),
             landing_speed_max_mps=float(item.get('landing_speed_max_mps', 0.25)))
@@ -143,7 +149,14 @@ def load_map_cases(path, contract=None):
             raise ValueError('reach case needs a goal')
         if kind == 'local_reach' and case.region_id is None:
             raise ValueError('local reach case needs region_id')
-        if kind == 'route':
+        if kind == 'dynamic_route':
+            if len(case.waypoints) < 2:
+                raise ValueError('dynamic route needs waypoints')
+            if case.obstacle is None:
+                raise ValueError('dynamic route needs obstacle')
+            if case.route_id is None or case.region_id is None or case.goal_region_id is None:
+                raise ValueError('dynamic route needs route/region ids')
+        if kind in ('route', 'dynamic_route'):
             if len(case.waypoints) < 2:
                 raise ValueError('route case needs at least two waypoints')
             if case.region_id is None or case.goal_region_id is None:
@@ -192,6 +205,9 @@ def case_payload(case):
         'route_id': case.route_id,
         'waypoints': [list(point) for point in case.waypoints],
         'contact_prim': case.contact_prim,
+        'obstacle': case.obstacle,
+        'scenario_class': case.scenario_class,
+        'expected_behavior': case.expected_behavior,
         'hover_altitude_m': case.hover_altitude_m,
         'hover_time_s': case.hover_time_s,
         'landing_speed_max_mps': case.landing_speed_max_mps,
