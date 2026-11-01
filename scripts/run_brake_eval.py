@@ -130,6 +130,7 @@ try:
             state = read_state(); executor.reset(state)
             gate = V2ActionGate(V2ExecutionConfig(ttl_ns=int(params_cfg['ttl_ms'])*1_000_000,
                 max_age_ms=int(params_cfg['ttl_ms']), allowed_observation_age_ns=250_000_000))
+            executor.control_epoch = gate.config.control_epoch
             last_setpoint = None; last_action = None; last_admission = ''; last_reject = ''
             brake_start = None; stop_hold = 0.0; fault_start = None; fault_done = False
             physical_outcome = 'RUNNING'; business_outcome = 'RUNNING'
