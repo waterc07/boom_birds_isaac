@@ -1,0 +1,406 @@
+{
+  "schema_version": "boom_birds.contact_verification_cases.v1",
+  "contact_contract_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "map_config": "configs/maps/rmuc2027.yaml",
+  "local_config": "configs/maps/rmuc2027.local.yaml",
+  "notes": "Controlled contact-evidence matrix: A map wall contact, B kinematic obstacle contact, C legal close pass, D sphere overlap without collision-geometry contact. Each 2 repeats; plus 3 replays of the previous boundary evidence (2 CONTACT_INFERRED + 1 NO_CONTACT) with identical run parameters.",
+  "segments": [
+    {
+      "segment_id": "contact_A_wall",
+      "role": "wall",
+      "mode": "wall",
+      "repeats": 2,
+      "cases": [
+        {
+          "case_id": "contact_A_wall",
+          "robot": {
+            "start_position_world_m": [
+              -4.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "forward_velocity",
+            "forward_mps": 0.6,
+            "max_steps": 300
+          },
+          "obstacle": null,
+          "target": {
+            "kind": "map_wall",
+            "prim_path": "/World/RMUC2027/Collisions/collision_014",
+            "map_config": "configs/maps/rmuc2027.yaml",
+            "local_config": "configs/maps/rmuc2027.local.yaml"
+          },
+          "expected_physical": [
+            "PHYSX_CONTACT_FORCE_MEASURED"
+          ]
+        },
+        {
+          "case_id": "contact_A_wall",
+          "robot": {
+            "start_position_world_m": [
+              -4.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "forward_velocity",
+            "forward_mps": 0.6,
+            "max_steps": 300
+          },
+          "obstacle": null,
+          "target": {
+            "kind": "map_wall",
+            "prim_path": "/World/RMUC2027/Collisions/collision_014",
+            "map_config": "configs/maps/rmuc2027.yaml",
+            "local_config": "configs/maps/rmuc2027.local.yaml"
+          },
+          "expected_physical": [
+            "PHYSX_CONTACT_FORCE_MEASURED"
+          ]
+        }
+      ]
+    },
+    {
+      "segment_id": "contact_B_obstacle",
+      "role": "obstacle",
+      "mode": "obstacle",
+      "repeats": 2,
+      "cases": [
+        {
+          "case_id": "contact_B_obstacle",
+          "robot": {
+            "start_position_world_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "hover",
+            "forward_mps": 0.0,
+            "max_steps": 200
+          },
+          "obstacle": {
+            "size_m": [
+              0.4,
+              0.6,
+              0.6
+            ],
+            "start_position_world_m": [
+              1.4,
+              0.0,
+              1.0
+            ],
+            "velocity_world_mps": [
+              -0.4,
+              0.0,
+              0.0
+            ],
+            "kinematic": true
+          },
+          "target": null,
+          "expected_physical": [
+            "PHYSX_CONTACT_FORCE_MEASURED",
+            "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "PHYSX_CONTACT_EVENT_ONLY"
+          ]
+        },
+        {
+          "case_id": "contact_B_obstacle",
+          "robot": {
+            "start_position_world_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "hover",
+            "forward_mps": 0.0,
+            "max_steps": 200
+          },
+          "obstacle": {
+            "size_m": [
+              0.4,
+              0.6,
+              0.6
+            ],
+            "start_position_world_m": [
+              1.4,
+              0.0,
+              1.0
+            ],
+            "velocity_world_mps": [
+              -0.4,
+              0.0,
+              0.0
+            ],
+            "kinematic": true
+          },
+          "target": null,
+          "expected_physical": [
+            "PHYSX_CONTACT_FORCE_MEASURED",
+            "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "PHYSX_CONTACT_EVENT_ONLY"
+          ]
+        }
+      ]
+    },
+    {
+      "segment_id": "contact_C_clearance",
+      "role": "clearance",
+      "mode": "clearance",
+      "repeats": 2,
+      "cases": [
+        {
+          "case_id": "contact_C_clearance",
+          "robot": {
+            "start_position_world_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "hover",
+            "forward_mps": 0.0,
+            "max_steps": 200
+          },
+          "obstacle": {
+            "size_m": [
+              0.4,
+              0.6,
+              0.6
+            ],
+            "start_position_world_m": [
+              1.4,
+              0.45,
+              1.0
+            ],
+            "velocity_world_mps": [
+              -0.4,
+              0.0,
+              0.0
+            ],
+            "kinematic": true
+          },
+          "target": null,
+          "expected_physical": [
+            "NO_CONTACT"
+          ]
+        },
+        {
+          "case_id": "contact_C_clearance",
+          "robot": {
+            "start_position_world_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "hover",
+            "forward_mps": 0.0,
+            "max_steps": 200
+          },
+          "obstacle": {
+            "size_m": [
+              0.4,
+              0.6,
+              0.6
+            ],
+            "start_position_world_m": [
+              1.4,
+              0.45,
+              1.0
+            ],
+            "velocity_world_mps": [
+              -0.4,
+              0.0,
+              0.0
+            ],
+            "kinematic": true
+          },
+          "target": null,
+          "expected_physical": [
+            "NO_CONTACT"
+          ]
+        }
+      ]
+    },
+    {
+      "segment_id": "contact_D_geometry",
+      "role": "geometry",
+      "mode": "geometry",
+      "repeats": 2,
+      "cases": [
+        {
+          "case_id": "contact_D_geometry",
+          "robot": {
+            "start_position_world_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "hover",
+            "forward_mps": 0.0,
+            "max_steps": 200
+          },
+          "obstacle": {
+            "size_m": [
+              0.4,
+              0.6,
+              0.6
+            ],
+            "start_position_world_m": [
+              1.4,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              -0.4,
+              0.0,
+              0.0
+            ],
+            "kinematic": true
+          },
+          "target": null,
+          "expected_physical": [
+            "GEOMETRY_OVERLAP_ONLY"
+          ],
+          "geometry_note": "Lateral 0.30 m with obstacle size [0.4,0.6,0.6]: obstacle half-width 0.30 + robot collision half-width 0.0382 = 0.3382 m < 0.30? (0.30 < 0.3382 -> no collision-geometry contact); conservative sphere radii 0.072463 + 0.30 = 0.372463 m gives overlap 0.072463 m > 0.02 m."
+        },
+        {
+          "case_id": "contact_D_geometry",
+          "robot": {
+            "start_position_world_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "yaw_rad": 0.0
+          },
+          "control": {
+            "mode": "hover",
+            "forward_mps": 0.0,
+            "max_steps": 200
+          },
+          "obstacle": {
+            "size_m": [
+              0.4,
+              0.6,
+              0.6
+            ],
+            "start_position_world_m": [
+              1.4,
+              0.35,
+              1.0
+            ],
+            "velocity_world_mps": [
+              -0.4,
+              0.0,
+              0.0
+            ],
+            "kinematic": true
+          },
+          "target": null,
+          "expected_physical": [
+            "GEOMETRY_OVERLAP_ONLY"
+          ],
+          "geometry_note": "Lateral 0.30 m with obstacle size [0.4,0.6,0.6]: obstacle half-width 0.30 + robot collision half-width 0.0382 = 0.3382 m < 0.30? (0.30 < 0.3382 -> no collision-geometry contact); conservative sphere radii 0.072463 + 0.30 = 0.372463 m gives overlap 0.072463 m > 0.02 m."
+        }
+      ]
+    },
+    {
+      "segment_id": "replay_contact_inferred",
+      "role": "replay",
+      "mode": "replay",
+      "repeats": 1,
+      "cases": [
+        {
+          "case_id": "boundary_B_cross_late_r0",
+          "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+          "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+          "previous_episode_id": "boundary_B_cross_late_r0-supervisor-boundary_default",
+          "previous_physical_label": "CONTACT_INFERRED",
+          "expected_physical": [
+            "PHYSX_CONTACT_FORCE_MEASURED",
+            "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "PHYSX_CONTACT_EVENT_ONLY",
+            "GEOMETRY_OVERLAP_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        {
+          "case_id": "boundary_C_headon_collide_r0",
+          "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+          "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+          "previous_episode_id": "boundary_C_headon_collide_r0-supervisor-boundary_default",
+          "previous_physical_label": "CONTACT_INFERRED",
+          "expected_physical": [
+            "PHYSX_CONTACT_FORCE_MEASURED",
+            "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "PHYSX_CONTACT_EVENT_ONLY",
+            "GEOMETRY_OVERLAP_ONLY",
+            "UNKNOWN"
+          ]
+        }
+      ]
+    },
+    {
+      "segment_id": "replay_no_contact",
+      "role": "replay",
+      "mode": "replay",
+      "repeats": 1,
+      "cases": [
+        {
+          "case_id": "boundary_A_static_offpath_r0",
+          "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+          "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+          "previous_episode_id": "boundary_A_static_offpath_r0-supervisor-boundary_default",
+          "previous_physical_label": "NO_CONTACT",
+          "expected_physical": [
+            "NO_CONTACT",
+            "GEOMETRY_OVERLAP_ONLY",
+            "UNKNOWN"
+          ]
+        }
+      ]
+    }
+  ],
+  "replay_params": {
+    "vehicle_config": "configs/vehicles/sim_reference.yaml",
+    "methods": [
+      "supervisor"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.15,
+    "action_delay_s": 0.1,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 300,
+    "stop_distance_m": 1.1,
+    "post_abort_observe_s": 3.0,
+    "clock_offset_ms": 20.0,
+    "clock_drift_ppm": 200.0,
+    "clock_uncertainty_ms": 5.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15,
+    "obstacle_time_clamp": true
+  }
+}

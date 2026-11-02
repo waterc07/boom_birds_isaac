@@ -1,0 +1,567 @@
+{
+  "schema_version": "boom_birds.contact_verification_manifest.v1",
+  "code_commit": "c50de1ff1ce3225f69e7c5536a13d7500095263a",
+  "working_tree": "clean at c50de1f + pre-run freeze v2",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NOT RECORDED",
+  "started_at": "2026-11-02T12:54:51Z",
+  "segment_id": "replay_contact_inferred",
+  "role": "replay",
+  "mode": "replay",
+  "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+  "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+  "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+  "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+  "run_plan": {
+    "segment_id": "replay_contact_inferred",
+    "role": "replay",
+    "mode": "replay",
+    "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+    "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+    "case_ids": [
+      "boundary_B_cross_late_r0",
+      "boundary_C_headon_collide_r0"
+    ],
+    "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+    "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+    "contact_contract_version": "boom_birds.contact_evidence.v2",
+    "envelope_contract_version": "boom_birds.body_envelope.v2",
+    "vehicle_config": "configs/vehicles/sim_reference.yaml",
+    "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+    "map_config": "configs/maps/rmuc2027.yaml",
+    "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+    "run_params": {
+      "repeats": 1,
+      "replay_params": {
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "obstacle_time_clamp": true
+      },
+      "cases": {
+        "boundary_B_cross_late_r0": {
+          "case_id": "boundary_B_cross_late_r0",
+          "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+          "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+          "previous_episode_id": "boundary_B_cross_late_r0-supervisor-boundary_default",
+          "previous_physical_label": "CONTACT_INFERRED"
+        },
+        "boundary_C_headon_collide_r0": {
+          "case_id": "boundary_C_headon_collide_r0",
+          "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+          "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+          "previous_episode_id": "boundary_C_headon_collide_r0-supervisor-boundary_default",
+          "previous_physical_label": "CONTACT_INFERRED"
+        }
+      }
+    }
+  },
+  "episode_ids": [
+    "boundary_B_cross_late_r0-r0-replay_contact_inferred",
+    "boundary_C_headon_collide_r0-r1-replay_contact_inferred"
+  ],
+  "contact_contract_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "freeze": {
+    "path": "configs/scenarios/contact_verification_freeze_v2.json",
+    "sha256": "184beecc779d768964fa7412724502ac9e342ad0ef68a8101aed00ac543f6fba",
+    "schema_version": "boom_birds.contact_verification_freeze.v1",
+    "frozen_at": "2026-11-02T12:51:49.006419+00:00",
+    "code_commit": "c50de1ff1ce3225f69e7c5536a13d7500095263a"
+  },
+  "contact_sensor": {
+    "available": true,
+    "mode": "isaaclab_contact_sensor",
+    "prim_paths": [
+      "/World/envs/env_0/Robot/body",
+      "/World/envs/env_0/Robot/m1_prop",
+      "/World/envs/env_0/Robot/m2_prop",
+      "/World/envs/env_0/Robot/m3_prop",
+      "/World/envs/env_0/Robot/m4_prop"
+    ],
+    "filter_prim_paths": [
+      "/World/envs/env_0/Obstacle"
+    ],
+    "update_order": "after_env_step",
+    "physics": {
+      "physics_dt_s": 0.01,
+      "decimation": 5,
+      "substeps_per_step": 5
+    },
+    "threshold_n": 0.02,
+    "errors": []
+  },
+  "physics": {
+    "physics_dt_s": 0.01,
+    "decimation": 5,
+    "substeps_per_step": 5,
+    "replicate_physics": false
+  },
+  "body_envelope": {
+    "schema_version": "boom_birds.body_envelope.v2",
+    "units": "m",
+    "frame": "robot_reference_frame",
+    "aabb": {
+      "half_extents_m": [
+        0.05454223374277353,
+        0.03820826672017574,
+        0.013588040310423821
+      ],
+      "center_offset_m": [
+        5.902443081140518e-05,
+        2.421438694000244e-08,
+        0.014868530270177871
+      ],
+      "lengths_m": [
+        0.10908446748554707,
+        0.07641653344035149,
+        0.027176080620847642
+      ],
+      "reference_origin": "robot_root_prim_origin",
+      "frame": "robot_reference_frame",
+      "units": "m"
+    },
+    "sphere_about_origin": {
+      "radius_m": 0.07246342042360011,
+      "center_offset_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "center_kind": "robot_reference_origin",
+      "aabb_center_offset_m": [
+        5.902443081140518e-05,
+        2.421438694000244e-08,
+        0.014868530270177871
+      ],
+      "rule": "sphere_about_reference_origin_max_aabb_corner",
+      "rule_definition": "max over the eight AABB corners of ||corner||_2 = || |center_offset_m| + half_extents_m ||_2 about the robot reference origin",
+      "attitude_scope": "any_rigid_rotation_about_reference_origin",
+      "units": "m",
+      "proof_notes": [
+        "the farthest point of an axis-aligned box from the origin is the corner whose coordinate signs match the box center offset, so the max corner distance is || |center_offset_m| + half_extents_m ||_2",
+        "a rigid rotation about the reference origin preserves every corner distance to the origin, so the sphere centered at the origin contains the box for any such rotation",
+        "the sphere center is the robot reference origin, not the AABB center; the half diagonal about the AABB center is not an around-origin radius when the center offset is non-zero"
+      ]
+    },
+    "sphere_about_aabb_center": {
+      "radius_m": 0.0679658866409402,
+      "center_offset_m": [
+        5.902443081140518e-05,
+        2.421438694000244e-08,
+        0.014868530270177871
+      ],
+      "center_kind": "aabb_center",
+      "aabb_center_offset_m": [
+        5.902443081140518e-05,
+        2.421438694000244e-08,
+        0.014868530270177871
+      ],
+      "rule": "sphere_about_aabb_center_half_diagonal",
+      "rule_definition": "radius_m = || half_extents_m ||_2 with the sphere centered at the AABB center",
+      "attitude_scope": "rigid_rotation_about_aabb_center_only",
+      "units": "m",
+      "proof_notes": [
+        "the distance from the AABB center to any corner is the half diagonal, and rotation about the center preserves it"
+      ],
+      "limitations": [
+        "valid only with the sphere centered at the AABB center; not an around-origin radius",
+        "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof"
+      ]
+    },
+    "production": {
+      "envelope_field": "sphere_about_origin",
+      "radius_m": 0.07246342042360011,
+      "center_kind": "robot_reference_origin",
+      "rule": "sphere_about_reference_origin_max_aabb_corner",
+      "attitude_scope": "any_rigid_rotation_about_reference_origin"
+    },
+    "coverage": {
+      "source": "collision_geometry",
+      "prim_paths": [
+        "/World/envs/env_0/Robot/body/body_collision/geometry"
+      ],
+      "collision_prim_paths": [
+        "/World/envs/env_0/Robot/body/body_collision/geometry"
+      ],
+      "visual_prim_paths": [],
+      "sub_bodies": [
+        "body"
+      ],
+      "attitude_scope": "any_rigid_rotation_about_reference_origin",
+      "joint_state_scope": "fixed_joint_state_at_measurement",
+      "limitations": [
+        "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof",
+        "AABB is measured at one fixed joint state; rotor spin, flex and other joint states are not swept"
+      ]
+    },
+    "attitude_scope": "any_rigid_rotation_about_reference_origin",
+    "joint_state_scope": "fixed_joint_state_at_measurement",
+    "limitations": [
+      "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof",
+      "AABB is measured at one fixed joint state; rotor spin, flex and other joint states are not swept"
+    ],
+    "measurement": {
+      "frame": "robot_reference_frame",
+      "bbox_purpose": "default_and_render",
+      "sim_time_s": 0.0,
+      "robot_root_prim": "/World/envs/env_0/Robot",
+      "root_position_world_m": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "root_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "previous_rule_comparison": {
+      "previous_rule": "box_conservative_sphere_radius",
+      "previous_rule_center_kind": "aabb_center",
+      "previous_radius_m": 0.0679658866409402,
+      "previous_round_reported_radius_m": 0.0679658866409402,
+      "corrected_rule": "sphere_about_reference_origin_max_aabb_corner",
+      "corrected_center_kind": "robot_reference_origin",
+      "corrected_radius_m": 0.07246342042360011,
+      "underestimate_m": 0.004497533782659907,
+      "underestimate_formula": "|| |center_offset_m| + half_extents_m ||_2 - || half_extents_m ||_2",
+      "equal_within_tolerance": false,
+      "tolerance_m": 1e-12,
+      "previous_rule_exact_when": "center_offset_m == (0, 0, 0): the AABB center coincides with the robot reference origin",
+      "previous_rule_underestimates_when": "any center_offset_m component is non-zero: the AABB center is offset from the robot reference origin",
+      "note": "the previous 0.067966 m half-diagonal radius is an around-origin radius only for a centered AABB; otherwise it underestimates by underestimate_m"
+    }
+  },
+  "prim_inventory": {
+    "robot": [
+      {
+        "path": "/World/envs/env_0/Robot",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/m1_joint",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/m2_joint",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/m3_joint",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/m4_joint",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual/battery_holder",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual/pin_headers",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual/battery",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual/cf_body_001",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual/Cylinder",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_visual/motor_mount",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_collision",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/body/body_collision/geometry",
+        "collision": true,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m1_prop",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m1_prop/ccw_prop",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m2_prop",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m2_prop/cw_prop",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m3_prop",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m3_prop/ccw_prop",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m4_prop",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true
+      },
+      {
+        "path": "/World/envs/env_0/Robot/m4_prop/cw_prop",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_0",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_0/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_1",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_1/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_2",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_2/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_3",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_3/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_4",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_4/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_5",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_5/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/MaterialPhysics_0",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_6",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_6/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_7",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_7/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_8",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_8/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_9",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Robot/Looks/Material_9/Shader",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      }
+    ],
+    "obstacle": [
+      {
+        "path": "/World/envs/env_0/Obstacle",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true
+      },
+      {
+        "path": "/World/envs/env_0/Obstacle/geometry",
+        "collision": false,
+        "rigid_body": false,
+        "contact_report": false
+      },
+      {
+        "path": "/World/envs/env_0/Obstacle/geometry/mesh",
+        "collision": true,
+        "rigid_body": false,
+        "contact_report": true
+      }
+    ],
+    "map": []
+  },
+  "episode_boundary": {
+    "started_from_reset": true,
+    "no_silent_reset": true,
+    "env_terminated_counts": {
+      "boundary_B_cross_late_r0-r0-replay_contact_inferred": 0,
+      "boundary_C_headon_collide_r0-r1-replay_contact_inferred": 0
+    }
+  },
+  "wheel": {
+    "threshold_n": 0.02
+  },
+  "outputs_sha256": {
+    "summary.json": "b3bd3e3df1ee1ac0fb86c4d560d87f31087bfe2deb95272a460548e8bff5d7e2",
+    "episodes.jsonl": "1b3c4fad6fbad9ff6f4288437b9dac4c7f212e3ddc2992e17b435fab3359db1c",
+    "steps.jsonl": "18772b7843e2a8c51b2d7997fec62fd83b358bbe5ff9536531e66889153d1932"
+  },
+  "command": "scripts\\run_contact_verification.py --segment-id replay_contact_inferred --cases configs/scenarios/contact_verification_cases_v1.json --expected configs/scenarios/contact_verification_expected_v1.json --freeze configs/scenarios/contact_verification_freeze_v2.json --code-commit c50de1ff1ce3225f69e7c5536a13d7500095263a --working-tree clean at c50de1f + pre-run freeze v2 --kit_args=--/app/vulkan=false --device cuda:0 --output outputs/map_eval\\replay_contact_inferred"
+}

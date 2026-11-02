@@ -1,0 +1,247 @@
+{
+  "schema_version": "boom_birds.contact_envelope_evidence.v1",
+  "configs": {
+    "contact_verification_freeze_v2.json": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/contact_verification_freeze_v2.json",
+      "sha256": "184beecc779d768964fa7412724502ac9e342ad0ef68a8101aed00ac543f6fba",
+      "bytes": 36935
+    },
+    "contact_verification_cases_v1.json": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/contact_verification_cases_v1.json",
+      "sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "bytes": 11615
+    },
+    "contact_verification_expected_v1.json": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/contact_verification_expected_v1.json",
+      "sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+      "bytes": 6967
+    },
+    "pilot/contact_verification_freeze_v1.json": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/pilot/contact_verification_freeze_v1.json",
+      "sha256": "5173ecbb3d5492e85c727b206756f9112b126f87a9aa40882349bf949b728716",
+      "bytes": 36935
+    }
+  },
+  "runs": {
+    "contact_A_wall": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_A_wall/summary.json",
+        "sha256": "d5e4693830de592250154648455c4d8f5057c5a568e4af351f22a06049c7fd7c",
+        "bytes": 3237
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_A_wall/episodes.jsonl",
+        "sha256": "feec0c97910a39d35631f9d56b03caa98680f8fae6e8d6b4d1f246a69e1d5893",
+        "bytes": 2051
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_A_wall/manifest.json",
+        "sha256": "058301230d39738b2530b7b7bf5e9ee2664af9c5e6eb94058a70c98248568b16",
+        "bytes": 48731
+      },
+      "steps.jsonl": {
+        "sha256": "2091b1689b2e2beade1d493e69f765e96d85c525a9ddff4fabe4846fe73d1cd1",
+        "bytes": 410249,
+        "note": "raw outputs stay outside git (gitignored)"
+      }
+    },
+    "contact_B_obstacle": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_B_obstacle/summary.json",
+        "sha256": "03f4fdc94f01a64a64e5c3c27eb011be02a85359f8c482b7be1b2001bf505370",
+        "bytes": 3487
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_B_obstacle/episodes.jsonl",
+        "sha256": "eac7fa3fce584b35dc62061742caf4a1c755b5d224be1c4e922660f1028a4fcb",
+        "bytes": 2162
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_B_obstacle/manifest.json",
+        "sha256": "29d5ddf98158e06ac76383309f8cd7de8d196cbca62fbff39f530cb12b24e041",
+        "bytes": 19748
+      },
+      "steps.jsonl": {
+        "sha256": "f4368387cb8a9aafd61199defe71f970a3d6b7a2e06a89adc90b75e476384fdd",
+        "bytes": 486488,
+        "note": "raw outputs stay outside git (gitignored)"
+      }
+    },
+    "contact_C_clearance": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_C_clearance/summary.json",
+        "sha256": "8f0cf3692e3d7a0c7b9ea69fd7b192b0d6402ae3940cc12605ceb86800e09b63",
+        "bytes": 3198
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_C_clearance/episodes.jsonl",
+        "sha256": "1b09eb7b848928103baf8b63038b73373cecff3ba4f902e15cdcb146a009c730",
+        "bytes": 1997
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_C_clearance/manifest.json",
+        "sha256": "6d13baac02eadd5f5173aba89cc6a3d7e987bfe41a8a98efd8729c3339067e05",
+        "bytes": 19311
+      },
+      "steps.jsonl": {
+        "sha256": "01ef935e02dad57f056d92debd7ebb8ae1b046f93e001dca8287abcb19a57c04",
+        "bytes": 646038,
+        "note": "raw outputs stay outside git (gitignored)"
+      }
+    },
+    "contact_D_geometry": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_D_geometry/summary.json",
+        "sha256": "4042942e4d93220507802a16e8b4427b441bb7cfef58b6e61e8b242ad9584a1a",
+        "bytes": 3214
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_D_geometry/episodes.jsonl",
+        "sha256": "4f0cce0414a5a0b6b0968c7d486b56d43a7b50e26019a7f2b0e4f2648a1cc8d5",
+        "bytes": 2016
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/contact_D_geometry/manifest.json",
+        "sha256": "420580181c704b35f8860b1d8ab974af709566531d382cd5faf79515e0118897",
+        "bytes": 19302
+      },
+      "steps.jsonl": {
+        "sha256": "9bbeaeefec261ac5121d3f4a214b30da81cb0843ed238b44785f82d92f1d7c33",
+        "bytes": 645596,
+        "note": "raw outputs stay outside git (gitignored)"
+      }
+    },
+    "replay_contact_inferred": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/replay_contact_inferred/summary.json",
+        "sha256": "b3bd3e3df1ee1ac0fb86c4d560d87f31087bfe2deb95272a460548e8bff5d7e2",
+        "bytes": 4179
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/replay_contact_inferred/episodes.jsonl",
+        "sha256": "1b3c4fad6fbad9ff6f4288437b9dac4c7f212e3ddc2992e17b435fab3359db1c",
+        "bytes": 2827
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/replay_contact_inferred/manifest.json",
+        "sha256": "95630a0e8b209bf3fe3a01faa15a7cc01ec912002f47496125c5e07efab309fb",
+        "bytes": 19930
+      },
+      "steps.jsonl": {
+        "sha256": "18772b7843e2a8c51b2d7997fec62fd83b358bbe5ff9536531e66889153d1932",
+        "bytes": 646898,
+        "note": "raw outputs stay outside git (gitignored)"
+      }
+    },
+    "replay_no_contact": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/replay_no_contact/summary.json",
+        "sha256": "529f3815af103dee6809af492c433a41d3d72bc587901cacc3db08b02a7ccb5a",
+        "bytes": 2258
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/replay_no_contact/episodes.jsonl",
+        "sha256": "514f847157df3e4b67b3947ae5eb41cfe213936fa3b0f6867461ac35d2db4d47",
+        "bytes": 1373
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/contact_envelope/evidence/runs/replay_no_contact/manifest.json",
+        "sha256": "7a343f0cdb1bd7ff6ab7315e7f73dffcb3307207d88cb8fb1b1256d7a2038b67",
+        "bytes": 19322
+      },
+      "steps.jsonl": {
+        "sha256": "57c8357c766c68600947331a73a0935f65bc565efb9036537b68a047a7ae5bc8",
+        "bytes": 316737,
+        "note": "raw outputs stay outside git (gitignored)"
+      }
+    }
+  },
+  "probes": {
+    "probe2_wall_ok": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/probe2_wall_ok",
+      "sha256": "bcd3c28ebbbd85404dae759bb2f6f07501ccbb6ee0b686362d88cf5536a58d32",
+      "bytes": 8398
+    },
+    "probe4_unfiltered_obstacle_zero": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/probe4_unfiltered_obstacle_zero",
+      "sha256": "1f5706ee307c1d2a6c793aec7538b216cd8be20a50f749fe75fac1828c2ca4ae",
+      "bytes": 5623
+    },
+    "probe6_replicate_true_obstacle_zero": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/probe6_replicate_true_obstacle_zero",
+      "sha256": "ea75f8d8c72df3d737af66af9114b05c31fd2fe94ddf7640ca8bd9322d51efa8",
+      "bytes": 15136
+    },
+    "probe7_posthoc_shape_reporter_zero": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/probe7_posthoc_shape_reporter_zero",
+      "sha256": "1ea41d68d6b3840b5684296c1e7ae51a0be0eb0eb429ab8bfa1fab8d33ba1328",
+      "bytes": 15136
+    },
+    "probe8_physics_sensor_zero": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/probe8_physics_sensor_zero",
+      "sha256": "ffa5a9629f759039bb2c4840ca3053bc7c7960663636548ca8092af8f7a5f2f6",
+      "bytes": 2744
+    },
+    "probe11_replicate_false_ok": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/probe11_replicate_false_ok",
+      "sha256": "b9d50c46a6e21d04f3b7a66fdad320687df829baac2bc835327b5090ff52ccf6",
+      "bytes": 5074
+    },
+    "historical_repro1_episodes": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/historical_repro1_episodes",
+      "sha256": "29cb17250e15faebacbb1a8fabb10a8710aa2f8f4370dea3394c0462a4dbeffe",
+      "bytes": 898
+    },
+    "historical_repro1_manifest": {
+      "path": "docs/reports/map_eval/contact_envelope/evidence/probes/historical_repro1_manifest",
+      "sha256": "edd2bb3e25ec8f87ef01bced0684c4d23c8b29e30d4f9ab4c93822d230bdfa09",
+      "bytes": 1204
+    }
+  },
+  "screenshots": {
+    "gui_wall_contact.png": {
+      "path": "docs/reports/map_eval/contact_envelope/screenshots/gui_wall_contact.png",
+      "sha256": "319b34b50423d33fbe087bececab1a24c360e11989dab5667dde5120dce0ceba",
+      "bytes": 1425023
+    }
+  },
+  "verification": {
+    "verification": {
+      "path": "docs/reports/map_eval/contact_envelope/verify_contact_verification.json",
+      "sha256": "1484cc5274ff6da683481a35a1f02ef6f15d75b7b521018dfd794d79bddf2c1c",
+      "bytes": 47495
+    }
+  },
+  "analysis": {
+    "analysis": {
+      "path": "docs/reports/map_eval/contact_envelope/analyze_envelope_correction.json",
+      "sha256": "8e5e275b30cd947f0fac78098aca9bdaae7c11921680b999ed8acb856de03068",
+      "bytes": 8915
+    }
+  },
+  "reports": {
+    "diagnosis": {
+      "path": "docs/reports/map_eval/contact_envelope/CONTACT_DIAGNOSIS_20261102.md",
+      "sha256": "68769d940cd08d5851feda74d4b03d9a7bd110c0e04add9353886e3753472c8f",
+      "bytes": 8487
+    },
+    "report": {
+      "path": "MAP_CONTACT_ENVELOPE_REPORT.md",
+      "sha256": "a9b98c1935623e9cbef0340441ee5657ccd99403e20bd6ba07ad819670b39569",
+      "bytes": 20104
+    },
+    "handoff": {
+      "path": "HANDOFF_20261102_CONTACT_ENVELOPE.md",
+      "sha256": "8890f28137e0ff9f4762ee6fc5f501941133883af6691bc080300ad9a2b862b2",
+      "bytes": 6359
+    },
+    "report_evidence_screenshot": {
+      "path": "docs/reports/map_eval/contact_envelope/screenshots/gui_wall_contact.png",
+      "sha256": "319b34b50423d33fbe087bececab1a24c360e11989dab5667dde5120dce0ceba"
+    }
+  },
+  "gui_logs": {
+    "path": "evidence/gui_logs.txt",
+    "sha256": "1889d2b7c071c92fb767fe9fb8829be7ef6f3e18637a2308cef9289f15a7a4aa"
+  }
+}

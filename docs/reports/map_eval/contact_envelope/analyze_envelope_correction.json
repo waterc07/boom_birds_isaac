@@ -1,0 +1,185 @@
+{
+  "schema_version": "boom_birds.envelope_correction_analysis.v1",
+  "source": {
+    "envelope_manifest": "outputs\\map_eval\\contact_A_wall\\manifest.json",
+    "boundary_run": "outputs\\map_eval\\bnd_boundary_default",
+    "policy": {},
+    "coverage": {
+      "source": "collision_geometry",
+      "prim_paths": [
+        "/World/envs/env_0/Robot/body/body_collision/geometry"
+      ],
+      "collision_prim_paths": [
+        "/World/envs/env_0/Robot/body/body_collision/geometry"
+      ],
+      "visual_prim_paths": [],
+      "sub_bodies": [
+        "body"
+      ],
+      "attitude_scope": "any_rigid_rotation_about_reference_origin",
+      "joint_state_scope": "fixed_joint_state_at_measurement",
+      "limitations": [
+        "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof",
+        "AABB is measured at one fixed joint state; rotor spin, flex and other joint states are not swept"
+      ]
+    },
+    "limitations": [
+      "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof",
+      "AABB is measured at one fixed joint state; rotor spin, flex and other joint states are not swept"
+    ]
+  },
+  "aabb": {
+    "half_extents_m": [
+      0.05454223374277353,
+      0.03820826672017574,
+      0.013588040310423821
+    ],
+    "center_offset_m": [
+      5.902443081140518e-05,
+      2.421438694000244e-08,
+      0.014868530270177871
+    ]
+  },
+  "radius_sphere_about_aabb_center_m": 0.0679658866409402,
+  "radius_sphere_about_origin_m": 0.07246342042360011,
+  "legacy_underestimate_m": 0.004497533782659907,
+  "formula": "r_origin = || |center_offset| + half_extents ||_2; r_legacy = ||half_extents||_2 (only valid for zero offset)",
+  "thresholds": {
+    "1.1": {
+      "envelope_gap_legacy_m": 0.7320341133590598,
+      "envelope_gap_corrected_m": 0.7275365795763999
+    },
+    "1.38": {
+      "envelope_gap_legacy_m": 1.0120341133590596,
+      "envelope_gap_corrected_m": 1.0075365795763997
+    }
+  },
+  "episodes": {
+    "boundary_A_static_far_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.5095656746024468e-07,
+      "min_path_clearance_gap_corrected_m": -0.3724632694670327,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.14796577218337853,
+      "stop_requirement_min_margin_corrected_m": -0.15246330596603844
+    },
+    "boundary_A_static_far_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.5095656746024468e-07,
+      "min_path_clearance_gap_corrected_m": -0.3724632694670327,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.14796577218337853,
+      "stop_requirement_min_margin_corrected_m": -0.15246330596603844
+    },
+    "boundary_A_static_tight_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.0,
+      "min_path_clearance_gap_corrected_m": 0.6275365795763999,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.1414916979015926,
+      "stop_requirement_min_margin_corrected_m": -0.1459892316842525
+    },
+    "boundary_A_static_tight_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.0,
+      "min_path_clearance_gap_corrected_m": 0.6275365795763999,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.1414916979015926,
+      "stop_requirement_min_margin_corrected_m": -0.1459892316842525
+    },
+    "boundary_A_static_offpath_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.499999818129733,
+      "min_path_clearance_gap_corrected_m": 1.1275363977061328,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.13920177066587397,
+      "stop_requirement_min_margin_corrected_m": -0.14369930444853388
+    },
+    "boundary_A_static_offpath_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.499999818129733,
+      "min_path_clearance_gap_corrected_m": 1.1275363977061328,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.13920177066587397,
+      "stop_requirement_min_margin_corrected_m": -0.14369930444853388
+    },
+    "boundary_B_cross_early_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 0.015000047683715325,
+      "min_path_clearance_gap_corrected_m": -0.35746337273988477,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.09417925992639525,
+      "stop_requirement_min_margin_corrected_m": -0.09867679370905516
+    },
+    "boundary_B_cross_early_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 0.015000047683715325,
+      "min_path_clearance_gap_corrected_m": -0.35746337273988477,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.09417925992639525,
+      "stop_requirement_min_margin_corrected_m": -0.09867679370905516
+    },
+    "boundary_B_cross_late_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.8557986614098357e-07,
+      "min_path_clearance_gap_corrected_m": -0.37246323484373395,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": null,
+      "stop_requirement_min_margin_corrected_m": null
+    },
+    "boundary_B_cross_late_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.8557986614098357e-07,
+      "min_path_clearance_gap_corrected_m": -0.37246323484373395,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": null,
+      "stop_requirement_min_margin_corrected_m": null
+    },
+    "boundary_B_cross_far_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 3.000037499765628,
+      "min_path_clearance_gap_corrected_m": 2.6275740793420277,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.15225814444016122,
+      "stop_requirement_min_margin_corrected_m": -0.15675567822282113
+    },
+    "boundary_B_cross_far_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 3.000037499765628,
+      "min_path_clearance_gap_corrected_m": 2.6275740793420277,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.15225814444016122,
+      "stop_requirement_min_margin_corrected_m": -0.15675567822282113
+    },
+    "boundary_C_headon_stop_short_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.02,
+      "min_path_clearance_gap_corrected_m": 0.6475365795763999,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.23162770089366008,
+      "stop_requirement_min_margin_corrected_m": -0.23612523467632
+    },
+    "boundary_C_headon_stop_short_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 1.02,
+      "min_path_clearance_gap_corrected_m": 0.6475365795763999,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.23162770089366008,
+      "stop_requirement_min_margin_corrected_m": -0.23612523467632
+    },
+    "boundary_C_headon_collide_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 0.0,
+      "min_path_clearance_gap_corrected_m": -0.3724634204236001,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.23162770089366008,
+      "stop_requirement_min_margin_corrected_m": -0.23612523467632
+    },
+    "boundary_C_headon_collide_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 0.0,
+      "min_path_clearance_gap_corrected_m": -0.3724634204236001,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.23162770089366008,
+      "stop_requirement_min_margin_corrected_m": -0.23612523467632
+    },
+    "boundary_C_headon_early_r0-supervisor-boundary_default": {
+      "min_path_clearance_m": 0.0,
+      "min_path_clearance_gap_corrected_m": -0.3724634204236001,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.23812577690910103,
+      "stop_requirement_min_margin_corrected_m": -0.24262331069176094
+    },
+    "boundary_C_headon_early_r1-supervisor-boundary_default": {
+      "min_path_clearance_m": 0.0,
+      "min_path_clearance_gap_corrected_m": -0.3724634204236001,
+      "legacy_robot_radius_recorded_m": 0.0679658866409402,
+      "stop_requirement_min_margin_recorded_m": -0.23812577690910103,
+      "stop_requirement_min_margin_corrected_m": -0.24262331069176094
+    }
+  }
+}

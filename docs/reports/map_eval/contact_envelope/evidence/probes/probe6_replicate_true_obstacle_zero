@@ -1,0 +1,768 @@
+{
+  "ground_disabled": true,
+  "map_spawned": true,
+  "links": [
+    "/World/envs/env_0/Robot/body",
+    "/World/envs/env_0/Robot/m1_prop",
+    "/World/envs/env_0/Robot/m2_prop",
+    "/World/envs/env_0/Robot/m3_prop",
+    "/World/envs/env_0/Robot/m4_prop"
+  ],
+  "sensor_keys": [
+    "body",
+    "m1_prop",
+    "m2_prop",
+    "m3_prop",
+    "m4_prop"
+  ],
+  "phase1": {
+    "first": null,
+    "samples": [
+      {
+        "step": 25,
+        "obstacle_x": 0.9,
+        "robot": [
+          0.0,
+          -0.0,
+          1.0
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 50,
+        "obstacle_x": 0.4,
+        "robot": [
+          0.0,
+          -0.0,
+          1.0
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 75,
+        "obstacle_x": -0.1,
+        "robot": [
+          -0.201,
+          -0.062,
+          0.988
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 100,
+        "obstacle_x": -0.6,
+        "robot": [
+          0.577,
+          -0.273,
+          1.006
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 125,
+        "obstacle_x": -1.1,
+        "robot": [
+          0.491,
+          -0.207,
+          1.01
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 150,
+        "obstacle_x": -1.6,
+        "robot": [
+          0.371,
+          -0.153,
+          1.023
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      }
+    ],
+    "any_nonzero": false
+  },
+  "phase2": {
+    "first": null,
+    "samples": [
+      {
+        "step": 25,
+        "robot": [
+          -1.549,
+          0.026,
+          1.008
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 50,
+        "robot": [
+          -0.791,
+          0.056,
+          1.013
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 75,
+        "robot": [
+          -0.342,
+          0.128,
+          1.023
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 100,
+        "robot": [
+          -0.35,
+          0.127,
+          1.025
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 125,
+        "robot": [
+          -0.347,
+          0.127,
+          1.025
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "step": 150,
+        "robot": [
+          -0.347,
+          0.128,
+          1.025
+        ],
+        "max_net": 0.0,
+        "readings": {
+          "body": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m1_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m2_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m3_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          },
+          "m4_prop": {
+            "force_n": 0.0,
+            "net_n": 0.0,
+            "shape": [
+              1,
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      }
+    ],
+    "any_nonzero": false
+  }
+}

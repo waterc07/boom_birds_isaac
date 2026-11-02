@@ -1,0 +1,970 @@
+{
+  "schema_version": "boom_birds.contact_verification_freeze.v1",
+  "status": "PRE_RUN_FROZEN",
+  "frozen_at": "2026-11-02T12:51:49.006419+00:00",
+  "code_commit": "c50de1ff1ce3225f69e7c5536a13d7500095263a",
+  "worktree_state": {
+    "tracked_paths": [
+      "src",
+      "scripts",
+      "tests",
+      "configs"
+    ],
+    "status_text_sha256": "5d35b021b59119d597d7bf8fa3b5f34c2fb1c32e631a7b247a1481b1d38d9436",
+    "clean": false
+  },
+  "map_state": {
+    "map_asset_id": "rmuc2027-isaacsim-20261028",
+    "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+    "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+    "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+    "map_config_file": "configs/maps/rmuc2027.yaml"
+  },
+  "contact_contract_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "vehicle_config": "configs/vehicles/sim_reference.yaml",
+  "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+  "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+  "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+  "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+  "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+  "segments": {
+    "contact_A_wall": {
+      "segment_id": "contact_A_wall",
+      "role": "wall",
+      "mode": "wall",
+      "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+      "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "case_ids": [
+        "contact_A_wall"
+      ],
+      "repeats": 2,
+      "episodes": 2,
+      "run_plan": {
+        "segment_id": "contact_A_wall",
+        "role": "wall",
+        "mode": "wall",
+        "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+        "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+        "case_ids": [
+          "contact_A_wall"
+        ],
+        "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+        "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "run_params": {
+          "repeats": 2,
+          "cases": {
+            "contact_A_wall": {
+              "case_id": "contact_A_wall",
+              "robot": {
+                "start_position_world_m": [
+                  -4.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.6,
+                "max_steps": 300
+              },
+              "obstacle": null,
+              "target": {
+                "kind": "map_wall",
+                "prim_path": "/World/RMUC2027/Collisions/collision_014",
+                "map_config": "configs/maps/rmuc2027.yaml",
+                "local_config": "configs/maps/rmuc2027.local.yaml"
+              },
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED"
+              ]
+            }
+          },
+          "repeat_indices": {
+            "contact_A_wall": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "expected": {
+        "cases": {
+          "contact_A_wall": {
+            "case_id": "contact_A_wall",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED"
+            ],
+            "must_conditions": [
+              "sensor_available_true",
+              "event_true",
+              "force_measured_gt_0.02_n",
+              {
+                "kind": "attribution_prim_in",
+                "value": "/World/RMUC2027/Collisions/collision_014"
+              }
+            ],
+            "unsupported_allowed": true,
+            "attribution_prim_paths": [
+              "/World/RMUC2027/Collisions/collision_014"
+            ]
+          }
+        }
+      },
+      "expected_note": "预期非结论，实际以独立核验从原始记录重算为准"
+    },
+    "contact_B_obstacle": {
+      "segment_id": "contact_B_obstacle",
+      "role": "obstacle",
+      "mode": "obstacle",
+      "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+      "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "case_ids": [
+        "contact_B_obstacle"
+      ],
+      "repeats": 2,
+      "episodes": 2,
+      "run_plan": {
+        "segment_id": "contact_B_obstacle",
+        "role": "obstacle",
+        "mode": "obstacle",
+        "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+        "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+        "case_ids": [
+          "contact_B_obstacle"
+        ],
+        "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+        "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "run_params": {
+          "repeats": 2,
+          "cases": {
+            "contact_B_obstacle": {
+              "case_id": "contact_B_obstacle",
+              "robot": {
+                "start_position_world_m": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "hover",
+                "forward_mps": 0.0,
+                "max_steps": 200
+              },
+              "obstacle": {
+                "size_m": [
+                  0.4,
+                  0.6,
+                  0.6
+                ],
+                "start_position_world_m": [
+                  1.4,
+                  0.0,
+                  1.0
+                ],
+                "velocity_world_mps": [
+                  -0.4,
+                  0.0,
+                  0.0
+                ],
+                "kinematic": true
+              },
+              "target": null,
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+                "PHYSX_CONTACT_EVENT_ONLY"
+              ]
+            }
+          },
+          "repeat_indices": {
+            "contact_B_obstacle": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "expected": {
+        "cases": {
+          "contact_B_obstacle": {
+            "case_id": "contact_B_obstacle",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED",
+              "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+              "PHYSX_CONTACT_EVENT_ONLY"
+            ],
+            "must_conditions": [
+              "event_true_or_force_available",
+              "not_geometry_only",
+              "sensor_available_true"
+            ],
+            "unsupported_allowed": true
+          }
+        }
+      },
+      "expected_note": "预期非结论，实际以独立核验从原始记录重算为准"
+    },
+    "contact_C_clearance": {
+      "segment_id": "contact_C_clearance",
+      "role": "clearance",
+      "mode": "clearance",
+      "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+      "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "case_ids": [
+        "contact_C_clearance"
+      ],
+      "repeats": 2,
+      "episodes": 2,
+      "run_plan": {
+        "segment_id": "contact_C_clearance",
+        "role": "clearance",
+        "mode": "clearance",
+        "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+        "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+        "case_ids": [
+          "contact_C_clearance"
+        ],
+        "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+        "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "run_params": {
+          "repeats": 2,
+          "cases": {
+            "contact_C_clearance": {
+              "case_id": "contact_C_clearance",
+              "robot": {
+                "start_position_world_m": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "hover",
+                "forward_mps": 0.0,
+                "max_steps": 200
+              },
+              "obstacle": {
+                "size_m": [
+                  0.4,
+                  0.6,
+                  0.6
+                ],
+                "start_position_world_m": [
+                  1.4,
+                  0.45,
+                  1.0
+                ],
+                "velocity_world_mps": [
+                  -0.4,
+                  0.0,
+                  0.0
+                ],
+                "kinematic": true
+              },
+              "target": null,
+              "expected_physical": [
+                "NO_CONTACT"
+              ]
+            }
+          },
+          "repeat_indices": {
+            "contact_C_clearance": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "expected": {
+        "cases": {
+          "contact_C_clearance": {
+            "case_id": "contact_C_clearance",
+            "acceptable_physical_outcomes": [
+              "NO_CONTACT"
+            ],
+            "must_conditions": [
+              "sensor_available_true",
+              "event_false",
+              "force_available_with_valid_zero",
+              "geometry_overlap_le_0.02_m"
+            ],
+            "unsupported_allowed": false
+          }
+        }
+      },
+      "expected_note": "预期非结论，实际以独立核验从原始记录重算为准"
+    },
+    "contact_D_geometry": {
+      "segment_id": "contact_D_geometry",
+      "role": "geometry",
+      "mode": "geometry",
+      "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+      "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "case_ids": [
+        "contact_D_geometry"
+      ],
+      "repeats": 2,
+      "episodes": 2,
+      "run_plan": {
+        "segment_id": "contact_D_geometry",
+        "role": "geometry",
+        "mode": "geometry",
+        "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+        "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+        "case_ids": [
+          "contact_D_geometry"
+        ],
+        "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+        "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "run_params": {
+          "repeats": 2,
+          "cases": {
+            "contact_D_geometry": {
+              "case_id": "contact_D_geometry",
+              "robot": {
+                "start_position_world_m": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "hover",
+                "forward_mps": 0.0,
+                "max_steps": 200
+              },
+              "obstacle": {
+                "size_m": [
+                  0.4,
+                  0.6,
+                  0.6
+                ],
+                "start_position_world_m": [
+                  1.4,
+                  0.35,
+                  1.0
+                ],
+                "velocity_world_mps": [
+                  -0.4,
+                  0.0,
+                  0.0
+                ],
+                "kinematic": true
+              },
+              "target": null,
+              "expected_physical": [
+                "GEOMETRY_OVERLAP_ONLY"
+              ]
+            }
+          },
+          "repeat_indices": {
+            "contact_D_geometry": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "expected": {
+        "cases": {
+          "contact_D_geometry": {
+            "case_id": "contact_D_geometry",
+            "acceptable_physical_outcomes": [
+              "GEOMETRY_OVERLAP_ONLY"
+            ],
+            "must_conditions": [
+              "sensor_available_true",
+              "event_false",
+              "force_available_with_valid_zero",
+              "geometry_overlap_gt_0.02_m",
+              "not_physx_force"
+            ],
+            "unsupported_allowed": false
+          }
+        }
+      },
+      "expected_note": "预期非结论，实际以独立核验从原始记录重算为准"
+    },
+    "replay_contact_inferred": {
+      "segment_id": "replay_contact_inferred",
+      "role": "replay",
+      "mode": "replay",
+      "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+      "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "case_ids": [
+        "boundary_B_cross_late_r0",
+        "boundary_C_headon_collide_r0"
+      ],
+      "repeats": 1,
+      "episodes": 2,
+      "run_plan": {
+        "segment_id": "replay_contact_inferred",
+        "role": "replay",
+        "mode": "replay",
+        "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+        "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+        "case_ids": [
+          "boundary_B_cross_late_r0",
+          "boundary_C_headon_collide_r0"
+        ],
+        "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+        "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "run_params": {
+          "repeats": 1,
+          "replay_params": {
+            "vehicle_config": "configs/vehicles/sim_reference.yaml",
+            "methods": [
+              "supervisor"
+            ],
+            "execution_path": "v2",
+            "obs_delay_s": 0.15,
+            "action_delay_s": 0.1,
+            "ttl_ms": 150,
+            "max_age_ms": 150,
+            "allowed_observation_age_ms": 300,
+            "stop_distance_m": 1.1,
+            "post_abort_observe_s": 3.0,
+            "clock_offset_ms": 20.0,
+            "clock_drift_ppm": 200.0,
+            "clock_uncertainty_ms": 5.0,
+            "sync_fail_step": -1,
+            "obs_mapping_fail_step": -1,
+            "transport_stall_step": -1,
+            "transport_stall_delay_s": 0.15,
+            "obstacle_time_clamp": true
+          },
+          "cases": {
+            "boundary_B_cross_late_r0": {
+              "case_id": "boundary_B_cross_late_r0",
+              "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+              "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+              "previous_episode_id": "boundary_B_cross_late_r0-supervisor-boundary_default",
+              "previous_physical_label": "CONTACT_INFERRED"
+            },
+            "boundary_C_headon_collide_r0": {
+              "case_id": "boundary_C_headon_collide_r0",
+              "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+              "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+              "previous_episode_id": "boundary_C_headon_collide_r0-supervisor-boundary_default",
+              "previous_physical_label": "CONTACT_INFERRED"
+            }
+          }
+        }
+      },
+      "expected": {
+        "cases": {
+          "boundary_B_cross_late_r0": {
+            "case_id": "boundary_B_cross_late_r0",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED",
+              "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+              "PHYSX_CONTACT_EVENT_ONLY",
+              "GEOMETRY_OVERLAP_ONLY",
+              "UNKNOWN"
+            ],
+            "must_conditions": [
+              "replay_verdict_recorded",
+              "replay_basis_from_raw_contact_record"
+            ],
+            "unsupported_allowed": true,
+            "replay_verdict_allowed": [
+              "CONSISTENT",
+              "MISREPORT",
+              "MISS",
+              "UNDECIDABLE"
+            ],
+            "replay_rule": "CONSISTENT if raw records show a real PhysX contact event/force or an equally valid geometry-only classification with a documented reason; MISREPORT if previous inference was wrong in the opposite direction; UNDECIDABLE if the sensor chain is UNKNOWN during the contact window."
+          },
+          "boundary_C_headon_collide_r0": {
+            "case_id": "boundary_C_headon_collide_r0",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED",
+              "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+              "PHYSX_CONTACT_EVENT_ONLY",
+              "GEOMETRY_OVERLAP_ONLY",
+              "UNKNOWN"
+            ],
+            "must_conditions": [
+              "replay_verdict_recorded",
+              "replay_basis_from_raw_contact_record"
+            ],
+            "unsupported_allowed": true,
+            "replay_verdict_allowed": [
+              "CONSISTENT",
+              "MISREPORT",
+              "MISS",
+              "UNDECIDABLE"
+            ],
+            "replay_rule": "Same rule as boundary_B_cross_late_r0."
+          }
+        }
+      },
+      "expected_note": "预期非结论，实际以独立核验从原始记录重算为准"
+    },
+    "replay_no_contact": {
+      "segment_id": "replay_no_contact",
+      "role": "replay",
+      "mode": "replay",
+      "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+      "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+      "case_ids": [
+        "boundary_A_static_offpath_r0"
+      ],
+      "repeats": 1,
+      "episodes": 1,
+      "run_plan": {
+        "segment_id": "replay_no_contact",
+        "role": "replay",
+        "mode": "replay",
+        "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+        "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+        "case_ids": [
+          "boundary_A_static_offpath_r0"
+        ],
+        "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+        "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "run_params": {
+          "repeats": 1,
+          "replay_params": {
+            "vehicle_config": "configs/vehicles/sim_reference.yaml",
+            "methods": [
+              "supervisor"
+            ],
+            "execution_path": "v2",
+            "obs_delay_s": 0.15,
+            "action_delay_s": 0.1,
+            "ttl_ms": 150,
+            "max_age_ms": 150,
+            "allowed_observation_age_ms": 300,
+            "stop_distance_m": 1.1,
+            "post_abort_observe_s": 3.0,
+            "clock_offset_ms": 20.0,
+            "clock_drift_ppm": 200.0,
+            "clock_uncertainty_ms": 5.0,
+            "sync_fail_step": -1,
+            "obs_mapping_fail_step": -1,
+            "transport_stall_step": -1,
+            "transport_stall_delay_s": 0.15,
+            "obstacle_time_clamp": true
+          },
+          "cases": {
+            "boundary_A_static_offpath_r0": {
+              "case_id": "boundary_A_static_offpath_r0",
+              "source_cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+              "previous_run_dir": "outputs/map_eval/bnd_boundary_default",
+              "previous_episode_id": "boundary_A_static_offpath_r0-supervisor-boundary_default",
+              "previous_physical_label": "NO_CONTACT"
+            }
+          }
+        }
+      },
+      "expected": {
+        "cases": {
+          "boundary_A_static_offpath_r0": {
+            "case_id": "boundary_A_static_offpath_r0",
+            "acceptable_physical_outcomes": [
+              "NO_CONTACT",
+              "GEOMETRY_OVERLAP_ONLY",
+              "UNKNOWN"
+            ],
+            "must_conditions": [
+              "replay_verdict_recorded",
+              "replay_basis_from_raw_contact_record"
+            ],
+            "unsupported_allowed": true,
+            "replay_verdict_allowed": [
+              "CONSISTENT",
+              "MISREPORT",
+              "MISS",
+              "UNDECIDABLE"
+            ],
+            "replay_rule": "CONSISTENT if raw records show valid sensor, no event, no force, and no sphere overlap while passing the off-path static obstacle."
+          }
+        }
+      },
+      "expected_note": "预期非结论，实际以独立核验从原始记录重算为准"
+    }
+  },
+  "expected": {
+    "schema_version": "boom_birds.contact_verification_expected.v1",
+    "status": "EXPECTED_NOT_CONCLUSION",
+    "contact_contract_version": "boom_birds.contact_evidence.v2",
+    "envelope_contract_version": "boom_birds.body_envelope.v2",
+    "cases": {
+      "contact_A_wall": {
+        "case_id": "contact_A_wall",
+        "acceptable_physical_outcomes": [
+          "PHYSX_CONTACT_FORCE_MEASURED"
+        ],
+        "must_conditions": [
+          "sensor_available_true",
+          "event_true",
+          "force_measured_gt_0.02_n",
+          {
+            "kind": "attribution_prim_in",
+            "value": "/World/RMUC2027/Collisions/collision_014"
+          }
+        ],
+        "unsupported_allowed": true,
+        "attribution_prim_paths": [
+          "/World/RMUC2027/Collisions/collision_014"
+        ]
+      },
+      "contact_B_obstacle": {
+        "case_id": "contact_B_obstacle",
+        "acceptable_physical_outcomes": [
+          "PHYSX_CONTACT_FORCE_MEASURED",
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+          "PHYSX_CONTACT_EVENT_ONLY"
+        ],
+        "must_conditions": [
+          "event_true_or_force_available",
+          "not_geometry_only",
+          "sensor_available_true"
+        ],
+        "unsupported_allowed": true
+      },
+      "contact_C_clearance": {
+        "case_id": "contact_C_clearance",
+        "acceptable_physical_outcomes": [
+          "NO_CONTACT"
+        ],
+        "must_conditions": [
+          "sensor_available_true",
+          "event_false",
+          "force_available_with_valid_zero",
+          "geometry_overlap_le_0.02_m"
+        ],
+        "unsupported_allowed": false
+      },
+      "contact_D_geometry": {
+        "case_id": "contact_D_geometry",
+        "acceptable_physical_outcomes": [
+          "GEOMETRY_OVERLAP_ONLY"
+        ],
+        "must_conditions": [
+          "sensor_available_true",
+          "event_false",
+          "force_available_with_valid_zero",
+          "geometry_overlap_gt_0.02_m",
+          "not_physx_force"
+        ],
+        "unsupported_allowed": false
+      },
+      "boundary_B_cross_late_r0": {
+        "case_id": "boundary_B_cross_late_r0",
+        "acceptable_physical_outcomes": [
+          "PHYSX_CONTACT_FORCE_MEASURED",
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+          "PHYSX_CONTACT_EVENT_ONLY",
+          "GEOMETRY_OVERLAP_ONLY",
+          "UNKNOWN"
+        ],
+        "must_conditions": [
+          "replay_verdict_recorded",
+          "replay_basis_from_raw_contact_record"
+        ],
+        "unsupported_allowed": true,
+        "replay_verdict_allowed": [
+          "CONSISTENT",
+          "MISREPORT",
+          "MISS",
+          "UNDECIDABLE"
+        ],
+        "replay_rule": "CONSISTENT if raw records show a real PhysX contact event/force or an equally valid geometry-only classification with a documented reason; MISREPORT if previous inference was wrong in the opposite direction; UNDECIDABLE if the sensor chain is UNKNOWN during the contact window."
+      },
+      "boundary_C_headon_collide_r0": {
+        "case_id": "boundary_C_headon_collide_r0",
+        "acceptable_physical_outcomes": [
+          "PHYSX_CONTACT_FORCE_MEASURED",
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+          "PHYSX_CONTACT_EVENT_ONLY",
+          "GEOMETRY_OVERLAP_ONLY",
+          "UNKNOWN"
+        ],
+        "must_conditions": [
+          "replay_verdict_recorded",
+          "replay_basis_from_raw_contact_record"
+        ],
+        "unsupported_allowed": true,
+        "replay_verdict_allowed": [
+          "CONSISTENT",
+          "MISREPORT",
+          "MISS",
+          "UNDECIDABLE"
+        ],
+        "replay_rule": "Same rule as boundary_B_cross_late_r0."
+      },
+      "boundary_A_static_offpath_r0": {
+        "case_id": "boundary_A_static_offpath_r0",
+        "acceptable_physical_outcomes": [
+          "NO_CONTACT",
+          "GEOMETRY_OVERLAP_ONLY",
+          "UNKNOWN"
+        ],
+        "must_conditions": [
+          "replay_verdict_recorded",
+          "replay_basis_from_raw_contact_record"
+        ],
+        "unsupported_allowed": true,
+        "replay_verdict_allowed": [
+          "CONSISTENT",
+          "MISREPORT",
+          "MISS",
+          "UNDECIDABLE"
+        ],
+        "replay_rule": "CONSISTENT if raw records show valid sensor, no event, no force, and no sphere overlap while passing the off-path static obstacle."
+      }
+    },
+    "segments": {
+      "contact_A_wall": {
+        "role": "wall",
+        "expected_episodes": 2,
+        "cases": {
+          "contact_A_wall": {
+            "case_id": "contact_A_wall",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED"
+            ],
+            "must_conditions": [
+              "sensor_available_true",
+              "event_true",
+              "force_measured_gt_0.02_n",
+              {
+                "kind": "attribution_prim_in",
+                "value": "/World/RMUC2027/Collisions/collision_014"
+              }
+            ],
+            "unsupported_allowed": true,
+            "attribution_prim_paths": [
+              "/World/RMUC2027/Collisions/collision_014"
+            ]
+          }
+        }
+      },
+      "contact_B_obstacle": {
+        "role": "obstacle",
+        "expected_episodes": 2,
+        "cases": {
+          "contact_B_obstacle": {
+            "case_id": "contact_B_obstacle",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED",
+              "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+              "PHYSX_CONTACT_EVENT_ONLY"
+            ],
+            "must_conditions": [
+              "event_true_or_force_available",
+              "not_geometry_only",
+              "sensor_available_true"
+            ],
+            "unsupported_allowed": true
+          }
+        }
+      },
+      "contact_C_clearance": {
+        "role": "clearance",
+        "expected_episodes": 2,
+        "cases": {
+          "contact_C_clearance": {
+            "case_id": "contact_C_clearance",
+            "acceptable_physical_outcomes": [
+              "NO_CONTACT"
+            ],
+            "must_conditions": [
+              "sensor_available_true",
+              "event_false",
+              "force_available_with_valid_zero",
+              "geometry_overlap_le_0.02_m"
+            ],
+            "unsupported_allowed": false
+          }
+        }
+      },
+      "contact_D_geometry": {
+        "role": "geometry",
+        "expected_episodes": 2,
+        "cases": {
+          "contact_D_geometry": {
+            "case_id": "contact_D_geometry",
+            "acceptable_physical_outcomes": [
+              "GEOMETRY_OVERLAP_ONLY"
+            ],
+            "must_conditions": [
+              "sensor_available_true",
+              "event_false",
+              "force_available_with_valid_zero",
+              "geometry_overlap_gt_0.02_m",
+              "not_physx_force"
+            ],
+            "unsupported_allowed": false
+          }
+        }
+      },
+      "replay_contact_inferred": {
+        "role": "replay",
+        "expected_episodes": 2,
+        "cases": {
+          "boundary_B_cross_late_r0": {
+            "case_id": "boundary_B_cross_late_r0",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED",
+              "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+              "PHYSX_CONTACT_EVENT_ONLY",
+              "GEOMETRY_OVERLAP_ONLY",
+              "UNKNOWN"
+            ],
+            "must_conditions": [
+              "replay_verdict_recorded",
+              "replay_basis_from_raw_contact_record"
+            ],
+            "unsupported_allowed": true,
+            "replay_verdict_allowed": [
+              "CONSISTENT",
+              "MISREPORT",
+              "MISS",
+              "UNDECIDABLE"
+            ],
+            "replay_rule": "CONSISTENT if raw records show a real PhysX contact event/force or an equally valid geometry-only classification with a documented reason; MISREPORT if previous inference was wrong in the opposite direction; UNDECIDABLE if the sensor chain is UNKNOWN during the contact window."
+          },
+          "boundary_C_headon_collide_r0": {
+            "case_id": "boundary_C_headon_collide_r0",
+            "acceptable_physical_outcomes": [
+              "PHYSX_CONTACT_FORCE_MEASURED",
+              "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+              "PHYSX_CONTACT_EVENT_ONLY",
+              "GEOMETRY_OVERLAP_ONLY",
+              "UNKNOWN"
+            ],
+            "must_conditions": [
+              "replay_verdict_recorded",
+              "replay_basis_from_raw_contact_record"
+            ],
+            "unsupported_allowed": true,
+            "replay_verdict_allowed": [
+              "CONSISTENT",
+              "MISREPORT",
+              "MISS",
+              "UNDECIDABLE"
+            ],
+            "replay_rule": "Same rule as boundary_B_cross_late_r0."
+          }
+        }
+      },
+      "replay_no_contact": {
+        "role": "replay",
+        "expected_episodes": 1,
+        "cases": {
+          "boundary_A_static_offpath_r0": {
+            "case_id": "boundary_A_static_offpath_r0",
+            "acceptable_physical_outcomes": [
+              "NO_CONTACT",
+              "GEOMETRY_OVERLAP_ONLY",
+              "UNKNOWN"
+            ],
+            "must_conditions": [
+              "replay_verdict_recorded",
+              "replay_basis_from_raw_contact_record"
+            ],
+            "unsupported_allowed": true,
+            "replay_verdict_allowed": [
+              "CONSISTENT",
+              "MISREPORT",
+              "MISS",
+              "UNDECIDABLE"
+            ],
+            "replay_rule": "CONSISTENT if raw records show valid sensor, no event, no force, and no sphere overlap while passing the off-path static obstacle."
+          }
+        }
+      }
+    },
+    "notes": "Pre-frozen expectations for the controlled contact-evidence matrix. These are acceptance criteria, not conclusions; raw steps/episodes/manifest and the independent verifier are authoritative."
+  },
+  "budget": {
+    "total_episodes": 11,
+    "segment_episodes": {
+      "contact_A_wall": 2,
+      "contact_B_obstacle": 2,
+      "contact_C_clearance": 2,
+      "contact_D_geometry": 2,
+      "replay_contact_inferred": 2,
+      "replay_no_contact": 1
+    },
+    "by_role": {
+      "wall": 2,
+      "obstacle": 2,
+      "clearance": 2,
+      "geometry": 2,
+      "replay": 3
+    },
+    "min_episodes_required": 11
+  },
+  "support_scope": {
+    "scope": "CURRENT_SIM_MODEL_ONLY",
+    "evidence_domain": "GUI Isaac Lab simulation (DirectX/D3D12); 非 SITL/HIL/实机",
+    "contact_contract_version": "boom_birds.contact_evidence.v2",
+    "envelope_contract_version": "boom_birds.body_envelope.v2",
+    "contact_sensor_model": "physx_contact_sensor (filtered per-prim force / unfiltered net force); unavailable channel => UNKNOWN",
+    "simulation_models": [
+      "rigid_body_physx_contact",
+      "kinematic_obstacle",
+      "sphere_overlap_geometry_inference",
+      "reference_frame_aabb_envelope"
+    ],
+    "limitations": [
+      "PhysX contact evidence is simulation-channel evidence; it is not a real contact sensor and not hardware-in-the-loop evidence",
+      "force/impulse magnitudes are policy-step window aggregates and are not event-resolved; impulse is never used as a force",
+      "geometry overlap > 0.02 m is inference only and is never promoted to a PhysX contact event/force",
+      "AABB/sphere envelope is a conservative bound at one measured joint state, not an all-attitude triangle-mesh sweep proof",
+      "replay segments compare stored previous labels against re-simulated evidence; the referenced previous run directories are not re-read",
+      "expected values are pre-run expectations, not conclusions; only independent verification promotes them",
+      "this freeze covers the current simulation model only and does not raise any Gate"
+    ],
+    "replay_sources": [
+      "outputs/map_eval/bnd_boundary_default"
+    ]
+  },
+  "note": "接触证据/包络 v2 预运行冻结（单文件 6 segment：contact_A_wall 2 + contact_B_obstacle 2 + contact_C_clearance 2 + contact_D_geometry 2 + replay_contact_inferred 2 + replay_no_contact 1 = 11 episode）。冻结后修改 src/scripts/tests/configs 必须新建版本并重跑受影响段；replay 段只引用上一轮证据路径（previous_run_dir/previous_episode_id），本冻结不重读该运行目录内容；预期非结论，实际以独立核验从原始 steps/episodes/manifest 与 contact_record 层重算为准；本冻结只覆盖当前仿真模型（PhysX 接触通道 + 球包络），不提升任何 Gate。"
+}

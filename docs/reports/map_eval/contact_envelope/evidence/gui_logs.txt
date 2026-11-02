@@ -1,0 +1,28 @@
+== runc2_B_rep0.log
+Creating window for environment.
+CONTACT_EVAL_PASS {"episodes": 1, "success": 1, "fail": 0}
+[37.340s] Simulation App Shutting Down
+== runc2_B_rep1.log
+Creating window for environment.
+CONTACT_EVAL_PASS {"episodes": 1, "success": 1, "fail": 0}
+[37.392s] Simulation App Shutting Down
+== runc2_contact_A_wall.log
+Creating window for environment.
+CONTACT_EVAL_PASS {"episodes": 2, "success": 2, "fail": 0}
+[48.634s] Simulation App Shutting Down
+== runc2_contact_C_clearance.log
+Creating window for environment.
+CONTACT_EVAL_PASS {"episodes": 2, "success": 2, "fail": 0}
+[57.161s] Simulation App Shutting Down
+== runc2_contact_D_geometry.log
+Creating window for environment.
+CONTACT_EVAL_PASS {"episodes": 2, "success": 2, "fail": 0}
+[56.865s] Simulation App Shutting Down
+== runc2_replay_contact_inferred.log
+Creating window for environment.
+CONTACT_EVAL_FAIL {"episodes": 2, "success": 0, "fail": 2}
+[59.793s] Simulation App Shutting Down
+== runc2_replay_no_contact.log
+Creating window for environment.
+CONTACT_EVAL_FAIL {"episodes": 1, "success": 0, "fail": 1}
+[42.659s] Simulation App Shutting Down

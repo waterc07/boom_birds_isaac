@@ -1,0 +1,462 @@
+{
+  "test": "both",
+  "obstacle": {
+    "inventory": [
+      {
+        "path": "/World/envs/env_0/Obstacle",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true,
+        "type": "Xform"
+      },
+      {
+        "path": "/World/envs/env_0/Obstacle/geometry/mesh",
+        "collision": true,
+        "rigid_body": false,
+        "contact_report": false,
+        "type": "Cube"
+      }
+    ],
+    "applied_reporters": [
+      "/World/envs/env_0/Obstacle/geometry/mesh"
+    ],
+    "root_has_reporter": true,
+    "links": [
+      "/World/envs/env_0/Robot/body",
+      "/World/envs/env_0/Robot/m1_prop",
+      "/World/envs/env_0/Robot/m2_prop",
+      "/World/envs/env_0/Robot/m3_prop",
+      "/World/envs/env_0/Robot/m4_prop"
+    ],
+    "variants": {
+      "root@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      }
+    },
+    "errors": [],
+    "first_contact": null,
+    "samples": [
+      {
+        "step": 40,
+        "obstacle_x": 0.6,
+        "robot_z": 1.0,
+        "shapes": {
+          "root@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m2_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 80,
+        "obstacle_x": -0.2,
+        "robot_z": 0.99,
+        "shapes": {
+          "root@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m2_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 120,
+        "obstacle_x": -1.0,
+        "robot_z": 0.929,
+        "shapes": {
+          "root@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m2_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 160,
+        "obstacle_x": -1.8,
+        "robot_z": 0.965,
+        "shapes": {
+          "root@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m2_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 200,
+        "obstacle_x": -2.6,
+        "robot_z": 0.99,
+        "shapes": {
+          "root@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m2_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 240,
+        "obstacle_x": -3.4,
+        "robot_z": 1.002,
+        "shapes": {
+          "root@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "root@m2_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      }
+    ],
+    "any_nonzero": false
+  },
+  "wall": {
+    "applied_reporter_count": 34,
+    "wall_exists": true,
+    "wall_has_reporter": true,
+    "links": [
+      "/World/envs/env_0/Robot/body",
+      "/World/envs/env_0/Robot/m1_prop",
+      "/World/envs/env_0/Robot/m2_prop",
+      "/World/envs/env_0/Robot/m3_prop",
+      "/World/envs/env_0/Robot/m4_prop"
+    ],
+    "variants": {
+      "wall@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "wall@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "wall@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "wall@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "wall@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      }
+    },
+    "errors": [],
+    "first_contact": {
+      "step": 123,
+      "robot": [
+        -0.39025577902793884,
+        0.09838870912790298,
+        1.0107084512710571
+      ],
+      "found": {
+        "wall@body": {
+          "matrix_none": false,
+          "matrix_shape": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "force_n": 0.04222680628299713,
+          "net_n": 0.04222680628299713
+        }
+      }
+    },
+    "samples": [
+      {
+        "step": 40,
+        "robot_x": -3.004,
+        "shapes": {
+          "wall@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "wall@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 80,
+        "robot_x": -1.715,
+        "shapes": {
+          "wall@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "wall@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      },
+      {
+        "step": 120,
+        "robot_x": -0.466,
+        "shapes": {
+          "wall@body": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "wall@m1_prop": [
+            1,
+            1,
+            1,
+            3
+          ]
+        }
+      }
+    ],
+    "any_nonzero": true
+  }
+}

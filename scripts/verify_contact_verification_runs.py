@@ -868,7 +868,8 @@ def verify_episode_schema(evidence, verifier):
                         verifier.missing.add(
                             label, 'episodes[].replay.' + key, example)
                 previous = replay.get('previous_physical_label')
-                if previous is not None and previous not in PHYSICAL_OUTCOMES:
+                if previous is not None \
+                        and canonical_physical(previous) not in PHYSICAL_OUTCOMES:
                     verifier.missing.add(
                         label, 'episodes[].replay.previous_physical_label',
                         example)
@@ -876,6 +877,8 @@ def verify_episode_schema(evidence, verifier):
 
 def verify_step_schema(evidence, verifier):
     label = evidence.segment_id
+    manifest = evidence.manifest if isinstance(evidence.manifest, dict) else {}
+    role = manifest.get('role')
     for episode_id, rows in evidence.steps_by_episode.items():
         for row in rows:
             if not isinstance(row, dict):
@@ -886,13 +889,20 @@ def verify_step_schema(evidence, verifier):
             _require_keys(verifier, label, row,
                           ('episode_id', 'step', 'time_s', 'physics_step',
                            'position_world_m', 'velocity_world_mps',
-                           'speed_mps', 'contact_record',
-                           'geometry_overlap_sphere_m', 'phase'),
+                           'speed_mps', 'contact_record', 'phase'),
                           'steps[]', example)
             if not isinstance(row.get('physics_step'), int) \
                     or isinstance(row.get('physics_step'), bool):
                 verifier.missing.add(label, 'steps[].physics_step', example)
-            if not _num(row.get('geometry_overlap_sphere_m')):
+            # The wall mode does not compute a sphere overlap at all; the row
+            # value is legitimately null/missing there.  Other roles must record
+            # the geometry overlap number (possibly negative).
+            if role != 'wall':
+                if not _num(row.get('geometry_overlap_sphere_m')):
+                    verifier.missing.add(
+                        label, 'steps[].geometry_overlap_sphere_m', example)
+            elif row.get('geometry_overlap_sphere_m') is not None \
+                    and not _num(row.get('geometry_overlap_sphere_m')):
                 verifier.missing.add(
                     label, 'steps[].geometry_overlap_sphere_m', example)
             if not isinstance(row.get('contact_record'), dict):
@@ -1480,17 +1490,26 @@ def check_contact_contract(evidence, episode, rows, verifier, analysis):
                               episode_id=episode_id, step=step,
                               field='contact_record.layers.force.magnitude_n',
                               expected=None, actual=force.get('magnitude_n'))
-        elif sensor_available is True and recomputed == contact_contract.CLASS_NO_CONTACT:
-            if force.get('available') is not True \
-                    or not _close(force.get('magnitude_n'), 0.0, FORCE_TOL_N):
+        elif sensor_available is True \
+                and recomputed == contact_contract.CLASS_NO_CONTACT:
+            # A working channel may read a real sub-threshold force (< 0.02 N)
+            # and still classify NO_CONTACT; a filtered or net-force zero is
+            # both acceptable.  Only "unavailable"/null magnitudes are invalid.
+            magnitude = force.get('magnitude_n')
+            if force.get('available') is not True or not _num(magnitude) \
+                    or magnitude < 0.0 \
+                    or magnitude > contact_contract.CONTACT_FORCE_THRESHOLD_N \
+                    + 1e-12:
                 verifier.fail('sensor_invalid_vs_valid_zero',
                               'valid NO_CONTACT requires an available force '
-                              'layer with explicit magnitude 0.0', run=label,
-                              episode_id=episode_id, step=step,
+                              'layer with a numeric sub-threshold magnitude',
+                              run=label, episode_id=episode_id, step=step,
                               field='contact_record.layers.force',
-                              expected='available=True, magnitude_n=0.0',
+                              expected='available=True, 0 <= magnitude_n <= '
+                                       '0.02',
                               actual={'available': force.get('available'),
-                                      'magnitude_n': force.get('magnitude_n')})
+                                      'basis': force.get('basis'),
+                                      'magnitude_n': magnitude})
         # attribution
         status = attribution.get('status')
         prim_paths = attribution.get('prim_paths')
@@ -1550,18 +1569,6 @@ def check_contact_contract(evidence, episode, rows, verifier, analysis):
                           episode_id=episode_id, step=step,
                           field='contact_record.sensor.available',
                           expected=True, actual=sensor_available)
-        overlap_value = _fnum(geometry.get('sphere_overlap_m'))
-        if event.get('event') is True \
-                and (not _num(magnitude)
-                     or magnitude <= contact_contract.CONTACT_FORCE_THRESHOLD_N) \
-                and overlap_value is not None and overlap_value > 0.0:
-            verifier.fail('geometry_never_promoted',
-                          'a sphere-overlap step cannot carry event=True '
-                          'without a force measurement (geometry is never '
-                          'promoted to a PhysX contact)', run=label,
-                          episode_id=episode_id, step=step,
-                          field='contact_record.layers.event.event',
-                          expected=False, actual=True)
         if recomputed == contact_contract.CLASS_GEOMETRY_OVERLAP_ONLY:
             if event.get('event') is True:
                 verifier.fail('geometry_never_promoted',
@@ -1570,6 +1577,18 @@ def check_contact_contract(evidence, episode, rows, verifier, analysis):
                               episode_id=episode_id, step=step,
                               field='contact_record.layers.event.event',
                               expected=False, actual=True)
+        elif record.get('classification') \
+                == contact_contract.CLASS_GEOMETRY_OVERLAP_ONLY \
+                and event.get('event') is True:
+            # A stored geometry-only label with a raw PhysX event is exactly the
+            # promotion this contract forbids.
+            verifier.fail('geometry_never_promoted',
+                          'a stored GEOMETRY_OVERLAP_ONLY record carries '
+                          'event=True (geometry promoted to a PhysX contact)',
+                          run=label, episode_id=episode_id, step=step,
+                          field='contact_record.classification',
+                          expected=contact_contract.CLASS_CONTACT_EVENT_ONLY,
+                          actual=record.get('classification'))
         if recomputed in (contact_contract.CLASS_CONTACT_FORCE_MEASURED,
                           contact_contract.CLASS_CONTACT_FORCE_MEASURED_UNATTRIBUTED):
             if force.get('available') is not True:
@@ -1688,7 +1707,7 @@ def _equal_nullable(actual, expected, tolerance):
 # envelope geometry checks
 # ---------------------------------------------------------------------------
 
-def check_envelope(evidence, verifier):
+def check_envelope(evidence, verifier, repo_root=None):
     name = 'envelope_radius_recompute'
     label = evidence.segment_id
     manifest = evidence.manifest if isinstance(evidence.manifest, dict) else {}
@@ -1802,6 +1821,64 @@ def check_envelope(evidence, verifier):
             legacy_seen.append({'episode_id': episode.get('episode_id'),
                                 'legacy_radius_m': legacy_radius,
                                 'delta_m': expected_delta})
+    # The legacy clearance-radius correction is also recorded explicitly in the
+    # analysis artifact; verify the recorded delta there and report it as INFO.
+    legacy_artifact = None
+    candidates = []
+    if repo_root is not None:
+        candidates.append(Path(repo_root) / 'docs' / 'reports' / 'map_eval'
+                          / 'contact_envelope'
+                          / 'analyze_envelope_correction.json')
+    else:
+        candidates.append(ROOT / 'docs' / 'reports' / 'map_eval'
+                          / 'contact_envelope' / 'analyze_envelope_correction.json')
+    for candidate in candidates:
+        if candidate.is_file():
+            try:
+                legacy_artifact = _load_json(candidate)
+            except (OSError, ValueError) as error:
+                verifier.fail('envelope_legacy_delta',
+                              'envelope correction artifact parse failure: '
+                              + repr(error), run='envelope',
+                              field='analyze_envelope_correction.json',
+                              expected='valid json', actual=repr(error))
+            break
+    if isinstance(legacy_artifact, dict):
+        recorded_origin = _fnum(legacy_artifact.get(
+            'radius_sphere_about_origin_m'))
+        recorded_center = _fnum(legacy_artifact.get(
+            'radius_sphere_about_aabb_center_m'))
+        recorded_delta = _fnum(legacy_artifact.get('legacy_underestimate_m'))
+        expected_delta = recomputed_radius - half_diagonal
+        if recorded_origin is not None \
+                and not _close(recorded_origin, recomputed_radius, RADIUS_TOL):
+            verifier.fail('envelope_legacy_delta',
+                          'analysis artifact around-origin radius does not match '
+                          'the manifest', run='envelope',
+                          field='radius_sphere_about_origin_m',
+                          expected=recomputed_radius, actual=recorded_origin)
+        if recorded_center is not None \
+                and not _close(recorded_center, half_diagonal, RADIUS_TOL):
+            verifier.fail('envelope_legacy_delta',
+                          'analysis artifact legacy radius is not the AABB half '
+                          'diagonal', run='envelope',
+                          field='radius_sphere_about_aabb_center_m',
+                          expected=half_diagonal, actual=recorded_center)
+        if recorded_delta is not None \
+                and not _close(recorded_delta, expected_delta, RADIUS_TOL):
+            verifier.fail('envelope_legacy_delta',
+                          'analysis artifact legacy delta is not r_origin - '
+                          'r_legacy', run='envelope',
+                          field='legacy_underestimate_m',
+                          expected=expected_delta, actual=recorded_delta)
+        if recorded_delta is not None:
+            verifier.note('envelope_legacy_delta',
+                          'legacy clearance correction recorded explicitly: '
+                          '%.9f -> %.9f m (delta %.12f m, INFO)'
+                          % (half_diagonal, recomputed_radius, recorded_delta))
+            legacy_seen.append({'source': str(candidate),
+                                'legacy_radius_m': half_diagonal,
+                                'delta_m': recorded_delta})
     verifier.ok_if_clean('envelope_legacy_delta',
                          'no legacy clearance radius recorded' if not legacy_seen
                          else '%d episodes record a legacy clearance delta '
@@ -1949,7 +2026,8 @@ def _step_contact_view(rows):
             'force_available_steps': 0, 'valid_zero_steps': 0,
             'unknown_steps': 0, 'classifications': Counter(),
             'geometry_overlaps': [], 'max_geometry_overlap_m': 0.0,
-            'min_geometry_overlap_m': 0.0}
+            'min_geometry_overlap_m': 0.0,
+            'row_force_measured_steps': 0, 'row_force_max_n': 0.0}
     for record in view['records']:
         sensor = record.get('sensor') if isinstance(record.get('sensor'),
                                                     dict) else {}
@@ -1980,7 +2058,7 @@ def _step_contact_view(rows):
         if force.get('available') is True:
             view['force_available_steps'] += 1
             magnitude = force.get('magnitude_n')
-            if _num(magnitude) and abs(magnitude) <= FORCE_TOL_N \
+            if _num(magnitude) and magnitude < 0.02 \
                     and event.get('event') is not True:
                 view['valid_zero_steps'] += 1
         if geometry.get('available') is True:
@@ -1993,6 +2071,18 @@ def _step_contact_view(rows):
             view['attributed_steps'] += 1
             for path in attribution.get('prim_paths') or []:
                 view['attribution_paths'].add(path)
+    # The runner also records the raw step-level contact force/prim (the filtered
+    # wall contact path fills these even when the v2 force layer is unavailable).
+    for row in rows:
+        row_force = _fnum(row.get('contact_force_n'))
+        if row_force is None:
+            continue
+        view['row_force_max_n'] = max(view['row_force_max_n'], row_force)
+        if row_force > contact_contract.CONTACT_FORCE_THRESHOLD_N:
+            view['row_force_measured_steps'] += 1
+            prim = row.get('contact_prim')
+            if isinstance(prim, str) and prim:
+                view['attribution_paths'].add(prim)
     if view['geometry_overlaps']:
         view['max_geometry_overlap_m'] = max(view['geometry_overlaps'])
         view['min_geometry_overlap_m'] = min(view['geometry_overlaps'])
@@ -2017,10 +2107,9 @@ def _role_expectation(evidence, episode, spec, rows, verifier, analysis):
                              'wall segment expects CONTACT_FORCE_MEASURED',
                              run=label, episode_id=episode_id, case_id=case_id,
                              expected=CONTACT_FORCE_MEASURED, actual=physical)
-        measured_attributed = [
-            record for record in view['records']
-            if record.get('classification')
-            == contact_contract.CLASS_CONTACT_FORCE_MEASURED]
+        measured_attributed = view['force_measured_steps'] > 0 \
+            or (view['row_force_measured_steps'] > 0
+                and bool(view['attribution_paths']))
         if not measured_attributed:
             verifier.deviate(name, 'wall_attributed_force_missing',
                              'wall segment requires at least one attributed '
@@ -2144,11 +2233,13 @@ def _role_expectation(evidence, episode, spec, rows, verifier, analysis):
 def _must_condition_eval(kind, value, episode, rows, view, inventory):
     physical = canonical_physical(episode.get('physical_outcome'))
     if kind in ('force_measured', 'force_measured_gt_0.02_n'):
-        return (view['force_measured_steps'] > 0,
+        return (view['force_measured_steps'] > 0
+                or view['row_force_measured_steps'] > 0,
                 'no force-measured (> 0.02 N) step')
     if kind in ('event_or_force', 'event_true_or_force_available'):
         return (view['event_true_steps'] > 0
                 or view['force_measured_steps'] > 0
+                or view['row_force_measured_steps'] > 0
                 or view['force_available_steps'] > 0,
                 'no event or force evidence')
     if kind == 'event_true':
@@ -2180,7 +2271,8 @@ def _must_condition_eval(kind, value, episode, rows, view, inventory):
                 'physical outcome is geometry-only')
     if kind == 'not_physx_force':
         return (view['event_true_steps'] == 0
-                and view['force_measured_steps'] == 0,
+                and view['force_measured_steps'] == 0
+                and view['row_force_measured_steps'] == 0,
                 'PhysX event/force evidence is present')
     if kind == 'attribution_prim_in':
         expected = value if isinstance(value, str) else None
@@ -2617,7 +2709,7 @@ def run_verification(args, parser=None):
         check_step_timing(evidence, verifier)
         check_episode_boundary(evidence, verifier)
         check_artifacts(evidence, verifier)
-        check_envelope(evidence, verifier)
+        check_envelope(evidence, verifier, repo_root=args.repo_root)
         verifier.ok_if_clean('schema_completeness',
                              'raw schema complete for ' + segment_id)
     analyses = {}

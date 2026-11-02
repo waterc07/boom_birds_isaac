@@ -1,0 +1,107 @@
+{
+  "schema_version": "boom_birds.contact_verification_summary.v1",
+  "status": "PASS",
+  "segment_id": "contact_B_obstacle",
+  "mode": "obstacle",
+  "case_ids": [
+    "contact_B_obstacle"
+  ],
+  "counts": {
+    "episodes": 2,
+    "success": 2,
+    "fail": 0
+  },
+  "episodes": [
+    {
+      "episode_id": "contact_B_obstacle-r0-contact_B_obstacle",
+      "case_id": "contact_B_obstacle",
+      "mode": "obstacle",
+      "outcome": "SUCCESS",
+      "business_outcome": "SUCCESS",
+      "physical_outcome": "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+      "contact_summary": {
+        "schema_version": "boom_birds.contact_evidence.v2",
+        "total_steps": 150,
+        "classification_counts": {
+          "CONTACT_FORCE_MEASURED": 0,
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED": 0,
+          "CONTACT_EVENT_ONLY": 1,
+          "GEOMETRY_OVERLAP_ONLY": 70,
+          "NO_CONTACT": 79,
+          "UNKNOWN": 0
+        },
+        "first_force_contact_time_s": null,
+        "max_force_n": 0.005064396187663078,
+        "unknown_steps": 0,
+        "unknown_reasons": {
+          "SENSOR_UNAVAILABLE": 0,
+          "EVENT_UNAVAILABLE": 0
+        },
+        "geometry_only_steps": 70,
+        "force_available_ratio": 0.9933333333333333,
+        "attributed_steps": 1,
+        "unattributed_steps": 149,
+        "attribution_status_counts": {
+          "ATTRIBUTED": 1,
+          "UNATTRIBUTED": 149,
+          "UNKNOWN": 0
+        }
+      },
+      "envelope_sphere_about_origin_m": 0.07246342042360011,
+      "max_force_n": 0.02760433964431286,
+      "first_contact_time_s": 7.050000000000001,
+      "max_geometry_overlap_m": 0.11948055827533582,
+      "steps": 150,
+      "replay": null
+    },
+    {
+      "episode_id": "contact_B_obstacle-r1-contact_B_obstacle",
+      "case_id": "contact_B_obstacle",
+      "mode": "obstacle",
+      "outcome": "SUCCESS",
+      "business_outcome": "SUCCESS",
+      "physical_outcome": "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+      "contact_summary": {
+        "schema_version": "boom_birds.contact_evidence.v2",
+        "total_steps": 150,
+        "classification_counts": {
+          "CONTACT_FORCE_MEASURED": 0,
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED": 0,
+          "CONTACT_EVENT_ONLY": 1,
+          "GEOMETRY_OVERLAP_ONLY": 70,
+          "NO_CONTACT": 79,
+          "UNKNOWN": 0
+        },
+        "first_force_contact_time_s": null,
+        "max_force_n": 0.005064396187663078,
+        "unknown_steps": 0,
+        "unknown_reasons": {
+          "SENSOR_UNAVAILABLE": 0,
+          "EVENT_UNAVAILABLE": 0
+        },
+        "geometry_only_steps": 70,
+        "force_available_ratio": 0.9933333333333333,
+        "attributed_steps": 1,
+        "unattributed_steps": 149,
+        "attribution_status_counts": {
+          "ATTRIBUTED": 1,
+          "UNATTRIBUTED": 149,
+          "UNKNOWN": 0
+        }
+      },
+      "envelope_sphere_about_origin_m": 0.07246342042360011,
+      "max_force_n": 0.02760433964431286,
+      "first_contact_time_s": 7.050000000000001,
+      "max_geometry_overlap_m": 0.11948055827533582,
+      "steps": 150,
+      "replay": null
+    }
+  ],
+  "gui_mode": true,
+  "contact_contract_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "merged_from": [
+    "outputs\\map_eval\\contact_B_obstacle_rep0",
+    "outputs\\map_eval\\contact_B_obstacle_rep1"
+  ]
+}

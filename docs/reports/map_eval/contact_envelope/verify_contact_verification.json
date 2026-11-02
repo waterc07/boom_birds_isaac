@@ -1,0 +1,1229 @@
+{
+  "status": "PASS",
+  "checks": {
+    "data_integrity": {
+      "schema_completeness": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "manifest schema checked for contact_A_wall"
+      },
+      "freeze_lineage": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "freeze file sha256 verified for contact_A_wall; freeze lineage checked for contact_A_wall; freeze file sha256 verified for contact_B_obstacle; freeze lineage checked for contact_B_obstacle; freeze file sha256 verified for contact_C_clearance; freeze lineage checked for contact_C_clearance; freeze file sha256 verified for contact_D_geometry; freeze lineage checked for contact_D_geometry"
+      },
+      "gui_evidence": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "GUI evidence present for contact_A_wall; GUI evidence present for contact_B_obstacle; GUI evidence present for contact_C_clearance; GUI evidence present for contact_D_geometry; GUI evidence present for replay_contact_inferred; GUI evidence present for replay_no_contact"
+      },
+      "episode_identity_and_denominator": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "episode identity/denominator checked for contact_A_wall (2 episodes); episode identity/denominator checked for contact_B_obstacle (2 episodes); episode identity/denominator checked for contact_C_clearance (2 episodes); episode identity/denominator checked for contact_D_geometry (2 episodes); episode identity/denominator checked for replay_contact_inferred (2 episodes); episode identity/denominator checked for replay_no_contact (1 episodes)"
+      },
+      "step_physics_timing": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "step/physics timing checked for contact_A_wall"
+      },
+      "episode_boundary": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "episode boundary checked for contact_A_wall"
+      },
+      "artifact_hashes": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "3 artifact hashes verified for contact_A_wall"
+      }
+    },
+    "contact_contract": {
+      "contact_record_schema": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "contact_classification": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "contact_units_and_threshold": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "sensor_invalid_vs_valid_zero": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "attribution_contract": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall; attributed prim /World/envs/env_0/Obstacle is in the inventory but not flagged as collision geometry; attributed prim /World/envs/env_0/Obstacle is in the inventory but not flagged as collision geometry"
+      },
+      "geometry_never_promoted": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "impulse_never_force": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "net_vs_per_prim": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "contact_summary_recompute": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      }
+    },
+    "envelope_geometry": {
+      "envelope_radius_recompute": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "envelope radius checked for contact_A_wall"
+      },
+      "envelope_coverage_inventory": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "coverage compared with prim_inventory for contact_A_wall"
+      },
+      "envelope_limitations": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "envelope limitations checked for contact_A_wall"
+      },
+      "envelope_legacy_delta": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); 1 episodes record a legacy clearance delta (INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO)"
+      }
+    },
+    "scenario_expectation": {
+      "expected_config_coverage": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "expected classification present for contact_A_wall"
+      },
+      "acceptable_physical_outcomes": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "must_conditions": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "segment_role_expectations": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "role expectations checked for contact_A_wall-r0-contact_A_wall (wall)"
+      },
+      "replay_verdicts": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "not a replay episode (contact_A_wall-r0-contact_A_wall); replay rule for boundary_B_cross_late_r0 (INFO): CONSISTENT if raw records show a real PhysX contact event/force or an equally valid geometry-only classification with a documented reason; MISREPORT if previous inference was wrong in the opposite direction; UNDECIDABLE if the sensor chain is UNKNOWN during the contact window.; replay rule for boundary_C_headon_collide_r0 (INFO): Same rule as boundary_B_cross_late_r0.; replay rule for boundary_A_static_offpath_r0 (INFO): CONSISTENT if raw records show valid sensor, no event, no force, and no sphere overlap while passing the off-path static obstacle."
+      }
+    },
+    "performance_boundary": {
+      "contact_event_stats": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: 11 event steps, 2 physical outcomes; contact_B_obstacle: 2 event steps, 2 physical outcomes; contact_C_clearance: 0 event steps, 2 physical outcomes; contact_D_geometry: 0 event steps, 2 physical outcomes; replay_contact_inferred: 0 event steps, 2 physical outcomes; replay_no_contact: 0 event steps, 1 physical outcomes"
+      },
+      "force_impulse_extremes": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: max force=0.018937967717647552 N, max impulse=None N*s; contact_B_obstacle: max force=0.005064396187663078 N, max impulse=None N*s; contact_C_clearance: max force=0.0 N, max impulse=None N*s; contact_D_geometry: max force=0.0 N, max impulse=None N*s; replay_contact_inferred: max force=1.1455614234989753e-08 N, max impulse=None N*s; replay_no_contact: max force=0.0 N, max impulse=None N*s"
+      },
+      "attribution_coverage": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: 11/263 attributed steps; contact_B_obstacle: 2/300 attributed steps; contact_C_clearance: 0/400 attributed steps; contact_D_geometry: 0/400 attributed steps; replay_contact_inferred: 0/400 attributed steps; replay_no_contact: 0/200 attributed steps"
+      },
+      "geometry_only_and_unknown_stats": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: geometry-only=0, unknown=0, valid-zero=252; contact_B_obstacle: geometry-only=134, unknown=0, valid-zero=298; contact_C_clearance: geometry-only=0, unknown=0, valid-zero=400; contact_D_geometry: geometry-only=10, unknown=0, valid-zero=400; replay_contact_inferred: geometry-only=47, unknown=0, valid-zero=400; replay_no_contact: geometry-only=0, unknown=0, valid-zero=200"
+      }
+    }
+  },
+  "checks_by_category": {
+    "data_integrity": {
+      "schema_completeness": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "manifest schema checked for contact_A_wall"
+      },
+      "freeze_lineage": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "freeze file sha256 verified for contact_A_wall; freeze lineage checked for contact_A_wall; freeze file sha256 verified for contact_B_obstacle; freeze lineage checked for contact_B_obstacle; freeze file sha256 verified for contact_C_clearance; freeze lineage checked for contact_C_clearance; freeze file sha256 verified for contact_D_geometry; freeze lineage checked for contact_D_geometry"
+      },
+      "gui_evidence": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "GUI evidence present for contact_A_wall; GUI evidence present for contact_B_obstacle; GUI evidence present for contact_C_clearance; GUI evidence present for contact_D_geometry; GUI evidence present for replay_contact_inferred; GUI evidence present for replay_no_contact"
+      },
+      "episode_identity_and_denominator": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "episode identity/denominator checked for contact_A_wall (2 episodes); episode identity/denominator checked for contact_B_obstacle (2 episodes); episode identity/denominator checked for contact_C_clearance (2 episodes); episode identity/denominator checked for contact_D_geometry (2 episodes); episode identity/denominator checked for replay_contact_inferred (2 episodes); episode identity/denominator checked for replay_no_contact (1 episodes)"
+      },
+      "step_physics_timing": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "step/physics timing checked for contact_A_wall"
+      },
+      "episode_boundary": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "episode boundary checked for contact_A_wall"
+      },
+      "artifact_hashes": {
+        "passed": true,
+        "category": "data_integrity",
+        "detail": "3 artifact hashes verified for contact_A_wall"
+      }
+    },
+    "contact_contract": {
+      "contact_record_schema": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "contact_classification": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "contact_units_and_threshold": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "sensor_invalid_vs_valid_zero": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "attribution_contract": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall; attributed prim /World/envs/env_0/Obstacle is in the inventory but not flagged as collision geometry; attributed prim /World/envs/env_0/Obstacle is in the inventory but not flagged as collision geometry"
+      },
+      "geometry_never_promoted": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "impulse_never_force": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "net_vs_per_prim": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "contact_summary_recompute": {
+        "passed": true,
+        "category": "contact_contract",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      }
+    },
+    "envelope_geometry": {
+      "envelope_radius_recompute": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "envelope radius checked for contact_A_wall"
+      },
+      "envelope_coverage_inventory": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "coverage compared with prim_inventory for contact_A_wall"
+      },
+      "envelope_limitations": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "envelope limitations checked for contact_A_wall"
+      },
+      "envelope_legacy_delta": {
+        "passed": true,
+        "category": "envelope_geometry",
+        "detail": "legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); 1 episodes record a legacy clearance delta (INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO); legacy clearance correction recorded explicitly: 0.067965887 -> 0.072463420 m (delta 0.004497533783 m, INFO)"
+      }
+    },
+    "scenario_expectation": {
+      "expected_config_coverage": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "expected classification present for contact_A_wall"
+      },
+      "acceptable_physical_outcomes": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "must_conditions": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "checked for contact_A_wall-r0-contact_A_wall"
+      },
+      "segment_role_expectations": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "role expectations checked for contact_A_wall-r0-contact_A_wall (wall)"
+      },
+      "replay_verdicts": {
+        "passed": true,
+        "category": "scenario_expectation",
+        "detail": "not a replay episode (contact_A_wall-r0-contact_A_wall); replay rule for boundary_B_cross_late_r0 (INFO): CONSISTENT if raw records show a real PhysX contact event/force or an equally valid geometry-only classification with a documented reason; MISREPORT if previous inference was wrong in the opposite direction; UNDECIDABLE if the sensor chain is UNKNOWN during the contact window.; replay rule for boundary_C_headon_collide_r0 (INFO): Same rule as boundary_B_cross_late_r0.; replay rule for boundary_A_static_offpath_r0 (INFO): CONSISTENT if raw records show valid sensor, no event, no force, and no sphere overlap while passing the off-path static obstacle."
+      }
+    },
+    "performance_boundary": {
+      "contact_event_stats": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: 11 event steps, 2 physical outcomes; contact_B_obstacle: 2 event steps, 2 physical outcomes; contact_C_clearance: 0 event steps, 2 physical outcomes; contact_D_geometry: 0 event steps, 2 physical outcomes; replay_contact_inferred: 0 event steps, 2 physical outcomes; replay_no_contact: 0 event steps, 1 physical outcomes"
+      },
+      "force_impulse_extremes": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: max force=0.018937967717647552 N, max impulse=None N*s; contact_B_obstacle: max force=0.005064396187663078 N, max impulse=None N*s; contact_C_clearance: max force=0.0 N, max impulse=None N*s; contact_D_geometry: max force=0.0 N, max impulse=None N*s; replay_contact_inferred: max force=1.1455614234989753e-08 N, max impulse=None N*s; replay_no_contact: max force=0.0 N, max impulse=None N*s"
+      },
+      "attribution_coverage": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: 11/263 attributed steps; contact_B_obstacle: 2/300 attributed steps; contact_C_clearance: 0/400 attributed steps; contact_D_geometry: 0/400 attributed steps; replay_contact_inferred: 0/400 attributed steps; replay_no_contact: 0/200 attributed steps"
+      },
+      "geometry_only_and_unknown_stats": {
+        "passed": true,
+        "category": "performance_boundary",
+        "detail": "contact_A_wall: geometry-only=0, unknown=0, valid-zero=252; contact_B_obstacle: geometry-only=134, unknown=0, valid-zero=298; contact_C_clearance: geometry-only=0, unknown=0, valid-zero=400; contact_D_geometry: geometry-only=10, unknown=0, valid-zero=400; replay_contact_inferred: geometry-only=47, unknown=0, valid-zero=400; replay_no_contact: geometry-only=0, unknown=0, valid-zero=200"
+      }
+    }
+  },
+  "failures": [],
+  "deviations": [],
+  "missing_fields": [],
+  "recomputed": {
+    "contracts": {
+      "contact": "boom_birds.contact_evidence.v2",
+      "envelope": "boom_birds.body_envelope.v2",
+      "force_threshold_n": 0.02,
+      "physical_outcomes": [
+        "CONTACT_FORCE_MEASURED",
+        "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+        "CONTACT_EVENT_ONLY",
+        "GEOMETRY_OVERLAP_ONLY",
+        "NO_CONTACT",
+        "UNKNOWN"
+      ]
+    },
+    "expected_index": {
+      "case_count": 6,
+      "replay_verdict_count": 3,
+      "segments": {
+        "contact_A_wall": {
+          "case_count": 1,
+          "default_keys": [
+            "acceptable_physical",
+            "case_id",
+            "expected_episodes",
+            "mode",
+            "must_conditions",
+            "note",
+            "role",
+            "segment_id",
+            "unsupported_allowed"
+          ]
+        },
+        "contact_B_obstacle": {
+          "case_count": 1,
+          "default_keys": [
+            "acceptable_physical",
+            "case_id",
+            "expected_episodes",
+            "mode",
+            "must_conditions",
+            "note",
+            "role",
+            "segment_id",
+            "unsupported_allowed"
+          ]
+        },
+        "contact_C_clearance": {
+          "case_count": 1,
+          "default_keys": [
+            "acceptable_physical",
+            "case_id",
+            "expected_episodes",
+            "mode",
+            "must_conditions",
+            "note",
+            "role",
+            "segment_id",
+            "unsupported_allowed"
+          ]
+        },
+        "contact_D_geometry": {
+          "case_count": 1,
+          "default_keys": [
+            "acceptable_physical",
+            "case_id",
+            "expected_episodes",
+            "mode",
+            "must_conditions",
+            "note",
+            "role",
+            "segment_id",
+            "unsupported_allowed"
+          ]
+        },
+        "replay_contact_inferred": {
+          "case_count": 2,
+          "default_keys": [
+            "acceptable_physical",
+            "case_id",
+            "expected_episodes",
+            "mode",
+            "must_conditions",
+            "note",
+            "role",
+            "segment_id",
+            "unsupported_allowed"
+          ]
+        },
+        "replay_no_contact": {
+          "case_count": 1,
+          "default_keys": [
+            "acceptable_physical",
+            "case_id",
+            "expected_episodes",
+            "mode",
+            "must_conditions",
+            "note",
+            "role",
+            "segment_id",
+            "unsupported_allowed"
+          ]
+        }
+      }
+    },
+    "performance": {
+      "contact_A_wall": {
+        "episodes": [
+          {
+            "episode_id": "contact_A_wall-r0-contact_A_wall",
+            "case_id": "contact_A_wall",
+            "role": "wall",
+            "physical_outcome": "CONTACT_FORCE_MEASURED",
+            "contact_steps": 4,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 126,
+            "attributed_steps": 4,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 2,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_A_wall-r1-contact_A_wall",
+            "case_id": "contact_A_wall",
+            "role": "wall",
+            "physical_outcome": "CONTACT_FORCE_MEASURED",
+            "contact_steps": 7,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 126,
+            "attributed_steps": 7,
+            "max_force_n": 0.018937967717647552,
+            "max_impulse_ns": null,
+            "event_duration_steps": 4,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "CONTACT_FORCE_MEASURED": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 252,
+          "CONTACT_EVENT_ONLY": 11
+        },
+        "total_steps": 263,
+        "contact_event_steps": 11,
+        "unknown_steps": 0,
+        "geometry_only_steps": 0,
+        "valid_zero_steps": 252,
+        "force_measured_steps": 0,
+        "attributed_steps": 11,
+        "attribution_ratio": 0.04182509505703422,
+        "max_force_n": 0.018937967717647552,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 4
+      },
+      "contact_B_obstacle": {
+        "episodes": [
+          {
+            "episode_id": "contact_B_obstacle-r0-contact_B_obstacle",
+            "case_id": "contact_B_obstacle",
+            "role": "obstacle",
+            "physical_outcome": "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "contact_steps": 1,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 67,
+            "valid_zero_steps": 149,
+            "attributed_steps": 1,
+            "max_force_n": 0.005064396187663078,
+            "max_impulse_ns": null,
+            "event_duration_steps": 1,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_B_obstacle-r1-contact_B_obstacle",
+            "case_id": "contact_B_obstacle",
+            "role": "obstacle",
+            "physical_outcome": "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "contact_steps": 1,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 67,
+            "valid_zero_steps": 149,
+            "attributed_steps": 1,
+            "max_force_n": 0.005064396187663078,
+            "max_impulse_ns": null,
+            "event_duration_steps": 1,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 158,
+          "GEOMETRY_OVERLAP_ONLY": 140,
+          "CONTACT_EVENT_ONLY": 2
+        },
+        "total_steps": 300,
+        "contact_event_steps": 2,
+        "unknown_steps": 0,
+        "geometry_only_steps": 134,
+        "valid_zero_steps": 298,
+        "force_measured_steps": 0,
+        "attributed_steps": 2,
+        "attribution_ratio": 0.006666666666666667,
+        "max_force_n": 0.005064396187663078,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 1
+      },
+      "contact_C_clearance": {
+        "episodes": [
+          {
+            "episode_id": "contact_C_clearance-r0-contact_C_clearance",
+            "case_id": "contact_C_clearance",
+            "role": "clearance",
+            "physical_outcome": "NO_CONTACT",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_C_clearance-r1-contact_C_clearance",
+            "case_id": "contact_C_clearance",
+            "role": "clearance",
+            "physical_outcome": "NO_CONTACT",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "NO_CONTACT": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 400
+        },
+        "total_steps": 400,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 0,
+        "valid_zero_steps": 400,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 0.0,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      },
+      "contact_D_geometry": {
+        "episodes": [
+          {
+            "episode_id": "contact_D_geometry-r0-contact_D_geometry",
+            "case_id": "contact_D_geometry",
+            "role": "geometry",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 5,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_D_geometry-r1-contact_D_geometry",
+            "case_id": "contact_D_geometry",
+            "role": "geometry",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 5,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "GEOMETRY_OVERLAP_ONLY": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 374,
+          "GEOMETRY_OVERLAP_ONLY": 26
+        },
+        "total_steps": 400,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 10,
+        "valid_zero_steps": 400,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 0.0,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      },
+      "replay_contact_inferred": {
+        "episodes": [
+          {
+            "episode_id": "boundary_B_cross_late_r0-r0-replay_contact_inferred",
+            "case_id": "boundary_B_cross_late_r0",
+            "role": "replay",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 7,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 1.1455614234989753e-08,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": "MISS"
+          },
+          {
+            "episode_id": "boundary_C_headon_collide_r0-r1-replay_contact_inferred",
+            "case_id": "boundary_C_headon_collide_r0",
+            "role": "replay",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 40,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": "MISS"
+          }
+        ],
+        "physical_outcome_counts": {
+          "GEOMETRY_OVERLAP_ONLY": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 345,
+          "GEOMETRY_OVERLAP_ONLY": 55
+        },
+        "total_steps": 400,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 47,
+        "valid_zero_steps": 400,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 1.1455614234989753e-08,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      },
+      "replay_no_contact": {
+        "episodes": [
+          {
+            "episode_id": "boundary_A_static_offpath_r0-r0-replay_no_contact",
+            "case_id": "boundary_A_static_offpath_r0",
+            "role": "replay",
+            "physical_outcome": "NO_CONTACT",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": "CONSISTENT"
+          }
+        ],
+        "physical_outcome_counts": {
+          "NO_CONTACT": 1
+        },
+        "classification_counts": {
+          "NO_CONTACT": 200
+        },
+        "total_steps": 200,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 0,
+        "valid_zero_steps": 200,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 0.0,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      }
+    },
+    "segments": {
+      "contact_A_wall": {
+        "role": "wall",
+        "episode_count": 2,
+        "cases": [
+          "contact_A_wall",
+          "contact_A_wall"
+        ],
+        "replay_verdicts": [
+          null,
+          null
+        ]
+      },
+      "contact_B_obstacle": {
+        "role": "obstacle",
+        "episode_count": 2,
+        "cases": [
+          "contact_B_obstacle",
+          "contact_B_obstacle"
+        ],
+        "replay_verdicts": [
+          null,
+          null
+        ]
+      },
+      "contact_C_clearance": {
+        "role": "clearance",
+        "episode_count": 2,
+        "cases": [
+          "contact_C_clearance",
+          "contact_C_clearance"
+        ],
+        "replay_verdicts": [
+          null,
+          null
+        ]
+      },
+      "contact_D_geometry": {
+        "role": "geometry",
+        "episode_count": 2,
+        "cases": [
+          "contact_D_geometry",
+          "contact_D_geometry"
+        ],
+        "replay_verdicts": [
+          null,
+          null
+        ]
+      },
+      "replay_contact_inferred": {
+        "role": "replay",
+        "episode_count": 2,
+        "cases": [
+          "boundary_B_cross_late_r0",
+          "boundary_C_headon_collide_r0"
+        ],
+        "replay_verdicts": [
+          "MISS",
+          "MISS"
+        ]
+      },
+      "replay_no_contact": {
+        "role": "replay",
+        "episode_count": 1,
+        "cases": [
+          "boundary_A_static_offpath_r0"
+        ],
+        "replay_verdicts": [
+          "CONSISTENT"
+        ]
+      }
+    }
+  },
+  "segments": {
+    "contact_A_wall": {
+      "role": "wall",
+      "episode_count": 2,
+      "case_ids": [
+        "contact_A_wall",
+        "contact_A_wall"
+      ],
+      "run_dir": "outputs\\map_eval\\contact_A_wall",
+      "performance": {
+        "episodes": [
+          {
+            "episode_id": "contact_A_wall-r0-contact_A_wall",
+            "case_id": "contact_A_wall",
+            "role": "wall",
+            "physical_outcome": "CONTACT_FORCE_MEASURED",
+            "contact_steps": 4,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 126,
+            "attributed_steps": 4,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 2,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_A_wall-r1-contact_A_wall",
+            "case_id": "contact_A_wall",
+            "role": "wall",
+            "physical_outcome": "CONTACT_FORCE_MEASURED",
+            "contact_steps": 7,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 126,
+            "attributed_steps": 7,
+            "max_force_n": 0.018937967717647552,
+            "max_impulse_ns": null,
+            "event_duration_steps": 4,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "CONTACT_FORCE_MEASURED": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 252,
+          "CONTACT_EVENT_ONLY": 11
+        },
+        "total_steps": 263,
+        "contact_event_steps": 11,
+        "unknown_steps": 0,
+        "geometry_only_steps": 0,
+        "valid_zero_steps": 252,
+        "force_measured_steps": 0,
+        "attributed_steps": 11,
+        "attribution_ratio": 0.04182509505703422,
+        "max_force_n": 0.018937967717647552,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 4
+      }
+    },
+    "contact_B_obstacle": {
+      "role": "obstacle",
+      "episode_count": 2,
+      "case_ids": [
+        "contact_B_obstacle",
+        "contact_B_obstacle"
+      ],
+      "run_dir": "outputs\\map_eval\\contact_B_obstacle",
+      "performance": {
+        "episodes": [
+          {
+            "episode_id": "contact_B_obstacle-r0-contact_B_obstacle",
+            "case_id": "contact_B_obstacle",
+            "role": "obstacle",
+            "physical_outcome": "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "contact_steps": 1,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 67,
+            "valid_zero_steps": 149,
+            "attributed_steps": 1,
+            "max_force_n": 0.005064396187663078,
+            "max_impulse_ns": null,
+            "event_duration_steps": 1,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_B_obstacle-r1-contact_B_obstacle",
+            "case_id": "contact_B_obstacle",
+            "role": "obstacle",
+            "physical_outcome": "CONTACT_FORCE_MEASURED_UNATTRIBUTED",
+            "contact_steps": 1,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 67,
+            "valid_zero_steps": 149,
+            "attributed_steps": 1,
+            "max_force_n": 0.005064396187663078,
+            "max_impulse_ns": null,
+            "event_duration_steps": 1,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "CONTACT_FORCE_MEASURED_UNATTRIBUTED": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 158,
+          "GEOMETRY_OVERLAP_ONLY": 140,
+          "CONTACT_EVENT_ONLY": 2
+        },
+        "total_steps": 300,
+        "contact_event_steps": 2,
+        "unknown_steps": 0,
+        "geometry_only_steps": 134,
+        "valid_zero_steps": 298,
+        "force_measured_steps": 0,
+        "attributed_steps": 2,
+        "attribution_ratio": 0.006666666666666667,
+        "max_force_n": 0.005064396187663078,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 1
+      }
+    },
+    "contact_C_clearance": {
+      "role": "clearance",
+      "episode_count": 2,
+      "case_ids": [
+        "contact_C_clearance",
+        "contact_C_clearance"
+      ],
+      "run_dir": "outputs\\map_eval\\contact_C_clearance",
+      "performance": {
+        "episodes": [
+          {
+            "episode_id": "contact_C_clearance-r0-contact_C_clearance",
+            "case_id": "contact_C_clearance",
+            "role": "clearance",
+            "physical_outcome": "NO_CONTACT",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_C_clearance-r1-contact_C_clearance",
+            "case_id": "contact_C_clearance",
+            "role": "clearance",
+            "physical_outcome": "NO_CONTACT",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "NO_CONTACT": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 400
+        },
+        "total_steps": 400,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 0,
+        "valid_zero_steps": 400,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 0.0,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      }
+    },
+    "contact_D_geometry": {
+      "role": "geometry",
+      "episode_count": 2,
+      "case_ids": [
+        "contact_D_geometry",
+        "contact_D_geometry"
+      ],
+      "run_dir": "outputs\\map_eval\\contact_D_geometry",
+      "performance": {
+        "episodes": [
+          {
+            "episode_id": "contact_D_geometry-r0-contact_D_geometry",
+            "case_id": "contact_D_geometry",
+            "role": "geometry",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 5,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          },
+          {
+            "episode_id": "contact_D_geometry-r1-contact_D_geometry",
+            "case_id": "contact_D_geometry",
+            "role": "geometry",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 5,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": null
+          }
+        ],
+        "physical_outcome_counts": {
+          "GEOMETRY_OVERLAP_ONLY": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 374,
+          "GEOMETRY_OVERLAP_ONLY": 26
+        },
+        "total_steps": 400,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 10,
+        "valid_zero_steps": 400,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 0.0,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      }
+    },
+    "replay_contact_inferred": {
+      "role": "replay",
+      "episode_count": 2,
+      "case_ids": [
+        "boundary_B_cross_late_r0",
+        "boundary_C_headon_collide_r0"
+      ],
+      "run_dir": "outputs\\map_eval\\replay_contact_inferred",
+      "performance": {
+        "episodes": [
+          {
+            "episode_id": "boundary_B_cross_late_r0-r0-replay_contact_inferred",
+            "case_id": "boundary_B_cross_late_r0",
+            "role": "replay",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 7,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 1.1455614234989753e-08,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": "MISS"
+          },
+          {
+            "episode_id": "boundary_C_headon_collide_r0-r1-replay_contact_inferred",
+            "case_id": "boundary_C_headon_collide_r0",
+            "role": "replay",
+            "physical_outcome": "GEOMETRY_OVERLAP_ONLY",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 40,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": "MISS"
+          }
+        ],
+        "physical_outcome_counts": {
+          "GEOMETRY_OVERLAP_ONLY": 2
+        },
+        "classification_counts": {
+          "NO_CONTACT": 345,
+          "GEOMETRY_OVERLAP_ONLY": 55
+        },
+        "total_steps": 400,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 47,
+        "valid_zero_steps": 400,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 1.1455614234989753e-08,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      }
+    },
+    "replay_no_contact": {
+      "role": "replay",
+      "episode_count": 1,
+      "case_ids": [
+        "boundary_A_static_offpath_r0"
+      ],
+      "run_dir": "outputs\\map_eval\\replay_no_contact",
+      "performance": {
+        "episodes": [
+          {
+            "episode_id": "boundary_A_static_offpath_r0-r0-replay_no_contact",
+            "case_id": "boundary_A_static_offpath_r0",
+            "role": "replay",
+            "physical_outcome": "NO_CONTACT",
+            "contact_steps": 0,
+            "force_measured_steps": 0,
+            "unknown_steps": 0,
+            "geometry_only_steps": 0,
+            "valid_zero_steps": 200,
+            "attributed_steps": 0,
+            "max_force_n": 0.0,
+            "max_impulse_ns": null,
+            "event_duration_steps": 0,
+            "replay_verdict": "CONSISTENT"
+          }
+        ],
+        "physical_outcome_counts": {
+          "NO_CONTACT": 1
+        },
+        "classification_counts": {
+          "NO_CONTACT": 200
+        },
+        "total_steps": 200,
+        "contact_event_steps": 0,
+        "unknown_steps": 0,
+        "geometry_only_steps": 0,
+        "valid_zero_steps": 200,
+        "force_measured_steps": 0,
+        "attributed_steps": 0,
+        "attribution_ratio": 0.0,
+        "max_force_n": 0.0,
+        "max_impulse_ns": null,
+        "max_event_duration_steps": 0
+      }
+    }
+  },
+  "lineage": {
+    "path": "configs\\scenarios\\contact_verification_freeze_v2.json",
+    "sha256": "184beecc779d768964fa7412724502ac9e342ad0ef68a8101aed00ac543f6fba",
+    "schema_version": "boom_birds.contact_verification_freeze.v1",
+    "status": "PRE_RUN_FROZEN",
+    "frozen_at": "2026-11-02T12:51:49.006419+00:00",
+    "code_commit": "c50de1ff1ce3225f69e7c5536a13d7500095263a",
+    "expected_file": "configs/scenarios/contact_verification_expected_v1.json",
+    "expected_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187",
+    "cases_file": "configs/scenarios/contact_verification_cases_v1.json",
+    "cases_sha256": "b337a18a37e9a4854ae7ed624d85eead6471b69947f1b6e8db8342d3b971979c",
+    "segments": {
+      "contact_A_wall": {
+        "role": "wall",
+        "case_ids": [
+          "contact_A_wall"
+        ]
+      },
+      "contact_B_obstacle": {
+        "role": "obstacle",
+        "case_ids": [
+          "contact_B_obstacle"
+        ]
+      },
+      "contact_C_clearance": {
+        "role": "clearance",
+        "case_ids": [
+          "contact_C_clearance"
+        ]
+      },
+      "contact_D_geometry": {
+        "role": "geometry",
+        "case_ids": [
+          "contact_D_geometry"
+        ]
+      },
+      "replay_contact_inferred": {
+        "role": "replay",
+        "case_ids": [
+          "boundary_B_cross_late_r0",
+          "boundary_C_headon_collide_r0"
+        ]
+      },
+      "replay_no_contact": {
+        "role": "replay",
+        "case_ids": [
+          "boundary_A_static_offpath_r0"
+        ]
+      }
+    },
+    "expected_path": "configs\\scenarios\\contact_verification_expected_v1.json",
+    "expected_file_sha256": "3b71936851d117fcfd6fb88c37b8a1073bf54f236e2207dd38490d1533b4b187"
+  },
+  "run_dirs": {
+    "contact_A_wall": "outputs\\map_eval\\contact_A_wall",
+    "contact_B_obstacle": "outputs\\map_eval\\contact_B_obstacle",
+    "contact_C_clearance": "outputs\\map_eval\\contact_C_clearance",
+    "contact_D_geometry": "outputs\\map_eval\\contact_D_geometry",
+    "replay_contact_inferred": "outputs\\map_eval\\replay_contact_inferred",
+    "replay_no_contact": "outputs\\map_eval\\replay_no_contact"
+  }
+}

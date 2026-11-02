@@ -1,0 +1,287 @@
+{
+  "test": "obstacle",
+  "obstacle": {
+    "min_distance_m": 0.25298918062537423,
+    "min_distance_step": 58,
+    "inventory": [
+      {
+        "path": "/World/envs/env_0/Obstacle",
+        "collision": false,
+        "rigid_body": true,
+        "contact_report": true,
+        "type": "Xform"
+      },
+      {
+        "path": "/World/envs/env_0/Obstacle/geometry/mesh",
+        "collision": true,
+        "rigid_body": false,
+        "contact_report": false,
+        "type": "Cube"
+      }
+    ],
+    "applied_reporters": [
+      "/World/envs/env_0/Obstacle/geometry/mesh"
+    ],
+    "root_has_reporter": true,
+    "links": [
+      "/World/envs/env_0/Robot/body",
+      "/World/envs/env_0/Robot/m1_prop",
+      "/World/envs/env_0/Robot/m2_prop",
+      "/World/envs/env_0/Robot/m3_prop",
+      "/World/envs/env_0/Robot/m4_prop"
+    ],
+    "variants": {
+      "unfiltered@body": {
+        "shape": null,
+        "initial_max": null
+      },
+      "unfiltered@m1_prop": {
+        "shape": null,
+        "initial_max": null
+      },
+      "unfiltered@m2_prop": {
+        "shape": null,
+        "initial_max": null
+      },
+      "unfiltered@m3_prop": {
+        "shape": null,
+        "initial_max": null
+      },
+      "unfiltered@m4_prop": {
+        "shape": null,
+        "initial_max": null
+      },
+      "root@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "root@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "mesh@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@body": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m1_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m2_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m3_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      },
+      "geometry@m4_prop": {
+        "shape": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "initial_max": 0.0
+      }
+    },
+    "errors": [],
+    "first_contact": null,
+    "samples": [
+      {
+        "step": 20,
+        "obstacle_x": 1.0,
+        "robot": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "distance_m": 1.0,
+        "net_max": 0.0,
+        "shapes": {
+          "unfiltered@body": null,
+          "unfiltered@m1_prop": null
+        }
+      },
+      {
+        "step": 40,
+        "obstacle_x": 0.6,
+        "robot": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "distance_m": 0.6,
+        "net_max": 0.0,
+        "shapes": {
+          "unfiltered@body": null,
+          "unfiltered@m1_prop": null
+        }
+      },
+      {
+        "step": 60,
+        "obstacle_x": 0.2,
+        "robot": [
+          -0.083,
+          -0.005,
+          0.999
+        ],
+        "distance_m": 0.283,
+        "net_max": 0.0,
+        "shapes": {
+          "unfiltered@body": null,
+          "unfiltered@m1_prop": null
+        }
+      },
+      {
+        "step": 80,
+        "obstacle_x": -0.2,
+        "robot": [
+          -0.552,
+          0.002,
+          0.99
+        ],
+        "distance_m": 0.352,
+        "net_max": 0.0,
+        "shapes": {
+          "unfiltered@body": null,
+          "unfiltered@m1_prop": null
+        }
+      },
+      {
+        "step": 100,
+        "obstacle_x": -0.6,
+        "robot": [
+          -0.852,
+          -0.223,
+          0.953
+        ],
+        "distance_m": 0.34,
+        "net_max": 0.0,
+        "shapes": {
+          "unfiltered@body": null,
+          "unfiltered@m1_prop": null
+        }
+      },
+      {
+        "step": 120,
+        "obstacle_x": -1.0,
+        "robot": [
+          -0.432,
+          -1.531,
+          0.929
+        ],
+        "distance_m": 1.635,
+        "net_max": 0.0,
+        "shapes": {
+          "unfiltered@body": null,
+          "unfiltered@m1_prop": null
+        }
+      }
+    ],
+    "any_nonzero": false
+  },
+  "wall": {}
+}

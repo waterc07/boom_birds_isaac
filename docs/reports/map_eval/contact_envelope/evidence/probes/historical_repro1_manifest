@@ -1,0 +1,23 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "code_commit": "WORKTREE",
+  "working_tree": "recorded by the operator",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NOT RECORDED",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+  "methods": [
+    "follow_only"
+  ],
+  "command": "tmp\\run_dynamic_92757f0.py --only-cases dynamic_C_south_0 --methods follow_only --kit_args=--/app/vulkan=false --device cuda:0 --output tmp\\historical_repro1",
+  "started_at": "2026-11-02T20:15:11.707761+08:00",
+  "outputs_sha256": {
+    "summary.json": "6c0ac2155cfddd370aa4dcb3d1ade2a87eeed5ae06e8b1f6a5258af22589200d",
+    "episodes.jsonl": "29cb17250e15faebacbb1a8fabb10a8710aa2f8f4370dea3394c0462a4dbeffe",
+    "steps.jsonl": "3515f7974eaf6b2323469740839f4b49a277d582a29c8ca35ba64712535f5d94"
+  }
+}

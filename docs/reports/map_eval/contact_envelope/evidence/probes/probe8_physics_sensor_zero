@@ -1,0 +1,145 @@
+{
+  "robot_colliders": [
+    "/World/envs/env_0/Robot/body/body_collision/geometry"
+  ],
+  "obstacle_colliders": [
+    "/World/envs/env_0/Obstacle/geometry/mesh"
+  ],
+  "sensor_paths": [
+    "/World/envs/env_0/Robot/body/body_collision/geometry",
+    "/World/envs/env_0/Obstacle/geometry/mesh"
+  ],
+  "sensor_errors": [],
+  "phase1": {
+    "first": null,
+    "samples": [
+      {
+        "step": 25,
+        "robot": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 50,
+        "robot": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 75,
+        "robot": [
+          -0.539,
+          0.002,
+          0.991
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 100,
+        "robot": [
+          -0.852,
+          -0.223,
+          0.953
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 125,
+        "robot": [
+          -0.359,
+          -1.655,
+          0.933
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 150,
+        "robot": [
+          -0.317,
+          -1.611,
+          0.955
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      }
+    ],
+    "any_nonzero": false
+  },
+  "phase2": {
+    "first": null,
+    "samples": [
+      {
+        "step": 25,
+        "robot": [
+          -1.507,
+          0.083,
+          1.018
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 50,
+        "robot": [
+          -0.699,
+          0.183,
+          1.033
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 75,
+        "robot": [
+          -0.124,
+          0.288,
+          1.058
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 100,
+        "robot": [
+          0.642,
+          0.212,
+          1.059
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 125,
+        "robot": [
+          1.475,
+          0.214,
+          1.059
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      },
+      {
+        "step": 150,
+        "robot": [
+          2.286,
+          0.236,
+          1.059
+        ],
+        "in_contact_any": false,
+        "max_force": 0.0
+      }
+    ],
+    "any_nonzero": false
+  }
+}
