@@ -1,0 +1,1468 @@
+{
+  "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+  "status": "PRE_RUN_FROZEN",
+  "scope": "CURRENT_SIM_MODEL_ONLY",
+  "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+  "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808",
+  "worktree_state": {
+    "tracked_paths": [
+      "src",
+      "scripts",
+      "tests",
+      "configs"
+    ],
+    "status_text_sha256": "97efcb90216963a54717f6aebccd7ea20173c37a11d1a220410eb87b958e4cbc",
+    "clean": false
+  },
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "clearance_schema_version": "boom_birds.clearance.v1",
+  "stop_requirement_schema_version": "boom_birds.stop_requirement.v1",
+  "brake_model_file": "configs/scenarios/brake_model_v1.json",
+  "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+  "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+  "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+  "cases": [
+    {
+      "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6"
+    },
+    {
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032"
+    },
+    {
+      "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+      "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0"
+    },
+    {
+      "cases_file": "configs/scenarios/map_v2_fault_cases_v1.json",
+      "cases_sha256": "8bc87423d0d93cb54af48c8f79bd5b1048c94260ae92016d852d2c0762431e2d"
+    },
+    {
+      "cases_file": "configs/scenarios/map_v2_regression_cases_v1.json",
+      "cases_sha256": "cb13e8be0ebf03a307456f7e56ef206aedc764caca8f11f34ff1f6c3d5a4603c"
+    }
+  ],
+  "segments": {
+    "boundary_default": {
+      "segment_id": "boundary_default",
+      "role": "boundary",
+      "purpose": "A/B/C 边界场景 9 场景 × r0/r1 = 18 episode（A/B/C 三类静态/横穿/迎面，默认 obs 150/action 100 ms）",
+      "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "case_ids": [
+        "boundary_A_static_far_r0",
+        "boundary_A_static_far_r1",
+        "boundary_A_static_offpath_r0",
+        "boundary_A_static_offpath_r1",
+        "boundary_A_static_tight_r0",
+        "boundary_A_static_tight_r1",
+        "boundary_B_cross_early_r0",
+        "boundary_B_cross_early_r1",
+        "boundary_B_cross_far_r0",
+        "boundary_B_cross_far_r1",
+        "boundary_B_cross_late_r0",
+        "boundary_B_cross_late_r1",
+        "boundary_C_headon_collide_r0",
+        "boundary_C_headon_collide_r1",
+        "boundary_C_headon_early_r0",
+        "boundary_C_headon_early_r1",
+        "boundary_C_headon_stop_short_r0",
+        "boundary_C_headon_stop_short_r1"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "boundary_default",
+        "role": "boundary",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+        "case_ids": [
+          "boundary_A_static_far_r0",
+          "boundary_A_static_far_r1",
+          "boundary_A_static_offpath_r0",
+          "boundary_A_static_offpath_r1",
+          "boundary_A_static_tight_r0",
+          "boundary_A_static_tight_r1",
+          "boundary_B_cross_early_r0",
+          "boundary_B_cross_early_r1",
+          "boundary_B_cross_far_r0",
+          "boundary_B_cross_far_r1",
+          "boundary_B_cross_late_r0",
+          "boundary_B_cross_late_r1",
+          "boundary_C_headon_collide_r0",
+          "boundary_C_headon_collide_r1",
+          "boundary_C_headon_early_r0",
+          "boundary_C_headon_early_r1",
+          "boundary_C_headon_stop_short_r0",
+          "boundary_C_headon_stop_short_r1"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_A_static_far_r0",
+          "boundary_A_static_far_r1",
+          "boundary_A_static_offpath_r0",
+          "boundary_A_static_offpath_r1",
+          "boundary_A_static_tight_r0",
+          "boundary_A_static_tight_r1",
+          "boundary_B_cross_early_r0",
+          "boundary_B_cross_early_r1",
+          "boundary_B_cross_far_r0",
+          "boundary_B_cross_far_r1",
+          "boundary_B_cross_late_r0",
+          "boundary_B_cross_late_r1",
+          "boundary_C_headon_collide_r0",
+          "boundary_C_headon_collide_r1",
+          "boundary_C_headon_early_r0",
+          "boundary_C_headon_early_r1",
+          "boundary_C_headon_stop_short_r0",
+          "boundary_C_headon_stop_short_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "A/B/C 边界场景 9 场景 × r0/r1 = 18 episode（A/B/C 三类静态/横穿/迎面，默认 obs 150/action 100 ms）",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "boundary_delay_e1": {
+      "segment_id": "boundary_delay_e1",
+      "role": "boundary",
+      "purpose": "延迟·间隙不足（E1）：obs 200 ms/action 100 ms，2 episode",
+      "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "case_ids": [
+        "boundary_E_delay_insufficient_r0",
+        "boundary_E_delay_insufficient_r1"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "boundary_delay_e1",
+        "role": "boundary",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+        "case_ids": [
+          "boundary_E_delay_insufficient_r0",
+          "boundary_E_delay_insufficient_r1"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.2,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_E_delay_insufficient_r0",
+          "boundary_E_delay_insufficient_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.2,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "延迟·间隙不足（E1）：obs 200 ms/action 100 ms，2 episode",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "boundary_delay_e2": {
+      "segment_id": "boundary_delay_e2",
+      "role": "boundary",
+      "purpose": "延迟·动作迟到（E2）：obs 180 ms/action 120 ms，2 episode",
+      "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "case_ids": [
+        "boundary_E_action_late_r0",
+        "boundary_E_action_late_r1"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "boundary_delay_e2",
+        "role": "boundary",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+        "case_ids": [
+          "boundary_E_action_late_r0",
+          "boundary_E_action_late_r1"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.18,
+        "action_delay_s": 0.12,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_E_action_late_r0",
+          "boundary_E_action_late_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.18,
+          "action_delay_s": 0.12,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "延迟·动作迟到（E2）：obs 180 ms/action 120 ms，2 episode",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "boundary_fast": {
+      "segment_id": "boundary_fast",
+      "role": "boundary",
+      "purpose": "D 快速段：max_horizontal_mps 0.9（PROPOSED），2 episode",
+      "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "case_ids": [
+        "boundary_D_fast_cross_r0",
+        "boundary_D_fast_cross_r1"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "boundary_fast",
+        "role": "boundary",
+        "vehicle_config": "configs/vehicles/sim_reference_boundary_fast.yaml",
+        "vehicle_config_sha256": "7ca440c4e4c083b3ba6460b405800e3ba6ac16d6937fa85648f7b246d3ccaa5b",
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+        "case_ids": [
+          "boundary_D_fast_cross_r0",
+          "boundary_D_fast_cross_r1"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_D_fast_cross_r0",
+          "boundary_D_fast_cross_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference_boundary_fast.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "D 快速段：max_horizontal_mps 0.9（PROPOSED），2 episode",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "latency_clock_mapping_recheck": {
+      "segment_id": "latency_clock_mapping_recheck",
+      "role": "special",
+      "purpose": "latency_clock_mapping_recheck：同上一轮 clock_mapping 重跑，可接受路径预先冻结（含优先级），不得事后扩展",
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "case_ids": [
+        "special_stop_north"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "latency_clock_mapping_recheck",
+        "role": "special",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": 280,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": {
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": 280,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "latency_clock_mapping_recheck：同上一轮 clock_mapping 重跑，可接受路径预先冻结（含优先级），不得事后扩展",
+        "note": "旧证据（outputs/map_eval/latency_clock_mapping）只作对照；本段按预声明路径集合重跑后才可作为本轮场景预期证据。",
+        "cases": {
+          "special_stop_north": {
+            "acceptable_outcomes": [
+              "ABORT",
+              "TIMEOUT"
+            ],
+            "must_conditions": [],
+            "unsupported_allowed": false,
+            "repeats": 1,
+            "design": "同上一轮 clock_mapping：相机时钟映射失效，观测 reason=CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT；obs_mapping_fail_step=280",
+            "performance_note": "记录实际命中路径（含优先级）与 admission/observation/supervisor reason；命中集合外路径即偏差，不得判 PASS。"
+          }
+        },
+        "acceptable_paths": [
+          {
+            "priority": 1,
+            "path_id": "admission_reject_stale_observation",
+            "admission_reject_reason": "REJECT_STALE_OBSERVATION",
+            "observation_reason": "CLOCK_MAPPING_UNUSABLE",
+            "supervisor_state": "DEGRADED_ABORT",
+            "note": "主路径：admission 先拒绝 REJECT_STALE_OBSERVATION，观测 reason=CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT。"
+          },
+          {
+            "priority": 2,
+            "path_id": "supervisor_observation_stale",
+            "supervisor_reason": "OBSERVATION_STALE",
+            "episode_reason": "OBSERVATION_STALE",
+            "note": "备选路径：supervisor 直接 OBSERVATION_STALE abort。"
+          }
+        ],
+        "must_hit_declared_path": true,
+        "freeze_rule": "运行前冻结、不得事后扩展：实际命中路径必须是上面集合之一（记录命中路径与优先级）；不得新增/合并 reason 别名，不得在运行后扩展可接受集合。"
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "latency_ttl_over_recheck": {
+      "segment_id": "latency_ttl_over_recheck",
+      "role": "special",
+      "purpose": "latency_ttl_over_recheck：同上一轮 ttl_over（stall 0.15 s），按预声明 (c) 判据核验拒绝语义",
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "case_ids": [
+        "special_stop_north"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "latency_ttl_over_recheck",
+        "role": "special",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": 300,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": {
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": 300,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "latency_ttl_over_recheck：同上一轮 ttl_over（stall 0.15 s），按预声明 (c) 判据核验拒绝语义",
+        "note": "业务结果 TIMEOUT/ABORT 之一即可；拒绝语义本身是预期，不能用业务结果替代拒绝判据。",
+        "cases": {
+          "special_stop_north": {
+            "acceptable_outcomes": [
+              "ABORT",
+              "TIMEOUT"
+            ],
+            "must_conditions": [],
+            "unsupported_allowed": false,
+            "repeats": 1,
+            "design": "同上一轮 ttl_over：stall 0.15 s 后制动命令到达年龄 150 ms >= TTL 150 ms，按 (c) 判据核验拒绝语义；transport_stall_step=300",
+            "performance_note": "被拒动作 id 与已执行 id 集合无交集；首次拒绝前旧有效 setpoint；到期→NONE、零目标回退；业务结果 ABORT/TIMEOUT 之一。"
+          }
+        },
+        "criteria_id": "(c)",
+        "criteria": {
+          "rejected_before_executed": true,
+          "rejected_action_not_executed": true,
+          "old_valid_setpoint_before_first_reject": true,
+          "expiry_to_none": true,
+          "zero_target_fallback": true,
+          "business_outcomes": [
+            "ABORT",
+            "TIMEOUT"
+          ]
+        },
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "freeze_rule": "运行前冻结、不得事后扩展：(c) 判据在运行前声明，运行后不得放宽或替换判据。"
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "regression_dynamic": {
+      "segment_id": "regression_dynamic",
+      "role": "regression",
+      "purpose": "动态 A 类路线默认参数回归",
+      "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+      "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+      "case_ids": [
+        "dynamic_A_south_0"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "regression_dynamic",
+        "role": "regression",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+        "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+        "case_ids": [
+          "dynamic_A_south_0"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.0,
+        "action_delay_s": 0.0,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 250,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 0.0,
+        "clock_offset_ms": 0.0,
+        "clock_drift_ppm": 0.0,
+        "clock_uncertainty_ms": 0.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": null,
+      "expected_note": "regression 段按 U3 契约不写预冻结分类预期，对照既有证据"
+    },
+    "regression_no_obstacle": {
+      "segment_id": "regression_no_obstacle",
+      "role": "regression",
+      "purpose": "无障碍路线默认参数回归",
+      "cases_file": "configs/scenarios/map_v2_regression_cases_v1.json",
+      "cases_sha256": "cb13e8be0ebf03a307456f7e56ef206aedc764caca8f11f34ff1f6c3d5a4603c",
+      "case_ids": [
+        "v2_reg_route_south_R1"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "regression_no_obstacle",
+        "role": "regression",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/map_v2_regression_cases_v1.json",
+        "cases_sha256": "cb13e8be0ebf03a307456f7e56ef206aedc764caca8f11f34ff1f6c3d5a4603c",
+        "case_ids": [
+          "v2_reg_route_south_R1"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.0,
+        "action_delay_s": 0.0,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 250,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 0.0,
+        "clock_offset_ms": 0.0,
+        "clock_drift_ppm": 0.0,
+        "clock_uncertainty_ms": 0.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": null,
+      "expected_note": "regression 段按 U3 契约不写预冻结分类预期，对照既有证据"
+    },
+    "regression_fault": {
+      "segment_id": "regression_fault",
+      "role": "regression",
+      "purpose": "fault_ttl_expiry_0 默认参数回归",
+      "cases_file": "configs/scenarios/map_v2_fault_cases_v1.json",
+      "cases_sha256": "8bc87423d0d93cb54af48c8f79bd5b1048c94260ae92016d852d2c0762431e2d",
+      "case_ids": [
+        "fault_ttl_expiry_0"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "run_plan": {
+        "segment_id": "regression_fault",
+        "role": "regression",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "cases_file": "configs/scenarios/map_v2_fault_cases_v1.json",
+        "cases_sha256": "8bc87423d0d93cb54af48c8f79bd5b1048c94260ae92016d852d2c0762431e2d",
+        "case_ids": [
+          "fault_ttl_expiry_0"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.0,
+        "action_delay_s": 0.0,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 250,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 0.0,
+        "clock_offset_ms": 0.0,
+        "clock_drift_ppm": 0.0,
+        "clock_uncertainty_ms": 0.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15,
+        "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+        "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+        "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+        "clearance_schema_version": "boom_birds.clearance.v1",
+        "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+      },
+      "expected": null,
+      "expected_note": "regression 段按 U3 契约不写预冻结分类预期，对照既有证据"
+    }
+  },
+  "expected": {
+    "schema_version": "boom_birds.clearance_boundary_expected.v1",
+    "status": "EXPECTED_NOT_CONCLUSION",
+    "note": "预期非结论：本文件与冻结文件中的分类都是运行前的预期，实际结论以 scripts/verify_clearance_boundary_runs.py 从原始 steps/episodes/manifest 重算为准；实际结果与本预期不一致时，如实记录 FAIL/INCOMPLETE 或偏差，不得改写本文件、不得事后扩展可接受集合/路径/判据。",
+    "freeze_rule": "运行前冻结、不得事后扩展：可接受结果集合、clock_mapping 可接受路径（含优先级）与 ttl_over (c) 判据都必须在本文件冻结时声明；运行后修改本文件或放宽集合必须新建冻结版本并重跑受影响段。",
+    "cases": {
+      "boundary_A_static_far_r0": {
+        "scenario_class": "BLOCKED_EXIT",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "静态阻塞·早触发：长航段走廊，障碍在路径上，远距离即触发 STOP，margin 大，等待后退出",
+        "performance_note": "记录触发时实测速度/剩余距离、min_path_clearance_gap_sphere_m、stop_requirement 最小 margin 与 ABORT/TIMEOUT 原因；预期 margin 大且无接触。"
+      },
+      "boundary_A_static_far_r1": {
+        "scenario_class": "BLOCKED_EXIT",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "静态阻塞·早触发：长航段走廊，障碍在路径上，远距离即触发 STOP，margin 大，等待后退出",
+        "performance_note": "记录触发时实测速度/剩余距离、min_path_clearance_gap_sphere_m、stop_requirement 最小 margin 与 ABORT/TIMEOUT 原因；预期 margin 大且无接触。"
+      },
+      "boundary_A_static_tight_r0": {
+        "scenario_class": "BLOCKED_EXIT_TIGHT",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "静态阻塞·紧触发：短航段（~1 m 间距）使触发发生在阈值附近（v≈0.6），margin 小，等待后退出",
+        "performance_note": "记录触发速度与阈值附近的最小 margin、是否出现 UNSUPPORTED/INSUFFICIENT；预期无接触但 margin 明显小于 far 场景。"
+      },
+      "boundary_A_static_tight_r1": {
+        "scenario_class": "BLOCKED_EXIT_TIGHT",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "静态阻塞·紧触发：短航段（~1 m 间距）使触发发生在阈值附近（v≈0.6），margin 小，等待后退出",
+        "performance_note": "记录触发速度与阈值附近的最小 margin、是否出现 UNSUPPORTED/INSUFFICIENT；预期无接触但 margin 明显小于 far 场景。"
+      },
+      "boundary_A_static_offpath_r0": {
+        "scenario_class": "NO_STOP_EXPECTED",
+        "acceptable_outcomes": [
+          "SUCCESS"
+        ],
+        "must_conditions": [
+          "no_stop",
+          "no_contact",
+          {
+            "kind": "min_path_clearance_at_least_m",
+            "value": 1.1
+          }
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "静态·路径旁：障碍偏离走廊 1.5 m，路径净空>阈值，不触发停车",
+        "performance_note": "记录 min_path_clearance_m 仍大于 stop 阈值；预期不触发 STOP 且到达成功。"
+      },
+      "boundary_A_static_offpath_r1": {
+        "scenario_class": "NO_STOP_EXPECTED",
+        "acceptable_outcomes": [
+          "SUCCESS"
+        ],
+        "must_conditions": [
+          "no_stop",
+          "no_contact",
+          {
+            "kind": "min_path_clearance_at_least_m",
+            "value": 1.1
+          }
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "静态·路径旁：障碍偏离走廊 1.5 m，路径净空>阈值，不触发停车",
+        "performance_note": "记录 min_path_clearance_m 仍大于 stop 阈值；预期不触发 STOP 且到达成功。"
+      },
+      "boundary_B_cross_early_r0": {
+        "scenario_class": "STOP_WAIT_RESUME",
+        "acceptable_outcomes": [
+          "SUCCESS"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "横穿·早：障碍在机器人到达前 ~1.5–2 s 穿越",
+        "performance_note": "记录 STOP/WAIT/RESUME 状态转换、等待时长与恢复后到达；预期成功且无接触。"
+      },
+      "boundary_B_cross_early_r1": {
+        "scenario_class": "STOP_WAIT_RESUME",
+        "acceptable_outcomes": [
+          "SUCCESS"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "横穿·早：障碍在机器人到达前 ~1.5–2 s 穿越",
+        "performance_note": "记录 STOP/WAIT/RESUME 状态转换、等待时长与恢复后到达；预期成功且无接触。"
+      },
+      "boundary_B_cross_late_r0": {
+        "scenario_class": "INSUFFICIENT_MARGIN",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "横穿·晚：障碍与机器人同时到达交叉点（剩余间隙不足）",
+        "performance_note": "登记物理结果与接触时刻/力；剩余间隙不足时 COLLISION（物理）或 late ABORT/TIMEOUT 均可，但业务结果不得 SUCCESS；停车后观测窗口保留。"
+      },
+      "boundary_B_cross_late_r1": {
+        "scenario_class": "INSUFFICIENT_MARGIN",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "横穿·晚：障碍与机器人同时到达交叉点（剩余间隙不足）",
+        "performance_note": "登记物理结果与接触时刻/力；剩余间隙不足时 COLLISION（物理）或 late ABORT/TIMEOUT 均可，但业务结果不得 SUCCESS；停车后观测窗口保留。"
+      },
+      "boundary_B_cross_far_r0": {
+        "scenario_class": "NO_STOP_EXPECTED",
+        "acceptable_outcomes": [
+          "SUCCESS"
+        ],
+        "must_conditions": [
+          "no_stop",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "横穿·很远：障碍横穿点远在预测/触发之外",
+        "performance_note": "记录路径净空始终大于阈值；预期不触发 STOP 且到达成功。"
+      },
+      "boundary_B_cross_far_r1": {
+        "scenario_class": "NO_STOP_EXPECTED",
+        "acceptable_outcomes": [
+          "SUCCESS"
+        ],
+        "must_conditions": [
+          "no_stop",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "横穿·很远：障碍横穿点远在预测/触发之外",
+        "performance_note": "记录路径净空始终大于阈值；预期不触发 STOP 且到达成功。"
+      },
+      "boundary_C_headon_stop_short_r0": {
+        "scenario_class": "STOP_OBSTACLE_HOLD",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "迎面·障碍停住：障碍沿走廊朝向机器人，停止后机器人停车等待，障碍停在前方",
+        "performance_note": "记录停车后障碍接近量与最终间隙；预期无接触或极小间隙，业务 ABORT/TIMEOUT。"
+      },
+      "boundary_C_headon_stop_short_r1": {
+        "scenario_class": "STOP_OBSTACLE_HOLD",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "迎面·障碍停住：障碍沿走廊朝向机器人，停止后机器人停车等待，障碍停在前方",
+        "performance_note": "记录停车后障碍接近量与最终间隙；预期无接触或极小间隙，业务 ABORT/TIMEOUT。"
+      },
+      "boundary_C_headon_collide_r0": {
+        "scenario_class": "POST_STOP_COLLISION",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "contact_after_business_stop"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "迎面·继续驶来：障碍不停，机器人停车后障碍仍继续接近 → 停车后接触",
+        "performance_note": "接触必须发生在业务停止（停车/HOLD 或 ABORT）之后并单独登记物理结果与接触力；若接触早于业务停止则不符合 POST_STOP_COLLISION。"
+      },
+      "boundary_C_headon_collide_r1": {
+        "scenario_class": "POST_STOP_COLLISION",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "contact_after_business_stop"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "迎面·继续驶来：障碍不停，机器人停车后障碍仍继续接近 → 停车后接触",
+        "performance_note": "接触必须发生在业务停止（停车/HOLD 或 ABORT）之后并单独登记物理结果与接触力；若接触早于业务停止则不符合 POST_STOP_COLLISION。"
+      },
+      "boundary_C_headon_early_r0": {
+        "scenario_class": "BLOCKED_EXIT",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "迎面·远距离：迎面障碍远距离即触发停车，margin 大",
+        "performance_note": "记录触发距离/速度与停车后障碍接近量；预期无接触 ABORT/TIMEOUT。"
+      },
+      "boundary_C_headon_early_r1": {
+        "scenario_class": "BLOCKED_EXIT",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          "no_contact"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "迎面·远距离：迎面障碍远距离即触发停车，margin 大",
+        "performance_note": "记录触发距离/速度与停车后障碍接近量；预期无接触 ABORT/TIMEOUT。"
+      },
+      "boundary_D_fast_cross_r0": {
+        "scenario_class": "HIGH_SPEED_STOP",
+        "acceptable_outcomes": [
+          "SUCCESS",
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          {
+            "kind": "brake_speed_at_least_mps",
+            "value": 0.6
+          }
+        ],
+        "unsupported_allowed": [
+          "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT"
+        ],
+        "repeats": 1,
+        "design": "近最高实测速度：快速车配置（max 0.9），长直走廊，横穿障碍在对向触发时 v≈0.8–0.85",
+        "performance_note": "必须记录实际实测接近速度；若任何时刻 >0.851428 m/s（制动模型支持上界）必须标 UNSUPPORTED 且不得据此宣称安全余量；预期 SUCCESS 或紧触发退出。"
+      },
+      "boundary_D_fast_cross_r1": {
+        "scenario_class": "HIGH_SPEED_STOP",
+        "acceptable_outcomes": [
+          "SUCCESS",
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started",
+          {
+            "kind": "brake_speed_at_least_mps",
+            "value": 0.6
+          }
+        ],
+        "unsupported_allowed": [
+          "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT"
+        ],
+        "repeats": 1,
+        "design": "近最高实测速度：快速车配置（max 0.9），长直走廊，横穿障碍在对向触发时 v≈0.8–0.85",
+        "performance_note": "必须记录实际实测接近速度；若任何时刻 >0.851428 m/s（制动模型支持上界）必须标 UNSUPPORTED 且不得据此宣称安全余量；预期 SUCCESS 或紧触发退出。"
+      },
+      "boundary_E_delay_insufficient_r0": {
+        "scenario_class": "INSUFFICIENT_MARGIN",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "延迟·间隙不足：横穿时机紧 + obs 200 ms/action 100 ms，反应距离超过剩余间隙",
+        "performance_note": "段级 obs 200 ms/action 100 ms；反应距离超过剩余间隙，COLLISION（物理）或 late ABORT 登记物理结果，业务结果不得 SUCCESS。"
+      },
+      "boundary_E_delay_insufficient_r1": {
+        "scenario_class": "INSUFFICIENT_MARGIN",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "延迟·间隙不足：横穿时机紧 + obs 200 ms/action 100 ms，反应距离超过剩余间隙",
+        "performance_note": "段级 obs 200 ms/action 100 ms；反应距离超过剩余间隙，COLLISION（物理）或 late ABORT 登记物理结果，业务结果不得 SUCCESS。"
+      },
+      "boundary_E_action_late_r0": {
+        "scenario_class": "INSUFFICIENT_MARGIN",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "延迟·动作迟到：obs 180 ms/action 120 ms（TTL 150 内到达）紧横穿",
+        "performance_note": "段级 obs 180 ms/action 120 ms；动作仍在 TTL 150 ms 内到达，但迟到导致剩余间隙不足；登记物理结果，业务结果不得 SUCCESS。"
+      },
+      "boundary_E_action_late_r1": {
+        "scenario_class": "INSUFFICIENT_MARGIN",
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "must_conditions": [
+          "stop_started"
+        ],
+        "unsupported_allowed": false,
+        "repeats": 1,
+        "design": "延迟·动作迟到：obs 180 ms/action 120 ms（TTL 150 内到达）紧横穿",
+        "performance_note": "段级 obs 180 ms/action 120 ms；动作仍在 TTL 150 ms 内到达，但迟到导致剩余间隙不足；登记物理结果，业务结果不得 SUCCESS。"
+      }
+    },
+    "segments": {
+      "boundary_default": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_A_static_far_r0",
+          "boundary_A_static_far_r1",
+          "boundary_A_static_offpath_r0",
+          "boundary_A_static_offpath_r1",
+          "boundary_A_static_tight_r0",
+          "boundary_A_static_tight_r1",
+          "boundary_B_cross_early_r0",
+          "boundary_B_cross_early_r1",
+          "boundary_B_cross_far_r0",
+          "boundary_B_cross_far_r1",
+          "boundary_B_cross_late_r0",
+          "boundary_B_cross_late_r1",
+          "boundary_C_headon_collide_r0",
+          "boundary_C_headon_collide_r1",
+          "boundary_C_headon_early_r0",
+          "boundary_C_headon_early_r1",
+          "boundary_C_headon_stop_short_r0",
+          "boundary_C_headon_stop_short_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "A/B/C 边界场景 9 场景 × r0/r1 = 18 episode（A/B/C 三类静态/横穿/迎面，默认 obs 150/action 100 ms）",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "boundary_delay_e1": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_E_delay_insufficient_r0",
+          "boundary_E_delay_insufficient_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.2,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "延迟·间隙不足（E1）：obs 200 ms/action 100 ms，2 episode",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "boundary_delay_e2": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_E_action_late_r0",
+          "boundary_E_action_late_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.18,
+          "action_delay_s": 0.12,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "延迟·动作迟到（E2）：obs 180 ms/action 120 ms，2 episode",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "boundary_fast": {
+        "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+        "case_ids": [
+          "boundary_D_fast_cross_r0",
+          "boundary_D_fast_cross_r1"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference_boundary_fast.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "D 快速段：max_horizontal_mps 0.9（PROPOSED），2 episode",
+        "note": "逐 case 可接受集合见顶层 cases；本段只记录运行参数与段级说明。",
+        "cases": {}
+      },
+      "latency_clock_mapping_recheck": {
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": 280,
+          "transport_stall_step": -1,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "latency_clock_mapping_recheck：同上一轮 clock_mapping 重跑，可接受路径预先冻结（含优先级），不得事后扩展",
+        "note": "旧证据（outputs/map_eval/latency_clock_mapping）只作对照；本段按预声明路径集合重跑后才可作为本轮场景预期证据。",
+        "cases": {
+          "special_stop_north": {
+            "acceptable_outcomes": [
+              "ABORT",
+              "TIMEOUT"
+            ],
+            "must_conditions": [],
+            "unsupported_allowed": false,
+            "repeats": 1,
+            "design": "同上一轮 clock_mapping：相机时钟映射失效，观测 reason=CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT；obs_mapping_fail_step=280",
+            "performance_note": "记录实际命中路径（含优先级）与 admission/observation/supervisor reason；命中集合外路径即偏差，不得判 PASS。"
+          }
+        },
+        "acceptable_paths": [
+          {
+            "priority": 1,
+            "path_id": "admission_reject_stale_observation",
+            "admission_reject_reason": "REJECT_STALE_OBSERVATION",
+            "observation_reason": "CLOCK_MAPPING_UNUSABLE",
+            "supervisor_state": "DEGRADED_ABORT",
+            "note": "主路径：admission 先拒绝 REJECT_STALE_OBSERVATION，观测 reason=CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT。"
+          },
+          {
+            "priority": 2,
+            "path_id": "supervisor_observation_stale",
+            "supervisor_reason": "OBSERVATION_STALE",
+            "episode_reason": "OBSERVATION_STALE",
+            "note": "备选路径：supervisor 直接 OBSERVATION_STALE abort。"
+          }
+        ],
+        "must_hit_declared_path": true,
+        "freeze_rule": "运行前冻结、不得事后扩展：实际命中路径必须是上面集合之一（记录命中路径与优先级）；不得新增/合并 reason 别名，不得在运行后扩展可接受集合。"
+      },
+      "latency_ttl_over_recheck": {
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "run_params": {
+          "vehicle_config": "configs/vehicles/sim_reference.yaml",
+          "methods": [
+            "supervisor"
+          ],
+          "execution_path": "v2",
+          "obs_delay_s": 0.15,
+          "action_delay_s": 0.1,
+          "ttl_ms": 150,
+          "max_age_ms": 150,
+          "allowed_observation_age_ms": 300,
+          "stop_distance_m": 1.1,
+          "post_abort_observe_s": 3.0,
+          "clock_offset_ms": 20.0,
+          "clock_drift_ppm": 200.0,
+          "clock_uncertainty_ms": 5.0,
+          "sync_fail_step": -1,
+          "obs_mapping_fail_step": -1,
+          "transport_stall_step": 300,
+          "transport_stall_delay_s": 0.15
+        },
+        "purpose": "latency_ttl_over_recheck：同上一轮 ttl_over（stall 0.15 s），按预声明 (c) 判据核验拒绝语义",
+        "note": "业务结果 TIMEOUT/ABORT 之一即可；拒绝语义本身是预期，不能用业务结果替代拒绝判据。",
+        "cases": {
+          "special_stop_north": {
+            "acceptable_outcomes": [
+              "ABORT",
+              "TIMEOUT"
+            ],
+            "must_conditions": [],
+            "unsupported_allowed": false,
+            "repeats": 1,
+            "design": "同上一轮 ttl_over：stall 0.15 s 后制动命令到达年龄 150 ms >= TTL 150 ms，按 (c) 判据核验拒绝语义；transport_stall_step=300",
+            "performance_note": "被拒动作 id 与已执行 id 集合无交集；首次拒绝前旧有效 setpoint；到期→NONE、零目标回退；业务结果 ABORT/TIMEOUT 之一。"
+          }
+        },
+        "criteria_id": "(c)",
+        "criteria": {
+          "rejected_before_executed": true,
+          "rejected_action_not_executed": true,
+          "old_valid_setpoint_before_first_reject": true,
+          "expiry_to_none": true,
+          "zero_target_fallback": true,
+          "business_outcomes": [
+            "ABORT",
+            "TIMEOUT"
+          ]
+        },
+        "acceptable_outcomes": [
+          "ABORT",
+          "TIMEOUT"
+        ],
+        "freeze_rule": "运行前冻结、不得事后扩展：(c) 判据在运行前声明，运行后不得放宽或替换判据。"
+      }
+    },
+    "basis": "计划 docs/superpowers/plans/2026-11-02-clearance-boundary.md §5 表（12 场景 × _r0/_r1 = 24 case，每 case 1 episode）、Lead 2026-11-02 9 段修正、U3 scripts/verify_clearance_boundary_runs.py 的 ExpectedIndex 契约；参数与旧证据仅作对照，不把旧 PASS 当行为验收。",
+    "brake_model": {
+      "file": "configs/scenarios/brake_model_v1.json",
+      "version": "brake_final4.v1",
+      "speed_support_mps": [
+        0.248041,
+        0.851428
+      ]
+    }
+  },
+  "budget": {
+    "boundary_episodes": 24,
+    "special_episodes": 2,
+    "regression_episodes": 3,
+    "total_episodes": 29,
+    "min_boundary_episodes_required": 24
+  },
+  "support_scope": {
+    "scope": "CURRENT_SIM_MODEL_ONLY",
+    "evidence_domain": "GUI Isaac Lab simulation (DirectX/D3D12); 非 SITL/HIL/实机",
+    "simulation_models": [
+      "kinematic_obstacle",
+      "velocity_chain",
+      "simulated_camera_clock",
+      "oracle_observation"
+    ],
+    "brake_model_version": "brake_final4.v1",
+    "brake_model_speed_support_mps": [
+      0.248041,
+      0.851428
+    ],
+    "vehicle_configs": {
+      "configs/vehicles/sim_reference.yaml": "default_vehicle",
+      "configs/vehicles/sim_reference_boundary_fast.yaml": "fast_vehicle_PRO_POSED"
+    },
+    "limitations": [
+      "制动模型只允许在实测支持区间内分段线性插值，区间外不外推",
+      "支持区间外速度必须标 UNSUPPORTED，不得当作已验证安全余量",
+      "AABB/球包络是保守近似，不是网格扫掠或实机安全证明",
+      "快速车 max_horizontal_mps=0.9 是 PROPOSED，不是实测飞机限制",
+      "相机时钟域是模拟第二时钟，不存在真实多设备时钟/串口延迟",
+      "预期非结论；实际以独立核验从原始 steps/episodes/manifest 重算为准",
+      "本冻结只覆盖当前仿真模型，不提升任何 Gate"
+    ]
+  },
+  "note": "clearance 边界专项预运行冻结（单文件 9 segment；boundary_default 18 + boundary_delay_e1 2 + boundary_delay_e2 2 + boundary_fast 2 = 24 边界 episode，另 2 个 recheck + 3 个回归）；冻结后修改 src/scripts/tests/configs 必须新建版本并重跑受影响段；预期非结论，实际以独立核验从原始记录重算为准；本冻结只覆盖当前仿真模型，不提升任何 Gate。",
+  "map_config_file": "configs/maps/rmuc2027.yaml"
+}

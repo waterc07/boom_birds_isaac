@@ -1,0 +1,2728 @@
+{
+  "status": "PASS",
+  "checks": {
+    "schema_completeness": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "raw schema complete for boundary_default; raw schema complete for boundary_delay_e1; raw schema complete for boundary_delay_e2; raw schema complete for boundary_fast; raw schema complete for latency_clock_mapping_recheck; raw schema complete for latency_ttl_over_recheck; raw schema complete for regression_dynamic; raw schema complete for regression_no_obstacle"
+    },
+    "artifact_hashes": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "freeze file hash verified (clearance_boundary_cases_v1.json); freeze file hash verified (latency_special_cases_v1.json); freeze file hash verified (map_dynamic_cases_v1.json); freeze file hash verified (map_v2_regression_cases_v1.json); freeze file hash verified (map_v2_fault_cases_v1.json); freeze file hash verified (clearance_boundary_expected_v1.json); freeze file hash verified (brake_model_v1.json); 3 artifact hashes verified for boundary_default"
+    },
+    "episode_identity_and_denominator": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "episode identity/denominator checked for boundary_default"
+    },
+    "step_time_monotonicity": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "step timing checked"
+    },
+    "gui_evidence": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "gui_evidence present for boundary_default; gui_evidence present for boundary_delay_e1; gui_evidence present for boundary_delay_e2; gui_evidence present for boundary_fast; gui_evidence present for latency_clock_mapping_recheck; gui_evidence present for latency_ttl_over_recheck; gui_evidence present for regression_dynamic; gui_evidence present for regression_no_obstacle"
+    },
+    "freeze_lineage": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "INFO: current worktree digest differs from the recorded freeze digest (expected after the post-run commit; not a PASS criterion); freeze document parsed; brake model loaded (3 points, support 0.248041..0.851428 m/s); freeze file sha256 verified for boundary_default; frozen_at <= started_at; freeze file sha256 verified for boundary_delay_e1; frozen_at <= started_at; freeze file sha256 verified for boundary_delay_e2"
+    },
+    "manifest_disk_consistency": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "manifest/disk identity checked for boundary_default"
+    },
+    "contact_sensor_evidence": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); not a boundary segment: contact-evidence mode is checked on boundary runs only; not a boundary segment: contact-evidence mode is checked on boundary runs only; not a boundary segment: contact-evidence mode is checked on boundary runs only; not a boundary segment: contact-evidence mode is checked on boundary runs only"
+    },
+    "metrics_match_recorded": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "recorded metrics recomputed for boundary_A_static_far_r0-supervisor-boundary_default; contact_prim is empty while contact_evidence_summary records inferred contact for boundary_B_cross_late_r0-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_B_cross_late_r1-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_C_headon_collide_r0-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_C_headon_collide_r1-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_E_delay_insufficient_r0-supervisor-boundary_delay_e1 (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_E_delay_insufficient_r1-supervisor-boundary_delay_e1 (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_E_action_late_r0-supervisor-boundary_delay_e2 (kinematic inference mode)"
+    },
+    "business_physical_outcome": {
+      "category": "data_integrity",
+      "passed": true,
+      "detail": "business/physical outcome separation checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "clearance_recompute": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "clearance_prediction_structure": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "clearance_envelope_rules": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "clearance_metric_semantics": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "clearance_observation_age": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "clearance_decision_consistency": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "stop_requirement_recompute": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "stop requirement contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "stop_requirement_support_boundary": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "stop requirement contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "stop_requirement_basis": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "stop requirement contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "ttl_no_renewal": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "transport TTL checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "arrival_expiry_rejection": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "arrival gate checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "rejection_never_executed": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "rejection/execution disjointness checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "hold_until_expiry_then_none": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "holding/expiry checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "post_abort_old_setpoint": {
+      "category": "contract_invariant",
+      "passed": true,
+      "detail": "60 POST_ABORT rows recorded for boundary_A_static_far_r0-supervisor-boundary_default; 60 POST_ABORT rows recorded for boundary_A_static_far_r1-supervisor-boundary_default; 60 POST_ABORT rows recorded for boundary_A_static_tight_r0-supervisor-boundary_default; 60 POST_ABORT rows recorded for boundary_A_static_tight_r1-supervisor-boundary_default; SUCCESS episode boundary_A_static_offpath_r0-supervisor-boundary_default has no post-abort window (window applies to aborted episodes); SUCCESS episode boundary_A_static_offpath_r1-supervisor-boundary_default has no post-abort window (window applies to aborted episodes); SUCCESS episode boundary_B_cross_early_r0-supervisor-boundary_default has no post-abort window (window applies to aborted episodes); SUCCESS episode boundary_B_cross_early_r1-supervisor-boundary_default has no post-abort window (window applies to aborted episodes)"
+    },
+    "expected_config_coverage": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "expected coverage checked for boundary_default (18 cases, 18 episodes)"
+    },
+    "scenario_class_match": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "expectation checked for boundary_A_static_far_r0"
+    },
+    "acceptable_outcomes": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "expectation checked for boundary_A_static_far_r0"
+    },
+    "must_conditions": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "expectation checked for boundary_A_static_far_r0"
+    },
+    "insufficient_margin_success_ban": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "expectation checked for boundary_A_static_far_r0"
+    },
+    "post_stop_collision_ordering": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "expectation checked for boundary_A_static_far_r0"
+    },
+    "unsupported_allowed_scope": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "only the conservative ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT branch is UNSUPPORTED for boundary_A_static_far_r0 (INFO)"
+    },
+    "special_clock_mapping_paths": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "n/a: boundary_default is not a clock-mapping recheck segment; n/a: boundary_delay_e1 is not a clock-mapping recheck segment; n/a: boundary_delay_e2 is not a clock-mapping recheck segment; n/a: boundary_fast is not a clock-mapping recheck segment; hit pre-declared clock-mapping path #1 {'admission_reject_reason': 'REJECT_STALE_OBSERVATION', 'observation_reason': 'CLOCK_MAPPING_UNUSABLE'} (must_hit_declared_path=True); n/a: latency_ttl_over_recheck is not a clock-mapping recheck segment; n/a: regression_dynamic is not a clock-mapping recheck segment; n/a: regression_no_obstacle is not a clock-mapping recheck segment"
+    },
+    "special_ttl_over_criteria": {
+      "category": "scenario_expectation",
+      "passed": true,
+      "detail": "n/a: boundary_default is not a ttl-over recheck segment; n/a: boundary_delay_e1 is not a ttl-over recheck segment; n/a: boundary_delay_e2 is not a ttl-over recheck segment; n/a: boundary_fast is not a ttl-over recheck segment; n/a: latency_clock_mapping_recheck is not a ttl-over recheck segment; criteria_id=(c) 1_action_expired_rejection=True; 2_rejected_never_executed=True; 3_old_active_before_rejection=True; 4_active_expiry_to_none=True; 5_zero_target_fallback_after_rejection=True; 6_business_outcome_declared=True; ttl_over criteria (c) satisfied: 1_action_expired_rejection=True; 2_rejected_never_executed=True; 3_old_active_before_rejection=True; 4_active_expiry_to_none=True; 5_zero_target_fallback_after_rejection=True; 6_business_outcome_declared=True; n/a: regression_dynamic is not a ttl-over recheck segment"
+    },
+    "brake_start_metrics": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "brake start checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "stop_distance_time": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "stop distance/time checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "relative_closing_speed": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "closing/relative speed checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "contact_metrics": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "contact metrics checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "obstacle_approach_after_stop": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "post-stop obstacle approach checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "post_abort_residual": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "post-abort residual checked for boundary_A_static_far_r0-supervisor-boundary_default"
+    },
+    "unsupported_usage_stats": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "unsupported usage: 6347 steps in 29 episodes across 9 segments; by_reason={'ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT': 5625, 'ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT': 722, 'OBSERVATION_AGE_UNKNOWN': 1, 'CLOSING_SPEED_NOT_MODELLED': 1}; conservative BELOW-support steps=4522 (INFO, not a capability exceedance)"
+    },
+    "boundary_episode_coverage": {
+      "category": "performance_boundary",
+      "passed": true,
+      "detail": "boundary denominator 24/24 episodes {'boundary_default': '18/18', 'boundary_delay_e1': '2/2', 'boundary_delay_e2': '2/2', 'boundary_fast': '2/2'}"
+    }
+  },
+  "checks_by_category": {
+    "data_integrity": {
+      "schema_completeness": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "raw schema complete for boundary_default; raw schema complete for boundary_delay_e1; raw schema complete for boundary_delay_e2; raw schema complete for boundary_fast; raw schema complete for latency_clock_mapping_recheck; raw schema complete for latency_ttl_over_recheck; raw schema complete for regression_dynamic; raw schema complete for regression_no_obstacle"
+      },
+      "artifact_hashes": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "freeze file hash verified (clearance_boundary_cases_v1.json); freeze file hash verified (latency_special_cases_v1.json); freeze file hash verified (map_dynamic_cases_v1.json); freeze file hash verified (map_v2_regression_cases_v1.json); freeze file hash verified (map_v2_fault_cases_v1.json); freeze file hash verified (clearance_boundary_expected_v1.json); freeze file hash verified (brake_model_v1.json); 3 artifact hashes verified for boundary_default"
+      },
+      "episode_identity_and_denominator": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "episode identity/denominator checked for boundary_default"
+      },
+      "step_time_monotonicity": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "step timing checked"
+      },
+      "gui_evidence": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "gui_evidence present for boundary_default; gui_evidence present for boundary_delay_e1; gui_evidence present for boundary_delay_e2; gui_evidence present for boundary_fast; gui_evidence present for latency_clock_mapping_recheck; gui_evidence present for latency_ttl_over_recheck; gui_evidence present for regression_dynamic; gui_evidence present for regression_no_obstacle"
+      },
+      "freeze_lineage": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "INFO: current worktree digest differs from the recorded freeze digest (expected after the post-run commit; not a PASS criterion); freeze document parsed; brake model loaded (3 points, support 0.248041..0.851428 m/s); freeze file sha256 verified for boundary_default; frozen_at <= started_at; freeze file sha256 verified for boundary_delay_e1; frozen_at <= started_at; freeze file sha256 verified for boundary_delay_e2"
+      },
+      "manifest_disk_consistency": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "manifest/disk identity checked for boundary_default"
+      },
+      "contact_sensor_evidence": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); kinematic contact inference mode declared (sphere_overlap_m > 0.020, force sensor unavailable: ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.); not a boundary segment: contact-evidence mode is checked on boundary runs only; not a boundary segment: contact-evidence mode is checked on boundary runs only; not a boundary segment: contact-evidence mode is checked on boundary runs only; not a boundary segment: contact-evidence mode is checked on boundary runs only"
+      },
+      "metrics_match_recorded": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "recorded metrics recomputed for boundary_A_static_far_r0-supervisor-boundary_default; contact_prim is empty while contact_evidence_summary records inferred contact for boundary_B_cross_late_r0-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_B_cross_late_r1-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_C_headon_collide_r0-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_C_headon_collide_r1-supervisor-boundary_default (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_E_delay_insufficient_r0-supervisor-boundary_delay_e1 (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_E_delay_insufficient_r1-supervisor-boundary_delay_e1 (kinematic inference mode); contact_prim is empty while contact_evidence_summary records inferred contact for boundary_E_action_late_r0-supervisor-boundary_delay_e2 (kinematic inference mode)"
+      },
+      "business_physical_outcome": {
+        "category": "data_integrity",
+        "passed": true,
+        "detail": "business/physical outcome separation checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      }
+    },
+    "contract_invariant": {
+      "clearance_recompute": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "clearance_prediction_structure": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "clearance_envelope_rules": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "clearance_metric_semantics": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "clearance_observation_age": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "clearance_decision_consistency": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "clearance contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "stop_requirement_recompute": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "stop requirement contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "stop_requirement_support_boundary": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "stop requirement contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "stop_requirement_basis": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "stop requirement contract checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "ttl_no_renewal": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "transport TTL checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "arrival_expiry_rejection": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "arrival gate checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "rejection_never_executed": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "rejection/execution disjointness checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "hold_until_expiry_then_none": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "holding/expiry checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "post_abort_old_setpoint": {
+        "category": "contract_invariant",
+        "passed": true,
+        "detail": "60 POST_ABORT rows recorded for boundary_A_static_far_r0-supervisor-boundary_default; 60 POST_ABORT rows recorded for boundary_A_static_far_r1-supervisor-boundary_default; 60 POST_ABORT rows recorded for boundary_A_static_tight_r0-supervisor-boundary_default; 60 POST_ABORT rows recorded for boundary_A_static_tight_r1-supervisor-boundary_default; SUCCESS episode boundary_A_static_offpath_r0-supervisor-boundary_default has no post-abort window (window applies to aborted episodes); SUCCESS episode boundary_A_static_offpath_r1-supervisor-boundary_default has no post-abort window (window applies to aborted episodes); SUCCESS episode boundary_B_cross_early_r0-supervisor-boundary_default has no post-abort window (window applies to aborted episodes); SUCCESS episode boundary_B_cross_early_r1-supervisor-boundary_default has no post-abort window (window applies to aborted episodes)"
+      }
+    },
+    "scenario_expectation": {
+      "expected_config_coverage": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "expected coverage checked for boundary_default (18 cases, 18 episodes)"
+      },
+      "scenario_class_match": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "expectation checked for boundary_A_static_far_r0"
+      },
+      "acceptable_outcomes": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "expectation checked for boundary_A_static_far_r0"
+      },
+      "must_conditions": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "expectation checked for boundary_A_static_far_r0"
+      },
+      "insufficient_margin_success_ban": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "expectation checked for boundary_A_static_far_r0"
+      },
+      "post_stop_collision_ordering": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "expectation checked for boundary_A_static_far_r0"
+      },
+      "unsupported_allowed_scope": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "only the conservative ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT branch is UNSUPPORTED for boundary_A_static_far_r0 (INFO)"
+      },
+      "special_clock_mapping_paths": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "n/a: boundary_default is not a clock-mapping recheck segment; n/a: boundary_delay_e1 is not a clock-mapping recheck segment; n/a: boundary_delay_e2 is not a clock-mapping recheck segment; n/a: boundary_fast is not a clock-mapping recheck segment; hit pre-declared clock-mapping path #1 {'admission_reject_reason': 'REJECT_STALE_OBSERVATION', 'observation_reason': 'CLOCK_MAPPING_UNUSABLE'} (must_hit_declared_path=True); n/a: latency_ttl_over_recheck is not a clock-mapping recheck segment; n/a: regression_dynamic is not a clock-mapping recheck segment; n/a: regression_no_obstacle is not a clock-mapping recheck segment"
+      },
+      "special_ttl_over_criteria": {
+        "category": "scenario_expectation",
+        "passed": true,
+        "detail": "n/a: boundary_default is not a ttl-over recheck segment; n/a: boundary_delay_e1 is not a ttl-over recheck segment; n/a: boundary_delay_e2 is not a ttl-over recheck segment; n/a: boundary_fast is not a ttl-over recheck segment; n/a: latency_clock_mapping_recheck is not a ttl-over recheck segment; criteria_id=(c) 1_action_expired_rejection=True; 2_rejected_never_executed=True; 3_old_active_before_rejection=True; 4_active_expiry_to_none=True; 5_zero_target_fallback_after_rejection=True; 6_business_outcome_declared=True; ttl_over criteria (c) satisfied: 1_action_expired_rejection=True; 2_rejected_never_executed=True; 3_old_active_before_rejection=True; 4_active_expiry_to_none=True; 5_zero_target_fallback_after_rejection=True; 6_business_outcome_declared=True; n/a: regression_dynamic is not a ttl-over recheck segment"
+      }
+    },
+    "performance_boundary": {
+      "brake_start_metrics": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "brake start checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "stop_distance_time": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "stop distance/time checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "relative_closing_speed": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "closing/relative speed checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "contact_metrics": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "contact metrics checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "obstacle_approach_after_stop": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "post-stop obstacle approach checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "post_abort_residual": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "post-abort residual checked for boundary_A_static_far_r0-supervisor-boundary_default"
+      },
+      "unsupported_usage_stats": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "unsupported usage: 6347 steps in 29 episodes across 9 segments; by_reason={'ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT': 5625, 'ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT': 722, 'OBSERVATION_AGE_UNKNOWN': 1, 'CLOSING_SPEED_NOT_MODELLED': 1}; conservative BELOW-support steps=4522 (INFO, not a capability exceedance)"
+      },
+      "boundary_episode_coverage": {
+        "category": "performance_boundary",
+        "passed": true,
+        "detail": "boundary denominator 24/24 episodes {'boundary_default': '18/18', 'boundary_delay_e1': '2/2', 'boundary_delay_e2': '2/2', 'boundary_fast': '2/2'}"
+      }
+    }
+  },
+  "failures": [],
+  "deviations": [],
+  "missing_fields": [],
+  "contact_evidence_mode": "kinematic_inference",
+  "contact_evidence_limitation": "The environment contact force sensor does not report obstacle-robot force; physical contact is inferred from conservative sphere overlap (> 0.020 m) and a zero force is never read as NO_CONTACT. This is a kinematic geometry inference, not a measured contact force.",
+  "recomputed": {
+    "segments": {
+      "boundary_default": {
+        "episode_count": 18,
+        "role": "boundary",
+        "case_ids": [
+          "boundary_A_static_far_r0",
+          "boundary_A_static_far_r1",
+          "boundary_A_static_offpath_r0",
+          "boundary_A_static_offpath_r1",
+          "boundary_A_static_tight_r0",
+          "boundary_A_static_tight_r1",
+          "boundary_B_cross_early_r0",
+          "boundary_B_cross_early_r1",
+          "boundary_B_cross_far_r0",
+          "boundary_B_cross_far_r1",
+          "boundary_B_cross_late_r0",
+          "boundary_B_cross_late_r1",
+          "boundary_C_headon_collide_r0",
+          "boundary_C_headon_collide_r1",
+          "boundary_C_headon_early_r0",
+          "boundary_C_headon_early_r1",
+          "boundary_C_headon_stop_short_r0",
+          "boundary_C_headon_stop_short_r1"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 9142,
+          "valid_records": 9142,
+          "min_path_clearance_m": 0.0,
+          "applicability": {
+            "SUPPORTED": 9142
+          }
+        },
+        "stop_requirement": {
+          "records": 9142,
+          "unsupported_steps": 3420,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 3420
+          },
+          "max_robot_speed_mps": 0.6634802188486035,
+          "min_margin_m": -0.23812577690910103
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 4,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.11796588664086749,
+          "first_inferred_contact_time_s": 1.05
+        }
+      },
+      "boundary_delay_e1": {
+        "episode_count": 2,
+        "role": "boundary",
+        "case_ids": [
+          "boundary_E_delay_insufficient_r0",
+          "boundary_E_delay_insufficient_r1"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 348,
+          "valid_records": 348,
+          "min_path_clearance_m": 1.8557986614098357e-07,
+          "applicability": {
+            "SUPPORTED": 348
+          }
+        },
+        "stop_requirement": {
+          "records": 348,
+          "unsupported_steps": 348,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 348
+          },
+          "max_robot_speed_mps": 4.0291363027976115e-07,
+          "min_margin_m": null
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 2,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.11796588664086749,
+          "first_inferred_contact_time_s": 1.05
+        }
+      },
+      "boundary_delay_e2": {
+        "episode_count": 2,
+        "role": "boundary",
+        "case_ids": [
+          "boundary_E_action_late_r0",
+          "boundary_E_action_late_r1"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 348,
+          "valid_records": 348,
+          "min_path_clearance_m": 0.02200018458212494,
+          "applicability": {
+            "SUPPORTED": 348
+          }
+        },
+        "stop_requirement": {
+          "records": 348,
+          "unsupported_steps": 348,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 348
+          },
+          "max_robot_speed_mps": 4.5245233212552006e-07,
+          "min_margin_m": null
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 2,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0672999598663897,
+          "first_inferred_contact_time_s": 1.2
+        }
+      },
+      "boundary_fast": {
+        "episode_count": 2,
+        "role": "boundary",
+        "case_ids": [
+          "boundary_D_fast_cross_r0",
+          "boundary_D_fast_cross_r1"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 1218,
+          "valid_records": 1218,
+          "min_path_clearance_m": 0.006064756471401309,
+          "applicability": {
+            "SUPPORTED": 1218
+          }
+        },
+        "stop_requirement": {
+          "records": 1218,
+          "unsupported_steps": 1128,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 406,
+            "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 722
+          },
+          "max_robot_speed_mps": 0.9935403628799129,
+          "min_margin_m": -0.3359914102735762
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 0,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0,
+          "first_inferred_contact_time_s": null
+        }
+      },
+      "latency_clock_mapping_recheck": {
+        "episode_count": 1,
+        "role": "special",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 281,
+          "valid_records": 280,
+          "min_path_clearance_m": 8.265978465977273,
+          "applicability": {
+            "SUPPORTED": 280,
+            "UNSUPPORTED": 1
+          }
+        },
+        "stop_requirement": {
+          "records": 281,
+          "unsupported_steps": 31,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 31,
+            "OBSERVATION_AGE_UNKNOWN": 1,
+            "CLOSING_SPEED_NOT_MODELLED": 1
+          },
+          "max_robot_speed_mps": 0.7148632462257201,
+          "min_margin_m": -0.11392337540803893
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 0,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0,
+          "first_inferred_contact_time_s": null
+        }
+      },
+      "latency_ttl_over_recheck": {
+        "episode_count": 1,
+        "role": "special",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 1200,
+          "valid_records": 1200,
+          "min_path_clearance_m": 0.0035065686024940853,
+          "applicability": {
+            "SUPPORTED": 1200
+          }
+        },
+        "stop_requirement": {
+          "records": 1200,
+          "unsupported_steps": 928,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 928
+          },
+          "max_robot_speed_mps": 0.7148632462257201,
+          "min_margin_m": -0.11392337540803893
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 0,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0,
+          "first_inferred_contact_time_s": null
+        }
+      },
+      "regression_dynamic": {
+        "episode_count": 1,
+        "role": "regression",
+        "case_ids": [
+          "dynamic_A_south_0"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 1050,
+          "valid_records": 1050,
+          "min_path_clearance_m": 5.039268300061032,
+          "applicability": {
+            "SUPPORTED": 1050
+          }
+        },
+        "stop_requirement": {
+          "records": 1050,
+          "unsupported_steps": 67,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+          },
+          "max_robot_speed_mps": 0.7069125696402072,
+          "min_margin_m": -0.007558560542606674
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 0,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0,
+          "first_inferred_contact_time_s": null
+        }
+      },
+      "regression_no_obstacle": {
+        "episode_count": 1,
+        "role": "regression",
+        "case_ids": [
+          "v2_reg_route_south_R1"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 1050,
+          "valid_records": 1050,
+          "min_path_clearance_m": 50.42450693859088,
+          "applicability": {
+            "SUPPORTED": 1050
+          }
+        },
+        "stop_requirement": {
+          "records": 1050,
+          "unsupported_steps": 67,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+          },
+          "max_robot_speed_mps": 0.7069125696402072,
+          "min_margin_m": 0.040016990810629316
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 0,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0,
+          "first_inferred_contact_time_s": null
+        }
+      },
+      "regression_fault": {
+        "episode_count": 1,
+        "role": "regression",
+        "case_ids": [
+          "fault_ttl_expiry_0"
+        ],
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "clearance": {
+          "records": 101,
+          "valid_records": 101,
+          "min_path_clearance_m": 50.54232770974264,
+          "applicability": {
+            "SUPPORTED": 101
+          }
+        },
+        "stop_requirement": {
+          "records": 101,
+          "unsupported_steps": 10,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 10
+          },
+          "max_robot_speed_mps": 0.7069125696402072,
+          "min_margin_m": 0.040016990810629316
+        },
+        "contact_evidence": {
+          "mode": "sphere_overlap_inference",
+          "inferred_episodes": 0,
+          "measured_episodes": 0,
+          "max_sphere_overlap_m": 0.0,
+          "first_inferred_contact_time_s": null
+        }
+      }
+    },
+    "expected_index": {
+      "case_count": 24,
+      "segments": {
+        "boundary_default": {
+          "case_count": 0,
+          "defaults": [
+            "case_ids",
+            "cases_file",
+            "note",
+            "purpose",
+            "run_params"
+          ]
+        },
+        "boundary_delay_e1": {
+          "case_count": 0,
+          "defaults": [
+            "case_ids",
+            "cases_file",
+            "note",
+            "purpose",
+            "run_params"
+          ]
+        },
+        "boundary_delay_e2": {
+          "case_count": 0,
+          "defaults": [
+            "case_ids",
+            "cases_file",
+            "note",
+            "purpose",
+            "run_params"
+          ]
+        },
+        "boundary_fast": {
+          "case_count": 0,
+          "defaults": [
+            "case_ids",
+            "cases_file",
+            "note",
+            "purpose",
+            "run_params"
+          ]
+        },
+        "latency_clock_mapping_recheck": {
+          "case_count": 1,
+          "defaults": [
+            "acceptable_paths",
+            "case_ids",
+            "cases_file",
+            "freeze_rule",
+            "must_hit_declared_path",
+            "note",
+            "purpose",
+            "run_params"
+          ]
+        },
+        "latency_ttl_over_recheck": {
+          "case_count": 1,
+          "defaults": [
+            "acceptable_outcomes",
+            "case_ids",
+            "cases_file",
+            "criteria",
+            "criteria_id",
+            "freeze_rule",
+            "note",
+            "purpose",
+            "run_params"
+          ]
+        }
+      }
+    },
+    "brake_model": {
+      "model_id": "brake_final4.v1",
+      "supported_speed_range_mps": [
+        0.24804050960284207,
+        0.8514284648524023
+      ],
+      "points": [
+        {
+          "speed_mps": 0.24804050960284207,
+          "brake_distance_m": 0.1868339193944671,
+          "stop_time_s": 3.25
+        },
+        {
+          "speed_mps": 0.5474249130151224,
+          "brake_distance_m": 0.38977711838312157,
+          "stop_time_s": 3.25
+        },
+        {
+          "speed_mps": 0.8514284648524023,
+          "brake_distance_m": 0.5846594375783718,
+          "stop_time_s": 2.85
+        }
+      ],
+      "extrapolation": "forbidden"
+    },
+    "clearance": {
+      "records": 14738,
+      "max_abs_error_m": 0.0,
+      "min_path_clearance_m": 0.0
+    },
+    "stop_requirement": {
+      "records": 14738,
+      "unsupported_steps": 6347,
+      "by_reason": {
+        "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 5625,
+        "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 722,
+        "OBSERVATION_AGE_UNKNOWN": 1,
+        "CLOSING_SPEED_NOT_MODELLED": 1
+      },
+      "max_robot_speed_mps": 0.9935403628799129,
+      "min_margin_m": -0.3359914102735762
+    },
+    "metric_definitions": {
+      "path_clearance_m": "min point-to-segment distance from predicted obstacle centers to [robot_center_now -> current waypoint center] (11 points, 1.0 s / 0.1 s)",
+      "center_distance_m": "robot center to observed obstacle center",
+      "envelope_gap_sphere_m": "center_distance - (robot_radius + obstacle_radius)",
+      "path_clearance_gap_sphere_m": "path_clearance - (robot_radius + obstacle_radius)",
+      "robot_radius_m": "sqrt(sum(aabb_half_extents_m^2)); half diagonal, not max half extent",
+      "obstacle_radius_m": "max(size_m) / 2",
+      "stop_distance_m": "along the initial brake velocity direction to speed <= 0.08 m/s sustained 0.5 s"
+    },
+    "boundary_denominator": {
+      "expected_total": 24,
+      "observed_total": 24,
+      "by_segment": {
+        "boundary_default": {
+          "expected": 18,
+          "observed": 18
+        },
+        "boundary_delay_e1": {
+          "expected": 2,
+          "observed": 2
+        },
+        "boundary_delay_e2": {
+          "expected": 2,
+          "observed": 2
+        },
+        "boundary_fast": {
+          "expected": 2,
+          "observed": 2
+        }
+      },
+      "note": "Lead-aligned split 24 = boundary_default 18 + boundary_delay_e1 2 + boundary_delay_e2 2 + boundary_fast 2; the expected count is the frozen run_plan.case_ids length."
+    },
+    "contact_evidence": {
+      "mode": "sphere_overlap_inference",
+      "evidence_domain": "kinematic_inference",
+      "force_sensor_available": false,
+      "inference_rule": {
+        "sphere_overlap_m_gt": 0.02,
+        "radii": "robot half-diagonal + obstacle max(size)/2"
+      },
+      "limitation": "The environment contact force sensor does not report obstacle-robot force; physical contact is inferred from conservative sphere overlap (> 0.020 m) and a zero force is never read as NO_CONTACT. This is a kinematic geometry inference, not a measured contact force.",
+      "inferred_episodes": 8,
+      "measured_episodes": 0,
+      "max_sphere_overlap_m": 0.11796588664086749,
+      "first_inferred_contact_time_s": 1.05
+    }
+  },
+  "performance": {
+    "segments": {
+      "boundary_default": {
+        "episodes": [
+          {
+            "episode_id": "boundary_A_static_far_r0-supervisor-boundary_default",
+            "case_id": "boundary_A_static_far_r0",
+            "scenario_class": "BLOCKED_EXIT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 10.65,
+            "brake_start_step": 212,
+            "initial_speed_mps": 0.06727335313202218,
+            "stop_distance_m": -0.0006813681576810259,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 11.1,
+            "max_closing_speed_mps": 0.663375817520801,
+            "max_relative_speed_mps": 0.6634065357676897,
+            "min_path_clearance_m": 1.5095656746024468e-07,
+            "min_center_distance_m": 5.011424346743751,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.0,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.002895832150099835,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 192,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 192
+              },
+              "min_margin_m": -0.14796577218337853,
+              "max_robot_speed_mps": 0.6634065357676897
+            }
+          },
+          {
+            "episode_id": "boundary_A_static_far_r1-supervisor-boundary_default",
+            "case_id": "boundary_A_static_far_r1",
+            "scenario_class": "BLOCKED_EXIT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 10.65,
+            "brake_start_step": 212,
+            "initial_speed_mps": 0.06727335313202218,
+            "stop_distance_m": -0.0006813681576810259,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 11.1,
+            "max_closing_speed_mps": 0.663375817520801,
+            "max_relative_speed_mps": 0.6634065357676897,
+            "min_path_clearance_m": 1.5095656746024468e-07,
+            "min_center_distance_m": 5.011424346743751,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.0,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.002895832150099835,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 192,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 192
+              },
+              "min_margin_m": -0.14796577218337853,
+              "max_robot_speed_mps": 0.6634065357676897
+            }
+          },
+          {
+            "episode_id": "boundary_A_static_tight_r0-supervisor-boundary_default",
+            "case_id": "boundary_A_static_tight_r0",
+            "scenario_class": "BLOCKED_EXIT_TIGHT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 17.8,
+            "brake_start_step": 355,
+            "initial_speed_mps": 0.06405601823308144,
+            "stop_distance_m": 0.0021010849021253024,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 18.25,
+            "max_closing_speed_mps": 0.656528381955115,
+            "max_relative_speed_mps": 0.6567490280909445,
+            "min_path_clearance_m": 1.0,
+            "min_center_distance_m": 1.990295753101641,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.0,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.002174145065640781,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 279,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+              },
+              "min_margin_m": -0.1414916979015926,
+              "max_robot_speed_mps": 0.6567490280909445
+            }
+          },
+          {
+            "episode_id": "boundary_A_static_tight_r1-supervisor-boundary_default",
+            "case_id": "boundary_A_static_tight_r1",
+            "scenario_class": "BLOCKED_EXIT_TIGHT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 17.8,
+            "brake_start_step": 355,
+            "initial_speed_mps": 0.06405601823308144,
+            "stop_distance_m": 0.0021010849021253024,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 18.25,
+            "max_closing_speed_mps": 0.656528381955115,
+            "max_relative_speed_mps": 0.6567490280909445,
+            "min_path_clearance_m": 1.0,
+            "min_center_distance_m": 1.990295753101641,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.0,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.002174145065640781,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 279,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+              },
+              "min_margin_m": -0.1414916979015926,
+              "max_robot_speed_mps": 0.6567490280909445
+            }
+          },
+          {
+            "episode_id": "boundary_A_static_offpath_r0-supervisor-boundary_default",
+            "case_id": "boundary_A_static_offpath_r0",
+            "scenario_class": "NO_STOP_EXPECTED",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.6464081935742906,
+            "max_relative_speed_mps": 0.6567490280909445,
+            "min_path_clearance_m": 1.499999818129733,
+            "min_center_distance_m": 1.499999818129733,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 277,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 277
+              },
+              "min_margin_m": -0.13920177066587397,
+              "max_robot_speed_mps": 0.6567490280909445
+            }
+          },
+          {
+            "episode_id": "boundary_A_static_offpath_r1-supervisor-boundary_default",
+            "case_id": "boundary_A_static_offpath_r1",
+            "scenario_class": "NO_STOP_EXPECTED",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.6464081935742906,
+            "max_relative_speed_mps": 0.6567490280909445,
+            "min_path_clearance_m": 1.499999818129733,
+            "min_center_distance_m": 1.499999818129733,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 277,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 277
+              },
+              "min_margin_m": -0.13920177066587397,
+              "max_robot_speed_mps": 0.6567490280909445
+            }
+          },
+          {
+            "episode_id": "boundary_B_cross_early_r0-supervisor-boundary_default",
+            "case_id": "boundary_B_cross_early_r0",
+            "scenario_class": "STOP_WAIT_RESUME",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 0.25,
+            "brake_start_step": 4,
+            "initial_speed_mps": 1.9485198253157495e-07,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.44999999999999996,
+            "stop_complete_time_s": 0.7,
+            "max_closing_speed_mps": 0.4291396200904544,
+            "max_relative_speed_mps": 0.9644718769424037,
+            "min_path_clearance_m": 0.015000047683715325,
+            "min_center_distance_m": 7.9468173891796745,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 1.1480218342329849,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 131,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 131
+              },
+              "min_margin_m": -0.09417925992639525,
+              "max_robot_speed_mps": 0.6634802188486035
+            }
+          },
+          {
+            "episode_id": "boundary_B_cross_early_r1-supervisor-boundary_default",
+            "case_id": "boundary_B_cross_early_r1",
+            "scenario_class": "STOP_WAIT_RESUME",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 0.25,
+            "brake_start_step": 4,
+            "initial_speed_mps": 1.9485198253157495e-07,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.44999999999999996,
+            "stop_complete_time_s": 0.7,
+            "max_closing_speed_mps": 0.4291396200904544,
+            "max_relative_speed_mps": 0.9644718769424037,
+            "min_path_clearance_m": 0.015000047683715325,
+            "min_center_distance_m": 7.9468173891796745,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 1.1480218342329849,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 131,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 131
+              },
+              "min_margin_m": -0.09417925992639525,
+              "max_robot_speed_mps": 0.6634802188486035
+            }
+          },
+          {
+            "episode_id": "boundary_B_cross_late_r0-supervisor-boundary_default",
+            "case_id": "boundary_B_cross_late_r0",
+            "scenario_class": "INSUFFICIENT_MARGIN",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 0.05,
+            "brake_start_step": 0,
+            "initial_speed_mps": 7.596045676140841e-08,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.45,
+            "stop_complete_time_s": 0.5,
+            "max_closing_speed_mps": 1.4837974941546994,
+            "max_relative_speed_mps": 1.5000000349210698,
+            "min_path_clearance_m": 1.8557986614098357e-07,
+            "min_center_distance_m": 0.2500000000000728,
+            "first_contact_time_s": 1.05,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 1.05,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8293518427941335,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": true
+            },
+            "stop_requirement": {
+              "unsupported_steps": 174,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+              },
+              "min_margin_m": null,
+              "max_robot_speed_mps": 4.0291363027976115e-07
+            }
+          },
+          {
+            "episode_id": "boundary_B_cross_late_r1-supervisor-boundary_default",
+            "case_id": "boundary_B_cross_late_r1",
+            "scenario_class": "INSUFFICIENT_MARGIN",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 0.05,
+            "brake_start_step": 0,
+            "initial_speed_mps": 7.596045676140841e-08,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.45,
+            "stop_complete_time_s": 0.5,
+            "max_closing_speed_mps": 1.4837974941546994,
+            "max_relative_speed_mps": 1.5000000349210698,
+            "min_path_clearance_m": 1.8557986614098357e-07,
+            "min_center_distance_m": 0.2500000000000728,
+            "first_contact_time_s": 1.05,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 1.05,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8293518427941335,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": true
+            },
+            "stop_requirement": {
+              "unsupported_steps": 174,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+              },
+              "min_margin_m": null,
+              "max_robot_speed_mps": 4.0291363027976115e-07
+            }
+          },
+          {
+            "episode_id": "boundary_B_cross_far_r0-supervisor-boundary_default",
+            "case_id": "boundary_B_cross_far_r0",
+            "scenario_class": "NO_STOP_EXPECTED",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.6809420817733519,
+            "max_relative_speed_mps": 0.9644211935103858,
+            "min_path_clearance_m": 3.000037499765628,
+            "min_center_distance_m": 14.89905213120697,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 25,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 25
+              },
+              "min_margin_m": -0.15225814444016122,
+              "max_robot_speed_mps": 0.6634065357670211
+            }
+          },
+          {
+            "episode_id": "boundary_B_cross_far_r1-supervisor-boundary_default",
+            "case_id": "boundary_B_cross_far_r1",
+            "scenario_class": "NO_STOP_EXPECTED",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.6809420817733519,
+            "max_relative_speed_mps": 0.9644211935103858,
+            "min_path_clearance_m": 3.000037499765628,
+            "min_center_distance_m": 14.89905213120697,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 25,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 25
+              },
+              "min_margin_m": -0.15225814444016122,
+              "max_robot_speed_mps": 0.6634065357670211
+            }
+          },
+          {
+            "episode_id": "boundary_C_headon_stop_short_r0-supervisor-boundary_default",
+            "case_id": "boundary_C_headon_stop_short_r0",
+            "scenario_class": "STOP_OBSTACLE_HOLD",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 17.8,
+            "brake_start_step": 355,
+            "initial_speed_mps": 0.06405601823308144,
+            "stop_distance_m": 0.0021010849021253024,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 18.25,
+            "max_closing_speed_mps": 1.0565283942408892,
+            "max_relative_speed_mps": 1.0567481188147982,
+            "min_path_clearance_m": 1.02,
+            "min_center_distance_m": 2.3902957356097785,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.0,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.002174145065640781,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 279,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+              },
+              "min_margin_m": -0.23162770089366008,
+              "max_robot_speed_mps": 0.6567490280909445
+            }
+          },
+          {
+            "episode_id": "boundary_C_headon_stop_short_r1-supervisor-boundary_default",
+            "case_id": "boundary_C_headon_stop_short_r1",
+            "scenario_class": "STOP_OBSTACLE_HOLD",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 17.8,
+            "brake_start_step": 355,
+            "initial_speed_mps": 0.06405601823308144,
+            "stop_distance_m": 0.0021010849021253024,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 18.25,
+            "max_closing_speed_mps": 1.0565283942408892,
+            "max_relative_speed_mps": 1.0567481188147982,
+            "min_path_clearance_m": 1.02,
+            "min_center_distance_m": 2.3902957356097785,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.0,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.002174145065640781,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 279,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+              },
+              "min_margin_m": -0.23162770089366008,
+              "max_robot_speed_mps": 0.6567490280909445
+            }
+          },
+          {
+            "episode_id": "boundary_C_headon_collide_r0-supervisor-boundary_default",
+            "case_id": "boundary_C_headon_collide_r0",
+            "scenario_class": "POST_STOP_COLLISION",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 11.5,
+            "brake_start_step": 229,
+            "initial_speed_mps": 0.6128878328988231,
+            "stop_distance_m": 0.30580241452571827,
+            "stop_time_s": 1.25,
+            "stop_complete_time_s": 12.75,
+            "max_closing_speed_mps": 1.0565283942408892,
+            "max_relative_speed_mps": 1.6544466862776763,
+            "min_path_clearance_m": 0.0,
+            "min_center_distance_m": 0.2531773370543965,
+            "first_contact_time_s": 14.85,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 14.85,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.11478854958654372,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8563665175761036,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 1.5236298307382004,
+              "time_to_stop_s": 1.9499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 162,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 162
+              },
+              "min_margin_m": -0.23162770089366008,
+              "max_robot_speed_mps": 2.049074486386497
+            }
+          },
+          {
+            "episode_id": "boundary_C_headon_collide_r1-supervisor-boundary_default",
+            "case_id": "boundary_C_headon_collide_r1",
+            "scenario_class": "POST_STOP_COLLISION",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 11.5,
+            "brake_start_step": 229,
+            "initial_speed_mps": 0.6128878328988231,
+            "stop_distance_m": 0.30580241452571827,
+            "stop_time_s": 1.25,
+            "stop_complete_time_s": 12.75,
+            "max_closing_speed_mps": 1.0565283942408892,
+            "max_relative_speed_mps": 1.6544466862776763,
+            "min_path_clearance_m": 0.0,
+            "min_center_distance_m": 0.2531773370543965,
+            "first_contact_time_s": 14.85,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 14.85,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.11478854958654372,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8563665175761036,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 1.5236298307382004,
+              "time_to_stop_s": 1.9499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 162,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 162
+              },
+              "min_margin_m": -0.23162770089366008,
+              "max_robot_speed_mps": 2.049074486386497
+            }
+          },
+          {
+            "episode_id": "boundary_C_headon_early_r0-supervisor-boundary_default",
+            "case_id": "boundary_C_headon_early_r0",
+            "scenario_class": "BLOCKED_EXIT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 3.95,
+            "brake_start_step": 78,
+            "initial_speed_mps": 0.6385080408488794,
+            "stop_distance_m": 0.3150136674608928,
+            "stop_time_s": 1.2999999999999998,
+            "stop_complete_time_s": 5.25,
+            "max_closing_speed_mps": 1.0633758352192748,
+            "max_relative_speed_mps": 1.063406451772291,
+            "min_path_clearance_m": 0.0,
+            "min_center_distance_m": 12.224798645413806,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 4.286190954373662,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0020570757802736254,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 191,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 191
+              },
+              "min_margin_m": -0.23812577690910103,
+              "max_robot_speed_mps": 0.6634065357670211
+            }
+          },
+          {
+            "episode_id": "boundary_C_headon_early_r1-supervisor-boundary_default",
+            "case_id": "boundary_C_headon_early_r1",
+            "scenario_class": "BLOCKED_EXIT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 3.95,
+            "brake_start_step": 78,
+            "initial_speed_mps": 0.6385080408488794,
+            "stop_distance_m": 0.3150136674608928,
+            "stop_time_s": 1.2999999999999998,
+            "stop_complete_time_s": 5.25,
+            "max_closing_speed_mps": 1.0633758352192748,
+            "max_relative_speed_mps": 1.063406451772291,
+            "min_path_clearance_m": 0.0,
+            "min_center_distance_m": 12.224798645413806,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 4.286190954373662,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0020570757802736254,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 191,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 191
+              },
+              "min_margin_m": -0.23812577690910103,
+              "max_robot_speed_mps": 0.6634065357670211
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 12,
+          "SUCCESS": 6
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 14,
+          "CONTACT_INFERRED": 4
+        }
+      },
+      "boundary_delay_e1": {
+        "episodes": [
+          {
+            "episode_id": "boundary_E_delay_insufficient_r0-supervisor-boundary_delay_e1",
+            "case_id": "boundary_E_delay_insufficient_r0",
+            "scenario_class": "INSUFFICIENT_MARGIN",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 0.05,
+            "brake_start_step": 0,
+            "initial_speed_mps": 7.596045676140841e-08,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.45,
+            "stop_complete_time_s": 0.5,
+            "max_closing_speed_mps": 1.4837974941546994,
+            "max_relative_speed_mps": 1.5000000349210698,
+            "min_path_clearance_m": 1.8557986614098357e-07,
+            "min_center_distance_m": 0.2500000000000728,
+            "first_contact_time_s": 1.05,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 1.05,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8293518427941335,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": true
+            },
+            "stop_requirement": {
+              "unsupported_steps": 174,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+              },
+              "min_margin_m": null,
+              "max_robot_speed_mps": 4.0291363027976115e-07
+            }
+          },
+          {
+            "episode_id": "boundary_E_delay_insufficient_r1-supervisor-boundary_delay_e1",
+            "case_id": "boundary_E_delay_insufficient_r1",
+            "scenario_class": "INSUFFICIENT_MARGIN",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 0.05,
+            "brake_start_step": 0,
+            "initial_speed_mps": 7.596045676140841e-08,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.45,
+            "stop_complete_time_s": 0.5,
+            "max_closing_speed_mps": 1.4837974941546994,
+            "max_relative_speed_mps": 1.5000000349210698,
+            "min_path_clearance_m": 1.8557986614098357e-07,
+            "min_center_distance_m": 0.2500000000000728,
+            "first_contact_time_s": 1.05,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 1.05,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8293518427941335,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": true
+            },
+            "stop_requirement": {
+              "unsupported_steps": 174,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+              },
+              "min_margin_m": null,
+              "max_robot_speed_mps": 4.0291363027976115e-07
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 2
+        },
+        "physical_outcomes": {
+          "CONTACT_INFERRED": 2
+        }
+      },
+      "boundary_delay_e2": {
+        "episodes": [
+          {
+            "episode_id": "boundary_E_action_late_r0-supervisor-boundary_delay_e2",
+            "case_id": "boundary_E_action_late_r0",
+            "scenario_class": "INSUFFICIENT_MARGIN",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 0.05,
+            "brake_start_step": 0,
+            "initial_speed_mps": 7.5970468419198e-08,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.45,
+            "stop_complete_time_s": 0.5,
+            "max_closing_speed_mps": 1.378565334056403,
+            "max_relative_speed_mps": 1.4000000007957984,
+            "min_path_clearance_m": 0.02200018458212494,
+            "min_center_distance_m": 0.3006659267745505,
+            "first_contact_time_s": 1.2,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 1.2,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0672999598663897,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8395096854752874,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": true
+            },
+            "stop_requirement": {
+              "unsupported_steps": 174,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+              },
+              "min_margin_m": null,
+              "max_robot_speed_mps": 4.5245233212552006e-07
+            }
+          },
+          {
+            "episode_id": "boundary_E_action_late_r1-supervisor-boundary_delay_e2",
+            "case_id": "boundary_E_action_late_r1",
+            "scenario_class": "INSUFFICIENT_MARGIN",
+            "business_outcome": "ABORT",
+            "physical_outcome": "CONTACT_INFERRED",
+            "recomputed_physical_outcome": "CONTACT_INFERRED",
+            "brake_start_time_s": 0.05,
+            "brake_start_step": 0,
+            "initial_speed_mps": 7.5970468419198e-08,
+            "stop_distance_m": 0.0,
+            "stop_time_s": 0.45,
+            "stop_complete_time_s": 0.5,
+            "max_closing_speed_mps": 1.378565334056403,
+            "max_relative_speed_mps": 1.4000000007957984,
+            "min_path_clearance_m": 0.02200018458212494,
+            "min_center_distance_m": 0.3006659267745505,
+            "first_contact_time_s": 1.2,
+            "first_contact_phase": "RUN",
+            "first_inferred_contact_time_s": 1.2,
+            "inferred_contact": true,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0672999598663897,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.8395096854752874,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.4499999999999993,
+              "contact": true
+            },
+            "stop_requirement": {
+              "unsupported_steps": 174,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+              },
+              "min_margin_m": null,
+              "max_robot_speed_mps": 4.5245233212552006e-07
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 2
+        },
+        "physical_outcomes": {
+          "CONTACT_INFERRED": 2
+        }
+      },
+      "boundary_fast": {
+        "episodes": [
+          {
+            "episode_id": "boundary_D_fast_cross_r0-supervisor-boundary_fast",
+            "case_id": "boundary_D_fast_cross_r0",
+            "scenario_class": "HIGH_SPEED_STOP",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 1.75,
+            "brake_start_step": 34,
+            "initial_speed_mps": 0.9921414868110566,
+            "stop_distance_m": 0.5222802794516312,
+            "stop_time_s": 1.4500000000000002,
+            "stop_complete_time_s": 3.2,
+            "max_closing_speed_mps": 1.0200632149477675,
+            "max_relative_speed_mps": 1.0322414697376092,
+            "min_path_clearance_m": 0.006064756471401309,
+            "min_center_distance_m": 4.426620379269013,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 6.132513644490175,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 564,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 203,
+                "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 361
+              },
+              "min_margin_m": -0.3359914102735762,
+              "max_robot_speed_mps": 0.9935403628799129
+            }
+          },
+          {
+            "episode_id": "boundary_D_fast_cross_r1-supervisor-boundary_fast",
+            "case_id": "boundary_D_fast_cross_r1",
+            "scenario_class": "HIGH_SPEED_STOP",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 1.75,
+            "brake_start_step": 34,
+            "initial_speed_mps": 0.9921414868110566,
+            "stop_distance_m": 0.5222802794516312,
+            "stop_time_s": 1.4500000000000002,
+            "stop_complete_time_s": 3.2,
+            "max_closing_speed_mps": 1.0200632149477675,
+            "max_relative_speed_mps": 1.0322414697376092,
+            "min_path_clearance_m": 0.006064756471401309,
+            "min_center_distance_m": 4.426620379269013,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 6.132513644490175,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 564,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 203,
+                "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 361
+              },
+              "min_margin_m": -0.3359914102735762,
+              "max_robot_speed_mps": 0.9935403628799129
+            }
+          }
+        ],
+        "business_outcomes": {
+          "SUCCESS": 2
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 2
+        }
+      },
+      "latency_clock_mapping_recheck": {
+        "episodes": [
+          {
+            "episode_id": "special_stop_north-supervisor-latency_clock_mapping_recheck",
+            "case_id": "special_stop_north",
+            "scenario_class": "B",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 14.05,
+            "brake_start_step": 280,
+            "initial_speed_mps": 0.0996315072855509,
+            "stop_distance_m": 0.011313793818681842,
+            "stop_time_s": 0.5,
+            "stop_complete_time_s": 14.55,
+            "max_closing_speed_mps": 0.5788501613376968,
+            "max_relative_speed_mps": 0.5805715325604666,
+            "min_path_clearance_m": 8.265978465977273,
+            "min_center_distance_m": 8.096603724225346,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.2013587319383614,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.004744687230898904,
+              "time_to_stop_s": 0.45000000000000107,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 31,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 31,
+                "OBSERVATION_AGE_UNKNOWN": 1,
+                "CLOSING_SPEED_NOT_MODELLED": 1
+              },
+              "min_margin_m": -0.11392337540803893,
+              "max_robot_speed_mps": 0.7148632462257201
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "latency_ttl_over_recheck": {
+        "episodes": [
+          {
+            "episode_id": "special_stop_north-supervisor-latency_ttl_over_recheck",
+            "case_id": "special_stop_north",
+            "scenario_class": "B",
+            "business_outcome": "TIMEOUT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 16.45,
+            "brake_start_step": 328,
+            "initial_speed_mps": 0.005021449687596719,
+            "stop_distance_m": 0.0007366883028223451,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 16.9,
+            "max_closing_speed_mps": 0.6693187043785447,
+            "max_relative_speed_mps": 0.7268922912694127,
+            "min_path_clearance_m": 0.0035065686024940853,
+            "min_center_distance_m": 7.415077867662651,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.09454087430463787,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 7.2479248046875e-05,
+              "time_to_stop_s": 0.45000000000000284,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 928,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 928
+              },
+              "min_margin_m": -0.11392337540803893,
+              "max_robot_speed_mps": 0.7148632462257201
+            }
+          }
+        ],
+        "business_outcomes": {
+          "TIMEOUT": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "regression_dynamic": {
+        "episodes": [
+          {
+            "episode_id": "dynamic_A_south_0-supervisor-regression_dynamic",
+            "case_id": "dynamic_A_south_0",
+            "scenario_class": "A",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.9537664155982375,
+            "max_relative_speed_mps": 1.3806454975551057,
+            "min_path_clearance_m": 5.039268300061032,
+            "min_center_distance_m": 7.501920251958345,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 67,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+              },
+              "min_margin_m": -0.007558560542606674,
+              "max_robot_speed_mps": 0.7069125696402072
+            }
+          }
+        ],
+        "business_outcomes": {
+          "SUCCESS": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "regression_no_obstacle": {
+        "episodes": [
+          {
+            "episode_id": "v2_reg_route_south_R1-supervisor-regression_no_obstacle",
+            "case_id": "v2_reg_route_south_R1",
+            "scenario_class": "REGRESSION",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.6307477955592237,
+            "max_relative_speed_mps": 0.7069125696402072,
+            "min_path_clearance_m": 50.42450693859088,
+            "min_center_distance_m": 50.493724538200006,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 67,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+              },
+              "min_margin_m": 0.040016990810629316,
+              "max_robot_speed_mps": 0.7069125696402072
+            }
+          }
+        ],
+        "business_outcomes": {
+          "SUCCESS": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "regression_fault": {
+        "episodes": [
+          {
+            "episode_id": "fault_ttl_expiry_0-supervisor-regression_fault",
+            "case_id": "fault_ttl_expiry_0",
+            "scenario_class": "FAULT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.00024727118017153776,
+            "max_relative_speed_mps": 0.7069125696402072,
+            "min_path_clearance_m": 50.54232770974264,
+            "min_center_distance_m": 50.54232770974264,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 10,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 10
+              },
+              "min_margin_m": 0.040016990810629316,
+              "max_robot_speed_mps": 0.7069125696402072
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      }
+    },
+    "boundary_episode_total": 24,
+    "boundary_episode_expected": 24,
+    "boundary_episodes_by_segment": {
+      "boundary_default": {
+        "expected": 18,
+        "observed": 18
+      },
+      "boundary_delay_e1": {
+        "expected": 2,
+        "observed": 2
+      },
+      "boundary_delay_e2": {
+        "expected": 2,
+        "observed": 2
+      },
+      "boundary_fast": {
+        "expected": 2,
+        "observed": 2
+      }
+    },
+    "special_segments": {
+      "latency_clock_mapping_recheck": {
+        "episodes": [
+          {
+            "episode_id": "special_stop_north-supervisor-latency_clock_mapping_recheck",
+            "case_id": "special_stop_north",
+            "scenario_class": "B",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 14.05,
+            "brake_start_step": 280,
+            "initial_speed_mps": 0.0996315072855509,
+            "stop_distance_m": 0.011313793818681842,
+            "stop_time_s": 0.5,
+            "stop_complete_time_s": 14.55,
+            "max_closing_speed_mps": 0.5788501613376968,
+            "max_relative_speed_mps": 0.5805715325604666,
+            "min_path_clearance_m": 8.265978465977273,
+            "min_center_distance_m": 8.096603724225346,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.2013587319383614,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.004744687230898904,
+              "time_to_stop_s": 0.45000000000000107,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 31,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 31,
+                "OBSERVATION_AGE_UNKNOWN": 1,
+                "CLOSING_SPEED_NOT_MODELLED": 1
+              },
+              "min_margin_m": -0.11392337540803893,
+              "max_robot_speed_mps": 0.7148632462257201
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "latency_ttl_over_recheck": {
+        "episodes": [
+          {
+            "episode_id": "special_stop_north-supervisor-latency_ttl_over_recheck",
+            "case_id": "special_stop_north",
+            "scenario_class": "B",
+            "business_outcome": "TIMEOUT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": 16.45,
+            "brake_start_step": 328,
+            "initial_speed_mps": 0.005021449687596719,
+            "stop_distance_m": 0.0007366883028223451,
+            "stop_time_s": 0.4499999999999993,
+            "stop_complete_time_s": 16.9,
+            "max_closing_speed_mps": 0.6693187043785447,
+            "max_relative_speed_mps": 0.7268922912694127,
+            "min_path_clearance_m": 0.0035065686024940853,
+            "min_center_distance_m": 7.415077867662651,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": 0.09454087430463787,
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 7.2479248046875e-05,
+              "time_to_stop_s": 0.45000000000000284,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 928,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 928
+              },
+              "min_margin_m": -0.11392337540803893,
+              "max_robot_speed_mps": 0.7148632462257201
+            }
+          }
+        ],
+        "business_outcomes": {
+          "TIMEOUT": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "regression_dynamic": {
+        "episodes": [
+          {
+            "episode_id": "dynamic_A_south_0-supervisor-regression_dynamic",
+            "case_id": "dynamic_A_south_0",
+            "scenario_class": "A",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.9537664155982375,
+            "max_relative_speed_mps": 1.3806454975551057,
+            "min_path_clearance_m": 5.039268300061032,
+            "min_center_distance_m": 7.501920251958345,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 67,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+              },
+              "min_margin_m": -0.007558560542606674,
+              "max_robot_speed_mps": 0.7069125696402072
+            }
+          }
+        ],
+        "business_outcomes": {
+          "SUCCESS": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "regression_no_obstacle": {
+        "episodes": [
+          {
+            "episode_id": "v2_reg_route_south_R1-supervisor-regression_no_obstacle",
+            "case_id": "v2_reg_route_south_R1",
+            "scenario_class": "REGRESSION",
+            "business_outcome": "SUCCESS",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.6307477955592237,
+            "max_relative_speed_mps": 0.7069125696402072,
+            "min_path_clearance_m": 50.42450693859088,
+            "min_center_distance_m": 50.493724538200006,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 67,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+              },
+              "min_margin_m": 0.040016990810629316,
+              "max_robot_speed_mps": 0.7069125696402072
+            }
+          }
+        ],
+        "business_outcomes": {
+          "SUCCESS": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      },
+      "regression_fault": {
+        "episodes": [
+          {
+            "episode_id": "fault_ttl_expiry_0-supervisor-regression_fault",
+            "case_id": "fault_ttl_expiry_0",
+            "scenario_class": "FAULT",
+            "business_outcome": "ABORT",
+            "physical_outcome": "NO_CONTACT",
+            "recomputed_physical_outcome": "NO_CONTACT",
+            "brake_start_time_s": null,
+            "brake_start_step": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_complete_time_s": null,
+            "max_closing_speed_mps": 0.00024727118017153776,
+            "max_relative_speed_mps": 0.7069125696402072,
+            "min_path_clearance_m": 50.54232770974264,
+            "min_center_distance_m": 50.54232770974264,
+            "first_contact_time_s": null,
+            "first_contact_phase": null,
+            "first_inferred_contact_time_s": null,
+            "inferred_contact": false,
+            "measured_contact": false,
+            "max_sphere_overlap_m": 0.0,
+            "contact_max_force_n": 0.0,
+            "obstacle_approach_after_stop_m": null,
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "stop_requirement": {
+              "unsupported_steps": 10,
+              "unsupported_reasons": {
+                "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 10
+              },
+              "min_margin_m": 0.040016990810629316,
+              "max_robot_speed_mps": 0.7069125696402072
+            }
+          }
+        ],
+        "business_outcomes": {
+          "ABORT": 1
+        },
+        "physical_outcomes": {
+          "NO_CONTACT": 1
+        }
+      }
+    },
+    "recheck_and_regression_note": "recheck/regression segments are reported separately and are not part of the 24-episode boundary denominator"
+  },
+  "unsupported": {
+    "stop_requirement": {
+      "step_count": 6347,
+      "by_reason": {
+        "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 5625,
+        "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 722,
+        "OBSERVATION_AGE_UNKNOWN": 1,
+        "CLOSING_SPEED_NOT_MODELLED": 1
+      },
+      "by_segment": {
+        "boundary_default": 3420,
+        "boundary_delay_e1": 348,
+        "boundary_delay_e2": 348,
+        "boundary_fast": 1128,
+        "latency_clock_mapping_recheck": 31,
+        "latency_ttl_over_recheck": 928,
+        "regression_dynamic": 67,
+        "regression_no_obstacle": 67,
+        "regression_fault": 10
+      },
+      "max_robot_speed_mps": 0.9935403628799129,
+      "min_margin_m": -0.3359914102735762
+    },
+    "clearance_applicability": {
+      "by_segment": {
+        "boundary_default": {
+          "SUPPORTED": 9142
+        },
+        "boundary_delay_e1": {
+          "SUPPORTED": 348
+        },
+        "boundary_delay_e2": {
+          "SUPPORTED": 348
+        },
+        "boundary_fast": {
+          "SUPPORTED": 1218
+        },
+        "latency_clock_mapping_recheck": {
+          "SUPPORTED": 280,
+          "UNSUPPORTED": 1
+        },
+        "latency_ttl_over_recheck": {
+          "SUPPORTED": 1200
+        },
+        "regression_dynamic": {
+          "SUPPORTED": 1050
+        },
+        "regression_no_obstacle": {
+          "SUPPORTED": 1050
+        },
+        "regression_fault": {
+          "SUPPORTED": 101
+        }
+      }
+    }
+  },
+  "freeze": {
+    "path": "configs\\scenarios\\clearance_boundary_freeze_v1.json",
+    "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+    "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+    "status": "PRE_RUN_FROZEN",
+    "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+    "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808",
+    "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+    "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+    "brake_model_file": "configs/scenarios/brake_model_v1.json",
+    "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+    "cases_file": null,
+    "cases_sha256": null,
+    "segments": {
+      "boundary_default": {
+        "case_ids": [
+          "boundary_A_static_far_r0",
+          "boundary_A_static_far_r1",
+          "boundary_A_static_offpath_r0",
+          "boundary_A_static_offpath_r1",
+          "boundary_A_static_tight_r0",
+          "boundary_A_static_tight_r1",
+          "boundary_B_cross_early_r0",
+          "boundary_B_cross_early_r1",
+          "boundary_B_cross_far_r0",
+          "boundary_B_cross_far_r1",
+          "boundary_B_cross_late_r0",
+          "boundary_B_cross_late_r1",
+          "boundary_C_headon_collide_r0",
+          "boundary_C_headon_collide_r1",
+          "boundary_C_headon_early_r0",
+          "boundary_C_headon_early_r1",
+          "boundary_C_headon_stop_short_r0",
+          "boundary_C_headon_stop_short_r1"
+        ],
+        "role": "boundary"
+      },
+      "boundary_delay_e1": {
+        "case_ids": [
+          "boundary_E_delay_insufficient_r0",
+          "boundary_E_delay_insufficient_r1"
+        ],
+        "role": "boundary"
+      },
+      "boundary_delay_e2": {
+        "case_ids": [
+          "boundary_E_action_late_r0",
+          "boundary_E_action_late_r1"
+        ],
+        "role": "boundary"
+      },
+      "boundary_fast": {
+        "case_ids": [
+          "boundary_D_fast_cross_r0",
+          "boundary_D_fast_cross_r1"
+        ],
+        "role": "boundary"
+      },
+      "latency_clock_mapping_recheck": {
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "role": "special"
+      },
+      "latency_ttl_over_recheck": {
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "role": "special"
+      },
+      "regression_dynamic": {
+        "case_ids": [
+          "dynamic_A_south_0"
+        ],
+        "role": "regression"
+      },
+      "regression_no_obstacle": {
+        "case_ids": [
+          "v2_reg_route_south_R1"
+        ],
+        "role": "regression"
+      },
+      "regression_fault": {
+        "case_ids": [
+          "fault_ttl_expiry_0"
+        ],
+        "role": "regression"
+      }
+    },
+    "expected_path": "configs\\scenarios\\clearance_boundary_expected_v1.json",
+    "expected_file_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+    "brake_model_path": "configs\\scenarios\\brake_model_v1.json",
+    "brake_model_file_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a"
+  },
+  "run_dirs": {
+    "boundary_default": "outputs/map_eval/bnd_boundary_default",
+    "boundary_delay_e1": "outputs/map_eval/bnd_boundary_delay_e1",
+    "boundary_delay_e2": "outputs/map_eval/bnd_boundary_delay_e2",
+    "boundary_fast": "outputs/map_eval/bnd_boundary_fast",
+    "latency_clock_mapping_recheck": "outputs/map_eval/bnd_latency_clock_mapping_recheck",
+    "latency_ttl_over_recheck": "outputs/map_eval/bnd_latency_ttl_over_recheck",
+    "regression_dynamic": "outputs/map_eval/bnd_regression_dynamic",
+    "regression_no_obstacle": "outputs/map_eval/bnd_regression_no_obstacle",
+    "regression_fault": "outputs/map_eval/bnd_regression_fault"
+  }
+}

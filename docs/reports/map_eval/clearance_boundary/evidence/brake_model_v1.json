@@ -1,0 +1,74 @@
+{
+  "schema_version": "boom_birds.brake_model.v1",
+  "model_id": "brake_final4.v1",
+  "source": {
+    "path": "docs/reports/map_eval/brake/verify_brake_final.json",
+    "sha256": "13daa45d5e8470ec4f3ebb6e012c0d8ed98ea20115ef8500f7c57136bf8ae602",
+    "report": "docs/reports/map_eval/MAP_BRAKE_ENVELOPE_REPORT.md",
+    "run": "outputs/map_eval/brake_final4 via scripts/run_brake_eval.py then scripts/verify_brake_runs.py",
+    "measured_episode_count": 36,
+    "measured_ranges": {
+      "speed_mps": [
+        0.24785347654001066,
+        0.8514284648524023
+      ],
+      "brake_distance_m": [
+        0.18513260786830507,
+        0.5846594375783718
+      ],
+      "stop_time_s": [
+        1.25,
+        3.25
+      ]
+    },
+    "command_latency_note": "No separate command/actuation latency probe; setpoint issued and stepped at the same 0.05 s tick."
+  },
+  "supported_speed_range_mps": [
+    0.24804050960284207,
+    0.8514284648524023
+  ],
+  "points": [
+    {
+      "speed_mps": 0.24804050960284207,
+      "brake_distance_m": 0.1868339193944671,
+      "stop_time_s": 3.25
+    },
+    {
+      "speed_mps": 0.5474249130151224,
+      "brake_distance_m": 0.38977711838312157,
+      "stop_time_s": 3.25
+    },
+    {
+      "speed_mps": 0.8514284648524023,
+      "brake_distance_m": 0.5846594375783718,
+      "stop_time_s": 2.85
+    }
+  ],
+  "interpolation": "piecewise_linear_in_speed",
+  "extrapolation": "forbidden",
+  "aggregation": {
+    "rule": "per_speed_tier_worst_case",
+    "detail": "For each nominal speed tier take the maximum measured initial_speed_mps, the maximum measured along_m stopping distance and the maximum measured time_s independently (conservative envelope of the measured data, not a physics model).",
+    "tier_nominal_speeds_mps": [
+      0.3,
+      0.6,
+      0.9
+    ],
+    "tier_case_counts": [
+      12,
+      12,
+      12
+    ]
+  },
+  "measurement_basis": {
+    "basis": "actuation",
+    "definition": "Zero-velocity setpoint admitted and executed at the same 0.05 s tick; brake_distance_m is the measured displacement along the initial velocity direction from the actuation-start row to stable speed <= 0.08 m/s for 0.5 s; stop_time_s is that measured elapsed time. Measurement starts at actuation, so decision-to-actuation transport delay is NOT included and is added separately as robot_speed * action_delay (actuation basis). A trigger-to-stop measurement must use the trigger basis instead and must not add the reaction distance again."
+  },
+  "min_measured_distance_m": 0.18513260786830507,
+  "notes": [
+    "Measured in the current simulated vehicle/controller model only; not a real-flight or PX4 failsafe envelope.",
+    "36 episodes = 3 nominal speed tiers x 2 headings x 3 directions x 2 repeats, stopped from a valid zero-velocity v2 action.",
+    "No separate transport-latency probe: setpoint issued and stepped at the same 0.05 s tick.",
+    "Above supported_speed_range_mps[1] and below supported_speed_range_mps[0] no distance is extrapolated; the stop requirement is UNSUPPORTED at those speeds."
+  ]
+}

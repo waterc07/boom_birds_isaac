@@ -1,0 +1,1974 @@
+{
+  "sources": {
+    "freeze": "configs\\scenarios\\clearance_boundary_freeze_v1.json",
+    "freeze_sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+    "freeze_frozen_at": "2026-11-02T09:45:29.034358+00:00",
+    "freeze_code_commit": "0546701b715e20e35e0208b112debbf1c41c9808",
+    "expected": "configs\\scenarios\\clearance_boundary_expected_v1.json",
+    "evidence_domain": "SIMULATION_ONLY: Isaac simulated host time base + simulated camera clock domain; ORACLE obstacle observation; no real device clocks/serial/PX4",
+    "contact_mode": "sphere_overlap_inference (force sensor unavailable)",
+    "stop_threshold_default_m": 1.1,
+    "stop_threshold_candidate_m": 1.38,
+    "stop_threshold_note": "1.1 m is the frozen default for this round; 1.38 m remains a candidate and was NOT run as default in this boundary set"
+  },
+  "segments": {
+    "boundary_default": {
+      "run_dir": "outputs\\map_eval\\bnd_boundary_default",
+      "role": "boundary",
+      "episodes": [
+        {
+          "episode_id": "boundary_A_static_far_r0-supervisor-boundary_default",
+          "case_id": "boundary_A_static_far_r0",
+          "scenario_class": "BLOCKED_EXIT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 385,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.06727335313202218,
+          "brake_max_actual_speed_mps": 0.6634065357676897,
+          "stop_distance_m": -0.0006813681576810259,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 1.5095656746024468e-07,
+          "min_path_clearance_gap_sphere_m": -0.36796573568437274,
+          "min_center_distance_m": 5.011424346743751,
+          "min_envelope_gap_sphere_m": 4.643458460102811,
+          "stop_requirement_min_margin_m": -0.14796577218337853,
+          "unsupported_steps": 192,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 192
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 11.1,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 5.017707835045487,
+            "min_after_stop_m": 5.0198993757999455,
+            "closer_by_m": -0.0021915407544588206,
+            "obstacle_still_moving": false
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.002895832150099835,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_A_static_far_r1-supervisor-boundary_default",
+          "case_id": "boundary_A_static_far_r1",
+          "scenario_class": "BLOCKED_EXIT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 385,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.06727335313202218,
+          "brake_max_actual_speed_mps": 0.6634065357676897,
+          "stop_distance_m": -0.0006813681576810259,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 1.5095656746024468e-07,
+          "min_path_clearance_gap_sphere_m": -0.36796573568437274,
+          "min_center_distance_m": 5.011424346743751,
+          "min_envelope_gap_sphere_m": 4.643458460102811,
+          "stop_requirement_min_margin_m": -0.14796577218337853,
+          "unsupported_steps": 192,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 192
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 11.1,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 5.017707835045487,
+            "min_after_stop_m": 5.0198993757999455,
+            "closer_by_m": -0.0021915407544588206,
+            "obstacle_still_moving": false
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.002895832150099835,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_A_static_tight_r0-supervisor-boundary_default",
+          "case_id": "boundary_A_static_tight_r0",
+          "scenario_class": "BLOCKED_EXIT_TIGHT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 528,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.06405601823308144,
+          "brake_max_actual_speed_mps": 0.6567490280909445,
+          "stop_distance_m": 0.0021010849021253024,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 1.0,
+          "min_path_clearance_gap_sphere_m": 0.6320341133590599,
+          "min_center_distance_m": 1.990295753101641,
+          "min_envelope_gap_sphere_m": 1.6223298664607007,
+          "stop_requirement_min_margin_m": -0.1414916979015926,
+          "unsupported_steps": 279,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 18.25,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.9941859531410655,
+            "min_after_stop_m": 1.9957656261547925,
+            "closer_by_m": -0.0015796730137269677,
+            "obstacle_still_moving": false
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.002174145065640781,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_A_static_tight_r1-supervisor-boundary_default",
+          "case_id": "boundary_A_static_tight_r1",
+          "scenario_class": "BLOCKED_EXIT_TIGHT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 528,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.06405601823308144,
+          "brake_max_actual_speed_mps": 0.6567490280909445,
+          "stop_distance_m": 0.0021010849021253024,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 1.0,
+          "min_path_clearance_gap_sphere_m": 0.6320341133590599,
+          "min_center_distance_m": 1.990295753101641,
+          "min_envelope_gap_sphere_m": 1.6223298664607007,
+          "stop_requirement_min_margin_m": -0.1414916979015926,
+          "unsupported_steps": 279,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 18.25,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.9941859531410655,
+            "min_after_stop_m": 1.9957656261547925,
+            "closer_by_m": -0.0015796730137269677,
+            "obstacle_still_moving": false
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.002174145065640781,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_A_static_offpath_r0-supervisor-boundary_default",
+          "case_id": "boundary_A_static_offpath_r0",
+          "scenario_class": "NO_STOP_EXPECTED",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 923,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.6567490280909445,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 1.499999818129733,
+          "min_path_clearance_gap_sphere_m": 1.1320339314887926,
+          "min_center_distance_m": 1.499999818129733,
+          "min_envelope_gap_sphere_m": 1.1320339314887926,
+          "stop_requirement_min_margin_m": -0.13920177066587397,
+          "unsupported_steps": 277,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 277
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_A_static_offpath_r1-supervisor-boundary_default",
+          "case_id": "boundary_A_static_offpath_r1",
+          "scenario_class": "NO_STOP_EXPECTED",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 923,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.6567490280909445,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 1.499999818129733,
+          "min_path_clearance_gap_sphere_m": 1.1320339314887926,
+          "min_center_distance_m": 1.499999818129733,
+          "min_envelope_gap_sphere_m": 1.1320339314887926,
+          "stop_requirement_min_margin_m": -0.13920177066587397,
+          "unsupported_steps": 277,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 277
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_B_cross_early_r0-supervisor-boundary_default",
+          "case_id": "boundary_B_cross_early_r0",
+          "scenario_class": "STOP_WAIT_RESUME",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 727,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 1.9485198253157495e-07,
+          "brake_max_actual_speed_mps": 0.6634802188486035,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.44999999999999996,
+          "min_path_clearance_m": 0.015000047683715325,
+          "min_path_clearance_gap_sphere_m": -0.3529658389572249,
+          "min_center_distance_m": 7.9468173891796745,
+          "min_envelope_gap_sphere_m": 7.578851502538734,
+          "stop_requirement_min_margin_m": -0.09417925992639525,
+          "unsupported_steps": 131,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 131
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 0.7,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 713,
+            "distance_at_stop_m": 9.09483922341266,
+            "min_after_stop_m": 7.9468173891796745,
+            "closer_by_m": 1.1480218342329849,
+            "obstacle_still_moving": true
+          },
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_B_cross_early_r1-supervisor-boundary_default",
+          "case_id": "boundary_B_cross_early_r1",
+          "scenario_class": "STOP_WAIT_RESUME",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 727,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 1.9485198253157495e-07,
+          "brake_max_actual_speed_mps": 0.6634802188486035,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.44999999999999996,
+          "min_path_clearance_m": 0.015000047683715325,
+          "min_path_clearance_gap_sphere_m": -0.3529658389572249,
+          "min_center_distance_m": 7.9468173891796745,
+          "min_envelope_gap_sphere_m": 7.578851502538734,
+          "stop_requirement_min_margin_m": -0.09417925992639525,
+          "unsupported_steps": 131,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 131
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 0.7,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 713,
+            "distance_at_stop_m": 9.09483922341266,
+            "min_after_stop_m": 7.9468173891796745,
+            "closer_by_m": 1.1480218342329849,
+            "obstacle_still_moving": true
+          },
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_B_cross_late_r0-supervisor-boundary_default",
+          "case_id": "boundary_B_cross_late_r0",
+          "scenario_class": "INSUFFICIENT_MARGIN",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 173,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 7.596045676140841e-08,
+          "brake_max_actual_speed_mps": 4.0291363027976115e-07,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.45,
+          "min_path_clearance_m": 1.8557986614098357e-07,
+          "min_path_clearance_gap_sphere_m": -0.36796570106107407,
+          "min_center_distance_m": 0.2500000000000727,
+          "min_envelope_gap_sphere_m": -0.11796588664086749,
+          "stop_requirement_min_margin_m": null,
+          "unsupported_steps": 174,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 1.05,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 1.05,
+          "stop_time_s_derived": 0.5,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.0793518427942064,
+            "min_after_stop_m": 0.2500000000000727,
+            "closer_by_m": 0.8293518427941337,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_B_cross_late_r1-supervisor-boundary_default",
+          "case_id": "boundary_B_cross_late_r1",
+          "scenario_class": "INSUFFICIENT_MARGIN",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 173,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 7.596045676140841e-08,
+          "brake_max_actual_speed_mps": 4.0291363027976115e-07,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.45,
+          "min_path_clearance_m": 1.8557986614098357e-07,
+          "min_path_clearance_gap_sphere_m": -0.36796570106107407,
+          "min_center_distance_m": 0.2500000000000727,
+          "min_envelope_gap_sphere_m": -0.11796588664086749,
+          "stop_requirement_min_margin_m": null,
+          "unsupported_steps": 174,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 1.05,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 1.05,
+          "stop_time_s_derived": 0.5,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.0793518427942064,
+            "min_after_stop_m": 0.2500000000000727,
+            "closer_by_m": 0.8293518427941337,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_B_cross_far_r0-supervisor-boundary_default",
+          "case_id": "boundary_B_cross_far_r0",
+          "scenario_class": "NO_STOP_EXPECTED",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 618,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.6634065357670211,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 3.000037499765628,
+          "min_path_clearance_gap_sphere_m": 2.6320716131246877,
+          "min_center_distance_m": 14.89905213120697,
+          "min_envelope_gap_sphere_m": 14.53108624456603,
+          "stop_requirement_min_margin_m": -0.15225814444016122,
+          "unsupported_steps": 25,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 25
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_B_cross_far_r1-supervisor-boundary_default",
+          "case_id": "boundary_B_cross_far_r1",
+          "scenario_class": "NO_STOP_EXPECTED",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 618,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.6634065357670211,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 3.000037499765628,
+          "min_path_clearance_gap_sphere_m": 2.6320716131246877,
+          "min_center_distance_m": 14.89905213120697,
+          "min_envelope_gap_sphere_m": 14.53108624456603,
+          "stop_requirement_min_margin_m": -0.15225814444016122,
+          "unsupported_steps": 25,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 25
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_C_headon_stop_short_r0-supervisor-boundary_default",
+          "case_id": "boundary_C_headon_stop_short_r0",
+          "scenario_class": "STOP_OBSTACLE_HOLD",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 528,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.06405601823308144,
+          "brake_max_actual_speed_mps": 0.6567490280909445,
+          "stop_distance_m": 0.0021010849021253024,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 1.02,
+          "min_path_clearance_gap_sphere_m": 0.6520341133590599,
+          "min_center_distance_m": 2.3902957356097785,
+          "min_envelope_gap_sphere_m": 2.0223298489688384,
+          "stop_requirement_min_margin_m": -0.23162770089366008,
+          "unsupported_steps": 279,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 18.25,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 2.394185908528053,
+            "min_after_stop_m": 2.3957655764424994,
+            "closer_by_m": -0.0015796679144464143,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.002174145065640781,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_C_headon_stop_short_r1-supervisor-boundary_default",
+          "case_id": "boundary_C_headon_stop_short_r1",
+          "scenario_class": "STOP_OBSTACLE_HOLD",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 528,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.06405601823308144,
+          "brake_max_actual_speed_mps": 0.6567490280909445,
+          "stop_distance_m": 0.0021010849021253024,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 1.02,
+          "min_path_clearance_gap_sphere_m": 0.6520341133590599,
+          "min_center_distance_m": 2.3902957356097785,
+          "min_envelope_gap_sphere_m": 2.0223298489688384,
+          "stop_requirement_min_margin_m": -0.23162770089366008,
+          "unsupported_steps": 279,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 279
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 18.25,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 2.394185908528053,
+            "min_after_stop_m": 2.3957655764424994,
+            "closer_by_m": -0.0015796679144464143,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.002174145065640781,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_C_headon_collide_r0-supervisor-boundary_default",
+          "case_id": "boundary_C_headon_collide_r0",
+          "scenario_class": "POST_STOP_COLLISION",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 417,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.6128878328988231,
+          "brake_max_actual_speed_mps": 2.049074486386497,
+          "stop_distance_m": 0.30580241452571827,
+          "stop_time_s": 1.25,
+          "min_path_clearance_m": 0.0,
+          "min_path_clearance_gap_sphere_m": -0.3679658866409402,
+          "min_center_distance_m": 0.2531773370543965,
+          "min_envelope_gap_sphere_m": -0.11478854958654372,
+          "stop_requirement_min_margin_m": -0.23162770089366008,
+          "unsupported_steps": 162,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 162
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.11478854958654372,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 14.85,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 14.85,
+          "stop_time_s_derived": 12.75,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 223,
+            "distance_at_stop_m": 1.1095438546305,
+            "min_after_stop_m": 0.2531773370543965,
+            "closer_by_m": 0.8563665175761036,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 1.5236298307382004,
+            "time_to_stop_s": 1.9499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_C_headon_collide_r1-supervisor-boundary_default",
+          "case_id": "boundary_C_headon_collide_r1",
+          "scenario_class": "POST_STOP_COLLISION",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 417,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.6128878328988231,
+          "brake_max_actual_speed_mps": 2.049074486386497,
+          "stop_distance_m": 0.30580241452571827,
+          "stop_time_s": 1.25,
+          "min_path_clearance_m": 0.0,
+          "min_path_clearance_gap_sphere_m": -0.3679658866409402,
+          "min_center_distance_m": 0.2531773370543965,
+          "min_envelope_gap_sphere_m": -0.11478854958654372,
+          "stop_requirement_min_margin_m": -0.23162770089366008,
+          "unsupported_steps": 162,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 162
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.11478854958654372,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 14.85,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 14.85,
+          "stop_time_s_derived": 12.75,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 223,
+            "distance_at_stop_m": 1.1095438546305,
+            "min_after_stop_m": 0.2531773370543965,
+            "closer_by_m": 0.8563665175761036,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 1.5236298307382004,
+            "time_to_stop_s": 1.9499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_C_headon_early_r0-supervisor-boundary_default",
+          "case_id": "boundary_C_headon_early_r0",
+          "scenario_class": "BLOCKED_EXIT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 266,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.6385080408488794,
+          "brake_max_actual_speed_mps": 0.6634065357670211,
+          "stop_distance_m": 0.3150136674608928,
+          "stop_time_s": 1.2999999999999998,
+          "min_path_clearance_m": 0.0,
+          "min_path_clearance_gap_sphere_m": -0.3679658866409402,
+          "min_center_distance_m": 12.224798645413804,
+          "min_envelope_gap_sphere_m": 11.856832758772864,
+          "stop_requirement_min_margin_m": -0.23812577690910103,
+          "unsupported_steps": 191,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 191
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 5.25,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 222,
+            "distance_at_stop_m": 16.510989599787468,
+            "min_after_stop_m": 12.224798645413804,
+            "closer_by_m": 4.286190954373664,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0020570757802736254,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_C_headon_early_r1-supervisor-boundary_default",
+          "case_id": "boundary_C_headon_early_r1",
+          "scenario_class": "BLOCKED_EXIT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 266,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.6385080408488794,
+          "brake_max_actual_speed_mps": 0.6634065357670211,
+          "stop_distance_m": 0.3150136674608928,
+          "stop_time_s": 1.2999999999999998,
+          "min_path_clearance_m": 0.0,
+          "min_path_clearance_gap_sphere_m": -0.3679658866409402,
+          "min_center_distance_m": 12.224798645413804,
+          "min_envelope_gap_sphere_m": 11.856832758772864,
+          "stop_requirement_min_margin_m": -0.23812577690910103,
+          "unsupported_steps": 191,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 191
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 5.25,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 222,
+            "distance_at_stop_m": 16.510989599787468,
+            "min_after_stop_m": 12.224798645413804,
+            "closer_by_m": 4.286190954373664,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0020570757802736254,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        }
+      ],
+      "counts": {
+        "episodes": 18,
+        "business": {
+          "ABORT": 12,
+          "SUCCESS": 6
+        },
+        "physical": {
+          "NO_CONTACT": 14,
+          "CONTACT_INFERRED": 4
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    },
+    "boundary_delay_e1": {
+      "run_dir": "outputs\\map_eval\\bnd_boundary_delay_e1",
+      "role": "boundary",
+      "episodes": [
+        {
+          "episode_id": "boundary_E_delay_insufficient_r0-supervisor-boundary_delay_e1",
+          "case_id": "boundary_E_delay_insufficient_r0",
+          "scenario_class": "INSUFFICIENT_MARGIN",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 173,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 7.596045676140841e-08,
+          "brake_max_actual_speed_mps": 4.0291363027976115e-07,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.45,
+          "min_path_clearance_m": 1.8557986614098357e-07,
+          "min_path_clearance_gap_sphere_m": -0.36796570106107407,
+          "min_center_distance_m": 0.2500000000000727,
+          "min_envelope_gap_sphere_m": -0.11796588664086749,
+          "stop_requirement_min_margin_m": null,
+          "unsupported_steps": 174,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 1.05,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 1.05,
+          "stop_time_s_derived": 0.5,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.0793518427942064,
+            "min_after_stop_m": 0.2500000000000727,
+            "closer_by_m": 0.8293518427941337,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_E_delay_insufficient_r1-supervisor-boundary_delay_e1",
+          "case_id": "boundary_E_delay_insufficient_r1",
+          "scenario_class": "INSUFFICIENT_MARGIN",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 173,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 7.596045676140841e-08,
+          "brake_max_actual_speed_mps": 4.0291363027976115e-07,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.45,
+          "min_path_clearance_m": 1.8557986614098357e-07,
+          "min_path_clearance_gap_sphere_m": -0.36796570106107407,
+          "min_center_distance_m": 0.2500000000000727,
+          "min_envelope_gap_sphere_m": -0.11796588664086749,
+          "stop_requirement_min_margin_m": null,
+          "unsupported_steps": 174,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.11796588664086749,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 1.05,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 1.05,
+          "stop_time_s_derived": 0.5,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.0793518427942064,
+            "min_after_stop_m": 0.2500000000000727,
+            "closer_by_m": 0.8293518427941337,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        }
+      ],
+      "counts": {
+        "episodes": 2,
+        "business": {
+          "ABORT": 2
+        },
+        "physical": {
+          "CONTACT_INFERRED": 2
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    },
+    "boundary_delay_e2": {
+      "run_dir": "outputs\\map_eval\\bnd_boundary_delay_e2",
+      "role": "boundary",
+      "episodes": [
+        {
+          "episode_id": "boundary_E_action_late_r0-supervisor-boundary_delay_e2",
+          "case_id": "boundary_E_action_late_r0",
+          "scenario_class": "INSUFFICIENT_MARGIN",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 173,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 7.5970468419198e-08,
+          "brake_max_actual_speed_mps": 4.5245233212552006e-07,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.45,
+          "min_path_clearance_m": 0.02200018458212494,
+          "min_path_clearance_gap_sphere_m": -0.34596570205881527,
+          "min_center_distance_m": 0.3006659267745505,
+          "min_envelope_gap_sphere_m": -0.0672999598663897,
+          "stop_requirement_min_margin_m": null,
+          "unsupported_steps": 174,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0672999598663897,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 1.2,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 1.2,
+          "stop_time_s_derived": 0.5,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.1401756122498379,
+            "min_after_stop_m": 0.3006659267745505,
+            "closer_by_m": 0.8395096854752874,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        },
+        {
+          "episode_id": "boundary_E_action_late_r1-supervisor-boundary_delay_e2",
+          "case_id": "boundary_E_action_late_r1",
+          "scenario_class": "INSUFFICIENT_MARGIN",
+          "business_outcome": "ABORT",
+          "physical_outcome": "CONTACT_INFERRED",
+          "reason": "MAX_WAIT_EXCEEDED",
+          "steps": 173,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 7.5970468419198e-08,
+          "brake_max_actual_speed_mps": 4.5245233212552006e-07,
+          "stop_distance_m": 0.0,
+          "stop_time_s": 0.45,
+          "min_path_clearance_m": 0.02200018458212494,
+          "min_path_clearance_gap_sphere_m": -0.34596570205881527,
+          "min_center_distance_m": 0.3006659267745505,
+          "min_envelope_gap_sphere_m": -0.0672999598663897,
+          "stop_requirement_min_margin_m": null,
+          "unsupported_steps": 174,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 174
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0672999598663897,
+            "inferred_contact": true,
+            "first_inferred_contact_time_s": 1.2,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": 1.2,
+          "stop_time_s_derived": 0.5,
+          "contact_after_stop": true,
+          "post_stop_obstacle_motion": {
+            "rows": 224,
+            "distance_at_stop_m": 1.1401756122498379,
+            "min_after_stop_m": 0.3006659267745505,
+            "closer_by_m": 0.8395096854752874,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.0,
+            "time_to_stop_s": 0.4499999999999993,
+            "contact_max_force_n": 0.0
+          }
+        }
+      ],
+      "counts": {
+        "episodes": 2,
+        "business": {
+          "ABORT": 2
+        },
+        "physical": {
+          "CONTACT_INFERRED": 2
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    },
+    "boundary_fast": {
+      "run_dir": "outputs\\map_eval\\bnd_boundary_fast",
+      "role": "boundary",
+      "episodes": [
+        {
+          "episode_id": "boundary_D_fast_cross_r0-supervisor-boundary_fast",
+          "case_id": "boundary_D_fast_cross_r0",
+          "scenario_class": "HIGH_SPEED_STOP",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 609,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.9921414868110566,
+          "brake_max_actual_speed_mps": 0.9935403628799129,
+          "stop_distance_m": 0.5222802794516312,
+          "stop_time_s": 1.4500000000000002,
+          "min_path_clearance_m": 0.006064756471401309,
+          "min_path_clearance_gap_sphere_m": -0.3619011301695389,
+          "min_center_distance_m": 4.426620379269013,
+          "min_envelope_gap_sphere_m": 4.058654492628073,
+          "stop_requirement_min_margin_m": -0.3359914102735762,
+          "unsupported_steps": 564,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 203,
+            "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 361
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 3.2,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 545,
+            "distance_at_stop_m": 10.55913402375919,
+            "min_after_stop_m": 4.426620379269013,
+            "closer_by_m": 6.132513644490177,
+            "obstacle_still_moving": true
+          },
+          "post_abort": null
+        },
+        {
+          "episode_id": "boundary_D_fast_cross_r1-supervisor-boundary_fast",
+          "case_id": "boundary_D_fast_cross_r1",
+          "scenario_class": "HIGH_SPEED_STOP",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 609,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.9921414868110566,
+          "brake_max_actual_speed_mps": 0.9935403628799129,
+          "stop_distance_m": 0.5222802794516312,
+          "stop_time_s": 1.4500000000000002,
+          "min_path_clearance_m": 0.006064756471401309,
+          "min_path_clearance_gap_sphere_m": -0.3619011301695389,
+          "min_center_distance_m": 4.426620379269013,
+          "min_envelope_gap_sphere_m": 4.058654492628073,
+          "stop_requirement_min_margin_m": -0.3359914102735762,
+          "unsupported_steps": 564,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 203,
+            "ROBOT_SPEED_ABOVE_BRAKE_MODEL_SUPPORT": 361
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 3.2,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 545,
+            "distance_at_stop_m": 10.55913402375919,
+            "min_after_stop_m": 4.426620379269013,
+            "closer_by_m": 6.132513644490177,
+            "obstacle_still_moving": true
+          },
+          "post_abort": null
+        }
+      ],
+      "counts": {
+        "episodes": 2,
+        "business": {
+          "SUCCESS": 2
+        },
+        "physical": {
+          "NO_CONTACT": 2
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference_boundary_fast.yaml",
+          "sha256": "7ca440c4e4c083b3ba6460b405800e3ba6ac16d6937fa85648f7b246d3ccaa5b"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    }
+  },
+  "special": {
+    "latency_clock_mapping_recheck": {
+      "run_dir": "outputs\\map_eval\\bnd_latency_clock_mapping_recheck",
+      "role": "special",
+      "episodes": [
+        {
+          "episode_id": "special_stop_north-supervisor-latency_clock_mapping_recheck",
+          "case_id": "special_stop_north",
+          "scenario_class": "B",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "V2_REJECT_STALE_OBSERVATION",
+          "steps": 280,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.0996315072855509,
+          "brake_max_actual_speed_mps": 0.7148632462257201,
+          "stop_distance_m": 0.011313793818681842,
+          "stop_time_s": 0.5,
+          "min_path_clearance_m": 8.265978465977273,
+          "min_path_clearance_gap_sphere_m": 7.898012579336334,
+          "min_center_distance_m": 8.096603724225345,
+          "min_envelope_gap_sphere_m": 7.728637837584405,
+          "stop_requirement_min_margin_m": -0.11392337540803893,
+          "unsupported_steps": 31,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 31,
+            "OBSERVATION_AGE_UNKNOWN": 1,
+            "CLOSING_SPEED_NOT_MODELLED": 1
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 14.55,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 50,
+            "distance_at_stop_m": 8.297962456163708,
+            "min_after_stop_m": 8.096603724225345,
+            "closer_by_m": 0.20135873193836318,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 0.004744687230898904,
+            "time_to_stop_s": 0.45000000000000107,
+            "contact_max_force_n": 0.0
+          }
+        }
+      ],
+      "counts": {
+        "episodes": 1,
+        "business": {
+          "ABORT": 1
+        },
+        "physical": {
+          "NO_CONTACT": 1
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    },
+    "latency_ttl_over_recheck": {
+      "run_dir": "outputs\\map_eval\\bnd_latency_ttl_over_recheck",
+      "role": "special",
+      "episodes": [
+        {
+          "episode_id": "special_stop_north-supervisor-latency_ttl_over_recheck",
+          "case_id": "special_stop_north",
+          "scenario_class": "B",
+          "business_outcome": "TIMEOUT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "WALL_TIMEOUT",
+          "steps": 1200,
+          "stop_triggered": true,
+          "brake_actual_speed_mps": 0.005021449687596719,
+          "brake_max_actual_speed_mps": 0.7148632462257201,
+          "stop_distance_m": 0.0007366883028223451,
+          "stop_time_s": 0.4499999999999993,
+          "min_path_clearance_m": 0.0035065686024940853,
+          "min_path_clearance_gap_sphere_m": -0.3644593180384461,
+          "min_center_distance_m": 7.415077867662651,
+          "min_envelope_gap_sphere_m": 7.047111981021711,
+          "stop_requirement_min_margin_m": -0.11392337540803893,
+          "unsupported_steps": 928,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 928
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": 16.9,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": {
+            "rows": 922,
+            "distance_at_stop_m": 7.509618741967289,
+            "min_after_stop_m": 7.415077867662651,
+            "closer_by_m": 0.09454087430463787,
+            "obstacle_still_moving": true
+          },
+          "post_abort": {
+            "steps": 60,
+            "residual_distance_m": 7.2479248046875e-05,
+            "time_to_stop_s": 0.45000000000000284,
+            "contact_max_force_n": 0.0
+          }
+        }
+      ],
+      "counts": {
+        "episodes": 1,
+        "business": {
+          "TIMEOUT": 1
+        },
+        "physical": {
+          "NO_CONTACT": 1
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    }
+  },
+  "regression": {
+    "regression_dynamic": {
+      "run_dir": "outputs\\map_eval\\bnd_regression_dynamic",
+      "role": "regression",
+      "episodes": [
+        {
+          "episode_id": "dynamic_A_south_0-supervisor-regression_dynamic",
+          "case_id": "dynamic_A_south_0",
+          "scenario_class": "A",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 1050,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.7069125696402072,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 5.039268300061032,
+          "min_path_clearance_gap_sphere_m": 4.671302413420092,
+          "min_center_distance_m": 7.501920251958345,
+          "min_envelope_gap_sphere_m": 7.133954365317405,
+          "stop_requirement_min_margin_m": -0.007558560542606674,
+          "unsupported_steps": 67,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        }
+      ],
+      "counts": {
+        "episodes": 1,
+        "business": {
+          "SUCCESS": 1
+        },
+        "physical": {
+          "NO_CONTACT": 1
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    },
+    "regression_no_obstacle": {
+      "run_dir": "outputs\\map_eval\\bnd_regression_no_obstacle",
+      "role": "regression",
+      "episodes": [
+        {
+          "episode_id": "v2_reg_route_south_R1-supervisor-regression_no_obstacle",
+          "case_id": "v2_reg_route_south_R1",
+          "scenario_class": "REGRESSION",
+          "business_outcome": "SUCCESS",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "ROUTE_COMPLETE",
+          "steps": 1050,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.7069125696402072,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 50.42450693859088,
+          "min_path_clearance_gap_sphere_m": 50.05654105194994,
+          "min_center_distance_m": 50.4937245382,
+          "min_envelope_gap_sphere_m": 50.12575865155906,
+          "stop_requirement_min_margin_m": 0.040016990810629316,
+          "unsupported_steps": 67,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 67
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        }
+      ],
+      "counts": {
+        "episodes": 1,
+        "business": {
+          "SUCCESS": 1
+        },
+        "physical": {
+          "NO_CONTACT": 1
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    },
+    "regression_fault": {
+      "run_dir": "outputs\\map_eval\\bnd_regression_fault",
+      "role": "regression",
+      "episodes": [
+        {
+          "episode_id": "fault_ttl_expiry_0-supervisor-regression_fault",
+          "case_id": "fault_ttl_expiry_0",
+          "scenario_class": "FAULT",
+          "business_outcome": "ABORT",
+          "physical_outcome": "NO_CONTACT",
+          "reason": "V2_REJECT_TTL_EXPIRED",
+          "steps": 100,
+          "stop_triggered": false,
+          "brake_actual_speed_mps": null,
+          "brake_max_actual_speed_mps": 0.7069125696402072,
+          "stop_distance_m": null,
+          "stop_time_s": null,
+          "min_path_clearance_m": 50.54232770974264,
+          "min_path_clearance_gap_sphere_m": 50.174361823101705,
+          "min_center_distance_m": 50.54232770974264,
+          "min_envelope_gap_sphere_m": 50.174361823101705,
+          "stop_requirement_min_margin_m": 0.040016990810629316,
+          "unsupported_steps": 10,
+          "unsupported_reasons": {
+            "ROBOT_SPEED_BELOW_BRAKE_MODEL_SUPPORT": 10
+          },
+          "contact_evidence": {
+            "max_sensor_force_n": 0.0,
+            "max_sphere_overlap_m": 0.0,
+            "inferred_contact": false,
+            "first_inferred_contact_time_s": null,
+            "radii_sum_m": 0.3679658866409402
+          },
+          "first_inferred_contact_time_s": null,
+          "stop_time_s_derived": null,
+          "contact_after_stop": null,
+          "post_stop_obstacle_motion": null,
+          "post_abort": null
+        }
+      ],
+      "counts": {
+        "episodes": 1,
+        "business": {
+          "ABORT": 1
+        },
+        "physical": {
+          "NO_CONTACT": 1
+        }
+      },
+      "manifest": {
+        "contact_sensor": {
+          "valid": true,
+          "mode": "sphere_overlap_inference",
+          "force_sensor_available": false,
+          "source": "contact_force_sensor_not_reporting_in_this_environment",
+          "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+          "inference_rule": {
+            "sphere_overlap_m_gt": 0.02,
+            "radii": "robot half-diagonal + obstacle max(size)/2"
+          },
+          "prim_paths": [],
+          "filter": [],
+          "num_sensors": 0,
+          "errors": []
+        },
+        "body_envelope": {
+          "half_extents_m": [
+            0.05454223374277353,
+            0.03820826672017574,
+            0.013588040310423821
+          ],
+          "source": "measured_usd_aabb_at_runtime",
+          "measured_prim": "/World/envs/env_0/Robot"
+        },
+        "vehicle_config": {
+          "file": "configs/vehicles/sim_reference.yaml",
+          "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+        },
+        "freeze": {
+          "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+          "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+          "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+          "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+          "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+        }
+      }
+    }
+  },
+  "boundary": {
+    "episode_total": 24,
+    "by_scenario_class": {
+      "BLOCKED_EXIT": {
+        "episodes": 4,
+        "business": {
+          "ABORT": 4
+        },
+        "physical": {
+          "NO_CONTACT": 4
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          0.06727335313202218,
+          0.6385080408488794
+        ],
+        "min_path_clearance_range_m": [
+          0.0,
+          1.5095656746024468e-07
+        ],
+        "min_envelope_gap_range_m": [
+          4.643458460102811,
+          11.856832758772864
+        ]
+      },
+      "BLOCKED_EXIT_TIGHT": {
+        "episodes": 2,
+        "business": {
+          "ABORT": 2
+        },
+        "physical": {
+          "NO_CONTACT": 2
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          0.06405601823308144,
+          0.06405601823308144
+        ],
+        "min_path_clearance_range_m": [
+          1.0,
+          1.0
+        ],
+        "min_envelope_gap_range_m": [
+          1.6223298664607007,
+          1.6223298664607007
+        ]
+      },
+      "NO_STOP_EXPECTED": {
+        "episodes": 4,
+        "business": {
+          "SUCCESS": 4
+        },
+        "physical": {
+          "NO_CONTACT": 4
+        },
+        "stop_triggered_ratio": 0.0,
+        "brake_speed_range_mps": [
+          null,
+          null
+        ],
+        "min_path_clearance_range_m": [
+          1.499999818129733,
+          3.000037499765628
+        ],
+        "min_envelope_gap_range_m": [
+          1.1320339314887926,
+          14.53108624456603
+        ]
+      },
+      "STOP_WAIT_RESUME": {
+        "episodes": 2,
+        "business": {
+          "SUCCESS": 2
+        },
+        "physical": {
+          "NO_CONTACT": 2
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          1.9485198253157495e-07,
+          1.9485198253157495e-07
+        ],
+        "min_path_clearance_range_m": [
+          0.015000047683715325,
+          0.015000047683715325
+        ],
+        "min_envelope_gap_range_m": [
+          7.578851502538734,
+          7.578851502538734
+        ]
+      },
+      "INSUFFICIENT_MARGIN": {
+        "episodes": 6,
+        "business": {
+          "ABORT": 6
+        },
+        "physical": {
+          "CONTACT_INFERRED": 6
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          7.596045676140841e-08,
+          7.5970468419198e-08
+        ],
+        "min_path_clearance_range_m": [
+          1.8557986614098357e-07,
+          0.02200018458212494
+        ],
+        "min_envelope_gap_range_m": [
+          -0.11796588664086749,
+          -0.0672999598663897
+        ]
+      },
+      "STOP_OBSTACLE_HOLD": {
+        "episodes": 2,
+        "business": {
+          "ABORT": 2
+        },
+        "physical": {
+          "NO_CONTACT": 2
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          0.06405601823308144,
+          0.06405601823308144
+        ],
+        "min_path_clearance_range_m": [
+          1.02,
+          1.02
+        ],
+        "min_envelope_gap_range_m": [
+          2.0223298489688384,
+          2.0223298489688384
+        ]
+      },
+      "POST_STOP_COLLISION": {
+        "episodes": 2,
+        "business": {
+          "ABORT": 2
+        },
+        "physical": {
+          "CONTACT_INFERRED": 2
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          0.6128878328988231,
+          0.6128878328988231
+        ],
+        "min_path_clearance_range_m": [
+          0.0,
+          0.0
+        ],
+        "min_envelope_gap_range_m": [
+          -0.11478854958654372,
+          -0.11478854958654372
+        ]
+      },
+      "HIGH_SPEED_STOP": {
+        "episodes": 2,
+        "business": {
+          "SUCCESS": 2
+        },
+        "physical": {
+          "NO_CONTACT": 2
+        },
+        "stop_triggered_ratio": 1.0,
+        "brake_speed_range_mps": [
+          0.9921414868110566,
+          0.9921414868110566
+        ],
+        "min_path_clearance_range_m": [
+          0.006064756471401309,
+          0.006064756471401309
+        ],
+        "min_envelope_gap_range_m": [
+          4.058654492628073,
+          4.058654492628073
+        ]
+      }
+    },
+    "unsupported_episode_count": 24,
+    "contact_inferred_episode_count": 8
+  },
+  "brake_model": {
+    "model_id": "brake_final4.v1",
+    "speed_support_mps": [
+      0.24804050960284207,
+      0.8514284648524023
+    ],
+    "points": [
+      {
+        "speed_mps": 0.24804050960284207,
+        "brake_distance_m": 0.1868339193944671,
+        "stop_time_s": 3.25
+      },
+      {
+        "speed_mps": 0.5474249130151224,
+        "brake_distance_m": 0.38977711838312157,
+        "stop_time_s": 3.25
+      },
+      {
+        "speed_mps": 0.8514284648524023,
+        "brake_distance_m": 0.5846594375783718,
+        "stop_time_s": 2.85
+      }
+    ],
+    "extrapolation": "forbidden"
+  },
+  "support_classification": {
+    "boundary_episodes_with_speed_above_support": [
+      "boundary_C_headon_collide_r0-supervisor-boundary_default",
+      "boundary_C_headon_collide_r1-supervisor-boundary_default",
+      "boundary_D_fast_cross_r0-supervisor-boundary_fast",
+      "boundary_D_fast_cross_r1-supervisor-boundary_fast"
+    ],
+    "boundary_episodes_with_unsupported_steps": [
+      "boundary_A_static_far_r0-supervisor-boundary_default",
+      "boundary_A_static_far_r1-supervisor-boundary_default",
+      "boundary_A_static_tight_r0-supervisor-boundary_default",
+      "boundary_A_static_tight_r1-supervisor-boundary_default",
+      "boundary_A_static_offpath_r0-supervisor-boundary_default",
+      "boundary_A_static_offpath_r1-supervisor-boundary_default",
+      "boundary_B_cross_early_r0-supervisor-boundary_default",
+      "boundary_B_cross_early_r1-supervisor-boundary_default",
+      "boundary_B_cross_late_r0-supervisor-boundary_default",
+      "boundary_B_cross_late_r1-supervisor-boundary_default",
+      "boundary_B_cross_far_r0-supervisor-boundary_default",
+      "boundary_B_cross_far_r1-supervisor-boundary_default",
+      "boundary_C_headon_stop_short_r0-supervisor-boundary_default",
+      "boundary_C_headon_stop_short_r1-supervisor-boundary_default",
+      "boundary_C_headon_collide_r0-supervisor-boundary_default",
+      "boundary_C_headon_collide_r1-supervisor-boundary_default",
+      "boundary_C_headon_early_r0-supervisor-boundary_default",
+      "boundary_C_headon_early_r1-supervisor-boundary_default",
+      "boundary_E_delay_insufficient_r0-supervisor-boundary_delay_e1",
+      "boundary_E_delay_insufficient_r1-supervisor-boundary_delay_e1",
+      "boundary_E_action_late_r0-supervisor-boundary_delay_e2",
+      "boundary_E_action_late_r1-supervisor-boundary_delay_e2",
+      "boundary_D_fast_cross_r0-supervisor-boundary_fast",
+      "boundary_D_fast_cross_r1-supervisor-boundary_fast"
+    ],
+    "note": "episodes whose actual speed exceeds the measured brake-model support are flagged UNSUPPORTED in raw records and are not extrapolated into safety claims"
+  }
+}

@@ -557,8 +557,11 @@ def _manifest(run_dir, plan, freeze_path, body_half, case_ids,
                           'source': 'measured_usd_aabb_at_runtime',
                           'measured_prim': '/World/envs/env_0/Robot'},
         'envelope_policy': {
-            'robot_envelope': 'sphere_over_spawn_aabb_half_diagonal',
-            'obstacle_envelope': 'sphere_over_case_cuboid'},
+            'robot_radius_rule': 'sqrt(sum(aabb_half_extents^2))',
+            'robot_attitude_scope': 'any_rigid_rotation_about_center',
+            'obstacle_radius_rule': 'max(obstacle_size)/2',
+            'limitation': 'sphere/AABB approximation; not a triangle-mesh '
+                          'sweep'},
         'freeze': {'path': str(freeze_path), 'sha256': _sha(freeze_path),
                    'schema_version': MODULE.BOUNDARY_FREEZE_SCHEMA,
                    'frozen_at': frozen_at, 'code_commit': CODE_COMMIT},
@@ -756,6 +759,7 @@ def test_positive_fixture_passes(tmp_path):
         assert entry['passed'] is True, (name, entry)
     assert result['recomputed']['clearance']['records'] > 0
     assert result['recomputed']['stop_requirement']['records'] > 0
+    assert _check(result, 'unsupported_usage_stats')['passed'] is True
     assert result['performance']['boundary_episode_total'] == 1
     assert result['performance']['boundary_episode_expected'] == 1
     assert result['performance']['boundary_episodes_by_segment'][
@@ -1403,6 +1407,59 @@ def test_regression_segment_does_not_require_expected_entry(tmp_path):
         segment_id='regression_dynamic', must_conditions=())
     result = run_verify(fixture)
     assert _check(result, 'expected_config_coverage')['passed'] is True
+
+
+def test_regression_fault_matches_existing_v2_fault_evidence(tmp_path):
+    fixture = build_fixture(
+        tmp_path, case_id='fault_ttl_expiry_0', business_outcome='ABORT',
+        role='regression', segment_id='regression_fault', acceptable=(),
+        must_conditions=())
+
+    def mutate(episodes):
+        episodes[0]['reason'] = 'V2_REJECT_TTL_EXPIRED'
+
+    _rewrite_episodes(fixture, mutate)
+    rows = _read_jsonl(fixture['run_dir'] / 'steps.jsonl')
+    for row in rows:
+        if row.get('outcome') in ('ABORT', 'TIMEOUT'):
+            row['reason'] = 'V2_REJECT_TTL_EXPIRED'
+    _write_jsonl(fixture['run_dir'] / 'steps.jsonl', rows)
+    _refresh_outputs(fixture['run_dir'])
+    result = run_verify(fixture)
+    assert _check(result, 'expected_config_coverage')['passed'] is True
+
+
+def test_recorded_alias_forms_are_accepted(tmp_path):
+    fixture = build_fixture(tmp_path)
+    manifest = _read_json(fixture['run_dir'] / 'manifest.json')
+    manifest.pop('clearance_schema_version', None)
+    manifest['clearance_algorithm']['schema_version'] = \
+        MODULE.CLEARANCE_SCHEMA_VERSION
+    manifest['vehicle_config'] = {
+        'file': fixture['plan']['vehicle_config_file'],
+        'sha256': fixture['plan']['vehicle_config_sha256']}
+    manifest['envelope_policy'] = {
+        'robot_radius_rule': 'sqrt(sum(aabb_half_extents^2))',
+        'robot_attitude_scope': 'any_rigid_rotation_about_center',
+        'obstacle_radius_rule': 'max(obstacle_size)/2',
+        'limitation': 'sphere/AABB approximation; not a triangle-mesh sweep'}
+    manifest['contact_sensor']['inference_rule'] = {
+        'sphere_overlap_m_gt': MODULE.CONTACT_OVERLAP_M,
+        'radii': 'robot half-diagonal + obstacle max(size)/2'}
+    _write_json(fixture['run_dir'] / 'manifest.json', manifest)
+    result = run_verify(fixture)
+    assert result['status'] == 'PASS', (
+        result['missing_fields'], result['failures'], result['deviations'])
+
+
+def test_success_episode_has_no_post_abort_window_requirement(tmp_path):
+    fixture = build_fixture(
+        tmp_path, business_outcome='SUCCESS', acceptable=('SUCCESS',),
+        post_abort_rows=0, must_conditions=('stop_started',))
+    result = run_verify(fixture)
+    assert _check(result, 'post_abort_old_setpoint')['passed'] is True
+    assert result['status'] == 'PASS', (
+        result['missing_fields'], result['failures'], result['deviations'])
 
 
 class _StubEvidence:

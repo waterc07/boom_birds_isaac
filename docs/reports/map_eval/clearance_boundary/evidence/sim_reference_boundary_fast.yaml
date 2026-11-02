@@ -1,0 +1,36 @@
+# Simulation velocity-chain reference parameters (PROPOSED, not aircraft limits).
+# Mass and inertia are read from the running asset, never copied here.
+#
+# Clearance boundary fast segment (PROPOSED): only
+# guidance.proportional.max_horizontal_mps is raised 0.6 -> 0.9 so the approach
+# speed reaches the measured brake-model support band (0.248-0.851 m/s) and the
+# >0.851 UNSUPPORTED path is exercised.  Every other value is identical to
+# configs/vehicles/sim_reference.yaml; this is not a measured aircraft limit.
+vehicle:
+  thrust_to_weight: 1.9
+  moment_scale_nm: 0.01
+  max_tilt_rad: 0.2
+controller:
+  ttl_s: 0.15
+guidance:
+  proportional:
+    max_horizontal_mps: 0.9
+    max_vertical_mps: 0.3
+    gain_per_m: 1.0
+    arrival_radius_m: 0.25
+    max_yaw_rate_radps: 0.0
+  braking:
+    max_horizontal_mps: 0.6
+    max_vertical_mps: 0.3
+    deceleration_mps2: 1.2
+    velocity_feedback_gain: 0.4
+    arrival_radius_m: 0.25
+gains:
+  kp_velocity_xy: 2.0
+  ki_velocity_xy: 0.5
+  kp_velocity_z: 3.0
+  ki_velocity_z: 1.0
+  k_attitude: 6.0
+  k_yaw: 2.0
+  k_rate: 20.0
+  integral_limit: 0.5

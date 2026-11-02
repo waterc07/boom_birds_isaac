@@ -1,0 +1,287 @@
+{
+  "schema_version": "boom_birds.clearance_boundary_evidence.v1",
+  "configs": {
+    "clearance_boundary_freeze_v1.json": {
+      "path": "docs/reports/map_eval/clearance_boundary/evidence/clearance_boundary_freeze_v1.json",
+      "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+      "bytes": 62357
+    },
+    "clearance_boundary_expected_v1.json": {
+      "path": "docs/reports/map_eval/clearance_boundary/evidence/clearance_boundary_expected_v1.json",
+      "sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+      "bytes": 26495
+    },
+    "clearance_boundary_cases_v1.json": {
+      "path": "docs/reports/map_eval/clearance_boundary/evidence/clearance_boundary_cases_v1.json",
+      "sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "bytes": 39749
+    },
+    "brake_model_v1.json": {
+      "path": "docs/reports/map_eval/clearance_boundary/evidence/brake_model_v1.json",
+      "sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+      "bytes": 3127
+    },
+    "sim_reference_boundary_fast.yaml": {
+      "path": "docs/reports/map_eval/clearance_boundary/evidence/sim_reference_boundary_fast.yaml",
+      "sha256": "7ca440c4e4c083b3ba6460b405800e3ba6ac16d6937fa85648f7b246d3ccaa5b",
+      "bytes": 1089
+    }
+  },
+  "runs": {
+    "boundary_default": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_default/summary.json",
+        "sha256": "ccfe37f0e26e0dbbc3464077152aa50db29feda748d764f04997f795e58d4a3d",
+        "bytes": 386105
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_default/episodes.jsonl",
+        "sha256": "f4656ffe207fced492ae5d5d416913f0961c66aecc7064c48b7c0e629f28fb3a",
+        "bytes": 242028
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_default/manifest.json",
+        "sha256": "3bb49b154a8fb00ef427414219723464abca94c2c90eaba14cafd0d665bab8c6",
+        "bytes": 9788
+      },
+      "steps.jsonl": {
+        "sha256": "cab4e05482b2a75804d7da9e9c50188354233414fb0e5e3a8814ca782646ae12",
+        "bytes": 62988610,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 6
+    },
+    "boundary_delay_e1": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_delay_e1/summary.json",
+        "sha256": "f45c5afcab26b9ffe2912a5e1aa7a586d37ddeac33262e86a15fcbd31f35b0fe",
+        "bytes": 25165
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_delay_e1/episodes.jsonl",
+        "sha256": "76ec965fc8762ab61eac39cf3c7ce0d01755f3e506b930f3230c811f6c4b199a",
+        "bytes": 14168
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_delay_e1/manifest.json",
+        "sha256": "8e57a3fba4c9580358df760e59c1d6daa4eddff2de7d51b5846b3b0f80197146",
+        "bytes": 7207
+      },
+      "steps.jsonl": {
+        "sha256": "8477989aa457ee017a724cd16c6bec5d0bc6af6e3abf17ca327f8a1809c5d576",
+        "bytes": 2594452,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "boundary_delay_e2": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_delay_e2/summary.json",
+        "sha256": "463ac19318d6cceb916a62e70c142bece6bdbcd904978265a72e4ef38c4d3c64",
+        "bytes": 15063
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_delay_e2/episodes.jsonl",
+        "sha256": "17e75708eb0ba58d6c660596e508bbd997ecf8b52fc908362c1d4645730ce2c4",
+        "bytes": 7852
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_delay_e2/manifest.json",
+        "sha256": "36046dc9686d8585e249cd2ea393fd42f5dc09c9a04e5a1f08f315eb19ef895f",
+        "bytes": 7157
+      },
+      "steps.jsonl": {
+        "sha256": "cc789387a38fc2760ad7450ea7df49f5232b58ad16192fa8b75308d34a163140",
+        "bytes": 2532936,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "boundary_fast": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_fast/summary.json",
+        "sha256": "07ca8ef26aaf474afa1bafcd49e2f1cbbf0620bf27466a313c7419f0e6d4239d",
+        "bytes": 51027
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_fast/episodes.jsonl",
+        "sha256": "bba9cc38047c932036f5ac14f9073dfc995638ac6b3fdcd6aae3a8b03467aa87",
+        "bytes": 30554
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/boundary_fast/manifest.json",
+        "sha256": "db377e70242519e74ded86dc1e94c36c86dc9be4d41fbdb786e622d313cfebd3",
+        "bytes": 7164
+      },
+      "steps.jsonl": {
+        "sha256": "babe1763bba201b72e37428ff669679ca369ce5152a63177bac1d2b3f7330457",
+        "bytes": 8238100,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 2
+    },
+    "latency_clock_mapping_recheck": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/latency_clock_mapping_recheck/summary.json",
+        "sha256": "fe50683b47e85b76b1a160268e0b39b474ec8a352273a135663d51282e330885",
+        "bytes": 17806
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/latency_clock_mapping_recheck/episodes.jsonl",
+        "sha256": "62860d8460c7f95368156c2665cb27a8781686b06f2e47318cd3a12a34336a71",
+        "bytes": 9204
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/latency_clock_mapping_recheck/manifest.json",
+        "sha256": "7df09700e8ec63e99dfea1f69df998cb71fbed4ee631ce918c39998c53eeef9d",
+        "bytes": 6984
+      },
+      "steps.jsonl": {
+        "sha256": "d14c2616c87fcf8440a2d05c14dee26a24b79d948202c387a1027634bf1e26b9",
+        "bytes": 2059915,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "latency_ttl_over_recheck": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/latency_ttl_over_recheck/summary.json",
+        "sha256": "13332f4c9ce3d969b16b2baf481aa15064fde7664beff8d647b75b4e64f080fd",
+        "bytes": 18438
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/latency_ttl_over_recheck/episodes.jsonl",
+        "sha256": "9d4739433b03c651e232afb1f0422c26918be88a21997bc40e7c23e794ad2a3d",
+        "bytes": 9597
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/latency_ttl_over_recheck/manifest.json",
+        "sha256": "412a5a55ba39eee87244613c37bc0d757ebf425e1483b14208a12f077c030e30",
+        "bytes": 6959
+      },
+      "steps.jsonl": {
+        "sha256": "1a202451679d069a731eb70750e47af48243f2a05e0772bd8b7cc8c1a7101b1f",
+        "bytes": 8086357,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "regression_dynamic": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_dynamic/summary.json",
+        "sha256": "6ea1e7da60c3909293ee344727f895b3c921e28db66ea05e54410c1173d9242d",
+        "bytes": 40036
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_dynamic/episodes.jsonl",
+        "sha256": "ce3f74076c72f6de9a78af81926b8d278bb4ff642b888a0c6f0ec2ec3c01c758",
+        "bytes": 23288
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_dynamic/manifest.json",
+        "sha256": "0876a1ea688a70e82f56b0f5cad6172784135da48980f0f2530434cbbcdcf089",
+        "bytes": 6898
+      },
+      "steps.jsonl": {
+        "sha256": "2c9428e91680ae6b4a4c01540a5e99ce902b3d3af6893e192d5391bf7f3c4da1",
+        "bytes": 6769874,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "regression_no_obstacle": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_no_obstacle/summary.json",
+        "sha256": "b6368d9f72e5e0a59ea8c80dd358ac9a04a3e641c3203076a3ee56cfca2bb369",
+        "bytes": 40108
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_no_obstacle/episodes.jsonl",
+        "sha256": "77385a8939384cd5cca2a623149ba3c1f6263fc040c010b3c4b35d16d090f177",
+        "bytes": 23328
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_no_obstacle/manifest.json",
+        "sha256": "8237fc0c62bf15d810e090ed14eb2ca4ede71cbb34d7a8a73f95c670688f07a8",
+        "bytes": 6952
+      },
+      "steps.jsonl": {
+        "sha256": "35cf72536dc188cbd3c335b1e4cd5e9787518743a58df807a6047f079b6e61d6",
+        "bytes": 6637216,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "regression_fault": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_fault/summary.json",
+        "sha256": "cd338a6a8900df93b1b2138512de9b9e859ca3df23866edce6384c1b4b08c0a4",
+        "bytes": 11513
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_fault/episodes.jsonl",
+        "sha256": "86e6b97dc04d7f4595fc4076edf9fcfc565385eefe3c0b17a6abf17b408625ad",
+        "bytes": 5217
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/clearance_boundary/evidence/regression_fault/manifest.json",
+        "sha256": "c146e99b3e0338776070674ad5266e8981148d2b35c3925915cc87ff205f8095",
+        "bytes": 6895
+      },
+      "steps.jsonl": {
+        "sha256": "0d76529e5526088bfb55a7671e75628dc2188eb92d288e256197abdc2e85cbf9",
+        "bytes": 633363,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    }
+  },
+  "screenshots": {
+    "boundary_default_boundary_A_static_offpath_r0-supervisor-boundary_default_success.png": {
+      "path": "docs/reports/map_eval/clearance_boundary/screenshots/boundary_default_boundary_A_static_offpath_r0-supervisor-boundary_default_success.png",
+      "sha256": "9ea0f66ffe65e62cee65ff499a14844fcd479cb090694b0aaa428e3b31379b04",
+      "bytes": 730709
+    },
+    "boundary_default_boundary_A_static_offpath_r1-supervisor-boundary_default_success.png": {
+      "path": "docs/reports/map_eval/clearance_boundary/screenshots/boundary_default_boundary_A_static_offpath_r1-supervisor-boundary_default_success.png",
+      "sha256": "c09a49518607bd8df1acf00f437da3ae130b387715785c29f8fbd006bb5806de",
+      "bytes": 735661
+    },
+    "boundary_fast_boundary_D_fast_cross_r0-supervisor-boundary_fast_success.png": {
+      "path": "docs/reports/map_eval/clearance_boundary/screenshots/boundary_fast_boundary_D_fast_cross_r0-supervisor-boundary_fast_success.png",
+      "sha256": "646acc109cc41ddbeefd3c8e584aacb73789fba61bf0ff238d60698ae409d369",
+      "bytes": 731039
+    },
+    "boundary_fast_boundary_D_fast_cross_r1-supervisor-boundary_fast_success.png": {
+      "path": "docs/reports/map_eval/clearance_boundary/screenshots/boundary_fast_boundary_D_fast_cross_r1-supervisor-boundary_fast_success.png",
+      "sha256": "2c90587f168e147d7b28363e273b6ec19e7c5478e869ea346dd21159b8adb266",
+      "bytes": 737244
+    }
+  },
+  "analysis": {
+    "path": "analyze_clearance_boundary.json",
+    "sha256": "816a1ace2b2c67b0fec42fa88a30fc01cbc5f691f2a5b541a7f22d55706aea17",
+    "bytes": 78897
+  },
+  "verification": {
+    "path": "verify_clearance_boundary.json",
+    "sha256": "fc5abe487f6d628981f1889f1437ef6eca14b1b48111c0602abf3f3fd720a48f",
+    "bytes": 120927
+  },
+  "report": {
+    "path": "MAP_CLEARANCE_BOUNDARY_REPORT.md",
+    "sha256": "0eef3cd19d68c8aec3487c1a18ddfd3dd128fd331df5a90ccec09ee72988c33f",
+    "bytes": 27327
+  },
+  "handoff": {
+    "path": "HANDOFF_20261102_CLEARANCE_BOUNDARY.md",
+    "sha256": "a2b59d66e65da6edd96f74ea2306fd6d30f2526bdfe2f0e03f4af568687e33bb",
+    "bytes": 8188
+  },
+  "contract": {
+    "path": "docs/design/CLEARANCE_GEOMETRY_CONTRACT.md",
+    "sha256": "c666a6b0ed22817a4fe82795a8599b14c26f72fc9506cc76631050c7166bda06",
+    "bytes": 5113
+  },
+  "analysis_script": {
+    "path": "scripts/analyze_clearance_boundary.py",
+    "sha256": "634ea309568cd525c3f48007bd8bd1e8857357c223ab85c00488d237e9f86cd3"
+  },
+  "verify_script": {
+    "path": "scripts/verify_clearance_boundary_runs.py",
+    "sha256": "b277dc6ed9ebdf89e3d9a68875b5c3fcf447b1dd1ce9577005f8e27349cc6a63"
+  }
+}

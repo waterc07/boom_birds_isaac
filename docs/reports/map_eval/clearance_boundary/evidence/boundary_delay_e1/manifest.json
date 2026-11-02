@@ -1,0 +1,158 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "evaluation_version": "boom_birds.latency_eval.v1",
+  "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808",
+  "working_tree": "clean at 0546701 + pre-run freeze",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NOT RECORDED",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+  "methods": [
+    "supervisor"
+  ],
+  "started_at": "2026-11-02T17:59:39.536637+08:00",
+  "latency_plan": {
+    "role": "special",
+    "segment_id": "boundary_delay_e1",
+    "config_id": "",
+    "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+    "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+    "case_ids": [
+      "boundary_E_delay_insufficient_r0",
+      "boundary_E_delay_insufficient_r1"
+    ],
+    "methods": [
+      "supervisor"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.2,
+    "action_delay_s": 0.1,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 300,
+    "stop_distance_m": 1.1,
+    "post_abort_observe_s": 3.0,
+    "clock_offset_ms": 20.0,
+    "clock_drift_ppm": 200.0,
+    "clock_uncertainty_ms": 5.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15
+  },
+  "boundary_plan": {
+    "segment_id": "boundary_delay_e1",
+    "role": "boundary",
+    "vehicle_config": "configs/vehicles/sim_reference.yaml",
+    "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+    "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+    "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+    "case_ids": [
+      "boundary_E_delay_insufficient_r0",
+      "boundary_E_delay_insufficient_r1"
+    ],
+    "methods": [
+      "supervisor"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.2,
+    "action_delay_s": 0.1,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 300,
+    "stop_distance_m": 1.1,
+    "post_abort_observe_s": 3.0,
+    "clock_offset_ms": 20.0,
+    "clock_drift_ppm": 200.0,
+    "clock_uncertainty_ms": 5.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15,
+    "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+    "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+    "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+    "clearance_schema_version": "boom_birds.clearance.v1",
+    "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+  },
+  "vehicle_config": {
+    "file": "configs/vehicles/sim_reference.yaml",
+    "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+  },
+  "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+  "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+  "brake_model_file": "configs/scenarios/brake_model_v1.json",
+  "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+  "clearance_algorithm": {
+    "id": "supervisor_predicted_path_clearance",
+    "version": "1.0.0",
+    "schema_version": "boom_birds.clearance.v1"
+  },
+  "stop_requirement_schema_version": "boom_birds.stop_requirement.v1",
+  "envelope_policy": {
+    "robot_radius_rule": "sqrt(sum(aabb_half_extents^2))",
+    "robot_attitude_scope": "any_rigid_rotation_about_center",
+    "obstacle_radius_rule": "max(obstacle_size)/2",
+    "limitation": "sphere/AABB approximation; not a triangle-mesh sweep"
+  },
+  "contact_sensor": {
+    "valid": true,
+    "mode": "sphere_overlap_inference",
+    "force_sensor_available": false,
+    "source": "contact_force_sensor_not_reporting_in_this_environment",
+    "reason": "ContactSensor probes (robot/obstacle side, per-link, scene and manual, with PhysxContactReportAPI applied) returned no obstacle-robot force while physical pushing was observed; contact is therefore inferred from conservative sphere overlap, not measured force.",
+    "inference_rule": {
+      "sphere_overlap_m_gt": 0.02,
+      "radii": "robot half-diagonal + obstacle max(size)/2"
+    },
+    "prim_paths": [],
+    "filter": [],
+    "num_sensors": 0,
+    "errors": []
+  },
+  "obstacle_time_clamp": true,
+  "clock_plan": {
+    "camera_clock_id": "camera_sim",
+    "offset_ms": 20.0,
+    "drift_ppm": 200.0,
+    "uncertainty_ms": 5.0
+  },
+  "freeze": {
+    "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+    "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+    "schema_version": "boom_birds.clearance_boundary_freeze.v1",
+    "frozen_at": "2026-11-02T09:45:29.034358+00:00",
+    "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808"
+  },
+  "body_envelope": {
+    "half_extents_m": [
+      0.05454223374277353,
+      0.03820826672017574,
+      0.013588040310423821
+    ],
+    "source": "measured_usd_aabb_at_runtime",
+    "measured_prim": "/World/envs/env_0/Robot"
+  },
+  "gui_evidence": {
+    "gui_mode": true,
+    "renderer": "DirectX (--/app/vulkan=false)",
+    "headless": false,
+    "window_required": true,
+    "screenshots": true,
+    "gpu_driver": "NOT RECORDED"
+  },
+  "episode_ids": [
+    "boundary_E_delay_insufficient_r0-supervisor-boundary_delay_e1",
+    "boundary_E_delay_insufficient_r1-supervisor-boundary_delay_e1"
+  ],
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/clearance_boundary_cases_v1.json --only-cases boundary_E_delay_insufficient_r0,boundary_E_delay_insufficient_r1 --methods supervisor --execution-path v2 --segment-id boundary_delay_e1 --vehicle-config configs/vehicles/sim_reference.yaml --stop-distance-m 1.1 --obstacle-time-clamp --screenshots --obs-delay-s 0.2 --action-delay-s 0.1 --ttl-ms 150 --max-age-ms 150 --allowed-observation-age-ms 300 --post-abort-observe-s 3.0 --clock-offset-ms 20.0 --clock-drift-ppm 200.0 --clock-uncertainty-ms 5.0 --sync-fail-step -1 --obs-mapping-fail-step -1 --transport-stall-step -1 --transport-stall-delay-s 0.15 --freeze configs/scenarios/clearance_boundary_freeze_v1.json --code-commit 0546701b715e20e35e0208b112debbf1c41c9808 --working-tree clean at 0546701 + pre-run freeze --kit_args=--/app/vulkan=false --device cuda:0 --output outputs/map_eval/bnd_boundary_delay_e1",
+  "outputs_sha256": {
+    "summary.json": "f45c5afcab26b9ffe2912a5e1aa7a586d37ddeac33262e86a15fcbd31f35b0fe",
+    "episodes.jsonl": "76ec965fc8762ab61eac39cf3c7ce0d01755f3e506b930f3230c811f6c4b199a",
+    "steps.jsonl": "8477989aa457ee017a724cd16c6bec5d0bc6af6e3abf17ca327f8a1809c5d576"
+  }
+}
