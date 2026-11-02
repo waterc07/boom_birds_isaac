@@ -660,8 +660,6 @@ try:
                 if previous_label == 'CONTACT_INFERRED':
                     if max_force > args.contact_threshold_n:
                         verdict = 'CONSISTENT'
-                    elif physical == 'GEOMETRY_OVERLAP_ONLY':
-                        verdict = 'MISS'
                     else:
                         verdict = 'UNDECIDABLE'
                 else:
