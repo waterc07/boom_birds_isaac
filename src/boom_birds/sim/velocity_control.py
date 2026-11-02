@@ -93,7 +93,13 @@ class VelocityGains:
 
 @dataclass(frozen=True)
 class VelocitySetpoint:
-    """Normalized contract command already mapped to physical units."""
+    """Normalized contract command already mapped to physical units.
+
+    The trailing provenance fields are optional so existing positional
+    construction keeps working; the delayed arrival gate reads them to verify
+    the six-tuple context epochs, sync generation and action identity at
+    arrival. ``check()`` semantics are unchanged (no renewal).
+    """
     vx_forward_mps: float
     vy_left_mps: float
     vz_up_mps: float
@@ -101,6 +107,9 @@ class VelocitySetpoint:
     issued_at_s: float
     expires_at_s: float
     control_epoch: int
+    action_id: str = ''
+    sync_generation: int = -1
+    epochs: tuple | None = None
 
     def __post_init__(self):
         for name in ('vx_forward_mps', 'vy_left_mps', 'vz_up_mps',

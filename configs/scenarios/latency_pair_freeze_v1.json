@@ -1,0 +1,36 @@
+{
+  "schema_version": "boom_birds.latency_pair_freeze.v1",
+  "status": "FROZEN_AFTER_RUNS_RECORDED",
+  "code_commit": "dff8650f7186d9b699621bb23f9186aff8493481",
+  "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+  "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+  "case_ids": [
+    "dynamic_A_south_0",
+    "dynamic_A_north_0",
+    "dynamic_A_south_1",
+    "dynamic_B_south_0",
+    "dynamic_B_north_0",
+    "dynamic_B_south_1",
+    "dynamic_C_south_0",
+    "dynamic_C_north_0",
+    "dynamic_D_south_0",
+    "dynamic_D_north_0",
+    "dynamic_E_south_0",
+    "dynamic_E_north_0"
+  ],
+  "delays": {
+    "observation_ms": 150,
+    "action_ms": 100
+  },
+  "configs": {
+    "A": {
+      "stop_distance_m": 1.1
+    },
+    "B": {
+      "stop_distance_m": 1.38
+    }
+  },
+  "episodes_per_config": 12,
+  "total_episodes": 24,
+  "note": "Freeze recorded after paired runs; runs used fixed code commit and explicit CLI args. Not a pre-run freeze."
+}

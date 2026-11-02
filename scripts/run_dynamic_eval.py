@@ -1,11 +1,18 @@
-"""Dynamic-obstacle stop-wait-resume paired evaluation (ORACLE, GUI)."""
+"""Dynamic-obstacle stop-wait-resume paired evaluation (ORACLE, GUI).
+
+Latency-envelope extension (2026-11-02): simulated camera clock domain + mapping
+error bound, action arrival gate with TTL/context/ownership checks, actual
+executed-setpoint records and post-abort physical observation.  The extension is
+inactive for --action-delay-s 0 with zero clock parameters (legacy path), except
+that the raw records carry the extra fields.
+"""
 import argparse
 import hashlib
 import json
 import math
 import sys
 import traceback
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from isaaclab.app import AppLauncher
@@ -22,6 +29,8 @@ parser.add_argument('--execution-path', default='v2', choices=('v1', 'v2'))
 parser.add_argument('--obs-delay-s', type=float, default=0.0)
 parser.add_argument('--action-delay-s', type=float, default=0.0)
 parser.add_argument('--clock-offset-ms', type=float, default=0.0)
+parser.add_argument('--clock-drift-ppm', type=float, default=0.0)
+parser.add_argument('--clock-uncertainty-ms', type=float, default=0.0)
 parser.add_argument('--sync-fail-step', type=int, default=-1)
 parser.add_argument('--stop-distance-m', type=float, default=1.1)
 parser.add_argument('--only-cases', default='')
@@ -31,8 +40,20 @@ parser.add_argument('--code-commit', default='WORKTREE')
 parser.add_argument('--working-tree', default='recorded by the operator')
 parser.add_argument('--gpu-driver', default='NOT RECORDED')
 parser.add_argument('--screenshots', action='store_true')
+# Latency-envelope extension arguments (see docs/superpowers/plans/2026-11-02-latency-envelope.md).
+parser.add_argument('--config-id', default='')
+parser.add_argument('--segment-id', default='')
+parser.add_argument('--ttl-ms', type=int, default=150)
+parser.add_argument('--max-age-ms', type=int, default=150)
+parser.add_argument('--allowed-observation-age-ms', type=int, default=250)
+parser.add_argument('--post-abort-observe-s', type=float, default=0.0)
+parser.add_argument('--obs-mapping-fail-step', type=int, default=-1)
+parser.add_argument('--transport-stall-step', type=int, default=-1)
+parser.add_argument('--transport-stall-delay-s', type=float, default=0.15)
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
+if getattr(args, 'headless', False):
+    raise RuntimeError('GUI runs are required; --headless is forbidden by the project rules')
 args.output.mkdir(parents=True, exist_ok=True)
 app = AppLauncher(args).app
 STAGES = []
@@ -41,6 +62,19 @@ STAGES = []
 def mark(stage):
     STAGES.append(stage)
     print('[stage] ' + stage, flush=True)
+
+
+def _iso_now():
+    return datetime.now(timezone.utc).astimezone().isoformat()
+
+
+def _parse_iso(text):
+    if not text:
+        return None
+    value = str(text)
+    if value.endswith('Z'):
+        value = value[:-1] + '+00:00'
+    return datetime.fromisoformat(value)
 
 
 try:
@@ -58,7 +92,11 @@ try:
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
     from boom_birds.evaluation.action_transport import DelayedVelocityExecutor
+    from boom_birds.evaluation.dual_clock import SimClock, SimMapping, mapping_age
     from boom_birds.evaluation.episode_boundary import EpisodeBoundary
+    from boom_birds.evaluation.latency_plan import (
+        LATENCY_EVAL_VERSION, LATENCY_FREEZE_SCHEMA, build_run_plan,
+        check_freeze_lineage, validate_run_plan)
     from boom_birds.evaluation.supervisor import RouteSupervisor, SupervisorConfig
     from boom_birds.evaluation.waypoints import WaypointConfig, WaypointRunner
     from boom_birds.sim.dynamic_obstacle import load_obstacle_spec
@@ -80,24 +118,79 @@ try:
     methods = [item.strip() for item in args.methods.split(',') if item.strip()]
     if not methods or any(item not in ('follow_only', 'supervisor') for item in methods):
         raise RuntimeError('methods must be follow_only and/or supervisor')
+    if not cases:
+        raise RuntimeError('no cases selected')
     case_sha = hashlib.sha256(args.cases.read_bytes()).hexdigest()
     map_cfg_sha = hashlib.sha256(args.map_config.read_bytes()).hexdigest()
+    started_at = _iso_now()
+
+    freeze_doc = None
+    freeze_meta = {'path': '', 'sha256': '', 'schema_version': '',
+                   'frozen_at': '', 'code_commit': ''}
+
+    def build_plan(role):
+        return build_run_plan(
+            role=role,
+            segment_id=args.segment_id,
+            config_id=args.config_id,
+            cases_file=Path(args.cases).as_posix(),
+            cases_sha256=case_sha,
+            case_ids=[case.case_id for case in cases],
+            methods=methods,
+            execution_path=args.execution_path,
+            obs_delay_s=args.obs_delay_s,
+            action_delay_s=args.action_delay_s,
+            ttl_ms=args.ttl_ms,
+            max_age_ms=args.max_age_ms,
+            allowed_observation_age_ms=args.allowed_observation_age_ms,
+            stop_distance_m=args.stop_distance_m,
+            post_abort_observe_s=args.post_abort_observe_s,
+            clock_offset_ms=args.clock_offset_ms,
+            clock_drift_ppm=args.clock_drift_ppm,
+            clock_uncertainty_ms=args.clock_uncertainty_ms,
+            sync_fail_step=args.sync_fail_step,
+            obs_mapping_fail_step=args.obs_mapping_fail_step,
+            transport_stall_step=args.transport_stall_step,
+            transport_stall_delay_s=args.transport_stall_delay_s)
 
     if args.freeze is not None:
-        freeze = json.loads(args.freeze.read_text(encoding='utf-8'))
-        expected = {
-            'map_asset_id': contract.asset_id,
-            'terrain_sha256': contract.terrain_sha256,
-            'preview_sha256': contract.preview_sha256,
-            'map_config_sha256': map_cfg_sha,
-            'cases_sha256': case_sha,
-        }
-        for key, value in expected.items():
-            if freeze.get(key) != value:
-                raise RuntimeError('freeze mismatch: ' + key)
-        if freeze.get('methods') != methods:
-            raise RuntimeError('freeze methods mismatch')
-        mark('dynamic freeze verified')
+        freeze_bytes = Path(args.freeze).read_bytes()
+        freeze_doc = json.loads(freeze_bytes)
+        freeze_meta.update(
+            path=Path(args.freeze).as_posix(),
+            sha256=hashlib.sha256(freeze_bytes).hexdigest(),
+            schema_version=str(freeze_doc.get('schema_version', '')),
+            frozen_at=str(freeze_doc.get('frozen_at', '')),
+            code_commit=str(freeze_doc.get('code_commit', '')))
+        if freeze_doc.get('schema_version') == LATENCY_FREEZE_SCHEMA:
+            role = 'main' if args.config_id else ('special' if args.segment_id else '')
+            if role not in ('main', 'special'):
+                raise RuntimeError('latency freeze requires --config-id (main) or '
+                                   '--segment-id (special)')
+            plan = build_plan(role)
+            validate_run_plan(freeze_doc, role=role, segment_id=args.segment_id,
+                              config_id=args.config_id, run_plan=plan)
+            check_freeze_lineage(freeze_doc, _iso_now(), Path.cwd())
+            if args.code_commit not in ('WORKTREE', str(freeze_doc.get('code_commit'))):
+                raise RuntimeError('--code-commit does not match the freeze commit')
+            mark('latency freeze verified')
+        else:
+            expected = {
+                'map_asset_id': contract.asset_id,
+                'terrain_sha256': contract.terrain_sha256,
+                'preview_sha256': contract.preview_sha256,
+                'map_config_sha256': map_cfg_sha,
+                'cases_sha256': case_sha,
+            }
+            for key, value in expected.items():
+                if freeze_doc.get(key) != value:
+                    raise RuntimeError('freeze mismatch: ' + key)
+            if freeze_doc.get('methods') != methods:
+                raise RuntimeError('freeze methods mismatch')
+            frozen_at = _parse_iso(freeze_doc.get('frozen_at', ''))
+            if frozen_at is not None and frozen_at > _parse_iso(_iso_now()):
+                raise RuntimeError('freeze is in the future (not a pre-run freeze)')
+            mark('dynamic freeze verified')
 
     import yaml
     config = yaml.safe_load(Path('configs/vehicles/sim_reference.yaml')
@@ -117,7 +210,8 @@ try:
     cfg.decimation = 5
     cfg.episode_length_s = 120.0
     cfg.robot.spawn.activate_contact_sensors = True
-    obstacle_specs = [load_obstacle_spec(case.obstacle) for case in cases]
+    obstacle_specs = [load_obstacle_spec(case.obstacle) for case in cases
+                      if case.obstacle is not None]
     if not obstacle_specs:
         raise RuntimeError('no dynamic obstacle cases')
     obstacle_size = obstacle_specs[0].size_m
@@ -158,8 +252,10 @@ try:
             gravity_mps2=float(gravity),
             max_tilt_rad=float(vehicle_cfg['max_tilt_rad']))
         executor = VelocityExecutor(params, gains, dt_s=dt, control_epoch=0)
+        delay_wrapper = None
         if args.action_delay_s > 0:
-            executor = DelayedVelocityExecutor(executor, args.action_delay_s)
+            delay_wrapper = DelayedVelocityExecutor(executor, args.action_delay_s)
+            executor = delay_wrapper
         zero_velocity = torch.zeros((1, 6), device=env.device)
         index = torch.tensor([0], device=env.device)
         stage = omni.usd.get_context().get_stage()
@@ -205,12 +301,33 @@ try:
         def obstacle_contact():
             try:
                 sensor.update(dt=dt)
-                matrix = sensor.data.force_matrix_w
+                matrix = sensor.force_matrix_w
                 if matrix is None:
                     return 0.0
                 return float(matrix[0].abs().sum(dim=-1).max())
             except Exception:
                 return 0.0
+
+        def measure_body_envelope():
+            """Measured USD axis-aligned bounding box of the robot prim."""
+            try:
+                from pxr import Usd, UsdGeom
+                prim = stage.GetPrimAtPath(robot_root)
+                if not prim or not prim.IsValid():
+                    return {'half_extents_m': None, 'source': 'UNAVAILABLE',
+                            'measured_prim': robot_root}
+                cache = UsdGeom.BBoxCache(Usd.TimeCode.Default(),
+                                          ['default', 'render'])
+                bounds = cache.ComputeWorldBound(prim).ComputeAlignedRange()
+                size = bounds.GetSize()
+                half = [abs(float(size[axis])) / 2.0 for axis in range(3)]
+                return {'half_extents_m': half,
+                        'source': 'measured_usd_aabb_at_runtime',
+                        'measured_prim': robot_root}
+            except Exception as error:
+                print('[dynamic] body envelope warning: ' + repr(error), flush=True)
+                return {'half_extents_m': None, 'source': 'UNAVAILABLE',
+                        'measured_prim': robot_root}
 
         mark('configure map dones')
         original_dones = env._get_dones
@@ -259,21 +376,330 @@ try:
                 print('[dynamic] screenshot warning: ' + repr(error), flush=True)
                 return None
 
+        mark('measure body envelope')
+        body_envelope = measure_body_envelope()
+        print('[dynamic] body envelope=' + json.dumps(body_envelope), flush=True)
+
+        clock_offset_ns = int(round(args.clock_offset_ms * 1_000_000))
+        clock_uncertainty_ns = int(round(args.clock_uncertainty_ms * 1_000_000))
+        camera_clock = SimClock('camera_sim', offset_ns=clock_offset_ns,
+                                drift_ppm=args.clock_drift_ppm,
+                                uncertainty_ns=clock_uncertainty_ns)
+        obs_delay_ns = int(round(args.obs_delay_s * 1_000_000_000))
+
+        def gate_epochs(gate):
+            cfg_gate = gate.config
+            return (cfg_gate.system_boot_id, cfg_gate.mission_epoch,
+                    cfg_gate.localization_epoch, cfg_gate.control_epoch,
+                    cfg_gate.px4_boot_id, cfg_gate.sync_generation)
+
+        def transport_snapshot(admitted_action, now_ns):
+            if delay_wrapper is None:
+                executed = admitted_action is not None
+                action_id = admitted_action.action_id if admitted_action is not None else ''
+                issued = (admitted_action.issued_at_monotonic_ns
+                          if admitted_action is not None else 0)
+                expires = (admitted_action.expires_at_monotonic_ns
+                           if admitted_action is not None else 0)
+                return {
+                    'status': 'DIRECT' if executed else 'NONE',
+                    'action_id': action_id,
+                    'executed_action_id': action_id if executed else '',
+                    'issued_at_ns': int(issued),
+                    'expires_at_ns': int(expires),
+                    'scheduled_arrival_ns': int(now_ns),
+                    'arrival_ns': int(now_ns),
+                    'dispatch_delay_s': 0.0,
+                    'arrival_age_s': 0.0,
+                    'reason': 'ACCEPT' if executed else 'REJECT_NO_CACHED_ACTION',
+                    'executed': executed,
+                    'applied': None,
+                    'rejections_this_step': [],
+                }
+            raw = getattr(delay_wrapper, 'last_transport', None) or {}
+            return {
+                'status': str(raw.get('status', 'NONE')),
+                'action_id': str(raw.get('action_id', '') or ''),
+                'executed_action_id': str(raw.get('executed_action_id', '') or ''),
+                'issued_at_ns': int(round(float(raw.get('issued_at_s', 0.0)) * 1_000_000_000)),
+                'expires_at_ns': int(round(float(raw.get('expires_at_s', 0.0)) * 1_000_000_000)),
+                'scheduled_arrival_ns': int(round(
+                    float(raw.get('scheduled_arrival_s', 0.0)) * 1_000_000_000)),
+                'arrival_ns': int(round(float(raw.get('arrival_s', 0.0)) * 1_000_000_000)),
+                'dispatch_delay_s': float(raw.get('dispatch_delay_s', 0.0)),
+                'arrival_age_s': float(raw.get('arrival_age_s', 0.0)),
+                'reason': str(raw.get('reason', '')),
+                'executed': bool(raw.get('executed', False)),
+                'applied': raw.get('applied'),
+                'rejections_this_step': list(raw.get('rejections_this_step', []) or []),
+            }
+
+        def empty_transport(now_ns):
+            return {
+                'status': 'NONE', 'action_id': '', 'executed_action_id': '',
+                'issued_at_ns': 0, 'expires_at_ns': 0,
+                'scheduled_arrival_ns': int(now_ns), 'arrival_ns': int(now_ns),
+                'dispatch_delay_s': 0.0, 'arrival_age_s': 0.0,
+                'reason': 'REJECT_NO_CACHED_ACTION', 'executed': False,
+                'applied': None, 'rejections_this_step': [],
+            }
+
+        def applied_snapshot(transport, command, admitted_action, now_ns,
+                             expires_ns, issued_ns):
+            applied = transport.get('applied')
+            if applied is not None:
+                return {
+                    'vx_forward_mps': float(applied.get('vx_forward_mps', 0.0)),
+                    'vy_left_mps': float(applied.get('vy_left_mps', 0.0)),
+                    'vz_up_mps': float(applied.get('vz_up_mps', 0.0)),
+                    'yaw_rate_ccw_world_radps': float(
+                        applied.get('yaw_rate_ccw_world_radps', 0.0)),
+                    'action_id': str(applied.get('action_id', '') or ''),
+                    'issued_at_ns': int(applied.get('issued_at_ns', 0) or 0),
+                    'expires_at_ns': int(applied.get('expires_at_ns', 0) or 0),
+                    'age_s': float(applied.get('age_s', 0.0)),
+                    'is_held': bool(applied.get('is_held', False)),
+                }
+            if delay_wrapper is None and admitted_action is not None:
+                return {
+                    'vx_forward_mps': float(command[0]),
+                    'vy_left_mps': float(command[1]),
+                    'vz_up_mps': float(command[2]),
+                    'yaw_rate_ccw_world_radps': float(command[3]),
+                    'action_id': str(admitted_action.action_id),
+                    'issued_at_ns': int(issued_ns),
+                    'expires_at_ns': int(expires_ns),
+                    'age_s': 0.0,
+                    'is_held': False,
+                }
+            return {
+                'vx_forward_mps': 0.0, 'vy_left_mps': 0.0, 'vz_up_mps': 0.0,
+                'yaw_rate_ccw_world_radps': 0.0, 'action_id': '',
+                'issued_at_ns': 0, 'expires_at_ns': 0, 'age_s': 0.0,
+                'is_held': False,
+            }
+
+        def clock_snapshot(now_ns, capture_host_ns, capture_clock_ns, mapping,
+                           age_rec, header_capture_ns):
+            return {
+                'host_now_ns': int(now_ns),
+                'capture_host_ns': int(capture_host_ns),
+                'capture_clock_ns': int(capture_clock_ns),
+                'camera_clock_id': camera_clock.clock_id,
+                'mapping_host_ns': (None if age_rec.get('mapped_host_ns') is None
+                                    else int(age_rec['mapped_host_ns'])),
+                'mapping_error_ns': (None if age_rec.get('error_bound_ns') is None
+                                     else int(age_rec['error_bound_ns'])),
+                'mapping_sync_generation': int(mapping.sync_generation),
+                'mapping_usable': bool(age_rec.get('valid')),
+                'mapping_reason': str(age_rec.get('reason', '')),
+                'age_point_s': (None if age_rec.get('age_point_s') is None
+                                else float(age_rec['age_point_s'])),
+                'age_bound_s': (None if age_rec.get('age_bound_s') is None
+                                else float(age_rec['age_bound_s'])),
+                'header_capture_host_ns': int(header_capture_ns),
+            }
+
+        def _dist(a, b):
+            return math.sqrt(sum((a[axis] - b[axis]) ** 2 for axis in range(3)))
+
+        def compute_episode_metrics(rows, case):
+            body_half = body_envelope.get('half_extents_m')
+            body_radius = max(body_half) if body_half else 0.0
+            obstacle_payload = case.obstacle or {}
+            obstacle_size_m = tuple(float(value) for value in
+                                    obstacle_payload.get('size_m', (0.0, 0.0, 0.0)))
+            obstacle_half = [value / 2.0 for value in obstacle_size_m]
+            obstacle_radius = max(obstacle_half) if obstacle_half else 0.0
+            run_rows = [row for row in rows if row.get('phase', 'RUN') == 'RUN']
+            brake_start = None
+            brake_index = None
+            for position, row in enumerate(run_rows):
+                if row.get('supervisor_action') == 'STOP':
+                    brake_start = {
+                        'step': int(row.get('step', 0)),
+                        'time_s': float(row.get('time_s', 0.0)),
+                        'position_world_m': list(row['position_world_m']),
+                        'velocity_world_mps': list(row['velocity_world_mps']),
+                        'speed_mps': float(row.get('speed_mps', 0.0)),
+                        'supervisor_state': row.get('supervisor_state'),
+                        'observation_age_s': float(row.get('observation_age_s', 0.0)),
+                    }
+                    brake_index = position
+                    break
+            stop_window = max(1, int(math.ceil(0.5 / dt)))
+            stop_distance = None
+            stop_time = None
+            stop_speed = None
+            final_speed = (float(rows[-1].get('speed_mps', 0.0)) if rows else 0.0)
+            if brake_start is not None:
+                tail = rows[brake_index:] if brake_index is not None else rows
+                speeds = [float(row.get('speed_mps', 0.0)) for row in tail]
+                stop_row = None
+                for position in range(0, len(tail)):
+                    window = speeds[position:position + stop_window]
+                    if len(window) < stop_window:
+                        break
+                    if all(value <= 0.08 for value in window):
+                        stop_row = tail[min(len(tail) - 1, position + stop_window - 1)]
+                        break
+                if stop_row is None and tail:
+                    stop_row = tail[-1]
+                if stop_row is not None:
+                    delta = [stop_row['position_world_m'][axis]
+                             - brake_start['position_world_m'][axis]
+                             for axis in range(3)]
+                    start_speed = float(brake_start['speed_mps'])
+                    if start_speed > 1e-9:
+                        unit = [value / start_speed for value in
+                                brake_start['velocity_world_mps']]
+                        along = sum(delta[axis] * unit[axis] for axis in range(3))
+                        lateral = math.sqrt(max(0.0, sum(value * value for value in delta)
+                                                - along * along))
+                    else:
+                        along = math.sqrt(sum(value * value for value in delta))
+                        lateral = 0.0
+                    stop_distance = along
+                    stop_time = float(stop_row.get('time_s', 0.0)) - float(
+                        brake_start['time_s'])
+                    stop_speed = float(stop_row.get('speed_mps', 0.0))
+                    stop_definition = ('ALONG_INITIAL_VELOCITY_TO_STABLE_SPEED_LE_0.08'
+                                       '_FOR_0.5S')
+                else:
+                    stop_definition = 'NO_STOP_ROW'
+            else:
+                stop_definition = 'NO_STOP_COMMAND'
+            min_distance = None
+            min_distance_time = None
+            min_gap = None
+            max_rel = 0.0
+            max_closing = 0.0
+            previous = None
+            contact_max = 0.0
+            contact_prim = ''
+            for row in rows:
+                obstacle_position = row.get('obstacle_position_world_m')
+                if obstacle_position is None:
+                    continue
+                distance = _dist(row['position_world_m'], obstacle_position)
+                if min_distance is None or distance < min_distance:
+                    min_distance = distance
+                    min_distance_time = float(row.get('time_s', 0.0))
+                gap = distance - body_radius - obstacle_radius
+                if min_gap is None or gap < min_gap:
+                    min_gap = gap
+                velocity = row.get('velocity_world_mps')
+                obstacle_velocity = row.get('obstacle_velocity_world_mps')
+                if velocity is not None and obstacle_velocity is not None:
+                    relative = [obstacle_velocity[axis] - velocity[axis]
+                                for axis in range(3)]
+                    max_rel = max(max_rel, math.sqrt(sum(v * v for v in relative)))
+                if previous is not None:
+                    delta_t = float(row.get('time_s', 0.0)) - previous[1]
+                    if delta_t > 1e-9:
+                        closing = (previous[0] - distance) / delta_t
+                        max_closing = max(max_closing, closing)
+                previous = (distance, float(row.get('time_s', 0.0)))
+                contact = float(row.get('contact_force_n', 0.0) or 0.0)
+                if contact > contact_max:
+                    contact_max = contact
+                if row.get('contact_prim'):
+                    contact_prim = row['contact_prim']
+            executed_ids = []
+            rejected_rows = []
+            for row in rows:
+                transport = row.get('transport') or {}
+                executed_id = transport.get('executed_action_id')
+                if transport.get('executed') and executed_id and executed_id not in executed_ids:
+                    executed_ids.append(executed_id)
+                if transport.get('status') == 'REJECTED':
+                    rejected_rows.append(transport.get('reason', ''))
+            reject_reasons = {}
+            for reason in rejected_rows:
+                reject_reasons[reason] = reject_reasons.get(reason, 0) + 1
+            post_rows = [row for row in rows if row.get('phase') == 'POST_ABORT']
+            post_abort = None
+            if post_rows:
+                anchor = post_rows[0]
+                residual = _dist(post_rows[-1]['position_world_m'],
+                                 anchor['position_world_m'])
+                post_stop = None
+                post_speeds = [float(row.get('speed_mps', 0.0)) for row in post_rows]
+                window = max(1, int(math.ceil(0.5 / dt)))
+                for position in range(0, len(post_rows)):
+                    segment = post_speeds[position:position + window]
+                    if len(segment) < window:
+                        break
+                    if all(value <= 0.08 for value in segment):
+                        post_stop = (float(post_rows[position + window - 1]['time_s'])
+                                     - float(anchor.get('time_s', 0.0)))
+                        break
+                post_abort = {
+                    'steps': len(post_rows),
+                    'residual_distance_m': residual,
+                    'time_to_stop_s': post_stop,
+                    'contact_max_force_n': max(
+                        [float(row.get('contact_force_n', 0.0) or 0.0)
+                         for row in post_rows] or [0.0]),
+                }
+            return {
+                'brake_start': brake_start,
+                'initial_speed_mps': (None if brake_start is None
+                                      else brake_start['speed_mps']),
+                'stop_distance_m': stop_distance,
+                'stop_time_s': stop_time,
+                'stop_speed_mps': stop_speed,
+                'stop_definition': stop_definition,
+                'final_speed_mps': final_speed,
+                'min_center_distance_m': min_distance,
+                'min_center_distance_time_s': min_distance_time,
+                'min_envelope_gap_m': min_gap,
+                'envelope': {
+                    'body_half_extents_m': (None if body_half is None
+                                            else [float(v) for v in body_half]),
+                    'obstacle_half_extents_m': [float(v) for v in obstacle_half],
+                    'body_radius_m': body_radius,
+                    'obstacle_radius_m': obstacle_radius,
+                    'body_source': body_envelope.get('source'),
+                },
+                'max_closing_speed_mps': max_closing,
+                'max_relative_speed_mps': max_rel,
+                'contact_max_force_n': contact_max,
+                'contact_prim': contact_prim,
+                'executed_action_count': len(executed_ids),
+                'executed_action_ids': executed_ids,
+                'arrival_rejection_count': len(rejected_rows),
+                'arrival_reject_reasons': reject_reasons,
+                'post_abort': post_abort,
+            }
+
+        def obstacle_observation_fields(observation):
+            return {
+                'observation_valid': bool(observation.get('valid')),
+                'observation_reason': observation.get('reason'),
+                'observation_age_s': float(observation.get('age_s', 0.0)),
+                'observation_age_point_s': float(
+                    observation.get('age_point_s', observation.get('age_s', 0.0))),
+            }
+
         supervisor_config = SupervisorConfig(stop_distance_m=args.stop_distance_m)
         boundary = EpisodeBoundary(env)
         results = []
         records = []
-        started_at = datetime.now().astimezone().isoformat()
         mark('run dynamic paired cases')
         with torch.inference_mode():
             for case in cases:
                 obstacle_spec = load_obstacle_spec(case.obstacle)
+                case_obs_delay_s = float(obstacle_spec.observation_delay_s)
+                case_obs_delay_ns = int(round(case_obs_delay_s * 1_000_000_000))
                 for method in methods:
                     boundary.start(seed=case.seed if hasattr(case, 'seed') else 9000)
                     set_robot_pose(case.start_position_world_m, case.start_yaw_rad)
                     set_obstacle_pose((0.0, 0.0, 50.0))
                     state = read_state()
                     executor.reset(state)
+                    if delay_wrapper is not None:
+                        delay_wrapper.clear()
                     runner = WaypointRunner(
                         case.waypoints,
                         WaypointConfig(arrival_radius_m=0.25,
@@ -284,12 +710,22 @@ try:
                         timeout_s=case.timeout_s)
                     supervisor = RouteSupervisor(supervisor_config)
                     v2_gate = (V2ActionGate(V2ExecutionConfig(
-                        ttl_ns=150_000_000, max_age_ms=150,
-                        allowed_observation_age_ns=250_000_000))
+                        ttl_ns=args.ttl_ms * 1_000_000,
+                        max_age_ms=args.max_age_ms,
+                        allowed_observation_age_ns=args.allowed_observation_age_ms * 1_000_000))
                         if args.execution_path == 'v2' else None)
-                    if hasattr(executor, 'clear'):
-                        executor.clear()
+                    if delay_wrapper is not None:
+                        executor.control_epoch = 0
+                        delay_wrapper.update_context(
+                            epochs=gate_epochs(v2_gate),
+                            owner=v2_gate.config.source)
+                    episode_id = case.case_id + '-' + method
+                    if args.config_id:
+                        episode_id += '-' + args.config_id
+                    if args.segment_id:
+                        episode_id += '-' + args.segment_id
                     outcome, reason = 'RUNNING', 'RUNNING'
+                    abort_time_s = None
                     v2_action_id = ''
                     v2_admission = ''
                     v2_reject_reason = ''
@@ -307,48 +743,89 @@ try:
                     states = []
                     contact_max = 0.0
                     contact_prim = ''
-                    obstacle_record = []
-                    episode_id = case.case_id + '-' + method
+                    episode_rows = []
+                    admitted_by_id = {}
                     steps = 0
+                    sync_generation = 0
                     max_steps = int(math.ceil(case.timeout_s / dt))
                     for step in range(max_steps):
                         elapsed = (step + 1) * dt
+                        now_ns = int(round(elapsed * 1_000_000_000))
+                        now_s = elapsed
                         state = read_state()
                         obstacle_position, obstacle_velocity = obstacle_spec.pose_at(elapsed)
                         set_obstacle_pose(obstacle_position)
+                        capture_host_ns = max(0, now_ns - obs_delay_ns - case_obs_delay_ns)
+                        capture_host_ns = min(capture_host_ns, now_ns)
+                        capture_clock_ns = camera_clock.read_ns(capture_host_ns)
+                        sync_generation = (int(v2_gate.config.sync_generation)
+                                           if v2_gate is not None else 0)
+                        mapping = SimMapping(
+                            'camera_sim', 'host_monotonic',
+                            offset_ns=clock_offset_ns,
+                            uncertainty_ns=clock_uncertainty_ns,
+                            drift_ppm=args.clock_drift_ppm,
+                            sync_generation=sync_generation)
+                        mapping_blocked = (args.obs_mapping_fail_step >= 0
+                                           and step >= args.obs_mapping_fail_step)
+                        if mapping_blocked:
+                            age_rec = {
+                                'valid': False, 'reason': 'CLOCK_MAPPING_UNUSABLE',
+                                'age_point_s': None, 'age_bound_s': None,
+                                'mapped_host_ns': None, 'error_bound_ns': None}
+                        else:
+                            age_rec = mapping_age(capture_clock_ns, now_ns, mapping,
+                                                  sync_generation)
                         observation_t = max(0.0, elapsed - args.obs_delay_s)
-                        observation = obstacle_spec.observation_at(observation_t)
-                        observation['age_s'] = (float(observation.get('age_s', 0.0))
-                                                + args.obs_delay_s
-                                                + args.clock_offset_ms / 1000.0)
+                        raw_observation = obstacle_spec.observation_at(observation_t)
+                        if raw_observation.get('valid') and age_rec.get('valid'):
+                            observation = dict(raw_observation)
+                            observation['age_s'] = float(age_rec['age_bound_s'])
+                            observation['age_point_s'] = float(age_rec['age_point_s'])
+                        else:
+                            observation = {
+                                'valid': False,
+                                'reason': ('CLOCK_MAPPING_UNUSABLE'
+                                           if not age_rec.get('valid')
+                                           else raw_observation.get('reason',
+                                                                    'OBSERVATION_INVALID')),
+                                'age_s': 0.0, 'age_point_s': 0.0,
+                                'position_world_m': None,
+                                'velocity_world_mps': None,
+                                'timestamp_s': observation_t,
+                            }
                         target = runner.waypoints[runner.index]
+                        speed = math.sqrt(sum(value * value
+                                              for value in state.velocity_world_mps))
                         decision = supervisor.update(
-                            state.position_world_m, target,
-                            math.sqrt(sum(value * value
-                                          for value in state.velocity_world_mps)),
+                            state.position_world_m, target, speed,
                             observation, route_active_s, dt)
+                        admitted_action = None
                         if method == 'supervisor':
                             states.append(decision['state'])
                             if decision['action'] == 'STOP':
                                 command = (0.0, 0.0, 0.0, 0.0)
                             elif decision['action'] == 'ABORT':
-                                outcome, reason = 'ABORT', decision.get(
-                                    'abort_reason') or 'SUPERVISOR_ABORT'
-                                records.append({
-                                    'episode_id': episode_id, 'case_id': case.case_id,
-                                    'method': method,
+                                outcome = 'ABORT'
+                                reason = (decision.get('abort_reason')
+                                          or 'SUPERVISOR_ABORT')
+                                abort_time_s = elapsed
+                                episode_rows.append({
+                                    'episode_id': episode_id,
+                                    'case_id': case.case_id, 'method': method,
                                     'scenario_class': case.scenario_class,
                                     'step': step, 'time_s': round(elapsed, 4),
+                                    'phase': 'RUN',
                                     'position_world_m': list(state.position_world_m),
                                     'velocity_world_mps': list(state.velocity_world_mps),
-                                    'speed_mps': math.sqrt(sum(value * value
-                                                               for value in state.velocity_world_mps)),
+                                    'speed_mps': speed,
                                     'command': [0.0, 0.0, 0.0, 0.0],
                                     'obstacle_position_world_m': list(obstacle_position),
                                     'obstacle_velocity_world_mps': list(obstacle_velocity),
-                                    'observation_valid': bool(observation.get('valid')),
-                                    'observation_reason': observation.get('reason'),
-                                    'observation_age_s': float(observation.get('age_s', 0.0)),
+                                    'clock': clock_snapshot(
+                                        now_ns, capture_host_ns, capture_clock_ns,
+                                        mapping, age_rec, capture_host_ns),
+                                    **obstacle_observation_fields(observation),
                                     'supervisor_state': decision['state'],
                                     'supervisor_action': decision['action'],
                                     'supervisor_wait_s': decision['wait_s'],
@@ -357,6 +834,21 @@ try:
                                     'outcome': outcome, 'reason': reason,
                                     'env_terminated': False, 'env_truncated': False,
                                     'episode_length_buf': 0, 'boundary_count_ok': True,
+                                    'execution_path': args.execution_path,
+                                    'v2_admission': 'NO_NEW_ACTION',
+                                    'v2_reject_reason': '',
+                                    'v2_action_id': '', 'v2_executed': False,
+                                    'v2_fault_type': (case.fault.get('type')
+                                                      if case.fault else None),
+                                    'v2_observation_id': '',
+                                    'v2_context': None,
+                                    'v2_context_owner': '',
+                                    'v2_pending_owner': None,
+                                    'v2_action_source': '',
+                                    'transport': empty_transport(now_ns),
+                                    'applied': applied_snapshot(
+                                        {'applied': None}, (0.0, 0.0, 0.0, 0.0),
+                                        None, now_ns, 0, 0),
                                 })
                                 break
                             else:
@@ -377,23 +869,41 @@ try:
                                 position_world_m=state.position_world_m,
                                 velocity_world_mps=state.velocity_world_mps,
                                 quat_wxyz=state.quat_wxyz)
+                        action = None
+                        clock_record = clock_snapshot(
+                            now_ns, capture_host_ns, capture_clock_ns, mapping,
+                            age_rec, capture_host_ns)
                         if v2_gate is not None:
-                            now_ns = int(round(elapsed * 1_000_000_000))
                             observation_id = 'state-' + episode_id + '-' + str(step)
+                            if age_rec.get('valid'):
+                                header_capture_ns = max(
+                                    0, int(age_rec['mapped_host_ns'])
+                                    - int(age_rec['error_bound_ns']))
+                            else:
+                                header_capture_ns = max(
+                                    0, now_ns - (args.allowed_observation_age_ms
+                                                 * 1_000_000 + 1_000_000))
+                            clock_record['header_capture_host_ns'] = int(
+                                header_capture_ns)
                             action = v2_gate.build(
                                 command, now_ns, step, observation_id,
-                                observation_time_ns=now_ns)
+                                observation_time_ns=header_capture_ns)
                             if args.sync_fail_step >= 0 and step == args.sync_fail_step:
                                 v2_gate.bump_context(sync=True)
+                            if (delay_wrapper is not None
+                                    and args.transport_stall_step >= 0
+                                    and step == args.transport_stall_step):
+                                delay_wrapper.set_delay(args.transport_stall_delay_s)
                             context = v2_gate.context()
                             v2_observation_id = observation_id
-                            v2_context_record = {'system_boot_id': context.system_boot_id,
-                                                 'mission_epoch': context.mission_epoch,
-                                                 'localization_epoch': context.localization_epoch,
-                                                 'control_epoch': context.control_epoch,
-                                                 'clock_id': context.clock_id,
-                                                 'px4_boot_id': context.px4_boot_id,
-                                                 'sync_generation': context.sync_generation}
+                            v2_context_record = {
+                                'system_boot_id': context.system_boot_id,
+                                'mission_epoch': context.mission_epoch,
+                                'localization_epoch': context.localization_epoch,
+                                'control_epoch': context.control_epoch,
+                                'clock_id': context.clock_id,
+                                'px4_boot_id': context.px4_boot_id,
+                                'sync_generation': context.sync_generation}
                             v2_owner = context.control_owner
                             v2_pending_owner = context.pending_owner
                             v2_action_source = action.source
@@ -405,7 +915,8 @@ try:
                                     fault_action = v2_gate.build(
                                         command, now_ns, step + 1,
                                         observation_id + '-short', ttl_ns=10)
-                                    result = v2_gate.admit(fault_action, context, now_ns + 1000)
+                                    result = v2_gate.admit(fault_action, context,
+                                                           now_ns + 1000)
                                 elif fault_type == 'cache_resend':
                                     first = v2_gate.admit(action, context, now_ns)
                                     result = v2_gate.send_cached(action, context,
@@ -418,38 +929,46 @@ try:
                                     result = v2_gate.admit(stale, context, now_ns)
                                 elif fault_type == 'context_reset':
                                     v2_gate.bump_context(mission=True)
-                                    result = v2_gate.admit(action, v2_gate.context(), now_ns)
+                                    result = v2_gate.admit(action, v2_gate.context(),
+                                                           now_ns)
                                 elif fault_type == 'px4_boot_change':
                                     v2_gate.bump_context(px4_boot=True)
-                                    result = v2_gate.admit(action, v2_gate.context(), now_ns)
+                                    result = v2_gate.admit(action, v2_gate.context(),
+                                                           now_ns)
                                 elif fault_type == 'clock_sync_mismatch':
                                     bad = v2_gate.build(
-                                        command, now_ns, step, observation_id + '-clock',
+                                        command, now_ns, step,
+                                        observation_id + '-clock',
                                         header_overrides={'clock_id': 'px4_boot_clock'})
                                     result = v2_gate.admit(bad, context, now_ns)
                                 elif fault_type == 'ownership_revoke':
                                     v2_gate.revoke_ownership(now_ns=now_ns)
-                                    result = v2_gate.admit(action, v2_gate.context(), now_ns)
+                                    result = v2_gate.admit(action, v2_gate.context(),
+                                                           now_ns)
                                 else:
-                                    raise RuntimeError('unknown fault type: ' + str(fault_type))
+                                    raise RuntimeError('unknown fault type: '
+                                                       + str(fault_type))
                                 if result is None or not result.accepted:
                                     v2_admission = 'REJECTED'
-                                    v2_reject_reason = (result.reason if result is not None
+                                    v2_reject_reason = (result.reason
+                                                        if result is not None
                                                         else 'REJECTED')
                                     outcome, reason = 'ABORT', 'V2_' + v2_reject_reason
-                                    records.append({
+                                    abort_time_s = elapsed
+                                    episode_rows.append({
                                         'episode_id': episode_id, 'case_id': case.case_id,
-                                        'method': method, 'scenario_class': case.scenario_class,
+                                        'method': method,
+                                        'scenario_class': case.scenario_class,
                                         'step': step, 'time_s': round(elapsed, 4),
+                                        'phase': 'RUN',
                                         'position_world_m': list(state.position_world_m),
                                         'velocity_world_mps': list(state.velocity_world_mps),
-                                        'speed_mps': math.sqrt(sum(value * value for value in state.velocity_world_mps)),
+                                        'speed_mps': speed,
                                         'command': [0.0, 0.0, 0.0, 0.0],
                                         'obstacle_position_world_m': list(obstacle_position),
                                         'obstacle_velocity_world_mps': list(obstacle_velocity),
-                                        'observation_valid': bool(observation.get('valid')),
-                                        'observation_reason': observation.get('reason'),
-                                        'observation_age_s': float(observation.get('age_s', 0.0)),
+                                        'clock': clock_record,
+                                        **obstacle_observation_fields(observation),
                                         'supervisor_state': decision['state'],
                                         'supervisor_action': decision['action'],
                                         'supervisor_wait_s': decision['wait_s'],
@@ -457,8 +976,10 @@ try:
                                         'contact_force_n': 0.0, 'contact_prim': '',
                                         'outcome': outcome, 'reason': reason,
                                         'env_terminated': False, 'env_truncated': False,
-                                        'episode_length_buf': 0, 'boundary_count_ok': True,
-                                        'execution_path': 'v2', 'v2_admission': 'REJECTED',
+                                        'episode_length_buf': 0,
+                                        'boundary_count_ok': True,
+                                        'execution_path': 'v2',
+                                        'v2_admission': 'REJECTED',
                                         'v2_reject_reason': v2_reject_reason,
                                         'v2_action_id': '', 'v2_executed': False,
                                         'v2_fault_type': fault.get('type'),
@@ -467,47 +988,107 @@ try:
                                         'v2_context_owner': v2_owner,
                                         'v2_pending_owner': v2_pending_owner,
                                         'v2_action_source': v2_action_source,
-                                        'v2_action_id': '',
+                                        'transport': empty_transport(now_ns),
+                                        'applied': applied_snapshot(
+                                            {'applied': None}, command, None,
+                                            now_ns, 0, 0),
                                     })
                                     fault_recorded = fault.get('type')
                                     break
-                                else:
-                                    v2_admission = 'ADMITTED'
-                                    v2_action_id = action.action_id
-                                    v2_issued_ns = action.issued_at_monotonic_ns
-                                    v2_expires_ns = action.expires_at_monotonic_ns
-                                    command = (action.payload.vx_forward_mps,
-                                               action.payload.vy_left_mps,
-                                               action.payload.vz_up_mps,
-                                               action.payload.yaw_rate_ccw_world_radps)
+                                v2_admission = 'ADMITTED'
+                                v2_action_id = action.action_id
+                                v2_issued_ns = action.issued_at_monotonic_ns
+                                v2_expires_ns = action.expires_at_monotonic_ns
+                                admitted_action = action
+                                admitted_by_id[action.action_id] = action
+                                command = (action.payload.vx_forward_mps,
+                                           action.payload.vy_left_mps,
+                                           action.payload.vz_up_mps,
+                                           action.payload.yaw_rate_ccw_world_radps)
                             else:
                                 result = v2_gate.admit(action, context, now_ns)
                                 if not result.accepted:
                                     v2_admission = 'REJECTED'
                                     v2_reject_reason = result.reason
                                     outcome, reason = 'ABORT', 'V2_' + result.reason
+                                    abort_time_s = elapsed
+                                    episode_rows.append({
+                                        'episode_id': episode_id, 'case_id': case.case_id,
+                                        'method': method,
+                                        'scenario_class': case.scenario_class,
+                                        'step': step, 'time_s': round(elapsed, 4),
+                                        'phase': 'RUN',
+                                        'position_world_m': list(state.position_world_m),
+                                        'velocity_world_mps': list(state.velocity_world_mps),
+                                        'speed_mps': speed,
+                                        'command': [0.0, 0.0, 0.0, 0.0],
+                                        'obstacle_position_world_m': list(obstacle_position),
+                                        'obstacle_velocity_world_mps': list(obstacle_velocity),
+                                        'clock': clock_record,
+                                        **obstacle_observation_fields(observation),
+                                        'supervisor_state': decision['state'],
+                                        'supervisor_action': decision['action'],
+                                        'supervisor_wait_s': decision['wait_s'],
+                                        'route_active_s': route_active_s,
+                                        'contact_force_n': 0.0, 'contact_prim': '',
+                                        'outcome': outcome, 'reason': reason,
+                                        'env_terminated': False, 'env_truncated': False,
+                                        'episode_length_buf': 0,
+                                        'boundary_count_ok': True,
+                                        'execution_path': 'v2',
+                                        'v2_admission': 'REJECTED',
+                                        'v2_reject_reason': v2_reject_reason,
+                                        'v2_action_id': '', 'v2_executed': False,
+                                        'v2_fault_type': (fault.get('type')
+                                                          if fault else None),
+                                        'v2_observation_id': v2_observation_id,
+                                        'v2_context': v2_context_record,
+                                        'v2_context_owner': v2_owner,
+                                        'v2_pending_owner': v2_pending_owner,
+                                        'v2_action_source': v2_action_source,
+                                        'transport': empty_transport(now_ns),
+                                        'applied': applied_snapshot(
+                                            {'applied': None}, command, None,
+                                            now_ns, 0, 0),
+                                    })
                                     break
                                 v2_admission = 'ADMITTED'
                                 v2_action_id = action.action_id
                                 v2_issued_ns = action.issued_at_monotonic_ns
                                 v2_expires_ns = action.expires_at_monotonic_ns
+                                admitted_action = action
+                                admitted_by_id[action.action_id] = action
                                 command = (action.payload.vx_forward_mps,
                                            action.payload.vy_left_mps,
                                            action.payload.vz_up_mps,
                                            action.payload.yaw_rate_ccw_world_radps)
-                            v2_gate.mark_executed(action, now_ns)
-                            v2_executed = True
-                        setpoint_expires_s = ((v2_expires_ns / 1_000_000_000.0)
-                                              if v2_gate is not None
-                                              else step * dt + float(controller_cfg['ttl_s']))
-                        setpoint = VelocitySetpoint(
-                            *command, issued_at_s=step * dt,
-                            expires_at_s=setpoint_expires_s,
-                            control_epoch=0)
-                        control = executor.step(setpoint, state, step * dt)
-                        action = control.to_actuator_action(params)
+                        if admitted_action is not None:
+                            epochs = gate_epochs(v2_gate)
+                            setpoint = VelocitySetpoint(
+                                *command,
+                                issued_at_s=now_s,
+                                expires_at_s=v2_expires_ns / 1_000_000_000.0,
+                                control_epoch=admitted_action.control_epoch,
+                                action_id=admitted_action.action_id,
+                                sync_generation=admitted_action.sync_generation,
+                                epochs=epochs)
+                            if delay_wrapper is not None:
+                                delay_wrapper.update_context(
+                                    epochs=epochs, owner=admitted_action.source)
+                            control = executor.step(setpoint, state, now_s)
+                        else:
+                            control = executor.step(None, state, now_s)
+                        transport = transport_snapshot(admitted_action, now_ns)
+                        applied = applied_snapshot(transport, command,
+                                                   admitted_action, now_ns,
+                                                   v2_expires_ns, v2_issued_ns)
+                        v2_executed = bool(transport.get('executed'))
+                        executed_id = transport.get('executed_action_id')
+                        if executed_id and executed_id in admitted_by_id:
+                            v2_gate.mark_executed(admitted_by_id[executed_id], now_ns)
+                        actuator_action = control.to_actuator_action(params)
                         _, _, terminated, truncated, _ = env.step(
-                            torch.tensor([action], dtype=torch.float32,
+                            torch.tensor([actuator_action], dtype=torch.float32,
                                          device=env.device))
                         boundary_state = boundary.after_step(
                             terminated[0].item(), truncated[0].item())
@@ -517,8 +1098,8 @@ try:
                             contact_max = max(contact_max, contact)
                             if not contact_prim:
                                 contact_prim = dyn_path
-                        speed = math.sqrt(sum(value * value
-                                              for value in after.velocity_world_mps))
+                        after_speed = math.sqrt(sum(value * value
+                                                    for value in after.velocity_world_mps))
                         if boundary_state['truncated']:
                             outcome, reason = 'INVALID', 'ENV_TRUNCATED'
                         elif boundary_state['unexpected_reset']:
@@ -534,8 +1115,8 @@ try:
                                     'abort_reason') or 'SUPERVISOR_ABORT'
                             else:
                                 route_decision = runner.update(
-                                    after.position_world_m, speed, route_active_s,
-                                    contact=False)
+                                    after.position_world_m, after_speed,
+                                    route_active_s, contact=False)
                                 if route_decision['outcome'] == 'SUCCESS':
                                     outcome, reason = 'SUCCESS', 'ROUTE_COMPLETE'
                                 elif route_decision['outcome'] == 'TIMEOUT':
@@ -544,7 +1125,7 @@ try:
                                     route_active_s += dt
                         else:
                             route_decision = runner.update(
-                                after.position_world_m, speed, elapsed,
+                                after.position_world_m, after_speed, elapsed,
                                 contact=False)
                             if route_decision['outcome'] == 'SUCCESS':
                                 outcome, reason = 'SUCCESS', 'ROUTE_COMPLETE'
@@ -553,13 +1134,14 @@ try:
                         if elapsed >= case.timeout_s and outcome == 'RUNNING':
                             outcome, reason = 'TIMEOUT', 'WALL_TIMEOUT'
                         steps = step + 1
-                        records.append({
+                        episode_rows.append({
                             'episode_id': episode_id, 'case_id': case.case_id,
                             'method': method, 'scenario_class': case.scenario_class,
                             'step': step, 'time_s': round(elapsed, 4),
+                            'phase': 'RUN',
                             'position_world_m': list(after.position_world_m),
                             'velocity_world_mps': list(after.velocity_world_mps),
-                            'speed_mps': speed,
+                            'speed_mps': after_speed,
                             'command': list(command),
                             'execution_path': args.execution_path,
                             'v2_admission': v2_admission,
@@ -568,17 +1150,19 @@ try:
                             'v2_executed': v2_executed,
                             'v2_issued_at_ns': v2_issued_ns,
                             'v2_expires_at_ns': v2_expires_ns,
-                            'v2_fault_type': (case.fault.get('type') if case.fault else None),
+                            'v2_fault_type': (case.fault.get('type')
+                                              if case.fault else None),
                             'v2_observation_id': v2_observation_id,
                             'v2_context': v2_context_record,
                             'v2_context_owner': v2_owner,
                             'v2_pending_owner': v2_pending_owner,
                             'v2_action_source': v2_action_source,
+                            'clock': clock_record,
+                            'transport': transport,
+                            'applied': applied,
                             'obstacle_position_world_m': list(obstacle_position),
                             'obstacle_velocity_world_mps': list(obstacle_velocity),
-                            'observation_valid': bool(observation.get('valid')),
-                            'observation_reason': observation.get('reason'),
-                            'observation_age_s': float(observation.get('age_s', 0.0)),
+                            **obstacle_observation_fields(observation),
                             'supervisor_state': decision['state'],
                             'supervisor_action': decision['action'],
                             'supervisor_wait_s': decision['wait_s'],
@@ -592,17 +1176,118 @@ try:
                             'boundary_count_ok': boundary_state['count_ok'],
                         })
                         if outcome != 'RUNNING':
+                            if abort_time_s is None:
+                                abort_time_s = elapsed
                             break
                     if outcome == 'RUNNING':
                         outcome, reason = 'TIMEOUT', 'WALL_TIMEOUT'
+                        if abort_time_s is None:
+                            abort_time_s = (step + 1) * dt
+                    # Post-abort physical observation: rejection is not a stop.
+                    if args.post_abort_observe_s > 0 and outcome in (
+                            'ABORT', 'COLLISION', 'OUT_OF_BOUNDS', 'TIMEOUT'):
+                        post_start = (abort_time_s if abort_time_s is not None
+                                      else (step + 1) * dt)
+                        extra_steps = int(math.ceil(args.post_abort_observe_s / dt))
+                        for extra in range(extra_steps):
+                            elapsed = post_start + (extra + 1) * dt
+                            now_ns = int(round(elapsed * 1_000_000_000))
+                            state = read_state()
+                            obstacle_position, obstacle_velocity = (
+                                obstacle_spec.pose_at(elapsed))
+                            set_obstacle_pose(obstacle_position)
+                            if delay_wrapper is not None:
+                                delay_wrapper.update_context(
+                                    epochs=gate_epochs(v2_gate),
+                                    owner=(v2_gate.context().control_owner
+                                           if v2_gate is not None else 'STUDENT'))
+                            control = executor.step(None, state, elapsed)
+                            transport = transport_snapshot(None, now_ns)
+                            applied = applied_snapshot(transport, (0.0, 0.0, 0.0, 0.0),
+                                                       None, now_ns, 0, 0)
+                            actuator_action = control.to_actuator_action(params)
+                            _, _, terminated, truncated, _ = env.step(
+                                torch.tensor([actuator_action], dtype=torch.float32,
+                                             device=env.device))
+                            boundary_state = boundary.after_step(
+                                terminated[0].item(), truncated[0].item())
+                            after = read_state()
+                            contact = obstacle_contact()
+                            if contact > 0.02:
+                                contact_max = max(contact_max, contact)
+                                if not contact_prim:
+                                    contact_prim = dyn_path
+                            after_speed = math.sqrt(sum(
+                                value * value for value in after.velocity_world_mps))
+                            capture_host_ns = min(now_ns, now_ns)
+                            capture_clock_ns = camera_clock.read_ns(capture_host_ns)
+                            mapping = SimMapping(
+                                'camera_sim', 'host_monotonic',
+                                offset_ns=clock_offset_ns,
+                                uncertainty_ns=clock_uncertainty_ns,
+                                drift_ppm=args.clock_drift_ppm,
+                                sync_generation=sync_generation)
+                            age_rec = mapping_age(capture_clock_ns, now_ns, mapping,
+                                                  sync_generation)
+                            episode_rows.append({
+                                'episode_id': episode_id, 'case_id': case.case_id,
+                                'method': method, 'scenario_class': case.scenario_class,
+                                'step': steps + extra, 'time_s': round(elapsed, 4),
+                                'phase': 'POST_ABORT',
+                                'position_world_m': list(after.position_world_m),
+                                'velocity_world_mps': list(after.velocity_world_mps),
+                                'speed_mps': after_speed,
+                                'command': [0.0, 0.0, 0.0, 0.0],
+                                'clock': clock_snapshot(
+                                    now_ns, capture_host_ns, capture_clock_ns,
+                                    mapping, age_rec, capture_host_ns),
+                                'transport': transport,
+                                'applied': applied,
+                                'obstacle_position_world_m': list(obstacle_position),
+                                'obstacle_velocity_world_mps': list(obstacle_velocity),
+                                'observation_valid': False,
+                                'observation_reason': 'POST_ABORT_NO_ACTION',
+                                'observation_age_s': 0.0,
+                                'execution_path': args.execution_path,
+                                'v2_admission': 'NO_NEW_ACTION',
+                                'v2_action_id': '',
+                                'v2_reject_reason': '',
+                                'v2_executed': False,
+                                'v2_issued_at_ns': 0,
+                                'v2_expires_at_ns': 0,
+                                'v2_fault_type': (case.fault.get('type')
+                                                  if case.fault else None),
+                                'v2_observation_id': '',
+                                'v2_context': None,
+                                'v2_context_owner': '',
+                                'v2_pending_owner': None,
+                                'v2_action_source': '',
+                                'supervisor_state': ('ABORT' if outcome == 'ABORT'
+                                                     else 'POST_ABORT'),
+                                'supervisor_action': 'NONE',
+                                'supervisor_wait_s': wait_total,
+                                'route_active_s': route_active_s,
+                                'contact_force_n': contact,
+                                'contact_prim': contact_prim,
+                                'outcome': outcome, 'reason': reason,
+                                'env_terminated': boundary_state['terminated'],
+                                'env_truncated': boundary_state['truncated'],
+                                'episode_length_buf': boundary_state['episode_length_buf'],
+                                'boundary_count_ok': boundary_state['count_ok'],
+                            })
                     if outcome == 'SUCCESS' and method == 'supervisor':
                         capture(episode_id + '_success')
                     if contact_prim and method == 'supervisor':
                         capture(episode_id + '_contact')
+                    metrics = compute_episode_metrics(episode_rows, case)
+                    records.extend(episode_rows)
                     results.append({
                         'episode_id': episode_id, 'case_id': case.case_id,
                         'method': method, 'scenario_class': case.scenario_class,
                         'route_id': case.route_id,
+                        'config_id': args.config_id,
+                        'segment_id': args.segment_id,
+                        'pair_key': case.case_id,
                         'outcome': outcome, 'reason': reason, 'steps': steps,
                         'duration_s': steps * dt, 'route_active_s': route_active_s,
                         'wait_total_s': wait_total,
@@ -624,17 +1309,54 @@ try:
                                               if v2_gate is not None else 0),
                         'v2_rejected_count': (len(v2_gate.rejections)
                                               if v2_gate is not None else 0),
+                        'metrics': metrics,
+                        'phase_summary': {
+                            'RUN': sum(1 for row in episode_rows
+                                       if row.get('phase', 'RUN') == 'RUN'),
+                            'POST_ABORT': sum(1 for row in episode_rows
+                                              if row.get('phase') == 'POST_ABORT'),
+                        },
                     })
                     print('[episode] ' + episode_id + ' ' + outcome + ' ' + reason,
                           flush=True)
         env._get_dones = original_dones
         mark('write outputs')
+        if args.config_id or args.segment_id:
+            latency_plan = build_plan('main' if args.config_id else 'special')
+        else:
+            latency_plan = {
+                'role': 'regression', 'segment_id': '', 'config_id': '',
+                'cases_file': Path(args.cases).as_posix(),
+                'cases_sha256': case_sha,
+                'case_ids': [case.case_id for case in cases],
+                'methods': methods, 'execution_path': args.execution_path,
+                'obs_delay_s': args.obs_delay_s,
+                'action_delay_s': args.action_delay_s,
+                'ttl_ms': args.ttl_ms, 'max_age_ms': args.max_age_ms,
+                'allowed_observation_age_ms': args.allowed_observation_age_ms,
+                'stop_distance_m': args.stop_distance_m,
+                'post_abort_observe_s': args.post_abort_observe_s,
+                'clock_offset_ms': args.clock_offset_ms,
+                'clock_drift_ppm': args.clock_drift_ppm,
+                'clock_uncertainty_ms': args.clock_uncertainty_ms,
+                'sync_fail_step': args.sync_fail_step,
+                'obs_mapping_fail_step': args.obs_mapping_fail_step,
+                'transport_stall_step': args.transport_stall_step,
+                'transport_stall_delay_s': args.transport_stall_delay_s,
+            }
+        episode_ids = [item['episode_id'] for item in results]
+        if len(episode_ids) != len(set(episode_ids)):
+            raise RuntimeError('duplicate episode ids')
         summary = {
             'schema_version': 'boom_birds.dynamic_eval.v1',
+            'evaluation_version': LATENCY_EVAL_VERSION,
             'status': 'PASS' if all(item['outcome'] != 'INVALID' for item in results)
             else 'FAIL',
             'scope': 'ORACLE_DYNAMIC_OBSTACLE_STOP_WAIT_RESUME',
             'execution_path': args.execution_path,
+            'config_id': args.config_id,
+            'segment_id': args.segment_id,
+            'latency_plan': latency_plan,
             'map': {
                 'asset_id': contract.asset_id,
                 'terrain_sha256': contract.terrain_sha256,
@@ -658,9 +1380,16 @@ try:
                                        if case.scenario_class == name)
                              for name in ('A', 'B', 'C', 'D', 'E')},
             'episodes': results,
+            'clock_plan': {
+                'camera_clock_id': camera_clock.clock_id,
+                'offset_ms': args.clock_offset_ms,
+                'drift_ppm': args.clock_drift_ppm,
+                'uncertainty_ms': args.clock_uncertainty_ms,
+            },
             'gui_mode': not bool(getattr(args, 'headless', False)),
         }
-        (args.output / 'summary.json').write_text(
+        summary_path = args.output / 'summary.json'
+        summary_path.write_text(
             json.dumps(summary, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
         with (args.output / 'episodes.jsonl').open('w', encoding='utf-8') as handle:
             for item in results:
@@ -668,8 +1397,14 @@ try:
         with (args.output / 'steps.jsonl').open('w', encoding='utf-8') as handle:
             for item in records:
                 handle.write(json.dumps(item, ensure_ascii=False) + '\n')
+        started_dt = _parse_iso(started_at)
+        frozen_dt = _parse_iso(freeze_meta.get('frozen_at', ''))
+        if frozen_dt is not None and started_dt is not None and frozen_dt > started_dt:
+            raise RuntimeError('freeze frozen_at is after run start; refusing to '
+                               'record as pre-run evidence')
         manifest = {
             'schema_version': 'boom_birds.manifest.v1',
+            'evaluation_version': LATENCY_EVAL_VERSION,
             'code_commit': args.code_commit,
             'working_tree': args.working_tree,
             'gui_mode': not bool(getattr(args, 'headless', False)),
@@ -681,16 +1416,34 @@ try:
             'map_config_sha256': map_cfg_sha,
             'cases_sha256': case_sha,
             'methods': methods,
-            'command': ' '.join(sys.argv),
             'started_at': started_at,
+            'latency_plan': latency_plan,
+            'clock_plan': {
+                'camera_clock_id': camera_clock.clock_id,
+                'offset_ms': args.clock_offset_ms,
+                'drift_ppm': args.clock_drift_ppm,
+                'uncertainty_ms': args.clock_uncertainty_ms,
+            },
+            'freeze': freeze_meta,
+            'body_envelope': body_envelope,
+            'gui_evidence': {
+                'gui_mode': not bool(getattr(args, 'headless', False)),
+                'renderer': 'DirectX (--/app/vulkan=false)',
+                'headless': bool(getattr(args, 'headless', False)),
+                'window_required': True,
+                'screenshots': bool(args.screenshots),
+                'gpu_driver': args.gpu_driver,
+            },
+            'episode_ids': episode_ids,
+            'command': ' '.join(sys.argv),
             'outputs_sha256': {
                 name: hashlib.sha256((args.output / name).read_bytes()).hexdigest()
                 for name in ('summary.json', 'episodes.jsonl', 'steps.jsonl')},
         }
         (args.output / 'manifest.json').write_text(
             json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
-        print('DYNAMIC_EVAL_' + summary['status'] + ' ' + json.dumps(summary['outcomes']),
-              flush=True)
+        print('DYNAMIC_EVAL_' + summary['status'] + ' '
+              + json.dumps(summary['outcomes']), flush=True)
         raise SystemExit(0 if summary['status'] == 'PASS' else 1)
     finally:
         env.close()
