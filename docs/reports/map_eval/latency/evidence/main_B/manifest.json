@@ -1,0 +1,107 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "evaluation_version": "boom_birds.latency_eval.v1",
+  "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2",
+  "working_tree": "clean at 0c03281 + pre-run freeze 2026-11-02T05:12:31Z",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NOT RECORDED",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+  "methods": [
+    "supervisor"
+  ],
+  "started_at": "2026-11-02T13:25:57.271951+08:00",
+  "latency_plan": {
+    "role": "main",
+    "segment_id": "",
+    "config_id": "B",
+    "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+    "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+    "case_ids": [
+      "dynamic_A_north_0",
+      "dynamic_A_south_0",
+      "dynamic_A_south_1",
+      "dynamic_B_north_0",
+      "dynamic_B_south_0",
+      "dynamic_B_south_1",
+      "dynamic_C_north_0",
+      "dynamic_C_south_0",
+      "dynamic_D_north_0",
+      "dynamic_D_south_0",
+      "dynamic_E_north_0",
+      "dynamic_E_south_0"
+    ],
+    "methods": [
+      "supervisor"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.15,
+    "action_delay_s": 0.1,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 300,
+    "stop_distance_m": 1.38,
+    "post_abort_observe_s": 0.0,
+    "clock_offset_ms": 20.0,
+    "clock_drift_ppm": 200.0,
+    "clock_uncertainty_ms": 5.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15
+  },
+  "clock_plan": {
+    "camera_clock_id": "camera_sim",
+    "offset_ms": 20.0,
+    "drift_ppm": 200.0,
+    "uncertainty_ms": 5.0
+  },
+  "freeze": {
+    "path": "configs/scenarios/latency_pair_freeze_v2.json",
+    "sha256": "02480584fa0146375843df15ef0ec65a06186c9f726b8a331a959535131da1eb",
+    "schema_version": "boom_birds.latency_freeze.v2",
+    "frozen_at": "2026-11-02T05:12:31.217461+00:00",
+    "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2"
+  },
+  "body_envelope": {
+    "half_extents_m": [
+      0.05454223374277353,
+      0.03820826672017574,
+      0.013588040310423821
+    ],
+    "source": "measured_usd_aabb_at_runtime",
+    "measured_prim": "/World/envs/env_0/Robot"
+  },
+  "gui_evidence": {
+    "gui_mode": true,
+    "renderer": "DirectX (--/app/vulkan=false)",
+    "headless": false,
+    "window_required": true,
+    "screenshots": true,
+    "gpu_driver": "NOT RECORDED"
+  },
+  "episode_ids": [
+    "dynamic_A_south_0-supervisor-B",
+    "dynamic_A_south_1-supervisor-B",
+    "dynamic_A_north_0-supervisor-B",
+    "dynamic_B_south_0-supervisor-B",
+    "dynamic_B_south_1-supervisor-B",
+    "dynamic_B_north_0-supervisor-B",
+    "dynamic_C_south_0-supervisor-B",
+    "dynamic_C_north_0-supervisor-B",
+    "dynamic_D_south_0-supervisor-B",
+    "dynamic_D_north_0-supervisor-B",
+    "dynamic_E_south_0-supervisor-B",
+    "dynamic_E_north_0-supervisor-B"
+  ],
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/map_dynamic_cases_v1.json --only-cases dynamic_A_south_0,dynamic_A_north_0,dynamic_A_south_1,dynamic_B_south_0,dynamic_B_north_0,dynamic_B_south_1,dynamic_C_south_0,dynamic_C_north_0,dynamic_D_south_0,dynamic_D_north_0,dynamic_E_south_0,dynamic_E_north_0 --methods supervisor --execution-path v2 --config-id B --stop-distance-m 1.38 --obs-delay-s 0.15 --action-delay-s 0.10 --ttl-ms 150 --max-age-ms 150 --allowed-observation-age-ms 300 --clock-offset-ms 20 --clock-drift-ppm 200 --clock-uncertainty-ms 5 --freeze configs/scenarios/latency_pair_freeze_v2.json --screenshots --kit_args=--/app/vulkan=false --device cuda:0 --code-commit 0c03281b7594f38e2274799afa1b1ab31896abc2 --working-tree clean at 0c03281 + pre-run freeze 2026-11-02T05:12:31Z --output outputs/map_eval/latency_formal2_B",
+  "outputs_sha256": {
+    "summary.json": "4ae5025faead1f650561317068ae8cde0a8e0ce0f1bf85155a528e92d08e4084",
+    "episodes.jsonl": "29e34b37cd2870cebd0562894cc48b4159c44c8ab64e73333c5f2682e94775d7",
+    "steps.jsonl": "4192d9ca052c5ac7b059826fa7ac42d5b53a38a4bd9d524b128723ec5430ad7c"
+  }
+}

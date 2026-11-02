@@ -1,0 +1,2348 @@
+{
+  "status": "PASS",
+  "checks": {
+    "schema_completeness": {
+      "passed": true,
+      "detail": "raw-only recompute: summary.json is not read and recorded metrics are comparison targets only; raw schema complete for main_A; raw schema complete for main_B; raw schema complete for ttl_near; raw schema complete for ttl_over; raw schema complete for clock_sync"
+    },
+    "clock_domain_and_mapping": {
+      "passed": true,
+      "detail": "8668 clock rows recomputed; 8739 clock rows recomputed; 1107 clock rows recomputed; 1200 clock rows recomputed; 301 clock rows recomputed; 280 clock rows recomputed"
+    },
+    "observation_age_and_queueing": {
+      "passed": true,
+      "detail": "raw observation dropout with a usable mapping: observation_valid=False and observation_age_s is a 0 placeholder; raw observation dropout with a usable mapping: observation_valid=False and observation_age_s is a 0 placeholder; raw observation dropout with a usable mapping: observation_valid=False and observation_age_s is a 0 placeholder; raw observation dropout with a usable mapping: observation_valid=False and observation_age_s is a 0 placeholder; raw observation dropout with a usable mapping: observation_valid=False and observation_age_s is a 0 placeholder; raw observation dropout with a usable mapping: observation_valid=False and observation_age_s is a 0 placeholder"
+    },
+    "ttl_no_renewal": {
+      "passed": true,
+      "detail": "8718 accepted-action TTL deltas checked; 8789 accepted-action TTL deltas checked; 1105 accepted-action TTL deltas checked; 1200 accepted-action TTL deltas checked; 299 accepted-action TTL deltas checked; 279 accepted-action TTL deltas checked"
+    },
+    "arrival_expiry_rejection": {
+      "passed": true,
+      "detail": "transport statuses validated: {'NONE': 30, 'APPLIED': 8718}; transport statuses validated: {'NONE': 30, 'APPLIED': 8789}; transport statuses validated: {'NONE': 2, 'APPLIED': 1105}; transport statuses validated: {'NONE': 60, 'APPLIED': 300, 'REJECTED': 900}; transport statuses validated: {'NONE': 62, 'APPLIED': 298, 'REJECTED': 1}; transport statuses validated: {'NONE': 62, 'APPLIED': 279}"
+    },
+    "rejection_never_executed": {
+      "passed": true,
+      "detail": "no rejected action id was executed"
+    },
+    "hold_until_expiry_then_none": {
+      "passed": true,
+      "detail": "HOLDING/NONE invariants checked"
+    },
+    "applied_record_consistency": {
+      "passed": true,
+      "detail": "8748 applied records checked; 8819 applied records checked; 1107 applied records checked; 1260 applied records checked; 361 applied records checked; 341 applied records checked"
+    },
+    "brake_start_and_stop_metrics": {
+      "passed": true,
+      "detail": "9/12 episodes have a recomputed brake start; 9/12 episodes have a recomputed brake start; 1/1 episodes have a recomputed brake start; 1/1 episodes have a recomputed brake start; 1/1 episodes have a recomputed brake start"
+    },
+    "geometry_contact_metrics": {
+      "passed": true,
+      "detail": "12/12 episodes have recomputed geometry; 12/12 episodes have recomputed geometry; 1/1 episodes have recomputed geometry; 1/1 episodes have recomputed geometry; 1/1 episodes have recomputed geometry; 1/1 episodes have recomputed geometry"
+    },
+    "metrics_match_recorded": {
+      "passed": true,
+      "detail": "12 recorded metric blocks compared against the independent recompute; 12 recorded metric blocks compared against the independent recompute; 1 recorded metric blocks compared against the independent recompute; 1 recorded metric blocks compared against the independent recompute; 1 recorded metric blocks compared against the independent recompute; 1 recorded metric blocks compared against the independent recompute"
+    },
+    "episode_continuity": {
+      "passed": true,
+      "detail": "decision-only terminal row tolerated for dynamic_C_south_0-supervisor-A; decision-only terminal row tolerated for dynamic_C_north_0-supervisor-A; decision-only terminal row tolerated for dynamic_D_south_0-supervisor-A; decision-only terminal row tolerated for dynamic_D_north_0-supervisor-A; decision-only terminal row tolerated for dynamic_E_south_0-supervisor-A; decision-only terminal row tolerated for dynamic_E_north_0-supervisor-A"
+    },
+    "pair_consistency": {
+      "passed": true,
+      "detail": "A/B plans, clock plans, case sets and frozen stop distances are consistent (only stop differs)"
+    },
+    "denominator_and_episode_ids": {
+      "passed": true,
+      "detail": "main_A 12/12 episodes; main_B 12/12 episodes"
+    },
+    "expected_classification": {
+      "passed": true,
+      "detail": "expected classification matched for dynamic_A_south_0-supervisor-A; expected reason matched for dynamic_A_south_0-supervisor-A; expected classification matched for dynamic_A_south_1-supervisor-A; expected reason matched for dynamic_A_south_1-supervisor-A; expected classification matched for dynamic_A_north_0-supervisor-A; expected reason matched for dynamic_A_north_0-supervisor-A"
+    },
+    "artifact_hashes": {
+      "passed": true,
+      "detail": "3 artifact hashes verified for main_A; freeze file sha256 verified for main_A; 3 artifact hashes verified for main_B; freeze file sha256 verified for main_B; 3 artifact hashes verified for ttl_near; freeze file sha256 verified for ttl_near"
+    },
+    "freeze_lineage": {
+      "passed": true,
+      "detail": "freeze document parsed (pair_freeze); INFO: current worktree digest differs from the recorded freeze digest (expected after the post-run commit; not a PASS criterion); freeze document parsed (special_freeze); frozen_at <= started_at; code_commit matches freeze; frozen_at <= started_at"
+    },
+    "gui_evidence": {
+      "passed": true,
+      "detail": "gui_evidence present for main_A; gui_evidence present for main_A; gui_evidence present for main_B; gui_evidence present for main_B; gui_evidence present for ttl_near; gui_evidence present for ttl_near"
+    },
+    "special_segments": {
+      "passed": true,
+      "detail": "ttl_near: accepted age=0.1000s ttl=0.120s margin=0.0200s; ttl_over: expired brake command rejected (age=0.1500s >= TTL 0.150s, executed=False); 300 contiguous APPLIED/HOLDING rows before the first rejection executed the old setpoint while it was still valid (action=STUDENT-1-0-299 expires_ns=15150000000 > host_ns=15100000000); active expiry -> NONE at step 302; zero target reached (final speed=0.0001, residual distance=0.2212m over 47.80s). Queue timing: residual is BEFORE the rejection row by construction.; ttl_over queue-timing: queue timing (expected, not missing evidence): in a monotonic publish queue an expired arrival was dispatched after the current active command, so it necessarily arrives after that active command expires; the old-setpoint residual can therefore only be observed in the contiguous APPLIED/HOLDING rows BEFORE the first expired rejection, never on the rejection row itself. The rejection row itself has applied=None and the active has already been dropped (NONE/ACTION_EXPIRED) at its expiry; the vehicle then keeps coasting towards zero on the zero target.; clock_sync: sync rejection recorded (origin=arrival age=0.1); clock_mapping: 1 unusable-mapping observation steps; clock_mapping: stale-observation action rejection recorded (ACTION_EXPIRED)"
+    },
+    "post_abort_rows": {
+      "passed": true,
+      "detail": "post_abort_rows: no observation window configured for ttl_near; post_abort_rows: 60 POST_ABORT rows (residual=False fallback=True); post_abort_rows: 60 POST_ABORT rows (residual=False fallback=True); post_abort_rows: 60 POST_ABORT rows (residual=True fallback=True); post_abort_rows: no observation window configured for regression_no_obstacle; post_abort_rows: no observation window configured for regression_dynamic"
+    }
+  },
+  "recomputed": {
+    "runs": {
+      "main_A": {
+        "role": "main",
+        "run_dir": "outputs\\map_eval\\latency_formal2_A",
+        "episode_count": 12,
+        "loaded": true,
+        "outcomes": {
+          "SUCCESS": 6,
+          "ABORT": 6
+        },
+        "status_counts": {
+          "NONE": 30,
+          "APPLIED": 8718
+        },
+        "phase_counts": {
+          "RUN": 8748
+        },
+        "rejection_reasons": {},
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 8718,
+          "min": 0.09999999999999432,
+          "max": 0.10000000000000142
+        },
+        "observation_age_bound_s": {
+          "count": 8668,
+          "min": 0.07501,
+          "max": 0.27662
+        },
+        "rejected_arrivals": [],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "dynamic_A_south_0-supervisor-A": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.019461963776708835,
+            "min_center_distance_m": 7.612860336904447,
+            "min_center_distance_time_s": 11.1,
+            "min_envelope_gap_m": 7.258318103161674,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.9498448477661361,
+            "max_relative_speed_mps": 1.384906468802102,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1061,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1063
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_A_south_1-supervisor-A": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.01886835045093687,
+            "min_center_distance_m": 10.344198892549398,
+            "min_center_distance_time_s": 11.5,
+            "min_envelope_gap_m": 9.989656658806625,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.5462966896706329,
+            "max_relative_speed_mps": 1.3787887583984524,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 972,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 974
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_A_north_0-supervisor-A": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.023481152831996747,
+            "min_center_distance_m": 10.764516046875752,
+            "min_center_distance_time_s": 13.5,
+            "min_envelope_gap_m": 10.409973813132979,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.37432148539967036,
+            "max_relative_speed_mps": 1.3602833785841344,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 966,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 968
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_B_south_0-supervisor-A": {
+            "brake_start": {
+              "step": 329,
+              "time_s": 16.5,
+              "position_world_m": [
+                -6.011325359344482,
+                -6.183453559875488,
+                1.0006788969039917
+              ],
+              "velocity_world_mps": [
+                0.029305871576070786,
+                -0.014988064765930176,
+                0.00038843360380269587
+              ],
+              "speed_mps": 0.03291849138289047,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.2283
+            },
+            "initial_speed_mps": 0.03291849138289047,
+            "stop_distance_m": 0.023666696306924202,
+            "stop_time_s": 0.8000000000000007,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.019596460148650918,
+            "min_center_distance_m": 3.4984987879532135,
+            "min_center_distance_time_s": 27.7,
+            "min_envelope_gap_m": 3.14395655421044,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.9223770996679185,
+            "max_relative_speed_mps": 1.0926356709778373,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1205,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1207
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_B_south_1-supervisor-A": {
+            "brake_start": {
+              "step": 330,
+              "time_s": 16.55,
+              "position_world_m": [
+                -4.764113903045654,
+                -6.12553596496582,
+                0.9991956949234009
+              ],
+              "velocity_world_mps": [
+                0.6224340200424194,
+                0.018842196092009544,
+                0.0006548133096657693
+              ],
+              "speed_mps": 0.622719492580895,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22831
+            },
+            "initial_speed_mps": 0.622719492580895,
+            "stop_distance_m": 0.29989753227893146,
+            "stop_time_s": 1.25,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.018917340631846507,
+            "min_center_distance_m": 4.85608525425287,
+            "min_center_distance_time_s": 30.35,
+            "min_envelope_gap_m": 4.501543020510097,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.8565263571527767,
+            "max_relative_speed_mps": 1.0882285443458655,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1113,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1115
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_B_north_0-supervisor-A": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -4.893237113952637,
+                5.728374481201172,
+                0.9990683794021606
+              ],
+              "velocity_world_mps": [
+                0.6228287220001221,
+                -0.02070619910955429,
+                0.000640024256426841
+              ],
+              "speed_mps": 0.6231731487001977,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.6231731487001977,
+            "stop_distance_m": 0.300468653791206,
+            "stop_time_s": 1.25,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.02359491562651537,
+            "min_center_distance_m": 4.9986803584223996,
+            "min_center_distance_time_s": 30.3,
+            "min_envelope_gap_m": 4.6441381246796265,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.701557956584481,
+            "max_relative_speed_mps": 1.0682341485989988,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1105,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1107
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_C_south_0-supervisor-A": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -6.015618324279785,
+                -6.1809983253479,
+                1.0008156299591064
+              ],
+              "velocity_world_mps": [
+                0.06256923079490662,
+                -0.037428539246320724,
+                -0.0020299707539379597
+              ],
+              "speed_mps": 0.07293781579977224,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.07293781579977224,
+            "stop_distance_m": 0.0008711509839643363,
+            "stop_time_s": 0.45000000000000284,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006915971448731019,
+            "min_center_distance_m": 4.009941986738918,
+            "min_center_distance_time_s": 16.6,
+            "min_envelope_gap_m": 3.655399752996144,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6280925482183175,
+            "max_relative_speed_mps": 0.7148642562426699,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 498,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 501
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_C_north_0-supervisor-A": {
+            "brake_start": {
+              "step": 280,
+              "time_s": 14.05,
+              "position_world_m": [
+                -6.016989231109619,
+                5.78154993057251,
+                1.0005348920822144
+              ],
+              "velocity_world_mps": [
+                0.06323500722646713,
+                0.038973595947027206,
+                -0.0021890713833272457
+              ],
+              "speed_mps": 0.07431284783598854,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22781
+            },
+            "initial_speed_mps": 0.07431284783598854,
+            "stop_distance_m": 0.0012632002205859244,
+            "stop_time_s": 0.4499999999999993,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006880222593271593,
+            "min_center_distance_m": 8.011183360706704,
+            "min_center_distance_time_s": 14.25,
+            "min_envelope_gap_m": 7.656641126963931,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6128611032143305,
+            "max_relative_speed_mps": 0.7148632462257201,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 451,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 454
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_D_south_0-supervisor-A": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -6.015618324279785,
+                -6.1809983253479,
+                1.0008156299591064
+              ],
+              "velocity_world_mps": [
+                0.06256923079490662,
+                -0.037428539246320724,
+                -0.0020299707539379597
+              ],
+              "speed_mps": 0.07293781579977224,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.07293781579977224,
+            "stop_distance_m": 0.0008711509839643363,
+            "stop_time_s": 0.45000000000000284,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006915971448731019,
+            "min_center_distance_m": 4.012774976839696,
+            "min_center_distance_time_s": 16.8,
+            "min_envelope_gap_m": 3.658232743096922,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 2.979499803746994,
+            "max_relative_speed_mps": 4.849530210667005,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 498,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 501
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_D_north_0-supervisor-A": {
+            "brake_start": {
+              "step": 280,
+              "time_s": 14.05,
+              "position_world_m": [
+                -6.016989231109619,
+                5.78154993057251,
+                1.0005348920822144
+              ],
+              "velocity_world_mps": [
+                0.06323500722646713,
+                0.038973595947027206,
+                -0.0021890713833272457
+              ],
+              "speed_mps": 0.07431284783598854,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22781
+            },
+            "initial_speed_mps": 0.07431284783598854,
+            "stop_distance_m": 0.0012632002205859244,
+            "stop_time_s": 0.4499999999999993,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006880222593271593,
+            "min_center_distance_m": 8.012724552592859,
+            "min_center_distance_time_s": 14.4,
+            "min_envelope_gap_m": 7.658182318850086,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 1.7920624150038817,
+            "max_relative_speed_mps": 4.855852946396129,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 451,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 454
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_E_south_0-supervisor-A": {
+            "brake_start": {
+              "step": 162,
+              "time_s": 8.15,
+              "position_world_m": [
+                -10.000691413879395,
+                -3.9847919940948486,
+                0.997846245765686
+              ],
+              "velocity_world_mps": [
+                0.004326372407376766,
+                -0.09835703670978546,
+                -0.0033302046358585358
+              ],
+              "speed_mps": 0.0985084485283069,
+              "supervisor_state": "DEGRADED",
+              "observation_age_s": 0.0
+            },
+            "initial_speed_mps": 0.0985084485283069,
+            "stop_distance_m": 0.006160419797532442,
+            "stop_time_s": 0.5,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.04477852973847778,
+            "min_center_distance_m": 8.298314294527662,
+            "min_center_distance_time_s": 8.4,
+            "min_envelope_gap_m": 7.943772060784889,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.42212551470811527,
+            "max_relative_speed_mps": 0.7148642562426699,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 199,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 202
+            },
+            "states": [
+              "ABORT",
+              "DEGRADED",
+              "FOLLOW"
+            ],
+            "outcome": "ABORT",
+            "reason": "OBSERVATION_STALE"
+          },
+          "dynamic_E_north_0-supervisor-A": {
+            "brake_start": {
+              "step": 162,
+              "time_s": 8.15,
+              "position_world_m": [
+                -8.967306137084961,
+                4.0256853103637695,
+                0.9969428181648254
+              ],
+              "velocity_world_mps": [
+                0.5632796287536621,
+                0.3011452257633209,
+                0.001782418112270534
+              ],
+              "speed_mps": 0.6387296487429027,
+              "supervisor_state": "DEGRADED",
+              "observation_age_s": 0.0
+            },
+            "initial_speed_mps": 0.6387296487429027,
+            "stop_distance_m": 0.31468203661256516,
+            "stop_time_s": 1.299999999999999,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.0430881623334682,
+            "min_center_distance_m": 10.806176011682762,
+            "min_center_distance_time_s": 9.25,
+            "min_envelope_gap_m": 10.451633777939989,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6128611032143305,
+            "max_relative_speed_mps": 0.7148632462257201,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 199,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 202
+            },
+            "states": [
+              "ABORT",
+              "DEGRADED",
+              "FOLLOW"
+            ],
+            "outcome": "ABORT",
+            "reason": "OBSERVATION_STALE"
+          }
+        }
+      },
+      "main_B": {
+        "role": "main",
+        "run_dir": "outputs\\map_eval\\latency_formal2_B",
+        "episode_count": 12,
+        "loaded": true,
+        "outcomes": {
+          "SUCCESS": 6,
+          "ABORT": 6
+        },
+        "status_counts": {
+          "NONE": 30,
+          "APPLIED": 8789
+        },
+        "phase_counts": {
+          "RUN": 8819
+        },
+        "rejection_reasons": {},
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 8789,
+          "min": 0.09999999999999432,
+          "max": 0.10000000000000142
+        },
+        "observation_age_bound_s": {
+          "count": 8739,
+          "min": 0.07501,
+          "max": 0.27662
+        },
+        "rejected_arrivals": [],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "dynamic_A_south_0-supervisor-B": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.019461963776708835,
+            "min_center_distance_m": 7.612860336904447,
+            "min_center_distance_time_s": 11.1,
+            "min_envelope_gap_m": 7.258318103161674,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.9498448477661361,
+            "max_relative_speed_mps": 1.384906468802102,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1061,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1063
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_A_south_1-supervisor-B": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.01886835045093687,
+            "min_center_distance_m": 10.344198892549398,
+            "min_center_distance_time_s": 11.5,
+            "min_envelope_gap_m": 9.989656658806625,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.5462966896706329,
+            "max_relative_speed_mps": 1.3787887583984524,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 972,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 974
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_A_north_0-supervisor-B": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.023481152831996747,
+            "min_center_distance_m": 10.764516046875752,
+            "min_center_distance_time_s": 13.5,
+            "min_envelope_gap_m": 10.409973813132979,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.37432148539967036,
+            "max_relative_speed_mps": 1.3602833785841344,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 966,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 968
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_B_south_0-supervisor-B": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -6.015618324279785,
+                -6.1809983253479,
+                1.0008156299591064
+              ],
+              "velocity_world_mps": [
+                0.06256923079490662,
+                -0.037428539246320724,
+                -0.0020299707539379597
+              ],
+              "speed_mps": 0.07293781579977224,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.07293781579977224,
+            "stop_distance_m": 0.0008711509839643363,
+            "stop_time_s": 0.45000000000000284,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.019324378368945246,
+            "min_center_distance_m": 3.7667974718644883,
+            "min_center_distance_time_s": 28.25,
+            "min_envelope_gap_m": 3.412255238121715,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.9223770996679185,
+            "max_relative_speed_mps": 1.0926356709778373,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1221,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1223
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_B_south_1-supervisor-B": {
+            "brake_start": {
+              "step": 316,
+              "time_s": 15.85,
+              "position_world_m": [
+                -5.200968265533447,
+                -6.140802383422852,
+                0.9988491535186768
+              ],
+              "velocity_world_mps": [
+                0.6248448491096497,
+                0.02501726895570755,
+                5.454158963402733e-05
+              ],
+              "speed_mps": 0.6253454662661656,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22817
+            },
+            "initial_speed_mps": 0.6253454662661656,
+            "stop_distance_m": 0.305021758059103,
+            "stop_time_s": 1.2500000000000018,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.018878671318858148,
+            "min_center_distance_m": 5.319782053371071,
+            "min_center_distance_time_s": 31.3,
+            "min_envelope_gap_m": 4.965239819628298,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.8565263571527767,
+            "max_relative_speed_mps": 1.0882285443458655,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1141,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1143
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_B_north_0-supervisor-B": {
+            "brake_start": {
+              "step": 314,
+              "time_s": 15.75,
+              "position_world_m": [
+                -5.298641204833984,
+                5.743750095367432,
+                0.9988679885864258
+              ],
+              "velocity_world_mps": [
+                0.6229490041732788,
+                -0.02681048773229122,
+                -0.00033873470965772867
+              ],
+              "speed_mps": 0.6235257643386732,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22815
+            },
+            "initial_speed_mps": 0.6235257643386732,
+            "stop_distance_m": 0.3045805669966263,
+            "stop_time_s": 1.25,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.023531865179841262,
+            "min_center_distance_m": 5.44862623902705,
+            "min_center_distance_time_s": 31.25,
+            "min_envelope_gap_m": 5.094084005284277,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.701557956584481,
+            "max_relative_speed_mps": 1.0682325644348574,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1132,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1134
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          },
+          "dynamic_C_south_0-supervisor-B": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -6.015618324279785,
+                -6.1809983253479,
+                1.0008156299591064
+              ],
+              "velocity_world_mps": [
+                0.06256923079490662,
+                -0.037428539246320724,
+                -0.0020299707539379597
+              ],
+              "speed_mps": 0.07293781579977224,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.07293781579977224,
+            "stop_distance_m": 0.0008711509839643363,
+            "stop_time_s": 0.45000000000000284,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006915971448731019,
+            "min_center_distance_m": 4.009941986738918,
+            "min_center_distance_time_s": 16.6,
+            "min_envelope_gap_m": 3.655399752996144,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6280925482183175,
+            "max_relative_speed_mps": 0.7148642562426699,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 498,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 501
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_C_north_0-supervisor-B": {
+            "brake_start": {
+              "step": 280,
+              "time_s": 14.05,
+              "position_world_m": [
+                -6.016989231109619,
+                5.78154993057251,
+                1.0005348920822144
+              ],
+              "velocity_world_mps": [
+                0.06323500722646713,
+                0.038973595947027206,
+                -0.0021890713833272457
+              ],
+              "speed_mps": 0.07431284783598854,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22781
+            },
+            "initial_speed_mps": 0.07431284783598854,
+            "stop_distance_m": 0.0012632002205859244,
+            "stop_time_s": 0.4499999999999993,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006880222593271593,
+            "min_center_distance_m": 8.011183360706704,
+            "min_center_distance_time_s": 14.25,
+            "min_envelope_gap_m": 7.656641126963931,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6128611032143305,
+            "max_relative_speed_mps": 0.7148632462257201,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 451,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 454
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_D_south_0-supervisor-B": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -6.015618324279785,
+                -6.1809983253479,
+                1.0008156299591064
+              ],
+              "velocity_world_mps": [
+                0.06256923079490662,
+                -0.037428539246320724,
+                -0.0020299707539379597
+              ],
+              "speed_mps": 0.07293781579977224,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.07293781579977224,
+            "stop_distance_m": 0.0008711509839643363,
+            "stop_time_s": 0.45000000000000284,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006915971448731019,
+            "min_center_distance_m": 4.012774976839696,
+            "min_center_distance_time_s": 16.8,
+            "min_envelope_gap_m": 3.658232743096922,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 2.979499803746994,
+            "max_relative_speed_mps": 4.849530210667005,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 498,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 501
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_D_north_0-supervisor-B": {
+            "brake_start": {
+              "step": 280,
+              "time_s": 14.05,
+              "position_world_m": [
+                -6.016989231109619,
+                5.78154993057251,
+                1.0005348920822144
+              ],
+              "velocity_world_mps": [
+                0.06323500722646713,
+                0.038973595947027206,
+                -0.0021890713833272457
+              ],
+              "speed_mps": 0.07431284783598854,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22781
+            },
+            "initial_speed_mps": 0.07431284783598854,
+            "stop_distance_m": 0.0012632002205859244,
+            "stop_time_s": 0.4499999999999993,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.006880222593271593,
+            "min_center_distance_m": 8.012724552592859,
+            "min_center_distance_time_s": 14.4,
+            "min_envelope_gap_m": 7.658182318850086,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 1.7920624150038817,
+            "max_relative_speed_mps": 4.855852946396129,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 451,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 454
+            },
+            "states": [
+              "ABORT",
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "WAIT"
+            ],
+            "outcome": "ABORT",
+            "reason": "MAX_WAIT_EXCEEDED"
+          },
+          "dynamic_E_south_0-supervisor-B": {
+            "brake_start": {
+              "step": 162,
+              "time_s": 8.15,
+              "position_world_m": [
+                -10.000691413879395,
+                -3.9847919940948486,
+                0.997846245765686
+              ],
+              "velocity_world_mps": [
+                0.004326372407376766,
+                -0.09835703670978546,
+                -0.0033302046358585358
+              ],
+              "speed_mps": 0.0985084485283069,
+              "supervisor_state": "DEGRADED",
+              "observation_age_s": 0.0
+            },
+            "initial_speed_mps": 0.0985084485283069,
+            "stop_distance_m": 0.006160419797532442,
+            "stop_time_s": 0.5,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.04477852973847778,
+            "min_center_distance_m": 8.298314294527662,
+            "min_center_distance_time_s": 8.4,
+            "min_envelope_gap_m": 7.943772060784889,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.42212551470811527,
+            "max_relative_speed_mps": 0.7148642562426699,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 199,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 202
+            },
+            "states": [
+              "ABORT",
+              "DEGRADED",
+              "FOLLOW"
+            ],
+            "outcome": "ABORT",
+            "reason": "OBSERVATION_STALE"
+          },
+          "dynamic_E_north_0-supervisor-B": {
+            "brake_start": {
+              "step": 162,
+              "time_s": 8.15,
+              "position_world_m": [
+                -8.967306137084961,
+                4.0256853103637695,
+                0.9969428181648254
+              ],
+              "velocity_world_mps": [
+                0.5632796287536621,
+                0.3011452257633209,
+                0.001782418112270534
+              ],
+              "speed_mps": 0.6387296487429027,
+              "supervisor_state": "DEGRADED",
+              "observation_age_s": 0.0
+            },
+            "initial_speed_mps": 0.6387296487429027,
+            "stop_distance_m": 0.31468203661256516,
+            "stop_time_s": 1.299999999999999,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.0430881623334682,
+            "min_center_distance_m": 10.806176011682762,
+            "min_center_distance_time_s": 9.25,
+            "min_envelope_gap_m": 10.451633777939989,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6128611032143305,
+            "max_relative_speed_mps": 0.7148632462257201,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 199,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 202
+            },
+            "states": [
+              "ABORT",
+              "DEGRADED",
+              "FOLLOW"
+            ],
+            "outcome": "ABORT",
+            "reason": "OBSERVATION_STALE"
+          }
+        }
+      },
+      "ttl_near": {
+        "role": "special",
+        "run_dir": "outputs\\map_eval\\latency_ttl_near",
+        "episode_count": 1,
+        "loaded": true,
+        "outcomes": {
+          "SUCCESS": 1
+        },
+        "status_counts": {
+          "NONE": 2,
+          "APPLIED": 1105
+        },
+        "phase_counts": {
+          "RUN": 1107
+        },
+        "rejection_reasons": {},
+        "ttl_ns_observed": [
+          120000000
+        ],
+        "arrival_age_s": {
+          "count": 1105,
+          "min": 0.09999999999999432,
+          "max": 0.10000000000000142
+        },
+        "observation_age_bound_s": {
+          "count": 1107,
+          "min": 0.07501,
+          "max": 0.23607
+        },
+        "rejected_arrivals": [],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "special_stop_north-supervisor-ttl_near": {
+            "brake_start": {
+              "step": 327,
+              "time_s": 16.4,
+              "position_world_m": [
+                -4.893237113952637,
+                5.728374481201172,
+                0.9990683794021606
+              ],
+              "velocity_world_mps": [
+                0.6228287220001221,
+                -0.02070619910955429,
+                0.000640024256426841
+              ],
+              "speed_mps": 0.6231731487001977,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22828
+            },
+            "initial_speed_mps": 0.6231731487001977,
+            "stop_distance_m": 0.300468653791206,
+            "stop_time_s": 1.25,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.02359491562651537,
+            "min_center_distance_m": 4.9986803584223996,
+            "min_center_distance_time_s": 30.3,
+            "min_envelope_gap_m": 4.6441381246796265,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.701557956584481,
+            "max_relative_speed_mps": 1.0682341485989988,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1105,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1107
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          }
+        }
+      },
+      "ttl_over": {
+        "role": "special",
+        "run_dir": "outputs\\map_eval\\latency_ttl_over",
+        "episode_count": 1,
+        "loaded": true,
+        "outcomes": {
+          "TIMEOUT": 1
+        },
+        "status_counts": {
+          "NONE": 60,
+          "APPLIED": 300,
+          "REJECTED": 900
+        },
+        "phase_counts": {
+          "RUN": 1200,
+          "POST_ABORT": 60
+        },
+        "rejection_reasons": {
+          "ACTION_EXPIRED": 1800
+        },
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 300,
+          "min": 0.09999999999999964,
+          "max": 0.10000000000000142
+        },
+        "observation_age_bound_s": {
+          "count": 1200,
+          "min": 0.07501,
+          "max": 0.237
+        },
+        "rejected_arrivals": [
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 303, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15200000000, 'scheduled_arrival_ns': 15200000000, 'issued_at_ns': 15050000000, 'expires_at_ns': 15200000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15200000000, 'ttl_s': 0.15, 'row_index': 303, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 303, 'action_id': 'STUDENT-1-0-300', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15200000000, 'ttl_s': 0.15, 'row_index': 303, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 304, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': 15250000000, 'scheduled_arrival_ns': 15250000000, 'issued_at_ns': 15100000000, 'expires_at_ns': 15250000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15250000000, 'ttl_s': 0.15, 'row_index': 304, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 304, 'action_id': 'STUDENT-1-0-301', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15250000000, 'ttl_s': 0.15, 'row_index': 304, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 305, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15300000000, 'scheduled_arrival_ns': 15300000000, 'issued_at_ns': 15150000000, 'expires_at_ns': 15300000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15300000000, 'ttl_s': 0.15, 'row_index': 305, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 305, 'action_id': 'STUDENT-1-0-302', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15300000000, 'ttl_s': 0.15, 'row_index': 305, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 306, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15350000000, 'scheduled_arrival_ns': 15350000000, 'issued_at_ns': 15200000000, 'expires_at_ns': 15350000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15350000000, 'ttl_s': 0.15, 'row_index': 306, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 306, 'action_id': 'STUDENT-1-0-303', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15350000000, 'ttl_s': 0.15, 'row_index': 306, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 307, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15400000000, 'scheduled_arrival_ns': 15400000000, 'issued_at_ns': 15250000000, 'expires_at_ns': 15400000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15400000000, 'ttl_s': 0.15, 'row_index': 307, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 307, 'action_id': 'STUDENT-1-0-304', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15400000000, 'ttl_s': 0.15, 'row_index': 307, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 308, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15450000000, 'scheduled_arrival_ns': 15450000000, 'issued_at_ns': 15300000000, 'expires_at_ns': 15450000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15450000000, 'ttl_s': 0.15, 'row_index': 308, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 308, 'action_id': 'STUDENT-1-0-305', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15450000000, 'ttl_s': 0.15, 'row_index': 308, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 309, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': 15500000000, 'scheduled_arrival_ns': 15500000000, 'issued_at_ns': 15350000000, 'expires_at_ns': 15500000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15500000000, 'ttl_s': 0.15, 'row_index': 309, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 309, 'action_id': 'STUDENT-1-0-306', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15500000000, 'ttl_s': 0.15, 'row_index': 309, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 310, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15550000000, 'scheduled_arrival_ns': 15550000000, 'issued_at_ns': 15400000000, 'expires_at_ns': 15550000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15550000000, 'ttl_s': 0.15, 'row_index': 310, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 310, 'action_id': 'STUDENT-1-0-307', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15550000000, 'ttl_s': 0.15, 'row_index': 310, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 311, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15600000000, 'scheduled_arrival_ns': 15600000000, 'issued_at_ns': 15450000000, 'expires_at_ns': 15600000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15600000000, 'ttl_s': 0.15, 'row_index': 311, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 311, 'action_id': 'STUDENT-1-0-308', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15600000000, 'ttl_s': 0.15, 'row_index': 311, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 312, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15650000000, 'scheduled_arrival_ns': 15650000000, 'issued_at_ns': 15500000000, 'expires_at_ns': 15650000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15650000000, 'ttl_s': 0.15, 'row_index': 312, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 312, 'action_id': 'STUDENT-1-0-309', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15650000000, 'ttl_s': 0.15, 'row_index': 312, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 313, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15700000000, 'scheduled_arrival_ns': 15700000000, 'issued_at_ns': 15550000000, 'expires_at_ns': 15700000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15700000000, 'ttl_s': 0.15, 'row_index': 313, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 313, 'action_id': 'STUDENT-1-0-310', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15700000000, 'ttl_s': 0.15, 'row_index': 313, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 314, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': 15750000000, 'scheduled_arrival_ns': 15750000000, 'issued_at_ns': 15600000000, 'expires_at_ns': 15750000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15750000000, 'ttl_s': 0.15, 'row_index': 314, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 314, 'action_id': 'STUDENT-1-0-311', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15750000000, 'ttl_s': 0.15, 'row_index': 314, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 315, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15800000000, 'scheduled_arrival_ns': 15800000000, 'issued_at_ns': 15650000000, 'expires_at_ns': 15800000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15800000000, 'ttl_s': 0.15, 'row_index': 315, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 315, 'action_id': 'STUDENT-1-0-312', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15800000000, 'ttl_s': 0.15, 'row_index': 315, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 316, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15850000000, 'scheduled_arrival_ns': 15850000000, 'issued_at_ns': 15700000000, 'expires_at_ns': 15850000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15850000000, 'ttl_s': 0.15, 'row_index': 316, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 316, 'action_id': 'STUDENT-1-0-313', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15850000000, 'ttl_s': 0.15, 'row_index': 316, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 317, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15900000000, 'scheduled_arrival_ns': 15900000000, 'issued_at_ns': 15750000000, 'expires_at_ns': 15900000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15900000000, 'ttl_s': 0.15, 'row_index': 317, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 317, 'action_id': 'STUDENT-1-0-314', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15900000000, 'ttl_s': 0.15, 'row_index': 317, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 318, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 15950000000, 'scheduled_arrival_ns': 15950000000, 'issued_at_ns': 15800000000, 'expires_at_ns': 15950000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15950000000, 'ttl_s': 0.15, 'row_index': 318, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 318, 'action_id': 'STUDENT-1-0-315', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 15950000000, 'ttl_s': 0.15, 'row_index': 318, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 319, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': 16000000000, 'scheduled_arrival_ns': 16000000000, 'issued_at_ns': 15850000000, 'expires_at_ns': 16000000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16000000000, 'ttl_s': 0.15, 'row_index': 319, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 319, 'action_id': 'STUDENT-1-0-316', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.14999999999999858, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16000000000, 'ttl_s': 0.15, 'row_index': 319, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 320, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 16050000000, 'scheduled_arrival_ns': 16050000000, 'issued_at_ns': 15900000000, 'expires_at_ns': 16050000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16050000000, 'ttl_s': 0.15, 'row_index': 320, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 320, 'action_id': 'STUDENT-1-0-317', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16050000000, 'ttl_s': 0.15, 'row_index': 320, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 321, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': 16100000000, 'scheduled_arrival_ns': 16100000000, 'issued_at_ns': 15950000000, 'expires_at_ns': 16100000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16100000000, 'ttl_s': 0.15, 'row_index': 321, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 321, 'action_id': 'STUDENT-1-0-318', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000036, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16100000000, 'ttl_s': 0.15, 'row_index': 321, 'origin': 'same_step', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 322, 'action_id': '', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000213, 'arrival_ns': 16150000000, 'scheduled_arrival_ns': 16150000000, 'issued_at_ns': 16000000000, 'expires_at_ns': 16150000000, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16150000000, 'ttl_s': 0.15, 'row_index': 322, 'origin': 'arrival', 'phase': 'RUN'}",
+          "{'episode_id': 'special_stop_north-supervisor-ttl_over', 'step': 322, 'action_id': 'STUDENT-1-0-319', 'reason': 'ACTION_EXPIRED', 'arrival_age_s': 0.15000000000000213, 'arrival_ns': None, 'scheduled_arrival_ns': None, 'executed': False, 'executed_action_id': '', 'host_now_ns': 16150000000, 'ttl_s': 0.15, 'row_index': 322, 'origin': 'same_step', 'phase': 'RUN'}",
+          "..."
+        ],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "special_stop_north-supervisor-ttl_over": {
+            "brake_start": {
+              "step": 328,
+              "time_s": 16.45,
+              "position_world_m": [
+                -5.415696144104004,
+                5.7485809326171875,
+                1.0006797313690186
+              ],
+              "velocity_world_mps": [
+                0.004996861331164837,
+                -0.0002403742546448484,
+                -0.00043422807357273996
+              ],
+              "speed_mps": 0.005021449687596719,
+              "supervisor_state": "BRAKE",
+              "observation_age_s": 0.22829
+            },
+            "initial_speed_mps": 0.005021449687596719,
+            "stop_distance_m": 0.0007366883028223451,
+            "stop_time_s": 0.4499999999999993,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.0001061900426550132,
+            "min_center_distance_m": 7.415077867662651,
+            "min_center_distance_time_s": 19.85,
+            "min_envelope_gap_m": 7.060535633919878,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6693187043785447,
+            "max_relative_speed_mps": 0.7268922912694127,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 300,
+            "arrival_rejection_count": 900,
+            "arrival_reject_reasons": {
+              "ACTION_EXPIRED": 900
+            },
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 7.2479248046875e-05,
+              "time_to_stop_s": 0.45000000000000284,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1200,
+              "POST_ABORT": 60
+            },
+            "states": [
+              "BRAKE",
+              "FOLLOW",
+              "HOLD",
+              "RESUME",
+              "WAIT"
+            ],
+            "outcome": "TIMEOUT",
+            "reason": "WALL_TIMEOUT"
+          }
+        }
+      },
+      "clock_sync": {
+        "role": "special",
+        "run_dir": "outputs\\map_eval\\latency_clock_sync",
+        "episode_count": 1,
+        "loaded": true,
+        "outcomes": {
+          "ABORT": 1
+        },
+        "status_counts": {
+          "NONE": 62,
+          "APPLIED": 298,
+          "REJECTED": 1
+        },
+        "phase_counts": {
+          "RUN": 301,
+          "POST_ABORT": 60
+        },
+        "rejection_reasons": {
+          "REJECT_SYNC_OR_PX4_BOOT": 2,
+          "ACTION_EXPIRED": 1
+        },
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 298,
+          "min": 0.09999999999999964,
+          "max": 0.10000000000000142
+        },
+        "observation_age_bound_s": {
+          "count": 301,
+          "min": 0.07501,
+          "max": 0.22801
+        },
+        "rejected_arrivals": [
+          {
+            "episode_id": "special_stop_north-supervisor-clock_sync",
+            "step": 300,
+            "action_id": "",
+            "reason": "REJECT_SYNC_OR_PX4_BOOT",
+            "arrival_age_s": 0.10000000000000142,
+            "arrival_ns": 15100000000,
+            "scheduled_arrival_ns": 15100000000,
+            "issued_at_ns": 15000000000,
+            "expires_at_ns": 15150000000,
+            "executed": false,
+            "executed_action_id": "",
+            "host_now_ns": 15100000000,
+            "ttl_s": 0.15,
+            "row_index": 301,
+            "origin": "arrival",
+            "phase": "POST_ABORT"
+          },
+          {
+            "episode_id": "special_stop_north-supervisor-clock_sync",
+            "step": 300,
+            "action_id": "STUDENT-1-0-298",
+            "reason": "ACTION_EXPIRED",
+            "arrival_age_s": 0.15000000000000036,
+            "arrival_ns": null,
+            "scheduled_arrival_ns": null,
+            "executed": false,
+            "executed_action_id": "",
+            "host_now_ns": 15100000000,
+            "ttl_s": 0.15,
+            "row_index": 301,
+            "origin": "same_step",
+            "phase": "POST_ABORT"
+          },
+          {
+            "episode_id": "special_stop_north-supervisor-clock_sync",
+            "step": 300,
+            "action_id": "STUDENT-1-0-299",
+            "reason": "REJECT_SYNC_OR_PX4_BOOT",
+            "arrival_age_s": 0.10000000000000142,
+            "arrival_ns": null,
+            "scheduled_arrival_ns": null,
+            "executed": false,
+            "executed_action_id": "",
+            "host_now_ns": 15100000000,
+            "ttl_s": 0.15,
+            "row_index": 301,
+            "origin": "same_step",
+            "phase": "POST_ABORT"
+          }
+        ],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "special_stop_north-supervisor-clock_sync": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 7.390346239800854e-05,
+            "min_center_distance_m": 7.513444982514111,
+            "min_center_distance_time_s": 18.05,
+            "min_envelope_gap_m": 7.158902748771338,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6515577175182138,
+            "max_relative_speed_mps": 0.711741037952931,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 298,
+            "arrival_rejection_count": 1,
+            "arrival_reject_reasons": {
+              "REJECT_SYNC_OR_PX4_BOOT": 1
+            },
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.24594465225958406,
+              "time_to_stop_s": 1.200000000000001,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 301,
+              "POST_ABORT": 60
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "ABORT",
+            "reason": "V2_REJECT_SYNC_OR_PX4_BOOT"
+          }
+        }
+      },
+      "clock_mapping": {
+        "role": "special",
+        "run_dir": "outputs\\map_eval\\latency_clock_mapping",
+        "episode_count": 1,
+        "loaded": true,
+        "outcomes": {
+          "ABORT": 1
+        },
+        "status_counts": {
+          "NONE": 62,
+          "APPLIED": 279
+        },
+        "phase_counts": {
+          "RUN": 281,
+          "POST_ABORT": 60
+        },
+        "rejection_reasons": {
+          "ACTION_EXPIRED": 1
+        },
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 279,
+          "min": 0.09999999999999964,
+          "max": 0.10000000000000142
+        },
+        "observation_age_bound_s": {
+          "count": 280,
+          "min": 0.07501,
+          "max": 0.2278
+        },
+        "rejected_arrivals": [
+          {
+            "episode_id": "special_stop_north-supervisor-clock_mapping",
+            "step": 280,
+            "action_id": "STUDENT-1-0-278",
+            "reason": "ACTION_EXPIRED",
+            "arrival_age_s": 0.15000000000000036,
+            "arrival_ns": null,
+            "scheduled_arrival_ns": null,
+            "executed": false,
+            "executed_action_id": "STUDENT-1-0-279",
+            "host_now_ns": 14100000000,
+            "ttl_s": 0.15,
+            "row_index": 281,
+            "origin": "same_step",
+            "phase": "POST_ABORT"
+          }
+        ],
+        "mapping_unusable_steps": 1,
+        "episodes": {
+          "special_stop_north-supervisor-clock_mapping": {
+            "brake_start": {
+              "step": 280,
+              "time_s": 14.05,
+              "position_world_m": [
+                -6.02056360244751,
+                5.7793288230896,
+                1.000640630722046
+              ],
+              "velocity_world_mps": [
+                0.08437321335077286,
+                0.052950017154216766,
+                -0.0019732704386115074
+              ],
+              "speed_mps": 0.0996315072855509,
+              "supervisor_state": "DEGRADED",
+              "observation_age_s": 0.0
+            },
+            "initial_speed_mps": 0.0996315072855509,
+            "stop_distance_m": 0.011313793818681842,
+            "stop_time_s": 0.5,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 9.356702600019957e-05,
+            "min_center_distance_m": 8.096603724225346,
+            "min_center_distance_time_s": 17.05,
+            "min_envelope_gap_m": 7.742061490482573,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.5788501613376968,
+            "max_relative_speed_mps": 0.5805715325604666,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 279,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 60,
+              "residual_distance_m": 0.004744687230898904,
+              "time_to_stop_s": 0.45000000000000107,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 281,
+              "POST_ABORT": 60
+            },
+            "states": [
+              "DEGRADED",
+              "FOLLOW"
+            ],
+            "outcome": "ABORT",
+            "reason": "V2_REJECT_STALE_OBSERVATION"
+          }
+        }
+      },
+      "regression_no_obstacle": {
+        "role": "regression",
+        "run_dir": "outputs\\map_eval\\latency_regression_no_obstacle",
+        "episode_count": 1,
+        "loaded": true,
+        "outcomes": {
+          "SUCCESS": 1
+        },
+        "status_counts": {
+          "DIRECT": 1050
+        },
+        "phase_counts": {
+          "RUN": 1050
+        },
+        "rejection_reasons": {},
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 0,
+          "min": null,
+          "max": null
+        },
+        "observation_age_bound_s": {
+          "count": 1050,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "rejected_arrivals": [],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "v2_reg_route_south_R1-supervisor": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.01962356710279412,
+            "min_center_distance_m": 50.493724538200006,
+            "min_center_distance_time_s": 52.4,
+            "min_envelope_gap_m": 50.13918230445723,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.6307477955592237,
+            "max_relative_speed_mps": 0.7069125696402072,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1050,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1050
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          }
+        }
+      },
+      "regression_dynamic": {
+        "role": "regression",
+        "run_dir": "outputs\\map_eval\\latency_regression_dynamic",
+        "episode_count": 1,
+        "loaded": true,
+        "outcomes": {
+          "SUCCESS": 1
+        },
+        "status_counts": {
+          "DIRECT": 1050
+        },
+        "phase_counts": {
+          "RUN": 1050
+        },
+        "rejection_reasons": {},
+        "ttl_ns_observed": [
+          150000000
+        ],
+        "arrival_age_s": {
+          "count": 0,
+          "min": null,
+          "max": null
+        },
+        "observation_age_bound_s": {
+          "count": 1050,
+          "min": 0.05,
+          "max": 0.05
+        },
+        "rejected_arrivals": [],
+        "mapping_unusable_steps": 0,
+        "episodes": {
+          "dynamic_A_south_0-supervisor": {
+            "brake_start": null,
+            "initial_speed_mps": null,
+            "stop_distance_m": null,
+            "stop_time_s": null,
+            "stop_definition": "speed<=0.08_mps_sustained_0.5s_along_initial_speed_direction",
+            "final_speed_mps": 0.01962356710279412,
+            "min_center_distance_m": 7.501920251958345,
+            "min_center_distance_time_s": 10.95,
+            "min_envelope_gap_m": 7.147378018215571,
+            "envelope": {
+              "body_half_extents_m": [
+                0.05454223374277353,
+                0.03820826672017574,
+                0.013588040310423821
+              ],
+              "obstacle_half_extents_m": [
+                0.2,
+                0.2,
+                0.3
+              ],
+              "body_radius_m": 0.05454223374277353,
+              "obstacle_radius_m": 0.3
+            },
+            "max_closing_speed_mps": 0.9537664155982375,
+            "max_relative_speed_mps": 1.3806454975551057,
+            "contact_max_force_n": 0.0,
+            "contact_prim": "",
+            "executed_action_count": 1050,
+            "arrival_rejection_count": 0,
+            "arrival_reject_reasons": {},
+            "post_abort": {
+              "steps": 0,
+              "residual_distance_m": 0.0,
+              "time_to_stop_s": 0.0,
+              "contact": false
+            },
+            "phase_summary": {
+              "RUN": 1050
+            },
+            "states": [
+              "FOLLOW"
+            ],
+            "outcome": "SUCCESS",
+            "reason": "ROUTE_COMPLETE"
+          }
+        }
+      }
+    },
+    "expected_index": {
+      "cases": 12,
+      "segments": {
+        "ttl_near": 2,
+        "ttl_over": 2,
+        "clock_sync": 2,
+        "clock_mapping": 2
+      }
+    },
+    "expected_reason_deviations": [
+      {
+        "kind": "expected_reason_deviation",
+        "run": "clock_mapping",
+        "episode_id": "special_stop_north-supervisor-clock_mapping",
+        "expected_reason": "OBSERVATION_STALE",
+        "actual_reason": "V2_REJECT_STALE_OBSERVATION",
+        "matched_field": "admission_reject_reason",
+        "matched_value": "REJECT_STALE_OBSERVATION",
+        "detail": "expected reason OBSERVATION_STALE -> actual V2_REJECT_STALE_OBSERVATION; matched pre-frozen admission_reject_reason=REJECT_STALE_OBSERVATION"
+      }
+    ],
+    "metric_definitions": {
+      "stop": "speed<=0.08_mps for 0.5 s; distance projected on the initial brake velocity direction",
+      "executed_action_count": "distinct executed_action_id values",
+      "arrival_rejection_count": "rows with transport.status=REJECTED"
+    },
+    "notes": {
+      "ttl_over_queue_timing": "Monotonic publish queue: an expired arrival was dispatched after the current active command, so it arrives after that active command expires. The old-setpoint residual therefore appears in the contiguous APPLIED/HOLDING rows BEFORE the first expired rejection (with expires_at_ns > that row host_now_ns), the rejection row itself has applied=None, and the active expiry is recorded as NONE/ACTION_EXPIRED followed by the zero-target coast. This is queue semantics, not missing evidence."
+    },
+    "pair": {
+      "config_a": "A",
+      "config_b": "B",
+      "stop_a": 1.1,
+      "stop_b": 1.38,
+      "ttl_a_ms": 150,
+      "ttl_b_ms": 150,
+      "obs_delay_a_s": 0.15,
+      "obs_delay_b_s": 0.15,
+      "action_delay_a_s": 0.1,
+      "action_delay_b_s": 0.1,
+      "case_count_a": 12,
+      "case_count_b": 12
+    }
+  },
+  "failures": [],
+  "missing_fields": [],
+  "run_dirs": {
+    "ttl_near": "outputs\\map_eval\\latency_ttl_near",
+    "ttl_over": "outputs\\map_eval\\latency_ttl_over",
+    "clock_sync": "outputs\\map_eval\\latency_clock_sync",
+    "clock_mapping": "outputs\\map_eval\\latency_clock_mapping",
+    "regression_no_obstacle": "outputs\\map_eval\\latency_regression_no_obstacle",
+    "regression_dynamic": "outputs\\map_eval\\latency_regression_dynamic",
+    "main_A": "outputs\\map_eval\\latency_formal2_A",
+    "main_B": "outputs\\map_eval\\latency_formal2_B"
+  },
+  "freeze": {
+    "path": "configs\\scenarios\\latency_pair_freeze_v2.json",
+    "sha256": "02480584fa0146375843df15ef0ec65a06186c9f726b8a331a959535131da1eb",
+    "frozen_at": "2026-11-02T05:12:31.217461+00:00",
+    "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2",
+    "schema_version": "boom_birds.latency_freeze.v2",
+    "special": {
+      "path": "configs\\scenarios\\latency_special_freeze_v2.json",
+      "sha256": "c971ad7b7d1434d9b83db7f6062e81dbdae04cc17f1052faafd5c096cfea35cd",
+      "frozen_at": "2026-11-02T05:12:31.217461+00:00",
+      "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2",
+      "schema_version": "boom_birds.latency_freeze.v2"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+stages: ["load contract and cases"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 173, in <module>
+    check_freeze_lineage(freeze_doc, _iso_now(), Path.cwd())
+  File "E:\isaac\proj_boom_birds\src\boom_birds\evaluation\latency_plan.py", line 472, in check_freeze_lineage
+    raise LatencyFreezeError(
+boom_birds.evaluation.latency_plan.LatencyFreezeError: WORKTREE_STATE_MISMATCH: 冻结后 src/scripts/tests/configs 发生变化；必须新建冻结版本并重跑受影响配对

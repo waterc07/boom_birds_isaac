@@ -1,0 +1,85 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "evaluation_version": "boom_birds.latency_eval.v1",
+  "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2",
+  "working_tree": "clean at 0c03281 + pre-run freeze 2026-11-02T05:12:31Z",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NOT RECORDED",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+  "methods": [
+    "supervisor"
+  ],
+  "started_at": "2026-11-02T13:37:57.572162+08:00",
+  "latency_plan": {
+    "role": "special",
+    "segment_id": "ttl_near",
+    "config_id": "",
+    "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+    "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+    "case_ids": [
+      "special_stop_north"
+    ],
+    "methods": [
+      "supervisor"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.15,
+    "action_delay_s": 0.1,
+    "ttl_ms": 120,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 300,
+    "stop_distance_m": 1.1,
+    "post_abort_observe_s": 0.0,
+    "clock_offset_ms": 20.0,
+    "clock_drift_ppm": 200.0,
+    "clock_uncertainty_ms": 5.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15
+  },
+  "clock_plan": {
+    "camera_clock_id": "camera_sim",
+    "offset_ms": 20.0,
+    "drift_ppm": 200.0,
+    "uncertainty_ms": 5.0
+  },
+  "freeze": {
+    "path": "configs/scenarios/latency_special_freeze_v2.json",
+    "sha256": "c971ad7b7d1434d9b83db7f6062e81dbdae04cc17f1052faafd5c096cfea35cd",
+    "schema_version": "boom_birds.latency_freeze.v2",
+    "frozen_at": "2026-11-02T05:12:31.217461+00:00",
+    "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2"
+  },
+  "body_envelope": {
+    "half_extents_m": [
+      0.05454223374277353,
+      0.03820826672017574,
+      0.013588040310423821
+    ],
+    "source": "measured_usd_aabb_at_runtime",
+    "measured_prim": "/World/envs/env_0/Robot"
+  },
+  "gui_evidence": {
+    "gui_mode": true,
+    "renderer": "DirectX (--/app/vulkan=false)",
+    "headless": false,
+    "window_required": true,
+    "screenshots": true,
+    "gpu_driver": "NOT RECORDED"
+  },
+  "episode_ids": [
+    "special_stop_north-supervisor-ttl_near"
+  ],
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/latency_special_cases_v1.json --only-cases special_stop_north --methods supervisor --execution-path v2 --segment-id ttl_near --stop-distance-m 1.1 --obs-delay-s 0.15 --action-delay-s 0.10 --ttl-ms 120 --max-age-ms 150 --allowed-observation-age-ms 300 --clock-offset-ms 20 --clock-drift-ppm 200 --clock-uncertainty-ms 5 --post-abort-observe-s 0 --freeze configs/scenarios/latency_special_freeze_v2.json --screenshots --kit_args=--/app/vulkan=false --device cuda:0 --code-commit 0c03281b7594f38e2274799afa1b1ab31896abc2 --working-tree clean at 0c03281 + pre-run freeze 2026-11-02T05:12:31Z --output outputs/map_eval/latency_ttl_near",
+  "outputs_sha256": {
+    "summary.json": "159deb9b2258bd723ce8dd616ba6dad5a62048834686ebabb5d25f5470e3e55f",
+    "episodes.jsonl": "2e6b2426ebc968457071e3b7641c91bd1c80d25ec25c5c796368090d8b71bb8b",
+    "steps.jsonl": "bf0596079a51c5aee3ab728a43083a384eeb40103dc9c208684d20f5dff628c3"
+  }
+}

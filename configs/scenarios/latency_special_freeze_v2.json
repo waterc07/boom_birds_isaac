@@ -1,0 +1,654 @@
+{
+  "schema_version": "boom_birds.latency_freeze.v2",
+  "artifact": "special",
+  "status": "PRE_RUN_FROZEN",
+  "scope": "CURRENT_SIM_MODEL_ONLY",
+  "frozen_at": "2026-11-02T05:12:31.217461+00:00",
+  "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2",
+  "worktree_state": {
+    "tracked_paths": [
+      "src",
+      "scripts",
+      "tests",
+      "configs"
+    ],
+    "status_text_sha256": "766ae24a572c520fcc5cfae73c0e6b9813f90b07d18bc6cdaa53d5437f69a129",
+    "clean": false
+  },
+  "evaluation_version": "boom_birds.latency_eval.v1",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "map_config_file": "configs/maps/rmuc2027.yaml",
+  "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+  "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+  "latency_plan_defaults": {
+    "obs_delay_s": 0.15,
+    "action_delay_s": 0.1,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 300,
+    "post_abort_observe_s": 0.0
+  },
+  "clock_plan": {
+    "camera_clock_id": "camera_sim",
+    "offset_ms": 20.0,
+    "drift_ppm": 200.0,
+    "uncertainty_ms": 5.0,
+    "sync_generation_plan": {
+      "initial": 0,
+      "clock_sync_fail_step": 300,
+      "note": "主配对与专项开段 sync_generation=0；clock_sync 段按 --sync-fail-step 在接纳前推进代次（发端拒绝）。"
+    }
+  },
+  "main_run_plans": {
+    "A": {
+      "role": "main",
+      "segment_id": "",
+      "config_id": "A",
+      "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+      "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+      "case_ids": [
+        "dynamic_A_north_0",
+        "dynamic_A_south_0",
+        "dynamic_A_south_1",
+        "dynamic_B_north_0",
+        "dynamic_B_south_0",
+        "dynamic_B_south_1",
+        "dynamic_C_north_0",
+        "dynamic_C_south_0",
+        "dynamic_D_north_0",
+        "dynamic_D_south_0",
+        "dynamic_E_north_0",
+        "dynamic_E_south_0"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "execution_path": "v2",
+      "obs_delay_s": 0.15,
+      "action_delay_s": 0.1,
+      "ttl_ms": 150,
+      "max_age_ms": 150,
+      "allowed_observation_age_ms": 300,
+      "stop_distance_m": 1.1,
+      "post_abort_observe_s": 0.0,
+      "clock_offset_ms": 20.0,
+      "clock_drift_ppm": 200.0,
+      "clock_uncertainty_ms": 5.0,
+      "sync_fail_step": -1,
+      "obs_mapping_fail_step": -1,
+      "transport_stall_step": -1,
+      "transport_stall_delay_s": 0.15
+    },
+    "B": {
+      "role": "main",
+      "segment_id": "",
+      "config_id": "B",
+      "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+      "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+      "case_ids": [
+        "dynamic_A_north_0",
+        "dynamic_A_south_0",
+        "dynamic_A_south_1",
+        "dynamic_B_north_0",
+        "dynamic_B_south_0",
+        "dynamic_B_south_1",
+        "dynamic_C_north_0",
+        "dynamic_C_south_0",
+        "dynamic_D_north_0",
+        "dynamic_D_south_0",
+        "dynamic_E_north_0",
+        "dynamic_E_south_0"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "execution_path": "v2",
+      "obs_delay_s": 0.15,
+      "action_delay_s": 0.1,
+      "ttl_ms": 150,
+      "max_age_ms": 150,
+      "allowed_observation_age_ms": 300,
+      "stop_distance_m": 1.38,
+      "post_abort_observe_s": 0.0,
+      "clock_offset_ms": 20.0,
+      "clock_drift_ppm": 200.0,
+      "clock_uncertainty_ms": 5.0,
+      "sync_fail_step": -1,
+      "obs_mapping_fail_step": -1,
+      "transport_stall_step": -1,
+      "transport_stall_delay_s": 0.15
+    }
+  },
+  "special_segments": {
+    "clock_mapping": {
+      "segment_id": "clock_mapping",
+      "purpose": "相机时钟映射失效：观测 CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT",
+      "case_ids": [
+        "special_stop_north"
+      ],
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "run_plan": {
+        "role": "special",
+        "segment_id": "clock_mapping",
+        "config_id": "",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": 280,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15
+      },
+      "expected": {
+        "expected_outcome": "ABORT",
+        "expected_reason": "OBSERVATION_STALE",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "cases": {
+          "special_stop_north": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "OBSERVATION_STALE"
+          }
+        },
+        "observation_reason": "CLOCK_MAPPING_UNUSABLE",
+        "admission_reject_reason": "REJECT_STALE_OBSERVATION",
+        "supervisor_state": "DEGRADED_ABORT",
+        "classification": "相机时钟映射失效：观测 CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT；动作因观测过期被拒；post-abort 继续观测",
+        "basis": "计划 §5 clock_mapping 行 + Lead 2026-11-02 精确参数"
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "clock_sync": {
+      "segment_id": "clock_sync",
+      "purpose": "sync 代次传输中失效：接纳与在途到达均拒绝，post-abort 观测旧 setpoint 到期",
+      "case_ids": [
+        "special_stop_north"
+      ],
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "run_plan": {
+        "role": "special",
+        "segment_id": "clock_sync",
+        "config_id": "",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": 300,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15
+      },
+      "expected": {
+        "expected_outcome": "ABORT",
+        "expected_outcome_alternatives": [
+          "TIMEOUT"
+        ],
+        "expected_reason": "REJECT_SYNC_OR_PX4_BOOT",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "cases": {
+          "special_stop_north": {
+            "expected_outcome": "ABORT",
+            "expected_outcome_alternatives": [
+              "TIMEOUT"
+            ]
+          }
+        },
+        "admission_reject_reason": "REJECT_SYNC_OR_PX4_BOOT",
+        "inflight_arrival_reject_reason": "REJECT_SYNC_OR_PX4_BOOT",
+        "classification": "sync 代次失效（传输中）：接纳拒绝 REJECT_SYNC_OR_PX4_BOOT；在途动作到达拒绝；post-abort 观测旧 setpoint 到期后 NONE",
+        "basis": "计划 §5 clock_sync 行 + Lead 2026-11-02 精确参数"
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "ttl_near": {
+      "segment_id": "ttl_near",
+      "purpose": "近 TTL 接纳：到达年龄 100 ms < TTL 120 ms，验证接纳与 20 ms 余量",
+      "case_ids": [
+        "special_stop_north"
+      ],
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "run_plan": {
+        "role": "special",
+        "segment_id": "ttl_near",
+        "config_id": "",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 120,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 0.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": -1,
+        "transport_stall_delay_s": 0.15
+      },
+      "expected": {
+        "expected_outcome": "SUCCESS",
+        "expected_reason": "ROUTE_COMPLETE",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "cases": {
+          "special_stop_north": {
+            "expected_outcome": "SUCCESS",
+            "expected_behavior": "STOP_WAIT_RESUME"
+          }
+        },
+        "arrival_accept_age_s": 0.1,
+        "ttl_margin_s": 0.02,
+        "outcome": "SUCCESS",
+        "classification": "近 TTL 接纳：制动命令到达年龄 100 ms < TTL 120 ms，应接纳并留 20 ms 余量；业务预期 STOP_WAIT_RESUME",
+        "basis": "计划 §5 ttl_near 行 + Lead 2026-11-02 精确参数"
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    },
+    "ttl_over": {
+      "segment_id": "ttl_over",
+      "purpose": "超 TTL 到达拒绝：stall 后制动命令到达年龄 150 ms >= TTL 150 ms，验证拒绝、旧 setpoint 残余与零目标回退",
+      "case_ids": [
+        "special_stop_north"
+      ],
+      "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+      "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "run_plan": {
+        "role": "special",
+        "segment_id": "ttl_over",
+        "config_id": "",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "cases_sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "methods": [
+          "supervisor"
+        ],
+        "execution_path": "v2",
+        "obs_delay_s": 0.15,
+        "action_delay_s": 0.1,
+        "ttl_ms": 150,
+        "max_age_ms": 150,
+        "allowed_observation_age_ms": 300,
+        "stop_distance_m": 1.1,
+        "post_abort_observe_s": 3.0,
+        "clock_offset_ms": 20.0,
+        "clock_drift_ppm": 200.0,
+        "clock_uncertainty_ms": 5.0,
+        "sync_fail_step": -1,
+        "obs_mapping_fail_step": -1,
+        "transport_stall_step": 300,
+        "transport_stall_delay_s": 0.15
+      },
+      "expected": {
+        "expected_outcome": "ABORT",
+        "expected_outcome_alternatives": [
+          "TIMEOUT",
+          "COLLISION"
+        ],
+        "expected_reason": "ACTION_EXPIRED",
+        "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+        "case_ids": [
+          "special_stop_north"
+        ],
+        "cases": {
+          "special_stop_north": {
+            "expected_outcome": "ABORT",
+            "expected_outcome_alternatives": [
+              "TIMEOUT",
+              "COLLISION"
+            ]
+          }
+        },
+        "arrival_reject_reason": "ACTION_EXPIRED",
+        "brake_command_executed": false,
+        "outcome": "ABORT_OR_TIMEOUT",
+        "classification": "超 TTL 拒绝：传输 stall 后制动命令到达年龄 150 ms >= TTL 150 ms，应到达拒绝且未执行；记录旧 setpoint 残余与零目标回退；不宣称实机失效后果",
+        "basis": "计划 §5 ttl_over 行 + Lead 2026-11-02 精确参数；业务结果不预判，只核验拒绝语义"
+      },
+      "expected_note": "预期非结论，实际以独立核验为准"
+    }
+  },
+  "evaluation": {
+    "version": "boom_birds.latency_eval.v1",
+    "status": "EXPECTED_NOT_CONCLUSION",
+    "note": "预期非结论：本文件与冻结文件中的分类都是运行前的预期，实际结论以 scripts/verify_latency_runs.py 从原始 steps/episodes/manifest 重算为准；运行结果与本预期不一致时，如实记录 FAIL/INCOMPLETE，不得改写预期来凑结果。",
+    "supervisor": {
+      "stop_distance_m": 1.1,
+      "release_distance_m": 1.6,
+      "prediction_horizon_s": 1.0,
+      "prediction_step_s": 0.1,
+      "observation_max_age_s": 0.3,
+      "max_stale_s": 2.0,
+      "max_wait_s": 8.0,
+      "min_hold_s": 0.5,
+      "release_hold_s": 0.5,
+      "resume_hold_s": 0.3,
+      "stop_speed_mps": 0.12
+    },
+    "supervisor_overrides": {
+      "A": {
+        "stop_distance_m": 1.1
+      },
+      "B": {
+        "stop_distance_m": 1.38
+      }
+    },
+    "thresholds": {
+      "success_distance_m": 0.2,
+      "success_speed_mps": 0.2,
+      "hold_time_s": 0.5,
+      "stop_speed_max_mps": 0.08,
+      "stop_hold_s": 0.5,
+      "contact_force_threshold_n": 0.02,
+      "observation_max_age_s": 0.3,
+      "min_hold_s": 0.5,
+      "control_step_s": 0.05,
+      "ttl_reference_ms": 150
+    },
+    "expected": {
+      "main": {
+        "A": {
+          "dynamic_A_north_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "NO_STOP_EXPECTED",
+            "classification": "A 类无障碍动态交叉，预期通过"
+          },
+          "dynamic_A_south_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "NO_STOP_EXPECTED",
+            "classification": "A 类无障碍动态交叉，预期通过"
+          },
+          "dynamic_A_south_1": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "NO_STOP_EXPECTED",
+            "classification": "A 类无障碍动态交叉，预期通过"
+          },
+          "dynamic_B_north_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "STOP_WAIT_RESUME",
+            "classification": "B 类静态障碍触发 STOP/WAIT/RESUME 后通过"
+          },
+          "dynamic_B_south_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "STOP_WAIT_RESUME",
+            "classification": "B 类静态障碍触发 STOP/WAIT/RESUME 后通过"
+          },
+          "dynamic_B_south_1": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "STOP_WAIT_RESUME",
+            "classification": "B 类静态障碍触发 STOP/WAIT/RESUME 后通过"
+          },
+          "dynamic_C_north_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "ABORT",
+            "classification": "C 类静止障碍长时间遮挡航路，预期等待超时 ABORT（不是安全结论）"
+          },
+          "dynamic_C_south_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "ABORT",
+            "classification": "C 类静止障碍长时间遮挡航路，预期等待超时 ABORT（不是安全结论）"
+          },
+          "dynamic_D_north_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "HYSTERESIS_NO_CHATTER",
+            "classification": "D 类往返障碍，预期迟滞不抖动但最终等待超时 ABORT"
+          },
+          "dynamic_D_south_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "HYSTERESIS_NO_CHATTER",
+            "classification": "D 类往返障碍，预期迟滞不抖动但最终等待超时 ABORT"
+          },
+          "dynamic_E_north_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "OBSERVATION_STALE",
+            "expected_behavior": "OBSERVATION_DEGRADED",
+            "classification": "E 类观测退化（dropout 窗口），预期观测过期 ABORT"
+          },
+          "dynamic_E_south_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "OBSERVATION_STALE",
+            "expected_behavior": "OBSERVATION_DEGRADED",
+            "classification": "E 类观测退化（dropout 窗口），预期观测过期 ABORT"
+          }
+        },
+        "B": {
+          "dynamic_A_north_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "NO_STOP_EXPECTED",
+            "classification": "A 类无障碍动态交叉，预期通过"
+          },
+          "dynamic_A_south_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "NO_STOP_EXPECTED",
+            "classification": "A 类无障碍动态交叉，预期通过"
+          },
+          "dynamic_A_south_1": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "NO_STOP_EXPECTED",
+            "classification": "A 类无障碍动态交叉，预期通过"
+          },
+          "dynamic_B_north_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "STOP_WAIT_RESUME",
+            "classification": "B 类静态障碍触发 STOP/WAIT/RESUME 后通过"
+          },
+          "dynamic_B_south_0": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "STOP_WAIT_RESUME",
+            "classification": "B 类静态障碍触发 STOP/WAIT/RESUME 后通过"
+          },
+          "dynamic_B_south_1": {
+            "expected_outcome": "SUCCESS",
+            "expected_reason": "ROUTE_COMPLETE",
+            "expected_behavior": "STOP_WAIT_RESUME",
+            "classification": "B 类静态障碍触发 STOP/WAIT/RESUME 后通过"
+          },
+          "dynamic_C_north_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "ABORT",
+            "classification": "C 类静止障碍长时间遮挡航路，预期等待超时 ABORT（不是安全结论）"
+          },
+          "dynamic_C_south_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "ABORT",
+            "classification": "C 类静止障碍长时间遮挡航路，预期等待超时 ABORT（不是安全结论）"
+          },
+          "dynamic_D_north_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "HYSTERESIS_NO_CHATTER",
+            "classification": "D 类往返障碍，预期迟滞不抖动但最终等待超时 ABORT"
+          },
+          "dynamic_D_south_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "MAX_WAIT_EXCEEDED",
+            "expected_behavior": "HYSTERESIS_NO_CHATTER",
+            "classification": "D 类往返障碍，预期迟滞不抖动但最终等待超时 ABORT"
+          },
+          "dynamic_E_north_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "OBSERVATION_STALE",
+            "expected_behavior": "OBSERVATION_DEGRADED",
+            "classification": "E 类观测退化（dropout 窗口），预期观测过期 ABORT"
+          },
+          "dynamic_E_south_0": {
+            "expected_outcome": "ABORT",
+            "expected_reason": "OBSERVATION_STALE",
+            "expected_behavior": "OBSERVATION_DEGRADED",
+            "classification": "E 类观测退化（dropout 窗口），预期观测过期 ABORT"
+          }
+        }
+      },
+      "special": {
+        "ttl_near": {
+          "expected_outcome": "SUCCESS",
+          "expected_reason": "ROUTE_COMPLETE",
+          "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+          "case_ids": [
+            "special_stop_north"
+          ],
+          "cases": {
+            "special_stop_north": {
+              "expected_outcome": "SUCCESS",
+              "expected_behavior": "STOP_WAIT_RESUME"
+            }
+          },
+          "arrival_accept_age_s": 0.1,
+          "ttl_margin_s": 0.02,
+          "outcome": "SUCCESS",
+          "classification": "近 TTL 接纳：制动命令到达年龄 100 ms < TTL 120 ms，应接纳并留 20 ms 余量；业务预期 STOP_WAIT_RESUME",
+          "basis": "计划 §5 ttl_near 行 + Lead 2026-11-02 精确参数"
+        },
+        "ttl_over": {
+          "expected_outcome": "ABORT",
+          "expected_outcome_alternatives": [
+            "TIMEOUT",
+            "COLLISION"
+          ],
+          "expected_reason": "ACTION_EXPIRED",
+          "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+          "case_ids": [
+            "special_stop_north"
+          ],
+          "cases": {
+            "special_stop_north": {
+              "expected_outcome": "ABORT",
+              "expected_outcome_alternatives": [
+                "TIMEOUT",
+                "COLLISION"
+              ]
+            }
+          },
+          "arrival_reject_reason": "ACTION_EXPIRED",
+          "brake_command_executed": false,
+          "outcome": "ABORT_OR_TIMEOUT",
+          "classification": "超 TTL 拒绝：传输 stall 后制动命令到达年龄 150 ms >= TTL 150 ms，应到达拒绝且未执行；记录旧 setpoint 残余与零目标回退；不宣称实机失效后果",
+          "basis": "计划 §5 ttl_over 行 + Lead 2026-11-02 精确参数；业务结果不预判，只核验拒绝语义"
+        },
+        "clock_sync": {
+          "expected_outcome": "ABORT",
+          "expected_outcome_alternatives": [
+            "TIMEOUT"
+          ],
+          "expected_reason": "REJECT_SYNC_OR_PX4_BOOT",
+          "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+          "case_ids": [
+            "special_stop_north"
+          ],
+          "cases": {
+            "special_stop_north": {
+              "expected_outcome": "ABORT",
+              "expected_outcome_alternatives": [
+                "TIMEOUT"
+              ]
+            }
+          },
+          "admission_reject_reason": "REJECT_SYNC_OR_PX4_BOOT",
+          "inflight_arrival_reject_reason": "REJECT_SYNC_OR_PX4_BOOT",
+          "classification": "sync 代次失效（传输中）：接纳拒绝 REJECT_SYNC_OR_PX4_BOOT；在途动作到达拒绝；post-abort 观测旧 setpoint 到期后 NONE",
+          "basis": "计划 §5 clock_sync 行 + Lead 2026-11-02 精确参数"
+        },
+        "clock_mapping": {
+          "expected_outcome": "ABORT",
+          "expected_reason": "OBSERVATION_STALE",
+          "cases_file": "configs/scenarios/latency_special_cases_v1.json",
+          "case_ids": [
+            "special_stop_north"
+          ],
+          "cases": {
+            "special_stop_north": {
+              "expected_outcome": "ABORT",
+              "expected_reason": "OBSERVATION_STALE"
+            }
+          },
+          "observation_reason": "CLOCK_MAPPING_UNUSABLE",
+          "admission_reject_reason": "REJECT_STALE_OBSERVATION",
+          "supervisor_state": "DEGRADED_ABORT",
+          "classification": "相机时钟映射失效：观测 CLOCK_MAPPING_UNUSABLE，监督器 DEGRADED→ABORT；动作因观测过期被拒；post-abort 继续观测",
+          "basis": "计划 §5 clock_mapping 行 + Lead 2026-11-02 精确参数"
+        }
+      }
+    }
+  },
+  "body_envelope": {
+    "source": "measured_usd_aabb_at_runtime",
+    "half_extents_m": null,
+    "measured_prim": null,
+    "tolerance_m": 0.01,
+    "status": "PROPOSED",
+    "note": "运行时从 USD AABB 实测并写入 manifest；冻结只记录计划来源与容差，不含实测值；核验时用 manifest 实测 AABB 与 steps 重算比对。"
+  },
+  "note": "专项段预运行冻结（ttl_near/ttl_over/clock_sync/clock_mapping，case 全部为 special_stop_north）；运行器 CLI 必须与 run_plan 逐字段一致；预期非结论，实际以独立核验为准。"
+}

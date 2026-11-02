@@ -1,0 +1,271 @@
+{
+  "schema_version": "boom_birds.latency_evidence.v1",
+  "configs": {
+    "latency_pair_freeze_v2.json": {
+      "path": "docs/reports/map_eval/latency/evidence/latency_pair_freeze_v2.json",
+      "sha256": "02480584fa0146375843df15ef0ec65a06186c9f726b8a331a959535131da1eb",
+      "bytes": 26136
+    },
+    "latency_special_freeze_v2.json": {
+      "path": "docs/reports/map_eval/latency/evidence/latency_special_freeze_v2.json",
+      "sha256": "c971ad7b7d1434d9b83db7f6062e81dbdae04cc17f1052faafd5c096cfea35cd",
+      "bytes": 26123
+    },
+    "latency_expected_v1.json": {
+      "path": "docs/reports/map_eval/latency/evidence/latency_expected_v1.json",
+      "sha256": "589cec7b2bf0e47392837a5f27f0e23b25106fe33889271fe9b5ced2adf0d44d",
+      "bytes": 7967
+    },
+    "latency_special_cases_v1.json": {
+      "path": "docs/reports/map_eval/latency/evidence/latency_special_cases_v1.json",
+      "sha256": "717878a70ea1f7ac0ecfbc63167dd23c209b5a67eb4de87e7e0c0a4f93794032",
+      "bytes": 4343
+    }
+  },
+  "runs": {
+    "main_A": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/main_A/summary.json",
+        "sha256": "42e142e91a3edd974ed58c434e05fecf65ea47fa0319a81f11d5640ed4043b68",
+        "bytes": 308279
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/main_A/episodes.jsonl",
+        "sha256": "621c5eadaaacd38dd11b685119c707863b27e68a8665e44db7d32729e2f6a6a9",
+        "bytes": 192719
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/main_A/manifest.json",
+        "sha256": "e724a83816942bca8f2435a41169f0bb8251b9dcfbae430562fbf6058dd6b6f5",
+        "bytes": 4540
+      },
+      "steps.jsonl": {
+        "sha256": "ab26c0486ecb02ba89d80ef7a09562034a46454ef7326023ae92ad37bb305148",
+        "bytes": 24882893,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 6
+    },
+    "main_B": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/main_B/summary.json",
+        "sha256": "4ae5025faead1f650561317068ae8cde0a8e0ce0f1bf85155a528e92d08e4084",
+        "bytes": 310524
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/main_B/episodes.jsonl",
+        "sha256": "29e34b37cd2870cebd0562894cc48b4159c44c8ab64e73333c5f2682e94775d7",
+        "bytes": 194182
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/main_B/manifest.json",
+        "sha256": "82b552f0f625b06bc2fc64019fd0a7759e38dee35701a1b6d096288424e26c94",
+        "bytes": 4542
+      },
+      "steps.jsonl": {
+        "sha256": "4192d9ca052c5ac7b059826fa7ac42d5b53a38a4bd9d524b128723ec5430ad7c",
+        "bytes": 25078735,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 6
+    },
+    "ttl_near": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/ttl_near/summary.json",
+        "sha256": "159deb9b2258bd723ce8dd616ba6dad5a62048834686ebabb5d25f5470e3e55f",
+        "bytes": 39095
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/ttl_near/episodes.jsonl",
+        "sha256": "2e6b2426ebc968457071e3b7641c91bd1c80d25ec25c5c796368090d8b71bb8b",
+        "bytes": 23393
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/ttl_near/manifest.json",
+        "sha256": "e38525fc565d7e0e4ef2a09663d10eae714d0018ce6fe3e8aba4c3fc5af2921c",
+        "bytes": 3671
+      },
+      "steps.jsonl": {
+        "sha256": "bf0596079a51c5aee3ab728a43083a384eeb40103dc9c208684d20f5dff628c3",
+        "bytes": 3176489,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 1
+    },
+    "ttl_over": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/ttl_over/summary.json",
+        "sha256": "60e691855b47b161f143c5cf1d319aa0a84520081c9bb04466e09a13cb0a1565",
+        "bytes": 15095
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/ttl_over/episodes.jsonl",
+        "sha256": "6a736de11ff6f9e12981917b7bdba2a6dca97032f809089028afef3f4fa34966",
+        "bytes": 8170
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/ttl_over/manifest.json",
+        "sha256": "bb6b3a69164be9e7d2818fa87f2edc3b58af001105fe452119101557188d246c",
+        "bytes": 3719
+      },
+      "steps.jsonl": {
+        "sha256": "5ce444c0fef6babd1f6f72a3d76e073d7e8f8ee824c302f369468795422ee1c3",
+        "bytes": 3360696,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "clock_sync": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/clock_sync/summary.json",
+        "sha256": "d8e8de3845a6985e321449368d3a4f27ae8b966e8495d80f248c848bd3ccfdd6",
+        "bytes": 14397
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/clock_sync/episodes.jsonl",
+        "sha256": "e67850a361a31911ac89805462bdd3e408f8865248f0ad64f1402272410654c8",
+        "bytes": 7718
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/clock_sync/manifest.json",
+        "sha256": "45c97dfb616f5b62aacddeb23aeebf9b676708a9cdc46a3e0f382af243aebbb7",
+        "bytes": 3690
+      },
+      "steps.jsonl": {
+        "sha256": "0ede8c60d3d72985aaec485c8f092eba6943619453447e4772328cad5eb2c092",
+        "bytes": 988499,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "clock_mapping": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/clock_mapping/summary.json",
+        "sha256": "3c4786d31225df1eda18a3528efdaee5e68cdbe8f13fd56e66fdabdc950f9157",
+        "bytes": 14379
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/clock_mapping/episodes.jsonl",
+        "sha256": "9c2e4c015c897a67da5c7b6f21eef061b8ed3de62bd424becfda8941948405e3",
+        "bytes": 7724
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/clock_mapping/manifest.json",
+        "sha256": "20adb61b76d1189e56f7e201f50b5f4afdf8c194f27e4be6d9e6c9dfaa04b243",
+        "bytes": 3709
+      },
+      "steps.jsonl": {
+        "sha256": "ca43c6f284770f7546e1a79fe78981fb4a991d762181ff15dcb34f32717878b1",
+        "bytes": 932791,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      }
+    },
+    "regression_no_obstacle": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/regression_no_obstacle/summary.json",
+        "sha256": "f7ecac6d695f824056ef56d9c58a216ecc3a4d601a442336599f449cfca299d8",
+        "bytes": 36747
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/regression_no_obstacle/episodes.jsonl",
+        "sha256": "bbc3f7b17a0a2491048c8eb5edfc1286cb98e2fd5efb6aa45864fffa94537b1c",
+        "bytes": 21893
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/regression_no_obstacle/manifest.json",
+        "sha256": "72a815b722883e6c657bb37746118863b6f90a155c042312f7b086b54b0a2059",
+        "bytes": 3188
+      },
+      "steps.jsonl": {
+        "sha256": "aefe1fc488956a6b890d04a116f5e366d33e8ab7e29f28f0082e45647e7b782b",
+        "bytes": 2660552,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 1
+    },
+    "regression_dynamic": {
+      "summary.json": {
+        "path": "docs/reports/map_eval/latency/evidence/regression_dynamic/summary.json",
+        "sha256": "f9022b086e7cf2d490d1207b014d2b2babf4ad201b9d2b2c72bd7e7b4a4e643d",
+        "bytes": 36704
+      },
+      "episodes.jsonl": {
+        "path": "docs/reports/map_eval/latency/evidence/regression_dynamic/episodes.jsonl",
+        "sha256": "1d867e9dc61a8b41bb8c86461c05456edb046ea7d51389b7f30732c4ad7c47a0",
+        "bytes": 21860
+      },
+      "manifest.json": {
+        "path": "docs/reports/map_eval/latency/evidence/regression_dynamic/manifest.json",
+        "sha256": "456c09e8845667bc28fc3a10d19ac4971de4deadcac26735cf9906f4ce2951fb",
+        "bytes": 3160
+      },
+      "steps.jsonl": {
+        "sha256": "5a1f2b3f711b469310059284259d41dbf04be335a6bd4a79ff04a619bb03e0cf",
+        "bytes": 2653373,
+        "note": "raw outputs stay outside git (gitignored); hash pins the exact file"
+      },
+      "screenshot_count": 1
+    }
+  },
+  "screenshots": {
+    "latency_formal2_A_dynamic_B_north_0-supervisor-A_success.png": {
+      "path": "docs/reports/map_eval/latency/screenshots/latency_formal2_A_dynamic_B_north_0-supervisor-A_success.png",
+      "sha256": "95455b4216def5c9e6a9c3767a7c8671eb6ef8162807fb2f2f6c2c9730dbb4fd",
+      "bytes": 732185
+    },
+    "latency_formal2_A_dynamic_B_south_1-supervisor-A_success.png": {
+      "path": "docs/reports/map_eval/latency/screenshots/latency_formal2_A_dynamic_B_south_1-supervisor-A_success.png",
+      "sha256": "c1cf184e2d8250b159ee9c87c54ce9caa3e359c6a5affdfdcebca24a5b35464e",
+      "bytes": 729976
+    },
+    "latency_formal2_B_dynamic_B_north_0-supervisor-B_success.png": {
+      "path": "docs/reports/map_eval/latency/screenshots/latency_formal2_B_dynamic_B_north_0-supervisor-B_success.png",
+      "sha256": "e51876789b2eb52aabb48415165094fb000cee1bdb832609460bb1c4f0c6bf7e",
+      "bytes": 707326
+    },
+    "latency_formal2_B_dynamic_B_south_1-supervisor-B_success.png": {
+      "path": "docs/reports/map_eval/latency/screenshots/latency_formal2_B_dynamic_B_south_1-supervisor-B_success.png",
+      "sha256": "de7b86486729258ba1b9a1130d0b21bf80f8822fa9b6a3a0b489e6ca79f418c4",
+      "bytes": 700270
+    }
+  },
+  "invalid_freeze_attempt": {
+    "latency_pair_freeze_v2.json": {
+      "path": "docs/reports/map_eval/latency/evidence/invalid_freeze_attempt1/latency_pair_freeze_v2.json",
+      "sha256": "779e928f014896f81fe871344a9151b1ee6b08ce080c74a6967ba77e4f386df4",
+      "bytes": 26136
+    },
+    "latency_special_freeze_v2.json": {
+      "path": "docs/reports/map_eval/latency/evidence/invalid_freeze_attempt1/latency_special_freeze_v2.json",
+      "sha256": "41167a599064913120a449b8b38537fe98f0c7610648e6b921f2c9b3b10d2f15",
+      "bytes": 26123
+    },
+    "summary.error.txt": {
+      "path": "docs/reports/map_eval/latency/evidence/invalid_freeze_attempt1/summary.error.txt",
+      "sha256": "8def7171ef91227df6a7dd54b2734cf453b6c4f16dd0760687199a1b8c2640f0",
+      "bytes": 547
+    }
+  },
+  "gui_evidence": {
+    "path": "evidence/gui_evidence.json",
+    "sha256": "9613763e48b0dd3a48d8bb00ffc98e47861857fe1d3d766fe7c13d4f6b6ee8b9"
+  },
+  "verification": {
+    "path": "latency/verify_latency_runs.json",
+    "sha256": "9e7c7102d8b460c2aa2ac57f7829269d4c7eb64ead8317b49d7a49e335e419c1",
+    "bytes": 101551
+  },
+  "analysis": {
+    "path": "latency/analyze_latency_envelope.json",
+    "sha256": "4b8c596d9dc10c441b7da5c2f56bbf410767419d2a0c244447f8d47f13598978",
+    "bytes": 245032
+  },
+  "report": {
+    "path": "MAP_LATENCY_ENVELOPE_REPORT.md",
+    "sha256": "c94db7dbe3ee5fb801a5a3c3e85b1c193af6b97eea1f86543740b3daae9bc76a",
+    "bytes": 30406
+  },
+  "handoff": {
+    "path": "HANDOFF_20261102_LATENCY_ENVELOPE.md",
+    "sha256": "ad7cf6820ee1d176aef181f9ca6b5845ffc2df5ecfa24486fc09ca514746636c",
+    "bytes": 7608
+  }
+}

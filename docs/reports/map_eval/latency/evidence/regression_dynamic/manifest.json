@@ -1,0 +1,85 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "evaluation_version": "boom_birds.latency_eval.v1",
+  "code_commit": "0c03281b7594f38e2274799afa1b1ab31896abc2",
+  "working_tree": "clean at 0c03281 + pre-run freeze 2026-11-02T05:12:31Z",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NOT RECORDED",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+  "methods": [
+    "supervisor"
+  ],
+  "started_at": "2026-11-02T13:46:52.277026+08:00",
+  "latency_plan": {
+    "role": "regression",
+    "segment_id": "",
+    "config_id": "",
+    "cases_file": "configs/scenarios/map_dynamic_cases_v1.json",
+    "cases_sha256": "0f3799050282eb10fb40e2401856769142a3d43432f51ac0efad36ea5f5397d0",
+    "case_ids": [
+      "dynamic_A_south_0"
+    ],
+    "methods": [
+      "supervisor"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.0,
+    "action_delay_s": 0.0,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 250,
+    "stop_distance_m": 1.1,
+    "post_abort_observe_s": 0.0,
+    "clock_offset_ms": 0.0,
+    "clock_drift_ppm": 0.0,
+    "clock_uncertainty_ms": 0.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15
+  },
+  "clock_plan": {
+    "camera_clock_id": "camera_sim",
+    "offset_ms": 0.0,
+    "drift_ppm": 0.0,
+    "uncertainty_ms": 0.0
+  },
+  "freeze": {
+    "path": "",
+    "sha256": "",
+    "schema_version": "",
+    "frozen_at": "",
+    "code_commit": ""
+  },
+  "body_envelope": {
+    "half_extents_m": [
+      0.05454223374277353,
+      0.03820826672017574,
+      0.013588040310423821
+    ],
+    "source": "measured_usd_aabb_at_runtime",
+    "measured_prim": "/World/envs/env_0/Robot"
+  },
+  "gui_evidence": {
+    "gui_mode": true,
+    "renderer": "DirectX (--/app/vulkan=false)",
+    "headless": false,
+    "window_required": true,
+    "screenshots": true,
+    "gpu_driver": "NOT RECORDED"
+  },
+  "episode_ids": [
+    "dynamic_A_south_0-supervisor"
+  ],
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/map_dynamic_cases_v1.json --only-cases dynamic_A_south_0 --methods supervisor --execution-path v2 --stop-distance-m 1.1 --screenshots --kit_args=--/app/vulkan=false --device cuda:0 --code-commit 0c03281b7594f38e2274799afa1b1ab31896abc2 --working-tree clean at 0c03281 + pre-run freeze 2026-11-02T05:12:31Z --output outputs/map_eval/latency_regression_dynamic",
+  "outputs_sha256": {
+    "summary.json": "f9022b086e7cf2d490d1207b014d2b2babf4ad201b9d2b2c72bd7e7b4a4e643d",
+    "episodes.jsonl": "1d867e9dc61a8b41bb8c86461c05456edb046ea7d51389b7f30732c4ad7c47a0",
+    "steps.jsonl": "5a1f2b3f711b469310059284259d41dbf04be335a6bd4a79ff04a619bb03e0cf"
+  }
+}

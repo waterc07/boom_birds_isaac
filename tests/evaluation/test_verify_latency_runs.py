@@ -268,6 +268,10 @@ def _build_episode(episode_id, case_id, plan, *, outcome='SUCCESS',
     delay_ns = int(round(plan['action_delay_s'] * 1e9))
     obs_ns = int(round(plan['obs_delay_s'] * 1e9))
     clock_zero = transport_mode == 'direct'
+    stall_step = plan.get('transport_stall_step')
+    stall_delay_ns = int(round(float(plan.get('transport_stall_delay_s') or 0.0)
+                              * 1e9))
+    stall_active = isinstance(stall_step, int) and stall_step >= 0
     pending = []
     active = None
     sync_gen = 0
@@ -286,8 +290,10 @@ def _build_episode(episode_id, case_id, plan, *, outcome='SUCCESS',
             state = 'DEGRADED'
         action = 'STOP' if index >= brake_step else 'ROUTE'
         dispatch_id = '%s-%d' % (episode_id, index)
+        ticket_delay = (stall_delay_ns
+                        if stall_active and index >= stall_step else delay_ns)
         ticket = {'id': dispatch_id, 'issued': host,
-                  'expires': host + ttl_ns, 'scheduled': host + delay_ns,
+                  'expires': host + ttl_ns, 'scheduled': host + ticket_delay,
                   'arrival': None, 'sync': sync_gen, 'command': speed}
         transport = None
         applied = None
@@ -345,7 +351,7 @@ def _build_episode(episode_id, case_id, plan, *, outcome='SUCCESS',
                     active = None
                 transport = {
                     'status': 'REJECTED',
-                    'action_id': ticket['id'], 'executed_action_id': '',
+                    'action_id': '', 'executed_action_id': '',
                     'issued_at_ns': ticket['issued'],
                     'expires_at_ns': ticket['expires'],
                     'scheduled_arrival_ns': ticket['scheduled'],
@@ -358,16 +364,22 @@ def _build_episode(episode_id, case_id, plan, *, outcome='SUCCESS',
                         'action_id': item['action_id'],
                         'reason': item['reason'],
                         'arrival_age_s': item['arrival_age_s']}
-                        for item in rejected_at_step[:-1]]}
-                applied = (_applied(active, host, held=True)
-                           if active is not None else _applied(None, host))
+                        for item in rejected_at_step],
+                    'applied': None}
+                if active is not None:
+                    applied = _applied(active, host, held=True)
+                else:
+                    applied = _applied(None, host)
             elif active is not None and host < active['expires']:
                 transport = _transport_record('HOLDING', active)
                 applied = _applied(active, host, held=True)
             else:
+                expired_active = (active is not None
+                                  and host >= active['expires'] - 1e-9)
                 active = None
                 transport = _transport_record(
-                    'NONE', reason='REJECT_NO_CACHED_ACTION')
+                    'NONE', reason='ACTION_EXPIRED' if expired_active
+                    else 'REJECT_NO_CACHED_ACTION')
                 applied = _applied(None, host)
         row = _base_step_row(
             episode_id, case_id, plan, index, time_s, host, speed, position,
@@ -421,6 +433,21 @@ def _build_episode(episode_id, case_id, plan, *, outcome='SUCCESS',
     else:
         rows[-1]['outcome'] = outcome
         rows[-1]['reason'] = reason
+        for jump in range(1, post_abort + 1):
+            time_s = round(last_time + jump * DT, 6)
+            host = round(time_s * 1e9)
+            usable = not (mapping_fail_step >= 0)
+            rows.append(_base_step_row(
+                episode_id, case_id, plan, n_physical + jump - 1, time_s,
+                host, 0.0, position, usable, sync_gen, outcome, reason,
+                'ABORT', 'ABORT', n_physical + jump, phase='POST_ABORT',
+                v2_fields=_v2('', host, ttl_ns, sync_gen, admission='',
+                              episode_id=episode_id,
+                              step=n_physical + jump - 1),
+                transport=_transport_record('NONE',
+                                            reason='REJECT_NO_CACHED_ACTION'),
+                applied=_applied(None, host), obstacle=obstacle,
+                clock_zero=clock_zero))
     for row_index, extra in (injections or {}).items():
         rows[row_index]['transport']['rejections_this_step'].extend(extra)
     phase_summary = Counter(row.get('phase') for row in rows)
@@ -598,7 +625,8 @@ def build_fixture(root):
     ttl_near_plan = _plan('special', '', 'ttl_near', ('special_case',),
                           stop=1.1, ttl_ms=120.0)
     ttl_over_plan = _plan('special', '', 'ttl_over', ('special_case',),
-                          stop=1.1, ttl_ms=150.0, post_abort=0.1)
+                          stop=1.1, ttl_ms=150.0, post_abort=0.1,
+                          stall_step=10, stall_delay=0.15)
     clock_sync_plan = _plan('special', '', 'clock_sync', ('special_case',),
                             stop=1.1, ttl_ms=150.0, post_abort=0.1,
                             sync_fail_step=10)
@@ -713,28 +741,8 @@ def build_fixture(root):
         n_physical=14, brake_step=12)
     ttl_over_episode, ttl_over_rows = _build_episode(
         'special_case-supervisor', 'special_case', ttl_over_plan,
-        n_physical=13, brake_step=12, abort=True, post_abort=2,
-        outcome='ABORT', abort_reason='ACTION_EXPIRED')
-    rejected_row = ttl_over_rows[12]
-    host = rejected_row['clock']['host_now_ns']
-    rejected_row['transport'] = {
-        'status': 'REJECTED', 'action_id': 'stalled-brake-command',
-        'executed_action_id': '',
-        'issued_at_ns': host - 150_000_000,
-        'expires_at_ns': host,
-        'scheduled_arrival_ns': host - 50_000_000,
-        'arrival_ns': host,
-        'dispatch_delay_s': 0.1, 'arrival_age_s': 0.15,
-        'reason': 'ACTION_EXPIRED', 'executed': False,
-        'rejections_this_step': [],
-        'applied': {
-            'vx_forward_mps': 0.3, 'vy_left_mps': 0.0, 'vz_up_mps': 0.0,
-            'yaw_rate_ccw_world_radps': 0.0,
-            'action_id': 'pre-stall-active',
-            'issued_at_ns': host - 100_000_000,
-            'expires_at_ns': host + 50_000_000, 'age_s': 0.1,
-            'is_held': True}}
-    rejected_row['applied'] = _applied(None, host)
+        n_physical=30, brake_step=12, abort=False, post_abort=2,
+        outcome='TIMEOUT', reason='WALL_TIMEOUT')
     clock_sync_episode, clock_sync_rows = _build_episode(
         'special_case-supervisor', 'special_case', clock_sync_plan,
         n_physical=13, brake_step=12, abort=True, post_abort=2,
@@ -861,6 +869,11 @@ def test_synthetic_fixture_passes(tmp_path):
     assert result['recomputed']['runs']['main_A']['ttl_ns_observed'] == [150_000_000]
     assert result['recomputed']['pair']['stop_a'] == 1.1
     assert result['recomputed']['pair']['stop_b'] == 1.38
+    queue_note = result['recomputed']['notes']['ttl_over_queue_timing']
+    assert 'publish queue' in queue_note.lower()
+    special_detail = result['checks']['special_segments']['detail']
+    assert 'ttl_over' in special_detail
+    assert 'contiguous APPLIED/HOLDING' in special_detail
 
 
 def test_single_run_is_incomplete_not_pass(tmp_path):
@@ -1083,25 +1096,37 @@ def test_ttl_over_rejection_missing_fails(tmp_path):
 
 
 def test_ttl_over_residual_missing_fails(tmp_path):
+    """Criterion (c): no pre-rejection APPLIED/HOLDING residue -> FAIL."""
     fixture = build_fixture(tmp_path)
 
     def mutate(steps, episodes, manifest):
-        for row in steps:
+        first_rejection = None
+        for index, row in enumerate(steps):
+            if (row.get('transport') or {}).get('status') == 'REJECTED':
+                first_rejection = index
+                break
+        assert first_rejection is not None
+        for row in steps[:first_rejection]:
             transport = row.get('transport') or {}
-            if transport.get('status') == 'REJECTED':
-                transport['applied'] = None
-                row['applied'] = {
-                    'vx_forward_mps': 0.0, 'vy_left_mps': 0.0,
-                    'vz_up_mps': 0.0, 'yaw_rate_ccw_world_radps': 0.0,
-                    'action_id': '', 'issued_at_ns': 0,
-                    'expires_at_ns': 0, 'age_s': 0.0, 'is_held': False}
+            if transport.get('status') in ('APPLIED', 'HOLDING'):
+                transport.update({
+                    'status': 'NONE', 'reason': 'REJECT_NO_CACHED_ACTION',
+                    'executed': False, 'action_id': '',
+                    'executed_action_id': '', 'issued_at_ns': 0,
+                    'expires_at_ns': 0, 'scheduled_arrival_ns': 0,
+                    'arrival_ns': 0, 'dispatch_delay_s': 0.0,
+                    'arrival_age_s': 0.0, 'applied': None})
+                row['applied'] = _applied(None, row['clock']['host_now_ns'])
+        episodes[0]['metrics'] = _record_metrics(manifest['latency_plan'],
+                                                episodes[0], steps)
 
     _mutate_run(fixture['ttl_over'], mutate)
     result = _verify(fixture)
     assert result['status'] == 'FAIL'
     assert 'special_segments' in _failed_checks(result)
-    assert any('no residual old setpoint' in failure['detail']
-               for failure in result['failures'])
+    details = ' '.join(failure['detail'] for failure in result['failures'])
+    assert 'contiguous APPLIED/HOLDING' in details or \
+        'ttl_over evidence incomplete' in details
 
 
 def test_ttl_over_post_abort_residual_satisfies_evidence(tmp_path):

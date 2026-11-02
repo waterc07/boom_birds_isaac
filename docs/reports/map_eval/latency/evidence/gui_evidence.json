@@ -1,0 +1,101 @@
+{
+  "schema_version": "boom_birds.gui_evidence.v1",
+  "runs": {
+    "main_A": {
+      "log": "logs/latency_formal2_A.log",
+      "log_sha256": "c26ceb4f8b1ef79406a35229eaf74b3357884041dcee490bef32d2a33ec7bee2",
+      "matched": [
+        "[1.046s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.277s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.471s] app ready",
+        "[18.538s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "main_B": {
+      "log": "logs/latency_formal2_B.log",
+      "log_sha256": "90b099958b93a073fc7b206512ecfc7f1b1a00f8544f53c71f8e1817a101cd84",
+      "matched": [
+        "[1.050s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.336s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.552s] app ready",
+        "[18.715s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "ttl_near": {
+      "log": "logs/latency_ttl_near.log",
+      "log_sha256": "c77ac108b681e0073ac87cca5772a44951020e50d53fbc4d1df38a6d7c9e1c74",
+      "matched": [
+        "[1.094s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.338s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.417s] app ready",
+        "[18.529s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "ttl_over": {
+      "log": "logs/latency_ttl_over.log",
+      "log_sha256": "67d5746b8fd9117fdb8bd15cb2986c70e3f6d01060032cc2f9f6dcccc0fd1a69",
+      "matched": [
+        "[1.044s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.389s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.930s] app ready",
+        "[19.171s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "clock_sync": {
+      "log": "logs/latency_clock_sync.log",
+      "log_sha256": "3db9172c36b3e2739622502ab3d59dcba066e88f692713511fe34eb6d125fd0d",
+      "matched": [
+        "[1.037s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.303s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.445s] app ready",
+        "[18.601s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "clock_mapping": {
+      "log": "logs/latency_clock_mapping.log",
+      "log_sha256": "268bc8db9abba29a4973ba58074150ecca9f8d77e246fecbcc11419b39b890cd",
+      "matched": [
+        "[1.088s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.339s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.408s] app ready",
+        "[18.585s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "regression_no_obstacle": {
+      "log": "logs/latency_regression_no_obstacle.log",
+      "log_sha256": "a8093fbd8afed98ebc423c5ae00f27e55f307068cbfbed25992d1326d779dcf0",
+      "matched": [
+        "[1.058s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.376s] [ext: omni.appwindow-1.1.10] startup",
+        "[15.343s] app ready",
+        "[18.461s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    },
+    "regression_dynamic": {
+      "log": "logs/latency_regression_dynamic.log",
+      "log_sha256": "ac4e03bc693982c28008aad8d53a86ef835d80ede8059660baa47625c6138f06",
+      "matched": [
+        "[1.018s] [ext: carb.windowing.plugins-1.0.0] startup",
+        "| Driver Version: 581.80        | Graphics API: D3D12",
+        "[2.216s] [ext: omni.appwindow-1.1.10] startup",
+        "[14.970s] app ready",
+        "[18.053s] Simulation App Startup Complete"
+      ],
+      "headless_flag_seen": false
+    }
+  }
+}
