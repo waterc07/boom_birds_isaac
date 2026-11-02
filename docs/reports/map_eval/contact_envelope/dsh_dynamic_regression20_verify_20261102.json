@@ -1,0 +1,191 @@
+{
+  "schema_version": "dsh.dynamic_regression20_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash",
+      "passed": true,
+      "detail": "manifest freeze sha256"
+    },
+    {
+      "category": "data_integrity",
+      "name": "pre_run_freeze",
+      "passed": true,
+      "detail": "frozen_at <= started_at"
+    },
+    {
+      "category": "data_integrity",
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "all frozen source hashes match working tree"
+    },
+    {
+      "category": "data_integrity",
+      "name": "config_hashes",
+      "passed": true,
+      "detail": "all frozen config hashes match working tree"
+    },
+    {
+      "category": "data_integrity",
+      "name": "expected_reference",
+      "passed": true,
+      "detail": "freeze expected reference hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "params",
+      "passed": true,
+      "detail": "geometry/contact/method modes"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui_evidence",
+      "passed": true,
+      "detail": "GUI DirectX/D3D12, not headless"
+    },
+    {
+      "category": "data_integrity",
+      "name": "screenshots",
+      "passed": true,
+      "detail": "representative screenshots: [('dynamic_A_north_0-supervisor_success.png', 736147), ('dynamic_A_north_1-supervisor_success.png', 733038), ('dynamic_A_south_0-supervisor_success.png', 731394)]"
+    },
+    {
+      "category": "data_integrity",
+      "name": "episode_identity",
+      "passed": true,
+      "detail": "episode ids=20"
+    },
+    {
+      "category": "data_integrity",
+      "name": "case_coverage",
+      "passed": true,
+      "detail": "unique case ids=20"
+    },
+    {
+      "category": "data_integrity",
+      "name": "no_invalid",
+      "passed": true,
+      "detail": "INVALID count=0"
+    },
+    {
+      "category": "reset",
+      "name": "initialization_count",
+      "passed": true,
+      "detail": "contact initializations=20"
+    },
+    {
+      "category": "reset",
+      "name": "generation_sequence",
+      "passed": true,
+      "detail": "generations=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]"
+    },
+    {
+      "category": "reset",
+      "name": "handshakes_fresh_zero",
+      "passed": true,
+      "detail": "fresh zero handshakes=20/20"
+    },
+    {
+      "category": "reset",
+      "name": "sensor_contract",
+      "passed": true,
+      "detail": "contact sensor mode/coverage"
+    },
+    {
+      "category": "contact",
+      "name": "raw_reads",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contact",
+      "name": "measured_forced_or_unknown",
+      "passed": true,
+      "detail": "episodes with raw measurements=20"
+    },
+    {
+      "category": "contact",
+      "name": "physical_outcome_mapping",
+      "passed": true,
+      "detail": "physical outcomes mapped from raw vectors"
+    },
+    {
+      "category": "geometry",
+      "name": "body_envelope",
+      "passed": true,
+      "detail": "root-frame collision envelope radius"
+    },
+    {
+      "category": "geometry",
+      "name": "clearance_radii",
+      "passed": true,
+      "detail": "clearance robot/obstacle radii checked=13149/13149"
+    },
+    {
+      "category": "geometry",
+      "name": "clearance_metrics",
+      "passed": true,
+      "detail": "clearance center distances checked=12989/12989 applicable; observation dropouts remain UNKNOWN/non-applicable"
+    },
+    {
+      "category": "scenario_expectation",
+      "name": "expected_cases_covered",
+      "passed": true,
+      "detail": "expected cases=20"
+    },
+    {
+      "category": "scenario_expectation",
+      "name": "acceptable_outcomes",
+      "passed": true,
+      "detail": "expected failures=[]"
+    },
+    {
+      "category": "scenario_expectation",
+      "name": "old_new_denominator",
+      "passed": true,
+      "detail": "old/new supervisor denominator"
+    },
+    {
+      "category": "scenario_expectation",
+      "name": "differences_recorded",
+      "passed": true,
+      "detail": "business differences=0"
+    },
+    {
+      "category": "performance",
+      "name": "outcome_counts_present",
+      "passed": true,
+      "detail": "business={'SUCCESS': 8, 'ABORT': 12} physical={'UNKNOWN': 20}"
+    },
+    {
+      "category": "performance",
+      "name": "unknown_kept",
+      "passed": true,
+      "detail": "no NO_CONTACT substitution in measured mode"
+    }
+  ],
+  "failures": [],
+  "missing_fields": [],
+  "differences": [],
+  "expected_failures": [],
+  "counts": {
+    "business": {
+      "SUCCESS": 8,
+      "ABORT": 12
+    },
+    "physical": {
+      "UNKNOWN": 20
+    }
+  },
+  "freeze": {
+    "path": "configs\\scenarios\\contact_production_migration_20_v2.json",
+    "sha256": "049d7a6c9ede4f1d83ff29e0b7aded6bc2e65688839d50ce3360cf2c5e982411",
+    "frozen_at": "2026-11-02T15:37:31.276059+00:00",
+    "git_head": "34bdaa8ab05f70d10255c30967281229612db3db"
+  },
+  "run": {
+    "path": "outputs\\map_eval\\production_contact_migration\\regression20",
+    "manifest_sha256": "9169e8d50bfb3413d51c7a467a656f7778fa57ac385f4a0186c0663ff709a45a"
+  }
+}

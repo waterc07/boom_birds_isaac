@@ -1,0 +1,142 @@
+{
+  "schema_version": "dsh.contact_end_verify.v1",
+  "status": "PASS",
+  "natural": {
+    "status": "PASS",
+    "mode": "obstacle_motion",
+    "rows": 272,
+    "checks": [
+      {
+        "name": "mode",
+        "passed": true,
+        "detail": "separation_mode=obstacle_motion"
+      },
+      {
+        "name": "natural_flag",
+        "passed": true,
+        "detail": "natural_separation flag"
+      },
+      {
+        "name": "handshake",
+        "passed": true,
+        "detail": "handshake=True"
+      },
+      {
+        "name": "no_mid_reset",
+        "passed": true,
+        "detail": "generation/mid-reset flags"
+      },
+      {
+        "name": "cycles",
+        "passed": true,
+        "detail": "cycles=3"
+      },
+      {
+        "name": "raw_vector_consistency",
+        "passed": true,
+        "detail": "raw errors=[]"
+      },
+      {
+        "name": "physics_step_monotonic",
+        "passed": true,
+        "detail": "physics steps=272"
+      },
+      {
+        "name": "cycle_contact_0",
+        "passed": true,
+        "detail": "contact=True"
+      },
+      {
+        "name": "cycle_separation_zero_0",
+        "passed": true,
+        "detail": "separated_zero=True max_after_sep=0.000000000"
+      },
+      {
+        "name": "cycle_recontact_0",
+        "passed": true,
+        "detail": "recontact=True"
+      },
+      {
+        "name": "cycle_contact_1",
+        "passed": true,
+        "detail": "contact=True"
+      },
+      {
+        "name": "cycle_separation_zero_1",
+        "passed": true,
+        "detail": "separated_zero=True max_after_sep=0.000000000"
+      },
+      {
+        "name": "cycle_recontact_1",
+        "passed": true,
+        "detail": "recontact=True"
+      },
+      {
+        "name": "cycle_contact_2",
+        "passed": true,
+        "detail": "contact=True"
+      },
+      {
+        "name": "cycle_separation_zero_2",
+        "passed": true,
+        "detail": "separated_zero=True max_after_sep=0.000000000"
+      },
+      {
+        "name": "cycle_recontact_2",
+        "passed": true,
+        "detail": "recontact=True"
+      }
+    ],
+    "failures": [],
+    "sha256": "842316063e737dfce079cf3222f402c3594ee6883d089981712a13773ba4ee35"
+  },
+  "teleport_control": {
+    "status": "PASS",
+    "mode": "robot_teleport",
+    "rows": 1076,
+    "checks": [
+      {
+        "name": "mode",
+        "passed": true,
+        "detail": "separation_mode=robot_teleport"
+      },
+      {
+        "name": "natural_flag",
+        "passed": true,
+        "detail": "natural_separation flag"
+      },
+      {
+        "name": "handshake",
+        "passed": true,
+        "detail": "handshake=True"
+      },
+      {
+        "name": "no_mid_reset",
+        "passed": true,
+        "detail": "generation/mid-reset flags"
+      },
+      {
+        "name": "cycles",
+        "passed": true,
+        "detail": "cycles=3"
+      },
+      {
+        "name": "raw_vector_consistency",
+        "passed": true,
+        "detail": "raw errors=[]"
+      },
+      {
+        "name": "physics_step_monotonic",
+        "passed": true,
+        "detail": "physics steps=1076"
+      },
+      {
+        "name": "teleport_control_stale_any_cycle",
+        "passed": true,
+        "detail": "stale teleport cycles=2/3"
+      }
+    ],
+    "failures": [],
+    "sha256": "70f69c11f6db2c658b21998f1fc777bff5055bb7d66ac401aca7d4571cff9b21"
+  }
+}

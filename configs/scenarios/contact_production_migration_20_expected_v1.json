@@ -1,0 +1,314 @@
+{
+  "schema_version": "dsh.contact_production_migration_expected.v1",
+  "status": "EXPECTED_NOT_CONCLUSION",
+  "scope": "20 dynamic cases x supervisor; new measured_hard_reset + reference_origin_v2",
+  "old_reference": {
+    "run_dir": "outputs/map_eval/final_v2_dynamic1",
+    "episodes_sha256": "5e1a132ec9b9acd0b6cca9c8d715911c6d480c98a5e2c154f07d9135dd3d8a6b",
+    "manifest_sha256": "e26e32d4aa5fc94829bcdae6cb07b6de419b1ab11592c6f0052824a121c2d257"
+  },
+  "contact_policy": {
+    "measurement": "filtered force after physics hard reset + separated zero handshake",
+    "zero_is_not_no_contact": true,
+    "physical_outcomes_allowed": [
+      "CONTACT_MEASURED",
+      "UNKNOWN"
+    ],
+    "business_outcomes_are_compared_not_forced_equal": true,
+    "notes": [
+      "no scenario removal",
+      "no stop-threshold change",
+      "differences must be analysed"
+    ]
+  },
+  "cases": {
+    "dynamic_A_south_0": {
+      "old_episode_id": "dynamic_A_south_0-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_A_south_1": {
+      "old_episode_id": "dynamic_A_south_1-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_A_north_0": {
+      "old_episode_id": "dynamic_A_north_0-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_A_north_1": {
+      "old_episode_id": "dynamic_A_north_1-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_B_south_0": {
+      "old_episode_id": "dynamic_B_south_0-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_B_south_1": {
+      "old_episode_id": "dynamic_B_south_1-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_B_north_0": {
+      "old_episode_id": "dynamic_B_north_0-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_B_north_1": {
+      "old_episode_id": "dynamic_B_north_1-supervisor",
+      "old_outcome": "SUCCESS",
+      "old_reason": "ROUTE_COMPLETE",
+      "acceptable_business": [
+        "SUCCESS",
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_C_south_0": {
+      "old_episode_id": "dynamic_C_south_0-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_C_south_1": {
+      "old_episode_id": "dynamic_C_south_1-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_C_north_0": {
+      "old_episode_id": "dynamic_C_north_0-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_C_north_1": {
+      "old_episode_id": "dynamic_C_north_1-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_D_south_0": {
+      "old_episode_id": "dynamic_D_south_0-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_D_south_1": {
+      "old_episode_id": "dynamic_D_south_1-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_D_north_0": {
+      "old_episode_id": "dynamic_D_north_0-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_D_north_1": {
+      "old_episode_id": "dynamic_D_north_1-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_E_south_0": {
+      "old_episode_id": "dynamic_E_south_0-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "OBSERVATION_STALE",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_E_south_1": {
+      "old_episode_id": "dynamic_E_south_1-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "OBSERVATION_STALE",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_E_north_0": {
+      "old_episode_id": "dynamic_E_north_0-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "OBSERVATION_STALE",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    },
+    "dynamic_E_north_1": {
+      "old_episode_id": "dynamic_E_north_1-supervisor",
+      "old_outcome": "ABORT",
+      "old_reason": "OBSERVATION_STALE",
+      "acceptable_business": [
+        "ABORT",
+        "TIMEOUT"
+      ],
+      "acceptable_physical": [
+        "CONTACT_MEASURED",
+        "UNKNOWN"
+      ],
+      "old_contact_max_n": 0.0
+    }
+  }
+}
