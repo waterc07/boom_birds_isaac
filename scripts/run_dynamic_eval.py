@@ -40,6 +40,9 @@ parser.add_argument('--code-commit', default='WORKTREE')
 parser.add_argument('--working-tree', default='recorded by the operator')
 parser.add_argument('--gpu-driver', default='NOT RECORDED')
 parser.add_argument('--screenshots', action='store_true')
+parser.add_argument('--vehicle-config', type=Path,
+                    default=Path('configs/vehicles/sim_reference.yaml'))
+parser.add_argument('--obstacle-time-clamp', action='store_true')
 # Latency-envelope extension arguments (see docs/superpowers/plans/2026-11-02-latency-envelope.md).
 parser.add_argument('--config-id', default='')
 parser.add_argument('--segment-id', default='')
@@ -97,6 +100,9 @@ try:
     from boom_birds.evaluation.latency_plan import (
         LATENCY_EVAL_VERSION, LATENCY_FREEZE_SCHEMA, build_run_plan,
         check_freeze_lineage, validate_run_plan)
+    from boom_birds.evaluation import boundary_plan
+    from boom_birds.evaluation import clearance as clearance_mod
+    from boom_birds.evaluation import stop_requirement as stop_req_mod
     from boom_birds.evaluation.supervisor import RouteSupervisor, SupervisorConfig
     from boom_birds.evaluation.waypoints import WaypointConfig, WaypointRunner
     from boom_birds.sim.dynamic_obstacle import load_obstacle_spec
@@ -122,9 +128,22 @@ try:
         raise RuntimeError('no cases selected')
     case_sha = hashlib.sha256(args.cases.read_bytes()).hexdigest()
     map_cfg_sha = hashlib.sha256(args.map_config.read_bytes()).hexdigest()
+    vehicle_config_sha = hashlib.sha256(args.vehicle_config.read_bytes()).hexdigest()
+    boundary_expected_path = Path(
+        'configs/scenarios/clearance_boundary_expected_v1.json')
+    brake_model_path = Path('configs/scenarios/brake_model_v1.json')
+    boundary_expected_sha = (
+        hashlib.sha256(boundary_expected_path.read_bytes()).hexdigest()
+        if boundary_expected_path.exists() else '')
+    brake_model_sha = (
+        hashlib.sha256(brake_model_path.read_bytes()).hexdigest()
+        if brake_model_path.exists() else '')
+    brake_model = (stop_req_mod.load_brake_model(brake_model_path)
+                   if brake_model_path.exists() else None)
     started_at = _iso_now()
 
     freeze_doc = None
+    boundary_plan_doc = None
     freeze_meta = {'path': '', 'sha256': '', 'schema_version': '',
                    'frozen_at': '', 'code_commit': ''}
 
@@ -162,7 +181,52 @@ try:
             schema_version=str(freeze_doc.get('schema_version', '')),
             frozen_at=str(freeze_doc.get('frozen_at', '')),
             code_commit=str(freeze_doc.get('code_commit', '')))
-        if freeze_doc.get('schema_version') == LATENCY_FREEZE_SCHEMA:
+        if freeze_doc.get('schema_version') == boundary_plan.CLEARANCE_BOUNDARY_FREEZE_SCHEMA:
+            if not args.segment_id:
+                raise RuntimeError('boundary freeze requires --segment-id')
+            segment = freeze_doc.get('segments', {}).get(args.segment_id)
+            if not isinstance(segment, dict):
+                raise RuntimeError('segment missing in boundary freeze: '
+                                   + str(args.segment_id))
+            role = str(segment.get('role', ''))
+            plan = boundary_plan.build_run_plan(
+                segment_id=args.segment_id,
+                role=role,
+                vehicle_config=Path(args.vehicle_config).as_posix(),
+                vehicle_config_sha256=vehicle_config_sha,
+                cases_file=Path(args.cases).as_posix(),
+                cases_sha256=case_sha,
+                case_ids=[case.case_id for case in cases],
+                methods=methods,
+                execution_path=args.execution_path,
+                obs_delay_s=args.obs_delay_s,
+                action_delay_s=args.action_delay_s,
+                ttl_ms=args.ttl_ms,
+                max_age_ms=args.max_age_ms,
+                allowed_observation_age_ms=args.allowed_observation_age_ms,
+                stop_distance_m=args.stop_distance_m,
+                post_abort_observe_s=args.post_abort_observe_s,
+                clock_offset_ms=args.clock_offset_ms,
+                clock_drift_ppm=args.clock_drift_ppm,
+                clock_uncertainty_ms=args.clock_uncertainty_ms,
+                sync_fail_step=args.sync_fail_step,
+                obs_mapping_fail_step=args.obs_mapping_fail_step,
+                transport_stall_step=args.transport_stall_step,
+                transport_stall_delay_s=args.transport_stall_delay_s,
+                expected_file=boundary_expected_path.as_posix(),
+                expected_sha256=boundary_expected_sha,
+                brake_model_sha256=brake_model_sha,
+                clearance_schema_version=clearance_mod.CLEARANCE_SCHEMA_VERSION,
+                stop_requirement_schema_version=(
+                    stop_req_mod.STOP_REQUIREMENT_SCHEMA_VERSION))
+            boundary_plan.validate_run_plan(freeze_doc, args.segment_id, plan)
+            boundary_plan.check_freeze_lineage(freeze_doc, _iso_now(), Path.cwd())
+            if args.code_commit not in ('WORKTREE',
+                                        str(freeze_doc.get('code_commit'))):
+                raise RuntimeError('--code-commit does not match the freeze commit')
+            boundary_plan_doc = plan
+            mark('boundary freeze verified')
+        elif freeze_doc.get('schema_version') == LATENCY_FREEZE_SCHEMA:
             role = 'main' if args.config_id else ('special' if args.segment_id else '')
             if role not in ('main', 'special'):
                 raise RuntimeError('latency freeze requires --config-id (main) or '
@@ -193,8 +257,7 @@ try:
             mark('dynamic freeze verified')
 
     import yaml
-    config = yaml.safe_load(Path('configs/vehicles/sim_reference.yaml')
-                            .read_text(encoding='utf-8'))
+    config = yaml.safe_load(args.vehicle_config.read_text(encoding='utf-8'))
     gains_cfg = config['gains']
     vehicle_cfg = config['vehicle']
     controller_cfg = config['controller']
@@ -288,25 +351,29 @@ try:
                                 dtype=torch.float32, device=env.device)
             obstacle.write_root_pose_to_sim(pose, torch.tensor([0], device=env.device))
 
-        mark('create obstacle contact sensor')
+        mark('declare kinematic contact inference')
         robot_root = '/World/envs/env_0/Robot'
-        sensor_cfg = ContactSensorCfg(
-            prim_path=robot_root + '/body',
-            filter_prim_paths_expr=[dyn_path], update_period=0.0,
-            debug_vis=False)
-        sensor = ContactSensor(sensor_cfg)
-        sensor._initialize_callback(None)
-        sensor.update(dt=dt)
+        sensors = []
+        contact_sensor_info = {
+            'valid': True, 'mode': 'sphere_overlap_inference',
+            'force_sensor_available': False,
+            'source': 'contact_force_sensor_not_reporting_in_this_environment',
+            'reason': ('ContactSensor probes (robot/obstacle side, per-link, scene '
+                       'and manual, with PhysxContactReportAPI applied) returned no '
+                       'obstacle-robot force while physical pushing was observed; '
+                       'contact is therefore inferred from conservative sphere '
+                       'overlap, not measured force.'),
+            'inference_rule': {'sphere_overlap_m_gt': 0.02,
+                               'radii': 'robot half-diagonal + obstacle max(size)/2'},
+            'prim_paths': [], 'filter': [], 'num_sensors': 0, 'errors': []}
+
+        contact_stats = {'max_force_n': 0.0, 'max_net_n': 0.0, 'samples': 0}
 
         def obstacle_contact():
-            try:
-                sensor.update(dt=dt)
-                matrix = sensor.force_matrix_w
-                if matrix is None:
-                    return 0.0
-                return float(matrix[0].abs().sum(dim=-1).max())
-            except Exception:
-                return 0.0
+            # Force sensor unavailable (documented above); contact is inferred
+            # from geometry in the per-step record instead.
+            contact_stats['samples'] += 1
+            return 0.0
 
         def measure_body_envelope():
             """Measured USD axis-aligned bounding box of the robot prim."""
@@ -500,12 +567,144 @@ try:
                 'header_capture_host_ns': int(header_capture_ns),
             }
 
+        body_half_extents = body_envelope.get('half_extents_m')
+        robot_radius_conservative = (
+            clearance_mod.box_conservative_sphere_radius(body_half_extents)
+            if body_half_extents else None)
+        robot_envelope_payload = {
+            'half_extents_m': (None if body_half_extents is None
+                               else [float(v) for v in body_half_extents]),
+            'measured_prim': body_envelope.get('measured_prim'),
+            'source': body_envelope.get('source')}
+
+        def build_clearance_for(robot_position, target_world, observation,
+                                waypoint_index, case_payload):
+            size = tuple(float(v) for v in
+                         ((case_payload.obstacle or {}).get('size_m',
+                                                            (0.4, 0.4, 0.6))))
+            obstacle_envelope = {'size_m': list(size),
+                                 'source': 'case_obstacle_size'}
+            valid = bool(observation.get('valid'))
+            reasons = ([] if valid else
+                       [str(observation.get('reason') or 'OBSERVATION_INVALID')])
+            try:
+                return clearance_mod.build_clearance_record(
+                    robot_position, target_world, observation,
+                    waypoint_index=waypoint_index,
+                    robot_envelope=robot_envelope_payload,
+                    obstacle_envelope=obstacle_envelope,
+                    observation_valid=valid, validity_reasons=reasons)
+            except Exception as error:
+                return {
+                    'schema_version': clearance_mod.CLEARANCE_SCHEMA_VERSION,
+                    'algorithm': {
+                        'id': clearance_mod.CLEARANCE_ALGORITHM_ID,
+                        'version': clearance_mod.CLEARANCE_ALGORITHM_VERSION,
+                        'units': clearance_mod.CLEARANCE_UNITS,
+                        'frame': clearance_mod.CLEARANCE_FRAME,
+                        'time_base': clearance_mod.CLEARANCE_TIME_BASE,
+                        'prediction_horizon_s':
+                            clearance_mod.PREDICTION_HORIZON_S,
+                        'prediction_step_s': clearance_mod.PREDICTION_STEP_S},
+                    'inputs': None, 'prediction': None, 'metrics': None,
+                    'envelopes': {'robot': robot_envelope_payload,
+                                  'obstacle': obstacle_envelope},
+                    'validity': {'valid': False,
+                                 'reasons': reasons + [
+                                     'BUILD_ERROR:' + type(error).__name__]},
+                    'applicability': {'status': 'UNSUPPORTED',
+                                      'reasons': ['CLEARANCE_BUILD_ERROR'],
+                                      'notes': []}}
+
+        def build_stop_requirement_for(clearance_record, observation,
+                                       robot_position, velocity, speed,
+                                       ttl_remaining_s):
+            envelopes = (clearance_record or {}).get('envelopes') or {}
+            robot_radius = (envelopes.get('robot') or {}).get('radius_m')
+            obstacle_radius = (envelopes.get('obstacle') or {}).get('radius_m')
+            closing = None
+            metrics = (clearance_record or {}).get('metrics') or {}
+            center = metrics.get('center_distance_m')
+            obs_pos = observation.get('position_world_m')
+            obs_vel = observation.get('velocity_world_mps')
+            if (observation.get('valid') and obs_pos is not None
+                    and obs_vel is not None and center and center > 1e-9):
+                relative = [obs_vel[i] - velocity[i] for i in range(3)]
+                unit = [(obs_pos[i] - robot_position[i]) / center
+                        for i in range(3)]
+                closing = max(0.0, -sum(relative[i] * unit[i]
+                                        for i in range(3)))
+            try:
+                return stop_req_mod.evaluate_stop_requirement(
+                    robot_speed_mps=speed,
+                    closing_speed_mps=closing,
+                    observation_age_bound_s=(float(observation['age_s'])
+                                             if observation.get('valid') else None),
+                    action_delay_s=args.action_delay_s,
+                    action_ttl_remaining_s=ttl_remaining_s,
+                    robot_radius_m=robot_radius,
+                    obstacle_radius_m=obstacle_radius,
+                    stop_threshold_m=args.stop_distance_m,
+                    proposed_margin_m=0.2,
+                    brake_model=brake_model,
+                    observation_valid=bool(observation.get('valid')),
+                    basis='actuation',
+                    prediction_horizon_s=1.0)
+            except Exception as error:
+                return {
+                    'schema_version':
+                        stop_req_mod.STOP_REQUIREMENT_SCHEMA_VERSION,
+                    'model_id': 'brake_final4.v1', 'basis': 'actuation',
+                    'inputs': None, 'terms': None,
+                    'required_clearance_m': None, 'margin_to_threshold_m': None,
+                    'status': 'UNSUPPORTED',
+                    'status_reasons': ['EVALUATION_ERROR:'
+                                       + type(error).__name__]}
+
+        inference_overlap_m = 0.02
+
+        def contact_evidence_for(robot_position, obstacle_position,
+                                 clearance_record, applied, speed_value,
+                                 time_value):
+            envelopes = (clearance_record or {}).get('envelopes') or {}
+            robot_radius = (envelopes.get('robot') or {}).get('radius_m')
+            obstacle_radius = (envelopes.get('obstacle') or {}).get('radius_m')
+            center = (math.sqrt(sum((float(robot_position[i])
+                                     - float(obstacle_position[i])) ** 2
+                                    for i in range(3)))
+                      if obstacle_position is not None else None)
+            radii_sum = ((robot_radius or 0.0) + (obstacle_radius or 0.0))
+            overlap = (None if center is None else
+                       max(0.0, radii_sum - center))
+            applied = applied or {}
+            command_zero = all(abs(float(applied.get(name) or 0.0)) <= 1e-9
+                               for name in ('vx_forward_mps', 'vy_left_mps',
+                                            'vz_up_mps',
+                                            'yaw_rate_ccw_world_radps'))
+            return {
+                'force_sensor_available': False,
+                'sensor_force_n': 0.0,
+                'center_distance_m': center,
+                'radii_sum_m': radii_sum,
+                'sphere_overlap_m': overlap,
+                'sphere_overlap_threshold_m': inference_overlap_m,
+                'inferred_contact': bool(overlap is not None
+                                         and overlap > inference_overlap_m),
+                'inferred_contact_time_s': (
+                    float(time_value) if overlap is not None
+                    and overlap > inference_overlap_m else None),
+                'command_all_zero': bool(command_zero),
+                'robot_speed_mps': float(speed_value),
+                'evidence_mode': 'sphere_overlap_inference',
+            }
+
         def _dist(a, b):
             return math.sqrt(sum((a[axis] - b[axis]) ** 2 for axis in range(3)))
 
         def compute_episode_metrics(rows, case):
             body_half = body_envelope.get('half_extents_m')
-            body_radius = max(body_half) if body_half else 0.0
+            body_radius = (clearance_mod.box_conservative_sphere_radius(body_half)
+                           if body_half else 0.0)
             obstacle_payload = case.obstacle or {}
             obstacle_size_m = tuple(float(value) for value in
                                     obstacle_payload.get('size_m', (0.0, 0.0, 0.0)))
@@ -642,6 +841,64 @@ try:
                         [float(row.get('contact_force_n', 0.0) or 0.0)
                          for row in post_rows] or [0.0]),
                 }
+            clearance_min = None
+            clearance_gap_min = None
+            sr_margins = []
+            sr_unsupported = 0
+            sr_unsupported_reasons = {}
+            sr_max_speed = 0.0
+            for row in rows:
+                clearance_row = row.get('clearance') or {}
+                metrics_row = clearance_row.get('metrics') or {}
+                path_clearance = metrics_row.get('path_clearance_m')
+                path_gap = metrics_row.get('path_clearance_gap_sphere_m')
+                if path_clearance is not None and (
+                        clearance_min is None or path_clearance < clearance_min):
+                    clearance_min = path_clearance
+                if path_gap is not None and (
+                        clearance_gap_min is None or path_gap < clearance_gap_min):
+                    clearance_gap_min = path_gap
+                requirement = row.get('stop_requirement') or {}
+                margin = requirement.get('margin_to_threshold_m')
+                if margin is not None:
+                    sr_margins.append(float(margin))
+                if requirement.get('status') == 'UNSUPPORTED':
+                    sr_unsupported += 1
+                    for reason in requirement.get('status_reasons') or []:
+                        sr_unsupported_reasons[reason] = (
+                            sr_unsupported_reasons.get(reason, 0) + 1)
+                sr_max_speed = max(sr_max_speed, float(row.get('speed_mps', 0.0)))
+            inferred_rows = []
+            max_overlap = 0.0
+            for row in rows:
+                evidence = row.get('contact_evidence') or {}
+                overlap = evidence.get('sphere_overlap_m')
+                if overlap is not None:
+                    max_overlap = max(max_overlap, float(overlap))
+                if evidence.get('inferred_contact'):
+                    inferred_rows.append(float(row.get('time_s', 0.0)))
+            contact_evidence_summary = {
+                'max_sensor_force_n': contact_max,
+                'max_sphere_overlap_m': max_overlap,
+                'inferred_contact': bool(inferred_rows),
+                'first_inferred_contact_time_s': (inferred_rows[0]
+                                                  if inferred_rows else None),
+                'radii_sum_m': body_radius + obstacle_radius,
+            }
+            conservative_envelope = {
+                'robot_radius_m': body_radius,
+                'robot_aabb_half_extents_m': (None if body_half is None
+                                              else [float(v) for v in body_half]),
+                'robot_radius_rule': 'half_diagonal_of_measured_aabb',
+                'robot_source': body_envelope.get('source'),
+                'robot_measured_prim': body_envelope.get('measured_prim'),
+                'robot_attitude_scope': 'any_rigid_rotation_about_center',
+                'obstacle_radius_m': obstacle_radius,
+                'obstacle_size_m': [float(v) for v in obstacle_size_m],
+                'obstacle_source': 'case_obstacle_size',
+                'limitation': ('sphere/AABB approximation; not a triangle-mesh '
+                               'sweep and not a real-aircraft envelope'),
+            }
             return {
                 'brake_start': brake_start,
                 'initial_speed_mps': (None if brake_start is None
@@ -654,6 +911,16 @@ try:
                 'min_center_distance_m': min_distance,
                 'min_center_distance_time_s': min_distance_time,
                 'min_envelope_gap_m': min_gap,
+                'min_envelope_gap_sphere_m': min_gap,
+                'min_path_clearance_m': clearance_min,
+                'min_path_clearance_gap_sphere_m': clearance_gap_min,
+                'conservative_envelope': conservative_envelope,
+                'stop_requirement_extremes': {
+                    'min_margin_m': (min(sr_margins) if sr_margins else None),
+                    'unsupported_steps': sr_unsupported,
+                    'unsupported_reasons': sr_unsupported_reasons,
+                    'max_robot_speed_mps': sr_max_speed,
+                },
                 'envelope': {
                     'body_half_extents_m': (None if body_half is None
                                             else [float(v) for v in body_half]),
@@ -666,6 +933,7 @@ try:
                 'max_relative_speed_mps': max_rel,
                 'contact_max_force_n': contact_max,
                 'contact_prim': contact_prim,
+                'contact_evidence_summary': contact_evidence_summary,
                 'executed_action_count': len(executed_ids),
                 'executed_action_ids': executed_ids,
                 'arrival_rejection_count': len(rejected_rows),
@@ -753,7 +1021,12 @@ try:
                         now_ns = int(round(elapsed * 1_000_000_000))
                         now_s = elapsed
                         state = read_state()
-                        obstacle_position, obstacle_velocity = obstacle_spec.pose_at(elapsed)
+                        obstacle_t = elapsed
+                        if args.obstacle_time_clamp:
+                            obstacle_t = min(max(elapsed, obstacle_spec.start_time_s),
+                                             obstacle_spec.end_time_s)
+                        obstacle_position, obstacle_velocity = obstacle_spec.pose_at(
+                            obstacle_t)
                         set_obstacle_pose(obstacle_position)
                         capture_host_ns = max(0, now_ns - obs_delay_ns - case_obs_delay_ns)
                         capture_host_ns = min(capture_host_ns, now_ns)
@@ -777,7 +1050,13 @@ try:
                             age_rec = mapping_age(capture_clock_ns, now_ns, mapping,
                                                   sync_generation)
                         observation_t = max(0.0, elapsed - args.obs_delay_s)
-                        raw_observation = obstacle_spec.observation_at(observation_t)
+                        observation_sample_t = observation_t
+                        if args.obstacle_time_clamp:
+                            observation_sample_t = min(
+                                max(observation_t, obstacle_spec.start_time_s),
+                                obstacle_spec.end_time_s)
+                        raw_observation = obstacle_spec.observation_at(
+                            observation_sample_t)
                         if raw_observation.get('valid') and age_rec.get('valid'):
                             observation = dict(raw_observation)
                             observation['age_s'] = float(age_rec['age_bound_s'])
@@ -799,7 +1078,23 @@ try:
                                               for value in state.velocity_world_mps))
                         decision = supervisor.update(
                             state.position_world_m, target, speed,
-                            observation, route_active_s, dt)
+                            observation, route_active_s, dt,
+                            robot_velocity_world_mps=state.velocity_world_mps,
+                            waypoint_index=runner.index,
+                            robot_envelope=robot_envelope_payload,
+                            obstacle_envelope={
+                                'size_m': [float(value) for value in
+                                           (case.obstacle or {}).get(
+                                               'size_m', (0.4, 0.4, 0.6))],
+                                'source': 'case_obstacle_size'})
+                        clearance_record = (decision.get('clearance_record')
+                                            or build_clearance_for(
+                                                state.position_world_m, target,
+                                                observation, runner.index, case))
+                        stop_req_record = build_stop_requirement_for(
+                            clearance_record, observation,
+                            state.position_world_m, state.velocity_world_mps,
+                            speed, None)
                         admitted_action = None
                         if method == 'supervisor':
                             states.append(decision['state'])
@@ -849,6 +1144,12 @@ try:
                                     'applied': applied_snapshot(
                                         {'applied': None}, (0.0, 0.0, 0.0, 0.0),
                                         None, now_ns, 0, 0),
+                                    'contact_evidence': contact_evidence_for(
+                                        state.position_world_m, obstacle_position,
+                                        clearance_record, None, speed, elapsed),
+                                    'clearance': clearance_record,
+                                    'clearance_m': decision.get('clearance_m'),
+                                    'stop_requirement': stop_req_record,
                                 })
                                 break
                             else:
@@ -992,6 +1293,13 @@ try:
                                         'applied': applied_snapshot(
                                             {'applied': None}, command, None,
                                             now_ns, 0, 0),
+                                        'contact_evidence': contact_evidence_for(
+                                            state.position_world_m,
+                                            obstacle_position, clearance_record,
+                                            None, speed, elapsed),
+                                        'clearance': clearance_record,
+                                        'clearance_m': decision.get('clearance_m'),
+                                        'stop_requirement': stop_req_record,
                                     })
                                     fault_recorded = fault.get('type')
                                     break
@@ -1050,6 +1358,13 @@ try:
                                         'applied': applied_snapshot(
                                             {'applied': None}, command, None,
                                             now_ns, 0, 0),
+                                        'contact_evidence': contact_evidence_for(
+                                            state.position_world_m,
+                                            obstacle_position, clearance_record,
+                                            None, speed, elapsed),
+                                        'clearance': clearance_record,
+                                        'clearance_m': decision.get('clearance_m'),
+                                        'stop_requirement': stop_req_record,
                                     })
                                     break
                                 v2_admission = 'ADMITTED'
@@ -1086,6 +1401,12 @@ try:
                         executed_id = transport.get('executed_action_id')
                         if executed_id and executed_id in admitted_by_id:
                             v2_gate.mark_executed(admitted_by_id[executed_id], now_ns)
+                        if v2_expires_ns:
+                            stop_req_record = build_stop_requirement_for(
+                                clearance_record, observation,
+                                state.position_world_m, state.velocity_world_mps,
+                                speed,
+                                max(0.0, (v2_expires_ns - now_ns) / 1_000_000_000.0))
                         actuator_action = control.to_actuator_action(params)
                         _, _, terminated, truncated, _ = env.step(
                             torch.tensor([actuator_action], dtype=torch.float32,
@@ -1160,6 +1481,12 @@ try:
                             'clock': clock_record,
                             'transport': transport,
                             'applied': applied,
+                            'clearance': clearance_record,
+                            'clearance_m': decision.get('clearance_m'),
+                            'stop_requirement': stop_req_record,
+                            'contact_evidence': contact_evidence_for(
+                                after.position_world_m, obstacle_position,
+                                clearance_record, applied, after_speed, elapsed),
                             'obstacle_position_world_m': list(obstacle_position),
                             'obstacle_velocity_world_mps': list(obstacle_velocity),
                             **obstacle_observation_fields(observation),
@@ -1193,8 +1520,13 @@ try:
                             elapsed = post_start + (extra + 1) * dt
                             now_ns = int(round(elapsed * 1_000_000_000))
                             state = read_state()
+                            obstacle_t = elapsed
+                            if args.obstacle_time_clamp:
+                                obstacle_t = min(
+                                    max(elapsed, obstacle_spec.start_time_s),
+                                    obstacle_spec.end_time_s)
                             obstacle_position, obstacle_velocity = (
-                                obstacle_spec.pose_at(elapsed))
+                                obstacle_spec.pose_at(obstacle_t))
                             set_obstacle_pose(obstacle_position)
                             if delay_wrapper is not None:
                                 delay_wrapper.update_context(
@@ -1243,6 +1575,10 @@ try:
                                     mapping, age_rec, capture_host_ns),
                                 'transport': transport,
                                 'applied': applied,
+                                'contact_evidence': contact_evidence_for(
+                                    after.position_world_m, obstacle_position,
+                                    clearance_record, applied, after_speed,
+                                    elapsed),
                                 'obstacle_position_world_m': list(obstacle_position),
                                 'obstacle_velocity_world_mps': list(obstacle_velocity),
                                 'observation_valid': False,
@@ -1280,9 +1616,30 @@ try:
                     if contact_prim and method == 'supervisor':
                         capture(episode_id + '_contact')
                     metrics = compute_episode_metrics(episode_rows, case)
+                    if outcome in ('SUCCESS', 'ABORT', 'TIMEOUT', 'INVALID'):
+                        business_outcome = outcome
+                    else:
+                        business_outcome = 'ABORT'
+                    evidence_summary = metrics.get('contact_evidence_summary') or {}
+                    if outcome == 'COLLISION' or contact_max > 0.02:
+                        physical_outcome = 'CONTACT_MEASURED'
+                    elif evidence_summary.get('inferred_contact'):
+                        physical_outcome = 'CONTACT_INFERRED'
+                    elif outcome == 'OUT_OF_BOUNDS':
+                        physical_outcome = 'OUT_OF_BOUNDS'
+                    else:
+                        physical_outcome = 'NO_CONTACT'
+                    if physical_outcome in ('CONTACT_MEASURED',
+                                            'CONTACT_INFERRED') and not contact_prim:
+                        contact_prim = ('OBSTACLE_FORCE_SENSOR'
+                                        if physical_outcome == 'CONTACT_MEASURED'
+                                        else 'INFERRED_OBSTACLE_OVERLAP')
                     records.extend(episode_rows)
                     results.append({
                         'episode_id': episode_id, 'case_id': case.case_id,
+                        'business_outcome': business_outcome,
+                        'physical_outcome': physical_outcome,
+                        'role': (boundary_plan_doc or {}).get('role', ''),
                         'method': method, 'scenario_class': case.scenario_class,
                         'route_id': case.route_id,
                         'config_id': args.config_id,
@@ -1297,6 +1654,7 @@ try:
                         'states': sorted(set(states)),
                         'contact_max_force_n': contact_max,
                         'contact_prim': contact_prim,
+                        'contact_evidence_summary': evidence_summary,
                         'start_position_world_m': list(case.start_position_world_m),
                         'goal_position_world_m': list(case.goal_position_world_m),
                         'waypoints': [list(point) for point in case.waypoints],
@@ -1357,6 +1715,7 @@ try:
             'config_id': args.config_id,
             'segment_id': args.segment_id,
             'latency_plan': latency_plan,
+            'boundary_plan': boundary_plan_doc,
             'map': {
                 'asset_id': contract.asset_id,
                 'terrain_sha256': contract.terrain_sha256,
@@ -1418,6 +1777,29 @@ try:
             'methods': methods,
             'started_at': started_at,
             'latency_plan': latency_plan,
+            'boundary_plan': boundary_plan_doc,
+            'vehicle_config': {'file': Path(args.vehicle_config).as_posix(),
+                               'sha256': vehicle_config_sha},
+            'expected_file': (boundary_expected_path.as_posix()
+                              if boundary_plan_doc is not None else ''),
+            'expected_sha256': boundary_expected_sha,
+            'brake_model_file': (brake_model_path.as_posix()
+                                 if boundary_plan_doc is not None else ''),
+            'brake_model_sha256': brake_model_sha,
+            'clearance_algorithm': {
+                'id': clearance_mod.CLEARANCE_ALGORITHM_ID,
+                'version': clearance_mod.CLEARANCE_ALGORITHM_VERSION,
+                'schema_version': clearance_mod.CLEARANCE_SCHEMA_VERSION},
+            'stop_requirement_schema_version':
+                stop_req_mod.STOP_REQUIREMENT_SCHEMA_VERSION,
+            'envelope_policy': {
+                'robot_radius_rule': 'sqrt(sum(aabb_half_extents^2))',
+                'robot_attitude_scope': 'any_rigid_rotation_about_center',
+                'obstacle_radius_rule': 'max(obstacle_size)/2',
+                'limitation': ('sphere/AABB approximation; not a triangle-mesh '
+                               'sweep')},
+            'contact_sensor': contact_sensor_info,
+            'obstacle_time_clamp': bool(args.obstacle_time_clamp),
             'clock_plan': {
                 'camera_clock_id': camera_clock.clock_id,
                 'offset_ms': args.clock_offset_ms,
