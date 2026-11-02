@@ -260,8 +260,8 @@
   },
   "report": {
     "path": "MAP_LATENCY_ENVELOPE_REPORT.md",
-    "sha256": "c94db7dbe3ee5fb801a5a3c3e85b1c193af6b97eea1f86543740b3daae9bc76a",
-    "bytes": 30406
+    "sha256": "756ae54dcdaee34fceb77ae055f74a4e150a245ad007ec91d95845ed809ef19d",
+    "bytes": 32117
   },
   "handoff": {
     "path": "HANDOFF_20261102_LATENCY_ENVELOPE.md",
