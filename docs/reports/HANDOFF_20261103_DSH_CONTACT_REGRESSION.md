@@ -24,7 +24,7 @@
 | 正式预冻结 v2 | `configs/scenarios/contact_production_migration_20_v2.json` |
 | pilot 预冻结 v1 | `configs/scenarios/contact_production_migration_20_v1.json`（pilot 停止，不作为验收） |
 | 20 集运行 | `outputs/map_eval/production_contact_migration/regression20`（steps 为 gitignored 原始证据） |
-| 接触结束运行 | `outputs/dsh_contact_end/natural_obstacle_motion_final`、`robot_teleport_control` |
+| 接触结束运行 | `outputs/dsh_contact_end/natural_obstacle_motion_final2`、`robot_teleport_control` |
 | 核验 JSON | `dsh_contact_end_verify_20261102.json`、`dsh_dynamic_regression20_verify_20261102.json`、`..._migration_verify_...json`、`..._raw_audit_...json`（均在 `docs/reports/map_eval/contact_envelope/`） |
 | 版本化证据/hash | `docs/reports/map_eval/contact_envelope/evidence_20261103/`（含 `hashes.json`） |
 | GUI 证据 | 接触结束持续接触截图、20 集成功集截图；均有效非空 PNG；完整日志另存 |
@@ -67,10 +67,10 @@
 ```powershell
 $py = 'E:\isaac\env_isaaclab\Scripts\python.exe'
 # 接触结束（自然，GUI）
-& $py -u scripts/contact_end_freshness_probe.py --cycles 3 --separation-mode obstacle_motion --screenshots --output outputs/dsh_contact_end/natural_obstacle_motion_final --kit_args=--/app/vulkan=false --device cuda:0
+& $py -u scripts/contact_end_freshness_probe.py --cycles 3 --separation-mode obstacle_motion --screenshots --output outputs/dsh_contact_end/natural_obstacle_motion_final2 --kit_args=--/app/vulkan=false --device cuda:0
 # 传送对照（单独目录，GUI）
 & $py -u scripts/contact_end_freshness_probe.py --cycles 3 --separation-mode robot_teleport --output outputs/dsh_contact_end/robot_teleport_control --kit_args=--/app/vulkan=false --device cuda:0
-& $py scripts/verify_contact_end_freshness.py --natural outputs/dsh_contact_end/natural_obstacle_motion_final --teleport-control outputs/dsh_contact_end/robot_teleport_control --output docs/reports/map_eval/contact_envelope/dsh_contact_end_verify_20261102.json
+& $py scripts/verify_contact_end_freshness.py --natural outputs/dsh_contact_end/natural_obstacle_motion_final2 --teleport-control outputs/dsh_contact_end/robot_teleport_control --output docs/reports/map_eval/contact_envelope/dsh_contact_end_verify_20261102.json
 # 20 集预冻结运行（正式；先冻结 expected/v2）
 & $py -u scripts/run_dynamic_eval.py --cases configs/scenarios/map_dynamic_cases_v1.json --methods supervisor --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --screenshots --device cuda:0 --gpu-driver 'NVIDIA 581.80 (observed)' --kit_args=--/app/vulkan=false --freeze configs/scenarios/contact_production_migration_20_v2.json --output outputs/map_eval/production_contact_migration/regression20
 # 独立核验

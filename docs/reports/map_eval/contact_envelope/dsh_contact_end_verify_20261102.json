@@ -4,7 +4,7 @@
   "natural": {
     "status": "PASS",
     "mode": "obstacle_motion",
-    "rows": 272,
+    "rows": 350,
     "checks": [
       {
         "name": "mode",
@@ -39,7 +39,7 @@
       {
         "name": "physics_step_monotonic",
         "passed": true,
-        "detail": "physics steps=272"
+        "detail": "physics steps=350"
       },
       {
         "name": "cycle_contact_0",
@@ -88,7 +88,7 @@
       }
     ],
     "failures": [],
-    "sha256": "842316063e737dfce079cf3222f402c3594ee6883d089981712a13773ba4ee35"
+    "sha256": "a09382be18538c7f3ed97bb5da8bb13fbf4242470d888fa6b421d52cb67ea019"
   },
   "teleport_control": {
     "status": "PASS",

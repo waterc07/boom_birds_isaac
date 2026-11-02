@@ -240,8 +240,25 @@ try:
         hover_step()
         obstacle_x = 1.4
         for cycle in range(args.cycles):
-            # 1) continuous approach from the current obstacle position; no
-            # teleport jump at the cycle boundary.
+            # 1) for cycles after the first, first move only the kinematic
+            # obstacle away from the just-recontacted pose.  This makes every
+            # cycle include its own separated baseline and a full approach;
+            # the robot is still not teleported.
+            precycle_separation_rows = 0
+            if cycle > 0:
+                for _ in range(20):
+                    obstacle_x += args.approach_speed_mps * dt
+                    set_obstacle_pose((obstacle_x, 0.0, 1.0))
+                    hold_step()
+                    state = read_state()
+                    sample = sample_row(cycle, 'precycle_separation',
+                                        state.position_world_m,
+                                        [obstacle_x, 0.0, 1.0],
+                                        [args.approach_speed_mps, 0, 0], state)
+                    precycle_separation_rows += 1
+                    if sample['box_separation_m'] > 0.5:
+                        break
+            # 2) continuous approach from the current obstacle position
             contact = False
             for approach in range(160):
                 state = read_state()
@@ -256,7 +273,7 @@ try:
                         or sample['box_separation_m'] < 0.0:
                     contact = True
                     break
-            # 2) sustained contact: obstacle tracks the robot at a contact offset
+            # 3) sustained contact: obstacle tracks the robot at a contact offset
             for sustain in range(args.sustain_steps):
                 state = read_state()
                 robot = [state.position_world_m[i] + origin[i] for i in range(3)]
@@ -268,7 +285,7 @@ try:
                            [obstacle_x, robot[1], 1.0], [0.0, 0.0, 0.0], state)
                 if cycle == 1 and sustain == 10:
                     capture('contact_end_sustain')
-            # 3) natural separation: obstacle moves away continuously; robot pose
+            # 4) natural separation: obstacle moves away continuously; robot pose
             # is station-kept, never teleported to create the separation.
             separated_zero = False
             separation_force_zero_rows = 0
@@ -293,7 +310,7 @@ try:
                         and sample['box_separation_m'] > 0.1:
                     separated_zero = True
                     separation_force_zero_rows += 1
-            # 4) re-contact: obstacle returns continuously from its far position
+            # 5) re-contact: obstacle returns continuously from its far position
             if args.separation_mode == 'robot_teleport':
                 set_robot_pose((0.0, 0.0, 1.0))
             recontact = False
@@ -312,6 +329,7 @@ try:
             phases.append({'cycle': cycle, 'contact': contact,
                            'separated_zero': separated_zero,
                            'separation_force_zero_rows': separation_force_zero_rows,
+                           'precycle_separation_rows': precycle_separation_rows,
                            'recontact': recontact,
                            'separation_mode': args.separation_mode})
         # explicit teleport control is a separate invocation/mode, not mixed here

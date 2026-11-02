@@ -25,7 +25,7 @@
 3. 机器人以“站定保持”写回参考悬停点，仅用于保持受控几何；**没有用机器人传送制造分离**。这是诊断干预，已在记录与限制中标明。
 4. 另起一次 `--separation-mode robot_teleport`，单独目录记录显式传送对照；不写入自然分离结果。
 
-原始记录（`outputs/dsh_contact_end/natural_obstacle_motion_final/contact_end_freshness.json`，272 行）逐样本包含：循环/阶段、`physics_step`、`physics_generation`、模拟/主机时间、机器人/障碍世界位置和速度、`center_distance_m`、`box_separation_m`、机器人/障碍半径、球重叠、原始 `filtered_by_target_n`/`net_vectors_n`、读取健康、目标路径与 filter count。
+原始记录（`outputs/dsh_contact_end/natural_obstacle_motion_final2/contact_end_freshness.json`，350 行）逐样本包含：循环/阶段、`physics_step`、`physics_generation`、模拟/主机时间、机器人/障碍世界位置和速度、`center_distance_m`、`box_separation_m`、机器人/障碍半径、球重叠、原始 `filtered_by_target_n`/`net_vectors_n`、读取健康、目标路径与 filter count。
 
 ## 3. 结果
 
@@ -34,10 +34,10 @@
 | 循环 | 接触建立 | 持续接触最大测力 | 自然分离后 box>0.1 m 最大测力 | 零样本数 | 重接触 | 重接触最大测力 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 是（66 步接近） | 0.012677 N | **0.0 N** | 6 | 是（18 步） | 0.012262 N |
-| 1 | 是（承接上次重接触；1 步内再次接触） | 0.012666 N | **0.0 N** | 6 | 是（18 步） | 0.012597 N |
-| 2 | 是（承接上次重接触；1 步内再次接触） | 0.012683 N | **0.0 N** | 6 | 是（18 步） | 0.012517 N |
+| 1 | 是（先自然离开 20 步，再 20 步接近） | 0.012603 N | **0.0 N** | 6 | 是（18 步） | 0.012341 N |
+| 2 | 是（先自然离开 20 步，再 20 步接近） | 0.012524 N | **0.0 N** | 6 | 是（18 步） | 0.012453 N |
 
-说明：循环 1/2 的“接近”只有 1 步，是因为它们紧接上一循环的**重接触**，障碍仍在接触附近；每个循环仍包含接触、持续接触、自然分离和重接触，且自然分离后测力均回到零。该连续性在记录中可逐行核对。
+说明：循环 1/2 在开始处先由**运动学障碍连续离开** 20 步（`precycle_separation`，机器人不传送），然后进行完整接近；因此每个循环都有独立的分离基线、接触建立、持续接触、自然分离与重接触。自然分离后测力均回到零。
 
 显式 teleport 对照（`outputs/dsh_contact_end/robot_teleport_control/contact_end_freshness.json`，1076 行，单独目录）：
 
@@ -70,11 +70,11 @@
 ```powershell
 $py = 'E:\isaac\env_isaaclab\Scripts\python.exe'
 # 自然分离/重接触，GUI；单独目录
-& $py -u scripts/contact_end_freshness_probe.py --cycles 3 --separation-mode obstacle_motion --screenshots --output outputs/dsh_contact_end/natural_obstacle_motion_final --kit_args=--/app/vulkan=false --device cuda:0
+& $py -u scripts/contact_end_freshness_probe.py --cycles 3 --separation-mode obstacle_motion --screenshots --output outputs/dsh_contact_end/natural_obstacle_motion_final2 --kit_args=--/app/vulkan=false --device cuda:0
 # 显式传送对照，GUI；必须单独目录，不混称自然分离
 & $py -u scripts/contact_end_freshness_probe.py --cycles 3 --separation-mode robot_teleport --output outputs/dsh_contact_end/robot_teleport_control --kit_args=--/app/vulkan=false --device cuda:0
 # 独立核验
-& $py scripts/verify_contact_end_freshness.py --natural outputs/dsh_contact_end/natural_obstacle_motion_final --teleport-control outputs/dsh_contact_end/robot_teleport_control --output docs/reports/map_eval/contact_envelope/dsh_contact_end_verify_20261102.json
+& $py scripts/verify_contact_end_freshness.py --natural outputs/dsh_contact_end/natural_obstacle_motion_final2 --teleport-control outputs/dsh_contact_end/robot_teleport_control --output docs/reports/map_eval/contact_envelope/dsh_contact_end_verify_20261102.json
 ```
 
 ## 7. 版本化摘要
