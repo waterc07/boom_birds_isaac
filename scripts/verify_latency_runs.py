@@ -2406,10 +2406,26 @@ class ExpectedIndex:
                                                     or entry))
 
     def lookup(self, segment_id, case_id):
+        def _merge(specs, key):
+            if not isinstance(specs, dict):
+                return None
+            base = specs.get('*')
+            specific = specs.get(str(key)) if key is not None else None
+            if specific is None:
+                return base
+            if isinstance(base, dict) and isinstance(specific, dict):
+                merged = dict(base)
+                merged.update(specific)
+                if not merged.get('alternatives') and base.get('alternatives'):
+                    merged['alternatives'] = list(base['alternatives'])
+                return merged
+            return specific
+
         if segment_id and segment_id in self.segments:
-            specs = self.segments[segment_id]
-            return specs.get(str(case_id)) or specs.get('*')
-        return self.cases.get(str(case_id)) or self.cases.get('*')
+            found = _merge(self.segments[segment_id], case_id)
+            if found is not None:
+                return found
+        return _merge(self.cases, case_id)
 
     def summary(self):
         return {'cases': len(self.cases),
@@ -2651,6 +2667,43 @@ def _evidence_after(rows, step, status, require_zero=False):
     return found
 
 
+def _row_applied_info(row):
+    """Return the executed-setpoint record of a step row.
+
+    The runner records the applied setpoint both at the top level (``applied``)
+    and nested inside the transport record (``transport.applied``); a rejected
+    arrival keeps the old setpoint in the nested copy.  Prefer the top-level
+    record but fall back to the transport copy.
+    """
+    applied = row.get('applied')
+    transport = row.get('transport')
+    nested = transport.get('applied') if isinstance(transport, dict) else None
+    if isinstance(applied, dict) and applied.get('action_id'):
+        return applied
+    if isinstance(nested, dict) and nested.get('action_id'):
+        return nested
+    if isinstance(applied, dict):
+        return applied
+    if isinstance(nested, dict):
+        return nested
+    return {}
+
+
+def _applied_is_zero(applied):
+    if not isinstance(applied, dict):
+        return True
+    values = [applied.get('vx_forward_mps'), applied.get('vy_left_mps'),
+              applied.get('vz_up_mps'),
+              applied.get('yaw_rate_ccw_world_radps')]
+    if not all(_num(value) and abs(value) <= 1e-12 for value in values):
+        return False
+    if applied.get('action_id') not in ('', None):
+        return False
+    if applied.get('is_held') not in (None, False):
+        return False
+    return True
+
+
 def _expected_details(freeze_entry, expected_index, segment_id):
     details = {}
     if isinstance(freeze_entry, dict) \
@@ -2762,35 +2815,40 @@ def _check_segment(segment_id, evidence, analysis, freeze_entry, expected_index,
             if not isinstance(start, int):
                 start = next((index for index, row in enumerate(rows)
                               if row.get('step') == item.get('step')), 0)
-            residual = False
+            run_residual = False
+            run_applied = {}
+            post_residual = False
             fallback = False
             executed_after = False
             for row in rows[max(0, start):]:
                 transport = row.get('transport')
                 transport = transport if isinstance(transport, dict) else {}
-                applied = row.get('applied')
-                applied = applied if isinstance(applied, dict) else {}
-                if transport.get('status') == 'HOLDING' \
-                        and applied.get('is_held') is True:
-                    residual = True
+                applied = _row_applied_info(row)
+                phase = row.get('phase')
+                if transport.get('status') == 'HOLDING':
+                    if phase == 'POST_ABORT':
+                        post_residual = True
+                    else:
+                        run_residual = True
                 if applied.get('action_id'):
-                    residual = True
+                    if phase == 'POST_ABORT':
+                        post_residual = True
+                    else:
+                        run_residual = True
+                        if not run_applied:
+                            run_applied = applied
                 if transport.get('status') == 'NONE' \
-                        and applied.get('action_id') in ('', None):
-                    values = [applied.get('vx_forward_mps'),
-                              applied.get('vy_left_mps'),
-                              applied.get('vz_up_mps'),
-                              applied.get('yaw_rate_ccw_world_radps')]
-                    if all(_num(value) and abs(value) <= 1e-12
-                           for value in values):
-                        fallback = True
+                        and _applied_is_zero(applied):
+                    fallback = True
                 if transport.get('executed') and item.get('action_id') \
                         and transport.get('executed_action_id') \
                         == item.get('action_id'):
                     executed_after = True
+            residual = run_residual or post_residual
             if not residual:
                 verifier.fail('special_segments', 'ttl_over: no residual old '
-                              'setpoint record around the rejection', run=label,
+                              'setpoint record at the rejection row or in the '
+                              'POST_ABORT window', run=label,
                               episode_id=item.get('episode_id'),
                               field='applied.action_id',
                               expected='old active setpoint record',
@@ -2809,10 +2867,15 @@ def _check_segment(segment_id, evidence, analysis, freeze_entry, expected_index,
                               expected='rejected action never executed',
                               actual=item.get('action_id'))
             if residual and fallback and not executed_after:
+                where = 'POST_ABORT' if post_residual else 'RUN_REJECTION'
+                age_s = run_applied.get('age_s')
+                held = run_applied.get('is_held')
                 verifier.ok('special_segments', 'ttl_over: expired brake command '
-                            'rejected (age=%s), old setpoint residual then '
-                            'zero-target fallback'
-                            % (round(age, 4) if age is not None else age))
+                            'rejected (age=%s); residual old setpoint in %s'
+                            ' (applied.action_id=%s age_s=%s is_held=%s); '
+                            'zero-target fallback present'
+                            % (round(age, 4) if age is not None else age, where,
+                               run_applied.get('action_id'), age_s, held))
     elif kind == 'clock_sync':
         reasons = {details.get('inflight_arrival_reject_reason'),
                    details.get('admission_reject_reason'),

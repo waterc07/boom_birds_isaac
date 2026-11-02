@@ -630,7 +630,9 @@ def build_fixture(root):
             'expected': _expected_segment(
                 'ttl_over', ['special_case'], 'ABORT', 'ACTION_EXPIRED',
                 {'arrival_reject_reason': 'ACTION_EXPIRED',
-                 'brake_command_executed': False}),
+                 'brake_command_executed': False,
+                 'expected_outcome_alternatives':
+                 ['TIMEOUT', 'COLLISION', 'ABORT']}),
         },
         'clock_sync': {
             'segment_id': 'clock_sync', 'cases_file': str(special_cases),
@@ -713,11 +715,26 @@ def build_fixture(root):
         'special_case-supervisor', 'special_case', ttl_over_plan,
         n_physical=13, brake_step=12, abort=True, post_abort=2,
         outcome='ABORT', abort_reason='ACTION_EXPIRED')
-    stalled = {
-        'action_id': 'stalled-brake-command', 'reason': 'ACTION_EXPIRED',
-        'arrival_s': ttl_over_rows[-3]['time_s'],
-        'arrival_age_s': 0.15}
-    ttl_over_rows[12]['transport']['rejections_this_step'].append(stalled)
+    rejected_row = ttl_over_rows[12]
+    host = rejected_row['clock']['host_now_ns']
+    rejected_row['transport'] = {
+        'status': 'REJECTED', 'action_id': 'stalled-brake-command',
+        'executed_action_id': '',
+        'issued_at_ns': host - 150_000_000,
+        'expires_at_ns': host,
+        'scheduled_arrival_ns': host - 50_000_000,
+        'arrival_ns': host,
+        'dispatch_delay_s': 0.1, 'arrival_age_s': 0.15,
+        'reason': 'ACTION_EXPIRED', 'executed': False,
+        'rejections_this_step': [],
+        'applied': {
+            'vx_forward_mps': 0.3, 'vy_left_mps': 0.0, 'vz_up_mps': 0.0,
+            'yaw_rate_ccw_world_radps': 0.0,
+            'action_id': 'pre-stall-active',
+            'issued_at_ns': host - 100_000_000,
+            'expires_at_ns': host + 50_000_000, 'age_s': 0.1,
+            'is_held': True}}
+    rejected_row['applied'] = _applied(None, host)
     clock_sync_episode, clock_sync_rows = _build_episode(
         'special_case-supervisor', 'special_case', clock_sync_plan,
         n_physical=13, brake_step=12, abort=True, post_abort=2,
@@ -1063,6 +1080,97 @@ def test_ttl_over_rejection_missing_fails(tmp_path):
     result = _verify(fixture)
     assert result['status'] == 'FAIL'
     assert 'special_segments' in _failed_checks(result)
+
+
+def test_ttl_over_residual_missing_fails(tmp_path):
+    fixture = build_fixture(tmp_path)
+
+    def mutate(steps, episodes, manifest):
+        for row in steps:
+            transport = row.get('transport') or {}
+            if transport.get('status') == 'REJECTED':
+                transport['applied'] = None
+                row['applied'] = {
+                    'vx_forward_mps': 0.0, 'vy_left_mps': 0.0,
+                    'vz_up_mps': 0.0, 'yaw_rate_ccw_world_radps': 0.0,
+                    'action_id': '', 'issued_at_ns': 0,
+                    'expires_at_ns': 0, 'age_s': 0.0, 'is_held': False}
+
+    _mutate_run(fixture['ttl_over'], mutate)
+    result = _verify(fixture)
+    assert result['status'] == 'FAIL'
+    assert 'special_segments' in _failed_checks(result)
+    assert any('no residual old setpoint' in failure['detail']
+               for failure in result['failures'])
+
+
+def test_ttl_over_post_abort_residual_satisfies_evidence(tmp_path):
+    """Lead-agreed alternative (a): residual may live in the POST_ABORT rows."""
+    fixture = build_fixture(tmp_path)
+
+    def mutate(steps, episodes, manifest):
+        post_index = None
+        for index, row in enumerate(steps):
+            transport = row.get('transport') or {}
+            if transport.get('status') == 'REJECTED':
+                transport['applied'] = None
+                row['applied'] = {
+                    'vx_forward_mps': 0.0, 'vy_left_mps': 0.0,
+                    'vz_up_mps': 0.0, 'yaw_rate_ccw_world_radps': 0.0,
+                    'action_id': '', 'issued_at_ns': 0,
+                    'expires_at_ns': 0, 'age_s': 0.0, 'is_held': False}
+        for index, row in enumerate(steps):
+            if row.get('phase') == 'POST_ABORT':
+                post_index = index
+                break
+        assert post_index is not None
+        row = steps[post_index]
+        host = row['clock']['host_now_ns']
+        issued = host - 150_000_000
+        ticket = {'id': 'post-abort-active', 'issued': issued,
+                  'expires': issued + 150_000_000,
+                  'scheduled': host - 50_000_000, 'arrival': host,
+                  'command': 0.2}
+        row['transport'] = {
+            'status': 'APPLIED', 'action_id': ticket['id'],
+            'executed_action_id': ticket['id'],
+            'issued_at_ns': issued, 'expires_at_ns': ticket['expires'],
+            'scheduled_arrival_ns': ticket['scheduled'],
+            'arrival_ns': host, 'dispatch_delay_s': 0.1,
+            'arrival_age_s': 0.15, 'reason': 'ACCEPT', 'executed': True,
+            'rejections_this_step': []}
+        row['applied'] = {
+            'vx_forward_mps': 0.2, 'vy_left_mps': 0.0, 'vz_up_mps': 0.0,
+            'yaw_rate_ccw_world_radps': 0.0, 'action_id': ticket['id'],
+            'issued_at_ns': issued, 'expires_at_ns': ticket['expires'],
+            'age_s': 0.15, 'is_held': False}
+        episodes[0]['metrics'] = _record_metrics(manifest['latency_plan'],
+                                                episodes[0], steps)
+
+    _mutate_run(fixture['ttl_over'], mutate)
+    result = _verify(fixture)
+    assert result['status'] == 'PASS', (result['status'], result['failures'],
+                                        result['missing_fields'])
+
+
+def test_expected_outcome_alternatives_accepted(tmp_path):
+    fixture = build_fixture(tmp_path)
+
+    def mutate(steps, episodes, manifest):
+        episodes[0]['outcome'] = 'TIMEOUT'
+        episodes[0]['reason'] = 'WALL_TIMEOUT'
+        for row in reversed(steps):
+            if row.get('phase') == 'RUN':
+                row['outcome'] = 'TIMEOUT'
+                row['reason'] = 'WALL_TIMEOUT'
+                break
+        episodes[0]['metrics'] = _record_metrics(manifest['latency_plan'],
+                                                episodes[0], steps)
+
+    _mutate_run(fixture['ttl_over'], mutate)
+    result = _verify(fixture)
+    assert result['status'] == 'PASS', (result['status'], result['failures'],
+                                        result['missing_fields'])
 
 
 def test_clock_sync_rejection_missing_fails(tmp_path):
