@@ -98,8 +98,10 @@ run_plan = {
         'contact_threshold_n': args.contact_threshold_n,
         'post_contact_observe_s': args.post_contact_observe_s,
         'geometry': [{'case_id': case['case_id'],
-                      'robot': case['robot'], 'control': case['control'],
-                      'obstacle': case['obstacle'], 'target': case['target']}
+                      'robot': case.get('robot'),
+                      'control': case.get('control'),
+                      'obstacle': case.get('obstacle'),
+                      'target': case.get('target')}
                      for case in cases],
     },
 }
