@@ -1,0 +1,1104 @@
+{
+  "schema_version": "dsh.contact_positive_validation_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "category": "data_integrity",
+      "name": "freeze_expected_hash",
+      "passed": true,
+      "detail": "expected reference hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "freeze_schema",
+      "passed": true,
+      "detail": "schema=boom_birds.dynamic_migration_freeze.v1"
+    },
+    {
+      "category": "data_integrity",
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "source hashes match working tree"
+    },
+    {
+      "category": "data_integrity",
+      "name": "config_hashes",
+      "passed": true,
+      "detail": "config hashes match working tree"
+    },
+    {
+      "category": "data_integrity",
+      "name": "frozen_identity",
+      "passed": true,
+      "detail": "frozen cases/methods/policies"
+    },
+    {
+      "category": "data_integrity",
+      "name": "repeat_plan",
+      "passed": true,
+      "detail": "pre-frozen repeat plan"
+    },
+    {
+      "category": "data_integrity",
+      "name": "expected_cases",
+      "passed": true,
+      "detail": "expected cases=4"
+    },
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash_repeat1",
+      "passed": true,
+      "detail": "manifest freeze hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "pre_run_freeze_repeat1",
+      "passed": true,
+      "detail": "freeze before run"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui_repeat1",
+      "passed": true,
+      "detail": "GUI/DirectX evidence"
+    },
+    {
+      "category": "data_integrity",
+      "name": "denominator_repeat1",
+      "passed": true,
+      "detail": "episode denominator/identity=['dynamic_C_north_0-follow_only', 'dynamic_C_north_0-supervisor', 'dynamic_C_south_0-follow_only', 'dynamic_C_south_0-supervisor', 'dynamic_D_north_0-follow_only', 'dynamic_D_north_0-supervisor', 'dynamic_D_south_0-follow_only', 'dynamic_D_south_0-supervisor']"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_hashes_repeat1",
+      "passed": true,
+      "detail": "output hashes"
+    },
+    {
+      "category": "reset",
+      "name": "initialization_count_repeat1",
+      "passed": true,
+      "detail": "initializations=8"
+    },
+    {
+      "category": "reset",
+      "name": "generation_sequence_repeat1",
+      "passed": true,
+      "detail": "generations=[1, 2, 3, 4, 5, 6, 7, 8]"
+    },
+    {
+      "category": "reset",
+      "name": "fresh_zero_handshakes_repeat1",
+      "passed": true,
+      "detail": "fresh zero=8/8"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=455"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.013053221"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=10.115789"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=2280"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=BELOW_0.02_N_REAL_CONTACT"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "last_step=455 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=495"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat1_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=543"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.029039511"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=12.825858"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=7475"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=ABOVE_0.02_N"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "last_step=543 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=449"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat1_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=636"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.029580854"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=9.986149"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=12905"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=ABOVE_0.02_N"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "last_step=636 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=495"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat1_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=552"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.037414394"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=12.909650"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=18145"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=ABOVE_0.02_N"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "last_step=552 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat1_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat1_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat1_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=449"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat1_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat1_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat1_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash_repeat2",
+      "passed": true,
+      "detail": "manifest freeze hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "pre_run_freeze_repeat2",
+      "passed": true,
+      "detail": "freeze before run"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui_repeat2",
+      "passed": true,
+      "detail": "GUI/DirectX evidence"
+    },
+    {
+      "category": "data_integrity",
+      "name": "denominator_repeat2",
+      "passed": true,
+      "detail": "episode denominator/identity=['dynamic_C_north_0-follow_only', 'dynamic_C_north_0-supervisor', 'dynamic_C_south_0-follow_only', 'dynamic_C_south_0-supervisor', 'dynamic_D_north_0-follow_only', 'dynamic_D_north_0-supervisor', 'dynamic_D_south_0-follow_only', 'dynamic_D_south_0-supervisor']"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_hashes_repeat2",
+      "passed": true,
+      "detail": "output hashes"
+    },
+    {
+      "category": "reset",
+      "name": "initialization_count_repeat2",
+      "passed": true,
+      "detail": "initializations=8"
+    },
+    {
+      "category": "reset",
+      "name": "generation_sequence_repeat2",
+      "passed": true,
+      "detail": "generations=[1, 2, 3, 4, 5, 6, 7, 8]"
+    },
+    {
+      "category": "reset",
+      "name": "fresh_zero_handshakes_repeat2",
+      "passed": true,
+      "detail": "fresh zero=8/8"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=455"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.013053221"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=10.115789"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=2280"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=BELOW_0.02_N_REAL_CONTACT"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "last_step=455 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=495"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat2_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=543"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.029039511"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=12.825858"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=7475"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=ABOVE_0.02_N"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "last_step=543 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_C_north_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=449"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat2_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_C_north_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=636"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.029580854"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=9.986149"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=12905"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=ABOVE_0.02_N"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "last_step=636 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_D_south_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=495"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat2_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_D_south_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "physics steps=552"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "max_filtered=0.037414394"
+    },
+    {
+      "category": "capability",
+      "name": "follow_positive_geometry_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "first contact row has geometry"
+    },
+    {
+      "category": "capability",
+      "name": "follow_not_initial_penetration_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "initial_margin=12.909650"
+    },
+    {
+      "category": "capability",
+      "name": "follow_contact_after_motion_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "first_physics_step=18145"
+    },
+    {
+      "category": "capability",
+      "name": "follow_peak_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "episode physical/max=ABOVE_0.02_N"
+    },
+    {
+      "category": "capability",
+      "name": "follow_object_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "last_step=552 term=False trunc=False last_outcome=COLLISION"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_D_north_0-follow_only",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "contract",
+      "name": "raw_repeat2_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "raw errors=[]"
+    },
+    {
+      "category": "contract",
+      "name": "filter_target_repeat2_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "targets=['/World/envs/env_0/Obstacle']"
+    },
+    {
+      "category": "contract",
+      "name": "generation_repeat2_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "physics steps=449"
+    },
+    {
+      "category": "capability",
+      "name": "supervisor_physical_repeat2_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "physical=UNKNOWN"
+    },
+    {
+      "category": "contract",
+      "name": "actual_done_repeat2_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "last_step=0 term=False trunc=False last_outcome=ABORT"
+    },
+    {
+      "category": "contract",
+      "name": "boundary_repeat2_dynamic_D_north_0-supervisor",
+      "passed": true,
+      "detail": "boundary_count_ok=True"
+    },
+    {
+      "category": "expected",
+      "name": "paired_identity",
+      "passed": true,
+      "detail": "pairs=8"
+    },
+    {
+      "category": "capability",
+      "name": "four_cases_positive_in_both_repeats",
+      "passed": true,
+      "detail": "case positivity={'dynamic_C_south_0': [True, True], 'dynamic_C_north_0': [True, True], 'dynamic_D_south_0': [True, True], 'dynamic_D_north_0': [True, True]}"
+    },
+    {
+      "category": "capability",
+      "name": "at_least_four_distinct_cases",
+      "passed": true,
+      "detail": "positive cases=4"
+    },
+    {
+      "category": "capability",
+      "name": "methods_retained",
+      "passed": true,
+      "detail": "supervisor records=8"
+    },
+    {
+      "category": "capability",
+      "name": "no_unknown_follow_only",
+      "passed": true,
+      "detail": "follow_only zero-read cases=[]"
+    }
+  ],
+  "failures": [],
+  "missing_fields": [],
+  "repeat_reports": {
+    "repeat1": {
+      "episodes": 8,
+      "inits": 8
+    },
+    "repeat2": {
+      "episodes": 8,
+      "inits": 8
+    }
+  },
+  "case_positive_follow_only": {
+    "dynamic_C_south_0": [
+      true,
+      true
+    ],
+    "dynamic_C_north_0": [
+      true,
+      true
+    ],
+    "dynamic_D_south_0": [
+      true,
+      true
+    ],
+    "dynamic_D_north_0": [
+      true,
+      true
+    ]
+  },
+  "supervisor_records": [
+    {
+      "repeat": "repeat1",
+      "case_id": "dynamic_C_south_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat1",
+      "case_id": "dynamic_C_north_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat1",
+      "case_id": "dynamic_D_south_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat1",
+      "case_id": "dynamic_D_north_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat2",
+      "case_id": "dynamic_C_south_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat2",
+      "case_id": "dynamic_C_north_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat2",
+      "case_id": "dynamic_D_south_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    },
+    {
+      "repeat": "repeat2",
+      "case_id": "dynamic_D_north_0",
+      "outcome": "ABORT",
+      "reason": "MAX_WAIT_EXCEEDED",
+      "business": "ABORT",
+      "physical": "UNKNOWN",
+      "max_filtered_n": 0.0
+    }
+  ],
+  "freeze": {
+    "path": "configs\\scenarios\\contact_positive_validation_linefix_v2.json",
+    "sha256": "8383b3d488abc4d95310bf6d12fdecfeaab989970bd5d74395606078699d1b4d",
+    "git_head": "1ebbcbe42060212fadc3a2c8e583b7605f81c0b9",
+    "frozen_at": "2026-11-03T02:15:21.009858+00:00"
+  },
+  "expected": {
+    "path": "configs\\scenarios\\contact_positive_validation_linefix_expected_v1.json",
+    "sha256": "5da44ada2b87d42e491cbb94aa380c8d630e633e7b369f0ec934cbed1d5b1da5"
+  }
+}

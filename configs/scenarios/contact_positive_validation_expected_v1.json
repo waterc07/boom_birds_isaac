@@ -1,0 +1,156 @@
+{
+  "schema_version": "dsh.contact_positive_validation_expected.v1",
+  "status": "EXPECTED_NOT_CONCLUSION",
+  "code_commit": "d708acbd00626e2be1a492e7f0f94ec1d7ac49f1",
+  "scope": "single-env new mode; 4 C/D cases x follow_only,supervisor x 2 repeats; free flight",
+  "selection": {
+    "primary": [
+      "dynamic_C_south_0",
+      "dynamic_C_north_0",
+      "dynamic_D_south_0",
+      "dynamic_D_north_0"
+    ],
+    "classes": [
+      "C",
+      "D"
+    ],
+    "routes": [
+      "south",
+      "north"
+    ]
+  },
+  "repeats": [
+    "repeat1",
+    "repeat2"
+  ],
+  "methods": [
+    "follow_only",
+    "supervisor"
+  ],
+  "positive_rule": {
+    "source": "raw filtered_by_target_n vectors, recomputed independently",
+    "minimum_force_n": 1e-06,
+    "filtered_target": "/World/envs/.../Obstacle",
+    "requires_geometry_proximity_or_approach": true,
+    "below_0_02_n_still_positive_if_raw_nonzero_and_cross_checked": true,
+    "zero_is_unknown_not_no_contact": true,
+    "requires_no_mid_run_reset": true,
+    "requires_handshake_generation": true
+  },
+  "cases": {
+    "dynamic_C_south_0": {
+      "class": "C",
+      "route": "south",
+      "follow_only": {
+        "acceptable_business": [
+          "ABORT"
+        ],
+        "required_physical": [
+          "CONTACT_MEASURED"
+        ],
+        "positive_in_all_repeats": true
+      },
+      "supervisor": {
+        "acceptable_business": [
+          "SUCCESS",
+          "ABORT"
+        ],
+        "acceptable_physical": [
+          "CONTACT_MEASURED",
+          "UNKNOWN"
+        ],
+        "not_a_performance_requirement": true
+      },
+      "backup_case": "dynamic_C_south_1"
+    },
+    "dynamic_C_north_0": {
+      "class": "C",
+      "route": "north",
+      "follow_only": {
+        "acceptable_business": [
+          "ABORT"
+        ],
+        "required_physical": [
+          "CONTACT_MEASURED"
+        ],
+        "positive_in_all_repeats": true
+      },
+      "supervisor": {
+        "acceptable_business": [
+          "SUCCESS",
+          "ABORT"
+        ],
+        "acceptable_physical": [
+          "CONTACT_MEASURED",
+          "UNKNOWN"
+        ],
+        "not_a_performance_requirement": true
+      },
+      "backup_case": "dynamic_C_north_1"
+    },
+    "dynamic_D_south_0": {
+      "class": "D",
+      "route": "south",
+      "follow_only": {
+        "acceptable_business": [
+          "ABORT"
+        ],
+        "required_physical": [
+          "CONTACT_MEASURED"
+        ],
+        "positive_in_all_repeats": true
+      },
+      "supervisor": {
+        "acceptable_business": [
+          "SUCCESS",
+          "ABORT"
+        ],
+        "acceptable_physical": [
+          "CONTACT_MEASURED",
+          "UNKNOWN"
+        ],
+        "not_a_performance_requirement": true
+      },
+      "backup_case": "dynamic_D_south_1"
+    },
+    "dynamic_D_north_0": {
+      "class": "D",
+      "route": "north",
+      "follow_only": {
+        "acceptable_business": [
+          "ABORT"
+        ],
+        "required_physical": [
+          "CONTACT_MEASURED"
+        ],
+        "positive_in_all_repeats": true
+      },
+      "supervisor": {
+        "acceptable_business": [
+          "SUCCESS",
+          "ABORT"
+        ],
+        "acceptable_physical": [
+          "CONTACT_MEASURED",
+          "UNKNOWN"
+        ],
+        "not_a_performance_requirement": true
+      },
+      "backup_case": "dynamic_D_north_1"
+    }
+  },
+  "fallback_rule": {
+    "when": "a primary FOLLOW_ONLY has no filtered positive in either repeat, or geometry shows no contact process",
+    "action": "preserve the failed run, add the declared backup case from the same class/route, run both methods and both repeats under a new pre-freeze; do not delete failures and do not widen accepted results",
+    "backups": {
+      "dynamic_C_south_0": "dynamic_C_south_1",
+      "dynamic_C_north_0": "dynamic_C_north_1",
+      "dynamic_D_south_0": "dynamic_D_south_1",
+      "dynamic_D_north_0": "dynamic_D_north_1"
+    }
+  },
+  "notes": [
+    "selection is based on historical FOLLOW_ONLY collisions for C/D/E classes; pilot is diagnostic only, not an acceptance denominator",
+    "supervisor result is observed, not required to collide; no controller/threshold/TTL/ownership changes"
+  ]
+}

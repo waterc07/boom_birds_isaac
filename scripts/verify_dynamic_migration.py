@@ -19,6 +19,10 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def logical_sha(path):
+    return hashlib.sha256(Path(path).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+
+
 def verify(directory, freeze_path):
     directory = Path(directory)
     manifest = load(directory / 'manifest.json')
@@ -31,7 +35,7 @@ def verify(directory, freeze_path):
     check('freeze_hash', manifest['freeze']['sha256'] == sha(freeze_path))
     check('pre_run_freeze', datetime.fromisoformat(freeze['frozen_at'])
           <= datetime.fromisoformat(manifest['started_at']))
-    check('source_hashes', all(sha(p) == value for p, value in freeze['source_hashes'].items()))
+    check('source_hashes', all(logical_sha(p) == value for p, value in freeze['source_hashes'].items()))
     check('output_hashes', all(sha(directory / name) == value for name, value
                                in manifest['outputs_sha256'].items()))
     check('gui_mode', manifest['gui_evidence']['gui_mode'] is True

@@ -1,0 +1,17 @@
+{
+  "code_commit": "1ebbcbe42060212fadc3a2c8e583b7605f81c0b9",
+  "export_worktree": "TEMP/dsh_wt_linefix (detached 1ebbcbe; core.autocrlf=false)",
+  "freeze_path": "configs/scenarios/contact_positive_validation_linefix_v2.json",
+  "freeze_sha256": "8383b3d488abc4d95310bf6d12fdecfeaab989970bd5d74395606078699d1b4d",
+  "expected_sha256": "5da44ada2b87d42e491cbb94aa380c8d630e633e7b369f0ec934cbed1d5b1da5",
+  "freeze_validation": "PASS (validate_migration_freeze from export)",
+  "import_check": "PASS (boom_birds and new modules from export src)",
+  "export_pytest": "774 passed",
+  "local_assets_copied": [
+    "configs/maps/rmuc2027.local.yaml",
+    "docs/reports/map_eval/brake/verify_brake_final.json"
+  ],
+  "gui_smoke_repeated": false,
+  "gui_smoke_decision": "formal GUI 16 episodes already run on same commit/freeze; export pure recovery passed, no evidence of missing runtime dependency; no unbounded repeat",
+  "unrelated_line_ending_tests": "2 brake tests require local existing evidence file; copied local asset; not a new-mode defect"
+}
