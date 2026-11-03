@@ -1,0 +1,225 @@
+{
+  "schema_version": "dsh.landmark_root_cause_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "diagnostic_scope",
+      "passed": true,
+      "detail": "DIAGNOSTIC_OFFLINE_EXPOSED_DATA"
+    },
+    {
+      "name": "input_hash_labels",
+      "passed": true,
+      "detail": "labels hash"
+    },
+    {
+      "name": "input_hash_old_template",
+      "passed": true,
+      "detail": "old template hash"
+    },
+    {
+      "name": "input_hash_templates_meta",
+      "passed": true,
+      "detail": "templates meta hash"
+    },
+    {
+      "name": "input_hash_observations",
+      "passed": true,
+      "detail": "observations hash"
+    },
+    {
+      "name": "candidate_frames",
+      "passed": true,
+      "detail": "{'baseline': 49, 'improved': 49}"
+    },
+    {
+      "name": "baseline_sweep_0.50",
+      "passed": true,
+      "detail": "recomputed=(13, 4, 14, 18) frozen=(13, 4, 14, 18)"
+    },
+    {
+      "name": "baseline_sweep_0.55",
+      "passed": true,
+      "detail": "recomputed=(12, 0, 15, 22) frozen=(12, 0, 15, 22)"
+    },
+    {
+      "name": "baseline_sweep_0.60",
+      "passed": true,
+      "detail": "recomputed=(11, 0, 16, 22) frozen=(11, 0, 16, 22)"
+    },
+    {
+      "name": "baseline_sweep_0.65",
+      "passed": true,
+      "detail": "recomputed=(11, 0, 16, 22) frozen=(11, 0, 16, 22)"
+    },
+    {
+      "name": "baseline_sweep_0.70",
+      "passed": true,
+      "detail": "recomputed=(9, 0, 18, 22) frozen=(9, 0, 18, 22)"
+    },
+    {
+      "name": "improved_sweep_0.50",
+      "passed": true,
+      "detail": "recomputed=(27, 22, 0, 0) frozen=(27, 22, 0, 0)"
+    },
+    {
+      "name": "improved_sweep_0.55",
+      "passed": true,
+      "detail": "recomputed=(15, 22, 12, 0) frozen=(15, 22, 12, 0)"
+    },
+    {
+      "name": "improved_sweep_0.60",
+      "passed": true,
+      "detail": "recomputed=(4, 20, 23, 2) frozen=(4, 20, 23, 2)"
+    },
+    {
+      "name": "improved_sweep_0.65",
+      "passed": true,
+      "detail": "recomputed=(0, 2, 27, 20) frozen=(0, 2, 27, 20)"
+    },
+    {
+      "name": "improved_sweep_0.70",
+      "passed": true,
+      "detail": "recomputed=(0, 0, 27, 22) frozen=(0, 0, 27, 22)"
+    },
+    {
+      "name": "label_center_green_px:test_reverse_south-follow_only_g2_201.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_reverse_south-follow_only_g2_201.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_reverse_south-follow_only_g2_201.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_reverse_south-follow_only_g2_206.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_reverse_south-follow_only_g2_206.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_reverse_south-follow_only_g2_206.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_reverse_south-follow_only_g2_212.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_reverse_south-follow_only_g2_212.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_reverse_south-follow_only_g2_212.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_north_0-follow_only_g3_186.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_north_0-follow_only_g3_186.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_north_0-follow_only_g3_186.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_north_0-follow_only_g3_192.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_north_0-follow_only_g3_192.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_north_0-follow_only_g3_192.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_static_oblique-follow_only_g4_3.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_static_oblique-follow_only_g4_3.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_static_oblique-follow_only_g4_3.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_static_oblique-follow_only_g4_4.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_static_oblique-follow_only_g4_4.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_static_oblique-follow_only_g4_4.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "label_center_green_px:test_static_oblique-follow_only_g4_5.png",
+      "passed": true,
+      "detail": "label bbox center to green"
+    },
+    {
+      "name": "label_center_green_deg:test_static_oblique-follow_only_g4_5.png",
+      "passed": true,
+      "detail": "label bbox center vs green angle"
+    },
+    {
+      "name": "improved_candidate_iou:test_static_oblique-follow_only_g4_5.png",
+      "passed": true,
+      "detail": "candidate IoU"
+    },
+    {
+      "name": "B_reproduces_old_baseline",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "image_shape_intrinsics",
+      "passed": true,
+      "detail": "all diagnostic observations 320x240 with fx=160/cx=160"
+    },
+    {
+      "name": "template_source_hashes",
+      "passed": true,
+      "detail": "template files/hash"
+    }
+  ],
+  "failures": [],
+  "scope": "offline diagnostic only; 49 frames are exposed, not a sealed test",
+  "recomputed_candidate_frames": 98,
+  "B_reproduction_mismatches": 0
+}

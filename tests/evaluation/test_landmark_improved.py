@@ -58,3 +58,29 @@ def test_multiview_detector_reports_not_detected_below_threshold(tmp_path):
                                              [0, 100.0, 80.0], [0, 0, 1.0]])
     assert detection.status in ('NOT_DETECTED', 'UNKNOWN')
     assert detection.distance_m is None
+
+
+import pytest
+
+
+@pytest.mark.parametrize('scale', [0.5, 0.8, 1.0])
+def test_anchor_mapping_is_scaled_with_template(tmp_path, scale):
+    """Full-image bbox + scaled template anchor must stay on the same feature."""
+    meta_path, template = write_meta(tmp_path)
+    scaled = cv2.resize(template, None, fx=scale, fy=scale,
+                        interpolation=cv2.INTER_AREA)
+    th, tw = scaled.shape
+    image = np.zeros((240, 300), dtype=np.uint8)
+    image[50:50 + th, 70:70 + tw] = scaled
+    image_path = tmp_path / ('scale_%s.png' % scale)
+    cv2.imwrite(str(image_path), image)
+    detector = MultiViewAnchorDetector(meta_path, threshold=0.8,
+                                       scales=(scale,))
+    intrinsics = [[100.0, 0, 100.0], [0, 100.0, 80.0], [0, 0, 1.0]]
+    detection = detector.detect(image_path, intrinsics)
+    assert detection.status == 'DETECTED'
+    assert detection.bbox_xywh[0] == pytest.approx(70, abs=1)
+    assert detection.anchor_xy[0] == pytest.approx(
+        70 + 0.5 * tw, abs=1)
+    assert detection.anchor_xy[1] == pytest.approx(
+        50 + 0.1 * th, abs=1)
