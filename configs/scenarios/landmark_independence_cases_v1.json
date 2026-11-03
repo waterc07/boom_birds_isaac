@@ -1,0 +1,441 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "south",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ]
+      ],
+      "corridor_y": -6.2,
+      "sample_count": 0,
+      "blocked_count": 0
+    },
+    {
+      "route_id": "north",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ]
+      ],
+      "corridor_y": 5.8,
+      "sample_count": 0,
+      "blocked_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "dev_south_new",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "NO_STOP_EXPECTED",
+      "route_id": "south",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        -1,
+        0.512
+      ],
+      "start_yaw_rad": 0.3,
+      "goal_position_world_m": [
+        9.8,
+        -0.8,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          -1,
+          0.512
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          9.8,
+          -0.8,
+          0.53
+        ]
+      ],
+      "timeout_s": 90,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_A",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          -8.7,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.7,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 14,
+        "observation_delay_s": 0.05
+      },
+      "note": "development only; same south corridor but new start/approach; not sealed"
+    },
+    {
+      "case_id": "test_reverse_south",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "south",
+      "region_id": "E",
+      "goal_region_id": "W",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "start_yaw_rad": 3.141592653589793,
+      "goal_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "waypoints": [
+        [
+          9.6,
+          0.5,
+          0.53
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -10.2,
+          0.5,
+          0.512
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lm_static",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          -2.0,
+          -8.7,
+          1.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "sealed test; east-to-west reverse route, new approach to tower"
+    },
+    {
+      "case_id": "test_north_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "NO_STOP_EXPECTED",
+      "route_id": "north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -10.2,
+        0.5,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        0.5,
+        0.53
+      ],
+      "waypoints": [
+        [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ],
+        [
+          9.6,
+          0.5,
+          0.53
+        ]
+      ],
+      "timeout_s": 90,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_A",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2,
+          3.3,
+          1
+        ],
+        "velocity_world_mps": [
+          0,
+          0.7,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 14,
+        "observation_delay_s": 0.05
+      },
+      "note": "sealed test; north corridor"
+    },
+    {
+      "case_id": "test_static_oblique",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "south",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.2,
+        1.1,
+        1.0
+      ],
+      "start_yaw_rad": -0.3,
+      "goal_position_world_m": [
+        9.2,
+        1.1,
+        1.0
+      ],
+      "waypoints": [
+        [
+          9.2,
+          1.1,
+          1.0
+        ],
+        [
+          9.2,
+          1.1,
+          1.0
+        ]
+      ],
+      "timeout_s": 10.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lm_static",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          8.2,
+          -2.5,
+          0.5
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "sealed test; oblique/edge view"
+    },
+    {
+      "case_id": "test_static_away",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "south",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.2,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 3.141592653589793,
+      "goal_position_world_m": [
+        9.2,
+        0.0,
+        1.0
+      ],
+      "waypoints": [
+        [
+          9.2,
+          0.0,
+          1.0
+        ],
+        [
+          9.2,
+          0.0,
+          1.0
+        ]
+      ],
+      "timeout_s": 10.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lm_static",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          8.2,
+          -2.5,
+          0.5
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "sealed test; target absent/hard negative"
+    }
+  ],
+  "notes": [
+    "landmark independence collection; natural tower; sealed test families listed in configs/perception/independence_plan_v1.json"
+  ]
+}

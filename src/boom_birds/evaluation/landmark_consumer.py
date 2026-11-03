@@ -39,10 +39,15 @@ def _header_from_dict(value):
 class LandmarkConsumer:
     """Ordered, generation-aware consumer; no truth input anywhere."""
 
-    def __init__(self, *, template_path: Path, threshold: float,
-                 allowed_age_ns: int = 250_000_000,
+    def __init__(self, *, template_path: Path = None, threshold: float = None,
+                 detector=None, allowed_age_ns: int = 250_000_000,
                  capture_interval_ns: int = DEFAULT_CAPTURE_INTERVAL_NS):
-        self.detector = TowerTemplateDetector(template_path, threshold=threshold)
+        if detector is None:
+            if template_path is None or threshold is None:
+                raise ValueError('provide detector or template_path+threshold')
+            detector = TowerTemplateDetector(template_path, threshold=threshold)
+        self.detector = detector
+        self.template_path = Path(template_path) if template_path is not None else None
         self.allowed_age_ns = int(allowed_age_ns)
         self.capture_interval_ns = int(capture_interval_ns)
         self.gate = obs_mod.ObservationGate(self.allowed_age_ns)
@@ -51,8 +56,9 @@ class LandmarkConsumer:
         self.cache = {}
         self.reset_count = 0
         self.template_path = Path(template_path)
-        self.template_hash = hashlib.sha256(
+        self.template_hash = (hashlib.sha256(
             self.template_path.read_bytes()).hexdigest()
+            if self.template_path is not None else None)
 
     def reset(self):
         self.gate = obs_mod.ObservationGate(self.allowed_age_ns)
@@ -151,6 +157,7 @@ class LandmarkConsumer:
             'reason': reason,
             'algorithm': self.detector.metadata(),
             'calibration_version': 'intrinsics_from_observation',
+            'camera_intrinsics': raw.get('sensor', {}).get('intrinsics'),
             'source': {
                 'sensor_id': raw.get('sensor', {}).get('sensor_id'),
                 'frame_id': raw.get('sensor', {}).get('frame_id'),

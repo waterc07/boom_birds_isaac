@@ -1,0 +1,87 @@
+{
+  "schema_version": "dsh.independent_template_library.v1",
+  "status": "DEVELOPMENT_ONLY",
+  "target": "natural RoboMaster central tower",
+  "selection_basis": "development views only; no sealed-test image used",
+  "annotator": "agent manual crop + green-light pixel inspection",
+  "entries": [
+    {
+      "template_id": "dev_static_center",
+      "source_image": "outputs/sensor_shadow/lm_pilot_sensor/images/pilot_east_center-follow_only_g1_3.png",
+      "source_box_xywh": [
+        100,
+        50,
+        150,
+        175
+      ],
+      "path": "configs/perception/independent_templates/dev_static_center.png",
+      "sha256": "e6dd21b95948bea58f8146ee0733860c6af40a3eb74d023601bba5d0624fa81b",
+      "shape_hw": [
+        175,
+        150
+      ],
+      "anchor_px_in_template": [
+        59.5,
+        55.5
+      ],
+      "anchor_fraction_xy": [
+        0.39666666666666667,
+        0.3171428571428571
+      ],
+      "anchor_status": "GREEN_LIGHT_CENTROID_MANUAL_VERIFY",
+      "role": "development-only multi-view template"
+    },
+    {
+      "template_id": "dev_static_left",
+      "source_image": "outputs/sensor_shadow/lm_pilot_sensor/images/pilot_east_left-follow_only_g2_3.png",
+      "source_box_xywh": [
+        190,
+        60,
+        110,
+        170
+      ],
+      "path": "configs/perception/independent_templates/dev_static_left.png",
+      "sha256": "10f51364df9cd203aabc5ccfbb5ab4aa1e1af383aa3c2f27b9dc410b198c44de",
+      "shape_hw": [
+        170,
+        110
+      ],
+      "anchor_px_in_template": [
+        50.5,
+        44.0
+      ],
+      "anchor_fraction_xy": [
+        0.4590909090909091,
+        0.25882352941176473
+      ],
+      "anchor_status": "GREEN_LIGHT_CENTROID_MANUAL_VERIFY",
+      "role": "development-only multi-view template"
+    },
+    {
+      "template_id": "dev_route_near",
+      "source_image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_183.png",
+      "source_box_xywh": [
+        20,
+        65,
+        140,
+        155
+      ],
+      "path": "configs/perception/independent_templates/dev_route_near.png",
+      "sha256": "ef3d403f64e12061e0b190db4bdb8da48e068a671d229edcb9fa8a23c68c079f",
+      "shape_hw": [
+        155,
+        140
+      ],
+      "anchor_px_in_template": [
+        40.0,
+        8.5
+      ],
+      "anchor_fraction_xy": [
+        0.2857142857142857,
+        0.054838709677419356
+      ],
+      "anchor_status": "GREEN_LIGHT_CENTROID_MANUAL_VERIFY",
+      "role": "development-only multi-view template"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "dsh.landmark_independence_plan.v1",
+  "created_at": "2026-11-03T14:42:30.171516+00:00",
+  "status": "FROZEN_BEFORE_LABELS_AND_TEST_EVALUATION",
+  "source_commit": "3f370cf0fde8a8629e774384b178e84ee9d0a56f",
+  "scope": "shadow natural-tower landmark; no control/localization",
+  "old_data_audit": {
+    "old_test_set": "configs/perception/landmark_labels_v1.json (36 test frames)",
+    "old_train_family": "route_0 / generation 3",
+    "old_route_families": {
+      "generation3": "south A",
+      "generation4": "south A (same case)",
+      "generation5": "south A (same case, reset)",
+      "generation6": "south A (same case, reset)"
+    },
+    "exact_image_duplicates": "to be computed in audit",
+    "ruling": "old test frames are development/historical regression only; no longer independent sealed test"
+  },
+  "data_collection": {
+    "gui": "foreground visible Isaac Sim GUI, DirectX/D3D12, no headless/hidden",
+    "development_families": [
+      "south_new_start (A_south_1)",
+      "static_E_dev_center/left/away (pilot)"
+    ],
+    "sealed_test_families": [
+      "reverse_south (E->W reverse route)",
+      "north_0 (north corridor)",
+      "static_E_test_oblique",
+      "static_E_test_away"
+    ],
+    "cases": [
+      {
+        "case_id": "dev_south_new",
+        "family": "south_new_start",
+        "split": "development",
+        "kind": "dynamic_route",
+        "source": "map_dynamic_cases_v1 dynamic_A_south_1",
+        "reason": "movement/scale in development, not sealed"
+      },
+      {
+        "case_id": "pilot_east_center",
+        "family": "static_dev",
+        "split": "development",
+        "kind": "static",
+        "source": "outputs/sensor_shadow/lm_pilot_sensor generation1",
+        "reason": "development template/view"
+      },
+      {
+        "case_id": "pilot_east_left",
+        "family": "static_dev",
+        "split": "development",
+        "kind": "static",
+        "source": "outputs/sensor_shadow/lm_pilot_sensor generation2",
+        "reason": "development template/view"
+      },
+      {
+        "case_id": "pilot_east_away",
+        "family": "static_dev_negative",
+        "split": "development",
+        "kind": "static_negative",
+        "source": "outputs/sensor_shadow/lm_pilot_sensor generation3",
+        "reason": "development hard negative"
+      },
+      {
+        "case_id": "test_reverse_south",
+        "family": "reverse_south",
+        "split": "sealed_test",
+        "kind": "dynamic_route",
+        "source": "new config reverse of A south",
+        "reason": "direction/approach differs from old south route"
+      },
+      {
+        "case_id": "test_north_0",
+        "family": "north",
+        "split": "sealed_test",
+        "kind": "dynamic_route",
+        "source": "map_dynamic_cases_v1 dynamic_A_north_0",
+        "reason": "different corridor/viewpoint"
+      },
+      {
+        "case_id": "test_static_oblique",
+        "family": "static_test_oblique",
+        "split": "sealed_test",
+        "kind": "static",
+        "source": "new config E pose/yaw",
+        "reason": "lateral/edge/partial view"
+      },
+      {
+        "case_id": "test_static_away",
+        "family": "static_test_away",
+        "split": "sealed_test",
+        "kind": "static_negative",
+        "source": "new config E yaw away",
+        "reason": "target absent/hard negative"
+      }
+    ],
+    "sample_rule": "route accepted RGB records: every 20th sequence plus the last 12 accepted frames (fixed before labels/evaluation); static: all accepted RGB frames. No selection by detector score or result.",
+    "labeling": {
+      "amounting": "manual agent labels, aided by pixel inspection for bbox/reference point; not user expert review; no detector output used to create labels",
+      "target": "RMUC2027 RoboMaster central tower; natural map structure",
+      "fields": [
+        "present",
+        "visibility FULL/PARTIAL/OCCLUDED",
+        "bbox_xywh",
+        "reference_point_px green roof light center",
+        "annotator",
+        "notes"
+      ],
+      "unreliable": "mark UNKNOWN/NOT_ANNOTATABLE and exclude from localization TP but retain in denominator"
+    },
+    "acceptance_proposed": {
+      "iou_threshold": 0.3,
+      "bearing_error_deg_threshold": 5.0,
+      "bearing_definition": "angle from camera optical axis to manually labelled green roof-light reference point; camera intrinsic fx; not world bearing",
+      "presence_tp": "any detection in positive frame",
+      "localization_tp": "bbox IoU>=0.3 and reference point error<=5 deg",
+      "not_matched_counted": "FN/UNKNOWN in denominator",
+      "metrics": "presence TP/FP/FN/TN; localization TP/FP/FN; precision/recall; IoU/ref point/bearing error; UNKNOWN/REJECTED; stratified by view/scale/occlusion/negative/family; frame and trajectory"
+    },
+    "algorithm": {
+      "baseline": "old single tower template v1, threshold 0.55, bbox-center bearing (presence-only baseline)",
+      "improvement_1": "multi-view template library from development only (center/left/near route), max NCC",
+      "improvement_2": "template anchor reference point (green roof light) for bearing; geometry/aspect validation; no threshold-only recall tuning",
+      "max_improvements": 2,
+      "test_not_used_for_template_or_threshold": true
+    },
+    "time_semantics": {
+      "capture": "SIM_UPDATE_SAMPLE_TIME; exposure UNKNOWN; age not full latency",
+      "legacy_v1": "normalize with exposure UNKNOWN"
+    },
+    "expected": {
+      "new_test_may_fail": "algorithm effect may be below PROPOSED thresholds; report honestly",
+      "no_gate_claim": true
+    },
+    "localization_label_subset": "route positive windows: first, middle and last sampled positive frame; static: all accepted positive frames. Bbox/ref-point labels only on this predeclared subset; presence labels on all sampled frames."
+  },
+  "plan_version": "v2",
+  "supersedes": "configs/perception/independence_plan_v1.json",
+  "revision_reason": "v1 fixed every-10th route sampling; after looking only at target visibility (not detector outputs), the target appears only in the final approach window. v2 adds a predeclared trailing window; v1 is preserved as pilot/historical.",
+  "expected": {
+    "sampling_limitation": "small independent sample; report exact denominators and do not claim statistical adequacy",
+    "old_result_revision": "old 36-frame test set was based on same south route family for train and two reset test episodes; old recall 0.5 is presence-level only and not an independent localization result"
+  }
+}
