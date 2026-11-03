@@ -18,3 +18,8 @@
 | 哪些未知会改变路线 | [参数与风险](docs/design/06_PARAMETERS_AND_RISKS.md) |
 
 现有资料、预算和历史检查在docs/planning、docs/references、env。数值标签：USER_PROVIDED/MEASURED/ASSUMED/UNKNOWN；门限标签：PROPOSED/ACCEPTED；实验标签：NOT RUN/PASS/FAIL。本版规划核查见[交付报告](docs/reports/PLANNING_ACCEPTANCE.md)。
+
+
+## 单环境动态评价默认升级（2026-11-03）
+
+`scripts/run_dynamic_eval.py` 的单环境评价默认已升级为 `--geometry-policy reference_origin_v2 --contact-mode measured_hard_reset`。历史复现必须显式传 `--geometry-policy legacy --contact-mode legacy_inference`；旧 v1 raw-hash/旧 boundary/latency freeze 在新默认下会被明确拒绝，不自动回退。新 freeze schema v2 记录 hash algorithm、实际生效配置与 default/explicit 来源。只影响该单环境评价入口，不影响训练/多环境/官方 smoke。证据见 `docs/reports/map_eval/contact_envelope/DSH_DYNAMIC_DEFAULT_UPGRADE_20261103.md`。

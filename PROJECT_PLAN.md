@@ -54,3 +54,8 @@ P4可用合成机库，P6集中开展真实目标采集；少量传感器可用�
 - [规划交付核查](docs/reports/PLANNING_ACCEPTANCE.md)
 
 本版架构方向已接受；所有注明PROPOSED的实验门限、工时与硬件假设是规划初值。真实质量/赛季要求、机库几何、算力实测仍UNKNOWN。v1.1原文在docs/references/planning_v1_1_before_20261011保留，当前入口以本总纲和design/01–09为准。
+
+
+## 单环境动态评价默认升级（2026-11-03）
+
+`scripts/run_dynamic_eval.py` 的单环境评价默认已升级为 `--geometry-policy reference_origin_v2 --contact-mode measured_hard_reset`。历史复现必须显式传 `--geometry-policy legacy --contact-mode legacy_inference`；旧 v1 raw-hash/旧 boundary/latency freeze 在新默认下会被明确拒绝，不自动回退。新 freeze schema v2 记录 hash algorithm、实际生效配置与 default/explicit 来源。只影响该单环境评价入口，不影响训练/多环境/官方 smoke。证据见 `docs/reports/map_eval/contact_envelope/DSH_DYNAMIC_DEFAULT_UPGRADE_20261103.md`。

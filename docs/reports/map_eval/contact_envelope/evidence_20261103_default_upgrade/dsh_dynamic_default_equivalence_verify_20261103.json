@@ -1,0 +1,329 @@
+{
+  "schema_version": "dsh.dynamic_default_equivalence_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash",
+      "passed": true,
+      "detail": "manifest freeze hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "expected_reference",
+      "passed": true,
+      "detail": "freeze expected reference"
+    },
+    {
+      "category": "data_integrity",
+      "name": "pre_run",
+      "passed": true,
+      "detail": "freeze before run"
+    },
+    {
+      "category": "data_integrity",
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "source hashes match"
+    },
+    {
+      "category": "data_integrity",
+      "name": "single_env",
+      "passed": true,
+      "detail": "single_env_only=True"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui",
+      "passed": true,
+      "detail": "GUI/DirectX evidence"
+    },
+    {
+      "category": "data_integrity",
+      "name": "completion_marker",
+      "passed": true,
+      "detail": "completion marker present; error file absent"
+    },
+    {
+      "category": "data_integrity",
+      "name": "completion_status",
+      "passed": true,
+      "detail": "completion/status"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_summary.json",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_episodes.jsonl",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_steps.jsonl",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_run.complete.json",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "contract",
+      "name": "summary_status",
+      "passed": true,
+      "detail": "summary status"
+    },
+    {
+      "category": "contract",
+      "name": "effective_config",
+      "passed": true,
+      "detail": "actual effective config={'geometry_policy': 'reference_origin_v2', 'contact_mode': 'measured_hard_reset', 'argument_sources': {'geometry_policy': 'default', 'contact_mode': 'default'}}"
+    },
+    {
+      "category": "contract",
+      "name": "episode_denominator",
+      "passed": true,
+      "detail": "episodes=['dynamic_A_south_0-follow_only', 'dynamic_A_south_0-supervisor', 'dynamic_C_south_0-follow_only', 'dynamic_C_south_0-supervisor']"
+    },
+    {
+      "category": "capability",
+      "name": "raw_unknown_dynamic_A_south_0-follow_only",
+      "passed": true,
+      "detail": "peak=0.000000000"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_A_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim="
+    },
+    {
+      "category": "capability",
+      "name": "raw_unknown_dynamic_A_south_0-supervisor",
+      "passed": true,
+      "detail": "peak=0.000000000"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_A_south_0-supervisor",
+      "passed": true,
+      "detail": "contact_prim="
+    },
+    {
+      "category": "capability",
+      "name": "raw_positive_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "peak=0.013053221"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "capability",
+      "name": "raw_unknown_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "peak=0.000000000"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "contact_prim="
+    },
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash",
+      "passed": true,
+      "detail": "manifest freeze hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "expected_reference",
+      "passed": true,
+      "detail": "freeze expected reference"
+    },
+    {
+      "category": "data_integrity",
+      "name": "pre_run",
+      "passed": true,
+      "detail": "freeze before run"
+    },
+    {
+      "category": "data_integrity",
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "source hashes match"
+    },
+    {
+      "category": "data_integrity",
+      "name": "single_env",
+      "passed": true,
+      "detail": "single_env_only=True"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui",
+      "passed": true,
+      "detail": "GUI/DirectX evidence"
+    },
+    {
+      "category": "data_integrity",
+      "name": "completion_marker",
+      "passed": true,
+      "detail": "completion marker present; error file absent"
+    },
+    {
+      "category": "data_integrity",
+      "name": "completion_status",
+      "passed": true,
+      "detail": "completion/status"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_summary.json",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_episodes.jsonl",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_steps.jsonl",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_run.complete.json",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "contract",
+      "name": "summary_status",
+      "passed": true,
+      "detail": "summary status"
+    },
+    {
+      "category": "contract",
+      "name": "effective_config",
+      "passed": true,
+      "detail": "actual effective config={'geometry_policy': 'reference_origin_v2', 'contact_mode': 'measured_hard_reset', 'argument_sources': {'geometry_policy': 'explicit', 'contact_mode': 'explicit'}}"
+    },
+    {
+      "category": "contract",
+      "name": "episode_denominator",
+      "passed": true,
+      "detail": "episodes=['dynamic_A_south_0-follow_only', 'dynamic_A_south_0-supervisor', 'dynamic_C_south_0-follow_only', 'dynamic_C_south_0-supervisor']"
+    },
+    {
+      "category": "capability",
+      "name": "raw_unknown_dynamic_A_south_0-follow_only",
+      "passed": true,
+      "detail": "peak=0.000000000"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_A_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim="
+    },
+    {
+      "category": "capability",
+      "name": "raw_unknown_dynamic_A_south_0-supervisor",
+      "passed": true,
+      "detail": "peak=0.000000000"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_A_south_0-supervisor",
+      "passed": true,
+      "detail": "contact_prim="
+    },
+    {
+      "category": "capability",
+      "name": "raw_positive_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "peak=0.013053221"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_C_south_0-follow_only",
+      "passed": true,
+      "detail": "contact_prim=/World/envs/env_0/Obstacle"
+    },
+    {
+      "category": "capability",
+      "name": "raw_unknown_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "peak=0.000000000"
+    },
+    {
+      "category": "capability",
+      "name": "contact_object_dynamic_C_south_0-supervisor",
+      "passed": true,
+      "detail": "contact_prim="
+    },
+    {
+      "category": "equivalence",
+      "name": "default_sources",
+      "passed": true,
+      "detail": "{'geometry_policy': 'default', 'contact_mode': 'default'}"
+    },
+    {
+      "category": "equivalence",
+      "name": "explicit_sources",
+      "passed": true,
+      "detail": "{'geometry_policy': 'explicit', 'contact_mode': 'explicit'}"
+    },
+    {
+      "category": "equivalence",
+      "name": "pair_identity",
+      "passed": true,
+      "detail": "pairs=4 field failures=0"
+    },
+    {
+      "category": "equivalence",
+      "name": "time_differences",
+      "passed": true,
+      "detail": "max duration diff=0.000000000 max wait diff=0.000000000"
+    },
+    {
+      "category": "equivalence",
+      "name": "trajectory_difference",
+      "passed": true,
+      "detail": "max numeric position/velocity/time diff=0.000000000000"
+    },
+    {
+      "category": "contract",
+      "name": "episode_boundary_equal",
+      "passed": true,
+      "detail": "steps equal"
+    }
+  ],
+  "failures": [],
+  "summary": {
+    "default_manifest": "8070674385554979a7ee81907127e77cbad9807629e65b27abbce9b96261a659",
+    "explicit_manifest": "dc399aa073f462b287ee8f251bae196fbcac97d0118d9e7820da565be511deb2",
+    "default_freeze": "2b261d4e67ddce3e2c1777f6a38c317ca16e70dc26d62a2390227f3ac2718bf1",
+    "explicit_freeze": "6cc1955784b787f5776733943cc107946f8fe762497d7d69942dbc935b697af9",
+    "expected": "1f55a5a72a454e6ba683d21e7f65876756d227ca5421000494210ef382a3093a"
+  },
+  "max_duration_diff_s": 0.0,
+  "max_wait_diff_s": 0.0,
+  "max_trajectory_diff": 0.0
+}

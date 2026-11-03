@@ -85,3 +85,8 @@ PX4 保留飞控权限；策略不能直接解锁、改模式或改参数。官�
 完成工作包时同步实施计划勾选项、相关设计/命令与 `docs/reports/` 证据；只有实际执行并满足条件的项目才能取消 NOT RUN 或标记通过。UNKNOWN、PROPOSED 和未通过项须保留明确状态。
 
 交接至少记录：完成范围、验证命令和结果、源码/配置/资产等可追踪标识、未解决问题及下一工作包。报告保存可版本化摘要和外部产物 hash，不把被忽略的日志或 runs 目录作为唯一结论来源。能力或入口变化时同步更新本文件，避免接手指引漂移。
+
+
+## 单环境动态评价默认升级（2026-11-03）
+
+`scripts/run_dynamic_eval.py` 的单环境评价默认已升级为 `--geometry-policy reference_origin_v2 --contact-mode measured_hard_reset`。历史复现必须显式传 `--geometry-policy legacy --contact-mode legacy_inference`；旧 v1 raw-hash/旧 boundary/latency freeze 在新默认下会被明确拒绝，不自动回退。新 freeze schema v2 记录 hash algorithm、实际生效配置与 default/explicit 来源。只影响该单环境评价入口，不影响训练/多环境/官方 smoke。证据见 `docs/reports/map_eval/contact_envelope/DSH_DYNAMIC_DEFAULT_UPGRADE_20261103.md`。

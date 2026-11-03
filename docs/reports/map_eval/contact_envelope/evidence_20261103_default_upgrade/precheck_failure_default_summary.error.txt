@@ -1,0 +1,8 @@
+stages: ["load contract and cases"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 223, in <module>
+    validate_migration_freeze(freeze_doc, vars(args), Path.cwd())
+  File "E:\isaac\proj_boom_birds\src\boom_birds\evaluation\dynamic_migration_plan.py", line 132, in validate_migration_freeze
+    raise ValueError('migration freeze mismatch: ' + key)
+ValueError: migration freeze mismatch: parameters

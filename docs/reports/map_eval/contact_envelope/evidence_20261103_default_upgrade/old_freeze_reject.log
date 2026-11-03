@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 92, in <module>
+    migration_freeze_mode(
+  File "E:\isaac\proj_boom_birds\src\boom_birds\evaluation\dynamic_eval_policy.py", line 69, in migration_freeze_mode
+    raise RuntimeError(
+RuntimeError: legacy freeze requires explicit --geometry-policy legacy --contact-mode legacy_inference; the default measured mode will not silently reinterpret an old freeze
