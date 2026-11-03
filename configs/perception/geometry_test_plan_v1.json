@@ -1,0 +1,63 @@
+{
+  "schema_version": "dsh.geometry_test_plan.v1",
+  "created_at": "2026-11-03T16:12:48.168817+00:00",
+  "status": "FROZEN_BEFORE_TEST_CAPTURE",
+  "code_commit": "c6f74bf26c84162dca7cda523aec274008d3976b",
+  "method": "green-light-seeded tower geometry",
+  "algorithm_parameters": {
+    "green_rgb": [
+      100.0,
+      1.25,
+      1.15
+    ],
+    "min_green_area": 10,
+    "max_green_area": 300,
+    "sat_min": 70,
+    "sat_val_min": 35,
+    "min_sat_pixels": 20,
+    "min_bbox_side": 30,
+    "min_edge_density": 0.03,
+    "max_symmetry": 0.97,
+    "max_anchor_top_fraction": 0.45,
+    "ambiguity_ratio": 0.97
+  },
+  "test_families": {
+    "geo_test_north_0": "new north-corridor trajectory different from all development paths",
+    "geo_test_static_a": "new near/front static pose",
+    "geo_test_static_b": "new oblique/edge static pose",
+    "geo_test_static_c": "new target-absent static pose"
+  },
+  "data_collection": {
+    "gui": "foreground visible Isaac Sim GUI, DirectX/D3D12, no headless/hidden",
+    "episodes": 4,
+    "sample_rule": "route accepted RGB every 20th sequence plus last 12 accepted; static all accepted RGB (3)",
+    "no_detector_selection": true
+  },
+  "labels": {
+    "annotator": "agent manual; not user expert",
+    "presence": "all sampled frames; target present/absent",
+    "bbox_reference_subset": "route positive frames: first/middle/last of last-12 sample; static: all positive frames",
+    "reference_point": "green roof-light centroid; manual pixel annotation/verification",
+    "if_reference_invisible": "reference UNAVAILABLE; counted in presence, excluded only from anchor error denominator and reported",
+    "label_basis": "images only; no detector output"
+  },
+  "evaluation": {
+    "iou_threshold": 0.3,
+    "bearing_error_threshold_deg": 5.0,
+    "presence": "any DETECTED on a positive label",
+    "bbox_tp": "IoU>=0.3",
+    "joint_tp": "presence and bbox>0.3 and anchor error<=5 deg where reference available",
+    "report": "TP/FP/FN, precision/recall, bbox IoU, ref pixel/bearing error, success coverage, joint pass over all positives, unknown/rejected, per-family denominators",
+    "old_baseline_anchor": "not compared as same anchor; historical diagnostic only"
+  },
+  "expected": {
+    "sealed_test_frames": "TBD after sampling (fixed rule)",
+    "positive_share": "TBD after labels",
+    "no_post_test_tuning": true,
+    "failure_allowed": true
+  },
+  "budget": {
+    "gui_episodes": 4,
+    "no_additional_episodes": true
+  }
+}
