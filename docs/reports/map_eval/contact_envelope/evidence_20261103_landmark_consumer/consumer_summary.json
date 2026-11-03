@@ -1,0 +1,36 @@
+{
+  "schema_version": "dsh.landmark_consumer_run.v1",
+  "shadow_only": true,
+  "control_participation": "NONE",
+  "consumer_version": "dsh.landmark_consumer.v1",
+  "input_observations_sha256": "465fe10c13ff0d442037195a86101f094e305c82587c5b3f179b594cc522e98a",
+  "freeze_sha256": "e812a64e07d57f5e6a77319f7a028c66e2cdd6cf4f6defb25be108540042b641",
+  "processed_rgb_records": 864,
+  "status_counts": {
+    "REJECTED": 18,
+    "NOT_DETECTED": 804,
+    "DETECTED": 42
+  },
+  "reason_counts": {
+    "WARMUP": 18,
+    "TARGET_NOT_DETECTED": 804,
+    "TARGET_DETECTED": 42
+  },
+  "generations": {
+    "1": 6,
+    "2": 6,
+    "3": 213,
+    "4": 213,
+    "5": 213,
+    "6": 213
+  },
+  "consumer_reset_count": 6,
+  "results_sha256": "7869bfabb3012cb644b99abb10bb59dabd734778a977e67952e5a061f8184ce4",
+  "time_semantics": {
+    "capture_time_source": "SIM_UPDATE_SAMPLE_TIME_LEGACY_V1",
+    "exposure_time_status": "UNKNOWN",
+    "age_semantics": "SIM_SAMPLE_TIME_NOT_FULL_LATENCY",
+    "note": "legacy v1 capture_host was taken after camera update; it is not an exposure timestamp; full latency unknown"
+  },
+  "distance": "UNAVAILABLE for arbitrary detection boxes"
+}

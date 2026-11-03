@@ -1,0 +1,359 @@
+{
+  "schema_version": "dsh.landmark_consumer_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "category": "data_integrity",
+      "name": "freeze_sha",
+      "passed": true,
+      "detail": "summary freeze hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "input_manifest.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/formal6/manifest.json"
+    },
+    {
+      "category": "data_integrity",
+      "name": "input_summary.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/formal6/summary.json"
+    },
+    {
+      "category": "data_integrity",
+      "name": "input_run.complete.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/formal6/run.complete.json"
+    },
+    {
+      "category": "data_integrity",
+      "name": "input_observations.jsonl",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/formal6_sensor/observations.jsonl"
+    },
+    {
+      "category": "data_integrity",
+      "name": "input_summary.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/formal6_sensor/summary.json"
+    },
+    {
+      "category": "data_integrity",
+      "name": "sensor_completion",
+      "passed": true,
+      "detail": "sensor run complete, no error"
+    },
+    {
+      "category": "data_integrity",
+      "name": "sensor_freeze_lineage",
+      "passed": true,
+      "detail": "sensor freeze lineage"
+    },
+    {
+      "category": "data_integrity",
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "consumer source hashes"
+    },
+    {
+      "category": "data_integrity",
+      "name": "template_hash",
+      "passed": true,
+      "detail": "template hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "labels_hash",
+      "passed": true,
+      "detail": "evaluation labels hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "no_truth_import",
+      "passed": true,
+      "detail": "consumer source does not reference labels/pose/steps"
+    },
+    {
+      "category": "data_integrity",
+      "name": "results_count",
+      "passed": true,
+      "detail": "results count/hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "shadow_boundary",
+      "passed": true,
+      "detail": "shadow only, no control, no distance"
+    },
+    {
+      "category": "contract",
+      "name": "split_by_episode",
+      "passed": true,
+      "detail": "train episodes=['route_0'] test=['reset_0', 'reset_1', 'route_1', 'static_0', 'static_1']"
+    },
+    {
+      "category": "contract",
+      "name": "test_frame_results_present",
+      "passed": true,
+      "detail": "missing=[]"
+    },
+    {
+      "category": "contract",
+      "name": "provenance_and_generation",
+      "passed": true,
+      "detail": "payload/generation lineage"
+    },
+    {
+      "category": "contract",
+      "name": "time_semantics_unknown_exposure",
+      "passed": true,
+      "detail": "capture source and exposure status"
+    },
+    {
+      "category": "contract",
+      "name": "reset_count",
+      "passed": true,
+      "detail": "consumer reset count=6"
+    },
+    {
+      "category": "metrics",
+      "name": "frame_denominator",
+      "passed": true,
+      "detail": "test frames=36/36"
+    },
+    {
+      "category": "metrics",
+      "name": "metrics_computed",
+      "passed": true,
+      "detail": "precision=1.0 recall=0.5"
+    },
+    {
+      "category": "metrics",
+      "name": "capture_time_not_claimed_exposure",
+      "passed": true,
+      "detail": "all results exposure UNKNOWN"
+    },
+    {
+      "category": "metrics",
+      "name": "scores_are_correlation",
+      "passed": true,
+      "detail": "score definition"
+    },
+    {
+      "category": "metrics",
+      "name": "episode_denominator",
+      "passed": true,
+      "detail": "episodes=['reset_0', 'reset_1', 'route_1', 'static_0', 'static_1']"
+    }
+  ],
+  "failures": [],
+  "frame_metrics": {
+    "total": 36,
+    "tp": 9,
+    "fp": 0,
+    "fn": 9,
+    "tn": 18,
+    "precision": 1.0,
+    "recall": 0.5,
+    "rejection_rate": 0.0,
+    "rejected": 0,
+    "pixel_or_bearing_error": "NOT_AVAILABLE: labels are presence-only; no independent bbox/bearing labels"
+  },
+  "episode_metrics": {
+    "route_1": {
+      "positives": 6,
+      "detected_positives": 3,
+      "negatives": 4,
+      "false_positives": 0,
+      "rejected": 0
+    },
+    "reset_0": {
+      "positives": 6,
+      "detected_positives": 3,
+      "negatives": 4,
+      "false_positives": 0,
+      "rejected": 0
+    },
+    "reset_1": {
+      "positives": 6,
+      "detected_positives": 3,
+      "negatives": 4,
+      "false_positives": 0,
+      "rejected": 0
+    },
+    "static_0": {
+      "positives": 0,
+      "detected_positives": 0,
+      "negatives": 3,
+      "false_positives": 0,
+      "rejected": 0
+    },
+    "static_1": {
+      "positives": 0,
+      "detected_positives": 0,
+      "negatives": 3,
+      "false_positives": 0,
+      "rejected": 0
+    }
+  },
+  "per_episode": {
+    "positive_episodes": [
+      "route_1",
+      "reset_0",
+      "reset_1"
+    ],
+    "negative_episodes": [
+      "route_1",
+      "reset_0",
+      "reset_1",
+      "static_0",
+      "static_1"
+    ],
+    "positive_episodes_with_detection": [
+      "route_1",
+      "reset_0",
+      "reset_1"
+    ],
+    "episodes_with_false_positive": []
+  },
+  "detections": [
+    {
+      "status": "DETECTED",
+      "score": 0.6477504968643188,
+      "bbox_xywh": [
+        26,
+        21,
+        170,
+        215
+      ],
+      "bearing_rad": -0.2971808304163159,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.8598167896270752,
+      "bbox_xywh": [
+        79,
+        19,
+        170,
+        215
+      ],
+      "bearing_rad": 0.02499479361892016,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.9976204633712769,
+      "bbox_xywh": [
+        80,
+        20,
+        170,
+        215
+      ],
+      "bearing_rad": 0.031239833430268277,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.6449900269508362,
+      "bbox_xywh": [
+        27,
+        21,
+        170,
+        215
+      ],
+      "bearing_rad": -0.2914567944778671,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.8604965209960938,
+      "bbox_xywh": [
+        79,
+        19,
+        170,
+        215
+      ],
+      "bearing_rad": 0.02499479361892016,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.9973326325416565,
+      "bbox_xywh": [
+        80,
+        20,
+        170,
+        215
+      ],
+      "bearing_rad": 0.031239833430268277,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.6510270833969116,
+      "bbox_xywh": [
+        26,
+        21,
+        170,
+        215
+      ],
+      "bearing_rad": -0.2971808304163159,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.8598369359970093,
+      "bbox_xywh": [
+        79,
+        19,
+        170,
+        215
+      ],
+      "bearing_rad": 0.02499479361892016,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    },
+    {
+      "status": "DETECTED",
+      "score": 0.9970495104789734,
+      "bbox_xywh": [
+        80,
+        20,
+        170,
+        215
+      ],
+      "bearing_rad": 0.031239833430268277,
+      "distance_m": null,
+      "distance_status": "UNAVAILABLE_DISTANCE_ONLY_CENTER_DEPTH",
+      "scale": 1.0
+    }
+  ],
+  "freeze": {
+    "path": "configs\\perception\\landmark_freeze_v4.json",
+    "sha256": "e812a64e07d57f5e6a77319f7a028c66e2cdd6cf4f6defb25be108540042b641",
+    "git_head": null
+  },
+  "labels": {
+    "path": "configs\\perception\\landmark_labels_v1.json",
+    "sha256": "dd8c551dd89c69eb673726319c9f7c8846aadfc8e847d9a45e8d141a4e1efc0c",
+    "status": "MANUAL_PRESENCE_LABELS_NOT_CONSUMER_INPUT"
+  },
+  "scope": "shadow only; ORACLE route control unchanged; no localization"
+}
