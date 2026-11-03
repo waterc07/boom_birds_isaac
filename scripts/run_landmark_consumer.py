@@ -30,7 +30,8 @@ def logical_sha(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--freeze', type=Path, required=True)
-    parser.add_argument('--sensor-dir', type=Path, required=True)
+    parser.add_argument('--run', type=Path, required=True)
+    parser.add_argument('--shadow', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     freeze = load(args.freeze)
@@ -39,13 +40,13 @@ def main():
         path = Path(name)
         if not path.exists() or sha(path) != digest:
             raise RuntimeError('input hash mismatch: ' + name)
-    manifest = load(args.sensor_dir / 'manifest.json')
-    if not (args.sensor_dir / 'run.complete.json').exists() or (
-            args.sensor_dir / 'summary.error.txt').exists():
+    manifest = load(args.run / 'manifest.json')
+    if not (args.run / 'run.complete.json').exists() or (
+            args.run / 'summary.error.txt').exists():
         raise RuntimeError('sensor input did not complete cleanly')
     if manifest.get('freeze', {}).get('sha256') != freeze['input']['sensor_freeze_sha256']:
         raise RuntimeError('sensor freeze lineage mismatch')
-    observations = load_jsonl(args.sensor_dir / 'observations.jsonl')
+    observations = load_jsonl(args.shadow / 'observations.jsonl')
     rgb = [item for item in observations
            if item.get('sensor_key') == 'front_rgb']
     rgb.sort(key=lambda item: (item['header']['sync_generation'],
@@ -76,7 +77,7 @@ def main():
         'shadow_only': True,
         'control_participation': 'NONE',
         'consumer_version': 'dsh.landmark_consumer.v1',
-        'input_observations_sha256': sha(args.sensor_dir / 'observations.jsonl'),
+        'input_observations_sha256': sha(args.shadow / 'observations.jsonl'),
         'freeze_sha256': sha(args.freeze),
         'processed_rgb_records': len(results),
         'status_counts': counts,

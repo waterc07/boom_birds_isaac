@@ -28,7 +28,8 @@ def logical_sha(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--sensor-dir', type=Path, required=True)
+    parser.add_argument('--run', type=Path, required=True)
+    parser.add_argument('--shadow', type=Path, required=True)
     parser.add_argument('--results', type=Path, required=True)
     parser.add_argument('--labels', type=Path, required=True)
     parser.add_argument('--freeze', type=Path, required=True)
@@ -39,8 +40,8 @@ def main():
     labels_doc = load(args.labels)
     results = load_jsonl(args.results / 'results.jsonl')
     summary = load(args.results / 'summary.json')
-    manifest = load(args.sensor_dir / 'manifest.json')
-    observations = load_jsonl(args.sensor_dir / 'observations.jsonl')
+    manifest = load(args.run / 'manifest.json')
+    observations = load_jsonl(args.shadow / 'observations.jsonl')
     by_frame = {item['payload']['ref'].split('/')[-1]: item
                 for item in observations
                 if item.get('sensor_key') == 'front_rgb'}
@@ -61,8 +62,8 @@ def main():
               Path(name).exists() and sha(name) == digest,
               'input hash ' + name)
     check('data_integrity', 'sensor_completion',
-          (args.sensor_dir / 'run.complete.json').exists()
-          and not (args.sensor_dir / 'summary.error.txt').exists(),
+          (args.run / 'run.complete.json').exists()
+          and not (args.run / 'summary.error.txt').exists(),
           'sensor run complete, no error')
     check('data_integrity', 'sensor_freeze_lineage',
           manifest.get('freeze', {}).get('sha256')
