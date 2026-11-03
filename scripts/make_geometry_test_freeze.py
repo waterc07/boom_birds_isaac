@@ -42,10 +42,12 @@ def main():
                         default=Path('configs/perception/geometry_test_freeze_v1.json'))
     parser.add_argument('--code-commit', default=None)
     parser.add_argument('--working-tree', default='operator recorded')
+    parser.add_argument('--labels', type=Path,
+                        default=Path('configs/perception/geometry_test_labels_v1.json'))
     args = parser.parse_args()
     if args.output.exists():
         raise SystemExit('refusing overwrite: ' + str(args.output))
-    labels = Path('configs/perception/geometry_test_labels_v1.json')
+    labels = args.labels
     plan = Path('configs/perception/geometry_test_plan_v1.json')
     cases = Path('configs/scenarios/geometry_test_cases_v1.json')
     source = {}
