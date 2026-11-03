@@ -1,0 +1,15 @@
+{
+  "schema_version": "dsh.geometry_test_run.v1",
+  "shadow_only": true,
+  "control_participation": "NONE",
+  "freeze_sha256": "b5897274746fcc07a3e5d14d84d8f7022f131af3fa04aa1b290a35e8e3c3f0e5",
+  "input_observations_sha256": "13abb5de23f99e77d79b989ccee71a3176f04bb8df5373b744af42f977a74b22",
+  "processed_rgb_records": 207,
+  "status_counts": {
+    "DETECTED": 27,
+    "REJECTED": 12,
+    "UNKNOWN": 168
+  },
+  "results_sha256": "ba4ca15b2b2e45c96fd4454f667d73cd82320d09603ba461bcf3699af81d7ebe",
+  "distance": "UNAVAILABLE"
+}

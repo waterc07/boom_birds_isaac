@@ -1,0 +1,277 @@
+{
+  "schema_version": "dsh.geometry_test_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "input:manifest.json",
+      "passed": true,
+      "detail": "outputs/sensor_shadow/geo_test/manifest.json"
+    },
+    {
+      "name": "input:summary.json",
+      "passed": true,
+      "detail": "outputs/sensor_shadow/geo_test/summary.json"
+    },
+    {
+      "name": "input:run.complete.json",
+      "passed": true,
+      "detail": "outputs/sensor_shadow/geo_test/run.complete.json"
+    },
+    {
+      "name": "input:observations.jsonl",
+      "passed": true,
+      "detail": "outputs/sensor_shadow/geo_test_sensor/observations.jsonl"
+    },
+    {
+      "name": "input:summary.json",
+      "passed": true,
+      "detail": "outputs/sensor_shadow/geo_test_sensor/summary.json"
+    },
+    {
+      "name": "labels_hash",
+      "passed": true,
+      "detail": "labels"
+    },
+    {
+      "name": "plan_hash",
+      "passed": true,
+      "detail": "test plan"
+    },
+    {
+      "name": "cases_hash",
+      "passed": true,
+      "detail": "cases"
+    },
+    {
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "source hashes"
+    },
+    {
+      "name": "completion",
+      "passed": true,
+      "detail": "run completion"
+    },
+    {
+      "name": "shadow_boundary",
+      "passed": true,
+      "detail": "shadow/control"
+    },
+    {
+      "name": "distance_unavailable",
+      "passed": true,
+      "detail": "distance"
+    },
+    {
+      "name": "time_unknown",
+      "passed": true,
+      "detail": "time"
+    },
+    {
+      "name": "provenance",
+      "passed": true,
+      "detail": "provenance"
+    },
+    {
+      "name": "test_frames_present",
+      "passed": true,
+      "detail": "all test labels have results"
+    },
+    {
+      "name": "test_split",
+      "passed": true,
+      "detail": "all labels sealed test"
+    },
+    {
+      "name": "denominators",
+      "passed": true,
+      "detail": "label denominators"
+    }
+  ],
+  "failures": [],
+  "freeze": {
+    "path": "configs\\perception\\geometry_test_freeze_v1.json",
+    "sha256": "01bb59a49a938201505252c31f19f754cdc6ef6ff02737c4ef69c3fbede1139d",
+    "code_commit": "7f036a38581fe8079d179901abff10d841f1a31e"
+  },
+  "frame_metrics": {
+    "total": 30,
+    "tp": 13,
+    "fp": 0,
+    "fn": 5,
+    "tn": 12,
+    "precision": 1.0,
+    "recall": 0.7222222222222222,
+    "unknown": 17,
+    "rejected": 0,
+    "positive_success_coverage": 0.7222222222222222,
+    "bbox_subset": 9,
+    "bbox_tp": 3,
+    "joint_tp": 1,
+    "joint_all_positive_rate": 0.05555555555555555,
+    "bearing_error_mean_deg": 11.554150944363359,
+    "bearing_error_median_deg": 13.080653499711996,
+    "bearing_error_max_deg": 28.949396209245343,
+    "reference_unavailable": 0
+  },
+  "per_family": {
+    "geo_north_test": {
+      "frames": 21,
+      "positives": 12,
+      "negatives": 9,
+      "detected_positives": 12,
+      "false_positives": 0,
+      "unknown": 9,
+      "rejected": 0
+    },
+    "geo_static_a": {
+      "frames": 3,
+      "positives": 3,
+      "negatives": 0,
+      "detected_positives": 0,
+      "false_positives": 0,
+      "unknown": 3,
+      "rejected": 0
+    },
+    "geo_static_b": {
+      "frames": 3,
+      "positives": 3,
+      "negatives": 0,
+      "detected_positives": 1,
+      "false_positives": 0,
+      "unknown": 2,
+      "rejected": 0
+    },
+    "geo_static_c": {
+      "frames": 3,
+      "positives": 0,
+      "negatives": 3,
+      "detected_positives": 0,
+      "false_positives": 0,
+      "unknown": 3,
+      "rejected": 0
+    }
+  },
+  "localization_rows": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "family": "geo_north_test",
+      "status": "DETECTED",
+      "bbox": [
+        201,
+        58,
+        96,
+        91
+      ],
+      "bbox_iou": 0.3156639566395664,
+      "bearing_error_deg": 4.052788219209334,
+      "bbox_tp": true,
+      "joint_tp": true,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "family": "geo_north_test",
+      "status": "DETECTED",
+      "bbox": [
+        63,
+        56,
+        257,
+        184
+      ],
+      "bbox_iou": 0.5323367302430707,
+      "bearing_error_deg": 13.080653499711996,
+      "bbox_tp": true,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+      "family": "geo_north_test",
+      "status": "DETECTED",
+      "bbox": [
+        42,
+        55,
+        233,
+        185
+      ],
+      "bbox_iou": 0.373189070236567,
+      "bearing_error_deg": 28.949396209245343,
+      "bbox_tp": true,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "family": "geo_static_a",
+      "status": "UNKNOWN",
+      "bbox": null,
+      "bbox_iou": 0.0,
+      "bearing_error_deg": null,
+      "bbox_tp": false,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+      "family": "geo_static_a",
+      "status": "UNKNOWN",
+      "bbox": null,
+      "bbox_iou": 0.0,
+      "bearing_error_deg": null,
+      "bbox_tp": false,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+      "family": "geo_static_a",
+      "status": "UNKNOWN",
+      "bbox": null,
+      "bbox_iou": 0.0,
+      "bearing_error_deg": null,
+      "bbox_tp": false,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+      "family": "geo_static_b",
+      "status": "UNKNOWN",
+      "bbox": null,
+      "bbox_iou": 0.0,
+      "bearing_error_deg": null,
+      "bbox_tp": false,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "family": "geo_static_b",
+      "status": "UNKNOWN",
+      "bbox": null,
+      "bbox_iou": 0.0,
+      "bearing_error_deg": null,
+      "bbox_tp": false,
+      "joint_tp": false,
+      "reference_available": true
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+      "family": "geo_static_b",
+      "status": "DETECTED",
+      "bbox": [
+        146,
+        111,
+        81,
+        78
+      ],
+      "bbox_iou": 0.2659051666888033,
+      "bearing_error_deg": 0.13376584928676788,
+      "bbox_tp": false,
+      "joint_tp": false,
+      "reference_available": true
+    }
+  ],
+  "scope": "shadow only; no region/localization/distance/control claim"
+}
