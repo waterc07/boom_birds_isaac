@@ -1,0 +1,199 @@
+{
+  "schema_version": "dsh.independent_landmark_freeze.v1",
+  "frozen_at": "2026-11-03T14:46:52.430822+00:00",
+  "code_commit": "1ecbb9c92c29e9523a470a22ebfe91e415fb1ac2",
+  "working_tree": "accepted-detection-only localization verifier",
+  "source_hashes": {
+    "src/boom_birds/__init__.py": "191f6d2e72c84e6af87d119158a1c688371ff100f8ce94f2438b0e2f97ccf57e",
+    "src/boom_birds/contracts/__init__.py": "6774036d1a7226ec3429db15843135f0a0190b5eec24490889a68026c2985b75",
+    "src/boom_birds/contracts/action_v2.py": "7dc32b4845b5cfcf782c604016116dda13bd8158aaa19cb1305481421ef095e6",
+    "src/boom_birds/contracts/admission.py": "352b85c3b75b4c421f7c7e0f0dd3a0f59254596d5a60ce438923383b4a4f2b1e",
+    "src/boom_birds/contracts/context.py": "ee7d59c60fa6fa7a09950c3ed97bd6a1b827df98de83843ed51a41560a41d7f3",
+    "src/boom_birds/contracts/frames.py": "52b40d8796ac9020f0b757926ba63e4f2d8d58224199b4bb1d99fde40a06b51c",
+    "src/boom_birds/contracts/lifecycle.py": "0a79f8fe9d4dca890f3f49515f9f1e72abad3fd7737a6cc7132e45918f0ec523",
+    "src/boom_birds/contracts/ownership.py": "20e6cc43d695171ab6cd7ce8d9279adfe70cdbca7e767babebedb21624c99641",
+    "src/boom_birds/contracts/reasons.py": "7caaebcb66846dda327e5888a30904638a0651ae6f850936ec422cd0e7670f1e",
+    "src/boom_birds/contracts/timebase.py": "02fc0479dd5b399def12eb9e7032c4a40e2b33b2e65df0c0dcd3ccb96da18b06",
+    "src/boom_birds/contracts/types.py": "e1f23aff588a12577e5619acf2683c8cf1da428e66a40bc167d2c5411fc0fabe",
+    "src/boom_birds/contracts/versions.py": "52e8e26d093010b2638f1935742cb5eebb97739193b38d025e1e487f6c445b6b",
+    "src/boom_birds/evaluation/__init__.py": "175421e83a05b19a755c808d37fa0cb77b8652e95e894378b59b36418783e084",
+    "src/boom_birds/evaluation/action_transport.py": "69fba1043cceb908eea828a1bf57e7ebeac6b2289d0e0d3225951b35f9af94d3",
+    "src/boom_birds/evaluation/boundary_plan.py": "b5ff575d2aba648b3e82835c468c106c6c213d2f2be9cfb5b3943338cb2037a2",
+    "src/boom_birds/evaluation/clearance.py": "c114ec6cd40342082166e5ea69e9793ab5ddf632570666dc9bb2b5331d5aeff2",
+    "src/boom_birds/evaluation/comparison.py": "b6a8b60e3a27d311e052eadf24836f6eb418194c5059f8fe3f13d9a867781bcb",
+    "src/boom_birds/evaluation/contact_contract.py": "a110d2fd747ffc28d70a2b9e9b7dd5e5001eaea0d808503b78a9e22a921d8b91",
+    "src/boom_birds/evaluation/contact_plan.py": "4d3ba1dd769f00520af797cea55c0057d775f86c9e669e4d9f2876dd31b73c81",
+    "src/boom_birds/evaluation/contact_raw_audit.py": "5e555c79a30e94f3ef9993b1123bf997d5912978ea9853dcb229e9a247db6111",
+    "src/boom_birds/evaluation/contact_readout.py": "92c089905d02930d3859d2ad178d2663c44cfe2fa248a87a3f976c8dd7db6f55",
+    "src/boom_birds/evaluation/csv_io.py": "f6a81f4915407eab23d2a0bb2d2f1d8ff657e3236f7e99133ed2e43aad0f529f",
+    "src/boom_birds/evaluation/dual_clock.py": "3c367c31191edab72a19ca061eb26c11915779b551071b7dc0d9ffbcb19cf9a3",
+    "src/boom_birds/evaluation/dynamic_eval_policy.py": "0a08c31fc4300062726d991e7376aa1e379022f25a313fd5cbe4bab755e14ebc",
+    "src/boom_birds/evaluation/dynamic_migration_plan.py": "caede500e551c3186c77c62d7f2b0b580fc4cd61df47809892f2cfc73917102e",
+    "src/boom_birds/evaluation/envelope.py": "d35f545bd895a7e3349d67febca29ecbb9cdbe530b5e9647a4788050141b42d4",
+    "src/boom_birds/evaluation/episode_boundary.py": "278719ed5a5dfd1dca7f28c80b843268e944809f0d527c520ef5969e7721b6fb",
+    "src/boom_birds/evaluation/episodes.py": "2a0c7b1835db08682345cbbc5ddfe8c4731bed543f00e83f1756839bd141310f",
+    "src/boom_birds/evaluation/landmark_consumer.py": "35e3dee43ace301835a57603e8468b8026f8bb12ff8e1b36bd4b0a2eee152071",
+    "src/boom_birds/evaluation/landmark_detector.py": "356d1f0341c0e831376451a5c47dcdeb5311e4352a0931c63cb7e99f8c1e523d",
+    "src/boom_birds/evaluation/landmark_improved.py": "c55c2b4ccd3a260d746d7ff6659a6ccd400b928ae7f46d332011c7107e103aef",
+    "src/boom_birds/evaluation/latency_plan.py": "d3c75aeca203afddb8844ccaffb3b468b1c398abdb606ca51d8a6188cc04258b",
+    "src/boom_birds/evaluation/map_eval.py": "b85f9456ebc59d36631a97c02bea45628dc3e0f95c596f89b968a736ed99933e",
+    "src/boom_birds/evaluation/sensor_observation.py": "6f202eae5cdbc41fa8a8f52cb181107a20edfa6736c5c47dd0568c97294bd8c4",
+    "src/boom_birds/evaluation/stop_requirement.py": "c84b70ba9f25b594da94b75b679afeadc564de2f313e4779ce940df482b0d90a",
+    "src/boom_birds/evaluation/supervisor.py": "39f3cd10ea1910c3cad9481079d2a8a873dd40ee138d6dd8aa3d1fcfee1199a7",
+    "src/boom_birds/evaluation/waypoints.py": "82b48d89c4194f72257dbca457ad6b90fb3ca7fa03efa6d6b5ecbba0c4ad0fc5",
+    "src/boom_birds/sim/__init__.py": "0d09975e1c263ad2f2352d7c80c33cd1adec06297da796d1d6994fb0dac6bde1",
+    "src/boom_birds/sim/body_envelope.py": "24971c3c03b05c4490acade85249492d6f5f623e161171a55cc4b9ec2360b0f8",
+    "src/boom_birds/sim/contact_evidence.py": "48c0267490b19f2142b3a89c710f6d230b9b05b0d56c2c8162ef263126b6ccf0",
+    "src/boom_birds/sim/disturbance.py": "d1ce9e3cef29fdb9ffff8ed2ec26b7ec804296487ea5033a83c8fbbac8abcb20",
+    "src/boom_birds/sim/dynamic_contact_session.py": "4e13ff72580209fa1ddc69b59a3f3fc4053de68b29d8dd06fa00b26de9e94a67",
+    "src/boom_birds/sim/dynamic_obstacle.py": "06c4d2fed8ad7f92ccc879cd93a41b7470a7737c5c06b72d994fca0adfffc704",
+    "src/boom_birds/sim/faults.py": "6c3de86aa49f603b4e8d7d19deb3863937faf5611452decbf3085e0782de99e2",
+    "src/boom_birds/sim/guidance.py": "19f0dbafdc602f7f8fe3e15cef15d25019bfbe82defe09428086e1b0e41c037a",
+    "src/boom_birds/sim/isaac_layered_scene.py": "2ee22017e522930baa784595ec929dfd8399857d4a789659b2b84a346c5e0ea6",
+    "src/boom_birds/sim/layered.py": "a0360958c0663986d3e9bfaebb41bacd19a5571690031eb76832c7f1af91b5fe",
+    "src/boom_birds/sim/map_contract.py": "b7ae5eb40e39336b44687f858f40dcd9026fbdcf92550c3c6d7dce7453189075",
+    "src/boom_birds/sim/observation_interface.py": "620333c780cba75c0747c42c1664b8415ef3f52cbf9ab414c01b2191a2f9941a",
+    "src/boom_birds/sim/reach.py": "16b56516df9b57b93b6019680d5f44cd6966beb207693efec033af3c96d97848",
+    "src/boom_birds/sim/scenarios.py": "074e12402ee882b413c24f2133e6d2571f9c4901086e988fd01c08ec9880fb9e",
+    "src/boom_birds/sim/sensor_shadow.py": "f977b14a859f90aa689f3127b42a978ab34d2325be4e37974369605ee456bfdf",
+    "src/boom_birds/sim/usd_body_envelope.py": "1bfce77eed5d4d65c48536173ec538261e7faec759d0e122cf4253b6f0954c6a",
+    "src/boom_birds/sim/v2_execution.py": "fe5ec905627df58db430e73a15c3093c45d8fdf56962c37025539d675c45bb08",
+    "src/boom_birds/sim/velocity_control.py": "4207e35e81a6f743fe2f608298a77c09984c0a79f88c95eb3a1b6f60581cb32b",
+    "scripts/run_independent_landmark_eval.py": "d4a3c097dc72ac945a6cb673ec7948d9815f1953dced2064b3af04fb0f01c497",
+    "scripts/verify_independent_landmark.py": "dc2f9e5c65c2879725fe29cb772a01d1cb402ab153e3e7f0a04f3969a373ab14",
+    "scripts/run_landmark_consumer.py": "4307df3fd5b024a4e3552c8b96b305292e917b279b8099ac5d3fff15c1a30588"
+  },
+  "input": {
+    "final_run": "outputs/sensor_shadow/lm_independence",
+    "final_shadow": "outputs/sensor_shadow/lm_independence_sensor",
+    "pilot_dev_run": "outputs/sensor_shadow/lm_pilot",
+    "pilot_shadow": "outputs/sensor_shadow/lm_pilot_sensor",
+    "sensor_freeze_sources": "formal sensor freeze + independent collection plan"
+  },
+  "input_hashes": {
+    "outputs/sensor_shadow/lm_independence/manifest.json": "87dc16b5b638f4906c666378ff9c8a4930125859670567f19b4b326b7d487742",
+    "outputs/sensor_shadow/lm_independence/summary.json": "0aa4b59191303071f58e3c67556f399f5ca7f051555d0e44cf17aa99306dc16f",
+    "outputs/sensor_shadow/lm_independence/run.complete.json": "aa70de84128709091758e74065877d2eaa744687c0b9273de4ddb88b836329c0",
+    "outputs/sensor_shadow/lm_independence_sensor/observations.jsonl": "3b5ca70d1b63e6e6f060157e3511dff785c5fe2689766fd5325ed743dc3e0309",
+    "outputs/sensor_shadow/lm_independence_sensor/summary.json": "e2fb56450d9f9332784d0eaff5d2d32911db10256bf94b930a6964481db4a20b",
+    "outputs/sensor_shadow/lm_pilot/manifest.json": "1685d526260a9ad4f574e5d20175a985b96fab9f89b8847ce23674b3d12b5079",
+    "outputs/sensor_shadow/lm_pilot/summary.json": "59bdb7b94473b5eb661432d67858161e8b5d0ff4deda8689f8379db818b389a3",
+    "outputs/sensor_shadow/lm_pilot/run.complete.json": "31c1dd558cf7aa3c915b0dc16d573546da23a012ba68ffbb115ea9ee6299ced4",
+    "outputs/sensor_shadow/lm_pilot_sensor/observations.jsonl": "0c30b46c41fb97ae2fbfe17b653f6c4a263a66c3e33e07903b17c6f8b88092ab",
+    "outputs/sensor_shadow/lm_pilot_sensor/summary.json": "01bc754e85b92d7d66287118466980fe33ee3a712c88facf34255eb8c6e4f916"
+  },
+  "labels": {
+    "path": "configs/perception/landmark_independent_labels_v1.json",
+    "sha256": "565b19a53328aa3d54086bbb7c65f7def3b089328772c822acdced8dbcd09aa1",
+    "plan_path": "configs/perception/independence_plan_v2.json",
+    "plan_sha256": "ccf4f53a5d95de0dcbe63e7cd37047be452159401e045049902f4772d7cd9cd2",
+    "train_episodes": [
+      "dev_south_new",
+      "static_dev_away",
+      "static_dev_center",
+      "static_dev_left"
+    ],
+    "test_families": [
+      "north",
+      "reverse_south",
+      "static_test_away",
+      "static_test_oblique"
+    ],
+    "development_frames": 30,
+    "test_frames": 49,
+    "test_positives": 27,
+    "test_negatives": 22,
+    "localization_subset": 9,
+    "iou_threshold": 0.3,
+    "bearing_error_threshold_deg": 5.0
+  },
+  "algorithms": {
+    "baseline": {
+      "name": "old_single_template",
+      "template_path": "configs/perception/tower_template_v1.png",
+      "template_sha256": "e527000344a883b9e3698053cc6324ab2a5258bf8fdc00c66371d9a93b3b48f2",
+      "threshold": 0.55,
+      "scales": [
+        0.5,
+        0.65,
+        0.8,
+        1.0,
+        1.15
+      ],
+      "bearing_source": "BBOX_CENTER",
+      "allowed_age_ns": 250000000
+    },
+    "improved": {
+      "name": "dev_multiview_anchor",
+      "templates_meta": "configs/perception/independent_templates/templates_v1.json",
+      "templates_meta_sha256": "a85dce15b859bb3894e40d504c953e5f4e0501473c97d62e00d7ad1498bd0d38",
+      "templates": [
+        {
+          "template_id": "dev_static_center",
+          "path": "configs/perception/independent_templates/dev_static_center.png",
+          "sha256": "e6dd21b95948bea58f8146ee0733860c6af40a3eb74d023601bba5d0624fa81b",
+          "source_image": "outputs/sensor_shadow/lm_pilot_sensor/images/pilot_east_center-follow_only_g1_3.png",
+          "source_split": "development",
+          "anchor_fraction_xy": [
+            0.39666666666666667,
+            0.3171428571428571
+          ],
+          "anchor_status": "GREEN_LIGHT_CENTROID_MANUAL_VERIFY"
+        },
+        {
+          "template_id": "dev_static_left",
+          "path": "configs/perception/independent_templates/dev_static_left.png",
+          "sha256": "10f51364df9cd203aabc5ccfbb5ab4aa1e1af383aa3c2f27b9dc410b198c44de",
+          "source_image": "outputs/sensor_shadow/lm_pilot_sensor/images/pilot_east_left-follow_only_g2_3.png",
+          "source_split": "development",
+          "anchor_fraction_xy": [
+            0.4590909090909091,
+            0.25882352941176473
+          ],
+          "anchor_status": "GREEN_LIGHT_CENTROID_MANUAL_VERIFY"
+        },
+        {
+          "template_id": "dev_route_near",
+          "path": "configs/perception/independent_templates/dev_route_near.png",
+          "sha256": "ef3d403f64e12061e0b190db4bdb8da48e068a671d229edcb9fa8a23c68c079f",
+          "source_image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_183.png",
+          "source_split": "development",
+          "anchor_fraction_xy": [
+            0.2857142857142857,
+            0.054838709677419356
+          ],
+          "anchor_status": "GREEN_LIGHT_CENTROID_MANUAL_VERIFY"
+        }
+      ],
+      "threshold": 0.65,
+      "scales": [
+        0.5,
+        0.65,
+        0.8,
+        1.0,
+        1.15
+      ],
+      "bearing_source": "TEMPLATE_ANCHOR_GREEN_LIGHT",
+      "allowed_age_ns": 250000000,
+      "improvements": [
+        "multi_view_template_library",
+        "template_anchor_bearing"
+      ]
+    }
+  },
+  "templates_development_only": true,
+  "test_not_used_for_templates_or_threshold": true,
+  "expected": {
+    "test_frame_denominator": 49,
+    "test_positive_denominator": 27,
+    "test_negative_denominator": 22,
+    "localization_subset": 9,
+    "shadow_only": true,
+    "control_participation": "NONE",
+    "distance_available": false,
+    "exposure_status": "UNKNOWN",
+    "algorithm_effect_may_fail": true,
+    "no_post_test_threshold_change": true
+  },
+  "scope": "natural tower; offline shadow; no control/localization; no Gate claim"
+}

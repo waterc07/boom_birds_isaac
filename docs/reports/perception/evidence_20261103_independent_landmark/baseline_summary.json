@@ -1,0 +1,22 @@
+{
+  "schema_version": "dsh.independent_landmark_run.v1",
+  "method": "baseline",
+  "shadow_only": true,
+  "control_participation": "NONE",
+  "freeze_sha256": "6493f653df1fc4066211c146789fb0c3052270fd53401076e18a3fd2bf252978",
+  "inputs": {
+    "final_observations": "3b5ca70d1b63e6e6f060157e3511dff785c5fe2689766fd5325ed743dc3e0309",
+    "pilot_observations": "0c30b46c41fb97ae2fbfe17b653f6c4a263a66c3e33e07903b17c6f8b88092ab"
+  },
+  "result_count": 631,
+  "status_counts": {
+    "('final', 'REJECTED')": 15,
+    "('final', 'NOT_DETECTED')": 577,
+    "('final', 'DETECTED')": 21,
+    "('pilot_dev', 'REJECTED')": 9,
+    "('pilot_dev', 'DETECTED')": 6,
+    "('pilot_dev', 'NOT_DETECTED')": 3
+  },
+  "results_sha256": "5830e6dce80369d2df0ca2dc8cf0515f547c24c427e592a34163e009bb6f07fe",
+  "distance": "UNAVAILABLE for arbitrary detection boxes"
+}

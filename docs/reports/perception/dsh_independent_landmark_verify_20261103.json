@@ -1,0 +1,472 @@
+{
+  "schema_version": "dsh.independent_landmark_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "freeze_hash",
+      "passed": true,
+      "detail": "freeze bytes"
+    },
+    {
+      "name": "input:manifest.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_independence/manifest.json"
+    },
+    {
+      "name": "input:summary.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_independence/summary.json"
+    },
+    {
+      "name": "input:run.complete.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_independence/run.complete.json"
+    },
+    {
+      "name": "input:observations.jsonl",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_independence_sensor/observations.jsonl"
+    },
+    {
+      "name": "input:summary.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_independence_sensor/summary.json"
+    },
+    {
+      "name": "input:manifest.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_pilot/manifest.json"
+    },
+    {
+      "name": "input:summary.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_pilot/summary.json"
+    },
+    {
+      "name": "input:run.complete.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_pilot/run.complete.json"
+    },
+    {
+      "name": "input:observations.jsonl",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_pilot_sensor/observations.jsonl"
+    },
+    {
+      "name": "input:summary.json",
+      "passed": true,
+      "detail": "input hash outputs/sensor_shadow/lm_pilot_sensor/summary.json"
+    },
+    {
+      "name": "labels_hash",
+      "passed": true,
+      "detail": "labels hash"
+    },
+    {
+      "name": "source_hash",
+      "passed": true,
+      "detail": "consumer/verifier source hashes"
+    },
+    {
+      "name": "completion",
+      "passed": true,
+      "detail": "final run completion/error"
+    },
+    {
+      "name": "templates_dev_only",
+      "passed": true,
+      "detail": "all new templates from development split"
+    },
+    {
+      "name": "baseline_result_count",
+      "passed": true,
+      "detail": "631"
+    },
+    {
+      "name": "baseline_shadow",
+      "passed": true,
+      "detail": "shadow/control boundary"
+    },
+    {
+      "name": "baseline_distance_unavailable",
+      "passed": true,
+      "detail": "distance unavailable"
+    },
+    {
+      "name": "baseline_time_unknown",
+      "passed": true,
+      "detail": "exposure UNKNOWN"
+    },
+    {
+      "name": "baseline_provenance",
+      "passed": true,
+      "detail": "frame/payload provenance"
+    },
+    {
+      "name": "baseline_test_frames",
+      "passed": true,
+      "detail": "test label frames present in results"
+    },
+    {
+      "name": "improved_result_count",
+      "passed": true,
+      "detail": "631"
+    },
+    {
+      "name": "improved_shadow",
+      "passed": true,
+      "detail": "shadow/control boundary"
+    },
+    {
+      "name": "improved_distance_unavailable",
+      "passed": true,
+      "detail": "distance unavailable"
+    },
+    {
+      "name": "improved_time_unknown",
+      "passed": true,
+      "detail": "exposure UNKNOWN"
+    },
+    {
+      "name": "improved_provenance",
+      "passed": true,
+      "detail": "frame/payload provenance"
+    },
+    {
+      "name": "improved_test_frames",
+      "passed": true,
+      "detail": "test label frames present in results"
+    },
+    {
+      "name": "baseline_denominator",
+      "passed": true,
+      "detail": "49"
+    },
+    {
+      "name": "improved_denominator",
+      "passed": true,
+      "detail": "49"
+    },
+    {
+      "name": "split_by_family",
+      "passed": true,
+      "detail": "dev=['dev_south_new', 'static_dev_away', 'static_dev_center', 'static_dev_left'] test=['north', 'reverse_south', 'static_test_away', 'static_test_oblique']"
+    }
+  ],
+  "failures": [],
+  "freeze": {
+    "path": "configs\\perception\\independent_freeze_v3.json",
+    "sha256": "6493f653df1fc4066211c146789fb0c3052270fd53401076e18a3fd2bf252978",
+    "code_commit": "1ecbb9c92c29e9523a470a22ebfe91e415fb1ac2"
+  },
+  "baseline": {
+    "presence": {
+      "total": 49,
+      "tp": 12,
+      "fp": 0,
+      "fn": 15,
+      "tn": 22,
+      "precision": 1.0,
+      "recall": 0.4444444444444444,
+      "rejected": 0,
+      "unknown": 0,
+      "rejection_rate": 0.0
+    },
+    "localization": {
+      "subset_with_bbox": 9,
+      "evaluable_with_reference": 8,
+      "tp": 0,
+      "fn": 8,
+      "iou_threshold": 0.3,
+      "bearing_error_threshold_deg": 5.0,
+      "bearing_errors_deg": [
+        9.134136335436981,
+        10.457090512657585,
+        11.463201699570112,
+        10.748381901756845,
+        10.390707081704416
+      ],
+      "bearing_mean_deg": 10.438703506225187,
+      "bearing_median_deg": 10.457090512657585,
+      "bearing_max_deg": 11.463201699570112,
+      "rows": [
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_201.png",
+          "family": "reverse_south",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_206.png",
+          "family": "reverse_south",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_212.png",
+          "family": "reverse_south",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_181.png",
+          "family": "north",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": false,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_186.png",
+          "family": "north",
+          "status": "DETECTED",
+          "iou": 0.6745937376139517,
+          "bearing_error_deg": 9.134136335436981,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_192.png",
+          "family": "north",
+          "status": "DETECTED",
+          "iou": 0.6738868832731648,
+          "bearing_error_deg": 10.457090512657585,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_3.png",
+          "family": "static_test_oblique",
+          "status": "DETECTED",
+          "iou": 0.6051613763670312,
+          "bearing_error_deg": 11.463201699570112,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_4.png",
+          "family": "static_test_oblique",
+          "status": "DETECTED",
+          "iou": 0.6230193513586407,
+          "bearing_error_deg": 10.748381901756845,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_5.png",
+          "family": "static_test_oblique",
+          "status": "DETECTED",
+          "iou": 0.6320981794758789,
+          "bearing_error_deg": 10.390707081704416,
+          "ref_available": true,
+          "localization_tp": false
+        }
+      ]
+    },
+    "per_family": {
+      "reverse_south": {
+        "frames": 22,
+        "positives": 12,
+        "negatives": 10,
+        "detected_positives": 0,
+        "false_positives": 0,
+        "unknown": 0,
+        "rejected": 0
+      },
+      "north": {
+        "frames": 21,
+        "positives": 12,
+        "negatives": 9,
+        "detected_positives": 9,
+        "false_positives": 0,
+        "unknown": 0,
+        "rejected": 0
+      },
+      "static_test_oblique": {
+        "frames": 3,
+        "positives": 3,
+        "negatives": 0,
+        "detected_positives": 3,
+        "false_positives": 0,
+        "unknown": 0,
+        "rejected": 0
+      },
+      "static_test_away": {
+        "frames": 3,
+        "positives": 0,
+        "negatives": 3,
+        "detected_positives": 0,
+        "false_positives": 0,
+        "unknown": 0,
+        "rejected": 0
+      }
+    },
+    "method": "baseline"
+  },
+  "improved": {
+    "presence": {
+      "total": 49,
+      "tp": 0,
+      "fp": 2,
+      "fn": 27,
+      "tn": 20,
+      "precision": 0.0,
+      "recall": 0.0,
+      "rejected": 0,
+      "unknown": 0,
+      "rejection_rate": 0.0
+    },
+    "localization": {
+      "subset_with_bbox": 9,
+      "evaluable_with_reference": 8,
+      "tp": 0,
+      "fn": 8,
+      "iou_threshold": 0.3,
+      "bearing_error_threshold_deg": 5.0,
+      "bearing_errors_deg": [],
+      "bearing_mean_deg": null,
+      "bearing_median_deg": null,
+      "bearing_max_deg": null,
+      "rows": [
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_201.png",
+          "family": "reverse_south",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_206.png",
+          "family": "reverse_south",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_212.png",
+          "family": "reverse_south",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_181.png",
+          "family": "north",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": false,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_186.png",
+          "family": "north",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_192.png",
+          "family": "north",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_3.png",
+          "family": "static_test_oblique",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_4.png",
+          "family": "static_test_oblique",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_5.png",
+          "family": "static_test_oblique",
+          "status": "NOT_DETECTED",
+          "iou": 0.0,
+          "bearing_error_deg": null,
+          "ref_available": true,
+          "localization_tp": false
+        }
+      ]
+    },
+    "per_family": {
+      "reverse_south": {
+        "frames": 22,
+        "positives": 12,
+        "negatives": 10,
+        "detected_positives": 0,
+        "false_positives": 1,
+        "unknown": 0,
+        "rejected": 0
+      },
+      "north": {
+        "frames": 21,
+        "positives": 12,
+        "negatives": 9,
+        "detected_positives": 0,
+        "false_positives": 1,
+        "unknown": 0,
+        "rejected": 0
+      },
+      "static_test_oblique": {
+        "frames": 3,
+        "positives": 3,
+        "negatives": 0,
+        "detected_positives": 0,
+        "false_positives": 0,
+        "unknown": 0,
+        "rejected": 0
+      },
+      "static_test_away": {
+        "frames": 3,
+        "positives": 0,
+        "negatives": 3,
+        "detected_positives": 0,
+        "false_positives": 0,
+        "unknown": 0,
+        "rejected": 0
+      }
+    },
+    "method": "improved"
+  },
+  "delta": {
+    "presence_tp": -12,
+    "presence_fp": 2,
+    "presence_fn": 12,
+    "recall": -0.4444444444444444,
+    "localization_tp": 0
+  },
+  "scope": "shadow only; no control/Gate claim; small independent sample"
+}

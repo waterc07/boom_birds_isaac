@@ -1,0 +1,561 @@
+{
+  "schema_version": "dsh.landmark_independence_audit.v1",
+  "old": {
+    "total_rgb": 846,
+    "exact_duplicate_hashes_across_all_available": 0,
+    "duplicate_hash_counts": {},
+    "route_cases": [
+      {
+        "case_id": "sensor_route_0",
+        "waypoints": [
+          [
+            -10.2,
+            0.5,
+            0.512
+          ],
+          [
+            -10,
+            -4,
+            1
+          ],
+          [
+            -6,
+            -6.2,
+            1
+          ],
+          [
+            6,
+            -6.2,
+            1
+          ],
+          [
+            9.5,
+            -4,
+            1
+          ],
+          [
+            9.6,
+            0.5,
+            0.53
+          ]
+        ],
+        "start": [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        "goal": [
+          9.6,
+          0.5,
+          0.53
+        ],
+        "route_id": "south"
+      },
+      {
+        "case_id": "sensor_route_1",
+        "waypoints": [
+          [
+            -10.2,
+            0.5,
+            0.512
+          ],
+          [
+            -10,
+            -4,
+            1
+          ],
+          [
+            -6,
+            -6.2,
+            1
+          ],
+          [
+            6,
+            -6.2,
+            1
+          ],
+          [
+            9.5,
+            -4,
+            1
+          ],
+          [
+            9.6,
+            0.5,
+            0.53
+          ]
+        ],
+        "start": [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        "goal": [
+          9.6,
+          0.5,
+          0.53
+        ],
+        "route_id": "south"
+      },
+      {
+        "case_id": "sensor_reset_0",
+        "waypoints": [
+          [
+            -10.2,
+            0.5,
+            0.512
+          ],
+          [
+            -10,
+            -4,
+            1
+          ],
+          [
+            -6,
+            -6.2,
+            1
+          ],
+          [
+            6,
+            -6.2,
+            1
+          ],
+          [
+            9.5,
+            -4,
+            1
+          ],
+          [
+            9.6,
+            0.5,
+            0.53
+          ]
+        ],
+        "start": [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        "goal": [
+          9.6,
+          0.5,
+          0.53
+        ],
+        "route_id": "south"
+      },
+      {
+        "case_id": "sensor_reset_1",
+        "waypoints": [
+          [
+            -10.2,
+            0.5,
+            0.512
+          ],
+          [
+            -10,
+            -4,
+            1
+          ],
+          [
+            -6,
+            -6.2,
+            1
+          ],
+          [
+            6,
+            -6.2,
+            1
+          ],
+          [
+            9.5,
+            -4,
+            1
+          ],
+          [
+            9.6,
+            0.5,
+            0.53
+          ]
+        ],
+        "start": [
+          -10.2,
+          0.5,
+          0.512
+        ],
+        "goal": [
+          9.6,
+          0.5,
+          0.53
+        ],
+        "route_id": "south"
+      }
+    ],
+    "all_route_cases_same_waypoints": true,
+    "image_pairs_vs_generation3": {
+      "1": {
+        "label": "old g1 vs g3",
+        "pairs": [
+          {
+            "generation": 1,
+            "sequence": 3,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0014618207651541546,
+            "image_mae_rgb_0_255": 3.6814582347869873
+          }
+        ]
+      },
+      "2": {
+        "label": "old g2 vs g3",
+        "pairs": [
+          {
+            "generation": 2,
+            "sequence": 3,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0014618207651541546,
+            "image_mae_rgb_0_255": 2.2671353816986084
+          }
+        ]
+      },
+      "3": {
+        "label": "old g3 vs g3",
+        "pairs": []
+      },
+      "4": {
+        "label": "old g4 vs g3",
+        "pairs": [
+          {
+            "generation": 4,
+            "sequence": 3,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.00055152897661051,
+            "image_mae_rgb_0_255": 0.9273611307144165
+          },
+          {
+            "generation": 4,
+            "sequence": 45,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006310296243139505,
+            "image_mae_rgb_0_255": 1.0626431703567505
+          },
+          {
+            "generation": 4,
+            "sequence": 87,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006096896315896499,
+            "image_mae_rgb_0_255": 8.641297340393066
+          },
+          {
+            "generation": 4,
+            "sequence": 129,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006004840928300178,
+            "image_mae_rgb_0_255": 0.4827864468097687
+          },
+          {
+            "generation": 4,
+            "sequence": 171,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006066058922244161,
+            "image_mae_rgb_0_255": 0.9237673878669739
+          },
+          {
+            "generation": 4,
+            "sequence": 190,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006301870913470668,
+            "image_mae_rgb_0_255": 0.7630468606948853
+          },
+          {
+            "generation": 4,
+            "sequence": 195,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006203846197429937,
+            "image_mae_rgb_0_255": 0.9463281035423279
+          },
+          {
+            "generation": 4,
+            "sequence": 200,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0061388670997077725,
+            "image_mae_rgb_0_255": 1.067968726158142
+          },
+          {
+            "generation": 4,
+            "sequence": 205,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006095031462652457,
+            "image_mae_rgb_0_255": 1.3756858110427856
+          },
+          {
+            "generation": 4,
+            "sequence": 210,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0019880389203236733,
+            "image_mae_rgb_0_255": 0.8527864813804626
+          },
+          {
+            "generation": 4,
+            "sequence": 212,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.000176830667868964,
+            "image_mae_rgb_0_255": 0.6823828220367432
+          }
+        ]
+      },
+      "5": {
+        "label": "old g5 vs g3",
+        "pairs": [
+          {
+            "generation": 5,
+            "sequence": 3,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.7778298854827881
+          },
+          {
+            "generation": 5,
+            "sequence": 45,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.7307508587837219
+          },
+          {
+            "generation": 5,
+            "sequence": 87,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.5524652600288391
+          },
+          {
+            "generation": 5,
+            "sequence": 129,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.3832942843437195
+          },
+          {
+            "generation": 5,
+            "sequence": 171,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.8131814002990723
+          },
+          {
+            "generation": 5,
+            "sequence": 190,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.6330251693725586
+          },
+          {
+            "generation": 5,
+            "sequence": 195,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.7327126860618591
+          },
+          {
+            "generation": 5,
+            "sequence": 200,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.7401084899902344
+          },
+          {
+            "generation": 5,
+            "sequence": 205,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.8549175262451172
+          },
+          {
+            "generation": 5,
+            "sequence": 210,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.735546886920929
+          },
+          {
+            "generation": 5,
+            "sequence": 212,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0,
+            "image_mae_rgb_0_255": 0.7040755152702332
+          }
+        ]
+      },
+      "6": {
+        "label": "old g6 vs g3",
+        "pairs": [
+          {
+            "generation": 6,
+            "sequence": 3,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.00055152897661051,
+            "image_mae_rgb_0_255": 1.0046788454055786
+          },
+          {
+            "generation": 6,
+            "sequence": 45,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006310296243139505,
+            "image_mae_rgb_0_255": 0.7588497996330261
+          },
+          {
+            "generation": 6,
+            "sequence": 87,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006096896315896499,
+            "image_mae_rgb_0_255": 0.5579383969306946
+          },
+          {
+            "generation": 6,
+            "sequence": 129,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006004840928300178,
+            "image_mae_rgb_0_255": 0.4739670157432556
+          },
+          {
+            "generation": 6,
+            "sequence": 171,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006066058922244161,
+            "image_mae_rgb_0_255": 1.0165060758590698
+          },
+          {
+            "generation": 6,
+            "sequence": 190,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006301870913470668,
+            "image_mae_rgb_0_255": 0.7303949594497681
+          },
+          {
+            "generation": 6,
+            "sequence": 195,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006203846197429937,
+            "image_mae_rgb_0_255": 0.9184635281562805
+          },
+          {
+            "generation": 6,
+            "sequence": 200,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0061388670997077725,
+            "image_mae_rgb_0_255": 1.0865538120269775
+          },
+          {
+            "generation": 6,
+            "sequence": 205,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.006095031462652457,
+            "image_mae_rgb_0_255": 1.3611067533493042
+          },
+          {
+            "generation": 6,
+            "sequence": 210,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.0019880389203236733,
+            "image_mae_rgb_0_255": 0.8323047161102295
+          },
+          {
+            "generation": 6,
+            "sequence": 212,
+            "same_sha": false,
+            "camera_pos_distance_m": 0.000176830667868964,
+            "image_mae_rgb_0_255": 0.7222092151641846
+          }
+        ]
+      }
+    },
+    "finding": "all four old route episodes use the same south A case/waypoints; resets differ only by execution/render noise. Exact image hashes differ, so hashes alone do not establish trajectory independence."
+  },
+  "new": {
+    "total_selected_labels": 79,
+    "development": 30,
+    "sealed_test": 49,
+    "test_positives": 27,
+    "test_negatives": 22,
+    "exact_duplicate_hashes_all_selected": 0,
+    "families": {
+      "dev_south_new": {
+        "split": "development",
+        "frames": 21,
+        "positives": 12,
+        "negatives": 9,
+        "generations": [
+          1
+        ]
+      },
+      "reverse_south": {
+        "split": "sealed_test",
+        "frames": 22,
+        "positives": 12,
+        "negatives": 10,
+        "generations": [
+          2
+        ]
+      },
+      "north": {
+        "split": "sealed_test",
+        "frames": 21,
+        "positives": 12,
+        "negatives": 9,
+        "generations": [
+          3
+        ]
+      },
+      "static_test_oblique": {
+        "split": "sealed_test",
+        "frames": 3,
+        "positives": 3,
+        "negatives": 0,
+        "generations": [
+          4
+        ]
+      },
+      "static_test_away": {
+        "split": "sealed_test",
+        "frames": 3,
+        "positives": 0,
+        "negatives": 3,
+        "generations": [
+          5
+        ]
+      },
+      "static_dev_center": {
+        "split": "development",
+        "frames": 3,
+        "positives": 3,
+        "negatives": 0,
+        "generations": [
+          1
+        ]
+      },
+      "static_dev_left": {
+        "split": "development",
+        "frames": 3,
+        "positives": 3,
+        "negatives": 0,
+        "generations": [
+          2
+        ]
+      },
+      "static_dev_away": {
+        "split": "development",
+        "frames": 3,
+        "positives": 0,
+        "negatives": 3,
+        "generations": [
+          3
+        ]
+      }
+    },
+    "finding": "new test families are reverse_south, north, static_test_oblique, static_test_away; development families are south_new/static_dev; templates use development images only. No exact duplicate image hashes in the selected new frames."
+  },
+  "old_tp_definition": {
+    "old_labels": "presence-only; no bbox or reference point",
+    "old_tp": "any DETECTED in a manually labelled positive frame; no bbox/IoU validation",
+    "old_bearing": "atan2(bbox_center_x - cx0, fx); bbox center is not a fixed tower feature",
+    "revision": "old TP is presence-level only; old bearing is not independently validated. Old recall 0.5 and old test set are historical/development/regression, not an independent localization result."
+  }
+}
