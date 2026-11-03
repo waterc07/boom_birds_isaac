@@ -40,6 +40,10 @@ parser.add_argument('--code-commit', default='WORKTREE')
 parser.add_argument('--working-tree', default='recorded by the operator')
 parser.add_argument('--gpu-driver', default='NOT RECORDED')
 parser.add_argument('--screenshots', action='store_true')
+parser.add_argument('--sensor-shadow', type=Path, default=None,
+                    help='enable shadow observation capture to this external directory')
+parser.add_argument('--sensor-shadow-config', type=Path,
+                    default=Path('configs/sensors/sensor_shadow_v1.json'))
 parser.add_argument('--geometry-policy', choices=('legacy', 'reference_origin_v2'),
                     default=None,
                     help='default: reference_origin_v2; use legacy only for historical reproduction')
@@ -79,6 +83,12 @@ args.geometry_policy_source = _resolved['argument_sources']['geometry_policy']
 args.contact_mode_source = _resolved['argument_sources']['contact_mode']
 args.geometry_policy_explicit = args.geometry_policy_source == 'explicit'
 args.contact_mode_explicit = args.contact_mode_source == 'explicit'
+if args.sensor_shadow is not None:
+    if args.contact_mode != 'measured_hard_reset' or args.geometry_policy != 'reference_origin_v2':
+        raise RuntimeError('sensor shadow requires the measured single-env modes')
+    if getattr(args, 'headless', False):
+        raise RuntimeError('sensor shadow requires a visible GUI')
+    args.enable_cameras = True
 if args.write_migration_freeze is not None:
     make_migration_freeze(vars(args), Path.cwd(), args.write_migration_freeze)
     raise SystemExit(0)
@@ -369,8 +379,13 @@ try:
     mark('create env')
     env = QuadcopterEnv(cfg)
     env.reset(seed=0)
+    sensor_shadow = None
     try:
         dt = env.step_dt
+        try:
+            physics_dt = float(env.sim.get_physics_dt())
+        except Exception:
+            physics_dt = dt / max(1.0, float(getattr(cfg, 'decimation', 1)))
         origin = env.scene.env_origins[0].tolist()
         mass = float(env._robot_mass.item())
         inertias = env._robot.root_physx_view.get_inertias()
@@ -426,6 +441,25 @@ try:
 
         mark('declare kinematic contact inference')
         robot_root = '/World/envs/env_0/Robot'
+        sensor_config_sha = ''
+        if args.sensor_shadow is not None:
+            sensor_config_path = Path(args.sensor_shadow_config)
+            sensor_config_sha = hashlib.sha256(
+                sensor_config_path.read_bytes()).hexdigest()
+            sensor_config = json.loads(sensor_config_path.read_text(
+                encoding='utf-8'))
+            from boom_birds.sim.sensor_shadow import ShadowSensorChain
+            sensor_shadow = ShadowSensorChain(
+                env, robot_root, args.sensor_shadow, sensor_config,
+                dt_s=dt, physics_dt_s=physics_dt)
+            original_env_step = env.step
+
+            def shadow_env_step(action):
+                result = original_env_step(action)
+                if sensor_shadow is not None:
+                    sensor_shadow.on_policy_step()
+                return result
+            env.step = shadow_env_step
         sensors = []
         contact_sensor_info = {
             'valid': True, 'mode': 'sphere_overlap_inference',
@@ -1062,6 +1096,11 @@ try:
                 case_obs_delay_s = float(obstacle_spec.observation_delay_s)
                 case_obs_delay_ns = int(round(case_obs_delay_s * 1_000_000_000))
                 for method in methods:
+                    shadow_episode_id = case.case_id + '-' + method
+                    if args.config_id:
+                        shadow_episode_id += '-' + args.config_id
+                    if args.segment_id:
+                        shadow_episode_id += '-' + args.segment_id
                     if args.contact_mode == 'measured_hard_reset':
                         contact_session = None
                         env.sim.reset(soft=False)
@@ -1073,6 +1112,11 @@ try:
                         executor.reset(read_state())
                         if delay_wrapper is not None:
                             delay_wrapper.clear()
+                        if sensor_shadow is not None:
+                            sensor_shadow.begin_episode(
+                                episode_id=shadow_episode_id,
+                                generation=physics_generation,
+                                dt_s=dt, physics_dt_s=physics_dt)
                         contact_session = DynamicContactSession(
                             env, generation=physics_generation,
                             body_path=robot_root + '/body', target_path=dyn_path, dt_s=dt)
@@ -1137,6 +1181,8 @@ try:
                         episode_id += '-' + args.config_id
                     if args.segment_id:
                         episode_id += '-' + args.segment_id
+                    if sensor_shadow is not None:
+                        sensor_shadow.start_measurement()
                     outcome, reason = 'RUNNING', 'RUNNING'
                     abort_time_s = None
                     v2_action_id = ''
@@ -1966,6 +2012,16 @@ try:
                 'limitation': ('sphere/AABB approximation; not a triangle-mesh '
                                'sweep')},
             'contact_sensor': contact_sensor_info,
+            'sensor_shadow': {
+                'enabled': sensor_shadow is not None,
+                'mode': 'SHADOW_ONLY_NOT_IN_CONTROL',
+                'control_source': 'ORACLE_STATE',
+                'config': (Path(args.sensor_shadow_config).as_posix()
+                           if sensor_shadow is not None else ''),
+                'config_sha256': sensor_config_sha,
+                'summary': (Path(args.sensor_shadow) / 'summary.json').as_posix()
+                if sensor_shadow is not None else '',
+            },
             'obstacle_time_clamp': bool(args.obstacle_time_clamp),
             'clock_plan': {
                 'camera_clock_id': camera_clock.clock_id,
@@ -2007,6 +2063,11 @@ try:
               + json.dumps(summary['outcomes']), flush=True)
         raise SystemExit(0 if summary['status'] == 'PASS' else 1)
     finally:
+        if sensor_shadow is not None:
+            try:
+                sensor_shadow.close()
+            except Exception:
+                pass
         env.close()
 except SystemExit:
     raise

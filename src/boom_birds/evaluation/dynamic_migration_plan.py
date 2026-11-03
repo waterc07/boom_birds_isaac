@@ -20,7 +20,7 @@ from boom_birds.evaluation.dynamic_eval_policy import (
 )
 
 _EXCLUDED = {'output', 'freeze', 'write_migration_freeze', 'working_tree',
-             'gpu_driver', 'code_commit', 'screenshots',
+             'gpu_driver', 'code_commit', 'screenshots', 'sensor_shadow',
              'geometry_policy_explicit', 'contact_mode_explicit',
              'geometry_policy_source', 'contact_mode_source'}
 
@@ -47,7 +47,8 @@ def _identity(args, root, *, canonical_text):
     source = {p.relative_to(root).as_posix(): _hash(p, canonical_text=canonical_text)
               for p in files}
     config = {}
-    for name in ('cases', 'map_config', 'vehicle_config', 'local_config'):
+    for name in ('cases', 'map_config', 'vehicle_config', 'local_config',
+                 'sensor_shadow_config'):
         if args.get(name) is not None:
             path = Path(args[name])
             path = path if path.is_absolute() else root / path
