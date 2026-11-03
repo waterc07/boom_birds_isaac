@@ -45,7 +45,11 @@ def record(sequence=1, capture=None, valid=True, reason=reasons.ACCEPT,
          'consume_sim_ns': capture + 2_000_000,
          'capture_host_ns': 1, 'ready_host_ns': 2, 'consume_host_ns': 3,
          'capture_clock_id': 'sim_physics', 'ready_clock_id': 'host_monotonic',
-         'consume_clock_id': 'host_monotonic', 'exposure_uncertainty_ns': 0},
+         'consume_clock_id': 'host_monotonic',
+         'capture_time_source': 'SIM_UPDATE_SAMPLE_TIME',
+         'exposure_time_status': 'UNKNOWN',
+         'capture_interval_ns': 250_000_000,
+         'capture_time_uncertainty_ns': 0},
         {'ref': 'images/x.png', 'sha256': digest, 'shape': [4, 4, 3],
          'dtype': 'uint8', 'size_bytes': 10},
         {'valid': valid, 'reason': reason})
@@ -89,6 +93,24 @@ def test_invalid_sensor_sample_is_not_accepted():
     assert verdict['reason'] == 'NO_RETURN'
 
 
+def test_v2_capture_time_semantics_do_not_claim_exposure():
+    rec = record()
+    stamps = dict(rec.timestamps)
+    v2 = obs.ObservationRecord(obs.RECORD_VERSION, rec.header, rec.context,
+                               rec.sensor, stamps, rec.payload, rec.validity)
+    assert v2.timestamps['exposure_time_status'] == 'UNKNOWN'
+    assert 'exposure_uncertainty_ns' not in v2.timestamps
+
+
+def test_v2_rejects_missing_capture_time_semantics():
+    rec = record()
+    stamps = dict(rec.timestamps)
+    stamps.pop('capture_interval_ns')
+    with pytest.raises(ValueError, match='timestamps'):
+        obs.ObservationRecord(obs.RECORD_VERSION, rec.header, rec.context,
+                              rec.sensor, stamps, rec.payload, rec.validity)
+
+
 def test_depth_source_is_supported_as_distance_modality():
     rec = record()
     sensor = dict(rec.sensor)
@@ -115,7 +137,10 @@ def test_payload_hash_and_shape_validation():
              'capture_clock_id': 'sim_physics',
              'ready_clock_id': 'host_monotonic',
              'consume_clock_id': 'host_monotonic',
-             'exposure_uncertainty_ns': 0},
+             'capture_time_source': 'SIM_UPDATE_SAMPLE_TIME',
+             'exposure_time_status': 'UNKNOWN',
+             'capture_interval_ns': 250_000_000,
+             'capture_time_uncertainty_ns': 0},
             {'ref': 'x', 'sha256': 'nothex', 'shape': [1, 1, 3],
              'dtype': 'uint8', 'size_bytes': 1},
             {'valid': True, 'reason': reasons.ACCEPT})

@@ -149,7 +149,7 @@ class ShadowSensorChain:
             receive_timestamp_ns=ready_sim_ns,
             publish_timestamp_ns=consume_sim_ns,
             source_id=int(source_id),
-            timestamp_uncertainty_ns=int(round(self.physics_dt_s * 1e9)),
+            timestamp_uncertainty_ns=0,
             quarantine=False, valid=True)
 
     # -- capture ----------------------------------------------------------
@@ -216,7 +216,12 @@ class ShadowSensorChain:
             'capture_clock_id': 'sim_physics',
             'ready_clock_id': 'host_monotonic',
             'consume_clock_id': 'host_monotonic',
-            'exposure_uncertainty_ns': int(round(self.physics_dt_s * 1e9)),
+            'capture_time_source': 'SIM_UPDATE_SAMPLE_TIME',
+            'exposure_time_status': 'UNKNOWN',
+            'capture_interval_ns': int(round(
+                self.dt_s * max(1, int(self.config['observation']
+                                      ['sample_period_steps'])) * 1e9)),
+            'capture_time_uncertainty_ns': 0,
         }
         header = self._header('front_rgb', 10, seq_rgb, capture_sim_ns,
                               capture_sim_ns, capture_sim_ns)

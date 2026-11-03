@@ -13,7 +13,8 @@ from boom_birds.contracts import reasons
 from boom_birds.contracts.context import (ContractContext, MessageHeader,
                                           validate_message, worst_case_age_ns)
 
-RECORD_VERSION = 'boom_birds.sensor_observation.v1'
+RECORD_VERSION = 'boom_birds.sensor_observation.v2'
+LEGACY_RECORD_VERSION = 'boom_birds.sensor_observation.v1'
 MODALITIES = frozenset({'RGB_IMAGE', 'SIM_RENDER_DEPTH', 'IDEAL_RAYCAST_RANGE'})
 SOURCES = frozenset({'SIM_RENDER_RGB', 'SIM_RENDER_DEPTH', 'IDEAL_RAYCAST_RANGE'})
 UNITS = frozenset({'px', 'm'})
@@ -56,18 +57,39 @@ class ObservationRecord:
             raise ValueError('unsupported sensor source')
         if self.sensor['units'] not in UNITS:
             raise ValueError('unsupported payload units')
-        _require(self.timestamps, ('capture_sim_ns', 'ready_sim_ns',
-                                   'consume_sim_ns', 'capture_host_ns',
-                                   'ready_host_ns', 'consume_host_ns',
-                                   'capture_clock_id', 'ready_clock_id',
-                                   'consume_clock_id',
-                                   'exposure_uncertainty_ns'), 'timestamps')
-        for key in ('capture_sim_ns', 'ready_sim_ns', 'consume_sim_ns',
-                    'capture_host_ns', 'ready_host_ns', 'consume_host_ns',
-                    'exposure_uncertainty_ns'):
-            value = self.timestamps[key]
-            if not isinstance(value, int) or isinstance(value, bool) or value < 0:
-                raise ValueError('timestamp must be a nonnegative int')
+        if self.record_version == LEGACY_RECORD_VERSION:
+            _require(self.timestamps, ('capture_sim_ns', 'ready_sim_ns',
+                                       'consume_sim_ns', 'capture_host_ns',
+                                       'ready_host_ns', 'consume_host_ns',
+                                       'capture_clock_id', 'ready_clock_id',
+                                       'consume_clock_id',
+                                       'exposure_uncertainty_ns'), 'timestamps')
+            for key in ('capture_sim_ns', 'ready_sim_ns', 'consume_sim_ns',
+                        'capture_host_ns', 'ready_host_ns', 'consume_host_ns',
+                        'exposure_uncertainty_ns'):
+                value = self.timestamps[key]
+                if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                    raise ValueError('timestamp must be a nonnegative int')
+        elif self.record_version == RECORD_VERSION:
+            _require(self.timestamps, ('capture_sim_ns', 'ready_sim_ns',
+                                       'consume_sim_ns', 'capture_host_ns',
+                                       'ready_host_ns', 'consume_host_ns',
+                                       'capture_clock_id', 'ready_clock_id',
+                                       'consume_clock_id', 'capture_time_source',
+                                       'exposure_time_status', 'capture_interval_ns',
+                                       'capture_time_uncertainty_ns'), 'timestamps')
+            for key in ('capture_sim_ns', 'ready_sim_ns', 'consume_sim_ns',
+                        'capture_host_ns', 'ready_host_ns', 'consume_host_ns',
+                        'capture_interval_ns', 'capture_time_uncertainty_ns'):
+                value = self.timestamps[key]
+                if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                    raise ValueError('timestamp must be a nonnegative int')
+            if self.timestamps['capture_time_source'] != 'SIM_UPDATE_SAMPLE_TIME':
+                raise ValueError('unsupported capture time source')
+            if self.timestamps['exposure_time_status'] != 'UNKNOWN':
+                raise ValueError('exposure time is not supported by the renderer')
+        else:
+            raise ValueError('unsupported observation record version')
         for key in ('capture_clock_id', 'ready_clock_id', 'consume_clock_id'):
             if not isinstance(self.timestamps[key], str) or not self.timestamps[key]:
                 raise ValueError('clock id must be a nonempty string')
