@@ -1,0 +1,67 @@
+{
+  "schema_version": "dsh.sensor_shadow_expected.v1",
+  "status": "EXPECTED_NOT_CONCLUSION",
+  "source_commit": "a623b4baaab54ea1a88066483b4b528210d65bde",
+  "mode": "SHADOW_ONLY_NOT_IN_CONTROL",
+  "message_schema": "boom_birds.message.v2.0",
+  "record_version": "boom_birds.sensor_observation.v1",
+  "design_channels": {
+    "front_rgb": {
+      "design": "OV9782 front color PROVISIONAL",
+      "simulation": "Isaac Lab pinhole Camera SIM_RENDER_RGB",
+      "not_hardware": true
+    },
+    "front_depth": {
+      "design": "front near-field range PROVISIONAL",
+      "simulation": "rendered center-pixel depth SIM_RENDER_DEPTH; not ToF/stereo",
+      "not_hardware": true
+    }
+  },
+  "cases": [
+    {
+      "case_id": "sensor_static_0",
+      "role": "static"
+    },
+    {
+      "case_id": "sensor_static_1",
+      "role": "static"
+    },
+    {
+      "case_id": "sensor_route_0",
+      "role": "route"
+    },
+    {
+      "case_id": "sensor_route_1",
+      "role": "route"
+    },
+    {
+      "case_id": "sensor_reset_0",
+      "role": "reset"
+    },
+    {
+      "case_id": "sensor_reset_1",
+      "role": "reset"
+    }
+  ],
+  "expected": {
+    "episodes": 6,
+    "generations": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "camera_accepted_per_episode_min": 1,
+    "depth_accepted_per_episode_min": 1,
+    "static_depth_reference_m": {
+      "sensor_static_0": 1.68,
+      "sensor_static_1": 2.68
+    },
+    "reset_isolation": "episode generation must increase and old generation samples must not be accepted",
+    "shadow_not_control": true,
+    "zero_depth_remains_invalid": true
+  },
+  "fallback": "if a sensor episode has no accepted camera/depth, preserve failure and diagnose camera/render/reset; do not lower validity or zero-fill"
+}

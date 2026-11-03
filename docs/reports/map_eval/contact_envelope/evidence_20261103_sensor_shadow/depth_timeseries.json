@@ -1,0 +1,8642 @@
+[
+  {
+    "episode_generation": 1,
+    "phase": "WARMUP",
+    "sequence": 0,
+    "capture_sim_ns": 69999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 1,
+    "phase": "WARMUP",
+    "sequence": 1,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 1,
+    "phase": "WARMUP",
+    "sequence": 2,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 1,
+    "phase": "RUN",
+    "sequence": 3,
+    "capture_sim_ns": 339999992,
+    "depth_m": 1.6800000667572021,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 1,
+    "phase": "RUN",
+    "sequence": 4,
+    "capture_sim_ns": 589999987,
+    "depth_m": 1.6800000667572021,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 1,
+    "phase": "RUN",
+    "sequence": 5,
+    "capture_sim_ns": 839999981,
+    "depth_m": 1.6800000667572021,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 2,
+    "phase": "WARMUP",
+    "sequence": 0,
+    "capture_sim_ns": 69999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 2,
+    "phase": "WARMUP",
+    "sequence": 1,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 2,
+    "phase": "WARMUP",
+    "sequence": 2,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 2,
+    "phase": "RUN",
+    "sequence": 3,
+    "capture_sim_ns": 339999992,
+    "depth_m": 2.680000066757202,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 2,
+    "phase": "RUN",
+    "sequence": 4,
+    "capture_sim_ns": 589999987,
+    "depth_m": 2.680000066757202,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 2,
+    "phase": "RUN",
+    "sequence": 5,
+    "capture_sim_ns": 839999981,
+    "depth_m": 2.680000066757202,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "WARMUP",
+    "sequence": 0,
+    "capture_sim_ns": 69999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "WARMUP",
+    "sequence": 1,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "WARMUP",
+    "sequence": 2,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 3,
+    "capture_sim_ns": 339999992,
+    "depth_m": 9.771058082580566,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 4,
+    "capture_sim_ns": 589999987,
+    "depth_m": 9.755779266357422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 5,
+    "capture_sim_ns": 839999981,
+    "depth_m": 9.670212745666504,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 6,
+    "capture_sim_ns": 1089999976,
+    "depth_m": 9.54550552368164,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 7,
+    "capture_sim_ns": 1339999970,
+    "depth_m": 9.433526992797852,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 8,
+    "capture_sim_ns": 1589999964,
+    "depth_m": 21.36819839477539,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 9,
+    "capture_sim_ns": 1839999959,
+    "depth_m": 21.426883697509766,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 10,
+    "capture_sim_ns": 2089999953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 11,
+    "capture_sim_ns": 2339999948,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 12,
+    "capture_sim_ns": 2589999942,
+    "depth_m": 9.169320106506348,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 13,
+    "capture_sim_ns": 2839999937,
+    "depth_m": 9.181171417236328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 14,
+    "capture_sim_ns": 3089999931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 15,
+    "capture_sim_ns": 3339999925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 16,
+    "capture_sim_ns": 3589999920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 17,
+    "capture_sim_ns": 3839999914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 18,
+    "capture_sim_ns": 4089999909,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 19,
+    "capture_sim_ns": 4339999903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 20,
+    "capture_sim_ns": 4589999897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 21,
+    "capture_sim_ns": 4839999892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 22,
+    "capture_sim_ns": 5089999886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 23,
+    "capture_sim_ns": 5339999881,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 24,
+    "capture_sim_ns": 5589999875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 25,
+    "capture_sim_ns": 5839999869,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 26,
+    "capture_sim_ns": 6089999864,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 27,
+    "capture_sim_ns": 6339999858,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 28,
+    "capture_sim_ns": 6589999853,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 29,
+    "capture_sim_ns": 6839999847,
+    "depth_m": 23.370981216430664,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 30,
+    "capture_sim_ns": 7089999842,
+    "depth_m": 23.328659057617188,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 31,
+    "capture_sim_ns": 7339999836,
+    "depth_m": 7.694036960601807,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 32,
+    "capture_sim_ns": 7589999830,
+    "depth_m": 6.644601821899414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 33,
+    "capture_sim_ns": 7839999825,
+    "depth_m": 6.640962600708008,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 34,
+    "capture_sim_ns": 8089999819,
+    "depth_m": 6.636758804321289,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 35,
+    "capture_sim_ns": 8339999814,
+    "depth_m": 6.585334300994873,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 36,
+    "capture_sim_ns": 8589999808,
+    "depth_m": 6.537988662719727,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 37,
+    "capture_sim_ns": 8839999802,
+    "depth_m": 20.59815216064453,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 38,
+    "capture_sim_ns": 9089999797,
+    "depth_m": 21.062362670898438,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 39,
+    "capture_sim_ns": 9339999791,
+    "depth_m": 23.214862823486328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 40,
+    "capture_sim_ns": 9589999786,
+    "depth_m": 23.077550888061523,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 41,
+    "capture_sim_ns": 9839999780,
+    "depth_m": 22.92871856689453,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 42,
+    "capture_sim_ns": 10089999774,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 43,
+    "capture_sim_ns": 10339999769,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 44,
+    "capture_sim_ns": 10589999763,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 45,
+    "capture_sim_ns": 10839999758,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 46,
+    "capture_sim_ns": 11089999752,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 47,
+    "capture_sim_ns": 11339999747,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 48,
+    "capture_sim_ns": 11589999741,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 49,
+    "capture_sim_ns": 11839999735,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 50,
+    "capture_sim_ns": 12089999730,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 51,
+    "capture_sim_ns": 12339999724,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 52,
+    "capture_sim_ns": 12589999719,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 53,
+    "capture_sim_ns": 12839999713,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 54,
+    "capture_sim_ns": 13089999707,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 55,
+    "capture_sim_ns": 13339999702,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 56,
+    "capture_sim_ns": 13589999696,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 57,
+    "capture_sim_ns": 13839999691,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 58,
+    "capture_sim_ns": 14089999685,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 59,
+    "capture_sim_ns": 14339999679,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 60,
+    "capture_sim_ns": 14589999674,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 61,
+    "capture_sim_ns": 14839999668,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 62,
+    "capture_sim_ns": 15089999663,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 63,
+    "capture_sim_ns": 15339999657,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 64,
+    "capture_sim_ns": 15589999652,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 65,
+    "capture_sim_ns": 15839999646,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 66,
+    "capture_sim_ns": 16089999640,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 67,
+    "capture_sim_ns": 16339999635,
+    "depth_m": 13.394612312316895,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 68,
+    "capture_sim_ns": 16589999629,
+    "depth_m": 11.009727478027344,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 69,
+    "capture_sim_ns": 16839999624,
+    "depth_m": 16.6923828125,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 70,
+    "capture_sim_ns": 17089999618,
+    "depth_m": 17.982881546020508,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 71,
+    "capture_sim_ns": 17339999612,
+    "depth_m": 17.859956741333008,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 72,
+    "capture_sim_ns": 17589999607,
+    "depth_m": 17.717966079711914,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 73,
+    "capture_sim_ns": 17839999601,
+    "depth_m": 17.572092056274414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 74,
+    "capture_sim_ns": 18089999596,
+    "depth_m": 17.429967880249023,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 75,
+    "capture_sim_ns": 18339999590,
+    "depth_m": 17.271865844726562,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 76,
+    "capture_sim_ns": 18589999584,
+    "depth_m": 17.125070571899414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 77,
+    "capture_sim_ns": 18839999579,
+    "depth_m": 16.96612548828125,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 78,
+    "capture_sim_ns": 19089999573,
+    "depth_m": 16.819366455078125,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 79,
+    "capture_sim_ns": 19339999568,
+    "depth_m": 16.66043472290039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 80,
+    "capture_sim_ns": 19589999562,
+    "depth_m": 16.513835906982422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 81,
+    "capture_sim_ns": 19839999557,
+    "depth_m": 16.355154037475586,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 82,
+    "capture_sim_ns": 20089999551,
+    "depth_m": 16.208789825439453,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 83,
+    "capture_sim_ns": 20339999545,
+    "depth_m": 16.050350189208984,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 84,
+    "capture_sim_ns": 20589999540,
+    "depth_m": 15.904206275939941,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 85,
+    "capture_sim_ns": 20839999534,
+    "depth_m": 15.745978355407715,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 86,
+    "capture_sim_ns": 21089999529,
+    "depth_m": 15.600021362304688,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 87,
+    "capture_sim_ns": 21339999523,
+    "depth_m": 15.441984176635742,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 88,
+    "capture_sim_ns": 21589999517,
+    "depth_m": 15.296180725097656,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 89,
+    "capture_sim_ns": 21839999512,
+    "depth_m": 15.138298988342285,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 90,
+    "capture_sim_ns": 22089999506,
+    "depth_m": 14.992622375488281,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 91,
+    "capture_sim_ns": 22339999501,
+    "depth_m": 14.834905624389648,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 92,
+    "capture_sim_ns": 22589999495,
+    "depth_m": 14.689374923706055,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 93,
+    "capture_sim_ns": 22839999489,
+    "depth_m": 14.531763076782227,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 94,
+    "capture_sim_ns": 23089999484,
+    "depth_m": 14.386322975158691,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 95,
+    "capture_sim_ns": 23339999478,
+    "depth_m": 14.228830337524414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 96,
+    "capture_sim_ns": 23589999473,
+    "depth_m": 14.083479881286621,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 97,
+    "capture_sim_ns": 23839999467,
+    "depth_m": 13.926050186157227,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 98,
+    "capture_sim_ns": 24089999462,
+    "depth_m": 13.780780792236328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 99,
+    "capture_sim_ns": 24339999456,
+    "depth_m": 13.623446464538574,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 100,
+    "capture_sim_ns": 24589999450,
+    "depth_m": 13.478248596191406,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 101,
+    "capture_sim_ns": 24839999445,
+    "depth_m": 13.32097053527832,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 102,
+    "capture_sim_ns": 25089999439,
+    "depth_m": 13.175829887390137,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 103,
+    "capture_sim_ns": 25339999434,
+    "depth_m": 13.018609046936035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 104,
+    "capture_sim_ns": 25589999428,
+    "depth_m": 12.873506546020508,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 105,
+    "capture_sim_ns": 25839999422,
+    "depth_m": 12.716334342956543,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 106,
+    "capture_sim_ns": 26089999417,
+    "depth_m": 12.571285247802734,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 107,
+    "capture_sim_ns": 26339999411,
+    "depth_m": 12.41415786743164,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 108,
+    "capture_sim_ns": 26589999406,
+    "depth_m": 12.269136428833008,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 109,
+    "capture_sim_ns": 26839999400,
+    "depth_m": 12.112039566040039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 110,
+    "capture_sim_ns": 27089999394,
+    "depth_m": 11.96705150604248,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 111,
+    "capture_sim_ns": 27339999389,
+    "depth_m": 11.809999465942383,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 112,
+    "capture_sim_ns": 27589999383,
+    "depth_m": 11.66502571105957,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 113,
+    "capture_sim_ns": 27839999378,
+    "depth_m": 11.508005142211914,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 114,
+    "capture_sim_ns": 28089999372,
+    "depth_m": 11.363051414489746,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 115,
+    "capture_sim_ns": 28339999367,
+    "depth_m": 11.206052780151367,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 116,
+    "capture_sim_ns": 28589999361,
+    "depth_m": 11.061131477355957,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 117,
+    "capture_sim_ns": 28839999355,
+    "depth_m": 10.904135704040527,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 118,
+    "capture_sim_ns": 29089999350,
+    "depth_m": 10.759234428405762,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 119,
+    "capture_sim_ns": 29339999344,
+    "depth_m": 10.60226821899414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 120,
+    "capture_sim_ns": 29589999339,
+    "depth_m": 10.457372665405273,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 121,
+    "capture_sim_ns": 29839999333,
+    "depth_m": 10.300407409667969,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 122,
+    "capture_sim_ns": 30089999327,
+    "depth_m": 10.155531883239746,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 123,
+    "capture_sim_ns": 30339999322,
+    "depth_m": 9.999700546264648,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 124,
+    "capture_sim_ns": 30589999316,
+    "depth_m": 9.85482406616211,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 125,
+    "capture_sim_ns": 30839999311,
+    "depth_m": 9.697892189025879,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 126,
+    "capture_sim_ns": 31089999305,
+    "depth_m": 9.553030967712402,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 127,
+    "capture_sim_ns": 31339999299,
+    "depth_m": 9.396098136901855,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 128,
+    "capture_sim_ns": 31589999294,
+    "depth_m": 9.251243591308594,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 129,
+    "capture_sim_ns": 31839999288,
+    "depth_m": 9.094322204589844,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 130,
+    "capture_sim_ns": 32089999283,
+    "depth_m": 8.94947338104248,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 131,
+    "capture_sim_ns": 32339999277,
+    "depth_m": 8.792553901672363,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 132,
+    "capture_sim_ns": 32589999272,
+    "depth_m": 8.647706985473633,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 133,
+    "capture_sim_ns": 32839999266,
+    "depth_m": 8.490784645080566,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 134,
+    "capture_sim_ns": 33089999260,
+    "depth_m": 8.349085807800293,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 135,
+    "capture_sim_ns": 33339999255,
+    "depth_m": 8.19749927520752,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 136,
+    "capture_sim_ns": 33589999249,
+    "depth_m": 8.057586669921875,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 137,
+    "capture_sim_ns": 33839999244,
+    "depth_m": 7.906060695648193,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 138,
+    "capture_sim_ns": 34089999238,
+    "depth_m": 7.766196250915527,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 139,
+    "capture_sim_ns": 34339999232,
+    "depth_m": 7.614687919616699,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 140,
+    "capture_sim_ns": 34589999227,
+    "depth_m": 7.474843502044678,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 141,
+    "capture_sim_ns": 34839999221,
+    "depth_m": 7.323360919952393,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 142,
+    "capture_sim_ns": 35089999216,
+    "depth_m": 7.183566570281982,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 143,
+    "capture_sim_ns": 35339999210,
+    "depth_m": 7.032138824462891,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 144,
+    "capture_sim_ns": 35589999205,
+    "depth_m": 6.89256477355957,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 145,
+    "capture_sim_ns": 35839999199,
+    "depth_m": 6.771119594573975,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 146,
+    "capture_sim_ns": 36089999193,
+    "depth_m": 6.681499004364014,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 147,
+    "capture_sim_ns": 36339999188,
+    "depth_m": 6.638850688934326,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 148,
+    "capture_sim_ns": 36589999182,
+    "depth_m": 6.562969207763672,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 149,
+    "capture_sim_ns": 36839999177,
+    "depth_m": 6.415743350982666,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 150,
+    "capture_sim_ns": 37089999171,
+    "depth_m": 6.306726932525635,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 151,
+    "capture_sim_ns": 37339999165,
+    "depth_m": 6.188202381134033,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 152,
+    "capture_sim_ns": 37589999160,
+    "depth_m": 6.161523342132568,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 153,
+    "capture_sim_ns": 37839999154,
+    "depth_m": 5.8043999671936035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 154,
+    "capture_sim_ns": 38089999149,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 155,
+    "capture_sim_ns": 38339999143,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 156,
+    "capture_sim_ns": 38589999137,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 157,
+    "capture_sim_ns": 38839999132,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 158,
+    "capture_sim_ns": 39089999126,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 159,
+    "capture_sim_ns": 39339999121,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 160,
+    "capture_sim_ns": 39589999115,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 161,
+    "capture_sim_ns": 39839999110,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 162,
+    "capture_sim_ns": 40089999104,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 163,
+    "capture_sim_ns": 40339999098,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 164,
+    "capture_sim_ns": 40589999093,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 165,
+    "capture_sim_ns": 40839999087,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 166,
+    "capture_sim_ns": 41089999082,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 167,
+    "capture_sim_ns": 41339999076,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 168,
+    "capture_sim_ns": 41589999070,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 169,
+    "capture_sim_ns": 41839999065,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 170,
+    "capture_sim_ns": 42089999059,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 171,
+    "capture_sim_ns": 42339999054,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 172,
+    "capture_sim_ns": 42589999048,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 173,
+    "capture_sim_ns": 42839999042,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 174,
+    "capture_sim_ns": 43089999037,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 175,
+    "capture_sim_ns": 43339999031,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 176,
+    "capture_sim_ns": 43589999026,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 177,
+    "capture_sim_ns": 43839999020,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 178,
+    "capture_sim_ns": 44089999015,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 179,
+    "capture_sim_ns": 44339999009,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 180,
+    "capture_sim_ns": 44589999003,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 181,
+    "capture_sim_ns": 44839998998,
+    "depth_m": 4.2249040603637695,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 182,
+    "capture_sim_ns": 45089998992,
+    "depth_m": 4.11467170715332,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 183,
+    "capture_sim_ns": 45339998987,
+    "depth_m": 1.8764559030532837,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 184,
+    "capture_sim_ns": 45589998981,
+    "depth_m": 1.9980041980743408,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 185,
+    "capture_sim_ns": 45839998975,
+    "depth_m": 2.1389644145965576,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 186,
+    "capture_sim_ns": 46089998970,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 187,
+    "capture_sim_ns": 46339998964,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 188,
+    "capture_sim_ns": 46589998959,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 189,
+    "capture_sim_ns": 46839998953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 190,
+    "capture_sim_ns": 47089998947,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 191,
+    "capture_sim_ns": 47339998942,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 192,
+    "capture_sim_ns": 47589998936,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 193,
+    "capture_sim_ns": 47839998931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 194,
+    "capture_sim_ns": 48089998925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 195,
+    "capture_sim_ns": 48339998920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 196,
+    "capture_sim_ns": 48589998914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 197,
+    "capture_sim_ns": 48839998908,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 198,
+    "capture_sim_ns": 49089998903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 199,
+    "capture_sim_ns": 49339998897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 200,
+    "capture_sim_ns": 49589998892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 201,
+    "capture_sim_ns": 49839998886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 202,
+    "capture_sim_ns": 50089998880,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 203,
+    "capture_sim_ns": 50339998875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 204,
+    "capture_sim_ns": 50589998869,
+    "depth_m": 1.7579760551452637,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 205,
+    "capture_sim_ns": 50839998864,
+    "depth_m": 1.629974603652954,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 206,
+    "capture_sim_ns": 51089998858,
+    "depth_m": 1.619642972946167,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 207,
+    "capture_sim_ns": 51339998852,
+    "depth_m": 1.6044385433197021,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 208,
+    "capture_sim_ns": 51589998847,
+    "depth_m": 1.5873444080352783,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 209,
+    "capture_sim_ns": 51839998841,
+    "depth_m": 1.6365981101989746,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 210,
+    "capture_sim_ns": 52089998836,
+    "depth_m": 1.8028466701507568,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 211,
+    "capture_sim_ns": 52339998830,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 3,
+    "phase": "RUN",
+    "sequence": 212,
+    "capture_sim_ns": 52589998825,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "WARMUP",
+    "sequence": 0,
+    "capture_sim_ns": 69999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "WARMUP",
+    "sequence": 1,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "WARMUP",
+    "sequence": 2,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 3,
+    "capture_sim_ns": 339999992,
+    "depth_m": 9.771035194396973,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 4,
+    "capture_sim_ns": 589999987,
+    "depth_m": 9.753854751586914,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 5,
+    "capture_sim_ns": 839999981,
+    "depth_m": 9.674644470214844,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 6,
+    "capture_sim_ns": 1089999976,
+    "depth_m": 9.540090560913086,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 7,
+    "capture_sim_ns": 1339999970,
+    "depth_m": 9.432233810424805,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 8,
+    "capture_sim_ns": 1589999964,
+    "depth_m": 21.36882781982422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 9,
+    "capture_sim_ns": 1839999959,
+    "depth_m": 21.41710662841797,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 10,
+    "capture_sim_ns": 2089999953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 11,
+    "capture_sim_ns": 2339999948,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 12,
+    "capture_sim_ns": 2589999942,
+    "depth_m": 9.162480354309082,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 13,
+    "capture_sim_ns": 2839999937,
+    "depth_m": 9.174907684326172,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 14,
+    "capture_sim_ns": 3089999931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 15,
+    "capture_sim_ns": 3339999925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 16,
+    "capture_sim_ns": 3589999920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 17,
+    "capture_sim_ns": 3839999914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 18,
+    "capture_sim_ns": 4089999909,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 19,
+    "capture_sim_ns": 4339999903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 20,
+    "capture_sim_ns": 4589999897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 21,
+    "capture_sim_ns": 4839999892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 22,
+    "capture_sim_ns": 5089999886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 23,
+    "capture_sim_ns": 5339999881,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 24,
+    "capture_sim_ns": 5589999875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 25,
+    "capture_sim_ns": 5839999869,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 26,
+    "capture_sim_ns": 6089999864,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 27,
+    "capture_sim_ns": 6339999858,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 28,
+    "capture_sim_ns": 6589999853,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 29,
+    "capture_sim_ns": 6839999847,
+    "depth_m": 23.373615264892578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 30,
+    "capture_sim_ns": 7089999842,
+    "depth_m": 23.334510803222656,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 31,
+    "capture_sim_ns": 7339999836,
+    "depth_m": 23.469562530517578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 32,
+    "capture_sim_ns": 7589999830,
+    "depth_m": 6.644444942474365,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 33,
+    "capture_sim_ns": 7839999825,
+    "depth_m": 6.641077041625977,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 34,
+    "capture_sim_ns": 8089999819,
+    "depth_m": 6.635846138000488,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 35,
+    "capture_sim_ns": 8339999814,
+    "depth_m": 6.586607933044434,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 36,
+    "capture_sim_ns": 8589999808,
+    "depth_m": 6.535453796386719,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 37,
+    "capture_sim_ns": 8839999802,
+    "depth_m": 20.603891372680664,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 38,
+    "capture_sim_ns": 9089999797,
+    "depth_m": 21.05671501159668,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 39,
+    "capture_sim_ns": 9339999791,
+    "depth_m": 23.22057342529297,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 40,
+    "capture_sim_ns": 9589999786,
+    "depth_m": 23.071821212768555,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 41,
+    "capture_sim_ns": 9839999780,
+    "depth_m": 22.934432983398438,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 42,
+    "capture_sim_ns": 10089999774,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 43,
+    "capture_sim_ns": 10339999769,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 44,
+    "capture_sim_ns": 10589999763,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 45,
+    "capture_sim_ns": 10839999758,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 46,
+    "capture_sim_ns": 11089999752,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 47,
+    "capture_sim_ns": 11339999747,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 48,
+    "capture_sim_ns": 11589999741,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 49,
+    "capture_sim_ns": 11839999735,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 50,
+    "capture_sim_ns": 12089999730,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 51,
+    "capture_sim_ns": 12339999724,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 52,
+    "capture_sim_ns": 12589999719,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 53,
+    "capture_sim_ns": 12839999713,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 54,
+    "capture_sim_ns": 13089999707,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 55,
+    "capture_sim_ns": 13339999702,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 56,
+    "capture_sim_ns": 13589999696,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 57,
+    "capture_sim_ns": 13839999691,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 58,
+    "capture_sim_ns": 14089999685,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 59,
+    "capture_sim_ns": 14339999679,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 60,
+    "capture_sim_ns": 14589999674,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 61,
+    "capture_sim_ns": 14839999668,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 62,
+    "capture_sim_ns": 15089999663,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 63,
+    "capture_sim_ns": 15339999657,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 64,
+    "capture_sim_ns": 15589999652,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 65,
+    "capture_sim_ns": 15839999646,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 66,
+    "capture_sim_ns": 16089999640,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 67,
+    "capture_sim_ns": 16339999635,
+    "depth_m": 14.119357109069824,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 68,
+    "capture_sim_ns": 16589999629,
+    "depth_m": 11.16714859008789,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 69,
+    "capture_sim_ns": 16839999624,
+    "depth_m": 16.69834327697754,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 70,
+    "capture_sim_ns": 17089999618,
+    "depth_m": 17.979074478149414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 71,
+    "capture_sim_ns": 17339999612,
+    "depth_m": 17.865415573120117,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 72,
+    "capture_sim_ns": 17589999607,
+    "depth_m": 17.711994171142578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 73,
+    "capture_sim_ns": 17839999601,
+    "depth_m": 17.577898025512695,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 74,
+    "capture_sim_ns": 18089999596,
+    "depth_m": 17.423965454101562,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 75,
+    "capture_sim_ns": 18339999590,
+    "depth_m": 17.27867889404297,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 76,
+    "capture_sim_ns": 18589999584,
+    "depth_m": 17.11896324157715,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 77,
+    "capture_sim_ns": 18839999579,
+    "depth_m": 16.972240447998047,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 78,
+    "capture_sim_ns": 19089999573,
+    "depth_m": 16.813251495361328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 79,
+    "capture_sim_ns": 19339999568,
+    "depth_m": 16.666542053222656,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 80,
+    "capture_sim_ns": 19589999562,
+    "depth_m": 16.507732391357422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 81,
+    "capture_sim_ns": 19839999557,
+    "depth_m": 16.361251831054688,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 82,
+    "capture_sim_ns": 20089999551,
+    "depth_m": 1.589707851409912,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 83,
+    "capture_sim_ns": 20339999545,
+    "depth_m": 1.4424874782562256,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 84,
+    "capture_sim_ns": 20589999540,
+    "depth_m": 1.2832432985305786,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 85,
+    "capture_sim_ns": 20839999534,
+    "depth_m": 1.1364600658416748,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 86,
+    "capture_sim_ns": 21089999529,
+    "depth_m": 15.593941688537598,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 87,
+    "capture_sim_ns": 21339999523,
+    "depth_m": 15.448060989379883,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 88,
+    "capture_sim_ns": 21589999517,
+    "depth_m": 15.290107727050781,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 89,
+    "capture_sim_ns": 21839999512,
+    "depth_m": 15.144367218017578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 90,
+    "capture_sim_ns": 22089999506,
+    "depth_m": 14.986557960510254,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 91,
+    "capture_sim_ns": 22339999501,
+    "depth_m": 14.84096908569336,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 92,
+    "capture_sim_ns": 22589999495,
+    "depth_m": 14.683313369750977,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 93,
+    "capture_sim_ns": 22839999489,
+    "depth_m": 14.537820816040039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 94,
+    "capture_sim_ns": 23089999484,
+    "depth_m": 14.380266189575195,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 95,
+    "capture_sim_ns": 23339999478,
+    "depth_m": 14.23488712310791,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 96,
+    "capture_sim_ns": 23589999473,
+    "depth_m": 14.077422142028809,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 97,
+    "capture_sim_ns": 23839999467,
+    "depth_m": 13.932106971740723,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 98,
+    "capture_sim_ns": 24089999462,
+    "depth_m": 13.774730682373047,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 99,
+    "capture_sim_ns": 24339999456,
+    "depth_m": 13.629496574401855,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 100,
+    "capture_sim_ns": 24589999450,
+    "depth_m": 13.472201347351074,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 101,
+    "capture_sim_ns": 24839999445,
+    "depth_m": 13.327020645141602,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 102,
+    "capture_sim_ns": 25089999439,
+    "depth_m": 13.169783592224121,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 103,
+    "capture_sim_ns": 25339999434,
+    "depth_m": 13.024654388427734,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 104,
+    "capture_sim_ns": 25589999428,
+    "depth_m": 12.867461204528809,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 105,
+    "capture_sim_ns": 25839999422,
+    "depth_m": 12.722381591796875,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 106,
+    "capture_sim_ns": 26089999417,
+    "depth_m": 12.565239906311035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 107,
+    "capture_sim_ns": 26339999411,
+    "depth_m": 12.42020034790039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 108,
+    "capture_sim_ns": 26589999406,
+    "depth_m": 12.263092994689941,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 109,
+    "capture_sim_ns": 26839999400,
+    "depth_m": 12.118080139160156,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 110,
+    "capture_sim_ns": 27089999394,
+    "depth_m": 11.961010932922363,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 111,
+    "capture_sim_ns": 27339999389,
+    "depth_m": 11.81604290008545,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 112,
+    "capture_sim_ns": 27589999383,
+    "depth_m": 11.65898609161377,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 113,
+    "capture_sim_ns": 27839999378,
+    "depth_m": 11.514043807983398,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 114,
+    "capture_sim_ns": 28089999372,
+    "depth_m": 11.357011795043945,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 115,
+    "capture_sim_ns": 28339999367,
+    "depth_m": 11.212091445922852,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 116,
+    "capture_sim_ns": 28589999361,
+    "depth_m": 11.055093765258789,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 117,
+    "capture_sim_ns": 28839999355,
+    "depth_m": 10.910176277160645,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 118,
+    "capture_sim_ns": 29089999350,
+    "depth_m": 10.753196716308594,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 119,
+    "capture_sim_ns": 29339999344,
+    "depth_m": 10.608304977416992,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 120,
+    "capture_sim_ns": 29589999339,
+    "depth_m": 10.451335906982422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 121,
+    "capture_sim_ns": 29839999333,
+    "depth_m": 10.30644416809082,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 122,
+    "capture_sim_ns": 30089999327,
+    "depth_m": 10.149495124816895,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 123,
+    "capture_sim_ns": 30339999322,
+    "depth_m": 10.005736351013184,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 124,
+    "capture_sim_ns": 30589999316,
+    "depth_m": 9.84878921508789,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 125,
+    "capture_sim_ns": 30839999311,
+    "depth_m": 9.70392894744873,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 126,
+    "capture_sim_ns": 31089999305,
+    "depth_m": 9.54699420928955,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 127,
+    "capture_sim_ns": 31339999299,
+    "depth_m": 9.40213680267334,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 128,
+    "capture_sim_ns": 31589999294,
+    "depth_m": 9.245209693908691,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 129,
+    "capture_sim_ns": 31839999288,
+    "depth_m": 9.100358963012695,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 130,
+    "capture_sim_ns": 32089999283,
+    "depth_m": 8.943436622619629,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 131,
+    "capture_sim_ns": 32339999277,
+    "depth_m": 8.798589706420898,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 132,
+    "capture_sim_ns": 32589999272,
+    "depth_m": 8.641672134399414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 133,
+    "capture_sim_ns": 32839999266,
+    "depth_m": 8.496819496154785,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 134,
+    "capture_sim_ns": 33089999260,
+    "depth_m": 8.343255996704102,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 135,
+    "capture_sim_ns": 33339999255,
+    "depth_m": 8.203328132629395,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 136,
+    "capture_sim_ns": 33589999249,
+    "depth_m": 8.051756858825684,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 137,
+    "capture_sim_ns": 33839999244,
+    "depth_m": 7.9118876457214355,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 138,
+    "capture_sim_ns": 34089999238,
+    "depth_m": 7.760369777679443,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 139,
+    "capture_sim_ns": 34339999232,
+    "depth_m": 7.620513916015625,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 140,
+    "capture_sim_ns": 34589999227,
+    "depth_m": 7.46901798248291,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 141,
+    "capture_sim_ns": 34839999221,
+    "depth_m": 7.329187393188477,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 142,
+    "capture_sim_ns": 35089999216,
+    "depth_m": 7.177741527557373,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 143,
+    "capture_sim_ns": 35339999210,
+    "depth_m": 7.037964820861816,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 144,
+    "capture_sim_ns": 35589999205,
+    "depth_m": 6.886841297149658,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 145,
+    "capture_sim_ns": 35839999199,
+    "depth_m": 6.775020599365234,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 146,
+    "capture_sim_ns": 36089999193,
+    "depth_m": 6.677791595458984,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 147,
+    "capture_sim_ns": 36339999188,
+    "depth_m": 6.639191150665283,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 148,
+    "capture_sim_ns": 36589999182,
+    "depth_m": 6.558638572692871,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 149,
+    "capture_sim_ns": 36839999177,
+    "depth_m": 6.423930644989014,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 150,
+    "capture_sim_ns": 37089999171,
+    "depth_m": 6.301927089691162,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 151,
+    "capture_sim_ns": 37339999165,
+    "depth_m": 6.188653945922852,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 152,
+    "capture_sim_ns": 37589999160,
+    "depth_m": 6.159774303436279,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 153,
+    "capture_sim_ns": 37839999154,
+    "depth_m": 5.658483505249023,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 154,
+    "capture_sim_ns": 38089999149,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 155,
+    "capture_sim_ns": 38339999143,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 156,
+    "capture_sim_ns": 38589999137,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 157,
+    "capture_sim_ns": 38839999132,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 158,
+    "capture_sim_ns": 39089999126,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 159,
+    "capture_sim_ns": 39339999121,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 160,
+    "capture_sim_ns": 39589999115,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 161,
+    "capture_sim_ns": 39839999110,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 162,
+    "capture_sim_ns": 40089999104,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 163,
+    "capture_sim_ns": 40339999098,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 164,
+    "capture_sim_ns": 40589999093,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 165,
+    "capture_sim_ns": 40839999087,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 166,
+    "capture_sim_ns": 41089999082,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 167,
+    "capture_sim_ns": 41339999076,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 168,
+    "capture_sim_ns": 41589999070,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 169,
+    "capture_sim_ns": 41839999065,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 170,
+    "capture_sim_ns": 42089999059,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 171,
+    "capture_sim_ns": 42339999054,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 172,
+    "capture_sim_ns": 42589999048,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 173,
+    "capture_sim_ns": 42839999042,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 174,
+    "capture_sim_ns": 43089999037,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 175,
+    "capture_sim_ns": 43339999031,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 176,
+    "capture_sim_ns": 43589999026,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 177,
+    "capture_sim_ns": 43839999020,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 178,
+    "capture_sim_ns": 44089999015,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 179,
+    "capture_sim_ns": 44339999009,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 180,
+    "capture_sim_ns": 44589999003,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 181,
+    "capture_sim_ns": 44839998998,
+    "depth_m": 4.228747844696045,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 182,
+    "capture_sim_ns": 45089998992,
+    "depth_m": 4.109498023986816,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 183,
+    "capture_sim_ns": 45339998987,
+    "depth_m": 1.871617078781128,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 184,
+    "capture_sim_ns": 45589998981,
+    "depth_m": 2.003265380859375,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 185,
+    "capture_sim_ns": 45839998975,
+    "depth_m": 2.133399486541748,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 186,
+    "capture_sim_ns": 46089998970,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 187,
+    "capture_sim_ns": 46339998964,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 188,
+    "capture_sim_ns": 46589998959,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 189,
+    "capture_sim_ns": 46839998953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 190,
+    "capture_sim_ns": 47089998947,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 191,
+    "capture_sim_ns": 47339998942,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 192,
+    "capture_sim_ns": 47589998936,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 193,
+    "capture_sim_ns": 47839998931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 194,
+    "capture_sim_ns": 48089998925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 195,
+    "capture_sim_ns": 48339998920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 196,
+    "capture_sim_ns": 48589998914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 197,
+    "capture_sim_ns": 48839998908,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 198,
+    "capture_sim_ns": 49089998903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 199,
+    "capture_sim_ns": 49339998897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 200,
+    "capture_sim_ns": 49589998892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 201,
+    "capture_sim_ns": 49839998886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 202,
+    "capture_sim_ns": 50089998880,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 203,
+    "capture_sim_ns": 50339998875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 204,
+    "capture_sim_ns": 50589998869,
+    "depth_m": 1.7468783855438232,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 205,
+    "capture_sim_ns": 50839998864,
+    "depth_m": 1.630598783493042,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 206,
+    "capture_sim_ns": 51089998858,
+    "depth_m": 1.619053602218628,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 207,
+    "capture_sim_ns": 51339998852,
+    "depth_m": 1.6050012111663818,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 208,
+    "capture_sim_ns": 51589998847,
+    "depth_m": 1.586836814880371,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 209,
+    "capture_sim_ns": 51839998841,
+    "depth_m": 1.6267669200897217,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 210,
+    "capture_sim_ns": 52089998836,
+    "depth_m": 1.8060142993927002,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 211,
+    "capture_sim_ns": 52339998830,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 4,
+    "phase": "RUN",
+    "sequence": 212,
+    "capture_sim_ns": 52589998825,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "WARMUP",
+    "sequence": 0,
+    "capture_sim_ns": 69999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "WARMUP",
+    "sequence": 1,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "WARMUP",
+    "sequence": 2,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 3,
+    "capture_sim_ns": 339999992,
+    "depth_m": 9.771058082580566,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 4,
+    "capture_sim_ns": 589999987,
+    "depth_m": 9.755779266357422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 5,
+    "capture_sim_ns": 839999981,
+    "depth_m": 9.670212745666504,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 6,
+    "capture_sim_ns": 1089999976,
+    "depth_m": 9.54550552368164,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 7,
+    "capture_sim_ns": 1339999970,
+    "depth_m": 9.433526992797852,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 8,
+    "capture_sim_ns": 1589999964,
+    "depth_m": 21.36819839477539,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 9,
+    "capture_sim_ns": 1839999959,
+    "depth_m": 21.426883697509766,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 10,
+    "capture_sim_ns": 2089999953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 11,
+    "capture_sim_ns": 2339999948,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 12,
+    "capture_sim_ns": 2589999942,
+    "depth_m": 9.169320106506348,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 13,
+    "capture_sim_ns": 2839999937,
+    "depth_m": 9.181171417236328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 14,
+    "capture_sim_ns": 3089999931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 15,
+    "capture_sim_ns": 3339999925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 16,
+    "capture_sim_ns": 3589999920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 17,
+    "capture_sim_ns": 3839999914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 18,
+    "capture_sim_ns": 4089999909,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 19,
+    "capture_sim_ns": 4339999903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 20,
+    "capture_sim_ns": 4589999897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 21,
+    "capture_sim_ns": 4839999892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 22,
+    "capture_sim_ns": 5089999886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 23,
+    "capture_sim_ns": 5339999881,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 24,
+    "capture_sim_ns": 5589999875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 25,
+    "capture_sim_ns": 5839999869,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 26,
+    "capture_sim_ns": 6089999864,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 27,
+    "capture_sim_ns": 6339999858,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 28,
+    "capture_sim_ns": 6589999853,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 29,
+    "capture_sim_ns": 6839999847,
+    "depth_m": 23.370981216430664,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 30,
+    "capture_sim_ns": 7089999842,
+    "depth_m": 23.328659057617188,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 31,
+    "capture_sim_ns": 7339999836,
+    "depth_m": 7.694036960601807,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 32,
+    "capture_sim_ns": 7589999830,
+    "depth_m": 6.644601821899414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 33,
+    "capture_sim_ns": 7839999825,
+    "depth_m": 6.640962600708008,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 34,
+    "capture_sim_ns": 8089999819,
+    "depth_m": 6.636758804321289,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 35,
+    "capture_sim_ns": 8339999814,
+    "depth_m": 6.585334300994873,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 36,
+    "capture_sim_ns": 8589999808,
+    "depth_m": 6.537988662719727,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 37,
+    "capture_sim_ns": 8839999802,
+    "depth_m": 20.59815216064453,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 38,
+    "capture_sim_ns": 9089999797,
+    "depth_m": 21.062362670898438,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 39,
+    "capture_sim_ns": 9339999791,
+    "depth_m": 23.214862823486328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 40,
+    "capture_sim_ns": 9589999786,
+    "depth_m": 23.077550888061523,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 41,
+    "capture_sim_ns": 9839999780,
+    "depth_m": 22.92871856689453,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 42,
+    "capture_sim_ns": 10089999774,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 43,
+    "capture_sim_ns": 10339999769,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 44,
+    "capture_sim_ns": 10589999763,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 45,
+    "capture_sim_ns": 10839999758,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 46,
+    "capture_sim_ns": 11089999752,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 47,
+    "capture_sim_ns": 11339999747,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 48,
+    "capture_sim_ns": 11589999741,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 49,
+    "capture_sim_ns": 11839999735,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 50,
+    "capture_sim_ns": 12089999730,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 51,
+    "capture_sim_ns": 12339999724,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 52,
+    "capture_sim_ns": 12589999719,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 53,
+    "capture_sim_ns": 12839999713,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 54,
+    "capture_sim_ns": 13089999707,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 55,
+    "capture_sim_ns": 13339999702,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 56,
+    "capture_sim_ns": 13589999696,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 57,
+    "capture_sim_ns": 13839999691,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 58,
+    "capture_sim_ns": 14089999685,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 59,
+    "capture_sim_ns": 14339999679,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 60,
+    "capture_sim_ns": 14589999674,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 61,
+    "capture_sim_ns": 14839999668,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 62,
+    "capture_sim_ns": 15089999663,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 63,
+    "capture_sim_ns": 15339999657,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 64,
+    "capture_sim_ns": 15589999652,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 65,
+    "capture_sim_ns": 15839999646,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 66,
+    "capture_sim_ns": 16089999640,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 67,
+    "capture_sim_ns": 16339999635,
+    "depth_m": 13.394612312316895,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 68,
+    "capture_sim_ns": 16589999629,
+    "depth_m": 11.009727478027344,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 69,
+    "capture_sim_ns": 16839999624,
+    "depth_m": 16.6923828125,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 70,
+    "capture_sim_ns": 17089999618,
+    "depth_m": 17.982881546020508,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 71,
+    "capture_sim_ns": 17339999612,
+    "depth_m": 17.859956741333008,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 72,
+    "capture_sim_ns": 17589999607,
+    "depth_m": 17.717966079711914,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 73,
+    "capture_sim_ns": 17839999601,
+    "depth_m": 17.572092056274414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 74,
+    "capture_sim_ns": 18089999596,
+    "depth_m": 17.429967880249023,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 75,
+    "capture_sim_ns": 18339999590,
+    "depth_m": 17.271865844726562,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 76,
+    "capture_sim_ns": 18589999584,
+    "depth_m": 17.125070571899414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 77,
+    "capture_sim_ns": 18839999579,
+    "depth_m": 16.96612548828125,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 78,
+    "capture_sim_ns": 19089999573,
+    "depth_m": 16.819366455078125,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 79,
+    "capture_sim_ns": 19339999568,
+    "depth_m": 16.66043472290039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 80,
+    "capture_sim_ns": 19589999562,
+    "depth_m": 16.513835906982422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 81,
+    "capture_sim_ns": 19839999557,
+    "depth_m": 16.355154037475586,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 82,
+    "capture_sim_ns": 20089999551,
+    "depth_m": 16.208789825439453,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 83,
+    "capture_sim_ns": 20339999545,
+    "depth_m": 16.050350189208984,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 84,
+    "capture_sim_ns": 20589999540,
+    "depth_m": 15.904206275939941,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 85,
+    "capture_sim_ns": 20839999534,
+    "depth_m": 15.745978355407715,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 86,
+    "capture_sim_ns": 21089999529,
+    "depth_m": 15.600021362304688,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 87,
+    "capture_sim_ns": 21339999523,
+    "depth_m": 15.441984176635742,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 88,
+    "capture_sim_ns": 21589999517,
+    "depth_m": 15.296180725097656,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 89,
+    "capture_sim_ns": 21839999512,
+    "depth_m": 15.138298988342285,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 90,
+    "capture_sim_ns": 22089999506,
+    "depth_m": 14.992622375488281,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 91,
+    "capture_sim_ns": 22339999501,
+    "depth_m": 14.834905624389648,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 92,
+    "capture_sim_ns": 22589999495,
+    "depth_m": 14.689374923706055,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 93,
+    "capture_sim_ns": 22839999489,
+    "depth_m": 14.531763076782227,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 94,
+    "capture_sim_ns": 23089999484,
+    "depth_m": 14.386322975158691,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 95,
+    "capture_sim_ns": 23339999478,
+    "depth_m": 14.228830337524414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 96,
+    "capture_sim_ns": 23589999473,
+    "depth_m": 14.083479881286621,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 97,
+    "capture_sim_ns": 23839999467,
+    "depth_m": 13.926050186157227,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 98,
+    "capture_sim_ns": 24089999462,
+    "depth_m": 13.780780792236328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 99,
+    "capture_sim_ns": 24339999456,
+    "depth_m": 13.623446464538574,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 100,
+    "capture_sim_ns": 24589999450,
+    "depth_m": 13.478248596191406,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 101,
+    "capture_sim_ns": 24839999445,
+    "depth_m": 13.32097053527832,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 102,
+    "capture_sim_ns": 25089999439,
+    "depth_m": 13.175829887390137,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 103,
+    "capture_sim_ns": 25339999434,
+    "depth_m": 13.018609046936035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 104,
+    "capture_sim_ns": 25589999428,
+    "depth_m": 12.873506546020508,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 105,
+    "capture_sim_ns": 25839999422,
+    "depth_m": 12.716334342956543,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 106,
+    "capture_sim_ns": 26089999417,
+    "depth_m": 12.571285247802734,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 107,
+    "capture_sim_ns": 26339999411,
+    "depth_m": 12.41415786743164,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 108,
+    "capture_sim_ns": 26589999406,
+    "depth_m": 12.269136428833008,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 109,
+    "capture_sim_ns": 26839999400,
+    "depth_m": 12.112039566040039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 110,
+    "capture_sim_ns": 27089999394,
+    "depth_m": 11.96705150604248,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 111,
+    "capture_sim_ns": 27339999389,
+    "depth_m": 11.809999465942383,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 112,
+    "capture_sim_ns": 27589999383,
+    "depth_m": 11.66502571105957,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 113,
+    "capture_sim_ns": 27839999378,
+    "depth_m": 11.508005142211914,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 114,
+    "capture_sim_ns": 28089999372,
+    "depth_m": 11.363051414489746,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 115,
+    "capture_sim_ns": 28339999367,
+    "depth_m": 11.206052780151367,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 116,
+    "capture_sim_ns": 28589999361,
+    "depth_m": 11.061131477355957,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 117,
+    "capture_sim_ns": 28839999355,
+    "depth_m": 10.904135704040527,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 118,
+    "capture_sim_ns": 29089999350,
+    "depth_m": 10.759234428405762,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 119,
+    "capture_sim_ns": 29339999344,
+    "depth_m": 10.60226821899414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 120,
+    "capture_sim_ns": 29589999339,
+    "depth_m": 10.457372665405273,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 121,
+    "capture_sim_ns": 29839999333,
+    "depth_m": 10.300407409667969,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 122,
+    "capture_sim_ns": 30089999327,
+    "depth_m": 10.155531883239746,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 123,
+    "capture_sim_ns": 30339999322,
+    "depth_m": 9.999700546264648,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 124,
+    "capture_sim_ns": 30589999316,
+    "depth_m": 9.85482406616211,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 125,
+    "capture_sim_ns": 30839999311,
+    "depth_m": 9.697892189025879,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 126,
+    "capture_sim_ns": 31089999305,
+    "depth_m": 9.553030967712402,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 127,
+    "capture_sim_ns": 31339999299,
+    "depth_m": 9.396098136901855,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 128,
+    "capture_sim_ns": 31589999294,
+    "depth_m": 9.251243591308594,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 129,
+    "capture_sim_ns": 31839999288,
+    "depth_m": 9.094322204589844,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 130,
+    "capture_sim_ns": 32089999283,
+    "depth_m": 8.94947338104248,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 131,
+    "capture_sim_ns": 32339999277,
+    "depth_m": 8.792553901672363,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 132,
+    "capture_sim_ns": 32589999272,
+    "depth_m": 8.647706985473633,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 133,
+    "capture_sim_ns": 32839999266,
+    "depth_m": 8.490784645080566,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 134,
+    "capture_sim_ns": 33089999260,
+    "depth_m": 8.349085807800293,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 135,
+    "capture_sim_ns": 33339999255,
+    "depth_m": 8.19749927520752,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 136,
+    "capture_sim_ns": 33589999249,
+    "depth_m": 8.057586669921875,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 137,
+    "capture_sim_ns": 33839999244,
+    "depth_m": 7.906060695648193,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 138,
+    "capture_sim_ns": 34089999238,
+    "depth_m": 7.766196250915527,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 139,
+    "capture_sim_ns": 34339999232,
+    "depth_m": 7.614687919616699,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 140,
+    "capture_sim_ns": 34589999227,
+    "depth_m": 7.474843502044678,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 141,
+    "capture_sim_ns": 34839999221,
+    "depth_m": 7.323360919952393,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 142,
+    "capture_sim_ns": 35089999216,
+    "depth_m": 7.183566570281982,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 143,
+    "capture_sim_ns": 35339999210,
+    "depth_m": 7.032138824462891,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 144,
+    "capture_sim_ns": 35589999205,
+    "depth_m": 6.89256477355957,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 145,
+    "capture_sim_ns": 35839999199,
+    "depth_m": 6.771119594573975,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 146,
+    "capture_sim_ns": 36089999193,
+    "depth_m": 6.681499004364014,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 147,
+    "capture_sim_ns": 36339999188,
+    "depth_m": 6.638850688934326,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 148,
+    "capture_sim_ns": 36589999182,
+    "depth_m": 6.562969207763672,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 149,
+    "capture_sim_ns": 36839999177,
+    "depth_m": 6.415743350982666,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 150,
+    "capture_sim_ns": 37089999171,
+    "depth_m": 6.306726932525635,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 151,
+    "capture_sim_ns": 37339999165,
+    "depth_m": 6.188202381134033,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 152,
+    "capture_sim_ns": 37589999160,
+    "depth_m": 6.161523342132568,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 153,
+    "capture_sim_ns": 37839999154,
+    "depth_m": 5.8043999671936035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 154,
+    "capture_sim_ns": 38089999149,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 155,
+    "capture_sim_ns": 38339999143,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 156,
+    "capture_sim_ns": 38589999137,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 157,
+    "capture_sim_ns": 38839999132,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 158,
+    "capture_sim_ns": 39089999126,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 159,
+    "capture_sim_ns": 39339999121,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 160,
+    "capture_sim_ns": 39589999115,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 161,
+    "capture_sim_ns": 39839999110,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 162,
+    "capture_sim_ns": 40089999104,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 163,
+    "capture_sim_ns": 40339999098,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 164,
+    "capture_sim_ns": 40589999093,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 165,
+    "capture_sim_ns": 40839999087,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 166,
+    "capture_sim_ns": 41089999082,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 167,
+    "capture_sim_ns": 41339999076,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 168,
+    "capture_sim_ns": 41589999070,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 169,
+    "capture_sim_ns": 41839999065,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 170,
+    "capture_sim_ns": 42089999059,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 171,
+    "capture_sim_ns": 42339999054,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 172,
+    "capture_sim_ns": 42589999048,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 173,
+    "capture_sim_ns": 42839999042,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 174,
+    "capture_sim_ns": 43089999037,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 175,
+    "capture_sim_ns": 43339999031,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 176,
+    "capture_sim_ns": 43589999026,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 177,
+    "capture_sim_ns": 43839999020,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 178,
+    "capture_sim_ns": 44089999015,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 179,
+    "capture_sim_ns": 44339999009,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 180,
+    "capture_sim_ns": 44589999003,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 181,
+    "capture_sim_ns": 44839998998,
+    "depth_m": 4.2249040603637695,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 182,
+    "capture_sim_ns": 45089998992,
+    "depth_m": 4.11467170715332,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 183,
+    "capture_sim_ns": 45339998987,
+    "depth_m": 1.8764559030532837,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 184,
+    "capture_sim_ns": 45589998981,
+    "depth_m": 1.9980041980743408,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 185,
+    "capture_sim_ns": 45839998975,
+    "depth_m": 2.1389644145965576,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 186,
+    "capture_sim_ns": 46089998970,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 187,
+    "capture_sim_ns": 46339998964,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 188,
+    "capture_sim_ns": 46589998959,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 189,
+    "capture_sim_ns": 46839998953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 190,
+    "capture_sim_ns": 47089998947,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 191,
+    "capture_sim_ns": 47339998942,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 192,
+    "capture_sim_ns": 47589998936,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 193,
+    "capture_sim_ns": 47839998931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 194,
+    "capture_sim_ns": 48089998925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 195,
+    "capture_sim_ns": 48339998920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 196,
+    "capture_sim_ns": 48589998914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 197,
+    "capture_sim_ns": 48839998908,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 198,
+    "capture_sim_ns": 49089998903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 199,
+    "capture_sim_ns": 49339998897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 200,
+    "capture_sim_ns": 49589998892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 201,
+    "capture_sim_ns": 49839998886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 202,
+    "capture_sim_ns": 50089998880,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 203,
+    "capture_sim_ns": 50339998875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 204,
+    "capture_sim_ns": 50589998869,
+    "depth_m": 1.7579760551452637,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 205,
+    "capture_sim_ns": 50839998864,
+    "depth_m": 1.629974603652954,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 206,
+    "capture_sim_ns": 51089998858,
+    "depth_m": 1.619642972946167,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 207,
+    "capture_sim_ns": 51339998852,
+    "depth_m": 1.6044385433197021,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 208,
+    "capture_sim_ns": 51589998847,
+    "depth_m": 1.5873444080352783,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 209,
+    "capture_sim_ns": 51839998841,
+    "depth_m": 1.6365981101989746,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 210,
+    "capture_sim_ns": 52089998836,
+    "depth_m": 1.8028466701507568,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 211,
+    "capture_sim_ns": 52339998830,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 5,
+    "phase": "RUN",
+    "sequence": 212,
+    "capture_sim_ns": 52589998825,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "WARMUP",
+    "sequence": 0,
+    "capture_sim_ns": 69999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "WARMUP",
+    "sequence": 1,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "WARMUP",
+    "sequence": 2,
+    "capture_sim_ns": 89999998,
+    "depth_m": 9.771645545959473,
+    "valid": false,
+    "reason": "WARMUP",
+    "gate": "WARMUP"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 3,
+    "capture_sim_ns": 339999992,
+    "depth_m": 9.771035194396973,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 4,
+    "capture_sim_ns": 589999987,
+    "depth_m": 9.753854751586914,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 5,
+    "capture_sim_ns": 839999981,
+    "depth_m": 9.674644470214844,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 6,
+    "capture_sim_ns": 1089999976,
+    "depth_m": 9.540090560913086,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 7,
+    "capture_sim_ns": 1339999970,
+    "depth_m": 9.432233810424805,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 8,
+    "capture_sim_ns": 1589999964,
+    "depth_m": 21.36882781982422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 9,
+    "capture_sim_ns": 1839999959,
+    "depth_m": 21.41710662841797,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 10,
+    "capture_sim_ns": 2089999953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 11,
+    "capture_sim_ns": 2339999948,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 12,
+    "capture_sim_ns": 2589999942,
+    "depth_m": 9.162480354309082,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 13,
+    "capture_sim_ns": 2839999937,
+    "depth_m": 9.174907684326172,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 14,
+    "capture_sim_ns": 3089999931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 15,
+    "capture_sim_ns": 3339999925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 16,
+    "capture_sim_ns": 3589999920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 17,
+    "capture_sim_ns": 3839999914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 18,
+    "capture_sim_ns": 4089999909,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 19,
+    "capture_sim_ns": 4339999903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 20,
+    "capture_sim_ns": 4589999897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 21,
+    "capture_sim_ns": 4839999892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 22,
+    "capture_sim_ns": 5089999886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 23,
+    "capture_sim_ns": 5339999881,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 24,
+    "capture_sim_ns": 5589999875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 25,
+    "capture_sim_ns": 5839999869,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 26,
+    "capture_sim_ns": 6089999864,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 27,
+    "capture_sim_ns": 6339999858,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 28,
+    "capture_sim_ns": 6589999853,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 29,
+    "capture_sim_ns": 6839999847,
+    "depth_m": 23.373615264892578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 30,
+    "capture_sim_ns": 7089999842,
+    "depth_m": 23.334510803222656,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 31,
+    "capture_sim_ns": 7339999836,
+    "depth_m": 7.694282531738281,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 32,
+    "capture_sim_ns": 7589999830,
+    "depth_m": 6.644444942474365,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 33,
+    "capture_sim_ns": 7839999825,
+    "depth_m": 6.641077041625977,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 34,
+    "capture_sim_ns": 8089999819,
+    "depth_m": 6.635846138000488,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 35,
+    "capture_sim_ns": 8339999814,
+    "depth_m": 6.586607933044434,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 36,
+    "capture_sim_ns": 8589999808,
+    "depth_m": 6.535453796386719,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 37,
+    "capture_sim_ns": 8839999802,
+    "depth_m": 20.603891372680664,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 38,
+    "capture_sim_ns": 9089999797,
+    "depth_m": 21.05671501159668,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 39,
+    "capture_sim_ns": 9339999791,
+    "depth_m": 23.22057342529297,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 40,
+    "capture_sim_ns": 9589999786,
+    "depth_m": 23.071821212768555,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 41,
+    "capture_sim_ns": 9839999780,
+    "depth_m": 22.934432983398438,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 42,
+    "capture_sim_ns": 10089999774,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 43,
+    "capture_sim_ns": 10339999769,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 44,
+    "capture_sim_ns": 10589999763,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 45,
+    "capture_sim_ns": 10839999758,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 46,
+    "capture_sim_ns": 11089999752,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 47,
+    "capture_sim_ns": 11339999747,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 48,
+    "capture_sim_ns": 11589999741,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 49,
+    "capture_sim_ns": 11839999735,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 50,
+    "capture_sim_ns": 12089999730,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 51,
+    "capture_sim_ns": 12339999724,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 52,
+    "capture_sim_ns": 12589999719,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 53,
+    "capture_sim_ns": 12839999713,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 54,
+    "capture_sim_ns": 13089999707,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 55,
+    "capture_sim_ns": 13339999702,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 56,
+    "capture_sim_ns": 13589999696,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 57,
+    "capture_sim_ns": 13839999691,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 58,
+    "capture_sim_ns": 14089999685,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 59,
+    "capture_sim_ns": 14339999679,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 60,
+    "capture_sim_ns": 14589999674,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 61,
+    "capture_sim_ns": 14839999668,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 62,
+    "capture_sim_ns": 15089999663,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 63,
+    "capture_sim_ns": 15339999657,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 64,
+    "capture_sim_ns": 15589999652,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 65,
+    "capture_sim_ns": 15839999646,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 66,
+    "capture_sim_ns": 16089999640,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 67,
+    "capture_sim_ns": 16339999635,
+    "depth_m": 14.119357109069824,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 68,
+    "capture_sim_ns": 16589999629,
+    "depth_m": 11.16714859008789,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 69,
+    "capture_sim_ns": 16839999624,
+    "depth_m": 16.69834327697754,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 70,
+    "capture_sim_ns": 17089999618,
+    "depth_m": 17.979074478149414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 71,
+    "capture_sim_ns": 17339999612,
+    "depth_m": 17.865415573120117,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 72,
+    "capture_sim_ns": 17589999607,
+    "depth_m": 17.711994171142578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 73,
+    "capture_sim_ns": 17839999601,
+    "depth_m": 17.577898025512695,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 74,
+    "capture_sim_ns": 18089999596,
+    "depth_m": 17.423965454101562,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 75,
+    "capture_sim_ns": 18339999590,
+    "depth_m": 17.27867889404297,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 76,
+    "capture_sim_ns": 18589999584,
+    "depth_m": 17.11896324157715,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 77,
+    "capture_sim_ns": 18839999579,
+    "depth_m": 16.972240447998047,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 78,
+    "capture_sim_ns": 19089999573,
+    "depth_m": 16.813251495361328,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 79,
+    "capture_sim_ns": 19339999568,
+    "depth_m": 16.666542053222656,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 80,
+    "capture_sim_ns": 19589999562,
+    "depth_m": 16.507732391357422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 81,
+    "capture_sim_ns": 19839999557,
+    "depth_m": 16.361251831054688,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 82,
+    "capture_sim_ns": 20089999551,
+    "depth_m": 16.20269203186035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 83,
+    "capture_sim_ns": 20339999545,
+    "depth_m": 16.05644416809082,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 84,
+    "capture_sim_ns": 20589999540,
+    "depth_m": 15.898120880126953,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 85,
+    "capture_sim_ns": 20839999534,
+    "depth_m": 15.75206184387207,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 86,
+    "capture_sim_ns": 21089999529,
+    "depth_m": 15.593941688537598,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 87,
+    "capture_sim_ns": 21339999523,
+    "depth_m": 15.448060989379883,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 88,
+    "capture_sim_ns": 21589999517,
+    "depth_m": 15.290107727050781,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 89,
+    "capture_sim_ns": 21839999512,
+    "depth_m": 15.144367218017578,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 90,
+    "capture_sim_ns": 22089999506,
+    "depth_m": 14.986557960510254,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 91,
+    "capture_sim_ns": 22339999501,
+    "depth_m": 14.84096908569336,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 92,
+    "capture_sim_ns": 22589999495,
+    "depth_m": 14.683313369750977,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 93,
+    "capture_sim_ns": 22839999489,
+    "depth_m": 14.537820816040039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 94,
+    "capture_sim_ns": 23089999484,
+    "depth_m": 14.380266189575195,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 95,
+    "capture_sim_ns": 23339999478,
+    "depth_m": 14.23488712310791,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 96,
+    "capture_sim_ns": 23589999473,
+    "depth_m": 14.077422142028809,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 97,
+    "capture_sim_ns": 23839999467,
+    "depth_m": 13.932106971740723,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 98,
+    "capture_sim_ns": 24089999462,
+    "depth_m": 13.774730682373047,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 99,
+    "capture_sim_ns": 24339999456,
+    "depth_m": 13.629496574401855,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 100,
+    "capture_sim_ns": 24589999450,
+    "depth_m": 13.472201347351074,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 101,
+    "capture_sim_ns": 24839999445,
+    "depth_m": 13.327020645141602,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 102,
+    "capture_sim_ns": 25089999439,
+    "depth_m": 13.169783592224121,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 103,
+    "capture_sim_ns": 25339999434,
+    "depth_m": 13.024654388427734,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 104,
+    "capture_sim_ns": 25589999428,
+    "depth_m": 12.867461204528809,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 105,
+    "capture_sim_ns": 25839999422,
+    "depth_m": 12.722381591796875,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 106,
+    "capture_sim_ns": 26089999417,
+    "depth_m": 12.565239906311035,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 107,
+    "capture_sim_ns": 26339999411,
+    "depth_m": 12.42020034790039,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 108,
+    "capture_sim_ns": 26589999406,
+    "depth_m": 12.263092994689941,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 109,
+    "capture_sim_ns": 26839999400,
+    "depth_m": 12.118080139160156,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 110,
+    "capture_sim_ns": 27089999394,
+    "depth_m": 11.961010932922363,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 111,
+    "capture_sim_ns": 27339999389,
+    "depth_m": 11.81604290008545,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 112,
+    "capture_sim_ns": 27589999383,
+    "depth_m": 11.65898609161377,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 113,
+    "capture_sim_ns": 27839999378,
+    "depth_m": 11.514043807983398,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 114,
+    "capture_sim_ns": 28089999372,
+    "depth_m": 11.357011795043945,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 115,
+    "capture_sim_ns": 28339999367,
+    "depth_m": 11.212091445922852,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 116,
+    "capture_sim_ns": 28589999361,
+    "depth_m": 11.055093765258789,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 117,
+    "capture_sim_ns": 28839999355,
+    "depth_m": 10.910176277160645,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 118,
+    "capture_sim_ns": 29089999350,
+    "depth_m": 10.753196716308594,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 119,
+    "capture_sim_ns": 29339999344,
+    "depth_m": 10.608304977416992,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 120,
+    "capture_sim_ns": 29589999339,
+    "depth_m": 10.451335906982422,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 121,
+    "capture_sim_ns": 29839999333,
+    "depth_m": 10.30644416809082,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 122,
+    "capture_sim_ns": 30089999327,
+    "depth_m": 10.149495124816895,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 123,
+    "capture_sim_ns": 30339999322,
+    "depth_m": 10.005736351013184,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 124,
+    "capture_sim_ns": 30589999316,
+    "depth_m": 9.84878921508789,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 125,
+    "capture_sim_ns": 30839999311,
+    "depth_m": 9.70392894744873,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 126,
+    "capture_sim_ns": 31089999305,
+    "depth_m": 9.54699420928955,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 127,
+    "capture_sim_ns": 31339999299,
+    "depth_m": 9.40213680267334,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 128,
+    "capture_sim_ns": 31589999294,
+    "depth_m": 9.245209693908691,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 129,
+    "capture_sim_ns": 31839999288,
+    "depth_m": 9.100358963012695,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 130,
+    "capture_sim_ns": 32089999283,
+    "depth_m": 8.943436622619629,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 131,
+    "capture_sim_ns": 32339999277,
+    "depth_m": 8.798589706420898,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 132,
+    "capture_sim_ns": 32589999272,
+    "depth_m": 8.641672134399414,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 133,
+    "capture_sim_ns": 32839999266,
+    "depth_m": 8.496819496154785,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 134,
+    "capture_sim_ns": 33089999260,
+    "depth_m": 8.343255996704102,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 135,
+    "capture_sim_ns": 33339999255,
+    "depth_m": 8.203328132629395,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 136,
+    "capture_sim_ns": 33589999249,
+    "depth_m": 8.051756858825684,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 137,
+    "capture_sim_ns": 33839999244,
+    "depth_m": 7.9118876457214355,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 138,
+    "capture_sim_ns": 34089999238,
+    "depth_m": 7.760369777679443,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 139,
+    "capture_sim_ns": 34339999232,
+    "depth_m": 7.620513916015625,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 140,
+    "capture_sim_ns": 34589999227,
+    "depth_m": 7.46901798248291,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 141,
+    "capture_sim_ns": 34839999221,
+    "depth_m": 7.329187393188477,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 142,
+    "capture_sim_ns": 35089999216,
+    "depth_m": 7.177741527557373,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 143,
+    "capture_sim_ns": 35339999210,
+    "depth_m": 7.037964820861816,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 144,
+    "capture_sim_ns": 35589999205,
+    "depth_m": 6.886841297149658,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 145,
+    "capture_sim_ns": 35839999199,
+    "depth_m": 6.775020599365234,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 146,
+    "capture_sim_ns": 36089999193,
+    "depth_m": 6.677791595458984,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 147,
+    "capture_sim_ns": 36339999188,
+    "depth_m": 6.639191150665283,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 148,
+    "capture_sim_ns": 36589999182,
+    "depth_m": 6.558638572692871,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 149,
+    "capture_sim_ns": 36839999177,
+    "depth_m": 6.423930644989014,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 150,
+    "capture_sim_ns": 37089999171,
+    "depth_m": 6.301927089691162,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 151,
+    "capture_sim_ns": 37339999165,
+    "depth_m": 6.188653945922852,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 152,
+    "capture_sim_ns": 37589999160,
+    "depth_m": 6.159774303436279,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 153,
+    "capture_sim_ns": 37839999154,
+    "depth_m": 5.658483505249023,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 154,
+    "capture_sim_ns": 38089999149,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 155,
+    "capture_sim_ns": 38339999143,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 156,
+    "capture_sim_ns": 38589999137,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 157,
+    "capture_sim_ns": 38839999132,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 158,
+    "capture_sim_ns": 39089999126,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 159,
+    "capture_sim_ns": 39339999121,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 160,
+    "capture_sim_ns": 39589999115,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 161,
+    "capture_sim_ns": 39839999110,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 162,
+    "capture_sim_ns": 40089999104,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 163,
+    "capture_sim_ns": 40339999098,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 164,
+    "capture_sim_ns": 40589999093,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 165,
+    "capture_sim_ns": 40839999087,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 166,
+    "capture_sim_ns": 41089999082,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 167,
+    "capture_sim_ns": 41339999076,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 168,
+    "capture_sim_ns": 41589999070,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 169,
+    "capture_sim_ns": 41839999065,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 170,
+    "capture_sim_ns": 42089999059,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 171,
+    "capture_sim_ns": 42339999054,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 172,
+    "capture_sim_ns": 42589999048,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 173,
+    "capture_sim_ns": 42839999042,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 174,
+    "capture_sim_ns": 43089999037,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 175,
+    "capture_sim_ns": 43339999031,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 176,
+    "capture_sim_ns": 43589999026,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 177,
+    "capture_sim_ns": 43839999020,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 178,
+    "capture_sim_ns": 44089999015,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 179,
+    "capture_sim_ns": 44339999009,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 180,
+    "capture_sim_ns": 44589999003,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 181,
+    "capture_sim_ns": 44839998998,
+    "depth_m": 4.228747844696045,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 182,
+    "capture_sim_ns": 45089998992,
+    "depth_m": 4.109498023986816,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 183,
+    "capture_sim_ns": 45339998987,
+    "depth_m": 1.871617078781128,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 184,
+    "capture_sim_ns": 45589998981,
+    "depth_m": 2.003265380859375,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 185,
+    "capture_sim_ns": 45839998975,
+    "depth_m": 2.133399486541748,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 186,
+    "capture_sim_ns": 46089998970,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 187,
+    "capture_sim_ns": 46339998964,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 188,
+    "capture_sim_ns": 46589998959,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 189,
+    "capture_sim_ns": 46839998953,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 190,
+    "capture_sim_ns": 47089998947,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 191,
+    "capture_sim_ns": 47339998942,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 192,
+    "capture_sim_ns": 47589998936,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 193,
+    "capture_sim_ns": 47839998931,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 194,
+    "capture_sim_ns": 48089998925,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 195,
+    "capture_sim_ns": 48339998920,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 196,
+    "capture_sim_ns": 48589998914,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 197,
+    "capture_sim_ns": 48839998908,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 198,
+    "capture_sim_ns": 49089998903,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 199,
+    "capture_sim_ns": 49339998897,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 200,
+    "capture_sim_ns": 49589998892,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 201,
+    "capture_sim_ns": 49839998886,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 202,
+    "capture_sim_ns": 50089998880,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 203,
+    "capture_sim_ns": 50339998875,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 204,
+    "capture_sim_ns": 50589998869,
+    "depth_m": 1.7468783855438232,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 205,
+    "capture_sim_ns": 50839998864,
+    "depth_m": 1.630598783493042,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 206,
+    "capture_sim_ns": 51089998858,
+    "depth_m": 1.619053602218628,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 207,
+    "capture_sim_ns": 51339998852,
+    "depth_m": 1.6050012111663818,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 208,
+    "capture_sim_ns": 51589998847,
+    "depth_m": 1.586836814880371,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 209,
+    "capture_sim_ns": 51839998841,
+    "depth_m": 1.6267669200897217,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 210,
+    "capture_sim_ns": 52089998836,
+    "depth_m": 1.8060142993927002,
+    "valid": true,
+    "reason": "ACCEPT",
+    "gate": "ACCEPT"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 211,
+    "capture_sim_ns": 52339998830,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  },
+  {
+    "episode_generation": 6,
+    "phase": "RUN",
+    "sequence": 212,
+    "capture_sim_ns": 52589998825,
+    "depth_m": Infinity,
+    "valid": false,
+    "reason": "NON_FINITE",
+    "gate": "NON_FINITE"
+  }
+]

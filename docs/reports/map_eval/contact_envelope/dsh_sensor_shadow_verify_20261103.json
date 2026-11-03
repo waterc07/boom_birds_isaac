@@ -1,0 +1,295 @@
+{
+  "schema_version": "dsh.sensor_shadow_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash",
+      "passed": true,
+      "detail": "manifest freeze hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "expected_hash",
+      "passed": true,
+      "detail": "expected reference"
+    },
+    {
+      "category": "data_integrity",
+      "name": "pre_run",
+      "passed": true,
+      "detail": "freeze before run"
+    },
+    {
+      "category": "data_integrity",
+      "name": "source_hashes",
+      "passed": true,
+      "detail": "source hashes"
+    },
+    {
+      "category": "data_integrity",
+      "name": "config_hashes",
+      "passed": true,
+      "detail": "config hashes"
+    },
+    {
+      "category": "data_integrity",
+      "name": "sensor_config_hash",
+      "passed": true,
+      "detail": "manifest sensor config hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "completion",
+      "passed": true,
+      "detail": "completion marker, no error file"
+    },
+    {
+      "category": "data_integrity",
+      "name": "completion_status",
+      "passed": true,
+      "detail": "completion status"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_summary.json",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_episodes.jsonl",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_steps.jsonl",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "output_run.complete.json",
+      "passed": true,
+      "detail": "output hash"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui",
+      "passed": true,
+      "detail": "GUI/DirectX"
+    },
+    {
+      "category": "contract",
+      "name": "denominator",
+      "passed": true,
+      "detail": "episodes=6"
+    },
+    {
+      "category": "contract",
+      "name": "case_identity",
+      "passed": true,
+      "detail": "cases=['sensor_reset_0', 'sensor_reset_1', 'sensor_route_0', 'sensor_route_1', 'sensor_static_0', 'sensor_static_1']"
+    },
+    {
+      "category": "contract",
+      "name": "shadow_mode",
+      "passed": true,
+      "detail": "shadow/control source"
+    },
+    {
+      "category": "contract",
+      "name": "generation_sequence",
+      "passed": true,
+      "detail": "generations=[1, 2, 3, 4, 5, 6]"
+    },
+    {
+      "category": "contract",
+      "name": "record_version",
+      "passed": true,
+      "detail": "records=1728"
+    },
+    {
+      "category": "contract",
+      "name": "schema_header",
+      "passed": true,
+      "detail": "v2 header/sim clock/no px4 boot"
+    },
+    {
+      "category": "contract",
+      "name": "sensor_sources",
+      "passed": true,
+      "detail": "sources={'SIM_RENDER_DEPTH', 'SIM_RENDER_RGB'}"
+    },
+    {
+      "category": "contract",
+      "name": "frame_units",
+      "passed": true,
+      "detail": "frame/units"
+    },
+    {
+      "category": "contract",
+      "name": "warmup_marked",
+      "passed": true,
+      "detail": "warmup samples"
+    },
+    {
+      "category": "contract",
+      "name": "zero_depth_not_valid",
+      "passed": true,
+      "detail": "missing depth remains invalid"
+    },
+    {
+      "category": "contract",
+      "name": "sequence_reset_and_monotonic",
+      "passed": true,
+      "detail": "sequence samples={\"front_rgb:1\": [0, 1, 2, 4, 5], \"front_depth:1\": [0, 1, 2, 4, 5], \"front_rgb:2\": [0, 1, 2, 4, 5], \"front_depth:2\": [0, 1, 2, 4, 5], \"front_rgb:3\": [0, 1, 2, 211, 212], \"front_depth:3\": [0, 1, 2, 211, 212], \"front_rgb:4\": [0, 1, 2, 211, 212], \"front_depth:4\": [0, 1, 2, 211, 212], \"front_rgb:5\": [0, 1, 2, 211, 212], \"front_depth:5\": [0, 1, 2, 211, 212], \"front_rgb:6\": [0, 1, 2, 211, 212], \"front_depth:6\": [0, 1, 2, 211, 212]}"
+    },
+    {
+      "category": "contract",
+      "name": "timestamp_ordering",
+      "passed": true,
+      "detail": "bad=[]"
+    },
+    {
+      "category": "contract",
+      "name": "age_limit",
+      "passed": true,
+      "detail": "over-age accepted=[]"
+    },
+    {
+      "category": "render",
+      "name": "image_decode_and_hash",
+      "passed": true,
+      "detail": "decoded=864/864 hash_ok=True"
+    },
+    {
+      "category": "render",
+      "name": "image_not_blank",
+      "passed": true,
+      "detail": "blank=[] sample=[{\"format\": \"PNG\", \"size\": [320, 240], \"mean\": 218.35142517089844, \"std\": 21.143117904663086, \"edge_mean\": 1.9772493839263916, \"unique_quantized\": 23}]"
+    },
+    {
+      "category": "render",
+      "name": "camera_motion_hashes",
+      "passed": true,
+      "detail": "distinct route image hashes={'sensor_route_0': 211, 'sensor_route_1': 211}"
+    },
+    {
+      "category": "render",
+      "name": "depth_primary_source",
+      "passed": true,
+      "detail": "primary depth source"
+    },
+    {
+      "category": "render",
+      "name": "depth_any_valid",
+      "passed": true,
+      "detail": "valid depth=490/864"
+    },
+    {
+      "category": "physics",
+      "name": "static_depth_sensor_static_0",
+      "passed": true,
+      "detail": "observed=[1.6800000667572021, 1.6800000667572021, 1.6800000667572021] expected=1.68"
+    },
+    {
+      "category": "physics",
+      "name": "static_depth_sensor_static_1",
+      "passed": true,
+      "detail": "observed=[2.680000066757202, 2.680000066757202, 2.680000066757202] expected=2.68"
+    },
+    {
+      "category": "physics",
+      "name": "two_static_distances",
+      "passed": true,
+      "detail": "static references={'sensor_static_0': [1.6800000667572021, 1.6800000667572021, 1.6800000667572021], 'sensor_static_1': [2.680000066757202, 2.680000066757202, 2.680000066757202]}"
+    },
+    {
+      "category": "physics",
+      "name": "raycast_reference_not_primary",
+      "passed": true,
+      "detail": "raycast recorded as auxiliary reference"
+    },
+    {
+      "category": "reset",
+      "name": "all_generations_observed",
+      "passed": true,
+      "detail": "samples per gen={1: 12, 2: 12, 3: 426, 4: 426, 5: 426, 6: 426}"
+    },
+    {
+      "category": "reset",
+      "name": "old_generation_not_accepted",
+      "passed": true,
+      "detail": "no pre-generation accepted records"
+    },
+    {
+      "category": "reset",
+      "name": "accepted_has_generation",
+      "passed": true,
+      "detail": "accepted generations bounded"
+    },
+    {
+      "category": "physics",
+      "name": "route_and_static_motion",
+      "passed": true,
+      "detail": "route movement/static stability"
+    },
+    {
+      "category": "physics",
+      "name": "physical_steps",
+      "passed": true,
+      "detail": "episode steps=[15, 15, 1050, 1050, 1050, 1050]"
+    },
+    {
+      "category": "data_integrity",
+      "name": "summary_counts",
+      "passed": true,
+      "detail": "summary counts={'samples': 1728, 'accepted': 1336, 'records': 1728}"
+    },
+    {
+      "category": "capability",
+      "name": "minimum_six_episodes",
+      "passed": true,
+      "detail": "episodes=6"
+    },
+    {
+      "category": "capability",
+      "name": "camera_and_depth_accepted",
+      "passed": true,
+      "detail": "accepted=1336 depth_valid=490"
+    }
+  ],
+  "failures": [],
+  "counts": {
+    "episodes": 6,
+    "records": 1728,
+    "accepted": 1336,
+    "valid": 1336,
+    "depth_valid": 490,
+    "images": 864
+  },
+  "static_depth_reference": {
+    "sensor_static_0": [
+      1.6800000667572021,
+      1.6800000667572021,
+      1.6800000667572021
+    ],
+    "sensor_static_1": [
+      2.680000066757202,
+      2.680000066757202,
+      2.680000066757202
+    ]
+  },
+  "freeze": {
+    "path": "configs\\scenarios\\sensor_shadow_v2.json",
+    "sha256": "58671440f71425d4355f8bbc0723dd92859239e317f212c6ff3d8e23b0e1bc8c",
+    "git_head": "a623b4baaab54ea1a88066483b4b528210d65bde"
+  },
+  "expected": {
+    "path": "configs\\scenarios\\sensor_shadow_expected_v1.json",
+    "sha256": "dcdd3affbad0dff4ccc2c508673cf6dbb7f3542d98be60f745c4ccc44ece09ec"
+  },
+  "scope": "shadow sensor chain; ORACLE control unchanged; not localization/avoidance"
+}

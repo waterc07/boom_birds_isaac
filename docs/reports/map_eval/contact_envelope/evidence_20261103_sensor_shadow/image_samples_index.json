@@ -1,0 +1,114 @@
+[
+  {
+    "case": "sensor_static_0",
+    "label": "first",
+    "file": "sensor_static_0_first.png",
+    "sha256": "9aa26e94c796226f5b711fbaf371186ea1939c1132ae67b52c40b2f515922809",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 1,
+    "sequence": 3,
+    "capture_sim_ns": 339999992
+  },
+  {
+    "case": "sensor_static_0",
+    "label": "last",
+    "file": "sensor_static_0_last.png",
+    "sha256": "008a4d1537b38cee3ce3abeeba33772fd8b19b8417ec78136a402225bc750cea",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 1,
+    "sequence": 5,
+    "capture_sim_ns": 839999981
+  },
+  {
+    "case": "sensor_static_1",
+    "label": "first",
+    "file": "sensor_static_1_first.png",
+    "sha256": "b3b1cc15274ccdae974f848c69491098545001dee044d58d1ef92bf46161d676",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 2,
+    "sequence": 3,
+    "capture_sim_ns": 339999992
+  },
+  {
+    "case": "sensor_static_1",
+    "label": "last",
+    "file": "sensor_static_1_last.png",
+    "sha256": "07348dc846ef9cea7c7ae0c74c700e0ed050fea509bca0b45cdfe8a439b168e2",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 2,
+    "sequence": 5,
+    "capture_sim_ns": 839999981
+  },
+  {
+    "case": "sensor_route_0",
+    "label": "first",
+    "file": "sensor_route_0_first.png",
+    "sha256": "2d7c7028920f47edde1947b8f884e519e5092eaa82d1cbb1b8084b685f83f2e7",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 3,
+    "sequence": 3,
+    "capture_sim_ns": 339999992
+  },
+  {
+    "case": "sensor_route_0",
+    "label": "last",
+    "file": "sensor_route_0_last.png",
+    "sha256": "0c2d99633a8f3775cdf43dd0b9bb53819567c77745e96da17968c1774f7c4a7d",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 3,
+    "sequence": 212,
+    "capture_sim_ns": 52589998825
+  },
+  {
+    "case": "sensor_route_1",
+    "label": "first",
+    "file": "sensor_route_1_first.png",
+    "sha256": "19c98c9173c005173ce19259620bb54664996e5abf63462ab198ae16075d8042",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 4,
+    "sequence": 3,
+    "capture_sim_ns": 339999992
+  },
+  {
+    "case": "sensor_route_1",
+    "label": "last",
+    "file": "sensor_route_1_last.png",
+    "sha256": "8b5e37d0b3bf8b0f47ee7a84667fb1ab9735a576a47061eaf3558623d6b336a7",
+    "shape": [
+      240,
+      320,
+      3
+    ],
+    "generation": 4,
+    "sequence": 212,
+    "capture_sim_ns": 52589998825
+  }
+]
