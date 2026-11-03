@@ -40,6 +40,11 @@ parser.add_argument('--code-commit', default='WORKTREE')
 parser.add_argument('--working-tree', default='recorded by the operator')
 parser.add_argument('--gpu-driver', default='NOT RECORDED')
 parser.add_argument('--screenshots', action='store_true')
+parser.add_argument('--geometry-policy', choices=('legacy', 'reference_origin_v2'),
+                    default='legacy')
+parser.add_argument('--contact-mode', choices=('legacy_inference', 'measured_hard_reset'),
+                    default='legacy_inference')
+parser.add_argument('--write-migration-freeze', type=Path, default=None)
 parser.add_argument('--vehicle-config', type=Path,
                     default=Path('configs/vehicles/sim_reference.yaml'))
 parser.add_argument('--obstacle-time-clamp', action='store_true')
@@ -57,6 +62,18 @@ AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 if getattr(args, 'headless', False):
     raise RuntimeError('GUI runs are required; --headless is forbidden by the project rules')
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from boom_birds.evaluation.dynamic_migration_plan import (
+    make_migration_freeze, validate_migration_freeze, MIGRATION_FREEZE_SCHEMA)
+if args.write_migration_freeze is not None:
+    make_migration_freeze(vars(args), Path.cwd(), args.write_migration_freeze)
+    raise SystemExit(0)
+if args.freeze is not None:
+    migration_candidate = json.loads(args.freeze.read_text(encoding='utf-8'))
+    if migration_candidate.get('schema_version') == MIGRATION_FREEZE_SCHEMA:
+        validate_migration_freeze(migration_candidate, vars(args), Path.cwd())
+    elif args.geometry_policy != 'legacy' or args.contact_mode != 'legacy_inference':
+        raise RuntimeError('new geometry/contact mode requires a new migration freeze')
 args.output.mkdir(parents=True, exist_ok=True)
 app = AppLauncher(args).app
 STAGES = []
@@ -109,6 +126,8 @@ try:
     from boom_birds.sim.guidance import GuidanceSpec, make_guidance
     from boom_birds.sim.map_contract import load_map_cases, load_map_contract
     from boom_birds.sim.v2_execution import V2ActionGate, V2ExecutionConfig
+    from boom_birds.sim.usd_body_envelope import measure_collision_envelope
+    from boom_birds.sim.dynamic_contact_session import DynamicContactSession
     from boom_birds.sim.velocity_control import (
         VehicleParams, VehicleState, VelocityExecutor, VelocityGains,
         VelocitySetpoint)
@@ -181,7 +200,9 @@ try:
             schema_version=str(freeze_doc.get('schema_version', '')),
             frozen_at=str(freeze_doc.get('frozen_at', '')),
             code_commit=str(freeze_doc.get('code_commit', '')))
-        if freeze_doc.get('schema_version') == boundary_plan.CLEARANCE_BOUNDARY_FREEZE_SCHEMA:
+        if freeze_doc.get('schema_version') == MIGRATION_FREEZE_SCHEMA:
+            mark('production migration source/parameter freeze verified before GUI startup')
+        elif freeze_doc.get('schema_version') == boundary_plan.CLEARANCE_BOUNDARY_FREEZE_SCHEMA:
             if not args.segment_id:
                 raise RuntimeError('boundary freeze requires --segment-id')
             segment = freeze_doc.get('segments', {}).get(args.segment_id)
@@ -278,6 +299,8 @@ try:
     if not obstacle_specs:
         raise RuntimeError('no dynamic obstacle cases')
     obstacle_size = obstacle_specs[0].size_m
+    if any(tuple(spec.size_m) != tuple(obstacle_size) for spec in obstacle_specs):
+        raise ValueError('one spawned cuboid cannot represent mixed case sizes; split runs')
 
     @dataclass
     class DynamicSceneCfg(InteractiveSceneCfg):
@@ -292,7 +315,8 @@ try:
                 activate_contact_sensors=True)))
 
     cfg.scene = DynamicSceneCfg(num_envs=1, env_spacing=2.5,
-                                replicate_physics=True, clone_in_fabric=False)
+                                replicate_physics=args.contact_mode == 'legacy_inference',
+                                clone_in_fabric=False)
     mark('create env')
     env = QuadcopterEnv(cfg)
     env.reset(seed=0)
@@ -368,15 +392,29 @@ try:
             'prim_paths': [], 'filter': [], 'num_sensors': 0, 'errors': []}
 
         contact_stats = {'max_force_n': 0.0, 'max_net_n': 0.0, 'samples': 0}
+        contact_session = None
+        physics_generation = 0
+        contact_initializations = []
 
         def obstacle_contact():
             # Force sensor unavailable (documented above); contact is inferred
             # from geometry in the per-step record instead.
             contact_stats['samples'] += 1
+            if contact_session is not None:
+                sample = contact_session.read()
+                if not sample['measure']['read_ok']:
+                    raise RuntimeError('contact read failed: ' + str(sample['error']))
+                # Only filtered target force can drive obstacle attribution.
+                return sample['measure']['max_filtered_force_n']
             return 0.0
 
         def measure_body_envelope():
             """Measured USD axis-aligned bounding box of the robot prim."""
+            if args.geometry_policy == 'reference_origin_v2':
+                measured = measure_collision_envelope(stage, robot_root)
+                # Compatibility keys are only aliases; full v2 record is kept.
+                return dict(measured, half_extents_m=measured['aabb']['half_extents_m'],
+                            measured_prim=robot_root, source='usd_collision_geometry_reference_frame')
             try:
                 from pxr import Usd, UsdGeom
                 prim = stage.GetPrimAtPath(robot_root)
@@ -569,6 +607,8 @@ try:
 
         body_half_extents = body_envelope.get('half_extents_m')
         robot_radius_conservative = (
+            body_envelope['sphere_about_origin']['radius_m']
+            if args.geometry_policy == 'reference_origin_v2' else
             clearance_mod.box_conservative_sphere_radius(body_half_extents)
             if body_half_extents else None)
         robot_envelope_payload = {
@@ -576,14 +616,22 @@ try:
                                else [float(v) for v in body_half_extents]),
             'measured_prim': body_envelope.get('measured_prim'),
             'source': body_envelope.get('source')}
+        if args.geometry_policy == 'reference_origin_v2':
+            robot_envelope_payload = clearance_mod.build_robot_envelope(body_envelope=body_envelope)
+
+        def obstacle_envelope_for(case_payload):
+            return clearance_mod.build_obstacle_envelope(
+                (case_payload.obstacle or {}).get('size_m', (0.4, 0.4, 0.6)),
+                source='spawn_checked_case_obstacle_size',
+                envelope_policy=('reference_origin_v2'
+                                 if args.geometry_policy == 'reference_origin_v2' else None))
 
         def build_clearance_for(robot_position, target_world, observation,
                                 waypoint_index, case_payload):
             size = tuple(float(v) for v in
                          ((case_payload.obstacle or {}).get('size_m',
                                                             (0.4, 0.4, 0.6))))
-            obstacle_envelope = {'size_m': list(size),
-                                 'source': 'case_obstacle_size'}
+            obstacle_envelope = obstacle_envelope_for(case_payload)
             valid = bool(observation.get('valid'))
             reasons = ([] if valid else
                        [str(observation.get('reason') or 'OBSERVATION_INVALID')])
@@ -682,8 +730,11 @@ try:
                                             'vz_up_mps',
                                             'yaw_rate_ccw_world_radps'))
             return {
-                'force_sensor_available': False,
-                'sensor_force_n': 0.0,
+                'force_sensor_available': contact_session is not None,
+                'sensor_force_n': ((contact_session.last or {}).get('measure', {}).get(
+                    'max_filtered_force_n') if contact_session is not None else 0.0),
+                'measurement': contact_session.last if contact_session is not None else None,
+                'negative_contact_verdict': 'UNKNOWN',
                 'center_distance_m': center,
                 'radii_sum_m': radii_sum,
                 'sphere_overlap_m': overlap,
@@ -703,13 +754,12 @@ try:
 
         def compute_episode_metrics(rows, case):
             body_half = body_envelope.get('half_extents_m')
-            body_radius = (clearance_mod.box_conservative_sphere_radius(body_half)
-                           if body_half else 0.0)
+            body_radius = robot_radius_conservative or 0.0
             obstacle_payload = case.obstacle or {}
             obstacle_size_m = tuple(float(value) for value in
                                     obstacle_payload.get('size_m', (0.0, 0.0, 0.0)))
             obstacle_half = [value / 2.0 for value in obstacle_size_m]
-            obstacle_radius = max(obstacle_half) if obstacle_half else 0.0
+            obstacle_radius = obstacle_envelope_for(case)['radius_m']
             run_rows = [row for row in rows if row.get('phase', 'RUN') == 'RUN']
             brake_start = None
             brake_index = None
@@ -889,10 +939,12 @@ try:
                 'robot_radius_m': body_radius,
                 'robot_aabb_half_extents_m': (None if body_half is None
                                               else [float(v) for v in body_half]),
-                'robot_radius_rule': 'half_diagonal_of_measured_aabb',
+                'robot_radius_rule': ('sphere_about_reference_origin' if args.geometry_policy
+                                      == 'reference_origin_v2' else 'half_diagonal_of_measured_aabb'),
                 'robot_source': body_envelope.get('source'),
                 'robot_measured_prim': body_envelope.get('measured_prim'),
-                'robot_attitude_scope': 'any_rigid_rotation_about_center',
+                'robot_attitude_scope': (robot_envelope_payload.get('attitude_scope')
+                                         or 'any_rigid_rotation_about_center'),
                 'obstacle_radius_m': obstacle_radius,
                 'obstacle_size_m': [float(v) for v in obstacle_size_m],
                 'obstacle_source': 'case_obstacle_size',
@@ -961,11 +1013,55 @@ try:
                 case_obs_delay_s = float(obstacle_spec.observation_delay_s)
                 case_obs_delay_ns = int(round(case_obs_delay_s * 1_000_000_000))
                 for method in methods:
+                    if args.contact_mode == 'measured_hard_reset':
+                        contact_session = None
+                        env.sim.reset(soft=False)
+                        physics_generation += 1
+                        boundary.start(seed=case.seed if hasattr(case, 'seed') else 9000)
+                        set_robot_pose(case.start_position_world_m, case.start_yaw_rad)
+                        set_obstacle_pose((0.0, 0.0, 50.0))
+                        executor.control_epoch = 0
+                        executor.reset(read_state())
+                        if delay_wrapper is not None:
+                            delay_wrapper.clear()
+                        contact_session = DynamicContactSession(
+                            env, generation=physics_generation,
+                            body_path=robot_root + '/body', target_path=dyn_path, dt_s=dt)
+
+                        def separated_hover_step():
+                            hover = executor.step(VelocitySetpoint(
+                                0.0, 0.0, 0.0, 0.0, issued_at_s=0.0,
+                                expires_at_s=1.0, control_epoch=0), read_state(), 0.0)
+                            env.step(torch.tensor([hover.to_actuator_action(params)],
+                                                  dtype=torch.float32, device=env.device))
+
+                        try:
+                            handshake = contact_session.establish_zero(separated_hover_step)
+                        except RuntimeError:
+                            (args.output / 'contact_initialization.error.json').write_text(
+                                json.dumps(contact_session.handshake, indent=2) + '\n',
+                                encoding='utf-8')
+                            raise
+                        contact_initializations.append({
+                            'case_id': case.case_id, 'method': method,
+                            'physics_generation': physics_generation,
+                            'handshake': handshake,
+                            'robot_start_world_m': list(case.start_position_world_m),
+                            'obstacle_handshake_world_m': [0.0, 0.0, 50.0]})
+                        contact_sensor_info.update({
+                            'mode': 'filtered_force_after_physics_hard_reset',
+                            'force_sensor_available': True,
+                            'source': 'isaaclab_contact_sensor_filtered',
+                            'reason': 'single-env reset/handshake; negative readings remain UNKNOWN',
+                            'filter': [dyn_path], 'prim_paths': [robot_root + '/body'],
+                            'negative_coverage': 'unverified', 'num_sensors': 1})
                     boundary.start(seed=case.seed if hasattr(case, 'seed') else 9000)
                     set_robot_pose(case.start_position_world_m, case.start_yaw_rad)
                     set_obstacle_pose((0.0, 0.0, 50.0))
                     state = read_state()
                     executor.reset(state)
+                    if args.contact_mode == 'measured_hard_reset':
+                        executor.control_epoch = 0
                     if delay_wrapper is not None:
                         delay_wrapper.clear()
                     runner = WaypointRunner(
@@ -1082,11 +1178,7 @@ try:
                             robot_velocity_world_mps=state.velocity_world_mps,
                             waypoint_index=runner.index,
                             robot_envelope=robot_envelope_payload,
-                            obstacle_envelope={
-                                'size_m': [float(value) for value in
-                                           (case.obstacle or {}).get(
-                                               'size_m', (0.4, 0.4, 0.6))],
-                                'source': 'case_obstacle_size'})
+                            obstacle_envelope=obstacle_envelope_for(case))
                         clearance_record = (decision.get('clearance_record')
                                             or build_clearance_for(
                                                 state.position_world_m, target,
@@ -1415,7 +1507,7 @@ try:
                             terminated[0].item(), truncated[0].item())
                         after = read_state()
                         contact = obstacle_contact()
-                        if contact > 0.02:
+                        if contact > (1e-6 if contact_session is not None else 0.02):
                             contact_max = max(contact_max, contact)
                             if not contact_prim:
                                 contact_prim = dyn_path
@@ -1425,7 +1517,7 @@ try:
                             outcome, reason = 'INVALID', 'ENV_TRUNCATED'
                         elif boundary_state['unexpected_reset']:
                             outcome, reason = 'INVALID', 'ENV_UNEXPECTED_RESET'
-                        elif contact > 0.02:
+                        elif contact > (1e-6 if contact_session is not None else 0.02):
                             outcome, reason = 'COLLISION', 'OBSTACLE_CONTACT'
                         elif method == 'supervisor':
                             if decision['state'] in ('WAIT', 'BRAKE', 'HOLD',
@@ -1621,7 +1713,10 @@ try:
                     else:
                         business_outcome = 'ABORT'
                     evidence_summary = metrics.get('contact_evidence_summary') or {}
-                    if outcome == 'COLLISION' or contact_max > 0.02:
+                    if args.contact_mode == 'measured_hard_reset':
+                        physical_outcome = ('CONTACT_MEASURED' if contact_max > 1e-6
+                                            else 'UNKNOWN')
+                    elif outcome == 'COLLISION' or contact_max > 0.02:
                         physical_outcome = 'CONTACT_MEASURED'
                     elif evidence_summary.get('inferred_contact'):
                         physical_outcome = 'CONTACT_INFERRED'
@@ -1788,14 +1883,24 @@ try:
             'brake_model_sha256': brake_model_sha,
             'clearance_algorithm': {
                 'id': clearance_mod.CLEARANCE_ALGORITHM_ID,
-                'version': clearance_mod.CLEARANCE_ALGORITHM_VERSION,
-                'schema_version': clearance_mod.CLEARANCE_SCHEMA_VERSION},
+                'version': ('2.0.0' if args.geometry_policy == 'reference_origin_v2'
+                            else clearance_mod.CLEARANCE_ALGORITHM_VERSION),
+                'schema_version': (clearance_mod.CLEARANCE_V2_SCHEMA_VERSION
+                                   if args.geometry_policy == 'reference_origin_v2'
+                                   else clearance_mod.CLEARANCE_SCHEMA_VERSION)},
             'stop_requirement_schema_version':
                 stop_req_mod.STOP_REQUIREMENT_SCHEMA_VERSION,
             'envelope_policy': {
-                'robot_radius_rule': 'sqrt(sum(aabb_half_extents^2))',
-                'robot_attitude_scope': 'any_rigid_rotation_about_center',
-                'obstacle_radius_rule': 'max(obstacle_size)/2',
+                'version': args.geometry_policy,
+                'robot_radius_rule': ('norm(abs(center_offset)+half_extents)'
+                                      if args.geometry_policy == 'reference_origin_v2'
+                                      else 'sqrt(sum(aabb_half_extents^2))'),
+                'robot_attitude_scope': ('any_rigid_rotation_about_reference_origin'
+                                         if args.geometry_policy == 'reference_origin_v2'
+                                         else 'any_rigid_rotation_about_center'),
+                'obstacle_radius_rule': ('norm(obstacle_size/2)'
+                                         if args.geometry_policy == 'reference_origin_v2'
+                                         else 'max(obstacle_size)/2'),
                 'limitation': ('sphere/AABB approximation; not a triangle-mesh '
                                'sweep')},
             'contact_sensor': contact_sensor_info,
@@ -1808,6 +1913,9 @@ try:
             },
             'freeze': freeze_meta,
             'body_envelope': body_envelope,
+            'geometry_policy': args.geometry_policy,
+            'contact_mode': args.contact_mode,
+            'contact_initializations': contact_initializations,
             'gui_evidence': {
                 'gui_mode': not bool(getattr(args, 'headless', False)),
                 'renderer': 'DirectX (--/app/vulkan=false)',

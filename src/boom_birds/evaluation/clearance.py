@@ -31,8 +31,13 @@ rotations.  The AABB itself is a spawn-pose bound on the asset; a sphere/AABB
 bound is not a triangle-mesh sweep proof.
 """
 import math
+from copy import deepcopy
+
+from boom_birds.sim.body_envelope import validate_body_envelope_record
 
 CLEARANCE_SCHEMA_VERSION = 'boom_birds.clearance.v1'
+CLEARANCE_V2_SCHEMA_VERSION = 'boom_birds.clearance.v2'
+REFERENCE_ORIGIN_POLICY = 'reference_origin_v2'
 CLEARANCE_ALGORITHM_ID = 'supervisor_predicted_path_clearance'
 CLEARANCE_ALGORITHM_VERSION = '1.0.0'
 CLEARANCE_UNITS = 'm'
@@ -170,8 +175,22 @@ def predicted_path_clearance(robot_position_world_m,
     }
 
 
-def build_robot_envelope(half_extents_m=None, measured_prim=None, source=None):
+def build_robot_envelope(half_extents_m=None, measured_prim=None, source=None,
+                         *, body_envelope=None):
     """Robot envelope record: conservative sphere over the spawn-pose AABB."""
+    if body_envelope is not None:
+        validate_body_envelope_record(body_envelope)
+        return {
+            'kind': 'sphere_about_robot_reference_origin',
+            'envelope_policy': REFERENCE_ORIGIN_POLICY,
+            'radius_m': body_envelope['sphere_about_origin']['radius_m'],
+            'aabb_half_extents_m': list(body_envelope['aabb']['half_extents_m']),
+            'center_offset_m': list(body_envelope['aabb']['center_offset_m']),
+            'attitude_scope': body_envelope['attitude_scope'],
+            'coverage': deepcopy(body_envelope['coverage']),
+            'limitations': list(body_envelope['limitations']),
+            'body_envelope': deepcopy(body_envelope),
+        }
     half_extents = (DEFAULT_ROBOT_AABB_HALF_EXTENTS_M if half_extents_m is None
                     else half_extents_m)
     return {
@@ -186,13 +205,25 @@ def build_robot_envelope(half_extents_m=None, measured_prim=None, source=None):
     }
 
 
-def build_obstacle_envelope(size_m=None, source=None):
+def build_obstacle_envelope(size_m=None, source=None, *, envelope_policy=None):
     """Obstacle envelope record: frozen ``max(size) / 2`` case-cuboid sphere."""
     size = DEFAULT_OBSTACLE_SIZE_M if size_m is None else size_m
     values = [float(value) for value in size]
     if len(values) != 3 or any(not math.isfinite(value) or value <= 0.0
                                for value in values):
         raise ValueError('obstacle size_m must hold three positive values')
+    if envelope_policy not in (None, REFERENCE_ORIGIN_POLICY):
+        raise ValueError('unknown obstacle envelope policy')
+    if envelope_policy == REFERENCE_ORIGIN_POLICY:
+        return {
+            'kind': 'sphere_over_cuboid_half_diagonal',
+            'envelope_policy': REFERENCE_ORIGIN_POLICY,
+            'radius_m': math.hypot(*(v / 2.0 for v in values)),
+            'size_m': values,
+            'source': source or 'case_obstacle_size_requires_spawn_match',
+            'attitude_scope': 'any_rigid_rotation_about_cuboid_center',
+            'limitation': 'cuboid bound; not mesh sweep or future trajectory bound',
+        }
     return {
         'kind': OBSTACLE_ENVELOPE_KIND,
         'radius_m': max(values) / 2.0,
@@ -205,6 +236,16 @@ def build_obstacle_envelope(size_m=None, source=None):
 def _resolve_robot_envelope(payload):
     if payload is None:
         return build_robot_envelope()
+    if payload.get('envelope_policy') == REFERENCE_ORIGIN_POLICY:
+        if payload.get('body_envelope') is None:
+            raise ValueError('reference-origin policy requires full body envelope')
+        result = build_robot_envelope(body_envelope=payload['body_envelope'])
+        if not _is_number(payload.get('radius_m')) or not math.isclose(
+                payload['radius_m'], result['radius_m'], abs_tol=1e-12):
+            raise ValueError('robot radius disagrees with body envelope')
+        return result
+    if payload.get('envelope_policy') is not None:
+        raise ValueError('unknown robot envelope policy')
     half_extents = payload.get('aabb_half_extents_m',
                                payload.get('half_extents_m'))
     return build_robot_envelope(
@@ -216,8 +257,14 @@ def _resolve_robot_envelope(payload):
 def _resolve_obstacle_envelope(payload):
     if payload is None:
         return build_obstacle_envelope()
-    return build_obstacle_envelope(size_m=payload.get('size_m'),
-                                   source=payload.get('source'))
+    result = build_obstacle_envelope(
+        size_m=payload.get('size_m'), source=payload.get('source'),
+        envelope_policy=payload.get('envelope_policy'))
+    if payload.get('envelope_policy') == REFERENCE_ORIGIN_POLICY and (
+            not _is_number(payload.get('radius_m')) or not math.isclose(
+                payload['radius_m'], result['radius_m'], abs_tol=1e-12)):
+        raise ValueError('obstacle radius disagrees with cuboid geometry')
+    return result
 
 
 def build_clearance_record(robot_center_world_m, target_waypoint_world_m,
@@ -247,6 +294,10 @@ def build_clearance_record(robot_center_world_m, target_waypoint_world_m,
     velocity_valid = _is_vector3(velocity)
     robot_envelope_record = _resolve_robot_envelope(robot_envelope)
     obstacle_envelope_record = _resolve_obstacle_envelope(obstacle_envelope)
+    robot_v2 = robot_envelope_record.get('envelope_policy') == REFERENCE_ORIGIN_POLICY
+    obstacle_v2 = obstacle_envelope_record.get('envelope_policy') == REFERENCE_ORIGIN_POLICY
+    if robot_v2 != obstacle_v2:
+        raise ValueError('mixed legacy and v2 geometry policies are not supported')
 
     reasons = []
 
@@ -276,10 +327,10 @@ def build_clearance_record(robot_center_world_m, target_waypoint_world_m,
     age_point = observation.get('age_point_s')
     age_bound = observation.get('age_s')
     record = {
-        'schema_version': CLEARANCE_SCHEMA_VERSION,
+        'schema_version': CLEARANCE_V2_SCHEMA_VERSION if robot_v2 else CLEARANCE_SCHEMA_VERSION,
         'algorithm': {
             'id': CLEARANCE_ALGORITHM_ID,
-            'version': CLEARANCE_ALGORITHM_VERSION,
+            'version': '2.0.0' if robot_v2 else CLEARANCE_ALGORITHM_VERSION,
             'units': CLEARANCE_UNITS,
             'frame': CLEARANCE_FRAME,
             'time_base': CLEARANCE_TIME_BASE,
@@ -326,7 +377,9 @@ def build_clearance_record(robot_center_world_m, target_waypoint_world_m,
             'reasons': [] if valid else list(reasons),
             'notes': [
                 PATH_CLEARANCE_NOTE,
-                ENVELOPE_NOTE,
+                ('robot sphere covers measured collision AABB about reference origin; '
+                 'obstacle sphere uses cuboid half diagonal; not a mesh sweep'
+                 if robot_v2 else ENVELOPE_NOTE),
                 ('prediction covers {horizon:.3f} s at {step:.3f} s steps from '
                  'the observation sample; not a complete stop-time horizon'
                  ).format(horizon=float(horizon_s), step=float(step_s)),
