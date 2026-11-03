@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 from isaaclab.app import AppLauncher

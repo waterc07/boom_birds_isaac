@@ -1,0 +1,12 @@
+stages: ["load contract and cases", "production migration source/parameter freeze verified before GUI startup", "create env", "disable default ground and spawn map", "bind obstacle from scene", "declare kinematic contact inference", "configure map dones", "measure body envelope"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 485, in <module>
+    body_envelope = measure_body_envelope()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 414, in measure_body_envelope
+    measured = measure_collision_envelope(stage, robot_root)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\isaac\proj_boom_birds\src\boom_birds\sim\usd_body_envelope.py", line 31, in measure_collision_envelope
+    raise ValueError('invalid collision bound: ' + str(prim.GetPath()))
+ValueError: invalid collision bound: /World/envs/env_0/Robot/body/body_collision/geometry

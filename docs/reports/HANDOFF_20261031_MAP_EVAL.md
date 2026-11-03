@@ -1,5 +1,7 @@
 # 交接记录：RMUC2027 地图动力学评价首版（2026-10-31）
 
+> 2026-11-01 后续补充：官方 smoke 缺少 `sys` 导入的结果写出缺陷已修复；581.80 下前台 Vulkan GUI、CUDA:0、USD 克隆的 100 步已完成，最新复测基于 f0ccfb1 加未提交 import 修复。见 [独立核验摘要](official_gui_smoke/vulkan_current_verification.json)。历史失败保留，但不再将“Vulkan 仍不可运行”作为统一当前结论；本工作包地图动力学结果仍只验收 D3D12。
+
 ## 1. 分支与提交
 
 - 工作区 E:\isaac\proj_boom_birds；分支 `codex/bb22-map-eval`（自 `e177eb6`）；未推送远端。
@@ -33,6 +35,7 @@
 
 - 默认 Vulkan GUI 的多次尝试在 env 创建后静默结束、无 PASS/结果（历史日志保留）。
 - 使用 DirectX（--kit_args=--/app/vulkan=false）GUI 100 步 PASS，记录 code_commit 965e6fa、gui_mode true、Graphics API D3D12；未回退 headless。
+- 后续修复与复测：补齐官方脚本的 `sys` 导入，单实例前台 Vulkan GUI 配合 `--clone-in-usd` 已完成 100 步。源码修复、克隆方式及启动条件与部分历史失败不同，不能仅凭这些记录确定后端因果。
 - 只读观测：Isaac Sim 5.1.0.0、RTX 5080、驱动 581.80；不声称驱动根因。
 
 ## 5. 验证
@@ -45,7 +48,7 @@
 
 1. 扩大地图区域与到点/悬停案例至正式样本量，覆盖更多起终点/yaw；加入动态障碍与自然碰撞统计。
 2. 地图几何-碰撞一致性专项（薄结构、单面网格、视觉偏差）。
-3. 官方 smoke Vulkan 静默失败根因定位（保持 GUI）。
+3. 官方 smoke 元数据缺陷已修复且 Vulkan GUI 短例已通过；历史持续挂起与默认 Fabric 路径的全部根因继续保留待查（保持 GUI、单实例、固定源码/参数）。
 4. 历史调参依据待重验：重建候选配置+调参集重跑后再冻结，不用最终集调参。
 5. 比赛地图规则/资产再分发条款 RULE-CHECK；不宣称地图官方认证。
 6. AGENTS/PROJECT_PLAN/README 状态同步在工作树（含用户修改），未提交。

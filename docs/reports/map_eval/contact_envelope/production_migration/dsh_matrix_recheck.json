@@ -1,0 +1,976 @@
+{
+  "schema_version": "dsh.contact_lifecycle_verify.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "category": "data_integrity",
+      "name": "freeze_schema",
+      "passed": true,
+      "detail": "freeze schema=boom_birds.dsh_contact_lifecycle_freeze.v1"
+    },
+    {
+      "category": "data_integrity",
+      "name": "freeze_hash_and_files",
+      "passed": true,
+      "detail": "cases/expected hashes match freeze"
+    },
+    {
+      "category": "data_integrity",
+      "name": "readout_source_hash",
+      "passed": true,
+      "detail": "readout source hash matches freeze"
+    },
+    {
+      "category": "data_integrity",
+      "name": "versions",
+      "passed": true,
+      "detail": "contact evidence version/reset mode/handshake frozen"
+    },
+    {
+      "category": "data_integrity",
+      "name": "expected_status",
+      "passed": true,
+      "detail": "expected is pre-frozen expectation"
+    },
+    {
+      "category": "data_integrity",
+      "name": "episode_identity_contact_W_wall3",
+      "passed": true,
+      "detail": "episode ids/denominator ['wall_ep0-r0-contact_W_wall3', 'wall_ep1-r1-contact_W_wall3', 'wall_ep2-r2-contact_W_wall3']"
+    },
+    {
+      "category": "data_integrity",
+      "name": "manifest_versions_contact_W_wall3",
+      "passed": true,
+      "detail": "manifest reset/readout/evidence versions"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui_evidence_contact_W_wall3",
+      "passed": true,
+      "detail": "GUI DirectX evidence recorded"
+    },
+    {
+      "category": "geometry",
+      "name": "wall_geometry_contact_W_wall3",
+      "passed": true,
+      "detail": "wall prim geometry/raycast: {\"raycast\": {\"origin\": [-4.0, 0.0, 1.0], \"direction\": [1.0, 0.0, 0.0], \"distance_m\": 3.6130404472351074, \"collision\": \"/World/RMUC2027/Collisions/collision_014\", \"hit\": true}, \"bbox\": [3.4028234663852886e+38, 3.4028234663852886e+38, 3.4028234663852886e+38]}"
+    },
+    {
+      "category": "data_integrity",
+      "name": "summary_contact_W_wall3",
+      "passed": true,
+      "detail": "summary episodes=3"
+    },
+    {
+      "category": "freshness",
+      "name": "generation_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "episode generation=1"
+    },
+    {
+      "category": "freshness",
+      "name": "handshake_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+    },
+    {
+      "category": "freshness",
+      "name": "no_mid_episode_reset_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "RUN generations constant"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "measured_contact_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "max_measured_n=0.647144649 read_ok=True"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "low_force_not_no_contact_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "physical_matches_raw_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "episode_observed_field_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "episode contact_observed/max_measured"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "wall_attribution_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "wall prim attribution present"
+    },
+    {
+      "category": "boundary",
+      "name": "sensor_reinit_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+    },
+    {
+      "category": "boundary",
+      "name": "episode_boundary_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "handshake before RUN, bounded steps"
+    },
+    {
+      "category": "boundary",
+      "name": "time_monotonic_wall_ep0-r0-contact_W_wall3",
+      "passed": true,
+      "detail": "RUN time non-decreasing"
+    },
+    {
+      "category": "freshness",
+      "name": "generation_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "episode generation=2"
+    },
+    {
+      "category": "freshness",
+      "name": "handshake_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+    },
+    {
+      "category": "freshness",
+      "name": "no_mid_episode_reset_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "RUN generations constant"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "measured_contact_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "max_measured_n=0.647144649 read_ok=True"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "low_force_not_no_contact_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "physical_matches_raw_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "episode_observed_field_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "episode contact_observed/max_measured"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "wall_attribution_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "wall prim attribution present"
+    },
+    {
+      "category": "boundary",
+      "name": "sensor_reinit_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+    },
+    {
+      "category": "boundary",
+      "name": "episode_boundary_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "handshake before RUN, bounded steps"
+    },
+    {
+      "category": "boundary",
+      "name": "time_monotonic_wall_ep1-r1-contact_W_wall3",
+      "passed": true,
+      "detail": "RUN time non-decreasing"
+    },
+    {
+      "category": "freshness",
+      "name": "generation_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "episode generation=3"
+    },
+    {
+      "category": "freshness",
+      "name": "handshake_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+    },
+    {
+      "category": "freshness",
+      "name": "no_mid_episode_reset_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "RUN generations constant"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "measured_contact_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "max_measured_n=0.647144649 read_ok=True"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "low_force_not_no_contact_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "physical_matches_raw_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "episode_observed_field_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "episode contact_observed/max_measured"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "wall_attribution_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "wall prim attribution present"
+    },
+    {
+      "category": "boundary",
+      "name": "sensor_reinit_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+    },
+    {
+      "category": "boundary",
+      "name": "episode_boundary_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "handshake before RUN, bounded steps"
+    },
+    {
+      "category": "boundary",
+      "name": "time_monotonic_wall_ep2-r2-contact_W_wall3",
+      "passed": true,
+      "detail": "RUN time non-decreasing"
+    },
+    {
+      "category": "data_integrity",
+      "name": "episode_identity_contact_S_static3",
+      "passed": true,
+      "detail": "episode ids/denominator ['static_ep0-r0-contact_S_static3', 'static_ep1-r1-contact_S_static3', 'static_ep2-r2-contact_S_static3']"
+    },
+    {
+      "category": "data_integrity",
+      "name": "manifest_versions_contact_S_static3",
+      "passed": true,
+      "detail": "manifest reset/readout/evidence versions"
+    },
+    {
+      "category": "data_integrity",
+      "name": "gui_evidence_contact_S_static3",
+      "passed": true,
+      "detail": "GUI DirectX evidence recorded"
+    },
+    {
+      "category": "data_integrity",
+      "name": "summary_contact_S_static3",
+      "passed": true,
+      "detail": "summary episodes=3"
+    },
+    {
+      "category": "freshness",
+      "name": "generation_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "episode generation=1"
+    },
+    {
+      "category": "freshness",
+      "name": "handshake_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+    },
+    {
+      "category": "freshness",
+      "name": "no_mid_episode_reset_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "RUN generations constant"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "measured_contact_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "max_measured_n=0.016021863 read_ok=True"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "low_force_not_no_contact_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "physical_matches_raw_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "episode_observed_field_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "episode contact_observed/max_measured"
+    },
+    {
+      "category": "boundary",
+      "name": "sensor_reinit_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+    },
+    {
+      "category": "boundary",
+      "name": "episode_boundary_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "handshake before RUN, bounded steps"
+    },
+    {
+      "category": "boundary",
+      "name": "time_monotonic_static_ep0-r0-contact_S_static3",
+      "passed": true,
+      "detail": "RUN time non-decreasing"
+    },
+    {
+      "category": "freshness",
+      "name": "generation_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "episode generation=2"
+    },
+    {
+      "category": "freshness",
+      "name": "handshake_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+    },
+    {
+      "category": "freshness",
+      "name": "no_mid_episode_reset_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "RUN generations constant"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "measured_contact_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "max_measured_n=0.016021863 read_ok=True"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "low_force_not_no_contact_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "physical_matches_raw_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "episode_observed_field_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "episode contact_observed/max_measured"
+    },
+    {
+      "category": "boundary",
+      "name": "sensor_reinit_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+    },
+    {
+      "category": "boundary",
+      "name": "episode_boundary_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "handshake before RUN, bounded steps"
+    },
+    {
+      "category": "boundary",
+      "name": "time_monotonic_static_ep1-r1-contact_S_static3",
+      "passed": true,
+      "detail": "RUN time non-decreasing"
+    },
+    {
+      "category": "freshness",
+      "name": "generation_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "episode generation=3"
+    },
+    {
+      "category": "freshness",
+      "name": "handshake_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+    },
+    {
+      "category": "freshness",
+      "name": "no_mid_episode_reset_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "RUN generations constant"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "measured_contact_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "max_measured_n=0.016021863 read_ok=True"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "low_force_not_no_contact_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "physical_matches_raw_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+    },
+    {
+      "category": "contact_evidence",
+      "name": "episode_observed_field_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "episode contact_observed/max_measured"
+    },
+    {
+      "category": "boundary",
+      "name": "sensor_reinit_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+    },
+    {
+      "category": "boundary",
+      "name": "episode_boundary_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "handshake before RUN, bounded steps"
+    },
+    {
+      "category": "boundary",
+      "name": "time_monotonic_static_ep2-r2-contact_S_static3",
+      "passed": true,
+      "detail": "RUN time non-decreasing"
+    }
+  ],
+  "checks_by_category": {
+    "data_integrity": [
+      {
+        "category": "data_integrity",
+        "name": "freeze_schema",
+        "passed": true,
+        "detail": "freeze schema=boom_birds.dsh_contact_lifecycle_freeze.v1"
+      },
+      {
+        "category": "data_integrity",
+        "name": "freeze_hash_and_files",
+        "passed": true,
+        "detail": "cases/expected hashes match freeze"
+      },
+      {
+        "category": "data_integrity",
+        "name": "readout_source_hash",
+        "passed": true,
+        "detail": "readout source hash matches freeze"
+      },
+      {
+        "category": "data_integrity",
+        "name": "versions",
+        "passed": true,
+        "detail": "contact evidence version/reset mode/handshake frozen"
+      },
+      {
+        "category": "data_integrity",
+        "name": "expected_status",
+        "passed": true,
+        "detail": "expected is pre-frozen expectation"
+      },
+      {
+        "category": "data_integrity",
+        "name": "episode_identity_contact_W_wall3",
+        "passed": true,
+        "detail": "episode ids/denominator ['wall_ep0-r0-contact_W_wall3', 'wall_ep1-r1-contact_W_wall3', 'wall_ep2-r2-contact_W_wall3']"
+      },
+      {
+        "category": "data_integrity",
+        "name": "manifest_versions_contact_W_wall3",
+        "passed": true,
+        "detail": "manifest reset/readout/evidence versions"
+      },
+      {
+        "category": "data_integrity",
+        "name": "gui_evidence_contact_W_wall3",
+        "passed": true,
+        "detail": "GUI DirectX evidence recorded"
+      },
+      {
+        "category": "data_integrity",
+        "name": "summary_contact_W_wall3",
+        "passed": true,
+        "detail": "summary episodes=3"
+      },
+      {
+        "category": "data_integrity",
+        "name": "episode_identity_contact_S_static3",
+        "passed": true,
+        "detail": "episode ids/denominator ['static_ep0-r0-contact_S_static3', 'static_ep1-r1-contact_S_static3', 'static_ep2-r2-contact_S_static3']"
+      },
+      {
+        "category": "data_integrity",
+        "name": "manifest_versions_contact_S_static3",
+        "passed": true,
+        "detail": "manifest reset/readout/evidence versions"
+      },
+      {
+        "category": "data_integrity",
+        "name": "gui_evidence_contact_S_static3",
+        "passed": true,
+        "detail": "GUI DirectX evidence recorded"
+      },
+      {
+        "category": "data_integrity",
+        "name": "summary_contact_S_static3",
+        "passed": true,
+        "detail": "summary episodes=3"
+      }
+    ],
+    "geometry": [
+      {
+        "category": "geometry",
+        "name": "wall_geometry_contact_W_wall3",
+        "passed": true,
+        "detail": "wall prim geometry/raycast: {\"raycast\": {\"origin\": [-4.0, 0.0, 1.0], \"direction\": [1.0, 0.0, 0.0], \"distance_m\": 3.6130404472351074, \"collision\": \"/World/RMUC2027/Collisions/collision_014\", \"hit\": true}, \"bbox\": [3.4028234663852886e+38, 3.4028234663852886e+38, 3.4028234663852886e+38]}"
+      }
+    ],
+    "freshness": [
+      {
+        "category": "freshness",
+        "name": "generation_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "episode generation=1"
+      },
+      {
+        "category": "freshness",
+        "name": "handshake_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+      },
+      {
+        "category": "freshness",
+        "name": "no_mid_episode_reset_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "RUN generations constant"
+      },
+      {
+        "category": "freshness",
+        "name": "generation_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "episode generation=2"
+      },
+      {
+        "category": "freshness",
+        "name": "handshake_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+      },
+      {
+        "category": "freshness",
+        "name": "no_mid_episode_reset_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "RUN generations constant"
+      },
+      {
+        "category": "freshness",
+        "name": "generation_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "episode generation=3"
+      },
+      {
+        "category": "freshness",
+        "name": "handshake_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+      },
+      {
+        "category": "freshness",
+        "name": "no_mid_episode_reset_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "RUN generations constant"
+      },
+      {
+        "category": "freshness",
+        "name": "generation_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "episode generation=1"
+      },
+      {
+        "category": "freshness",
+        "name": "handshake_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+      },
+      {
+        "category": "freshness",
+        "name": "no_mid_episode_reset_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "RUN generations constant"
+      },
+      {
+        "category": "freshness",
+        "name": "generation_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "episode generation=2"
+      },
+      {
+        "category": "freshness",
+        "name": "handshake_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+      },
+      {
+        "category": "freshness",
+        "name": "no_mid_episode_reset_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "RUN generations constant"
+      },
+      {
+        "category": "freshness",
+        "name": "generation_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "episode generation=3"
+      },
+      {
+        "category": "freshness",
+        "name": "handshake_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "handshake rows=1 success=[{\"step\": 1, \"measured\": 0.0}]"
+      },
+      {
+        "category": "freshness",
+        "name": "no_mid_episode_reset_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "RUN generations constant"
+      }
+    ],
+    "contact_evidence": [
+      {
+        "category": "contact_evidence",
+        "name": "measured_contact_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "max_measured_n=0.647144649 read_ok=True"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "low_force_not_no_contact_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "physical_matches_raw_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "episode_observed_field_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "episode contact_observed/max_measured"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "wall_attribution_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "wall prim attribution present"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "measured_contact_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "max_measured_n=0.647144649 read_ok=True"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "low_force_not_no_contact_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "physical_matches_raw_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "episode_observed_field_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "episode contact_observed/max_measured"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "wall_attribution_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "wall prim attribution present"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "measured_contact_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "max_measured_n=0.647144649 read_ok=True"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "low_force_not_no_contact_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "physical_matches_raw_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "episode_observed_field_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "episode contact_observed/max_measured"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "wall_attribution_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "wall prim attribution present"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "measured_contact_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "max_measured_n=0.016021863 read_ok=True"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "low_force_not_no_contact_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "physical_matches_raw_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "episode_observed_field_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "episode contact_observed/max_measured"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "measured_contact_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "max_measured_n=0.016021863 read_ok=True"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "low_force_not_no_contact_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "physical_matches_raw_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "episode_observed_field_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "episode contact_observed/max_measured"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "measured_contact_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "max_measured_n=0.016021863 read_ok=True"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "low_force_not_no_contact_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD allowed=['PHYSX_CONTACT_FORCE_MEASURED', 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD']"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "physical_matches_raw_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "expected_physical=PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+      },
+      {
+        "category": "contact_evidence",
+        "name": "episode_observed_field_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "episode contact_observed/max_measured"
+      }
+    ],
+    "boundary": [
+      {
+        "category": "boundary",
+        "name": "sensor_reinit_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+      },
+      {
+        "category": "boundary",
+        "name": "episode_boundary_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "handshake before RUN, bounded steps"
+      },
+      {
+        "category": "boundary",
+        "name": "time_monotonic_wall_ep0-r0-contact_W_wall3",
+        "passed": true,
+        "detail": "RUN time non-decreasing"
+      },
+      {
+        "category": "boundary",
+        "name": "sensor_reinit_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+      },
+      {
+        "category": "boundary",
+        "name": "episode_boundary_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "handshake before RUN, bounded steps"
+      },
+      {
+        "category": "boundary",
+        "name": "time_monotonic_wall_ep1-r1-contact_W_wall3",
+        "passed": true,
+        "detail": "RUN time non-decreasing"
+      },
+      {
+        "category": "boundary",
+        "name": "sensor_reinit_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+      },
+      {
+        "category": "boundary",
+        "name": "episode_boundary_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "handshake before RUN, bounded steps"
+      },
+      {
+        "category": "boundary",
+        "name": "time_monotonic_wall_ep2-r2-contact_W_wall3",
+        "passed": true,
+        "detail": "RUN time non-decreasing"
+      },
+      {
+        "category": "boundary",
+        "name": "sensor_reinit_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+      },
+      {
+        "category": "boundary",
+        "name": "episode_boundary_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "handshake before RUN, bounded steps"
+      },
+      {
+        "category": "boundary",
+        "name": "time_monotonic_static_ep0-r0-contact_S_static3",
+        "passed": true,
+        "detail": "RUN time non-decreasing"
+      },
+      {
+        "category": "boundary",
+        "name": "sensor_reinit_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+      },
+      {
+        "category": "boundary",
+        "name": "episode_boundary_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "handshake before RUN, bounded steps"
+      },
+      {
+        "category": "boundary",
+        "name": "time_monotonic_static_ep1-r1-contact_S_static3",
+        "passed": true,
+        "detail": "RUN time non-decreasing"
+      },
+      {
+        "category": "boundary",
+        "name": "sensor_reinit_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "sensor reinit=[{\"link\": \"/World/envs/env_0/Robot/body\", \"created\": true, \"error\": null, \"body_names\": [\"body\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m1_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m1_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m2_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m2_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m3_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m3_prop\"], \"filter_count\": 1}, {\"link\": \"/World/envs/env_0/Robot/m4_prop\", \"created\": true, \"error\": null, \"body_names\": [\"m4_prop\"], \"filter_count\": 1}]"
+      },
+      {
+        "category": "boundary",
+        "name": "episode_boundary_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "handshake before RUN, bounded steps"
+      },
+      {
+        "category": "boundary",
+        "name": "time_monotonic_static_ep2-r2-contact_S_static3",
+        "passed": true,
+        "detail": "RUN time non-decreasing"
+      }
+    ]
+  },
+  "failures": [],
+  "missing_fields": [],
+  "segments": {
+    "contact_W_wall3": {
+      "wall_ep0-r0-contact_W_wall3": {
+        "generation_expected": 1
+      },
+      "wall_ep1-r1-contact_W_wall3": {
+        "generation_expected": 2
+      },
+      "wall_ep2-r2-contact_W_wall3": {
+        "generation_expected": 3
+      }
+    },
+    "contact_S_static3": {
+      "static_ep0-r0-contact_S_static3": {
+        "generation_expected": 1
+      },
+      "static_ep1-r1-contact_S_static3": {
+        "generation_expected": 2
+      },
+      "static_ep2-r2-contact_S_static3": {
+        "generation_expected": 3
+      }
+    }
+  },
+  "freeze": {
+    "path": "configs\\scenarios\\dsh_contact_lifecycle_freeze_v1.json",
+    "sha256": "e0f89f283f51e1665b27ad5c468386c05e499afba9498b2c822da18ff5bdf3be",
+    "code_commit": "34bdaa8ab05f70d10255c30967281229612db3db",
+    "frozen_at": "2026-11-02T14:30:59.495846+00:00",
+    "physics_reset_mode": "hard",
+    "contact_readout_source_sha256": "92c089905d02930d3859d2ad178d2663c44cfe2fa248a87a3f976c8dd7db6f55"
+  }
+}

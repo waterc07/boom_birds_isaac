@@ -10,7 +10,7 @@ import math
 import sys
 import time
 import traceback
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from isaaclab.app import AppLauncher
@@ -31,6 +31,10 @@ parser.add_argument('--repeat-index', type=int, default=-1)
 parser.add_argument('--code-commit', default='WORKTREE')
 parser.add_argument('--working-tree', default='recorded by the operator')
 parser.add_argument('--gpu-driver', default='NOT RECORDED')
+parser.add_argument('--physics-reset-mode', choices=('none', 'hard'),
+                    default='none')
+parser.add_argument('--handshake-max-steps', type=int, default=20)
+parser.add_argument('--handshake-zero-tolerance-n', type=float, default=1e-6)
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 if getattr(args, 'headless', False):
@@ -94,6 +98,17 @@ run_plan = {
     'envelope_contract_version': cases_doc['envelope_contract_version'],
     'vehicle_config': Path(args.vehicle_config).as_posix(),
     'vehicle_config_sha256': sha256_file(args.vehicle_config),
+    'physics_reset_mode': args.physics_reset_mode,
+    'handshake': {'max_steps': int(args.handshake_max_steps),
+                  'zero_tolerance_n': float(args.handshake_zero_tolerance_n)},
+    'contact_evidence_version': cases_doc.get('contact_contract_version'),
+    'contact_readout': {
+        'schema_version': 'boom_birds.contact_readout.v1',
+        'source_sha256': sha256_file(
+            'src/boom_birds/evaluation/contact_readout.py'),
+        'negative_coverage': 'unverified',
+        'event_basis': 'force_threshold_inference',
+    },
     'run_params': {
         'contact_threshold_n': args.contact_threshold_n,
         'post_contact_observe_s': args.post_contact_observe_s,
@@ -126,6 +141,8 @@ if args.freeze is not None:
     frozen_plan = entry.get('run_plan')
     if frozen_plan is None:
         raise RuntimeError('freeze segment has no run_plan')
+    if frozen_plan.get('contact_readout') != run_plan['contact_readout']:
+        raise RuntimeError('freeze contact_readout mismatch; new pre-run freeze required')
     # the runner re-derives and compares the executable core fields
     if frozen_plan.get('cases_sha256') != cases_sha:
         raise RuntimeError('freeze cases_sha256 mismatch')
@@ -137,6 +154,16 @@ if args.freeze is not None:
         raise RuntimeError('freeze vehicle config mismatch')
     run_plan = frozen_plan
     mark('contact freeze verified')
+
+physics_reset_mode = run_plan.get('physics_reset_mode', 'none')
+handshake_cfg = run_plan.get('handshake', {
+    'max_steps': int(args.handshake_max_steps),
+    'zero_tolerance_n': float(args.handshake_zero_tolerance_n)})
+handshake_max_steps = int(handshake_cfg.get('max_steps', 20))
+handshake_zero_tolerance_n = float(
+    handshake_cfg.get('zero_tolerance_n', 1e-6))
+if physics_reset_mode not in ('none', 'hard'):
+    raise RuntimeError('unsupported physics_reset_mode: ' + repr(physics_reset_mode))
 
 app = None
 try:
@@ -154,6 +181,9 @@ try:
 
     sys.path.insert(0, str(Path('src').resolve()))
     from boom_birds.evaluation import contact_contract as contact_mod
+    from boom_birds.evaluation import contact_readout as readout_mod
+    if args.contact_threshold_n != contact_mod.CONTACT_FORCE_THRESHOLD_N:
+        raise ValueError('contact threshold must match the evidence contract')
     from boom_birds.sim import body_envelope as envelope_mod
     from boom_birds.sim.velocity_control import (
         VehicleParams, VehicleState, VelocityExecutor, VelocityGains,
@@ -208,14 +238,39 @@ try:
                       else env._body_id[0])
         matrix = (inertias[0, body_id].tolist()
                   if len(tuple(inertias.shape)) == 3 else inertias[0].tolist())
-        params = VehicleParams(
-            mass_kg=mass, inertia_kgm2=(matrix[0], matrix[4], matrix[8]),
-            thrust_to_weight=float(vehicle_cfg['thrust_to_weight']),
-            moment_scale_nm=float(vehicle_cfg['moment_scale_nm']),
-            gravity_mps2=9.81, max_tilt_rad=float(vehicle_cfg['max_tilt_rad']))
-        executor = VelocityExecutor(params, gains, dt_s=dt, control_epoch=0)
+        def build_executor():
+            current_mass = float(env._robot_mass.item())
+            current_inertias = env._robot.root_physx_view.get_inertias()
+            current_body_id = int(
+                env._body_id[0].item() if hasattr(env._body_id[0], 'item')
+                else env._body_id[0])
+            current_matrix = (current_inertias[0, current_body_id].tolist()
+                              if len(tuple(current_inertias.shape)) == 3
+                              else current_inertias[0].tolist())
+            current_params = VehicleParams(
+                mass_kg=current_mass,
+                inertia_kgm2=(current_matrix[0], current_matrix[4],
+                              current_matrix[8]),
+                thrust_to_weight=float(vehicle_cfg['thrust_to_weight']),
+                moment_scale_nm=float(vehicle_cfg['moment_scale_nm']),
+                gravity_mps2=9.81,
+                max_tilt_rad=float(vehicle_cfg['max_tilt_rad']))
+            return current_params, VelocityExecutor(
+                current_params, gains, dt_s=dt, control_epoch=0)
+
+        params, executor = build_executor()
 
         wall_target = None
+        wall_geometry = None
+
+        def apply_contact_reporters():
+            root = '/World/RMUC2027' if mode == 'wall' else '/World/envs/env_0/Obstacle'
+            for prim in Usd.PrimRange(stage.GetPrimAtPath(root)):
+                if prim.HasAPI(UsdPhysics.CollisionAPI):
+                    PhysxSchema.PhysxContactReportAPI.Apply(prim)
+            for _ in range(3):
+                app.update()
+
         if mode == 'wall':
             map_path = '/World/RMUC2027'
             contract = __import__('boom_birds.sim.map_contract', fromlist=['load_map_contract']).load_map_contract(
@@ -227,19 +282,50 @@ try:
             map_cfg.func(map_path, map_cfg)
             for _ in range(10):
                 app.update()
-            for prim in Usd.PrimRange(stage.GetPrimAtPath(map_path)):
-                if prim.HasAPI(UsdPhysics.CollisionAPI):
-                    PhysxSchema.PhysxContactReportAPI.Apply(prim)
             wall_target = segment['cases'][0]['target']['prim_path']
             if not stage.GetPrimAtPath(wall_target).IsValid():
                 raise RuntimeError('wall prim missing: ' + wall_target)
+            apply_contact_reporters()
+            # confirm the actual wall geometry at the test height: bbox + raycast
+            wall_prim = stage.GetPrimAtPath(wall_target)
+            wall_bbox = UsdGeom.BBoxCache(
+                Usd.TimeCode.Default(),
+                [UsdGeom.Tokens.default_, UsdGeom.Tokens.render]
+            ).ComputeWorldBound(wall_prim).ComputeAlignedRange()
+            wall_min = list(wall_bbox.GetMin())
+            wall_max = list(wall_bbox.GetMax())
+            start = segment['cases'][0]['robot']['start_position_world_m']
+            try:
+                import omni.physx
+                query = omni.physx.get_physx_scene_query_interface()
+                hit = query.raycast_closest(
+                    (float(start[0] + 0.0), float(start[1]),
+                     float(start[2])), (1.0, 0.0, 0.0), 20.0)
+                ray_hit = {
+                    'origin': [float(start[0]), float(start[1]), float(start[2])],
+                    'direction': [1.0, 0.0, 0.0],
+                    'distance_m': (float(hit.get('distance', -1.0))
+                                   if hit.get('hit') else None),
+                    'collision': str(hit.get('collision', ''))
+                    if hit.get('hit') else '',
+                    'hit': bool(hit.get('hit')),
+                }
+            except Exception as error:
+                ray_hit = {'error': repr(error)}
+            wall_geometry = {
+                'target_prim': wall_target,
+                'prim_type': wall_prim.GetTypeName(),
+                'collision_api': wall_prim.HasAPI(UsdPhysics.CollisionAPI),
+                'contact_report_api': wall_prim.HasAPI(
+                    PhysxSchema.PhysxContactReportAPI),
+                'world_bbox_min_m': wall_min,
+                'world_bbox_max_m': wall_max,
+                'raycast': ray_hit,
+                'test_height_m': float(start[2]),
+                'geometry_source': 'competition_map_collision_prim',
+            }
         else:
-            for prim in Usd.PrimRange(stage.GetPrimAtPath(
-                    '/World/envs/env_0/Obstacle')):
-                if prim.HasAPI(UsdPhysics.CollisionAPI):
-                    PhysxSchema.PhysxContactReportAPI.Apply(prim)
-            for _ in range(3):
-                app.update()
+            apply_contact_reporters()
         mark('contact reporters applied')
 
         # robot collision AABB -> body envelope (collision geometry, root frame)
@@ -420,44 +506,56 @@ try:
             'mode': 'isaaclab_contact_sensor',
             'prim_paths': [item['link'] for item in sensors],
             'filter_prim_paths': [target_path],
-            'update_order': 'after_env_step',
+            'update_order': 'after_env_step_force_recompute',
+            'readout_schema': readout_mod.CONTACT_READOUT_SCHEMA_ID,
+            'sample_basis': 'last_physics_step_not_policy_window_max',
+            'negative_coverage': 'unverified',
+            'event_basis': 'force_threshold_inference_not_raw_contact_report',
             'physics': {'physics_dt_s': physics_dt,
                         'decimation': int(cfg.decimation),
                         'substeps_per_step': int(round(dt / physics_dt))},
             'threshold_n': args.contact_threshold_n,
             'errors': [item['error'] for item in sensors if 'error' in item],
+            'reinit_count': 1,
         }
 
         def read_contacts():
-            per_prim = {}
-            target_vectors = {}
-            max_force = 0.0
-            max_net = 0.0
+            reads = []
             for item in sensors:
                 if 'sensor' not in item:
+                    reads.append(readout_mod.ContactRead(
+                        sample=None, error=item.get('error', 'sensor not created')))
                     continue
-                try:
-                    item['sensor'].update(dt=dt)
-                    matrix = item['sensor'].data.force_matrix_w
-                    net = item['sensor'].data.net_forces_w
-                    if net is not None:
-                        max_net = max(max_net, float(net[0].abs().sum(dim=-1).max()))
-                    if matrix is None:
-                        continue
-                    value = matrix[0].abs().sum(dim=-1)
-                    if matrix.shape[-2] == 1:
-                        vector = matrix[0, 0].tolist()
-                    else:
-                        vector = [float(matrix[0].abs().sum())] * 3
-                    force = float(value.max())
-                    max_force = max(max_force, force)
-                    if force > 0:
-                        per_prim[item['link']] = [float(v) for v in vector]
-                        target_vectors[target_path] = [float(v) for v in vector]
-                except Exception:
-                    continue
-            return max_force, per_prim, target_vectors, max_net
+                reads.append(readout_mod.read_contact_sensor(
+                    item['sensor'], dt_s=dt, target_paths=(target_path,)))
+            return reads
 
+        def raw_contact_measure(reads):
+            errors = []
+            net_vectors = []
+            filtered = {}
+            for read in reads:
+                if read.sample is None:
+                    errors.append(read.error or 'sample unavailable')
+                    continue
+                net_vectors.extend(read.sample.net_vectors_n)
+                for target, vector in read.sample.filtered_by_target_n.items():
+                    previous = filtered.get(target)
+                    if previous is None or math.hypot(*vector) > math.hypot(*previous):
+                        filtered[target] = vector
+            max_net = max((math.hypot(*v) for v in net_vectors), default=0.0)
+            max_filtered = max((math.hypot(*v) for v in filtered.values()),
+                               default=0.0)
+            return {
+                'read_ok': not errors,
+                'errors': errors,
+                'max_net_force_n': max_net,
+                'max_filtered_force_n': max_filtered,
+                'measured_force_n': max(max_net, max_filtered),
+                'filtered_targets': sorted(filtered),
+            }
+
+        physics_generation = 1 if physics_reset_mode == 'none' else 0
         results = []
         records = []
         episode_ids = []
@@ -478,12 +576,47 @@ try:
                 robot_start = case['robot']['start_position_world_m']
                 yaw = float(case['robot'].get('yaw_rad', 0.0))
                 obstacle_case = case.get('obstacle')
-            if mode == 'obstacle':
-                for prim in Usd.PrimRange(stage.GetPrimAtPath(
-                        '/World/envs/env_0/Obstacle')):
-                    if prim.HasAPI(UsdPhysics.CollisionAPI):
-                        PhysxSchema.PhysxContactReportAPI.Apply(prim)
+            episode_generation = physics_generation
+            if physics_reset_mode == 'hard':
+                env.sim.reset(soft=False)
+                env.reset(seed=0)
+                physics_generation += 1
+                episode_generation = physics_generation
+                origin = env.scene.env_origins[0].tolist()
+                obstacle = env.scene['obstacle']
+                dt = env.step_dt
+                try:
+                    physics_dt = float(env.sim.get_physics_dt())
+                except Exception:
+                    physics_dt = 0.01
+                params, executor = build_executor()
+                apply_contact_reporters()
                 sensors = create_sensors()
+                sensor_reinit = {
+                    'event': 'after_physics_hard_reset',
+                    'physics_generation': episode_generation,
+                    'sensors': [{'link': item['link'],
+                                 'created': 'sensor' in item,
+                                 'error': item.get('error'),
+                                 'body_names': (list(item['sensor'].body_names)
+                                                if 'sensor' in item else None),
+                                 'filter_count': (
+                                     int(item['sensor'].contact_physx_view.filter_count)
+                                     if 'sensor' in item else None)}
+                                for item in sensors],
+                    'executor_epoch': 0,
+                    'gate_epoch': 'not_used_in_this_entry',
+                    'action_queue': 'not_used_in_this_entry',
+                }
+            else:
+                physics_generation = max(physics_generation, 1)
+                episode_generation = physics_generation
+                sensor_reinit = {'event': 'no_hard_reset',
+                                 'physics_generation': episode_generation,
+                                 'sensors': [{'link': item['link'],
+                                              'created': 'sensor' in item,
+                                              'error': item.get('error')}
+                                             for item in sensors]}
             set_robot_pose(robot_start, yaw)
             try:
                 executor.reset(read_state())
@@ -493,7 +626,88 @@ try:
                 set_obstacle_pose((0.0, 0.0, 50.0))
             elif obstacle_case is not None:
                 set_obstacle_pose(obstacle_case['start_position_world_m'])
-            step_hover()
+            # bounded freshness handshake at a known separated pose
+            handshake_rows = []
+            handshake_ok = False
+            handshake_success_step = None
+            for handshake_step in range(1, handshake_max_steps + 1):
+                state = step_hover(0.0)
+                reads = read_contacts()
+                measure = raw_contact_measure(reads)
+                robot_position_world = [state.position_world_m[i] + origin[i]
+                                        for i in range(3)]
+                handshake_row = {
+                    'episode_id': episode_id,
+                    'phase': 'HANDSHAKE',
+                    'handshake_step': handshake_step,
+                    'physics_generation': episode_generation,
+                    'step': 0,
+                    'time_s': 0.0,
+                    'host_wall_time_ns': time.time_ns(),
+                    'position_world_m': robot_position_world,
+                    'obstacle_position_world_m': (
+                        [0.0, 0.0, 50.0] if mode == 'wall'
+                        else (list(obstacle_case['start_position_world_m'])
+                              if obstacle_case is not None else None)),
+                    'contact_readout': {
+                        'schema_version': readout_mod.CONTACT_READOUT_SCHEMA_ID,
+                        'reads': [asdict(read) for read in reads],
+                        'measure': measure,
+                        'fresh_zero_tolerance_n': handshake_zero_tolerance_n,
+                    },
+                    'fresh_zero': bool(measure['read_ok']
+                                       and measure['measured_force_n']
+                                       <= handshake_zero_tolerance_n),
+                    'read_ok': measure['read_ok'],
+                    'read_errors': measure['errors'],
+                    'measured_force_n': measure['measured_force_n'],
+                }
+                handshake_rows.append(handshake_row)
+                records.append(handshake_row)
+                if handshake_row['fresh_zero']:
+                    handshake_ok = True
+                    handshake_success_step = handshake_step
+                    break
+            if not handshake_ok:
+                episode = {
+                    'episode_id': episode_id,
+                    'case_id': case['case_id'],
+                    'mode': mode,
+                    'outcome': 'INITIALIZATION_FAILED',
+                    'business_outcome': 'FAIL',
+                    'physical_outcome': 'UNKNOWN',
+                    'contact_summary': None,
+                    'envelope_sphere_about_origin_m': sphere_radius,
+                    'max_force_n': 0.0,
+                    'max_measured_force_n': 0.0,
+                    'contact_observed': False,
+                    'first_contact_time_s': None,
+                    'max_geometry_overlap_m': None,
+                    'steps': 0,
+                    'physics_generation': episode_generation,
+                    'handshake': {
+                        'ok': False,
+                        'steps': handshake_rows,
+                        'max_steps': handshake_max_steps,
+                        'zero_tolerance_n': handshake_zero_tolerance_n,
+                    },
+                    'sensor_reinit': sensor_reinit,
+                    'replay': None,
+                }
+                results.append(episode)
+                print('[episode] ' + episode_id
+                      + ' INITIALIZATION_FAILED HANDSHAKE_NOT_FRESH', flush=True)
+                continue
+            # measurement starts only after the fresh-zero handshake
+            set_robot_pose(robot_start, yaw)
+            try:
+                executor.reset(read_state())
+            except Exception:
+                pass
+            if mode == 'wall':
+                set_obstacle_pose((0.0, 0.0, 50.0))
+            elif obstacle_case is not None:
+                set_obstacle_pose(obstacle_case['start_position_world_m'])
             episode_rows = []
             contact_steps = []
             max_force = 0.0
@@ -527,9 +741,12 @@ try:
                                     state.position_world_m[1],
                                     robot_start[2]], yaw)
                     state = read_state()
-                filtered_force, per_prim, target_vectors, net_force = read_contacts()
-                force = max(filtered_force, net_force)
-                max_force = max(max_force, force)
+                if physics_generation != episode_generation:
+                    raise RuntimeError('mid-episode physics reset detected: '
+                                       + str(episode_generation) + ' -> '
+                                       + str(physics_generation))
+                reads = read_contacts()
+                measure = raw_contact_measure(reads)
                 robot_position = list(state.position_world_m)
                 if obstacle_position is not None:
                     center_distance = math.sqrt(sum(
@@ -541,50 +758,19 @@ try:
                     center_distance = None
                     overlap = None
                 max_overlap = max(max_overlap, overlap if overlap is not None else -1e9)
-                event = force > args.contact_threshold_n
-                if event and first_contact_time is None:
-                    first_contact_time = time_s
-                sensor_available = bool(contact_sensor_info['available'])
-                if filtered_force > args.contact_threshold_n:
-                    force_payload = target_vectors
-                    net_payload = None
-                    attribution_prim = [target_path]
-                    attribution_status = 'ATTRIBUTED'
-                    sensor_status = 'filtered_contact_sensor'
-                    force_basis_event = True
-                elif max(filtered_force, net_force) > 0:
-                    force_payload = None
-                    net_payload = max(filtered_force, net_force)
-                    attribution_prim = []
-                    attribution_status = 'UNATTRIBUTED'
-                    sensor_status = 'filtered_unavailable_net_force_available'
-                    force_basis_event = net_payload > args.contact_threshold_n
-                else:
-                    force_payload = None
-                    net_payload = 0.0
-                    attribution_prim = []
-                    attribution_status = 'UNATTRIBUTED'
-                    sensor_status = 'filtered_contact_sensor'
-                    force_basis_event = False
-                record = contact_mod.build_contact_record(
-                    step=step, time_s=time_s,
-                    sensor_available=sensor_available,
-                    sensor_status=sensor_status,
-                    event_available=sensor_available,
-                    event=force_basis_event if sensor_available else None,
-                    prim_attributions=attribution_prim,
-                    force_per_prim_n=force_payload,
-                    net_force_n=net_payload,
-                    attribution_status=(attribution_status
-                                        if sensor_available else None),
-                    force_window_s=dt,
+                record = readout_mod.build_readout_record(
+                    reads, step=step, time_s=time_s, sample_dt_s=physics_dt,
                     geometry=(None if overlap is None else {
                         'sphere_overlap_m': overlap,
                         'robot_radius_m': sphere_radius,
                         'obstacle_radius_m': (
                             max(obstacle_case['size_m']) / 2.0
-                            if obstacle_case else None)}),
-                    notes=None)
+                            if obstacle_case else None)}))
+                force = record['layers']['force']['magnitude_n'] or 0.0
+                max_force = max(max_force, force)
+                event = force > args.contact_threshold_n
+                if event and first_contact_time is None:
+                    first_contact_time = time_s
                 row = {
                     'episode_id': episode_id,
                     'phase': 'RUN',
@@ -598,7 +784,21 @@ try:
                     'geometry_overlap_sphere_m': overlap,
                     'obstacle_position_world_m': obstacle_position,
                     'contact_force_n': float(force),
-                    'contact_prim': target_path if force > 0 else '',
+                    'contact_prim': (target_path if record['layers']['attribution']['status']
+                                     == 'ATTRIBUTED' else ''),
+                    'contact_readout': {
+                        'schema_version': readout_mod.CONTACT_READOUT_SCHEMA_ID,
+                        'reads': [asdict(read) for read in reads],
+                        'measure': measure,
+                        'physics_sample_dt_s': physics_dt,
+                        'coverage_verified': False,
+                    },
+                    'physics_generation': episode_generation,
+                    'host_wall_time_ns': time.time_ns(),
+                    'measured_force_n': measure['measured_force_n'],
+                    'read_ok': measure['read_ok'],
+                    'read_errors': measure['errors'],
+                    'threshold_event': bool(event),
                 }
                 episode_rows.append(row)
                 records.append(row)
@@ -615,57 +815,31 @@ try:
                     break
             summary = contact_mod.summarize_contact_records(
                 [row['contact_record'] for row in episode_rows])
-            if mode == 'wall':
-                if max_force > args.contact_threshold_n:
+            measured_force = max((row['measured_force_n']
+                                  for row in episode_rows), default=0.0)
+            read_error_rows = [row for row in episode_rows
+                               if not row.get('read_ok')]
+            contact_observed = measured_force > 0.0
+            threshold_event_steps = [row['step'] for row in episode_rows
+                                     if row.get('threshold_event')]
+            if read_error_rows:
+                physical = 'UNKNOWN'
+                outcome, reason = 'UNDECIDABLE', 'CONTACT_READ_ERROR'
+            elif contact_observed:
+                if measured_force > args.contact_threshold_n:
                     physical = 'PHYSX_CONTACT_FORCE_MEASURED'
-                    outcome, reason = 'SUCCESS', 'PHYSX_CONTACT'
                 else:
-                    physical = 'NO_CONTACT'
-                    outcome, reason = 'FAIL', 'NO_CONTACT_EVIDENCE'
-            elif mode == 'obstacle':
-                if max_force > args.contact_threshold_n:
-                    physical = ('PHYSX_CONTACT_FORCE_MEASURED'
-                                if any(row['contact_record']['layers']['force'].get('basis') == 'filtered_force'
-                                       for row in episode_rows)
-                                else 'CONTACT_FORCE_MEASURED_UNATTRIBUTED')
-                    outcome, reason = 'SUCCESS', 'PHYSX_CONTACT'
-                else:
-                    physical = 'NO_CONTACT'
-                    outcome, reason = 'FAIL', 'NO_CONTACT_EVIDENCE'
-            elif mode == 'clearance':
-                if max_force > args.contact_threshold_n:
-                    physical = 'PHYSX_CONTACT_FORCE_MEASURED'
+                    physical = 'PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD'
+                if mode in ('wall', 'obstacle'):
+                    outcome, reason = 'SUCCESS', 'PHYSX_CONTACT_FORCE_OBSERVED'
+                elif mode == 'clearance':
                     outcome, reason = 'FAIL', 'UNEXPECTED_CONTACT'
                 else:
-                    physical = 'NO_CONTACT'
-                    outcome, reason = 'SUCCESS', 'NO_CONTACT'
-            elif mode == 'geometry':
-                if max_force > args.contact_threshold_n:
-                    physical = 'PHYSX_CONTACT_FORCE_MEASURED'
-                    outcome, reason = 'FAIL', 'UNEXPECTED_CONTACT'
-                elif max_overlap > args.contact_threshold_n:
-                    physical = 'GEOMETRY_OVERLAP_ONLY'
-                    outcome, reason = 'SUCCESS', 'GEOMETRY_ONLY'
-                else:
-                    physical = 'NO_CONTACT'
-                    outcome, reason = 'FAIL', 'NO_GEOMETRY_OVERLAP'
-            else:  # replay
-                if max_force > args.contact_threshold_n:
-                    physical = 'PHYSX_CONTACT_FORCE_MEASURED'
-                elif max_overlap is not None and max_overlap > args.contact_threshold_n:
-                    physical = 'GEOMETRY_OVERLAP_ONLY'
-                else:
-                    physical = 'NO_CONTACT'
-                previous_label = replay_previous[case['case_id']]['previous_label']
-                if previous_label == 'CONTACT_INFERRED':
-                    if max_force > args.contact_threshold_n:
-                        verdict = 'CONSISTENT'
-                    else:
-                        verdict = 'UNDECIDABLE'
-                else:
-                    verdict = ('CONSISTENT' if physical == 'NO_CONTACT'
-                               else 'MISREPORT')
-                outcome, reason = verdict, 'REPLAY_' + verdict
+                    outcome, reason = 'UNDECIDABLE', 'GEOMETRY_PROBE_CONTACT'
+            else:
+                physical = 'UNKNOWN'
+                outcome, reason = ('UNDECIDABLE',
+                                   'READ_ZERO_COVERAGE_UNVERIFIED')
             episode = {
                 'episode_id': episode_id,
                 'case_id': case['case_id'],
@@ -676,10 +850,29 @@ try:
                 'contact_summary': summary,
                 'envelope_sphere_about_origin_m': sphere_radius,
                 'max_force_n': max_force,
+                'max_measured_force_n': measured_force,
+                'contact_observed': contact_observed,
+                'threshold_event_steps': threshold_event_steps,
                 'first_contact_time_s': first_contact_time,
                 'max_geometry_overlap_m': (None if max_overlap <= -1e8
                                            else max_overlap),
                 'steps': len(episode_rows),
+                'physics_generation': episode_generation,
+                'handshake': {
+                    'ok': handshake_ok,
+                    'success_step': handshake_success_step,
+                    'max_steps': handshake_max_steps,
+                    'zero_tolerance_n': handshake_zero_tolerance_n,
+                    'rows': handshake_rows,
+                },
+                'sensor_reinit': sensor_reinit,
+                'time_domains': {
+                    'host_wall_time_utc': time.strftime(
+                        '%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+                    'policy_steps': len(episode_rows),
+                    'physics_dt_s': physics_dt,
+                    'policy_dt_s': dt,
+                },
                 'replay': ({
                     'source_run': Path(case['previous_run_dir']).as_posix(),
                     'source_episode_id': case['previous_episode_id'],
@@ -717,8 +910,16 @@ try:
                                    if item['outcome'] != 'SUCCESS')},
             'episodes': results,
             'gui_mode': True,
+            'physics_reset_mode': physics_reset_mode,
+            'handshake': {'max_steps': handshake_max_steps,
+                          'zero_tolerance_n': handshake_zero_tolerance_n},
+            'physics_generations': {item['episode_id']: item['physics_generation']
+                                    for item in results},
             'contact_contract_version': cases_doc['contact_contract_version'],
             'envelope_contract_version': cases_doc['envelope_contract_version'],
+            'contact_readout': run_plan.get('contact_readout'),
+            'contact_evidence_version': run_plan.get(
+                'contact_evidence_version'),
         }
         (args.output / 'summary.json').write_text(
             json.dumps(summary, indent=2, ensure_ascii=False) + '\n',
@@ -752,7 +953,28 @@ try:
             'physics': {'physics_dt_s': physics_dt,
                         'decimation': int(cfg.decimation),
                         'substeps_per_step': int(round(dt / physics_dt)),
-                        'replicate_physics': False},
+                        'replicate_physics': False,
+                        'reset_mode': physics_reset_mode},
+            'physics_reset_mode': physics_reset_mode,
+            'physics_generations': {item['episode_id']: item['physics_generation']
+                                    for item in results},
+            'handshake': {'max_steps': handshake_max_steps,
+                          'zero_tolerance_n': handshake_zero_tolerance_n},
+            'sensor_reinit': {item['episode_id']: item.get('sensor_reinit')
+                              for item in results
+                              if item.get('sensor_reinit') is not None},
+            'wall_geometry': wall_geometry,
+            'contact_readout': run_plan.get('contact_readout'),
+            'contact_evidence_version': run_plan.get(
+                'contact_evidence_version'),
+            'time_domains': {
+                'host_start_utc': _started_at,
+                'host_end_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ',
+                                              time.gmtime()),
+                'policy_steps_total': sum(item['steps'] for item in results),
+                'physics_dt_s': physics_dt,
+                'policy_dt_s': dt,
+            },
             'body_envelope': body_envelope,
             'prim_inventory': {
                 'robot': prim_inventory(robot_root),
@@ -762,9 +984,13 @@ try:
             },
             'episode_boundary': {
                 'started_from_reset': True,
-                'no_silent_reset': True,
+                'no_silent_reset': (physics_reset_mode == 'hard'),
+                'reset_mode': physics_reset_mode,
+                'physics_generations': {item['episode_id']: item['physics_generation']
+                                        for item in results},
                 'env_terminated_counts': {item['episode_id']: 0
                                           for item in results},
+                'wrist': 'controlled diagnostic episodes; no mid-episode reset allowed',
             },
             'wheel': {'threshold_n': args.contact_threshold_n},
             'outputs_sha256': outputs_sha,

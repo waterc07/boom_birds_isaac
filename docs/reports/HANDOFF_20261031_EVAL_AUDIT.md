@@ -1,5 +1,7 @@
 # 交接记录：评价 episode 边界全入口修复与干净基线（2026-10-31）
 
+> 后续补充：官方 smoke 的命令元数据使用 `sys.argv` 却缺少导入，已补 `import sys`。单实例前台 GUI 100 步新证据 PASS（581.80、Vulkan、CUDA:0、USD 克隆）；修复前 GUI 对照复现退出 0 却无结果。见 [修复报告](official_gui_smoke/OFFICIAL_GUI_SMOKE_FIX_20261031.md)。本交接原始失败记录保留，不将此前所有 GUI 挂起都归因于该缺陷。调参重验仍待执行。
+
 ## 1. 分支与提交
 
 - 工作区 E:\isaac\proj_boom_birds；分支 `codex/bb22-eval-audit`（自 `c62fb8d`）；未推送远端。

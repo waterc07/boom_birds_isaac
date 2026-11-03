@@ -1,0 +1,9 @@
+stages: ["load contract and cases", "production migration source/parameter freeze verified before GUI startup", "create env", "disable default ground and spawn map", "bind obstacle from scene", "declare kinematic contact inference", "configure map dones", "measure body envelope", "run dynamic paired cases"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 1038, in <module>
+    handshake = contact_session.establish_zero(separated_hover_step)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\isaac\proj_boom_birds\src\boom_birds\sim\dynamic_contact_session.py", line 67, in establish_zero
+    raise RuntimeError('contact initialization has no fresh separated zero baseline')
+RuntimeError: contact initialization has no fresh separated zero baseline

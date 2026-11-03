@@ -1,5 +1,7 @@
 # RMUC2027 地图动力学评价报告（2026-10-31）
 
+> 2026-11-01 后续核对：当前脚本补齐 `import sys` 后，官方 smoke 已两次以前台 GUI、581.80、Vulkan、CUDA:0、USD 克隆完成 100 步；最新结果见 [独立核验摘要](../official_gui_smoke/vulkan_current_verification.json) 与 [修复报告](../official_gui_smoke/OFFICIAL_GUI_SMOKE_FIX_20261031.md)。因此不能将原先“静默退出、无结果”统一归因为 Vulkan；下方地图动力学集的已验证后端仍为 D3D12，未据此提升为 Vulkan 地图验收。
+
 > **状态：** PASS（地图集成与首版动力学证据；**不是**完整比赛导航/避障/训练验收，不提升任何 Gate）
 > **来源章节：** docs/design/RMUC2027_UAV_V2_2.md §8.6、§10.4、§13.2、§15.3、§17、§20.2、§20.11
 > **证据域：** 源码审计 + 单元测试 + 动力学仿真（前台可视 GUI，DirectX/D3D12）
@@ -14,7 +16,7 @@
 - 地图合同已落盘：米、Z-up、世界 X 东/Y 北/Z 上，机体 FLU；地形为静态三角网格碰撞（friction 0.8、restitution 0）；地图 bounds 与探针地面高度写入配置；地图/配置/案例/freeze 均有 hash。
 - 冻结 10 episode（前台 GUI）：3 组到点 ×2 = 6，全部 SUCCESS；起飞—悬停—下降—接地 ×2，全部 LANDED（地面接触力约 0.032 N，prim collision_005）；真实地图接触 ×2，全部 COLLISION（接触力约 0.050 N，prim collision_014）。重复运行结果逐位一致。
 - 独立核验 PASS（19 项）：地图/配置/案例/freeze hash、步数与仿真时间、EpisodeBoundary/无未声明 reset、起降阶段、真实接触 prim/力、分母与产物完整性、GUI 与截图。
-- 官方 GUI smoke 已用 DirectX/D3D12 复跑 PASS（100 步）；此前 Vulkan 后端的 GUI 尝试静默失败，现明确为**渲染后端相关**，未回退 headless，未声称驱动根因。
+- 官方 GUI smoke 的本工作包证据为 DirectX/D3D12 100 步 PASS。历史 Vulkan GUI 静默失败记录保留；后续补齐 `sys` 导入并采用 USD 克隆后，Vulkan GUI 100 步亦已通过，故不再将旧失败确认为渲染后端根因。所有这些复测均未改用 headless。
 
 ## 地图与坐标合同
 
@@ -62,7 +64,7 @@
 
 - 所有本轮 Isaac 运行均以前台可视 GUI 启动，无 --headless；日志含 @Creating window for environment.`。
 - 地图/评价运行使用 DirectX 后端（@--kit_args=--/app/vulkan=false`）；只读观测：Isaac Sim 5.1.0.0、GPU NVIDIA RTX 5080、驱动 581.80、Graphics API D3D12。
-- 官方 smoke：DirectX GUI 100 步 PASS（[result.json](evidence/official_smoke_directx.json)，code_commit 965e6fa、gui_mode true、Graphics API D3D12）。此前默认 Vulkan 的多次 GUI 尝试在环境创建后静默结束、无 PASS/结果（日志保留），**未改用 headless**；现确认与渲染后端相关，未声称驱动根因，也不改写历史 headless 记录。
+- 官方 smoke：本工作包 DirectX GUI 100 步 PASS（[result.json](evidence/official_smoke_directx.json)，code_commit 965e6fa、gui_mode true、Graphics API D3D12）。原默认 Vulkan 尝试的静默结束日志保留，但后续同机 Vulkan GUI（补齐 `sys` 导入、USD 克隆、单实例、正常显示窗口）已完成 100 步。前后并非仅后端一个变量，不能确证旧失败由渲染后端导致；未改用 headless，不改写历史结果。
 - 历史调参依据仍标为**待重验**（上轮审计：tuning 只有 episode 级记录、候选 A 配置未保留）；本轮使用既有比例参考控制器，不重建候选、不声称历史调参有效。
 
 ## 独立核验
@@ -108,7 +110,7 @@ $py = 'E:\isaac\env_isaaclab\Scripts\python.exe'
 3. 10 episode 为本工作包冻结下限，不替代 V2.2 §20.11 正式样本/场景族要求；未做多地图区域、动态障碍、多 yaw 全方向大样本。
 4. 地图几何/碰撞只在抽样区域核对；薄结构、单面网格、视觉-碰撞偏差未穷举。
 5. 起降阈值（离地/接地速度等）为 PROPOSED，不宣称实机安全。
-6. 官方 smoke 的 Vulkan 后端静默失败仍未定位；DirectX GUI 已 PASS；不得据此推断驱动根因。
+6. 官方 smoke 的结果写出缺陷（缺少 `sys` 导入）已修复，并有后续 Vulkan GUI 100 步 PASS；此前持续挂起、默认 Fabric 克隆路径和驱动兼容性的全部根因仍未确认，不能将有限短例通过解释为所有 Vulkan 入口稳定。
 7. 历史调参依据待重验；未运行 PPO、真实感知、板端、SITL/HIL、实机；规则/BOM/PX4 缺口保持 UNKNOWN/RULE-CHECK；不提升任何 Gate。
 8. 比赛地图权重/再分发条款仍需 RULE-CHECK，不能仅凭仓库 MIT 文件判定地形资产权限。
 
@@ -116,5 +118,5 @@ $py = 'E:\isaac\env_isaaclab\Scripts\python.exe'
 
 1. 扩展地图区域与到点/悬停案例到正式样本量，覆盖更多起终点和 yaw；加入动态障碍与真实碰撞统计。
 2. 地图几何-碰撞一致性专项（薄结构/单面网格/视觉偏差）。
-3. 官方 smoke Vulkan 根因定位（保持 GUI，不自动 headless）。
+3. 保留历史官方 smoke 挂起与失败日志；如继续追查间歇异常，需固定源码和克隆方式、使用单实例前台 GUI，避免将已通过的 Vulkan smoke 再笼统标为不可运行。
 4. 调参候选重建与调参集重跑后再冻结（不使用最终比较集调参）。

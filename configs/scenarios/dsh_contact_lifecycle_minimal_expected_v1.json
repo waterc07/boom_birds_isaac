@@ -1,0 +1,45 @@
+{
+  "schema_version": "dsh.contact_lifecycle_expected.v2",
+  "status": "EXPECTED_NOT_CONCLUSION",
+  "contact_contract_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "contact_readout_schema_version": "boom_birds.contact_readout.v1",
+  "physics_reset_mode": "hard",
+  "handshake": {"max_steps": 20, "zero_tolerance_n": 1e-06, "required": true},
+  "contact_threshold_n": 0.02,
+  "notes": "Pre-frozen expectation for the minimal freshness matrix. A zero read is never NO_CONTACT; a low-amplitude measured force is real contact evidence below the 0.02 N threshold and is accepted. Each episode must start from a fresh-zero handshake at a separated pose after a hard physics reset, and must not reset mid-episode.",
+  "segments": {
+    "contact_W_wall3": {
+      "role": "wall",
+      "mode": "wall",
+      "episodes": 3,
+      "fresh_zero_baseline_required": true,
+      "contact_observed_required": true,
+      "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"],
+      "attribution_required_for_wall": true,
+      "wall_target_prim": "/World/RMUC2027/Collisions/collision_014",
+      "wall_geometry_source": "competition_map_collision_prim",
+      "geometry_checks": ["wall_prim_collision_api", "wall_prim_contact_report_api", "raycast_hits_wall_at_test_height"],
+      "note": "Robot flies forward into collision_014; the wall's actual bbox and a raycast at the test height are recorded. No opening/gap/height drift is accepted as contact."
+    },
+    "contact_S_static3": {
+      "role": "obstacle",
+      "mode": "obstacle",
+      "episodes": 3,
+      "fresh_zero_baseline_required": true,
+      "contact_observed_required": true,
+      "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"],
+      "attribution_required_for_wall": false,
+      "static_obstacle_size_m": [0.6, 0.6, 0.6],
+      "note": "Robot flies forward into a static kinematic obstacle; low-amplitude (<0.02 N) contact is accepted as real contact evidence, not as no-contact."
+    }
+  },
+  "cases": {
+    "wall_ep0": {"segment_id": "contact_W_wall3", "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+    "wall_ep1": {"segment_id": "contact_W_wall3", "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+    "wall_ep2": {"segment_id": "contact_W_wall3", "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+    "static_ep0": {"segment_id": "contact_S_static3", "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+    "static_ep1": {"segment_id": "contact_S_static3", "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+    "static_ep2": {"segment_id": "contact_S_static3", "acceptable_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]}
+  }
+}

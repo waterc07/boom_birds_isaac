@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "scope": "OFFICIAL_GUI_SMOKE_METADATA_FIX_COMPARISON_ONLY",
+  "before_fix": {
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_s": 75.4724662,
+    "result_exists": false,
+    "pass_marker": false,
+    "script_sha256": "090f7f911bf0823e487c478703af32e68f11cebd778e47d6d9344a47bf7024ad"
+  },
+  "after_fix": {
+    "status": "PASS",
+    "scope": "FOREGROUND_GUI_OFFICIAL_TASK_100_STEPS_ONLY",
+    "driver": "581.80",
+    "actual_graphics_api": "Vulkan",
+    "steps": 100,
+    "gui_mode": true,
+    "clone_in_fabric": false,
+    "process": {
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_s": 33.0169261,
+      "concurrent_processes_at_start": 0,
+      "window_style": "Normal"
+    },
+    "project_training": "NOT RUN",
+    "original_hang_root_cause": "UNCONFIRMED",
+    "fixed_defect": "missing sys import in command metadata",
+    "script_sha256": "48dbec15046b3b5e0f7eddf00ce51a169598722743cee2f0511e33a6fc87d8f7",
+    "artifact_sha256": {
+      "process_result.json": "6fd812fa227df01ebcaeed06ea27bc1c6f781f577daf4ce8cf5c370960ba2b0a",
+      "result.json": "3511db63d1d4808295873808a5419ae315ab8eedb4615bfa164b62236187d6da",
+      "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout.log": "4d383fc86120c323350421af18de30e67c0287f8194d2618b9f1bf26c7d1cf4d",
+      "window_samples.json": "a1cd7fad63f533cce59afa414e8ccf54089ac1e5355cf1bfdfded786cc6847a0"
+    }
+  },
+  "defect": "sys.argv used for command metadata without importing sys",
+  "source_change": "import sys",
+  "headless_used_in_this_work_package": false,
+  "runtime_limits": "Only one successful 100-step GUI run; previous prolonged hangs and all driver regressions are not assigned to this defect.",
+  "artifact_sha256": {
+    "before_fix.py": "090f7f911bf0823e487c478703af32e68f11cebd778e47d6d9344a47bf7024ad",
+    "before_fix.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "before_fix.stdout.log": "0b74e58b7681af4a848f8ae6af81b6f07488b96baa50a4cd77591a482a14b09c",
+    "before_fix_process.json": "d7d181b951680f71050420db28aeaa02aad12449cdf1e26f9d328172e1f9f7bc",
+    "process_result.json": "6fd812fa227df01ebcaeed06ea27bc1c6f781f577daf4ce8cf5c370960ba2b0a",
+    "result.json": "3511db63d1d4808295873808a5419ae315ab8eedb4615bfa164b62236187d6da",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "4d383fc86120c323350421af18de30e67c0287f8194d2618b9f1bf26c7d1cf4d",
+    "verification.json": "95ad2e7a5cf1b19ed9bf9404db535600644eca0d4c9f5ecdd05cbdb3c4745192",
+    "window_samples.json": "a1cd7fad63f533cce59afa414e8ccf54089ac1e5355cf1bfdfded786cc6847a0"
+  }
+}

@@ -98,6 +98,27 @@ for name in SCENE_CLASSES:
         for col, bearing_bin in enumerate(BEARING_BINS):
             if counts[(distance_bin, bearing_bin)] != STRATA_QUOTAS[row][col]:
                 checks['scenario_quota'] = False
+steps_by_key = defaultdict(list)
+for row in steps:
+    steps_by_key[(row['method'], row['scenario_id'])].append(row)
+silent_reset = []
+for item in episodes:
+    seq = steps_by_key[(item['method'], item['scenario_id'])]
+    for index, row in enumerate(seq):
+        if index == 0:
+            continue
+        position = row['position_world_m']
+        velocity = row['velocity_world_mps']
+        quat = row['quat_wxyz']
+        if (abs(position[0]) < 1e-6 and abs(position[1]) < 1e-6
+                and abs(position[2] - 0.5) < 1e-6
+                and max(abs(value) for value in velocity) < 1e-6
+                and abs(quat[0] - 1.0) < 1e-6
+                and max(abs(quat[1]), abs(quat[2]), abs(quat[3])) < 1e-6):
+            silent_reset.append(item['episode_id'])
+            break
+checks['no_silent_auto_reset'] = not silent_reset
+
 checks['expected_outcomes'] = all(
     item['outcome'] in ('SUCCESS', 'COLLISION', 'TIMEOUT', 'OUT_OF_BOUNDS', 'INVALID')
     for item in episodes)

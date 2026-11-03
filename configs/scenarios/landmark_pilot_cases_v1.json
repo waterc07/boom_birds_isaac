@@ -1,0 +1,262 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "south",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          -4,
+          1
+        ],
+        [
+          -6,
+          -6.2,
+          1
+        ],
+        [
+          6,
+          -6.2,
+          1
+        ],
+        [
+          9.5,
+          -4,
+          1
+        ]
+      ],
+      "corridor_y": -6.2,
+      "sample_count": 0,
+      "blocked_count": 0
+    },
+    {
+      "route_id": "north",
+      "start_region": "W",
+      "goal_region": "E",
+      "corridor_waypoints": [
+        [
+          -10,
+          3.5,
+          1
+        ],
+        [
+          -6,
+          5.8,
+          1
+        ],
+        [
+          5.5,
+          5.8,
+          1
+        ],
+        [
+          9.5,
+          3.5,
+          1
+        ]
+      ],
+      "corridor_y": 5.8,
+      "sample_count": 0,
+      "blocked_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "pilot_east_center",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "south",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.5,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.0,
+      "goal_position_world_m": [
+        8.5,
+        0.0,
+        1.0
+      ],
+      "waypoints": [
+        [
+          8.5,
+          0.0,
+          1.0
+        ],
+        [
+          8.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "timeout_s": 10.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_pilot",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          8.5,
+          -2.5,
+          0.5
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      }
+    },
+    {
+      "case_id": "pilot_east_left",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "south",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.5,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 0.45,
+      "goal_position_world_m": [
+        8.5,
+        0.0,
+        1.0
+      ],
+      "waypoints": [
+        [
+          8.5,
+          0.0,
+          1.0
+        ],
+        [
+          8.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "timeout_s": 10.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_pilot",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          8.5,
+          -2.5,
+          0.5
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      }
+    },
+    {
+      "case_id": "pilot_east_away",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "south",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.5,
+        0.0,
+        1.0
+      ],
+      "start_yaw_rad": 3.14159,
+      "goal_position_world_m": [
+        8.5,
+        0.0,
+        1.0
+      ],
+      "waypoints": [
+        [
+          8.5,
+          0.0,
+          1.0
+        ],
+        [
+          8.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "timeout_s": 10.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_pilot",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          8.5,
+          -2.5,
+          0.5
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      }
+    }
+  ],
+  "notes": [
+    "pilot static E-region views for landmark dataset; natural tower; no synthetic marker"
+  ]
+}

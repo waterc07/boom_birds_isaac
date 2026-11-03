@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "freeze_hash",
+      "passed": true
+    },
+    {
+      "name": "pre_run_freeze",
+      "passed": true
+    },
+    {
+      "name": "source_hashes",
+      "passed": true
+    },
+    {
+      "name": "output_hashes",
+      "passed": true
+    },
+    {
+      "name": "gui_mode",
+      "passed": true
+    },
+    {
+      "name": "new_modes",
+      "passed": true
+    },
+    {
+      "name": "reference_origin_radius",
+      "passed": true
+    },
+    {
+      "name": "episode_denominator",
+      "passed": true
+    },
+    {
+      "name": "raw_vectors",
+      "passed": true
+    },
+    {
+      "name": "all_row_geometry_versions",
+      "passed": true
+    },
+    {
+      "name": "all_row_radii",
+      "passed": true
+    },
+    {
+      "name": "all_valid_row_gaps",
+      "passed": true
+    },
+    {
+      "name": "generation_1",
+      "passed": true
+    },
+    {
+      "name": "handshake_1",
+      "passed": true
+    },
+    {
+      "name": "generation_2",
+      "passed": true
+    },
+    {
+      "name": "handshake_2",
+      "passed": true
+    },
+    {
+      "name": "generation_3",
+      "passed": true
+    },
+    {
+      "name": "handshake_3",
+      "passed": true
+    },
+    {
+      "name": "generation_4",
+      "passed": true
+    },
+    {
+      "name": "handshake_4",
+      "passed": true
+    },
+    {
+      "name": "generation_5",
+      "passed": true
+    },
+    {
+      "name": "handshake_5",
+      "passed": true
+    },
+    {
+      "name": "generation_6",
+      "passed": true
+    },
+    {
+      "name": "handshake_6",
+      "passed": true
+    },
+    {
+      "name": "generation_7",
+      "passed": true
+    },
+    {
+      "name": "handshake_7",
+      "passed": true
+    },
+    {
+      "name": "generation_8",
+      "passed": true
+    },
+    {
+      "name": "handshake_8",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_C_south_0-follow_only",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_C_south_0-supervisor",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_C_north_0-follow_only",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_C_north_0-supervisor",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_D_south_0-follow_only",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_D_south_0-supervisor",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_D_north_0-follow_only",
+      "passed": true
+    },
+    {
+      "name": "physical_dynamic_D_north_0-supervisor",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "raw_errors": [],
+  "rows": 4074,
+  "episodes": 8,
+  "scope": "source/record consistency and positive force; negative contact coverage unverified"
+}

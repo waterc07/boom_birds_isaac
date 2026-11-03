@@ -1,0 +1,13 @@
+{
+  "outputs/map_eval/production_contact_migration/final3/steps.jsonl": "501d292d2f8f43eebbbacbc3f7f8866959d21aac8d57a08aa4cd73890da6696f",
+  "configs/scenarios/contact_production_migration_v3.json": "863350313d41986c8baead4136dc42e64ce448ca90bbbad57db354d154ac8116",
+  "logs/codex_production_contact_migration_final3.log": "985db4b794e8a7d72843dbd7337a4ae4c73abb301663357c3ff778973e074ff4",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/episodes.jsonl": "9cd828a27278269dd77f82d74f686ec4779060196ffe838bfe96d66f2b0414c1",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/final2.error.txt": "98dbc76e5f1dd9f37c454082b467311c942d43b2bf6c7855daefa62afdd6bca8",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/gui_log_excerpt.txt": "17be6ee57600779fe6c8b34b1beb5e29780f5ca3c26804b3cddb45afcf56eca6",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/manifest.json": "a80906507f61f349a1e6440d98d405c7878c7c5f175b9e86262da4925b78daff",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/map_viewport_success.png": "134c120919049734ac902f160e0ccd90892a51f5052929db00a1526267c815bb",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/pilot1.error.txt": "38b972dad95c76bf006f6675ac29f213bcb496b88e158bbe0d1b8a63e621e277",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/selected_steps.json": "01ffc7de6c64af9fad55fd38d57b1d2adf9db0a88690c74d70e8a7fc27b73abc",
+  "docs/reports/map_eval/contact_envelope/production_migration/evidence/summary.json": "e0a87db844b03f0aae2b9a2882cdeb23418fb89d52a5ad6d4b85d033b9478bfa"
+}

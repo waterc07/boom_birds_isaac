@@ -1,0 +1,44 @@
+{
+  "schema_version": "dsh.dynamic_default_equivalence_expected.v2",
+  "status": "EXPECTED_NOT_CONCLUSION",
+  "source_commit": "d332e0e4478ad9bcd329a1d57c7a5dbada0c07e5",
+  "cases": [
+    "dynamic_A_south_0",
+    "dynamic_C_south_0"
+  ],
+  "methods": [
+    "follow_only",
+    "supervisor"
+  ],
+  "runs": [
+    "default",
+    "explicit"
+  ],
+  "equivalence_rule": {
+    "effective_geometry_policy": "reference_origin_v2",
+    "effective_contact_mode": "measured_hard_reset",
+    "default_argument_sources": {
+      "geometry_policy": "default",
+      "contact_mode": "default"
+    },
+    "explicit_argument_sources": {
+      "geometry_policy": "explicit",
+      "contact_mode": "explicit"
+    },
+    "compare": [
+      "actual_effective_config",
+      "business_outcome",
+      "reason",
+      "physical_outcome",
+      "contact_prim",
+      "contact_max_force_n",
+      "generation",
+      "handshake",
+      "episode_boundary",
+      "trajectory_time"
+    ],
+    "not_a_new_performance_claim": true,
+    "zero_reads_remain_unknown": true
+  },
+  "fallback": "if a pair differs, preserve both and locate source/init/contact/control cause; do not change thresholds or delete failures"
+}

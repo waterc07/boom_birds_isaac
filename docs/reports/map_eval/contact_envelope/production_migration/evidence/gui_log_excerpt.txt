@@ -1,0 +1,18 @@
+| Driver Version: 581.80        | Graphics API: D3D12
+[stage] load contract and cases
+[stage] production migration source/parameter freeze verified before GUI startup
+[stage] create env
+Creating window for environment.
+[stage] disable default ground and spawn map
+[stage] bind obstacle from scene
+[stage] declare kinematic contact inference
+[stage] configure map dones
+[stage] measure body envelope
+[stage] run dynamic paired cases
+[episode] dynamic_A_south_0-follow_only SUCCESS ROUTE_COMPLETE
+[episode] dynamic_A_south_0-supervisor SUCCESS ROUTE_COMPLETE
+[episode] dynamic_C_south_0-follow_only COLLISION OBSTACLE_CONTACT
+[episode] dynamic_C_south_0-supervisor ABORT MAX_WAIT_EXCEEDED
+[stage] write outputs
+DYNAMIC_EVAL_PASS {"follow_only": {"SUCCESS": 1, "COLLISION": 1, "TIMEOUT": 0, "OUT_OF_BOUNDS": 0, "ABORT": 0, "INVALID": 0}, "supervisor": {"SUCCESS": 1, "COLLISION": 0, "TIMEOUT": 0, "OUT_OF_BOUNDS": 0, "ABORT": 1, "INVALID": 0}}
+[282.256s] Simulation App Shutting Down

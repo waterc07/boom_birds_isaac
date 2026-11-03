@@ -1,0 +1,34 @@
+{
+  "schema_version": "dsh.contact_lifecycle_cases.v1",
+  "contact_contract_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "contact_readout_schema_version": "boom_birds.contact_readout.v1",
+  "contact_threshold_n": 0.02,
+  "map_config": "configs/maps/rmuc2027.yaml",
+  "local_config": "configs/maps/rmuc2027.local.yaml",
+  "notes": "Minimal freshness matrix: 3 consecutive episodes in one process for a verified map wall and for a static kinematic obstacle, with explicit physics hard reset and a bounded separated-pose freshness handshake before any measurement.",
+  "segments": [
+    {
+      "segment_id": "contact_W_wall3",
+      "role": "wall",
+      "mode": "wall",
+      "repeats": 3,
+      "cases": [
+        {"case_id": "wall_ep0", "robot": {"start_position_world_m": [-4.0, 0.0, 1.0], "yaw_rad": 0.0}, "control": {"mode": "forward_velocity", "forward_mps": 0.6, "max_steps": 300}, "obstacle": null, "target": {"kind": "map_wall", "prim_path": "/World/RMUC2027/Collisions/collision_014", "map_config": "configs/maps/rmuc2027.yaml", "local_config": "configs/maps/rmuc2027.local.yaml"}, "expected_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+        {"case_id": "wall_ep1", "robot": {"start_position_world_m": [-4.0, 0.0, 1.0], "yaw_rad": 0.0}, "control": {"mode": "forward_velocity", "forward_mps": 0.6, "max_steps": 300}, "obstacle": null, "target": {"kind": "map_wall", "prim_path": "/World/RMUC2027/Collisions/collision_014", "map_config": "configs/maps/rmuc2027.yaml", "local_config": "configs/maps/rmuc2027.local.yaml"}, "expected_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+        {"case_id": "wall_ep2", "robot": {"start_position_world_m": [-4.0, 0.0, 1.0], "yaw_rad": 0.0}, "control": {"mode": "forward_velocity", "forward_mps": 0.6, "max_steps": 300}, "obstacle": null, "target": {"kind": "map_wall", "prim_path": "/World/RMUC2027/Collisions/collision_014", "map_config": "configs/maps/rmuc2027.yaml", "local_config": "configs/maps/rmuc2027.local.yaml"}, "expected_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]}
+      ]
+    },
+    {
+      "segment_id": "contact_S_static3",
+      "role": "obstacle",
+      "mode": "obstacle",
+      "repeats": 3,
+      "cases": [
+        {"case_id": "static_ep0", "robot": {"start_position_world_m": [-2.0, 0.0, 1.0], "yaw_rad": 0.0}, "control": {"mode": "forward_velocity", "forward_mps": 0.4, "max_steps": 200}, "obstacle": {"size_m": [0.6, 0.6, 0.6], "start_position_world_m": [0.0, 0.0, 1.0], "velocity_world_mps": [0.0, 0.0, 0.0], "kinematic": true}, "target": null, "expected_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+        {"case_id": "static_ep1", "robot": {"start_position_world_m": [-2.0, 0.0, 1.0], "yaw_rad": 0.0}, "control": {"mode": "forward_velocity", "forward_mps": 0.4, "max_steps": 200}, "obstacle": {"size_m": [0.6, 0.6, 0.6], "start_position_world_m": [0.0, 0.0, 1.0], "velocity_world_mps": [0.0, 0.0, 0.0], "kinematic": true}, "target": null, "expected_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]},
+        {"case_id": "static_ep2", "robot": {"start_position_world_m": [-2.0, 0.0, 1.0], "yaw_rad": 0.0}, "control": {"mode": "forward_velocity", "forward_mps": 0.4, "max_steps": 200}, "obstacle": {"size_m": [0.6, 0.6, 0.6], "start_position_world_m": [0.0, 0.0, 1.0], "velocity_world_mps": [0.0, 0.0, 0.0], "kinematic": true}, "target": null, "expected_physical": ["PHYSX_CONTACT_FORCE_MEASURED", "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"]}
+      ]
+    }
+  ]
+}

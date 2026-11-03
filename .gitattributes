@@ -8,3 +8,8 @@ docs/design/RMUC2027_UAV_V2_2.md text eol=lf
 # Accept Windows CRLF as line terminators without rewriting raw-hash evidence.
 *.py whitespace=cr-at-eol
 *.json whitespace=cr-at-eol
+*.md whitespace=cr-at-eol
+*.jsonl whitespace=cr-at-eol
+*.txt whitespace=cr-at-eol
+# The imported source snapshot also retains original Markdown trailing spaces.
+docs/references/route_v2_1_20261030.md -text whitespace=-blank-at-eol,cr-at-eol

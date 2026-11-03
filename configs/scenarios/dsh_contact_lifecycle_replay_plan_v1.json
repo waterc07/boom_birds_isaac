@@ -1,0 +1,420 @@
+{
+  "schema_version": "dsh.contact_lifecycle_replay_plan.v1",
+  "status": "READY_WITH_GAPS",
+  "purpose": "strict closed-loop replay preparation for the two old CONTACT_INFERRED boundary episodes; no production code change",
+  "source_run": {
+    "run_dir": "outputs/map_eval/bnd_boundary_default",
+    "code_commit": "0546701b715e20e35e0208b112debbf1c41c9808",
+    "commit_available_locally": true,
+    "runner_source": {
+      "path_in_commit": "scripts/run_dynamic_eval.py",
+      "sha256_at_commit": "fd4dd734d045c70d4e188d4c693e710d5ec7d5b016171273c97e41736a9d78b7",
+      "current_working_tree_sha256": "5adb8ed1548e93f8406789d5ae6071dc812bfb5e1501f0bf39b278c930cd3088",
+      "same_as_current": false
+    },
+    "manifest_evaluation_version": "boom_birds.latency_eval.v1",
+    "manifest_gui_evidence": {
+      "gui_mode": true,
+      "renderer": "DirectX (--/app/vulkan=false)",
+      "headless": false,
+      "window_required": true,
+      "screenshots": true,
+      "gpu_driver": "NOT RECORDED"
+    },
+    "manifest_clock_plan": {
+      "camera_clock_id": "camera_sim",
+      "offset_ms": 20.0,
+      "drift_ppm": 200.0,
+      "uncertainty_ms": 5.0
+    },
+    "manifest_envelope_policy": {
+      "robot_radius_rule": "sqrt(sum(aabb_half_extents^2))",
+      "robot_attitude_scope": "any_rigid_rotation_about_center",
+      "obstacle_radius_rule": "max(obstacle_size)/2",
+      "limitation": "sphere/AABB approximation; not a triangle-mesh sweep"
+    },
+    "manifest_body_envelope": {
+      "half_extents_m": [
+        0.05454223374277353,
+        0.03820826672017574,
+        0.013588040310423821
+      ],
+      "source": "measured_usd_aabb_at_runtime",
+      "measured_prim": "/World/envs/env_0/Robot"
+    },
+    "boundary_segment_run_plan": {
+      "segment_id": "boundary_default",
+      "role": "boundary",
+      "vehicle_config": "configs/vehicles/sim_reference.yaml",
+      "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+      "cases_file": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "case_ids": [
+        "boundary_A_static_far_r0",
+        "boundary_A_static_far_r1",
+        "boundary_A_static_offpath_r0",
+        "boundary_A_static_offpath_r1",
+        "boundary_A_static_tight_r0",
+        "boundary_A_static_tight_r1",
+        "boundary_B_cross_early_r0",
+        "boundary_B_cross_early_r1",
+        "boundary_B_cross_far_r0",
+        "boundary_B_cross_far_r1",
+        "boundary_B_cross_late_r0",
+        "boundary_B_cross_late_r1",
+        "boundary_C_headon_collide_r0",
+        "boundary_C_headon_collide_r1",
+        "boundary_C_headon_early_r0",
+        "boundary_C_headon_early_r1",
+        "boundary_C_headon_stop_short_r0",
+        "boundary_C_headon_stop_short_r1"
+      ],
+      "methods": [
+        "supervisor"
+      ],
+      "execution_path": "v2",
+      "obs_delay_s": 0.15,
+      "action_delay_s": 0.1,
+      "ttl_ms": 150,
+      "max_age_ms": 150,
+      "allowed_observation_age_ms": 300,
+      "stop_distance_m": 1.1,
+      "post_abort_observe_s": 3.0,
+      "clock_offset_ms": 20.0,
+      "clock_drift_ppm": 200.0,
+      "clock_uncertainty_ms": 5.0,
+      "sync_fail_step": -1,
+      "obs_mapping_fail_step": -1,
+      "transport_stall_step": -1,
+      "transport_stall_delay_s": 0.15,
+      "expected_file": "configs/scenarios/clearance_boundary_expected_v1.json",
+      "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+      "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+      "clearance_schema_version": "boom_birds.clearance.v1",
+      "stop_requirement_schema_version": "boom_birds.stop_requirement.v1"
+    },
+    "boundary_segment_sha256s": {
+      "cases_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "expected_sha256": null
+    }
+  },
+  "artifacts": {
+    "freeze": {
+      "path": "configs/scenarios/clearance_boundary_freeze_v1.json",
+      "sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+      "manifest_sha256": "7c8297e66af19b0e817d25da7d110115d33ee6acc8062a7a0d889e22f35fd8b2",
+      "matches_manifest": true
+    },
+    "cases": {
+      "path": "configs/scenarios/clearance_boundary_cases_v1.json",
+      "sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "manifest_sha256": "40039748c1bb02ff36aca20cf095d276b9a06b09fb7ac0faf56673c2d984a2c6",
+      "matches_manifest": true
+    },
+    "expected": {
+      "path": "configs/scenarios/clearance_boundary_expected_v1.json",
+      "sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+      "manifest_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+      "matches_manifest": true
+    },
+    "vehicle_config": {
+      "path": "configs/vehicles/sim_reference.yaml",
+      "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+      "manifest_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+      "matches_manifest": true
+    },
+    "brake_model": {
+      "path": "configs/scenarios/brake_model_v1.json",
+      "sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+      "manifest_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+      "matches_manifest": true
+    },
+    "episodes": {
+      "path": "outputs/map_eval/bnd_boundary_default/episodes.jsonl",
+      "sha256": "f4656ffe207fced492ae5d5d416913f0961c66aecc7064c48b7c0e629f28fb3a",
+      "manifest_sha256": "f4656ffe207fced492ae5d5d416913f0961c66aecc7064c48b7c0e629f28fb3a",
+      "matches_manifest": true
+    },
+    "steps": {
+      "path": "outputs/map_eval/bnd_boundary_default/steps.jsonl",
+      "sha256": "cab4e05482b2a75804d7da9e9c50188354233414fb0e5e3a8814ca782646ae12",
+      "manifest_sha256": "cab4e05482b2a75804d7da9e9c50188354233414fb0e5e3a8814ca782646ae12",
+      "matches_manifest": true
+    }
+  },
+  "replay_cases": [
+    {
+      "case_id": "boundary_B_cross_late_r0",
+      "old_episode_id": "boundary_B_cross_late_r0-supervisor-boundary_default",
+      "previous_physical_label": "CONTACT_INFERRED",
+      "old_business_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "old_steps": 173,
+      "old_contact_summary": {
+        "max_sensor_force_n": 0.0,
+        "max_sphere_overlap_m": 0.11796588664086749,
+        "inferred_contact": true,
+        "first_inferred_contact_time_s": 1.05,
+        "radii_sum_m": 0.3679658866409402
+      },
+      "old_first_inferred_contact_step": 20,
+      "old_first_inferred_contact_time_s": 1.05,
+      "old_contact_time_pose": {
+        "robot_world_m": [
+          -0.25,
+          -6.199999809265137,
+          1.0
+        ],
+        "obstacle_world_m": [
+          0.0,
+          -6.425,
+          1.0
+        ]
+      },
+      "initial_state": {
+        "start_position_world_m": [
+          -0.25,
+          -6.2,
+          1.0
+        ],
+        "start_yaw_rad": 0.0,
+        "goal_position_world_m": [
+          9.0,
+          -6.2,
+          1.0
+        ],
+        "waypoints": [
+          [
+            -0.25,
+            -6.2,
+            1.0
+          ],
+          [
+            9.0,
+            -6.2,
+            1.0
+          ]
+        ],
+        "timeout_s": 60.0,
+        "ground_z_m": -0.038,
+        "region_id": "S_S",
+        "goal_region_id": "S_E",
+        "route_id": "south"
+      },
+      "obstacle_trajectory": {
+        "obstacle_id": "obs_B_late",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          -8.0,
+          1.0
+        ],
+        "velocity_world_mps": [
+          0.0,
+          1.5,
+          0.0
+        ],
+        "start_time_s": 0.0,
+        "end_time_s": 1.25,
+        "observation_delay_s": 0.05
+      },
+      "controller": "RouteSupervisor + WaypointRunner + V2ActionGate + VelocityExecutor (exact source at source_commit)"
+    },
+    {
+      "case_id": "boundary_C_headon_collide_r0",
+      "old_episode_id": "boundary_C_headon_collide_r0-supervisor-boundary_default",
+      "previous_physical_label": "CONTACT_INFERRED",
+      "old_business_outcome": "ABORT",
+      "old_reason": "MAX_WAIT_EXCEEDED",
+      "old_steps": 417,
+      "old_contact_summary": {
+        "max_sensor_force_n": 0.0,
+        "max_sphere_overlap_m": 0.11478854958654372,
+        "inferred_contact": true,
+        "first_inferred_contact_time_s": 14.85,
+        "radii_sum_m": 0.3679658866409402
+      },
+      "old_first_inferred_contact_step": 296,
+      "old_first_inferred_contact_time_s": 14.85,
+      "old_contact_time_pose": {
+        "robot_world_m": [
+          -4.286159515380859,
+          -6.199999809265137,
+          0.9980233907699585
+        ],
+        "obstacle_world_m": [
+          -3.9400000000000013,
+          -6.2,
+          1.0
+        ]
+      },
+      "initial_state": {
+        "start_position_world_m": [
+          -9.0,
+          -6.2,
+          1.0
+        ],
+        "start_yaw_rad": 0.0,
+        "goal_position_world_m": [
+          9.0,
+          -6.2,
+          1.0
+        ],
+        "waypoints": [
+          [
+            -9.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -8.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -7.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -6.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -5.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -4.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -3.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -2.0,
+            -6.2,
+            1.0
+          ],
+          [
+            -1.0,
+            -6.2,
+            1.0
+          ],
+          [
+            0.0,
+            -6.2,
+            1.0
+          ],
+          [
+            1.0,
+            -6.2,
+            1.0
+          ],
+          [
+            2.0,
+            -6.2,
+            1.0
+          ],
+          [
+            3.0,
+            -6.2,
+            1.0
+          ],
+          [
+            4.0,
+            -6.2,
+            1.0
+          ],
+          [
+            5.0,
+            -6.2,
+            1.0
+          ],
+          [
+            6.0,
+            -6.2,
+            1.0
+          ],
+          [
+            7.0,
+            -6.2,
+            1.0
+          ],
+          [
+            8.0,
+            -6.2,
+            1.0
+          ],
+          [
+            9.0,
+            -6.2,
+            1.0
+          ]
+        ],
+        "timeout_s": 60.0,
+        "ground_z_m": -0.038,
+        "region_id": "S_S",
+        "goal_region_id": "S_E",
+        "route_id": "south"
+      },
+      "obstacle_trajectory": {
+        "obstacle_id": "obs_C_collide",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          2.0,
+          -6.2,
+          1.0
+        ],
+        "velocity_world_mps": [
+          -0.4,
+          0.0,
+          0.0
+        ],
+        "start_time_s": 0.0,
+        "end_time_s": 1000.0,
+        "observation_delay_s": 0.05
+      },
+      "controller": "RouteSupervisor + WaypointRunner + V2ActionGate + VelocityExecutor (exact source at source_commit)"
+    }
+  ],
+  "required_replay_semantics": {
+    "runner": "extract scripts/run_dynamic_eval.py and the src/boom_birds modules from source_commit 0546701 into a read-only tmp/dsh_contact_lifecycle_replay_src directory (git show / git archive), never checkout or rewrite the shared worktree",
+    "initial_state": "env.reset(seed=0) once; per episode write case start pose/yaw and zero root velocity; obstacle starts at (0,0,50) and is posed each step from case formula",
+    "policy": "RouteSupervisor + WaypointRunner (arrival 0.25 m, speed 0.2 m/s, intermediate hold 0.2 s, final hold 0.5 s, segment timeout 60 s) + V2ActionGate (TTL 150 ms, max_age 150 ms, allowed observation age 300 ms) + VelocityExecutor",
+    "clock_and_queue": "obs_delay 0.15 s, action_delay 0.10 s, SimClock camera offset 20 ms / drift 200 ppm / uncertainty 5 ms, no injected fail steps (all -1)",
+    "obstacle_trajectory": "linear start+velocity*t with obstacle end_time clamp enabled (--obstacle-time-clamp)",
+    "episode_boundary": "EpisodeBoundary.start(seed=case.seed or 9000); env._get_dones override; no per-episode env reset; max_steps=ceil(case.timeout_s/0.05)",
+    "measurement_adaptation": "inject the lifecycle-fixed contact readout as an observer only; do not alter control, obstacle, clock, queue or boundary logic; record raw sensor tensors and read health"
+  },
+  "missing_or_unrecorded": [
+    "Isaac Sim / Isaac Lab / PyTorch / CUDA versions are not recorded in the old manifest (only evaluation_version and GPU driver string).",
+    "GPU driver is recorded as \"NOT RECORDED\"; exact driver identity is absent.",
+    "env_origins / robot root prim world offset at run time are not recorded (probe shows env origin 0.0 in the current setup, but this is not old-run evidence).",
+    "cfg.seed=0 is fixed in source, but boundary.start seed defaults to 9000 when case.seed is absent (cases have no seed field); the default is source-pinned, not recorded per episode.",
+    "Physics/CUDA non-determinism across runs is not characterised; bitwise identical trajectories cannot be promised from the frozen artifacts alone.",
+    "No per-episode screenshots/raw GUI frames were captured for these two episodes (gui_evidence says screenshots=true but the old runner did not record files for every episode).",
+    "Old run has no contact sensor at all; the original contact labels are geometric inference, so the replay must add a measurement adapter and cannot reproduce the old readout by definition."
+  ],
+  "comparison_rule": "replay verdict for old CONTACT_INFERRED label must be CONSISTENT / MISREPORT / MISS / UNDECIDABLE based on the new measurement at the same episode; if lifecycle readout still degrades in-process, each episode must run in a separate process and the replay must be labelled \"separate-process replay\", not a same-process lifecycle validation.",
+  "next_steps": [
+    "after Codex merges contact_readout.py, re-run the lifecycle probe with the fixed readout and confirm same-process repeatability or a documented process-boundary limitation",
+    "if same-process readout is healthy, run the two episodes with the historical source extracted read-only from 0546701 and compare labels",
+    "record every missing item above in the replay report; do not claim bitwise reproduction"
+  ]
+}

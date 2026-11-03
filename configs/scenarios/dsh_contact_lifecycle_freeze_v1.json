@@ -1,0 +1,388 @@
+{
+  "schema_version": "boom_birds.dsh_contact_lifecycle_freeze.v1",
+  "status": "PRE_RUN_FROZEN",
+  "frozen_at": "2026-11-02T14:30:59.495846+00:00",
+  "code_commit": "34bdaa8ab05f70d10255c30967281229612db3db",
+  "worktree_state": {
+    "dirty": true,
+    "porcelain_sha256": "09bb311bbf82ef3c763312ecfff2cabafe35a1048f3574bcbf96396bfca00e20",
+    "entries": 46
+  },
+  "working_tree_note": "clean-head-34bdaa8 plus DSH/Codex uncommitted contact changes",
+  "contact_readout": {
+    "schema_version": "boom_birds.contact_readout.v1",
+    "source_sha256": "92c089905d02930d3859d2ad178d2663c44cfe2fa248a87a3f976c8dd7db6f55",
+    "negative_coverage": "unverified",
+    "event_basis": "force_threshold_inference"
+  },
+  "contact_evidence_version": "boom_birds.contact_evidence.v2",
+  "envelope_contract_version": "boom_birds.body_envelope.v2",
+  "physics_reset_mode": "hard",
+  "handshake": {
+    "max_steps": 20,
+    "zero_tolerance_n": 1e-06
+  },
+  "cases_file": "configs/scenarios/dsh_contact_lifecycle_minimal_cases_v1.json",
+  "cases_sha256": "6899f41d76e038b4b2f6d48bd5eebf8b0125c2952d6c1df06eda185f1feaffcf",
+  "expected_file": "configs/scenarios/dsh_contact_lifecycle_minimal_expected_v1.json",
+  "expected_sha256": "453510c721363fc91c699f48719355e14df2c4e4eab294c27eed2e9155ffa7b9",
+  "vehicle_config": "configs/vehicles/sim_reference.yaml",
+  "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+  "map_config": "configs/maps/rmuc2027.yaml",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "segments": {
+    "contact_W_wall3": {
+      "segment_id": "contact_W_wall3",
+      "role": "wall",
+      "mode": "wall",
+      "case_ids": [
+        "wall_ep0",
+        "wall_ep1",
+        "wall_ep2"
+      ],
+      "episodes": 3,
+      "run_plan": {
+        "segment_id": "contact_W_wall3",
+        "role": "wall",
+        "mode": "wall",
+        "cases_file": "configs/scenarios/dsh_contact_lifecycle_minimal_cases_v1.json",
+        "cases_sha256": "6899f41d76e038b4b2f6d48bd5eebf8b0125c2952d6c1df06eda185f1feaffcf",
+        "case_ids": [
+          "wall_ep0",
+          "wall_ep1",
+          "wall_ep2"
+        ],
+        "expected_file": "configs/scenarios/dsh_contact_lifecycle_minimal_expected_v1.json",
+        "expected_sha256": "453510c721363fc91c699f48719355e14df2c4e4eab294c27eed2e9155ffa7b9",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "physics_reset_mode": "hard",
+        "handshake": {
+          "max_steps": 20,
+          "zero_tolerance_n": 1e-06
+        },
+        "contact_evidence_version": "boom_birds.contact_evidence.v2",
+        "contact_readout": {
+          "schema_version": "boom_birds.contact_readout.v1",
+          "source_sha256": "92c089905d02930d3859d2ad178d2663c44cfe2fa248a87a3f976c8dd7db6f55",
+          "negative_coverage": "unverified",
+          "event_basis": "force_threshold_inference"
+        },
+        "run_params": {
+          "contact_threshold_n": 0.02,
+          "post_contact_observe_s": 0.0,
+          "cases": [
+            {
+              "case_id": "wall_ep0",
+              "robot": {
+                "start_position_world_m": [
+                  -4.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.6,
+                "max_steps": 300
+              },
+              "obstacle": null,
+              "target": {
+                "kind": "map_wall",
+                "prim_path": "/World/RMUC2027/Collisions/collision_014",
+                "map_config": "configs/maps/rmuc2027.yaml",
+                "local_config": "configs/maps/rmuc2027.local.yaml"
+              },
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+              ]
+            },
+            {
+              "case_id": "wall_ep1",
+              "robot": {
+                "start_position_world_m": [
+                  -4.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.6,
+                "max_steps": 300
+              },
+              "obstacle": null,
+              "target": {
+                "kind": "map_wall",
+                "prim_path": "/World/RMUC2027/Collisions/collision_014",
+                "map_config": "configs/maps/rmuc2027.yaml",
+                "local_config": "configs/maps/rmuc2027.local.yaml"
+              },
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+              ]
+            },
+            {
+              "case_id": "wall_ep2",
+              "robot": {
+                "start_position_world_m": [
+                  -4.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.6,
+                "max_steps": 300
+              },
+              "obstacle": null,
+              "target": {
+                "kind": "map_wall",
+                "prim_path": "/World/RMUC2027/Collisions/collision_014",
+                "map_config": "configs/maps/rmuc2027.yaml",
+                "local_config": "configs/maps/rmuc2027.local.yaml"
+              },
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+              ]
+            }
+          ]
+        }
+      },
+      "expected": {
+        "role": "wall",
+        "mode": "wall",
+        "episodes": 3,
+        "fresh_zero_baseline_required": true,
+        "contact_observed_required": true,
+        "acceptable_physical": [
+          "PHYSX_CONTACT_FORCE_MEASURED",
+          "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+        ],
+        "attribution_required_for_wall": true,
+        "wall_target_prim": "/World/RMUC2027/Collisions/collision_014",
+        "wall_geometry_source": "competition_map_collision_prim",
+        "geometry_checks": [
+          "wall_prim_collision_api",
+          "wall_prim_contact_report_api",
+          "raycast_hits_wall_at_test_height"
+        ],
+        "note": "Robot flies forward into collision_014; the wall's actual bbox and a raycast at the test height are recorded. No opening/gap/height drift is accepted as contact."
+      }
+    },
+    "contact_S_static3": {
+      "segment_id": "contact_S_static3",
+      "role": "obstacle",
+      "mode": "obstacle",
+      "case_ids": [
+        "static_ep0",
+        "static_ep1",
+        "static_ep2"
+      ],
+      "episodes": 3,
+      "run_plan": {
+        "segment_id": "contact_S_static3",
+        "role": "obstacle",
+        "mode": "obstacle",
+        "cases_file": "configs/scenarios/dsh_contact_lifecycle_minimal_cases_v1.json",
+        "cases_sha256": "6899f41d76e038b4b2f6d48bd5eebf8b0125c2952d6c1df06eda185f1feaffcf",
+        "case_ids": [
+          "static_ep0",
+          "static_ep1",
+          "static_ep2"
+        ],
+        "expected_file": "configs/scenarios/dsh_contact_lifecycle_minimal_expected_v1.json",
+        "expected_sha256": "453510c721363fc91c699f48719355e14df2c4e4eab294c27eed2e9155ffa7b9",
+        "contact_contract_version": "boom_birds.contact_evidence.v2",
+        "envelope_contract_version": "boom_birds.body_envelope.v2",
+        "vehicle_config": "configs/vehicles/sim_reference.yaml",
+        "vehicle_config_sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731",
+        "map_config": "configs/maps/rmuc2027.yaml",
+        "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+        "physics_reset_mode": "hard",
+        "handshake": {
+          "max_steps": 20,
+          "zero_tolerance_n": 1e-06
+        },
+        "contact_evidence_version": "boom_birds.contact_evidence.v2",
+        "contact_readout": {
+          "schema_version": "boom_birds.contact_readout.v1",
+          "source_sha256": "92c089905d02930d3859d2ad178d2663c44cfe2fa248a87a3f976c8dd7db6f55",
+          "negative_coverage": "unverified",
+          "event_basis": "force_threshold_inference"
+        },
+        "run_params": {
+          "contact_threshold_n": 0.02,
+          "post_contact_observe_s": 0.0,
+          "cases": [
+            {
+              "case_id": "static_ep0",
+              "robot": {
+                "start_position_world_m": [
+                  -2.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.4,
+                "max_steps": 200
+              },
+              "obstacle": {
+                "size_m": [
+                  0.6,
+                  0.6,
+                  0.6
+                ],
+                "start_position_world_m": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "velocity_world_mps": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "kinematic": true
+              },
+              "target": null,
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+              ]
+            },
+            {
+              "case_id": "static_ep1",
+              "robot": {
+                "start_position_world_m": [
+                  -2.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.4,
+                "max_steps": 200
+              },
+              "obstacle": {
+                "size_m": [
+                  0.6,
+                  0.6,
+                  0.6
+                ],
+                "start_position_world_m": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "velocity_world_mps": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "kinematic": true
+              },
+              "target": null,
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+              ]
+            },
+            {
+              "case_id": "static_ep2",
+              "robot": {
+                "start_position_world_m": [
+                  -2.0,
+                  0.0,
+                  1.0
+                ],
+                "yaw_rad": 0.0
+              },
+              "control": {
+                "mode": "forward_velocity",
+                "forward_mps": 0.4,
+                "max_steps": 200
+              },
+              "obstacle": {
+                "size_m": [
+                  0.6,
+                  0.6,
+                  0.6
+                ],
+                "start_position_world_m": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "velocity_world_mps": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "kinematic": true
+              },
+              "target": null,
+              "expected_physical": [
+                "PHYSX_CONTACT_FORCE_MEASURED",
+                "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+              ]
+            }
+          ]
+        }
+      },
+      "expected": {
+        "role": "obstacle",
+        "mode": "obstacle",
+        "episodes": 3,
+        "fresh_zero_baseline_required": true,
+        "contact_observed_required": true,
+        "acceptable_physical": [
+          "PHYSX_CONTACT_FORCE_MEASURED",
+          "PHYSX_CONTACT_FORCE_MEASURED_BELOW_THRESHOLD"
+        ],
+        "attribution_required_for_wall": false,
+        "static_obstacle_size_m": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "note": "Robot flies forward into a static kinematic obstacle; low-amplitude (<0.02 N) contact is accepted as real contact evidence, not as no-contact."
+      }
+    }
+  },
+  "budget": {
+    "segments": 2,
+    "episodes": 6
+  },
+  "support_scope": {
+    "scope": "CURRENT_SIM_MODEL_SINGLE_ENV_ONLY",
+    "gui_evidence_domain": "Isaac Sim GUI DirectX/D3D12; no headless",
+    "reset_mode": "hard physics reset at each episode start; no mid-episode reset",
+    "contact_evidence": "contact_readout.v1 + force_threshold_inference; negative coverage unverified",
+    "low_force": "below 0.02 N is measured force, not no-contact",
+    "limitations": [
+      "single environment only",
+      "not multi-env training",
+      "no native contact callback evidence",
+      "old freeze/results unchanged",
+      "no Gate promotion"
+    ]
+  },
+  "note": "DSH minimal contact freshness matrix pre-run freeze"
+}

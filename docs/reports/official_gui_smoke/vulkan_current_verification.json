@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "scope": "OFFICIAL_FOREGROUND_GUI_100_STEP_SMOKE_ONLY",
+  "driver": "581.80",
+  "actual_graphics_api": "Vulkan",
+  "gui_mode": true,
+  "clone_in_fabric": false,
+  "steps": 100,
+  "code_commit": "f0ccfb19da6707b9938e8147620e8ae4340ccc78",
+  "working_tree_delta": "scripts/check_official_quadcopter.py: import sys (uncommitted)",
+  "source_sha256": "48dbec15046b3b5e0f7eddf00ce51a169598722743cee2f0511e33a6fc87d8f7",
+  "process": {
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_s": 52.3433854,
+    "concurrent_instances_at_start": 0,
+    "window_style": "Normal"
+  },
+  "command": "scripts/check_official_quadcopter.py --steps 100 --clone-in-usd --device cuda:0 --code-commit f0ccfb19da6707b9938e8147620e8ae4340ccc78 --output E:/isaac/boom_birds_storage/runs/vulkan_current_verify_20261031_223123/result.json",
+  "limits": "Not a map-evaluation Vulkan run, default Fabric clone path or long-duration stability validation. Previous failures remain retained.",
+  "artifact_sha256": {
+    "process_result.json": "383558d26b77d8bb1550c027efa049e6f2f845552cd4b1a46bd86bc48bd15d9a",
+    "result.json": "03951ee1652f201506d203be33046b34a26f25b76a87b96a180a75046e9be468",
+    "source_hash.json": "791d16ea26a5265f059560095506d5dbd881b860946afb726f33b30129265de2",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "3bd342a8d5a0b96e4a78472c1abe79a03c4383f4335bf3ad2733323bb9209f8c"
+  }
+}
