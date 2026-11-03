@@ -1,0 +1,9 @@
+{
+  "review_date": "2026-10-31",
+  "original_name": "RMUC2027_UAV_V2.1_系统架构与开发规划.md",
+  "original_snapshot": "docs/references/route_v2_1_20261030.md",
+  "original_sha256": "092281c5def2c688eeaacd9305a53423a4c54c26cfe9c0d0d9387d8effb77ccf",
+  "accepted_design": "docs/design/RMUC2027_UAV_V2_2.md",
+  "accepted_sha256": "a96276a328aebca90177c48b55046a4a85ba6c292efbf0ca2dced60d44340a94",
+  "runtime_schema_status": "DESIGN_ONLY; existing boom_birds.velocity.v1 unchanged"
+}

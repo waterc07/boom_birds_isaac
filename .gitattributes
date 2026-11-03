@@ -1,2 +1,10 @@
 # Preserve original diagnostic logs, including renderer whitespace.
 *.log whitespace=-blank-at-eol
+
+# Keep the imported route snapshot byte-exact and the accepted design hash stable.
+docs/references/route_v2_1_20261030.md -text whitespace=-blank-at-eol
+docs/design/RMUC2027_UAV_V2_2.md text eol=lf
+
+# Accept Windows CRLF as line terminators without rewriting raw-hash evidence.
+*.py whitespace=cr-at-eol
+*.json whitespace=cr-at-eol
