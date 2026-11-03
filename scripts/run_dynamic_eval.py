@@ -84,10 +84,23 @@ if args.write_migration_freeze is not None:
     raise SystemExit(0)
 if args.freeze is not None:
     migration_candidate = json.loads(args.freeze.read_text(encoding='utf-8'))
-    if migration_candidate.get('schema_version') == MIGRATION_FREEZE_SCHEMA:
+    freeze_schema = migration_candidate.get('schema_version')
+    if freeze_schema in (MIGRATION_FREEZE_SCHEMA, MIGRATION_FREEZE_SCHEMA_V1):
+        # Validate before AppLauncher mutates the args namespace.  v1 is a
+        # raw-hash historical freeze and is accepted only with explicit legacy
+        # flags; v2 is the canonical-text measured-mode freeze.
+        migration_freeze_mode(
+            freeze_schema, args.geometry_policy_explicit,
+            args.contact_mode_explicit, args.geometry_policy,
+            args.contact_mode)
         validate_migration_freeze(migration_candidate, vars(args), Path.cwd())
-    elif args.geometry_policy != 'legacy' or args.contact_mode != 'legacy_inference':
-        raise RuntimeError('new geometry/contact mode requires a new migration freeze')
+    elif not legacy_freeze_flags_ok(
+            args.geometry_policy_explicit, args.contact_mode_explicit,
+            args.geometry_policy, args.contact_mode):
+        raise RuntimeError(
+            'legacy freeze requires explicit --geometry-policy legacy '
+            '--contact-mode legacy_inference; the default measured mode will '
+            'not silently reinterpret an old freeze')
 args.output.mkdir(parents=True, exist_ok=True)
 app = AppLauncher(args).app
 STAGES = []
@@ -216,11 +229,8 @@ try:
             code_commit=str(freeze_doc.get('code_commit', '')))
         freeze_schema = freeze_doc.get('schema_version')
         if freeze_schema in (MIGRATION_FREEZE_SCHEMA, MIGRATION_FREEZE_SCHEMA_V1):
-            migration_freeze_mode(
-                freeze_schema, args.geometry_policy_explicit,
-                args.contact_mode_explicit, args.geometry_policy,
-                args.contact_mode)
-            validate_migration_freeze(freeze_doc, vars(args), Path.cwd())
+            # Already validated before AppLauncher started (its args mutation
+            # must not be part of the frozen parameter identity).
             mark('production migration source/parameter freeze verified before GUI startup')
         elif freeze_schema == boundary_plan.CLEARANCE_BOUNDARY_FREEZE_SCHEMA:
             if not legacy_freeze_flags_ok(

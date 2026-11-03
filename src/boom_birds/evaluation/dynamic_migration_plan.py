@@ -129,4 +129,12 @@ def validate_migration_freeze(freeze, args, root):
     current = _identity(args, root, canonical_text=canonical_text)
     for key in ('source_hashes', 'config_hashes', 'parameters', 'git_head'):
         if freeze.get(key) != current[key]:
+            if key == 'parameters':
+                expected = freeze.get(key) or {}
+                actual = current[key] or {}
+                diff = {k: {'frozen': expected.get(k), 'current': actual.get(k)}
+                        for k in sorted(set(expected) | set(actual))
+                        if expected.get(k) != actual.get(k)}
+                raise ValueError('migration freeze mismatch: parameters '
+                                 + json.dumps(diff, default=str))
             raise ValueError('migration freeze mismatch: ' + key)
