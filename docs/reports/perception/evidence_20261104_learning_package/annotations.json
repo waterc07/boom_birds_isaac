@@ -1,0 +1,487 @@
+{
+  "schema_version": "dsh.tower_annotation.v1",
+  "status": "EXPOSED_DEVELOPMENT_SAMPLE_NOT_SEALED_TEST",
+  "note": "12 images copied from previously exposed geometry-test data; labels are manual approximations, not detector predictions; not independent test data",
+  "coordinate_contract": {
+    "image_origin": "top_left",
+    "bbox_format": "xywh_pixels",
+    "keypoint_units": "pixels",
+    "normalization": "none in source; model transforms must be explicit"
+  },
+  "annotations": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "image": "images/geo_test_north_0-follow_only_g1_177.png",
+      "image_sha256": "d7ccdd72059e898435c95bc2ca4ef49b9c548f8c0393aa53201516ca7a49103d",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_north_test",
+        "split": "exposed_development",
+        "episode_generation": 1,
+        "sequence": 177
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          185,
+          35,
+          135,
+          205
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 293.1,
+          "y": 60.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "image": "images/geo_test_north_0-follow_only_g1_182.png",
+      "image_sha256": "a4bfe0dba005384860434a613518f8ad721a829f067a32965fdbc81dd0d10589",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_north_test",
+        "split": "exposed_development",
+        "episode_generation": 1,
+        "sequence": 182
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          170,
+          35,
+          150,
+          200
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 229.0,
+          "y": 58.2,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+      "image": "images/geo_test_north_0-follow_only_g1_188.png",
+      "image_sha256": "23247267b8bf8e1ea3737b3487d273b017094407fb1098d0a6a8c752a7d4df58",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_north_test",
+        "split": "exposed_development",
+        "episode_generation": 1,
+        "sequence": 188
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          165,
+          35,
+          155,
+          205
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 185.5,
+          "y": 57.8,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "image": "images/geo_test_static_a-follow_only_g2_3.png",
+      "image_sha256": "835e4b7b85ca4b8f928c19f7d39c448f0711ed77c87a776786bb41f12673f2e3",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_a",
+        "split": "exposed_development",
+        "episode_generation": 2,
+        "sequence": 3
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          88,
+          65,
+          95,
+          115
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 140.0,
+          "y": 100.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+      "image": "images/geo_test_static_a-follow_only_g2_4.png",
+      "image_sha256": "f203303a409081452378521b7306aeca0d7123eee920e278b35164b6e3fa1525",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_a",
+        "split": "exposed_development",
+        "episode_generation": 2,
+        "sequence": 4
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          88,
+          65,
+          95,
+          115
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 140.0,
+          "y": 100.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+      "image": "images/geo_test_static_a-follow_only_g2_5.png",
+      "image_sha256": "4148c45b18e3c8042462c03602d3050579d059d4969c82e8774ac323fbd1c236",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_a",
+        "split": "exposed_development",
+        "episode_generation": 2,
+        "sequence": 5
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          88,
+          65,
+          95,
+          115
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 140.0,
+          "y": 100.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+      "image": "images/geo_test_static_b-follow_only_g3_3.png",
+      "image_sha256": "dac1096ddda2e6dd087fac2b07cc1a3119f9d0216e12873a3834475e44d5f319",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_b",
+        "split": "exposed_development",
+        "episode_generation": 3,
+        "sequence": 3
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          150,
+          75,
+          135,
+          165
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 225.0,
+          "y": 115.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "image": "images/geo_test_static_b-follow_only_g3_4.png",
+      "image_sha256": "b07caf56b027d6a497e6c30f5318966f59695384c067eb6ae43028e975449483",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_b",
+        "split": "exposed_development",
+        "episode_generation": 3,
+        "sequence": 4
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          150,
+          75,
+          135,
+          165
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 225.0,
+          "y": 115.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+      "image": "images/geo_test_static_b-follow_only_g3_5.png",
+      "image_sha256": "4f801113b959cc0ff5bae8fcdce3586d4915ed5e2e9b68841abdd782a94395ae",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_b",
+        "split": "exposed_development",
+        "episode_generation": 3,
+        "sequence": 5
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": [
+          150,
+          75,
+          135,
+          165
+        ],
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 225.0,
+          "y": 115.0,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "image": "images/geo_test_static_c-follow_only_g4_3.png",
+      "image_sha256": "06300eca28495fd669b2023e9be88b1f0e26a47ce4052da3431c2ecc6475d800",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_c",
+        "split": "exposed_development",
+        "episode_generation": 4,
+        "sequence": 3
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": false,
+        "visibility": "ABSENT",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": null,
+        "keypoint": null,
+        "reference_status": "NOT_APPLICABLE"
+      },
+      "negative_type": "TARGET_ABSENT_HARD_NEGATIVE",
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+      "image": "images/geo_test_static_c-follow_only_g4_4.png",
+      "image_sha256": "ae9c8c8590beb8cdf0f0685c04a70cb5e9daf716ad1e3d64a2edc54fa689f65e",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_c",
+        "split": "exposed_development",
+        "episode_generation": 4,
+        "sequence": 4
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": false,
+        "visibility": "ABSENT",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": null,
+        "keypoint": null,
+        "reference_status": "NOT_APPLICABLE"
+      },
+      "negative_type": "TARGET_ABSENT_HARD_NEGATIVE",
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+      "image": "images/geo_test_static_c-follow_only_g4_5.png",
+      "image_sha256": "fb838238e6c22bee78b4dff9df733735de90041d0a6d31e6a9f75e285f55af4a",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "outputs/sensor_shadow/geo_test",
+        "family": "geo_static_c",
+        "split": "exposed_development",
+        "episode_generation": 4,
+        "sequence": 5
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": false,
+        "visibility": "ABSENT",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_format": "xywh_pixels_origin_top_left",
+        "bbox_xywh": null,
+        "keypoint": null,
+        "reference_status": "NOT_APPLICABLE"
+      },
+      "negative_type": "TARGET_ABSENT_HARD_NEGATIVE",
+      "annotator": "agent_manual_pixel_inspection",
+      "annotation_uncertainty": "bbox approximate; keypoint approximate; not user expert review"
+    }
+  ]
+}

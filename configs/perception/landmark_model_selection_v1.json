@@ -1,0 +1,87 @@
+{
+  "schema_version": "dsh.landmark_model_selection.v1",
+  "status": "PROPOSED_SELECTION_NOT_TRAINED",
+  "selection_date": "2026-11-04",
+  "task": "landmark identity + visibility + green-light anchor + image bearing; bbox auxiliary; mask not required",
+  "candidates": [
+    {
+      "id": "main_yolov8n_pose",
+      "role": "main",
+      "task_fit": "detection bbox + one keypoint in a single network; directly emits green-light anchor and optional bbox",
+      "model": "YOLOv8n-pose",
+      "model_version": "Ultralytics v8.2.0 asset (yolov8n-pose.pt from the v8.2.0 release referenced by RKNN model zoo)",
+      "input": "RGB letterboxed 640x640; custom dataset one class tower, one keypoint green roof light",
+      "outputs": "class score/bbox + one keypoint (x,y,visibility) -> anchor + image bearing",
+      "params_approx": "nano scale; exact parameter/FLOP count must be recorded from the frozen export",
+      "source": "https://docs.ultralytics.com/models/yolov8",
+      "license": {
+        "code_and_weights": "AGPL-3.0 (Ultralytics); custom weights are derivatives; commercial/closed distribution requires legal review or a commercial license",
+        "source_url": "https://github.com/ultralytics/ultralytics/blob/main/LICENSE"
+      },
+      "deployment_evidence": {
+        "onnx_export": "Ultralytics export docs list ONNX; exact opset/version must be frozen at export",
+        "rknn_model_zoo": "official airockchip model zoo includes yolov8_pose; README lists RK3576 support and INT8 benchmark 75.0 FPS single-core for yolov8n-pose",
+        "rknn_version": "RKNN Model Zoo 2.5.0 / RKNPU SDK >=2.5.0 (model zoo README)",
+        "urls": ["https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose", "https://github.com/airockchip/rknn_model_zoo"]
+      },
+      "risks": ["AGPL license obligations", "COCO human-pose pretraining does not match a tower keypoint; custom labels required", "green light is 4-10 px in current 320x240 images; 640 letterbox may still be marginal", "custom pose export/quantization on RK3576 is not verified"],
+      "annotation_cost": "bbox + one keypoint per target; negatives as empty labels; visibility flags"
+    },
+    {
+      "id": "backup_yolox_nano_color_anchor",
+      "role": "backup",
+      "task_fit": "detection bbox only; green-light anchor remains a classical color/geometry stage, so anchor is not learned end-to-end",
+      "model": "YOLOX-Nano",
+      "model_version": "YOLOX 0.1.1rc0 weights (yolox_nano.pth); code/tag to be frozen in isolated environment",
+      "input": "RGB 416x416 default; custom one-class tower detection",
+      "outputs": "tower bbox; green anchor via existing color/geometry validation",
+      "params": "0.91M parameters, 1.08 GFLOPs (YOLOX official benchmark, 416 input)",
+      "source": "https://github.com/Megvii-BaseDetection/YOLOX",
+      "license": {
+        "code_and_weights": "Apache-2.0 (YOLOX repository); COCO pretrained weights/dataset terms require separate review",
+        "source_url": "https://github.com/Megvii-BaseDetection/YOLOX/blob/main/LICENSE"
+      },
+      "deployment_evidence": {
+        "onnx_export": "YOLOX repository provides ONNXRuntime deployment demo",
+        "rknn_model_zoo": "official model zoo lists YOLOX (yolox_s/m) for RK3576; YOLOX-Nano is not explicitly listed, so nano RKNN conversion is UNKNOWN",
+        "urls": ["https://github.com/airockchip/rknn_model_zoo"]
+      },
+      "risks": ["anchor stage remains heuristic and failed in the previous test", "YOLOX-Nano not in official RKNN zoo list", "lower task fit than keypoint model"],
+      "annotation_cost": "bbox only; anchor labels optional for evaluation but not needed for training"
+    },
+    {
+      "id": "rejected_segmentation",
+      "role": "rejected_third",
+      "task_fit": "mask is not consumed by V2.2 landmark relay; mask output does not add a required decision",
+      "model": "YOLOv8n-seg-style instance segmentation (example family)",
+      "source": "https://docs.ultralytics.com/tasks/segment",
+      "license": {
+        "code_and_weights": "AGPL-3.0 (Ultralytics), same license concern",
+        "source_url": "https://github.com/ultralytics/ultralytics/blob/main/LICENSE"
+      },
+      "deployment_evidence": "RKNN model zoo lists yolov8_seg for RK3576; deployment is possible but not the deciding issue",
+      "rejection_reason": "no current downstream consumer requires a mask; annotation cost and output complexity exceed the task contract; do not adopt without a mask-facing consumer"
+    }
+  ],
+  "decision": {
+    "main": "main_yolov8n_pose",
+    "backup": "backup_yolox_nano_color_anchor",
+    "decision_condition": "main is conditional on resolving AGPL obligations; if AGPL is unacceptable, backup is evaluated first but its anchor remains a known weak stage",
+    "rejected": "rejected_segmentation",
+    "not_trained": true,
+    "not_deployment_verified": true,
+    "rk3576_status": "UNKNOWN for our custom weights and quantized model; official zoo examples are not a custom-model validation"
+  },
+  "core_sources": [
+    "https://docs.ultralytics.com/models/yolov8",
+    "https://docs.ultralytics.com/tasks/pose",
+    "https://docs.ultralytics.com/modes/export",
+    "https://github.com/ultralytics/ultralytics/blob/main/LICENSE",
+    "https://github.com/Megvii-BaseDetection/YOLOX",
+    "https://github.com/Megvii-BaseDetection/YOLOX/blob/main/LICENSE",
+    "https://github.com/airockchip/rknn_model_zoo",
+    "https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose",
+    "https://github.com/open-mmlab/mmpose",
+    "https://github.com/open-mmlab/mmpose/blob/main/LICENSE"
+  ]
+}

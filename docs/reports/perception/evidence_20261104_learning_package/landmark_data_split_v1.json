@@ -1,0 +1,49 @@
+{
+  "schema_version": "dsh.landmark_data_split.v1",
+  "status": "PROPOSED_FOR_NEXT_EXPERIMENT",
+  "current_inventory": {
+    "inventory_report": "docs/reports/perception/dsh_landmark_data_inventory_20261104.json",
+    "all_current_data_exposed": true,
+    "sealed_test_remaining": false,
+    "reason": "all listed 49/30/36/30 frames and their labels were inspected during development, diagnostics or previous formal runs"
+  },
+  "grouping_rule": {
+    "group_unit": "physical trajectory family x acquisition session x camera/render version",
+    "no_frame_random_split": true,
+    "no_consecutive_frame_crossing": true,
+    "same_route_reset_or_lighting_render_variation": "one group; never split resets/static near-identical frames across train/val/test",
+    "test_must_be_new_trajectory_family": true,
+    "sample_size_rule": "explicit frame counts are not evidence of independence; report number of groups, positives, negatives, viewpoints and conditions"
+  },
+  "current_groups": [
+    {"group_id": "g_formal6_south_A", "dataset": "formal6", "route_family": "south_A", "generations": [3,4,5,6], "note": "same route repeated by reset; one physical family", "use": "train/development only"},
+    {"group_id": "g_formal6_static", "dataset": "formal6", "route_family": "static_start", "generations": [1,2], "use": "train/development only"},
+    {"group_id": "g_lm_pilot_static", "dataset": "lm_pilot", "route_family": "static_E_dev", "generations": [1,2,3], "use": "train/development only"},
+    {"group_id": "g_lm_dev_south", "dataset": "lm_independence", "route_family": "south_A_new_start", "generations": [1], "use": "train/development only"},
+    {"group_id": "g_lm_reverse", "dataset": "lm_independence", "route_family": "reverse_south", "generations": [2], "use": "train/development only"},
+    {"group_id": "g_lm_north", "dataset": "lm_independence", "route_family": "north", "generations": [3], "use": "validation candidate; do not mix with new north test"},
+    {"group_id": "g_lm_static_test", "dataset": "lm_independence", "route_family": "static_E_oblique_away", "generations": [4,5], "use": "validation candidate"},
+    {"group_id": "g_geo_north", "dataset": "geo_test", "route_family": "north_new_waypoints", "generations": [1], "use": "train/development only; exposed"},
+    {"group_id": "g_geo_static", "dataset": "geo_test", "route_family": "static_new_poses", "generations": [2,3,4], "use": "train/development only; exposed"}
+  ],
+  "proposed_training_split": {
+    "train_groups": ["g_formal6_south_A", "g_formal6_static", "g_lm_pilot_static", "g_lm_dev_south", "g_geo_north"],
+    "validation_groups": ["g_lm_north", "g_lm_static_test", "g_geo_static"],
+    "reason": "validation holds entire north/static groups; reversed south is exposed training/development and is not used as final test",
+    "val_policy": "only validation selects epoch/checkpoint; no validation frame is used for final test or threshold invention"
+  },
+  "future_sealed_test": {
+    "required": true,
+    "minimum_new_groups": 3,
+    "trajectory_families": ["new corridor/path not present above", "new approach direction", "new static pose/altitude/oblique view"],
+    "coverage": ["normal", "scale/distance", "yaw/lateral", "truncation/occlusion", "target absent", "similar landmark hard negative"],
+    "sealed_until_after_freeze": true,
+    "not_collected_in_this_package": true
+  },
+  "data_budget_next_experiment": {
+    "total_frames_target": "200-400 across groups, not 200-400 random consecutive frames",
+    "annotation_target": "bbox + one green-light keypoint for every target-positive sampled frame; negatives empty; visibility/truncation flags",
+    "sampling": "fixed time/path intervals; no score-based selection",
+    "gui_required": "foreground visible Isaac Sim GUI DirectX/D3D12 if new capture is needed; no headless"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "dsh.landmark_training_plan.v1",
+  "status": "PLANNED_NOT_STARTED",
+  "scope": "bounded supervised landmark experiment; no PPO; no control",
+  "selection": {
+    "main": {
+      "id": "main_yolov8n_pose",
+      "model": "YOLOv8n-pose",
+      "model_version": "Ultralytics v8.2.0 asset",
+      "code_version_pin": "ultralytics==8.2.0 (proposed isolated-env pin; verify install/version before run)",
+      "license": "AGPL-3.0; legal review required before distribution; custom weights are derivatives",
+      "why": "one network emits bbox + one keypoint; directly fits visibility + green anchor + auxiliary bbox; RKNN model zoo has yolov8_pose RK3576 example",
+      "official_sources": [
+        "https://docs.ultralytics.com/models/yolov8",
+        "https://docs.ultralytics.com/tasks/pose",
+        "https://docs.ultralytics.com/modes/export",
+        "https://github.com/ultralytics/ultralytics/blob/main/LICENSE",
+        "https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose"
+      ]
+    },
+    "backup": {
+      "id": "backup_yolox_nano_color_anchor",
+      "model": "YOLOX-Nano",
+      "model_version": "YOLOX 0.1.1rc0 weights",
+      "license": "Apache-2.0 code; COCO pretrained/dataset terms require separate review",
+      "why": "permissive license and tiny model; only bbox, anchor remains classical and therefore weaker",
+      "official_sources": [
+        "https://github.com/Megvii-BaseDetection/YOLOX",
+        "https://github.com/Megvii-BaseDetection/YOLOX/blob/main/LICENSE",
+        "https://github.com/airockchip/rknn_model_zoo"
+      ]
+    },
+    "rejected": "segmentation (no mask consumer in V2.2; not selected)"
+  },
+  "input_output": {
+    "input": "RGB image, original 320x240; training letterbox to 640x640; intrinsics retained for bearing conversion",
+    "class_map": {"0": "tower"},
+    "keypoint_count": 1,
+    "keypoint_definition": "green roof-light center; visibility 0/1/2",
+    "output": "bbox + keypoint + class score; bbox auxiliary; image bearing = atan2(anchor_x-cx0, fx)",
+    "mask": "not produced",
+    "distance": "not produced"
+  },
+  "data": {
+    "existing": "all current data are exposed; use only train/validation; no current sealed test",
+    "split": "configs/perception/landmark_data_split_v1.json",
+    "next_new_capture": {
+      "groups": "minimum 3 new trajectory families not present in current data",
+      "frames": "200-400 sampled across groups, not continuous random frames",
+      "conditions": ["normal", "scale/distance", "yaw/lateral", "truncation/occlusion", "target absent", "similar landmark hard negative"],
+      "labels": "bbox + one green-light keypoint for all positives; negatives empty; visibility/truncation/ambiguity flags",
+      "sealed": "freeze labels before final test; final test not seen during training/validation",
+      "gui": "foreground visible GUI DirectX/D3D12 if capture is needed; no headless"
+    }
+  },
+  "training_budget": {
+    "seeds": [0, 1, 2],
+    "epochs_max": 100,
+    "batch": 16,
+    "imgsz": 640,
+    "amp": true,
+    "early_stopping_patience": 20,
+    "checkpoint_selection": "run validation consumer after each saved epoch/end; select highest validation joint score, tie-break lower FP; never inspect final test",
+    "hardware": "host RTX 5080 16GB is available read-only; isolated training environment not created in this package",
+    "resource_estimate": "300-frame / 100-epoch nano run is expected to be hours-scale on the available GPU; verify before committing compute; not a committed benchmark"
+  },
+  "proposed_consumer_thresholds": {
+    "status": "PROPOSED_NOT_COMPETITION",
+    "identity_presence_precision": 0.95,
+    "identity_presence_recall": 0.85,
+    "high_confidence_false_match_rate_max": 0.005,
+    "keypoint_visible_coverage": 0.90,
+    "anchor_bearing_median_deg": 3.0,
+    "anchor_bearing_p90_deg": 5.0,
+    "joint_tp_all_positive_rate": 0.80,
+    "bbox_iou_threshold_for_diagnostic": 0.3,
+    "notes": "the 0.5% false-match target follows the V2.2 initial suggestion but cannot be certified with the current small sample; treat as PROPOSED and report INCOMPLETE if sample insufficient"
+  },
+  "metrics": {
+    "presence_identity": "TP/FP/FN/TN, precision/recall, high-confidence false match",
+    "bbox": "IoU>=0.3 on labelled subset; report coverage",
+    "anchor": "keypoint visible coverage; pixel error and image-bearing median/P90/max",
+    "joint": "all-positive joint pass rate; successful-output coverage; UNKNOWN/REJECTED; per group/visibility/negative type",
+    "denominators": "all positives retained; unlabeled localization samples reported separately; no deletion of failures",
+    "old_baseline": "presence/bbox historical only; no physical anchor comparison"
+  },
+  "stop_conditions": [
+    "validation joint <0.60 or no improvement over current rule baseline",
+    "train/validation gap >20 percentage points or persistent overfit",
+    "no validation improvement for 20 epochs",
+    "ONNX export or RKNN conversion fails / quantized validation drops >5 percentage points",
+    "final sealed test below proposed thresholds after one run; no post-test tuning",
+    "annotation/QA shows identity or keypoint labels unreliable",
+    "compute/data cannot support at least 3 independent groups"
+  ],
+  "reproduce_plan": {
+    "isolated_env": "create .venv/landmark-train outside the Isaac venv; install pinned ultralytics==8.2.0 + torch/torchvision matching CUDA; do not modify E:\\isaac\\env_isaaclab",
+    "data_yaml": "configs/perception/landmark_yolo_pose_v1.yaml (planned paths; no data yet)",
+    "commands_planned": [
+      "yolo pose train model=yolov8n-pose.pt data=configs/perception/landmark_yolo_pose_v1.yaml epochs=100 imgsz=640 batch=16 seed=0 patience=20 project=outputs/landmark/train",
+      "yolo pose val model=best.pt data=configs/perception/landmark_yolo_pose_v1.yaml imgsz=640",
+      "yolo export model=best.pt format=onnx imgsz=640 opset=18 simplify=True",
+      "RKNN model zoo examples/yolov8_pose/python/convert.py best.onnx rk3576 i8 (separate Linux RKNN environment; planned, not run)"
+    ],
+    "not_run": true
+  }
+}

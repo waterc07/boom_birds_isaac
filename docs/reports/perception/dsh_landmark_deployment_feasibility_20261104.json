@@ -1,0 +1,66 @@
+{
+  "schema_version": "dsh.landmark_deployment_feasibility.v1",
+  "status": "READ_ONLY_FEASIBILITY_NO_TRAINED_MODEL",
+  "policy": {
+    "isaac_venv_modified": false,
+    "pip_install_run": false,
+    "training_run": false,
+    "new_gui_run": false
+  },
+  "host_read_only": {
+    "date": "2026-11-04",
+    "platform": "Windows-10-10.0.28120-SP0",
+    "python": "3.11.9",
+    "python_path": "E:/isaac/env_isaaclab/Scripts/python.exe",
+    "packages_present": {
+      "torch": "2.7.0+cu128",
+      "torchvision": "0.22.0+cu128",
+      "onnx": "1.22.0",
+      "opencv": "4.11.0",
+      "numpy": "1.26.0",
+      "Pillow": "11.3.0"
+    },
+    "packages_absent": ["onnxruntime", "ultralytics", "rknn/rknn-toolkit2"],
+    "gpu": "NVIDIA GeForce RTX 5080, driver 581.80, 16303 MiB",
+    "disk_free": {"C": "41502212096 bytes", "E": "352750333952 bytes"},
+    "model_artifacts_found": "none (.onnx/.pt/.rknn search returned no files)",
+    "note": "import was read-only; no package install/upgrade and no Isaac environment change"
+  },
+  "minimal_load_forward_export": {
+    "performed": false,
+    "reason": "no trained weights and no ultralytics/onnxruntime installed; installing is outside this read-only package",
+    "not_evidence_of_accuracy": true
+  },
+  "host_inference": {
+    "performed": false,
+    "reason": "no trained model; timing without a fixed model/weights would be meaningless",
+    "future_protocol": "record input shape, batch, fp32/fp16/int8, warmup, device, preprocess/model/postprocess split, median/P95/P99; host timing does not replace RK3576"
+  },
+  "isolated_environment_plan": {
+    "path": ".venv/landmark-train (outside E:/isaac/env_isaaclab)",
+    "python": "3.11 (match host; freeze exact version)",
+    "pin_candidates": {
+      "ultralytics": "8.2.0",
+      "torch": "2.7.0",
+      "torchvision": "0.22.0",
+      "onnx": "1.22.0"
+    },
+    "install_command_planned": "python -m venv .venv/landmark-train; .venv/landmark-train/Scripts/pip install ultralytics==8.2.0 torch==2.7.0 torchvision==0.22.0 onnx==1.22.0",
+    "not_run": true,
+    "license_note": "Ultralytics 8.2.0/weights AGPL-3.0; no distribution until legal review"
+  },
+  "rknn_conversion": {
+    "official_toolchain": "RKNN Model Zoo 2.5.0 / RKNPU SDK >=2.5.0",
+    "target": "rk3576",
+    "official_example": "examples/yolov8_pose; INT8 benchmark 75.0 FPS single-core for yolov8n-pose (model zoo README, 640 input; inference only, excludes pre/post-processing)",
+    "our_status": "UNKNOWN",
+    "unknowns": ["custom one-keypoint tower export", "quantization calibration", "operator fallback", "pre/post-processing cost", "board driver/BSP", "thermal/continuous load"],
+    "command_planned": "python convert.py custom_best.onnx rk3576 i8"
+  },
+  "sources": [
+    "https://github.com/airockchip/rknn_model_zoo",
+    "https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose",
+    "https://github.com/airockchip/rknn_model_zoo/blob/main/examples/yolov8_pose/python/convert.py"
+  ],
+  "board_validation": "NOT RUN; no RK3576 board attached/tested; no Student full-stack claim"
+}

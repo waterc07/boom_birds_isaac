@@ -1,0 +1,76 @@
+{
+  "schema_version": "dsh.landmark_task_interface.proposed.v1",
+  "status": "PROPOSED_NOT_FROZEN",
+  "basis": [
+    "docs/design/RMUC2027_UAV_V2_2.md#7.4 赛场区域拓扑图",
+    "docs/design/RMUC2027_UAV_V2_2.md#7.5 地标接力导航",
+    "docs/design/RMUC2027_UAV_V2_2.md#7.7 地图和视觉区域定位输出",
+    "docs/design/RMUC2027_UAV_V2_2.md#9.1 前视视觉处理链",
+    "docs/design/RMUC2027_UAV_V2_2.md#10.1 normal observation visual_context"
+  ],
+  "pipeline": {
+    "upstream_observation": {
+      "source": "front_rgb observation from the existing v2 sensor/observation contract",
+      "required_fields": [
+        "sensor_id", "frame_id", "sequence_id", "capture_sim_ns",
+        "capture_time_source", "exposure_time_status", "sync_generation",
+        "four_level_context", "payload_ref", "payload_sha256",
+        "intrinsics", "image_width", "image_height", "validity"
+      ],
+      "do_not_use": ["ground_truth_position", "oracle_region", "target_world_position", "future_steps"]
+    },
+    "visual_perception_output": {
+      "landmark_identity": "proposed landmark_id/class; current asset landmark is RMUC2027 central tower",
+      "visibility": ["FULL", "PARTIAL", "OCCLUDED", "ABSENT", "UNKNOWN"],
+      "stable_reference_point": "green roof-light keypoint in image pixels; UNAVAILABLE if not observable",
+      "image_bearing": "horizontal image angle atan2(keypoint_x - cx0, fx), radians",
+      "bbox": "optional auxiliary detection box",
+      "mask": "not required by the current V2.2 consumer",
+      "confidence": "score/quality with explicit definition, not a calibrated probability unless calibrated",
+      "validity_and_rejections": ["TARGET_AMBIGUOUS", "REFERENCE_UNAVAILABLE", "OCCLUDED", "TRUNCATED", "MULTIPLE_CANDIDATES", "INVALID_OBSERVATION", "STALE", "DUPLICATE", "GENERATION_MISMATCH"]
+    },
+    "association_consumer": {
+      "inputs": ["landmark_id/class", "visibility", "image_bearing", "validity", "age/generation", "optional bbox for gating"],
+      "purpose": "update visible landmark hypotheses/region candidates and conservative coarse bearing; retain multiple hypotheses; no direct setpoint",
+      "must_not": ["treat bbox center as a stable physical anchor", "treat image bearing as world bearing", "treat absence as proof no landmark exists", "output world position or distance without geometry/calibration"]
+    },
+    "decision_use": {
+      "allowed": ["select region hypothesis", "choose next visible landmark/corridor", "bounded heading/search action after separate control validation"],
+      "not_allowed": ["direct PX4 setpoint", "gate promotion", "global localization claim"]
+    }
+  },
+  "answers": {
+    "need_landmark_identity": true,
+    "why_identity": "region/landmark relay needs to associate a detection with a known landmark/region; false match is more dangerous than miss",
+    "stable_physical_reference": "green roof-light center when visible; otherwise no anchor and reject/UNKNOWN",
+    "image_bearing_or_world_bearing": "image bearing only from perception; world bearing requires external attitude/map transform and is outside this consumer",
+    "bbox_consumed": "auxiliary only for detection quality/visibility/gating; downstream landmark relay consumes identity/visibility/bearing",
+    "mask_needed": false,
+    "mask_reason": "no current downstream consumer requires a mask; segmentation adds annotation/compute cost without a defined decision",
+    "reject_when": ["identity ambiguous", "multiple similar landmarks", "reference point invisible", "occlusion/truncation beyond policy", "observation stale/duplicate/generation mismatch", "no valid bearing"]
+  },
+  "proposed_output_record": {
+    "schema_version": "dsh.landmark_observation.proposed.v1",
+    "source": {"sensor_id": "", "frame_id": "", "sequence_id": 0, "payload_sha256": ""},
+    "context": {"sync_generation": 0, "four_level_context": {}, "capture_time_source": "SIM_UPDATE_SAMPLE_TIME", "exposure_time_status": "UNKNOWN"},
+    "landmark_id": null,
+    "landmark_class": "tower",
+    "visibility": "UNKNOWN",
+    "bbox_xywh": null,
+    "reference_point_px": null,
+    "reference_status": "UNAVAILABLE",
+    "bearing_x_rad": null,
+    "bearing_definition": "atan2(reference_x - cx0, fx)",
+    "quality_score": null,
+    "score_definition": "explicitly named; not probability unless calibrated",
+    "valid": false,
+    "reject_reason": "UNKNOWN",
+    "ambiguity": {"candidates": 0, "multiple": false}
+  },
+  "guardrails": [
+    "no region/world/localization/distance conclusion from this output",
+    "invalid data must carry explicit reason, never zero placeholder",
+    "do not use image bearing for horizontal translation without separately validated control conditions",
+    "landmark absence is not proof of target absence"
+  ]
+}

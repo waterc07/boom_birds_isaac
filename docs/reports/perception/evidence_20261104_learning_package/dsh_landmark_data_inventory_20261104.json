@@ -1,0 +1,151 @@
+{
+  "schema_version": "dsh.landmark_data_inventory.v1",
+  "map": {
+    "asset_id": "rmuc2027-isaacsim-20261028",
+    "contract_version": "boom_birds.map_contract.v1",
+    "yaml_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+    "upstream": "CosmosMount/rmuc2027_mjarena",
+    "upstream_commit": "ffd1eb7d1d1a2d1654125d8f316fdb0fdac6d001"
+  },
+  "camera": {
+    "config": "configs/sensors/sensor_shadow_v1.json",
+    "sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55",
+    "status": "PROVISIONAL/ASSET-SPECIFIC, not hardware-frozen"
+  },
+  "datasets": {
+    "formal6": {
+      "root": "outputs/sensor_shadow/formal6_sensor",
+      "records": 1728,
+      "accepted_rgb": 846,
+      "accepted_depth": 490,
+      "generations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "episodes": 6,
+      "episode_ids": [
+        "sensor_static_0",
+        "sensor_static_1",
+        "sensor_route_0",
+        "sensor_route_1",
+        "sensor_reset_0",
+        "sensor_reset_1"
+      ],
+      "sample_count": 1728,
+      "summary_sha256": "e9c7fb0abe1c974d54f6b134db0e35ebf9ebf7105b63e6192ba9794507daf675",
+      "run_complete": true
+    },
+    "lm_pilot": {
+      "root": "outputs/sensor_shadow/lm_pilot_sensor",
+      "records": 36,
+      "accepted_rgb": 9,
+      "accepted_depth": 6,
+      "generations": [
+        1,
+        2,
+        3
+      ],
+      "episodes": 3,
+      "episode_ids": [
+        "pilot_east_center",
+        "pilot_east_left",
+        "pilot_east_away"
+      ],
+      "sample_count": 36,
+      "summary_sha256": "01bc754e85b92d7d66287118466980fe33ee3a712c88facf34255eb8c6e4f916",
+      "run_complete": true
+    },
+    "lm_independence": {
+      "root": "outputs/sensor_shadow/lm_independence_sensor",
+      "records": 1226,
+      "accepted_rgb": 598,
+      "accepted_depth": 99,
+      "generations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "episodes": 5,
+      "episode_ids": [
+        "dev_south_new",
+        "test_reverse_south",
+        "test_north_0",
+        "test_static_oblique",
+        "test_static_away"
+      ],
+      "sample_count": 1226,
+      "summary_sha256": "e2fb56450d9f9332784d0eaff5d2d32911db10256bf94b930a6964481db4a20b",
+      "run_complete": true
+    },
+    "geo_test": {
+      "root": "outputs/sensor_shadow/geo_test_sensor",
+      "records": 414,
+      "accepted_rgb": 195,
+      "accepted_depth": 25,
+      "generations": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "episodes": 4,
+      "episode_ids": [
+        "geo_test_north_0",
+        "geo_test_static_a",
+        "geo_test_static_b",
+        "geo_test_static_c"
+      ],
+      "sample_count": 414,
+      "summary_sha256": "10ccf8ebc4ad00281c3a74c84f3ddf0db3e0a8aca82903c604cc2f0a2956b94b",
+      "run_complete": true
+    }
+  },
+  "labels": {
+    "old36": {
+      "path": "configs/perception/landmark_labels_v1.json",
+      "frames": 47,
+      "split_counts": {
+        "test": 36,
+        "train": 11
+      },
+      "present": 24,
+      "with_bbox": 0,
+      "with_reference": 0,
+      "sha256": "dd8c551dd89c69eb673726319c9f7c8846aadfc8e847d9a45e8d141a4e1efc0c"
+    },
+    "independent79": {
+      "path": "configs/perception/landmark_independent_labels_v1.json",
+      "frames": 79,
+      "split_counts": {
+        "development": 30,
+        "sealed_test": 49
+      },
+      "present": 45,
+      "with_bbox": 9,
+      "with_reference": 8,
+      "sha256": "565b19a53328aa3d54086bbb7c65f7def3b089328772c822acdced8dbcd09aa1"
+    },
+    "geometry30": {
+      "path": "configs/perception/geometry_test_labels_v2.json",
+      "frames": 30,
+      "split_counts": {
+        "sealed_test": 30
+      },
+      "present": 18,
+      "with_bbox": 9,
+      "with_reference": 9,
+      "sha256": "4bae561b46031096f35a012f002da59813293113aeba523b0fcc8230177ceb0f"
+    }
+  },
+  "exposure_state": {
+    "all_listed_runs": "exposed and used for development/diagnostic/testing",
+    "sealed_final_pool_remaining": "NONE",
+    "note": "the 49-frame and 30-frame evaluation sets are exposed; only new trajectory families can form a future sealed test"
+  }
+}

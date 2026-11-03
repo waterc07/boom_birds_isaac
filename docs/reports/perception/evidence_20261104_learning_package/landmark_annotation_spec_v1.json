@@ -1,0 +1,53 @@
+{
+  "schema_version": "dsh.landmark_annotation_spec.v1",
+  "status": "PROPOSED_FOR_NEXT_ANNOTATION",
+  "target": "RMUC2027 central tower, current synthetic map asset",
+  "source_policy": {
+    "allowed_sources": ["existing exposed development images", "new frozen GUI acquisition batches"],
+    "detector_predictions_as_truth": false,
+    "projection_aid": "may be used only as a visual aid after checking visibility/occlusion; must be marked and never treated as unconditional truth",
+    "split_label": "each frame carries group_id and exposure state; exposed data cannot be relabeled as sealed"
+  },
+  "fields": {
+    "frame_id": "stable image basename",
+    "image": "relative path + sha256 + width + height",
+    "source": "run, family/group_id, generation, sequence, capture provenance",
+    "target.landmark_id": "proposed stable ID such as RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "target.class": "tower",
+    "target.present": "true/false; no bbox/keypoint on absent",
+    "target.visibility": "FULL | PARTIAL | OCCLUDED | ABSENT | UNKNOWN",
+    "target.truncated": "boolean; frame-edge truncation",
+    "target.occluded": "boolean; other structure/object occlusion",
+    "target.ambiguous": "boolean; target identity/multiple similar structures uncertain",
+    "geometry.bbox_xywh": "pixels, origin top-left; only for target present",
+    "geometry.keypoint": {"name": "green_roof_light_center", "x": "pixels", "y": "pixels", "visible": "boolean"},
+    "geometry.reference_status": "MANUAL_APPROX | UNAVAILABLE | NOT_APPLICABLE",
+    "negative_type": "TARGET_ABSENT | SIMILAR_STRUCTURE | OTHER_LANDMARK | NONE",
+    "annotator": "agent/user identifier; proxy annotations must say so",
+    "uncertainty": "explicit bbox/keypoint/identity uncertainty",
+    "notes": "free text"
+  },
+  "rules": [
+    "bbox and keypoint are in the original image coordinates; model letterbox/flip transforms must be recorded and reversible",
+    "reference keypoint is the green roof-light center; if not visible, keypoint is null and reference_status UNAVAILABLE; do not guess",
+    "bbox center is not the reference point; never substitute bbox center for the keypoint",
+    "absent target must not carry bbox/keypoint",
+    "ambiguous identity must set ambiguous=true and be excluded from identity-positive training/evaluation or retained as explicit difficult example",
+    "same physical trajectory/reset/static near-identical frames stay in one group",
+    "agent annotations are not user expert review; report this limitation"
+  ],
+  "derived_model_format": {
+    "task": "one-class pose/detection",
+    "class_map": {"0": "tower"},
+    "keypoint_count": 1,
+    "keypoint_channels": ["x", "y", "visibility"],
+    "bbox_normalization": "model-specific; source pixels are transformed explicitly",
+    "negative_images": "empty label file, explicitly listed"
+  },
+  "quality_gate": {
+    "required_checks": ["image sha/dim", "bbox bounds", "keypoint bounds/inside box warning", "absent has no geometry", "no duplicate frame", "source split not mislabeled", "letterbox/hflip roundtrip"],
+    "tool": "scripts/validate_landmark_annotations.py",
+    "sample": "docs/reports/perception/annotation_sample_v1/",
+    "sample_status": "12 exposed development frames; approximate agent labels; QA PASS; not sealed"
+  }
+}

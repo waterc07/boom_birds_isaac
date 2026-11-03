@@ -1,0 +1,9 @@
+# PLANNED dataset config for the bounded landmark experiment.
+# The paths do not exist yet and no training has been run.
+path: data/landmark_v1
+train: images/train
+val: images/val
+names:
+  0: tower
+kpt_shape: [1, 3]
+# final test path is intentionally omitted until a new independent family is frozen.

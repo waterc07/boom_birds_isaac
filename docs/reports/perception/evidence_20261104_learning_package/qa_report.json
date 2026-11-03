@@ -1,0 +1,61 @@
+{
+  "schema_version": "dsh.annotation_qa.v1",
+  "annotations": "docs\\reports\\perception\\annotation_sample_v1\\annotations.json",
+  "annotations_sha256": "17f5a96d875079028feae6c5fd27000668bd126c0e654b4adacc8cb23dd8b471",
+  "root": "docs\\reports\\perception\\annotation_sample_v1",
+  "count": 12,
+  "errors": [],
+  "warnings": [],
+  "overlays": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "overlay_sha256": "712e3a2163d9fc2c46f6ada91acff6f1e3ea8a527eb5892b84d08cd13723099e"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "overlay_sha256": "5388661edc698af4520d7ae1ac990a40d729d3f037558ae9ea0150cce85d976b"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+      "overlay_sha256": "03c1a1c3e195e78c5b091a5cb996fab0eba22840381a4f34f6828d7a9f925347"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "overlay_sha256": "7499e9c32ef287b820a77bc1a67fb1e4b0b8f5db01fa02278f79f00869e16e43"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+      "overlay_sha256": "c0f0e900efcb473a31dcccad1c1f1c262d744edabb877c076a3d6d824a20c48e"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+      "overlay_sha256": "b88a2d33aa6672646e8f165d6f3683a1843637c541f6737fe8a481da404e392f"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+      "overlay_sha256": "3b2b315ad276de18605ee03ec0ac29c9ecd8d19a00ed87fab35ba3122728b3ca"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "overlay_sha256": "e8214bbf516c7607b116841280c95635de7a1ad20b8eaf0e60f6aa24b0b581c5"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+      "overlay_sha256": "bbc3bde29b399a2dae4d6f546437b73b1ea13f286d3823966eae350b866f3b46"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "overlay_sha256": "2e281830e77ce5b63a6bf59921572e7d7ec7c9e41c4fc959e479296b809954aa"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+      "overlay_sha256": "dab429672348bfae6abf2e272bfbf3eb269ed5005e4a6444dd740c3b9055468e"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+      "overlay_sha256": "1b30978bb43906bf1996b9e131b46087adf2d58d5f8da8603de20f6b35332b71"
+    }
+  ],
+  "status": "PASS",
+  "limits": "agent manual approximate labels; not user expert review; not a sealed test"
+}
