@@ -55,7 +55,6 @@ class LandmarkConsumer:
         self.last_sequence = {}
         self.cache = {}
         self.reset_count = 0
-        self.template_path = Path(template_path)
         self.template_hash = (hashlib.sha256(
             self.template_path.read_bytes()).hexdigest()
             if self.template_path is not None else None)
