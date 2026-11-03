@@ -11,7 +11,11 @@ _EXCLUDED = {'output', 'freeze', 'write_migration_freeze', 'working_tree',
 
 
 def _hash(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    # Freeze identity is logical text identity, not checkout line endings.
+    # Git may materialize LF or CRLF for the same committed blob depending on
+    # core.autocrlf; canonicalize CRLF to LF before hashing.
+    data = path.read_bytes().replace(b'\r\n', b'\n')
+    return hashlib.sha256(data).hexdigest()
 
 
 def _head(root):
