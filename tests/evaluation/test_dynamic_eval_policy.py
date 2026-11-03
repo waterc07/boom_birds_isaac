@@ -61,3 +61,9 @@ def test_legacy_raw_freeze_requires_explicit_legacy_flags():
         policy.migration_freeze_mode(
             "boom_birds.clearance_boundary_freeze.v1", False, False,
             "reference_origin_v2", "measured_hard_reset")
+
+def test_mixed_legacy_and_new_policies_are_rejected():
+    with pytest.raises(ValueError, match="mixed"):
+        policy.resolve_modes("legacy", "measured_hard_reset")
+    with pytest.raises(ValueError, match="mixed"):
+        policy.resolve_modes("reference_origin_v2", "legacy_inference")

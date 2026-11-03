@@ -33,6 +33,11 @@ def resolve_modes(geometry_policy: str | None,
         raise ValueError('unsupported geometry policy: ' + str(resolved_geometry))
     if resolved_contact not in (LEGACY_CONTACT_MODE, DEFAULT_CONTACT_MODE):
         raise ValueError('unsupported contact mode: ' + str(resolved_contact))
+    if ((resolved_geometry == LEGACY_GEOMETRY_POLICY)
+            != (resolved_contact == LEGACY_CONTACT_MODE)):
+        raise ValueError(
+            'mixed legacy/new geometry and contact policies are not supported; '
+            'pass both measured defaults or both explicit legacy flags')
     return {
         'geometry_policy': resolved_geometry,
         'contact_mode': resolved_contact,
