@@ -190,7 +190,7 @@ def main():
     negative_episodes = [name for name, value in per_episode.items()
                          if value['negatives']]
     check('metrics', 'episode_denominator',
-          len(positive_episodes) + len(negative_episodes) == len(per_episode),
+          len(per_episode) == len({item['episode'] for item in test}),
           'episodes=' + repr(sorted(per_episode)))
     failures.extend({'name': item['name'], 'detail': item['detail']}
                     for item in checks if not item['passed'])
