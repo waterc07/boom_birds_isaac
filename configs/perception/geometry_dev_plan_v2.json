@@ -1,0 +1,59 @@
+{
+  "schema_version": "dsh.geometry_dev_plan.v1",
+  "created_at": "2026-11-03T16:10:28.154786+00:00",
+  "status": "FROZEN_BEFORE_GEOMETRY_REEVALUATION",
+  "method": "green-light-seeded tower geometry",
+  "data": {
+    "source": "49 previously exposed diagnostic frames + 30 development frames from the independent landmark package",
+    "exposed": true,
+    "not_a_sealed_test": true,
+    "positive_frames": 27,
+    "negative_frames": 22,
+    "bbox_and_reference_subset": 9,
+    "bbox_evaluable": 8,
+    "note": "49 exposed diagnostic + 30 development frames; no sealed test"
+  },
+  "proposed_continue_conditions": {
+    "coordinate_mapping": "synthetic anchor scale .5/.8/1.0 must pass before any detections are evaluated",
+    "normal_plus_two_views": "bbox IoU>=0.3 and anchor error<=5 deg in at least 3 of 9 bbox-labelled positives, spanning at least two families (north/reverse/static)",
+    "presence": "presence TP>=16/27, FP<=3/22, precision>=0.70, recall>=0.55",
+    "localization": "bbox-localization TP>=5/9 and anchor error<=5 deg for at least 4/8 reference-evaluable positives",
+    "green_negatives": "known similar green negatives (e.g. north s103 and reverse s83/s103) must not be accepted by color alone; FP<=3/22 is not sufficient if all FPs are green-like",
+    "comparison": "better than the old baseline failed state on reverse/north evidence; baseline had 0/12 reverse detections at the PROPOSED threshold; this detector should produce at least one correct reverse target if it claims reverse capability"
+  },
+  "parameters": {
+    "green_rgb": [
+      100.0,
+      1.25,
+      1.15
+    ],
+    "min_green_area": 10,
+    "max_green_area": 300,
+    "sat_min": 70,
+    "sat_val_min": 35,
+    "min_sat_pixels": 20,
+    "min_bbox_side": 30,
+    "min_edge_density": 0.03,
+    "max_symmetry": 0.97,
+    "max_anchor_top_fraction": 0.45,
+    "ambiguity_ratio": 0.97
+  },
+  "evaluation": {
+    "presence": "DETECTED on a positive label",
+    "bbox_tp": "IoU>=0.3 with label bbox",
+    "anchor_tp": "anchor bearing error<=5 deg vs label green point",
+    "joint_tp": "presence and bbox IoU>=0.3 and anchor error<=5 deg, when reference available",
+    "unavailable_reference": "counted in presence; excluded only from anchor error denominator and reported separately",
+    "unknown_rejected": "retained in denominators; no deletion of positive failures",
+    "old_baseline_anchor": "old baseline has no anchor; its bbox-center bearing is historical diagnostic only, not compared as anchor bearing"
+  },
+  "decision_rule": {
+    "pass": "all proposed continue conditions met -> freeze method and collect 3-4 new independent GUI episodes for one sealed test",
+    "fail": "any condition missing -> stop this heuristic; no new GUI collection; write negative evidence and next-method proposal",
+    "no_test_time_tuning": true,
+    "proposed_not_competition": true
+  },
+  "plan_version": "v2",
+  "supersedes": "configs/perception/geometry_dev_plan_v1.json",
+  "revision_reason": "initial dev evaluation showed one false green structure (reverse s103) with green component area 9; target visible static green starts at 10 px in this asset. Bounded dev-only candidate-size filter; no sealed test exists or was used."
+}
