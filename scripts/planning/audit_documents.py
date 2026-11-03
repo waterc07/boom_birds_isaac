@@ -7,7 +7,8 @@ from pathlib import Path
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[2]
-FILES = [ROOT / "README.md", ROOT / "PROJECT_PLAN.md"]
+FILES = [ROOT / "README.md", ROOT / "PROJECT_PLAN.md", ROOT / "AGENTS.md",
+         ROOT / "docs/reports/CURRENT_STATUS.md"]
 FILES += sorted((ROOT / "docs/design").glob("*.md"))
 FILES += sorted((ROOT / "docs/decisions").glob("*.md"))
 FILES += [ROOT / p for p in (
@@ -20,6 +21,7 @@ FILES += [ROOT / p for p in (
     "docs/planning/09_TARGET_TEAM_AND_INTERCEPTION.md",
     "docs/planning/10_CURRENT_FACTS_AND_ANALYSIS_20261011.md",
     "docs/reports/PLANNING_ACCEPTANCE.md",
+    "docs/reports/ROUTE_V2_2_REVIEW_20261031.md",
     "docs/research/04_REPORT_REVIEW_20261009.md",
     "docs/superpowers/plans/2026-10-09-phase0-baseline.md",
     "docs/superpowers/plans/2026-10-11-p0-p1-foundation.md",
@@ -62,6 +64,18 @@ if __name__ == "__main__":
     checks.update(additional)
     errors += [f"arithmetic check: {k}" for k, passed in additional.items() if not passed]
     source_hashes = {}
+    route_provenance = json.loads(
+        (ROOT / "docs/references/route_review_provenance.json").read_text(encoding="utf-8")
+    )
+    for path_key, hash_key in (
+        ("original_snapshot", "original_sha256"),
+        ("accepted_design", "accepted_sha256"),
+    ):
+        route_file = ROOT / route_provenance[path_key]
+        passed = hashlib.sha256(route_file.read_bytes()).hexdigest() == route_provenance[hash_key]
+        source_hashes[str(route_file.relative_to(ROOT))] = passed
+        if not passed:
+            errors.append(f"route provenance hash changed: {route_file}")
     for folder, manifest, key in (
         ("docs/references/field_research_20261009", "sources.json", "sources"),
         ("docs/references/handoff_20261009", "snapshot_sources.json", None),

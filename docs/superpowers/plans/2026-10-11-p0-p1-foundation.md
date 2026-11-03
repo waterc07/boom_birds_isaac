@@ -1,6 +1,8 @@
 # Boom_Birds P0/P1 Foundation Implementation Plan
 
-> **For agentic workers:** Use `superpowers:executing-plans` to implement this plan task-by-task. Do not dispatch agents unless current instructions permit it. Steps use checkbox syntax; all unchecked steps are NOT RUN. Task 1/2于2026-10-11按实际证据更新；Task 3–6业务入口尚未实现。
+> **2026-10-31 路线变更**：Task 1/2 保留已完成证据，Task 3 的动力学验证方法可复用；Task 4–6 不自动继续。当前路线与 Gate 以 [V2.2 架构](../../design/RMUC2027_UAV_V2_2.md)和 [验收差距](../../reports/ROUTE_V2_2_REVIEW_20261031.md)为准，具体任务须按新依赖更新后实施。
+
+> **For agentic workers:** Use `superpowers:executing-plans` to implement this plan task-by-task. Do not dispatch agents unless current instructions permit it. Steps use checkbox syntax; all unchecked steps are NOT RUN. Task 1/2于2026-10-11按实际证据更新；Task 3–6 的未实现描述是原计划编写时状态；当前仿真入口及未运行训练边界见 [当前状态索引](../../reports/CURRENT_STATUS.md)。
 
 **Goal:** 在现有Isaac Lab基础上建立可复现的无障碍到点、停止、速度接口和PPO研究基线。
 
