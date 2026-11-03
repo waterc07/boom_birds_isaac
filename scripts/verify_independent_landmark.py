@@ -86,7 +86,9 @@ def evaluate(method, labels, results, freeze):
         if item.get('localization_subset') and item.get('bbox_xywh'):
             pred_box = None
             pred_bearing = None
-            if result and result.get('extra', {}).get('detection'):
+            # Only accepted detections count; candidates below threshold are
+            # NOT_DETECTED and must not contribute bbox/bearing error.
+            if status == 'DETECTED' and result and result.get('extra', {}).get('detection'):
                 detection = result['extra']['detection']
                 pred_box = detection.get('bbox_xywh')
                 pred_bearing = detection.get('bearing_rad')
