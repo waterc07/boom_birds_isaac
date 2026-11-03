@@ -41,9 +41,11 @@ parser.add_argument('--working-tree', default='recorded by the operator')
 parser.add_argument('--gpu-driver', default='NOT RECORDED')
 parser.add_argument('--screenshots', action='store_true')
 parser.add_argument('--geometry-policy', choices=('legacy', 'reference_origin_v2'),
-                    default='legacy')
+                    default=None,
+                    help='default: reference_origin_v2; use legacy only for historical reproduction')
 parser.add_argument('--contact-mode', choices=('legacy_inference', 'measured_hard_reset'),
-                    default='legacy_inference')
+                    default=None,
+                    help='default: measured_hard_reset; use legacy_inference only for historical reproduction')
 parser.add_argument('--write-migration-freeze', type=Path, default=None)
 parser.add_argument('--vehicle-config', type=Path,
                     default=Path('configs/vehicles/sim_reference.yaml'))
@@ -64,7 +66,19 @@ if getattr(args, 'headless', False):
     raise RuntimeError('GUI runs are required; --headless is forbidden by the project rules')
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from boom_birds.evaluation.dynamic_migration_plan import (
-    make_migration_freeze, validate_migration_freeze, MIGRATION_FREEZE_SCHEMA)
+    make_migration_freeze, validate_migration_freeze, MIGRATION_FREEZE_SCHEMA,
+    MIGRATION_FREEZE_SCHEMA_V1)
+from boom_birds.evaluation.dynamic_eval_policy import (
+    resolve_modes, require_single_env, legacy_freeze_flags_ok,
+    migration_freeze_mode)
+_geometry_arg, _contact_arg = args.geometry_policy, args.contact_mode
+_resolved = resolve_modes(_geometry_arg, _contact_arg)
+args.geometry_policy = _resolved['geometry_policy']
+args.contact_mode = _resolved['contact_mode']
+args.geometry_policy_source = _resolved['argument_sources']['geometry_policy']
+args.contact_mode_source = _resolved['argument_sources']['contact_mode']
+args.geometry_policy_explicit = args.geometry_policy_source == 'explicit'
+args.contact_mode_explicit = args.contact_mode_source == 'explicit'
 if args.write_migration_freeze is not None:
     make_migration_freeze(vars(args), Path.cwd(), args.write_migration_freeze)
     raise SystemExit(0)
@@ -200,9 +214,21 @@ try:
             schema_version=str(freeze_doc.get('schema_version', '')),
             frozen_at=str(freeze_doc.get('frozen_at', '')),
             code_commit=str(freeze_doc.get('code_commit', '')))
-        if freeze_doc.get('schema_version') == MIGRATION_FREEZE_SCHEMA:
+        freeze_schema = freeze_doc.get('schema_version')
+        if freeze_schema in (MIGRATION_FREEZE_SCHEMA, MIGRATION_FREEZE_SCHEMA_V1):
+            migration_freeze_mode(
+                freeze_schema, args.geometry_policy_explicit,
+                args.contact_mode_explicit, args.geometry_policy,
+                args.contact_mode)
+            validate_migration_freeze(freeze_doc, vars(args), Path.cwd())
             mark('production migration source/parameter freeze verified before GUI startup')
-        elif freeze_doc.get('schema_version') == boundary_plan.CLEARANCE_BOUNDARY_FREEZE_SCHEMA:
+        elif freeze_schema == boundary_plan.CLEARANCE_BOUNDARY_FREEZE_SCHEMA:
+            if not legacy_freeze_flags_ok(
+                    args.geometry_policy_explicit, args.contact_mode_explicit,
+                    args.geometry_policy, args.contact_mode):
+                raise RuntimeError(
+                    'legacy boundary freeze requires explicit '
+                    '--geometry-policy legacy --contact-mode legacy_inference')
             if not args.segment_id:
                 raise RuntimeError('boundary freeze requires --segment-id')
             segment = freeze_doc.get('segments', {}).get(args.segment_id)
@@ -248,6 +274,12 @@ try:
             boundary_plan_doc = plan
             mark('boundary freeze verified')
         elif freeze_doc.get('schema_version') == LATENCY_FREEZE_SCHEMA:
+            if not legacy_freeze_flags_ok(
+                    args.geometry_policy_explicit, args.contact_mode_explicit,
+                    args.geometry_policy, args.contact_mode):
+                raise RuntimeError(
+                    'legacy latency freeze requires explicit '
+                    '--geometry-policy legacy --contact-mode legacy_inference')
             role = 'main' if args.config_id else ('special' if args.segment_id else '')
             if role not in ('main', 'special'):
                 raise RuntimeError('latency freeze requires --config-id (main) or '
@@ -260,6 +292,12 @@ try:
                 raise RuntimeError('--code-commit does not match the freeze commit')
             mark('latency freeze verified')
         else:
+            if not legacy_freeze_flags_ok(
+                    args.geometry_policy_explicit, args.contact_mode_explicit,
+                    args.geometry_policy, args.contact_mode):
+                raise RuntimeError(
+                    'legacy dynamic freeze requires explicit '
+                    '--geometry-policy legacy --contact-mode legacy_inference')
             expected = {
                 'map_asset_id': contract.asset_id,
                 'terrain_sha256': contract.terrain_sha256,
@@ -317,6 +355,7 @@ try:
     cfg.scene = DynamicSceneCfg(num_envs=1, env_spacing=2.5,
                                 replicate_physics=args.contact_mode == 'legacy_inference',
                                 clone_in_fabric=False)
+    require_single_env(cfg.scene.num_envs)
     mark('create env')
     env = QuadcopterEnv(cfg)
     env.reset(seed=0)
@@ -1851,6 +1890,19 @@ try:
         with (args.output / 'steps.jsonl').open('w', encoding='utf-8') as handle:
             for item in records:
                 handle.write(json.dumps(item, ensure_ascii=False) + '\n')
+        # Positive completion marker: only a run that reached output writing gets
+        # this file.  A Kit exit code alone is never treated as completion; an
+        # exception leaves summary.error.txt and no completion marker.
+        completion = {
+            'schema_version': 'boom_birds.dynamic_eval_complete.v1',
+            'status': summary['status'],
+            'completed': True,
+            'summary_error_file': False,
+            'finished_at': _iso_now(),
+        }
+        (args.output / 'run.complete.json').write_text(
+            json.dumps(completion, indent=2, ensure_ascii=False) + '\n',
+            encoding='utf-8')
         started_dt = _parse_iso(started_at)
         frozen_dt = _parse_iso(freeze_meta.get('frozen_at', ''))
         if frozen_dt is not None and started_dt is not None and frozen_dt > started_dt:
@@ -1915,6 +1967,13 @@ try:
             'body_envelope': body_envelope,
             'geometry_policy': args.geometry_policy,
             'contact_mode': args.contact_mode,
+            'effective_config': {
+                'geometry_policy': args.geometry_policy,
+                'contact_mode': args.contact_mode,
+                'argument_sources': {
+                    'geometry_policy': args.geometry_policy_source,
+                    'contact_mode': args.contact_mode_source}},
+            'single_env_only': True,
             'contact_initializations': contact_initializations,
             'gui_evidence': {
                 'gui_mode': not bool(getattr(args, 'headless', False)),
@@ -1926,9 +1985,11 @@ try:
             },
             'episode_ids': episode_ids,
             'command': ' '.join(sys.argv),
+            'completion': completion,
             'outputs_sha256': {
                 name: hashlib.sha256((args.output / name).read_bytes()).hexdigest()
-                for name in ('summary.json', 'episodes.jsonl', 'steps.jsonl')},
+                for name in ('summary.json', 'episodes.jsonl', 'steps.jsonl',
+                             'run.complete.json')},
         }
         (args.output / 'manifest.json').write_text(
             json.dumps(manifest, indent=2) + '\n', encoding='utf-8')

@@ -64,3 +64,51 @@ def test_config_hash_is_independent_of_checkout_line_endings(tmp_path):
     freeze = plans.build_migration_freeze(args, tmp_path)
     config.write_bytes(b'{"a": 1}\r\n')
     plans.validate_migration_freeze(freeze, args, tmp_path)
+
+def test_v2_freeze_records_hash_algorithm_and_effective_config(tmp_path):
+    args = setup(tmp_path)
+    freeze = plans.build_migration_freeze(args, tmp_path)
+    assert freeze['schema_version'] == plans.MIGRATION_FREEZE_SCHEMA
+    assert freeze['hash_algorithm'] == {
+        'name': 'sha256',
+        'text_canonicalization': 'crlf_to_lf_v1',
+        'scope': 'declared_text_source_and_config_only',
+        'binary_assets': 'raw_sha256_not_in_freeze',
+    }
+    assert freeze['effective_config'] == {
+        'geometry_policy': 'reference_origin_v2',
+        'contact_mode': 'measured_hard_reset',
+    }
+    assert freeze['argument_sources'] == {
+        'geometry_policy': 'default', 'contact_mode': 'default'}
+
+
+def test_v1_raw_hash_freeze_is_not_silently_reinterpreted(tmp_path):
+    args = setup(tmp_path)
+    source = tmp_path / 'src' / 'entry.py'
+    source.write_bytes(b'line one\nline two\n')
+    legacy = plans.build_migration_freeze(
+        args, tmp_path, schema_version=plans.MIGRATION_FREEZE_SCHEMA_V1)
+    # Under the old raw-hash algorithm this checkout must not validate.
+    source.write_bytes(b'line one\r\nline two\r\n')
+    with pytest.raises(ValueError, match='source'):
+        plans.validate_migration_freeze(legacy, args, tmp_path)
+
+
+def test_v2_hash_does_not_strip_meaningful_source_content(tmp_path):
+    args = setup(tmp_path)
+    source = tmp_path / 'src' / 'entry.py'
+    source.write_bytes(b'line one\nline two\n')
+    freeze = plans.build_migration_freeze(args, tmp_path)
+    source.write_bytes(b'line one  \nline two\n')
+    with pytest.raises(ValueError, match='source'):
+        plans.validate_migration_freeze(freeze, args, tmp_path)
+
+def test_v2_freeze_rejects_argument_source_mismatch(tmp_path):
+    args = setup(tmp_path)
+    args['geometry_policy_source'] = 'explicit'
+    args['contact_mode_source'] = 'explicit'
+    freeze = plans.build_migration_freeze(args, tmp_path)
+    args['geometry_policy_source'] = 'default'
+    with pytest.raises(ValueError, match='source'):
+        plans.validate_migration_freeze(freeze, args, tmp_path)
