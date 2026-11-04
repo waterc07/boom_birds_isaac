@@ -13,7 +13,7 @@
 
 ## 当前状态与延续入口（2026-11-04）
 
-先查 [当前状态索引](docs/reports/CURRENT_STATUS.md) 和最新工作包交接，再使用下方历史记录。单环境动态评价已默认使用 `reference_origin_v2` / `measured_hard_reset`；传感器和地标感知仅 shadow。模板与几何/绿灯候选已按独立测试停止，不进入关联/控制，不自动开始模型训练；下一项为需求、轻量方案、数据和部署可行性评审。真实 PX4 Sender、板端 Student、项目 PPO 和各 Gate 均未完成验收。
+先查 [当前状态索引](docs/reports/CURRENT_STATUS.md) 和最新工作包交接，再使用下方历史记录。单环境动态评价已默认使用 `reference_origin_v2` / `measured_hard_reset`；传感器和地标感知仅 shadow。模板与几何/绿灯候选已按独立测试停止，不进入关联/控制。2026-11-04 已完成地标训练前闭环与数据准备（任务/实验定义、dev 划分冻结、6 族 279 帧 final 池 GUI 采集与封存、盲复标与 spec v2、许可与导出证据），训练准入判定 **INCOMPLETE**、训练启动 **BLOCKED**（许可需用户决策，final 标签未生产）；不自动开始训练、不自动切换备选模型。真实 PX4 Sender、板端 Student、项目 PPO 和各 Gate 均未完成验收。
 
 ## 历史状态与证据索引
 

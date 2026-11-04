@@ -1,0 +1,191 @@
+{
+  "schema_version": "dsh.landmark_dataset_evidence.v1",
+  "status": "PASS",
+  "generated_at": "2026-11-04T10:36:29.581457+00:00",
+  "mode": "verify-final-pool",
+  "split_profile": "v1",
+  "freeze": {
+    "path": "configs/perception/landmark_final_pool_seal_v1.json",
+    "file_sha256": "c852f0e520ffe608a1b7fc9db3e6e4c2d18aa4761a16700a4214a59e7708af02",
+    "canonical_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+    "schema_version": "dsh.landmark_split_freeze.v1",
+    "grouping_protocol": "dsh.landmark_dataset_grouping.v1",
+    "generated_at": "2026-11-04T10:26:46.712100+00:00",
+    "status": "SEALED_TEST_POOL_FROZEN_LABELS_PENDING",
+    "pool_kind": "FINAL_SEALED_TEST",
+    "freeze_id": "landmark_final_pool_seal_v1"
+  },
+  "checks": {
+    "errors": [],
+    "warnings": [
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 cd105433932b9d2dd8cc6d51d503998146c0cb322dc5ba59c2bc126616dbaa15 repeats inside group ['g_lmf_backoff'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 40e54b7ce49d19224eec124bf0d1abd79e7536f8311e71e746d3268b717958a4 repeats inside group ['g_lmf_edge'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 f577b5e86c08e31ebc5e2ecd1c55fb8ddbf5eb0ce0f071f00ca164aeffb6c287 repeats inside group ['g_lmf_near'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 be5bd199588571698622491c5a2dc0649db0d180cc4f97ca978ab3bcfdeb27bf repeats inside group ['g_lmf_side_negative'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 c2ee77df61df64e1a76c59924beb628f34c18764053f1206baabd51abeeca00c repeats inside group ['g_lmf_similar_negative'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 d29c50653ebf9238bd71b2a43be5461b5b48767356c00b86677c6ac31bc36128 repeats inside group ['g_lmf_sweep'] (3 frames)",
+        "detail": {}
+      }
+    ]
+  },
+  "stats": {
+    "datasets": {
+      "lm_final_candidate_20261104_sensor": {
+        "rgb_frames": 297,
+        "accepted_rgb_frames": 279,
+        "empty_capture": false,
+        "observations_sha256": "4a7481e4c85a2b508603f2941f159d32402792f9fba4fe3a585b3ec221d07def"
+      }
+    },
+    "groups": 6,
+    "families": 6,
+    "frame_total": 297,
+    "accepted_frame_total": 279,
+    "split_frame_counts": {
+      "train": 0,
+      "val": 0,
+      "test": 297,
+      "excluded": 0
+    },
+    "split_accepted_frame_counts": {
+      "train": 0,
+      "val": 0,
+      "test": 279,
+      "excluded": 0
+    },
+    "split_group_counts": {
+      "train": 0,
+      "val": 0,
+      "test": 6,
+      "excluded": 0
+    },
+    "duplicate_sha_groups": 0,
+    "intra_group_duplicate_sha_groups": 6,
+    "frames_unassigned": 0,
+    "episode_split_conflicts": 0,
+    "consecutive_frame_split_violations": 0,
+    "family_split_leaks": 0,
+    "sealed_groups_in_dev": 0,
+    "label_frame_total": 0,
+    "label_split_claim_counts": {},
+    "label_split_claim_conflicts": 0,
+    "view_cluster_split_warnings": 0,
+    "images_verified": 297,
+    "images_missing": 0,
+    "image_sha_mismatches": 0,
+    "final_pool": {
+      "total_frames": 297,
+      "accepted_frames": 279,
+      "families": 6,
+      "groups": 6,
+      "test_groups": 6,
+      "sealed_groups": 6
+    },
+    "provenance_files_checked": 23,
+    "cross_run": {
+      "freeze_paths": [
+        "configs/perception/landmark_split_freeze_v2.json"
+      ],
+      "freezes": [
+        {
+          "path": "configs/perception/landmark_split_freeze_v2.json",
+          "canonical_sha256": "269d9a659db387beee345daff33cf1a3508261d099f548aeb93353b94c33afed",
+          "frames": 2940,
+          "families": 6,
+          "groups": 19
+        }
+      ],
+      "frame_sha_overlap": [],
+      "frame_sha_overlap_count": 0,
+      "family_overlap": [],
+      "group_overlap": [],
+      "dataset_root_overlap": []
+    }
+  },
+  "limits": [
+    "grouping/hash QA only; not a model, board or navigation result",
+    "raw outputs are gitignored; the freeze records their hashes",
+    "sealed test pool manifest/hash QA only; no full semantic labels yet (PENDING, T6) and no model evaluation"
+  ],
+  "final_pool": {
+    "sampling": {
+      "required": false,
+      "rule_id": "all_included_N1",
+      "k": null,
+      "original_rgb_frames": 297,
+      "original_accepted_frames": 279,
+      "selected_accepted_frames": 279,
+      "rule": "N=1: all accepted frames are included because the independently recounted accepted total is <= 400; the 18 WARMUP frames stay in the manifest with accepted=false and are excluded from training/evaluation",
+      "fallback_rule_if_gt_400": "per family, sort accepted frames by sequence, k = ceil(total_accepted/400), take every k-th starting from the first accepted frame; sequence order only, no model score and no random choice",
+      "no_score_selection": true,
+      "lead_expectation_note": "the hand-off expected the raw accepted pool to exceed 200-400 and require sampling; the independent recount is 279 accepted (297 RGB frames including 18 WARMUP), so the fixed rule N=1 keeps every accepted frame and no sampling is triggered",
+      "recount_note": "accepted is recounted from observations.jsonl as gate.accepted AND validity.valid AND phase==RUN; the RGB frame total includes 3 WARMUP frames per episode"
+    },
+    "condition_coverage_aggregate": {
+      "accepted_frames": 279,
+      "distance_min_m": 1.458,
+      "distance_max_m": 8.367,
+      "truncated_frames": 26,
+      "target_absent_frames": 41,
+      "similar_structure_verified_frames": 0,
+      "small_green_false_clue_frames_le3px_negatives_only": 15,
+      "small_green_frames_le3px_positive_families": 42,
+      "bearing_min_deg": -179.94,
+      "bearing_max_deg": 179.85,
+      "occlusion_frames": 0
+    },
+    "annotation_status": "PENDING",
+    "cross_checks": {
+      "freeze_paths": [
+        "configs/perception/landmark_split_freeze_v2.json"
+      ],
+      "freezes": [
+        {
+          "path": "configs/perception/landmark_split_freeze_v2.json",
+          "canonical_sha256": "269d9a659db387beee345daff33cf1a3508261d099f548aeb93353b94c33afed",
+          "frames": 2940,
+          "families": 6,
+          "groups": 19
+        }
+      ],
+      "frame_sha_overlap": [],
+      "frame_sha_overlap_count": 0,
+      "family_overlap": [],
+      "group_overlap": [],
+      "dataset_root_overlap": []
+    },
+    "admission": {
+      "A3_sealed_final_pool": "INCOMPLETE",
+      "A8_sample_adequacy": "INCOMPLETE",
+      "reasons": [
+        "full semantic labels are PENDING (T6)",
+        "HN1 verified similar-structure negative is missing",
+        "scene-structure occlusion was not constructed",
+        "only 41 accepted target-absent frames"
+      ],
+      "note": "A3/A8 are admission-gate judgments; the seal integrity status is reported separately as PASS/INCOMPLETE in this evidence"
+    }
+  }
+}

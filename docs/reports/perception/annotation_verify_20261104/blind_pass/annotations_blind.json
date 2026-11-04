@@ -1,0 +1,1155 @@
+{
+  "schema_version": "dsh.tower_annotation.v1",
+  "status": "AGENT_BLIND_PROXY_REANNOTATION_EXPOSED_DATA_NOT_SEALED_NOT_EXPERT",
+  "note": "Independent blind re-annotation of exposed frames by an agent, for annotation-consistency checking only. NOT expert review, NOT sealed test labels, NOT model evidence.",
+  "coordinate_contract": {
+    "image_origin": "top-left",
+    "bbox_format": "xywh_px",
+    "keypoint_units": "px",
+    "normalization": "none; source pixels"
+  },
+  "root": "E:\\isaac\\proj_boom_birds",
+  "annotations": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_177.png",
+      "image_sha256": "d7ccdd72059e898435c95bc2ca4ef49b9c548f8c0393aa53201516ca7a49103d",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_north_test",
+        "generation": 1177,
+        "sequence": 177,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_177.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          216,
+          49,
+          104,
+          161
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 295,
+          "y": 60,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "tower enters from right edge; right part out of frame; base bottom just inside frame"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_182.png",
+      "image_sha256": "a4bfe0dba005384860434a613518f8ad721a829f067a32965fdbc81dd0d10589",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_north_test",
+        "generation": 1182,
+        "sequence": 182,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_182.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          158,
+          52,
+          159,
+          163
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 229,
+          "y": 59.5,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "full tower incl. base pedestal visible"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_188.png",
+      "image_sha256": "23247267b8bf8e1ea3737b3487d273b017094407fb1098d0a6a8c752a7d4df58",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_north_test",
+        "generation": 1188,
+        "sequence": 188,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_188.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          125,
+          51,
+          158,
+          130
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 185.5,
+          "y": 58,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "full tower incl. base pedestal visible"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_3.png",
+      "image_sha256": "835e4b7b85ca4b8f928c19f7d39c448f0711ed77c87a776786bb41f12673f2e3",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_a",
+        "generation": 23,
+        "sequence": 3,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_3.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          103,
+          91,
+          79,
+          75
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 139,
+          "y": 98.5,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "small/far front static pose; green light ~4x4 px"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_4.png",
+      "image_sha256": "f203303a409081452378521b7306aeca0d7123eee920e278b35164b6e3fa1525",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_a",
+        "generation": 24,
+        "sequence": 4,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_4.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          103,
+          91,
+          78,
+          75
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 139,
+          "y": 98,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "small/far front static pose"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_5.png",
+      "image_sha256": "4148c45b18e3c8042462c03602d3050579d059d4969c82e8774ac323fbd1c236",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_a",
+        "generation": 25,
+        "sequence": 5,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_5.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          103,
+          91,
+          78,
+          75
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 139,
+          "y": 98,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "small/far front static pose"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_3.png",
+      "image_sha256": "dac1096ddda2e6dd087fac2b07cc1a3119f9d0216e12873a3834475e44d5f319",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_b",
+        "generation": 33,
+        "sequence": 3,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_3.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          172,
+          102,
+          148,
+          138
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 226,
+          "y": 115,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "oblique/edge static pose; base cut by bottom frame edge"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_4.png",
+      "image_sha256": "b07caf56b027d6a497e6c30f5318966f59695384c067eb6ae43028e975449483",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_b",
+        "generation": 34,
+        "sequence": 4,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_4.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          172,
+          102,
+          148,
+          138
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 225.5,
+          "y": 114,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "oblique/edge static pose; base cut by bottom frame edge"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_5.png",
+      "image_sha256": "4f801113b959cc0ff5bae8fcdce3586d4915ed5e2e9b68841abdd782a94395ae",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_b",
+        "generation": 35,
+        "sequence": 5,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_5.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          172,
+          102,
+          148,
+          138
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 225,
+          "y": 114,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "oblique/edge static pose; base cut by bottom frame edge"
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_201.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_201.png",
+      "image_sha256": "408c58d126b4709e90d5f59282f503d4aa63caff16d4c528f919bc9db7c2b7bd",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "reverse_south",
+        "generation": 2201,
+        "sequence": 201,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_201.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          184,
+          29,
+          136,
+          211
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 261,
+          "y": 38,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "close approach; right side and base cut by frame edges"
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_206.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_206.png",
+      "image_sha256": "f6428da5f2d24c7c158b8afd8171d91bbd25f344c5eb92ab56954af6ed545579",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "reverse_south",
+        "generation": 2206,
+        "sequence": 206,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_206.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          69,
+          19,
+          193,
+          176
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 170.5,
+          "y": 31,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "centred close view; head and base inside frame"
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_212.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_212.png",
+      "image_sha256": "f2543b312384bb9d0b00e3ada26b565fe31f9d1f4713fc8edff62faec364ca4f",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "reverse_south",
+        "generation": 2212,
+        "sequence": 212,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_212.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          27,
+          14,
+          210,
+          186
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 105,
+          "y": 27,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "centred close view; head and base inside frame"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_181.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_181.png",
+      "image_sha256": "0df2454b9fb39252044cd0e0c59a3f55025f28c49b510ebb401e62228efcca04",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "north",
+        "generation": 3181,
+        "sequence": 181,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_181.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          247,
+          60,
+          73,
+          140
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": null,
+        "reference_status": "UNAVAILABLE"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "right-edge truncated; green roof light NOT visible in frame; reference UNAVAILABLE (do not guess)"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_186.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_186.png",
+      "image_sha256": "3d8f1402e0b004939c3e2cbdd304164c105d6d1e3dcc6d80087081ef388c601c",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "north",
+        "generation": 3186,
+        "sequence": 186,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_186.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": true,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          185,
+          52,
+          135,
+          158
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 261.5,
+          "y": 63,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "base cut at right/bottom frame edge"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_192.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_192.png",
+      "image_sha256": "d89321920b560fe3e456ff6ed32c79d15c3f636a1fe2eda2fc11f5a1dc0f682d",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "north",
+        "generation": 3192,
+        "sequence": 192,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_192.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "PARTIAL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          122,
+          52,
+          198,
+          163
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 211,
+          "y": 64,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "tower and base inside frame"
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_3.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_3.png",
+      "image_sha256": "fbc5932114e9a3d257a27c310321e00a360e21027cc5b516988ae1266255fd8c",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "static_test_oblique",
+        "generation": 43,
+        "sequence": 3,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_3.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          125,
+          92,
+          148,
+          128
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 185,
+          "y": 103,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "oblique close view; full tower incl. base visible"
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_4.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_4.png",
+      "image_sha256": "afd2b11d91df3893afef63408ae74f46b2dfb459ce8d266b850a3451195d68fb",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "static_test_oblique",
+        "generation": 44,
+        "sequence": 4,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_4.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          125,
+          92,
+          148,
+          128
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 185,
+          "y": 102.5,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "oblique close view; full tower incl. base visible"
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_5.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_5.png",
+      "image_sha256": "e44e0354fd815ec00eb4916d0c8e7d53febd5f555d9ad49eca7c00e6e7a30069",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "static_test_oblique",
+        "generation": 45,
+        "sequence": 5,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_5.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": true,
+        "visibility": "FULL",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": false
+      },
+      "geometry": {
+        "bbox_xywh": [
+          125,
+          92,
+          148,
+          128
+        ],
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": {
+          "name": "green_roof_light_center",
+          "x": 184,
+          "y": 102,
+          "visible": true
+        },
+        "reference_status": "MANUAL_APPROX"
+      },
+      "negative_type": null,
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "not_ambiguous",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "oblique close view; full tower incl. base visible"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_3.png",
+      "image_sha256": "06300eca28495fd669b2023e9be88b1f0e26a47ce4052da3431c2ecc6475d800",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_c",
+        "generation": 43,
+        "sequence": 3,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_3.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": false,
+        "visibility": "ABSENT",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": true
+      },
+      "geometry": {
+        "bbox_xywh": null,
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": null,
+        "reference_status": "NOT_APPLICABLE"
+      },
+      "negative_type": "SIMILAR_STRUCTURE",
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "similar_structure_present_identity_unresolved",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "target-absent pose (yaw=pi); no central tower; distant dim green-tipped pillar at approx (122-128,109-135) and dark pillar at (288-310,100-140) are similar structures, identity unverifiable from image alone"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_4.png",
+      "image_sha256": "ae9c8c8590beb8cdf0f0685c04a70cb5e9daf716ad1e3d64a2edc54fa689f65e",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_c",
+        "generation": 44,
+        "sequence": 4,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_4.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": false,
+        "visibility": "ABSENT",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": true
+      },
+      "geometry": {
+        "bbox_xywh": null,
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": null,
+        "reference_status": "NOT_APPLICABLE"
+      },
+      "negative_type": "SIMILAR_STRUCTURE",
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "similar_structure_present_identity_unresolved",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "same static pose as g4_3; no central tower; same distant green-tipped pillar"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_5.png",
+      "image_sha256": "fb838238e6c22bee78b4dff9df733735de90041d0a6d31e6a9f75e285f55af4a",
+      "image_width": 320,
+      "image_height": 240,
+      "source": {
+        "run": "sensor_shadow",
+        "family": "geo_static_c",
+        "generation": 45,
+        "sequence": 5,
+        "origin_split_in_freeze": "sealed_test",
+        "split": "exposed_development",
+        "exposure_note": "frames were declared sealed_test in the original freeze but have since been exposed/used; they are NOT sealed test data and are relabelled exposed_development per repo policy",
+        "image_path": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_5.png"
+      },
+      "target": {
+        "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+        "class": "tower",
+        "present": false,
+        "visibility": "ABSENT",
+        "truncated": false,
+        "occluded": false,
+        "ambiguous": true
+      },
+      "geometry": {
+        "bbox_xywh": null,
+        "bbox_definition": "axis-aligned box of the visible tower object (head+arms, tapering body, attached stepped base pedestal), clipped to image border; excludes ground markings, shadows and unrelated structures",
+        "keypoint": null,
+        "reference_status": "NOT_APPLICABLE"
+      },
+      "negative_type": "SIMILAR_STRUCTURE",
+      "annotator": "agent:annot (DSH teammate, DeepSeek agent, proxy pixel annotation at 16x-20x zoom); NOT an expert or human independent reviewer",
+      "annotation_uncertainty": {
+        "bbox_px": 3.0,
+        "keypoint_px": 1.5,
+        "identity": "similar_structure_present_identity_unresolved",
+        "note": "bbox edges of soft/white base and blur are uncertain by a few px; green light is only 3-8 px wide at 320x240"
+      },
+      "blind_pass": {
+        "protocol": "images only; old labels/geometry NOT opened before this file was written",
+        "view_aids": "3x/16x nearest-neighbour zoom crops with native-pixel grid; zoom windows centred using a disclosed pure-green colour cue (threshold g>=90,g-r>=25,g-b>=25); final centre chosen by eye",
+        "uncertainty_floor": "green-light core is 10-49 px area (bbox 4x3 to 8x7 px); manual centre reproducibility ~+/-1.5 px = +/-0.54 deg"
+      },
+      "notes": "same static pose as g4_3; no central tower; same distant green-tipped pillar"
+    }
+  ]
+}

@@ -1,0 +1,4261 @@
+{
+  "schema_version": "dsh.annotation_verification.v1",
+  "created_at_local": "2026-11-04",
+  "evidence_domain": "offline annotation QA on exposed Isaac sensor-shadow frames; no model, no board, no navigation claim",
+  "proxy_statement": "single-agent blind proxy re-annotation; not an expert or human independent review; not inter-annotator agreement in the statistical sense",
+  "blind_annotations": "docs\\reports\\perception\\annotation_verify_20261104\\blind_pass\\annotations_blind.json",
+  "blind_sha256": "aeb322cd815ecc03517ec4b6d801d64a1685ef2ba2e53228e9d2a6f6f3e487d2",
+  "pre_registration": "docs\\reports\\perception\\annotation_verify_20261104\\blind_pass\\pre_registration.json",
+  "pre_registration_sha256": "1c7fb4ce84e503e48aceb469dcb1113b5495e28d86628754d384f9773a842313",
+  "bearing_model": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx": 160.0,
+    "cx": 160.0,
+    "deg_per_px_at_axis": 0.3581,
+    "deg_per_px_source": "1px ~= atan(1/160) = 0.3581 deg"
+  },
+  "old_label_sources": {
+    "landmark_independent_labels_v1": {
+      "schema": "dsh.landmark_independent_labels.v1",
+      "records": 79
+    },
+    "geometry_test_labels_v2": {
+      "schema": "dsh.geometry_test_labels.v2",
+      "records": 30
+    },
+    "annotation_sample_v1": {
+      "schema": "dsh.tower_annotation.v1",
+      "records": 12
+    }
+  },
+  "frames": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_177.png",
+      "family": "geo_north_test",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        216,
+        49,
+        104,
+        161
+      ],
+      "blind_keypoint_px": [
+        295.0,
+        60.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            185,
+            35,
+            135,
+            205
+          ],
+          "old_reference_px": [
+            293.1,
+            60.0
+          ],
+          "bbox_iou": 0.605,
+          "bbox_centre_delta_px": [
+            15.5,
+            -8.0
+          ],
+          "bbox_width_height_delta_px": [
+            -31,
+            -44
+          ],
+          "keypoint_delta_px": [
+            1.9,
+            0.0
+          ],
+          "keypoint_dist_px": 1.9,
+          "bearing_old_deg": 39.756,
+          "bearing_blind_deg": 40.156,
+          "bearing_delta_deg": 0.4,
+          "bearing_delta_1px_rule": 0.68,
+          "colour_cue": {
+            "centroid_px": [
+              293.0,
+              60.0
+            ],
+            "pixels": 27,
+            "colour_vs_old_px": [
+              -0.1,
+              0.0
+            ],
+            "colour_vs_old_dist_px": 0.1,
+            "colour_vs_blind_dist_px": 2.0
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "bbox_iou=0.605 keypoint_px=1.9"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            185,
+            35,
+            135,
+            205
+          ],
+          "old_reference_px": [
+            293.1,
+            60.0
+          ],
+          "bbox_iou": 0.605,
+          "bbox_centre_delta_px": [
+            15.5,
+            -8.0
+          ],
+          "bbox_width_height_delta_px": [
+            -31,
+            -44
+          ],
+          "keypoint_delta_px": [
+            1.9,
+            0.0
+          ],
+          "keypoint_dist_px": 1.9,
+          "bearing_old_deg": 39.756,
+          "bearing_blind_deg": 40.156,
+          "bearing_delta_deg": 0.4,
+          "bearing_delta_1px_rule": 0.68,
+          "colour_cue": {
+            "centroid_px": [
+              293.0,
+              60.0
+            ],
+            "pixels": 27,
+            "colour_vs_old_px": [
+              -0.1,
+              0.0
+            ],
+            "colour_vs_old_dist_px": 0.1,
+            "colour_vs_blind_dist_px": 2.0
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "truncated blind=True old=False",
+            "bbox_iou=0.605 keypoint_px=1.9"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_182.png",
+      "family": "geo_north_test",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        158,
+        52,
+        159,
+        163
+      ],
+      "blind_keypoint_px": [
+        229.0,
+        59.5
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            170,
+            35,
+            150,
+            200
+          ],
+          "old_reference_px": [
+            229.0,
+            58.2
+          ],
+          "bbox_iou": 0.7498,
+          "bbox_centre_delta_px": [
+            -7.5,
+            -1.5
+          ],
+          "bbox_width_height_delta_px": [
+            9,
+            -37
+          ],
+          "keypoint_delta_px": [
+            0.0,
+            1.3
+          ],
+          "keypoint_dist_px": 1.3,
+          "bearing_old_deg": 23.328,
+          "bearing_blind_deg": 23.328,
+          "bearing_delta_deg": 0.0,
+          "bearing_delta_1px_rule": 0.466,
+          "colour_cue": {
+            "centroid_px": [
+              228.59,
+              58.07
+            ],
+            "pixels": 27,
+            "colour_vs_old_px": [
+              -0.41,
+              -0.13
+            ],
+            "colour_vs_old_dist_px": 0.43,
+            "colour_vs_blind_dist_px": 1.488
+          },
+          "classification": "consistent",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.75 keypoint_px=1.3"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            170,
+            35,
+            150,
+            200
+          ],
+          "old_reference_px": [
+            229.0,
+            58.2
+          ],
+          "bbox_iou": 0.7498,
+          "bbox_centre_delta_px": [
+            -7.5,
+            -1.5
+          ],
+          "bbox_width_height_delta_px": [
+            9,
+            -37
+          ],
+          "keypoint_delta_px": [
+            0.0,
+            1.3
+          ],
+          "keypoint_dist_px": 1.3,
+          "bearing_old_deg": 23.328,
+          "bearing_blind_deg": 23.328,
+          "bearing_delta_deg": 0.0,
+          "bearing_delta_1px_rule": 0.466,
+          "colour_cue": {
+            "centroid_px": [
+              228.59,
+              58.07
+            ],
+            "pixels": 27,
+            "colour_vs_old_px": [
+              -0.41,
+              -0.13
+            ],
+            "colour_vs_old_dist_px": 0.43,
+            "colour_vs_blind_dist_px": 1.488
+          },
+          "classification": "consistent",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.75 keypoint_px=1.3"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_188.png",
+      "family": "geo_north_test",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        125,
+        51,
+        158,
+        130
+      ],
+      "blind_keypoint_px": [
+        185.5,
+        58.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            165,
+            35,
+            155,
+            205
+          ],
+          "old_reference_px": [
+            185.5,
+            57.8
+          ],
+          "bbox_iou": 0.4149,
+          "bbox_centre_delta_px": [
+            -38.5,
+            -21.5
+          ],
+          "bbox_width_height_delta_px": [
+            3,
+            -75
+          ],
+          "keypoint_delta_px": [
+            0.0,
+            0.2
+          ],
+          "keypoint_dist_px": 0.2,
+          "bearing_old_deg": 9.055,
+          "bearing_blind_deg": 9.055,
+          "bearing_delta_deg": 0.0,
+          "bearing_delta_1px_rule": 0.072,
+          "colour_cue": {
+            "centroid_px": [
+              185.5,
+              57.67
+            ],
+            "pixels": 30,
+            "colour_vs_old_px": [
+              0.0,
+              -0.13
+            ],
+            "colour_vs_old_dist_px": 0.13,
+            "colour_vs_blind_dist_px": 0.33
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.415 keypoint_px=0.2"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            165,
+            35,
+            155,
+            205
+          ],
+          "old_reference_px": [
+            185.5,
+            57.8
+          ],
+          "bbox_iou": 0.4149,
+          "bbox_centre_delta_px": [
+            -38.5,
+            -21.5
+          ],
+          "bbox_width_height_delta_px": [
+            3,
+            -75
+          ],
+          "keypoint_delta_px": [
+            0.0,
+            0.2
+          ],
+          "keypoint_dist_px": 0.2,
+          "bearing_old_deg": 9.055,
+          "bearing_blind_deg": 9.055,
+          "bearing_delta_deg": 0.0,
+          "bearing_delta_1px_rule": 0.072,
+          "colour_cue": {
+            "centroid_px": [
+              185.5,
+              57.67
+            ],
+            "pixels": 30,
+            "colour_vs_old_px": [
+              0.0,
+              -0.13
+            ],
+            "colour_vs_old_dist_px": 0.13,
+            "colour_vs_blind_dist_px": 0.33
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.415 keypoint_px=0.2"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_3.png",
+      "family": "geo_static_a",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        103,
+        91,
+        79,
+        75
+      ],
+      "blind_keypoint_px": [
+        139.0,
+        98.5
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            88,
+            65,
+            95,
+            115
+          ],
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "bbox_iou": 0.5423,
+          "bbox_centre_delta_px": [
+            7.0,
+            6.0
+          ],
+          "bbox_width_height_delta_px": [
+            -16,
+            -40
+          ],
+          "keypoint_delta_px": [
+            -1.0,
+            -1.5
+          ],
+          "keypoint_dist_px": 1.803,
+          "bearing_old_deg": -7.125,
+          "bearing_blind_deg": -7.477,
+          "bearing_delta_deg": -0.352,
+          "bearing_delta_1px_rule": 0.646,
+          "colour_cue": {
+            "centroid_px": [
+              138.67,
+              98.75
+            ],
+            "pixels": 12,
+            "colour_vs_old_px": [
+              -1.33,
+              -1.25
+            ],
+            "colour_vs_old_dist_px": 1.825,
+            "colour_vs_blind_dist_px": 0.414
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.542 keypoint_px=1.803"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            88,
+            65,
+            95,
+            115
+          ],
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "bbox_iou": 0.5423,
+          "bbox_centre_delta_px": [
+            7.0,
+            6.0
+          ],
+          "bbox_width_height_delta_px": [
+            -16,
+            -40
+          ],
+          "keypoint_delta_px": [
+            -1.0,
+            -1.5
+          ],
+          "keypoint_dist_px": 1.803,
+          "bearing_old_deg": -7.125,
+          "bearing_blind_deg": -7.477,
+          "bearing_delta_deg": -0.352,
+          "bearing_delta_1px_rule": 0.646,
+          "colour_cue": {
+            "centroid_px": [
+              138.67,
+              98.75
+            ],
+            "pixels": 12,
+            "colour_vs_old_px": [
+              -1.33,
+              -1.25
+            ],
+            "colour_vs_old_dist_px": 1.825,
+            "colour_vs_blind_dist_px": 0.414
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.542 keypoint_px=1.803"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_4.png",
+      "family": "geo_static_a",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        103,
+        91,
+        78,
+        75
+      ],
+      "blind_keypoint_px": [
+        139.0,
+        98.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            88,
+            65,
+            95,
+            115
+          ],
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "bbox_iou": 0.5355,
+          "bbox_centre_delta_px": [
+            6.5,
+            6.0
+          ],
+          "bbox_width_height_delta_px": [
+            -17,
+            -40
+          ],
+          "keypoint_delta_px": [
+            -1.0,
+            -2.0
+          ],
+          "keypoint_dist_px": 2.236,
+          "bearing_old_deg": -7.125,
+          "bearing_blind_deg": -7.477,
+          "bearing_delta_deg": -0.352,
+          "bearing_delta_1px_rule": 0.801,
+          "colour_cue": {
+            "centroid_px": [
+              138.8,
+              98.0
+            ],
+            "pixels": 10,
+            "colour_vs_old_px": [
+              -1.2,
+              -2.0
+            ],
+            "colour_vs_old_dist_px": 2.332,
+            "colour_vs_blind_dist_px": 0.2
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "acceptable_deviation",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.535 keypoint_px=2.236"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            88,
+            65,
+            95,
+            115
+          ],
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "bbox_iou": 0.5355,
+          "bbox_centre_delta_px": [
+            6.5,
+            6.0
+          ],
+          "bbox_width_height_delta_px": [
+            -17,
+            -40
+          ],
+          "keypoint_delta_px": [
+            -1.0,
+            -2.0
+          ],
+          "keypoint_dist_px": 2.236,
+          "bearing_old_deg": -7.125,
+          "bearing_blind_deg": -7.477,
+          "bearing_delta_deg": -0.352,
+          "bearing_delta_1px_rule": 0.801,
+          "colour_cue": {
+            "centroid_px": [
+              138.8,
+              98.0
+            ],
+            "pixels": 10,
+            "colour_vs_old_px": [
+              -1.2,
+              -2.0
+            ],
+            "colour_vs_old_dist_px": 2.332,
+            "colour_vs_blind_dist_px": 0.2
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "acceptable_deviation",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.535 keypoint_px=2.236"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_a-follow_only_g2_5.png",
+      "family": "geo_static_a",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        103,
+        91,
+        78,
+        75
+      ],
+      "blind_keypoint_px": [
+        139.0,
+        98.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            88,
+            65,
+            95,
+            115
+          ],
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "bbox_iou": 0.5355,
+          "bbox_centre_delta_px": [
+            6.5,
+            6.0
+          ],
+          "bbox_width_height_delta_px": [
+            -17,
+            -40
+          ],
+          "keypoint_delta_px": [
+            -1.0,
+            -2.0
+          ],
+          "keypoint_dist_px": 2.236,
+          "bearing_old_deg": -7.125,
+          "bearing_blind_deg": -7.477,
+          "bearing_delta_deg": -0.352,
+          "bearing_delta_1px_rule": 0.801,
+          "colour_cue": {
+            "centroid_px": [
+              138.7,
+              97.7
+            ],
+            "pixels": 10,
+            "colour_vs_old_px": [
+              -1.3,
+              -2.3
+            ],
+            "colour_vs_old_dist_px": 2.642,
+            "colour_vs_blind_dist_px": 0.424
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "acceptable_deviation",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.535 keypoint_px=2.236"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            88,
+            65,
+            95,
+            115
+          ],
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "bbox_iou": 0.5355,
+          "bbox_centre_delta_px": [
+            6.5,
+            6.0
+          ],
+          "bbox_width_height_delta_px": [
+            -17,
+            -40
+          ],
+          "keypoint_delta_px": [
+            -1.0,
+            -2.0
+          ],
+          "keypoint_dist_px": 2.236,
+          "bearing_old_deg": -7.125,
+          "bearing_blind_deg": -7.477,
+          "bearing_delta_deg": -0.352,
+          "bearing_delta_1px_rule": 0.801,
+          "colour_cue": {
+            "centroid_px": [
+              138.7,
+              97.7
+            ],
+            "pixels": 10,
+            "colour_vs_old_px": [
+              -1.3,
+              -2.3
+            ],
+            "colour_vs_old_dist_px": 2.642,
+            "colour_vs_blind_dist_px": 0.424
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "acceptable_deviation",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.535 keypoint_px=2.236"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_3.png",
+      "family": "geo_static_b",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        172,
+        102,
+        148,
+        138
+      ],
+      "blind_keypoint_px": [
+        226.0,
+        115.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            150,
+            75,
+            135,
+            165
+          ],
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "bbox_iou": 0.5753,
+          "bbox_centre_delta_px": [
+            28.5,
+            13.5
+          ],
+          "bbox_width_height_delta_px": [
+            13,
+            -27
+          ],
+          "keypoint_delta_px": [
+            1.0,
+            0.0
+          ],
+          "keypoint_dist_px": 1.0,
+          "bearing_old_deg": 22.109,
+          "bearing_blind_deg": 22.416,
+          "bearing_delta_deg": 0.307,
+          "bearing_delta_1px_rule": 0.358,
+          "colour_cue": {
+            "centroid_px": [
+              224.5,
+              115.0
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              -0.5,
+              0.0
+            ],
+            "colour_vs_old_dist_px": 0.5,
+            "colour_vs_blind_dist_px": 1.5
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "bbox_iou=0.575 keypoint_px=1.0"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            150,
+            75,
+            135,
+            165
+          ],
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "bbox_iou": 0.5753,
+          "bbox_centre_delta_px": [
+            28.5,
+            13.5
+          ],
+          "bbox_width_height_delta_px": [
+            13,
+            -27
+          ],
+          "keypoint_delta_px": [
+            1.0,
+            0.0
+          ],
+          "keypoint_dist_px": 1.0,
+          "bearing_old_deg": 22.109,
+          "bearing_blind_deg": 22.416,
+          "bearing_delta_deg": 0.307,
+          "bearing_delta_1px_rule": 0.358,
+          "colour_cue": {
+            "centroid_px": [
+              224.5,
+              115.0
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              -0.5,
+              0.0
+            ],
+            "colour_vs_old_dist_px": 0.5,
+            "colour_vs_blind_dist_px": 1.5
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "truncated blind=True old=False",
+            "bbox_iou=0.575 keypoint_px=1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_4.png",
+      "family": "geo_static_b",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        172,
+        102,
+        148,
+        138
+      ],
+      "blind_keypoint_px": [
+        225.5,
+        114.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            150,
+            75,
+            135,
+            165
+          ],
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "bbox_iou": 0.5753,
+          "bbox_centre_delta_px": [
+            28.5,
+            13.5
+          ],
+          "bbox_width_height_delta_px": [
+            13,
+            -27
+          ],
+          "keypoint_delta_px": [
+            0.5,
+            -1.0
+          ],
+          "keypoint_dist_px": 1.118,
+          "bearing_old_deg": 22.109,
+          "bearing_blind_deg": 22.263,
+          "bearing_delta_deg": 0.154,
+          "bearing_delta_1px_rule": 0.4,
+          "colour_cue": {
+            "centroid_px": [
+              224.46,
+              113.62
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              -0.54,
+              -1.38
+            ],
+            "colour_vs_old_dist_px": 1.482,
+            "colour_vs_blind_dist_px": 1.107
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "bbox_iou=0.575 keypoint_px=1.118"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            150,
+            75,
+            135,
+            165
+          ],
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "bbox_iou": 0.5753,
+          "bbox_centre_delta_px": [
+            28.5,
+            13.5
+          ],
+          "bbox_width_height_delta_px": [
+            13,
+            -27
+          ],
+          "keypoint_delta_px": [
+            0.5,
+            -1.0
+          ],
+          "keypoint_dist_px": 1.118,
+          "bearing_old_deg": 22.109,
+          "bearing_blind_deg": 22.263,
+          "bearing_delta_deg": 0.154,
+          "bearing_delta_1px_rule": 0.4,
+          "colour_cue": {
+            "centroid_px": [
+              224.46,
+              113.62
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              -0.54,
+              -1.38
+            ],
+            "colour_vs_old_dist_px": 1.482,
+            "colour_vs_blind_dist_px": 1.107
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "truncated blind=True old=False",
+            "bbox_iou=0.575 keypoint_px=1.118"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_b-follow_only_g3_5.png",
+      "family": "geo_static_b",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        172,
+        102,
+        148,
+        138
+      ],
+      "blind_keypoint_px": [
+        225.0,
+        114.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            150,
+            75,
+            135,
+            165
+          ],
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "bbox_iou": 0.5753,
+          "bbox_centre_delta_px": [
+            28.5,
+            13.5
+          ],
+          "bbox_width_height_delta_px": [
+            13,
+            -27
+          ],
+          "keypoint_delta_px": [
+            0.0,
+            -1.0
+          ],
+          "keypoint_dist_px": 1.0,
+          "bearing_old_deg": 22.109,
+          "bearing_blind_deg": 22.109,
+          "bearing_delta_deg": 0.0,
+          "bearing_delta_1px_rule": 0.358,
+          "colour_cue": {
+            "centroid_px": [
+              224.62,
+              113.17
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              -0.38,
+              -1.83
+            ],
+            "colour_vs_old_dist_px": 1.869,
+            "colour_vs_blind_dist_px": 0.913
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "bbox_iou=0.575 keypoint_px=1.0"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            150,
+            75,
+            135,
+            165
+          ],
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "bbox_iou": 0.5753,
+          "bbox_centre_delta_px": [
+            28.5,
+            13.5
+          ],
+          "bbox_width_height_delta_px": [
+            13,
+            -27
+          ],
+          "keypoint_delta_px": [
+            0.0,
+            -1.0
+          ],
+          "keypoint_dist_px": 1.0,
+          "bearing_old_deg": 22.109,
+          "bearing_blind_deg": 22.109,
+          "bearing_delta_deg": 0.0,
+          "bearing_delta_1px_rule": 0.358,
+          "colour_cue": {
+            "centroid_px": [
+              224.62,
+              113.17
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              -0.38,
+              -1.83
+            ],
+            "colour_vs_old_dist_px": 1.869,
+            "colour_vs_blind_dist_px": 0.913
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='PARTIAL' old='FULL'",
+            "truncated blind=True old=False",
+            "bbox_iou=0.575 keypoint_px=1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_201.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_201.png",
+      "family": "reverse_south",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        184,
+        29,
+        136,
+        211
+      ],
+      "blind_keypoint_px": [
+        261.0,
+        38.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "PARTIAL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            190,
+            20,
+            130,
+            215
+          ],
+          "old_reference_px": [
+            260.9,
+            37.2
+          ],
+          "bbox_iou": 0.8967,
+          "bbox_centre_delta_px": [
+            -3.0,
+            7.0
+          ],
+          "bbox_width_height_delta_px": [
+            6,
+            -4
+          ],
+          "keypoint_delta_px": [
+            0.1,
+            0.8
+          ],
+          "keypoint_dist_px": 0.806,
+          "bearing_old_deg": 32.237,
+          "bearing_blind_deg": 32.262,
+          "bearing_delta_deg": 0.026,
+          "bearing_delta_1px_rule": 0.289,
+          "colour_cue": {
+            "centroid_px": [
+              260.72,
+              37.09
+            ],
+            "pixels": 43,
+            "colour_vs_old_px": [
+              -0.18,
+              -0.11
+            ],
+            "colour_vs_old_dist_px": 0.211,
+            "colour_vs_blind_dist_px": 0.952
+          },
+          "classification": "consistent",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.897 keypoint_px=0.806"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_206.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_206.png",
+      "family": "reverse_south",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        69,
+        19,
+        193,
+        176
+      ],
+      "blind_keypoint_px": [
+        170.5,
+        31.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "PARTIAL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            95,
+            20,
+            160,
+            220
+          ],
+          "old_reference_px": [
+            170.6,
+            31.5
+          ],
+          "bbox_iou": 0.6801,
+          "bbox_centre_delta_px": [
+            -9.5,
+            -23.0
+          ],
+          "bbox_width_height_delta_px": [
+            33,
+            -44
+          ],
+          "keypoint_delta_px": [
+            -0.1,
+            -0.5
+          ],
+          "keypoint_dist_px": 0.51,
+          "bearing_old_deg": 3.79,
+          "bearing_blind_deg": 3.755,
+          "bearing_delta_deg": -0.036,
+          "bearing_delta_1px_rule": 0.183,
+          "colour_cue": {
+            "centroid_px": [
+              170.47,
+              31.28
+            ],
+            "pixels": 47,
+            "colour_vs_old_px": [
+              -0.13,
+              -0.22
+            ],
+            "colour_vs_old_dist_px": 0.256,
+            "colour_vs_blind_dist_px": 0.282
+          },
+          "classification": "substantive_disagreement",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "visibility blind='FULL' old='PARTIAL'",
+            "bbox_iou=0.68 keypoint_px=0.51"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_212.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_reverse_south-follow_only_g2_212.png",
+      "family": "reverse_south",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        27,
+        14,
+        210,
+        186
+      ],
+      "blind_keypoint_px": [
+        105.0,
+        27.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            5,
+            15,
+            230,
+            225
+          ],
+          "old_reference_px": [
+            104.6,
+            26.5
+          ],
+          "bbox_iou": 0.7353,
+          "bbox_centre_delta_px": [
+            12.0,
+            -20.5
+          ],
+          "bbox_width_height_delta_px": [
+            -20,
+            -39
+          ],
+          "keypoint_delta_px": [
+            0.4,
+            0.5
+          ],
+          "keypoint_dist_px": 0.64,
+          "bearing_old_deg": -19.098,
+          "bearing_blind_deg": -18.97,
+          "bearing_delta_deg": 0.128,
+          "bearing_delta_1px_rule": 0.229,
+          "colour_cue": {
+            "centroid_px": [
+              104.49,
+              26.76
+            ],
+            "pixels": 49,
+            "colour_vs_old_px": [
+              -0.11,
+              0.26
+            ],
+            "colour_vs_old_dist_px": 0.282,
+            "colour_vs_blind_dist_px": 0.564
+          },
+          "classification": "consistent",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.735 keypoint_px=0.64"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_181.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_181.png",
+      "family": "north",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        247,
+        60,
+        73,
+        140
+      ],
+      "blind_keypoint_px": null,
+      "blind_reference_status": "UNAVAILABLE",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "PARTIAL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "UNAVAILABLE_GREEN_LIGHT_NOT_VISIBLE",
+          "old_bbox_xywh": [
+            245,
+            65,
+            75,
+            160
+          ],
+          "old_reference_px": null,
+          "bbox_iou": 0.797,
+          "bbox_centre_delta_px": [
+            1.0,
+            -15.0
+          ],
+          "bbox_width_height_delta_px": [
+            -2,
+            -20
+          ],
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.797 keypoint_px=999.0"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_186.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_186.png",
+      "family": "north",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": true,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        185,
+        52,
+        135,
+        158
+      ],
+      "blind_keypoint_px": [
+        261.5,
+        63.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "PARTIAL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            175,
+            45,
+            145,
+            185
+          ],
+          "old_reference_px": [
+            260.6,
+            62.0
+          ],
+          "bbox_iou": 0.7952,
+          "bbox_centre_delta_px": [
+            5.0,
+            -6.5
+          ],
+          "bbox_width_height_delta_px": [
+            -10,
+            -27
+          ],
+          "keypoint_delta_px": [
+            0.9,
+            1.0
+          ],
+          "keypoint_dist_px": 1.345,
+          "bearing_old_deg": 32.16,
+          "bearing_blind_deg": 32.39,
+          "bearing_delta_deg": 0.23,
+          "bearing_delta_1px_rule": 0.482,
+          "colour_cue": {
+            "centroid_px": [
+              260.67,
+              61.88
+            ],
+            "pixels": 24,
+            "colour_vs_old_px": [
+              0.07,
+              -0.12
+            ],
+            "colour_vs_old_dist_px": 0.139,
+            "colour_vs_blind_dist_px": 1.394
+          },
+          "classification": "consistent",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.795 keypoint_px=1.345"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_192.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_192.png",
+      "family": "north",
+      "blind_present": true,
+      "blind_visibility": "PARTIAL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        122,
+        52,
+        198,
+        163
+      ],
+      "blind_keypoint_px": [
+        211.0,
+        64.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "PARTIAL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            125,
+            35,
+            165,
+            200
+          ],
+          "old_reference_px": [
+            210.7,
+            63.0
+          ],
+          "bbox_iou": 0.7008,
+          "bbox_centre_delta_px": [
+            13.5,
+            -1.5
+          ],
+          "bbox_width_height_delta_px": [
+            33,
+            -37
+          ],
+          "keypoint_delta_px": [
+            0.3,
+            1.0
+          ],
+          "keypoint_dist_px": 1.044,
+          "bearing_old_deg": 17.582,
+          "bearing_blind_deg": 17.68,
+          "bearing_delta_deg": 0.098,
+          "bearing_delta_1px_rule": 0.374,
+          "colour_cue": {
+            "centroid_px": [
+              210.5,
+              63.0
+            ],
+            "pixels": 26,
+            "colour_vs_old_px": [
+              -0.2,
+              0.0
+            ],
+            "colour_vs_old_dist_px": 0.2,
+            "colour_vs_blind_dist_px": 1.118
+          },
+          "classification": "consistent",
+          "bbox_classification": "consistent",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.701 keypoint_px=1.044"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_3.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_3.png",
+      "family": "static_test_oblique",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        125,
+        92,
+        148,
+        128
+      ],
+      "blind_keypoint_px": [
+        185.0,
+        103.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            110,
+            70,
+            150,
+            165
+          ],
+          "old_reference_px": [
+            184.2,
+            102.8
+          ],
+          "bbox_iou": 0.6542,
+          "bbox_centre_delta_px": [
+            14.0,
+            3.5
+          ],
+          "bbox_width_height_delta_px": [
+            -2,
+            -37
+          ],
+          "keypoint_delta_px": [
+            0.8,
+            0.2
+          ],
+          "keypoint_dist_px": 0.825,
+          "bearing_old_deg": 8.601,
+          "bearing_blind_deg": 8.881,
+          "bearing_delta_deg": 0.28,
+          "bearing_delta_1px_rule": 0.295,
+          "colour_cue": {
+            "centroid_px": [
+              184.44,
+              102.75
+            ],
+            "pixels": 16,
+            "colour_vs_old_px": [
+              0.24,
+              -0.05
+            ],
+            "colour_vs_old_dist_px": 0.245,
+            "colour_vs_blind_dist_px": 0.613
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.654 keypoint_px=0.825"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_4.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_4.png",
+      "family": "static_test_oblique",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        125,
+        92,
+        148,
+        128
+      ],
+      "blind_keypoint_px": [
+        185.0,
+        102.5
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            110,
+            70,
+            150,
+            165
+          ],
+          "old_reference_px": [
+            184.2,
+            102.8
+          ],
+          "bbox_iou": 0.6542,
+          "bbox_centre_delta_px": [
+            14.0,
+            3.5
+          ],
+          "bbox_width_height_delta_px": [
+            -2,
+            -37
+          ],
+          "keypoint_delta_px": [
+            0.8,
+            -0.3
+          ],
+          "keypoint_dist_px": 0.854,
+          "bearing_old_deg": 8.601,
+          "bearing_blind_deg": 8.881,
+          "bearing_delta_deg": 0.28,
+          "bearing_delta_1px_rule": 0.306,
+          "colour_cue": {
+            "centroid_px": [
+              184.41,
+              101.88
+            ],
+            "pixels": 17,
+            "colour_vs_old_px": [
+              0.21,
+              -0.92
+            ],
+            "colour_vs_old_dist_px": 0.944,
+            "colour_vs_blind_dist_px": 0.856
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.654 keypoint_px=0.854"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_5.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_static_oblique-follow_only_g4_5.png",
+      "family": "static_test_oblique",
+      "blind_present": true,
+      "blind_visibility": "FULL",
+      "blind_truncated": false,
+      "blind_ambiguous": false,
+      "blind_negative_type": null,
+      "blind_bbox_xywh": [
+        125,
+        92,
+        148,
+        128
+      ],
+      "blind_keypoint_px": [
+        184.0,
+        102.0
+      ],
+      "blind_reference_status": "MANUAL_APPROX",
+      "old_records": [
+        {
+          "old_source": "landmark_independent_labels_v1",
+          "old_present": true,
+          "old_visibility": "FULL",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "MANUAL_APPROX",
+          "old_bbox_xywh": [
+            110,
+            70,
+            150,
+            165
+          ],
+          "old_reference_px": [
+            184.2,
+            102.8
+          ],
+          "bbox_iou": 0.6542,
+          "bbox_centre_delta_px": [
+            14.0,
+            3.5
+          ],
+          "bbox_width_height_delta_px": [
+            -2,
+            -37
+          ],
+          "keypoint_delta_px": [
+            -0.2,
+            -0.8
+          ],
+          "keypoint_dist_px": 0.825,
+          "bearing_old_deg": 8.601,
+          "bearing_blind_deg": 8.531,
+          "bearing_delta_deg": -0.07,
+          "bearing_delta_1px_rule": 0.295,
+          "colour_cue": {
+            "centroid_px": [
+              184.12,
+              101.59
+            ],
+            "pixels": 17,
+            "colour_vs_old_px": [
+              -0.08,
+              -1.21
+            ],
+            "colour_vs_old_dist_px": 1.213,
+            "colour_vs_blind_dist_px": 0.427
+          },
+          "classification": "acceptable_deviation",
+          "bbox_classification": "acceptable_deviation",
+          "keypoint_classification": "consistent",
+          "semantic_classification": "match",
+          "reasons": [
+            "bbox_iou=0.654 keypoint_px=0.825"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_3.png",
+      "family": "geo_static_c",
+      "blind_present": false,
+      "blind_visibility": "ABSENT",
+      "blind_truncated": false,
+      "blind_ambiguous": true,
+      "blind_negative_type": "SIMILAR_STRUCTURE",
+      "blind_bbox_xywh": null,
+      "blind_keypoint_px": null,
+      "blind_reference_status": "NOT_APPLICABLE",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": false,
+          "old_visibility": "ABSENT",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "NOT_APPLICABLE",
+          "old_bbox_xywh": null,
+          "old_reference_px": null,
+          "bbox_iou": null,
+          "bbox_centre_delta_px": null,
+          "bbox_width_height_delta_px": null,
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "undeterminable",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "match",
+          "reasons": [
+            "blind target identity/negative semantics flagged ambiguous"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": false,
+          "old_visibility": "ABSENT",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": "TARGET_ABSENT_HARD_NEGATIVE",
+          "old_reference_status": "NOT_APPLICABLE",
+          "old_bbox_xywh": null,
+          "old_reference_px": null,
+          "bbox_iou": null,
+          "bbox_centre_delta_px": null,
+          "bbox_width_height_delta_px": null,
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "undeterminable",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "negative_type blind='SIMILAR_STRUCTURE' old='TARGET_ABSENT_HARD_NEGATIVE'",
+            "blind target identity/negative semantics flagged ambiguous"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_4.png",
+      "family": "geo_static_c",
+      "blind_present": false,
+      "blind_visibility": "ABSENT",
+      "blind_truncated": false,
+      "blind_ambiguous": true,
+      "blind_negative_type": "SIMILAR_STRUCTURE",
+      "blind_bbox_xywh": null,
+      "blind_keypoint_px": null,
+      "blind_reference_status": "NOT_APPLICABLE",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": false,
+          "old_visibility": "ABSENT",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "NOT_APPLICABLE",
+          "old_bbox_xywh": null,
+          "old_reference_px": null,
+          "bbox_iou": null,
+          "bbox_centre_delta_px": null,
+          "bbox_width_height_delta_px": null,
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "undeterminable",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "match",
+          "reasons": [
+            "blind target identity/negative semantics flagged ambiguous"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": false,
+          "old_visibility": "ABSENT",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": "TARGET_ABSENT_HARD_NEGATIVE",
+          "old_reference_status": "NOT_APPLICABLE",
+          "old_bbox_xywh": null,
+          "old_reference_px": null,
+          "bbox_iou": null,
+          "bbox_centre_delta_px": null,
+          "bbox_width_height_delta_px": null,
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "undeterminable",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "negative_type blind='SIMILAR_STRUCTURE' old='TARGET_ABSENT_HARD_NEGATIVE'",
+            "blind target identity/negative semantics flagged ambiguous"
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+      "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_5.png",
+      "family": "geo_static_c",
+      "blind_present": false,
+      "blind_visibility": "ABSENT",
+      "blind_truncated": false,
+      "blind_ambiguous": true,
+      "blind_negative_type": "SIMILAR_STRUCTURE",
+      "blind_bbox_xywh": null,
+      "blind_keypoint_px": null,
+      "blind_reference_status": "NOT_APPLICABLE",
+      "old_records": [
+        {
+          "old_source": "geometry_test_labels_v2",
+          "old_present": false,
+          "old_visibility": "ABSENT",
+          "old_truncated": null,
+          "old_ambiguous": null,
+          "old_negative_type": null,
+          "old_reference_status": "NOT_APPLICABLE",
+          "old_bbox_xywh": null,
+          "old_reference_px": null,
+          "bbox_iou": null,
+          "bbox_centre_delta_px": null,
+          "bbox_width_height_delta_px": null,
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "undeterminable",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "match",
+          "reasons": [
+            "blind target identity/negative semantics flagged ambiguous"
+          ]
+        },
+        {
+          "old_source": "annotation_sample_v1",
+          "old_present": false,
+          "old_visibility": "ABSENT",
+          "old_truncated": false,
+          "old_ambiguous": false,
+          "old_negative_type": "TARGET_ABSENT_HARD_NEGATIVE",
+          "old_reference_status": "NOT_APPLICABLE",
+          "old_bbox_xywh": null,
+          "old_reference_px": null,
+          "bbox_iou": null,
+          "bbox_centre_delta_px": null,
+          "bbox_width_height_delta_px": null,
+          "keypoint_delta_px": null,
+          "keypoint_dist_px": null,
+          "bearing_old_deg": null,
+          "bearing_blind_deg": null,
+          "bearing_delta_deg": null,
+          "bearing_delta_1px_rule": null,
+          "colour_cue": null,
+          "classification": "undeterminable",
+          "bbox_classification": "undeterminable",
+          "keypoint_classification": "undeterminable",
+          "semantic_classification": "mismatch",
+          "reasons": [
+            "negative_type blind='SIMILAR_STRUCTURE' old='TARGET_ABSENT_HARD_NEGATIVE'",
+            "blind target identity/negative semantics flagged ambiguous"
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "unique_frames": 21,
+    "unique_frames_with_old_record": 21,
+    "matched_old_records": 33,
+    "classification_per_frame": {
+      "scope": "one primary old record per frame",
+      "records": 21,
+      "classification_counts": {
+        "consistent": 5,
+        "acceptable_deviation": 7,
+        "substantive_disagreement": 5,
+        "undeterminable": 4
+      },
+      "bbox_classification_counts": {
+        "consistent": 6,
+        "acceptable_deviation": 12,
+        "substantive_disagreement": 0,
+        "undeterminable": 3
+      },
+      "keypoint_classification_counts": {
+        "consistent": 15,
+        "acceptable_deviation": 2,
+        "substantive_disagreement": 0,
+        "undeterminable": 4
+      },
+      "semantic_classification_counts": {
+        "match": 16,
+        "mismatch": 5,
+        "not_comparable": 0
+      },
+      "bbox_iou": {
+        "n": 18,
+        "mean": 0.649,
+        "median": 0.654,
+        "p90": 0.796,
+        "min": 0.415,
+        "max": 0.897
+      },
+      "keypoint_dist_px": {
+        "n": 17,
+        "mean": 1.155,
+        "median": 1.0,
+        "p90": 2.034,
+        "min": 0.2,
+        "max": 2.236
+      },
+      "keypoint_dist_deg": {
+        "mean": 0.414,
+        "max": 0.801
+      },
+      "bearing_abs_delta_deg": {
+        "n": 17,
+        "mean": 0.18,
+        "median": 0.154,
+        "p90": 0.352,
+        "min": 0.0,
+        "max": 0.4
+      },
+      "bbox_centre_delta_px": {
+        "dx": {
+          "n": 18,
+          "mean": 7.556,
+          "median": 9.5,
+          "p90": 28.5,
+          "min": -38.5,
+          "max": 28.5
+        },
+        "dy": {
+          "n": 18,
+          "mean": -1.194,
+          "median": 3.5,
+          "p90": 13.5,
+          "min": -23.0,
+          "max": 13.5
+        }
+      },
+      "bbox_size_delta_px": {
+        "dw": {
+          "n": 18,
+          "mean": 0.222,
+          "median": -2.0,
+          "p90": 19.0,
+          "min": -31,
+          "max": 33
+        },
+        "dh": {
+          "n": 18,
+          "mean": -35.5,
+          "median": -37.0,
+          "p90": -24.9,
+          "min": -75,
+          "max": -4
+        }
+      },
+      "colour_cue_vs_old_px": {
+        "n": 17,
+        "mean": 0.871,
+        "median": 0.43,
+        "p90": 2.054,
+        "min": 0.1,
+        "max": 2.642
+      },
+      "colour_cue_vs_blind_px": {
+        "n": 17,
+        "mean": 0.858,
+        "median": 0.856,
+        "p90": 1.493,
+        "min": 0.2,
+        "max": 2.0
+      }
+    },
+    "classification_all_records": {
+      "scope": "all old records (sample duplicates geo)",
+      "records": 33,
+      "classification_counts": {
+        "consistent": 6,
+        "acceptable_deviation": 11,
+        "substantive_disagreement": 9,
+        "undeterminable": 7
+      },
+      "bbox_classification_counts": {
+        "consistent": 7,
+        "acceptable_deviation": 20,
+        "substantive_disagreement": 0,
+        "undeterminable": 6
+      },
+      "keypoint_classification_counts": {
+        "consistent": 22,
+        "acceptable_deviation": 4,
+        "substantive_disagreement": 0,
+        "undeterminable": 7
+      },
+      "semantic_classification_counts": {
+        "match": 21,
+        "mismatch": 12,
+        "not_comparable": 0
+      },
+      "bbox_iou": {
+        "n": 27,
+        "mean": 0.622,
+        "median": 0.575,
+        "p90": 0.768,
+        "min": 0.415,
+        "max": 0.897
+      },
+      "keypoint_dist_px": {
+        "n": 26,
+        "mean": 1.248,
+        "median": 1.081,
+        "p90": 2.236,
+        "min": 0.2,
+        "max": 2.236
+      },
+      "keypoint_dist_deg": {
+        "mean": 0.447,
+        "max": 0.801
+      },
+      "bearing_abs_delta_deg": {
+        "n": 26,
+        "mean": 0.192,
+        "median": 0.192,
+        "p90": 0.352,
+        "min": 0.0,
+        "max": 0.4
+      },
+      "bbox_centre_delta_px": {
+        "dx": {
+          "n": 27,
+          "mean": 7.815,
+          "median": 7.0,
+          "p90": 28.5,
+          "min": -38.5,
+          "max": 28.5
+        },
+        "dy": {
+          "n": 27,
+          "mean": 0.222,
+          "median": 3.5,
+          "p90": 13.5,
+          "min": -23.0,
+          "max": 13.5
+        }
+      },
+      "bbox_size_delta_px": {
+        "dw": {
+          "n": 27,
+          "mean": -0.963,
+          "median": -2.0,
+          "p90": 13.0,
+          "min": -31,
+          "max": 33
+        },
+        "dh": {
+          "n": 27,
+          "mean": -36.889,
+          "median": -37.0,
+          "p90": -27.0,
+          "min": -75,
+          "max": -4
+        }
+      },
+      "colour_cue_vs_old_px": {
+        "n": 26,
+        "mean": 1.004,
+        "median": 0.5,
+        "p90": 2.332,
+        "min": 0.1,
+        "max": 2.642
+      },
+      "colour_cue_vs_blind_px": {
+        "n": 26,
+        "mean": 0.883,
+        "median": 0.885,
+        "p90": 1.5,
+        "min": 0.2,
+        "max": 2.0
+      }
+    },
+    "semantic_agreement": {
+      "present_agree": 21,
+      "visibility_agree": 16,
+      "reference_status_agree": 21,
+      "truncated_agree": 0,
+      "negative_type_agree": 0,
+      "present_mismatch": 0,
+      "visibility_mismatch": 5,
+      "reference_status_mismatch": 0,
+      "truncated_mismatch": 0,
+      "negative_type_mismatch": 0,
+      "present_not_comparable": 0,
+      "visibility_not_comparable": 0,
+      "reference_status_not_comparable": 0,
+      "truncated_not_comparable": 21,
+      "negative_type_not_comparable": 21,
+      "records": 21
+    },
+    "semantic_mismatch_detail": [
+      {
+        "visibility": [
+          "mismatch",
+          "PARTIAL",
+          "FULL"
+        ],
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_north_0-follow_only_g1_177.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_north_0-follow_only_g1_182.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_north_0-follow_only_g1_188.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_static_a-follow_only_g2_3.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_static_a-follow_only_g2_4.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_static_a-follow_only_g2_5.png"
+      },
+      {
+        "visibility": [
+          "mismatch",
+          "PARTIAL",
+          "FULL"
+        ],
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_static_b-follow_only_g3_3.png"
+      },
+      {
+        "visibility": [
+          "mismatch",
+          "PARTIAL",
+          "FULL"
+        ],
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_static_b-follow_only_g3_4.png"
+      },
+      {
+        "visibility": [
+          "mismatch",
+          "PARTIAL",
+          "FULL"
+        ],
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "geo_test_static_b-follow_only_g3_5.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_reverse_south-follow_only_g2_201.png"
+      },
+      {
+        "visibility": [
+          "mismatch",
+          "FULL",
+          "PARTIAL"
+        ],
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_reverse_south-follow_only_g2_206.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_reverse_south-follow_only_g2_212.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_north_0-follow_only_g3_181.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          true,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_north_0-follow_only_g3_186.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_north_0-follow_only_g3_192.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_static_oblique-follow_only_g4_3.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_static_oblique-follow_only_g4_4.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          null,
+          null
+        ],
+        "frame_id": "test_static_oblique-follow_only_g4_5.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          "SIMILAR_STRUCTURE",
+          null
+        ],
+        "frame_id": "geo_test_static_c-follow_only_g4_3.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          "SIMILAR_STRUCTURE",
+          null
+        ],
+        "frame_id": "geo_test_static_c-follow_only_g4_4.png"
+      },
+      {
+        "truncated": [
+          "not_comparable",
+          false,
+          null
+        ],
+        "negative_type": [
+          "not_comparable",
+          "SIMILAR_STRUCTURE",
+          null
+        ],
+        "frame_id": "geo_test_static_c-follow_only_g4_5.png"
+      }
+    ],
+    "family_split": {
+      "geo_north_test": {
+        "scope": "family geo_north_test",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 1,
+          "acceptable_deviation": 1,
+          "substantive_disagreement": 1,
+          "undeterminable": 0
+        },
+        "bbox_classification_counts": {
+          "consistent": 1,
+          "acceptable_deviation": 2,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "keypoint_classification_counts": {
+          "consistent": 3,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "semantic_classification_counts": {
+          "match": 2,
+          "mismatch": 1,
+          "not_comparable": 0
+        },
+        "bbox_iou": {
+          "n": 3,
+          "mean": 0.59,
+          "median": 0.605,
+          "p90": 0.721,
+          "min": 0.415,
+          "max": 0.75
+        },
+        "keypoint_dist_px": {
+          "n": 3,
+          "mean": 1.133,
+          "median": 1.3,
+          "p90": 1.78,
+          "min": 0.2,
+          "max": 1.9
+        },
+        "keypoint_dist_deg": {
+          "mean": 0.406,
+          "max": 0.68
+        },
+        "bearing_abs_delta_deg": {
+          "n": 3,
+          "mean": 0.133,
+          "median": 0.0,
+          "p90": 0.32,
+          "min": 0.0,
+          "max": 0.4
+        },
+        "bbox_centre_delta_px": {
+          "dx": {
+            "n": 3,
+            "mean": -10.167,
+            "median": -7.5,
+            "p90": 10.9,
+            "min": -38.5,
+            "max": 15.5
+          },
+          "dy": {
+            "n": 3,
+            "mean": -10.333,
+            "median": -8.0,
+            "p90": -2.8,
+            "min": -21.5,
+            "max": -1.5
+          }
+        },
+        "bbox_size_delta_px": {
+          "dw": {
+            "n": 3,
+            "mean": -6.333,
+            "median": 3.0,
+            "p90": 7.8,
+            "min": -31,
+            "max": 9
+          },
+          "dh": {
+            "n": 3,
+            "mean": -52.0,
+            "median": -44.0,
+            "p90": -38.4,
+            "min": -75,
+            "max": -37
+          }
+        },
+        "colour_cue_vs_old_px": {
+          "n": 3,
+          "mean": 0.22,
+          "median": 0.13,
+          "p90": 0.37,
+          "min": 0.1,
+          "max": 0.43
+        },
+        "colour_cue_vs_blind_px": {
+          "n": 3,
+          "mean": 1.273,
+          "median": 1.488,
+          "p90": 1.898,
+          "min": 0.33,
+          "max": 2.0
+        }
+      },
+      "geo_static_a": {
+        "scope": "family geo_static_a",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 3,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "bbox_classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 3,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "keypoint_classification_counts": {
+          "consistent": 1,
+          "acceptable_deviation": 2,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "semantic_classification_counts": {
+          "match": 3,
+          "mismatch": 0,
+          "not_comparable": 0
+        },
+        "bbox_iou": {
+          "n": 3,
+          "mean": 0.538,
+          "median": 0.535,
+          "p90": 0.541,
+          "min": 0.535,
+          "max": 0.542
+        },
+        "keypoint_dist_px": {
+          "n": 3,
+          "mean": 2.092,
+          "median": 2.236,
+          "p90": 2.236,
+          "min": 1.803,
+          "max": 2.236
+        },
+        "keypoint_dist_deg": {
+          "mean": 0.749,
+          "max": 0.801
+        },
+        "bearing_abs_delta_deg": {
+          "n": 3,
+          "mean": 0.352,
+          "median": 0.352,
+          "p90": 0.352,
+          "min": 0.352,
+          "max": 0.352
+        },
+        "bbox_centre_delta_px": {
+          "dx": {
+            "n": 3,
+            "mean": 6.667,
+            "median": 6.5,
+            "p90": 6.9,
+            "min": 6.5,
+            "max": 7.0
+          },
+          "dy": {
+            "n": 3,
+            "mean": 6.0,
+            "median": 6.0,
+            "p90": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          }
+        },
+        "bbox_size_delta_px": {
+          "dw": {
+            "n": 3,
+            "mean": -16.667,
+            "median": -17.0,
+            "p90": -16.2,
+            "min": -17,
+            "max": -16
+          },
+          "dh": {
+            "n": 3,
+            "mean": -40.0,
+            "median": -40.0,
+            "p90": -40.0,
+            "min": -40,
+            "max": -40
+          }
+        },
+        "colour_cue_vs_old_px": {
+          "n": 3,
+          "mean": 2.266,
+          "median": 2.332,
+          "p90": 2.58,
+          "min": 1.825,
+          "max": 2.642
+        },
+        "colour_cue_vs_blind_px": {
+          "n": 3,
+          "mean": 0.346,
+          "median": 0.414,
+          "p90": 0.422,
+          "min": 0.2,
+          "max": 0.424
+        }
+      },
+      "geo_static_b": {
+        "scope": "family geo_static_b",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 3,
+          "undeterminable": 0
+        },
+        "bbox_classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 3,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "keypoint_classification_counts": {
+          "consistent": 3,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "semantic_classification_counts": {
+          "match": 0,
+          "mismatch": 3,
+          "not_comparable": 0
+        },
+        "bbox_iou": {
+          "n": 3,
+          "mean": 0.575,
+          "median": 0.575,
+          "p90": 0.575,
+          "min": 0.575,
+          "max": 0.575
+        },
+        "keypoint_dist_px": {
+          "n": 3,
+          "mean": 1.039,
+          "median": 1.0,
+          "p90": 1.094,
+          "min": 1.0,
+          "max": 1.118
+        },
+        "keypoint_dist_deg": {
+          "mean": 0.372,
+          "max": 0.4
+        },
+        "bearing_abs_delta_deg": {
+          "n": 3,
+          "mean": 0.154,
+          "median": 0.154,
+          "p90": 0.276,
+          "min": 0.0,
+          "max": 0.307
+        },
+        "bbox_centre_delta_px": {
+          "dx": {
+            "n": 3,
+            "mean": 28.5,
+            "median": 28.5,
+            "p90": 28.5,
+            "min": 28.5,
+            "max": 28.5
+          },
+          "dy": {
+            "n": 3,
+            "mean": 13.5,
+            "median": 13.5,
+            "p90": 13.5,
+            "min": 13.5,
+            "max": 13.5
+          }
+        },
+        "bbox_size_delta_px": {
+          "dw": {
+            "n": 3,
+            "mean": 13.0,
+            "median": 13.0,
+            "p90": 13.0,
+            "min": 13,
+            "max": 13
+          },
+          "dh": {
+            "n": 3,
+            "mean": -27.0,
+            "median": -27.0,
+            "p90": -27.0,
+            "min": -27,
+            "max": -27
+          }
+        },
+        "colour_cue_vs_old_px": {
+          "n": 3,
+          "mean": 1.284,
+          "median": 1.482,
+          "p90": 1.792,
+          "min": 0.5,
+          "max": 1.869
+        },
+        "colour_cue_vs_blind_px": {
+          "n": 3,
+          "mean": 1.173,
+          "median": 1.107,
+          "p90": 1.421,
+          "min": 0.913,
+          "max": 1.5
+        }
+      },
+      "reverse_south": {
+        "scope": "family reverse_south",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 2,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 1,
+          "undeterminable": 0
+        },
+        "bbox_classification_counts": {
+          "consistent": 2,
+          "acceptable_deviation": 1,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "keypoint_classification_counts": {
+          "consistent": 3,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "semantic_classification_counts": {
+          "match": 2,
+          "mismatch": 1,
+          "not_comparable": 0
+        },
+        "bbox_iou": {
+          "n": 3,
+          "mean": 0.771,
+          "median": 0.735,
+          "p90": 0.864,
+          "min": 0.68,
+          "max": 0.897
+        },
+        "keypoint_dist_px": {
+          "n": 3,
+          "mean": 0.652,
+          "median": 0.64,
+          "p90": 0.773,
+          "min": 0.51,
+          "max": 0.806
+        },
+        "keypoint_dist_deg": {
+          "mean": 0.233,
+          "max": 0.289
+        },
+        "bearing_abs_delta_deg": {
+          "n": 3,
+          "mean": 0.063,
+          "median": 0.036,
+          "p90": 0.11,
+          "min": 0.026,
+          "max": 0.128
+        },
+        "bbox_centre_delta_px": {
+          "dx": {
+            "n": 3,
+            "mean": -0.167,
+            "median": -3.0,
+            "p90": 9.0,
+            "min": -9.5,
+            "max": 12.0
+          },
+          "dy": {
+            "n": 3,
+            "mean": -12.167,
+            "median": -20.5,
+            "p90": 1.5,
+            "min": -23.0,
+            "max": 7.0
+          }
+        },
+        "bbox_size_delta_px": {
+          "dw": {
+            "n": 3,
+            "mean": 6.333,
+            "median": 6.0,
+            "p90": 27.6,
+            "min": -20,
+            "max": 33
+          },
+          "dh": {
+            "n": 3,
+            "mean": -29.0,
+            "median": -39.0,
+            "p90": -11.0,
+            "min": -44,
+            "max": -4
+          }
+        },
+        "colour_cue_vs_old_px": {
+          "n": 3,
+          "mean": 0.25,
+          "median": 0.256,
+          "p90": 0.277,
+          "min": 0.211,
+          "max": 0.282
+        },
+        "colour_cue_vs_blind_px": {
+          "n": 3,
+          "mean": 0.599,
+          "median": 0.564,
+          "p90": 0.874,
+          "min": 0.282,
+          "max": 0.952
+        }
+      },
+      "north": {
+        "scope": "family north",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 2,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 1
+        },
+        "bbox_classification_counts": {
+          "consistent": 3,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "keypoint_classification_counts": {
+          "consistent": 2,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 1
+        },
+        "semantic_classification_counts": {
+          "match": 3,
+          "mismatch": 0,
+          "not_comparable": 0
+        },
+        "bbox_iou": {
+          "n": 3,
+          "mean": 0.764,
+          "median": 0.795,
+          "p90": 0.797,
+          "min": 0.701,
+          "max": 0.797
+        },
+        "keypoint_dist_px": {
+          "n": 2,
+          "mean": 1.195,
+          "median": 1.195,
+          "p90": 1.315,
+          "min": 1.044,
+          "max": 1.345
+        },
+        "keypoint_dist_deg": {
+          "mean": 0.428,
+          "max": 0.482
+        },
+        "bearing_abs_delta_deg": {
+          "n": 2,
+          "mean": 0.164,
+          "median": 0.164,
+          "p90": 0.217,
+          "min": 0.098,
+          "max": 0.23
+        },
+        "bbox_centre_delta_px": {
+          "dx": {
+            "n": 3,
+            "mean": 6.5,
+            "median": 5.0,
+            "p90": 11.8,
+            "min": 1.0,
+            "max": 13.5
+          },
+          "dy": {
+            "n": 3,
+            "mean": -7.667,
+            "median": -6.5,
+            "p90": -2.5,
+            "min": -15.0,
+            "max": -1.5
+          }
+        },
+        "bbox_size_delta_px": {
+          "dw": {
+            "n": 3,
+            "mean": 7.0,
+            "median": -2.0,
+            "p90": 26.0,
+            "min": -10,
+            "max": 33
+          },
+          "dh": {
+            "n": 3,
+            "mean": -28.0,
+            "median": -27.0,
+            "p90": -21.4,
+            "min": -37,
+            "max": -20
+          }
+        },
+        "colour_cue_vs_old_px": {
+          "n": 2,
+          "mean": 0.17,
+          "median": 0.17,
+          "p90": 0.194,
+          "min": 0.139,
+          "max": 0.2
+        },
+        "colour_cue_vs_blind_px": {
+          "n": 2,
+          "mean": 1.256,
+          "median": 1.256,
+          "p90": 1.366,
+          "min": 1.118,
+          "max": 1.394
+        }
+      },
+      "static_test_oblique": {
+        "scope": "family static_test_oblique",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 3,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "bbox_classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 3,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "keypoint_classification_counts": {
+          "consistent": 3,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 0
+        },
+        "semantic_classification_counts": {
+          "match": 3,
+          "mismatch": 0,
+          "not_comparable": 0
+        },
+        "bbox_iou": {
+          "n": 3,
+          "mean": 0.654,
+          "median": 0.654,
+          "p90": 0.654,
+          "min": 0.654,
+          "max": 0.654
+        },
+        "keypoint_dist_px": {
+          "n": 3,
+          "mean": 0.835,
+          "median": 0.825,
+          "p90": 0.848,
+          "min": 0.825,
+          "max": 0.854
+        },
+        "keypoint_dist_deg": {
+          "mean": 0.299,
+          "max": 0.306
+        },
+        "bearing_abs_delta_deg": {
+          "n": 3,
+          "mean": 0.21,
+          "median": 0.28,
+          "p90": 0.28,
+          "min": 0.07,
+          "max": 0.28
+        },
+        "bbox_centre_delta_px": {
+          "dx": {
+            "n": 3,
+            "mean": 14.0,
+            "median": 14.0,
+            "p90": 14.0,
+            "min": 14.0,
+            "max": 14.0
+          },
+          "dy": {
+            "n": 3,
+            "mean": 3.5,
+            "median": 3.5,
+            "p90": 3.5,
+            "min": 3.5,
+            "max": 3.5
+          }
+        },
+        "bbox_size_delta_px": {
+          "dw": {
+            "n": 3,
+            "mean": -2.0,
+            "median": -2.0,
+            "p90": -2.0,
+            "min": -2,
+            "max": -2
+          },
+          "dh": {
+            "n": 3,
+            "mean": -37.0,
+            "median": -37.0,
+            "p90": -37.0,
+            "min": -37,
+            "max": -37
+          }
+        },
+        "colour_cue_vs_old_px": {
+          "n": 3,
+          "mean": 0.801,
+          "median": 0.944,
+          "p90": 1.159,
+          "min": 0.245,
+          "max": 1.213
+        },
+        "colour_cue_vs_blind_px": {
+          "n": 3,
+          "mean": 0.632,
+          "median": 0.613,
+          "p90": 0.807,
+          "min": 0.427,
+          "max": 0.856
+        }
+      },
+      "geo_static_c": {
+        "scope": "family geo_static_c",
+        "records": 3,
+        "classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 3
+        },
+        "bbox_classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 3
+        },
+        "keypoint_classification_counts": {
+          "consistent": 0,
+          "acceptable_deviation": 0,
+          "substantive_disagreement": 0,
+          "undeterminable": 3
+        },
+        "semantic_classification_counts": {
+          "match": 3,
+          "mismatch": 0,
+          "not_comparable": 0
+        },
+        "bbox_iou": null,
+        "keypoint_dist_px": null,
+        "keypoint_dist_deg": null,
+        "bearing_abs_delta_deg": null,
+        "bbox_centre_delta_px": {
+          "dx": null,
+          "dy": null
+        },
+        "bbox_size_delta_px": {
+          "dw": null,
+          "dh": null
+        },
+        "colour_cue_vs_old_px": null,
+        "colour_cue_vs_blind_px": null
+      }
+    },
+    "old_label_provenance_check": {
+      "note": "how close the old reference points are to a pure colour-cue centroid; if the old 'manual pixel' reference matches the colour rule to within a fraction of the light size, the 0.036 deg anchor agreement is circular (label and detector share the green cue)",
+      "records": [
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+          "old_reference_px": [
+            293.1,
+            60.0
+          ],
+          "colour_centroid_px": [
+            293.0,
+            60.0
+          ],
+          "old_minus_colour_px": [
+            -0.1,
+            0.0
+          ],
+          "distance_px": 0.1,
+          "green_pixels": 27
+        },
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+          "old_reference_px": [
+            229.0,
+            58.2
+          ],
+          "colour_centroid_px": [
+            228.59,
+            58.07
+          ],
+          "old_minus_colour_px": [
+            -0.41,
+            -0.13
+          ],
+          "distance_px": 0.43,
+          "green_pixels": 27
+        },
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+          "old_reference_px": [
+            185.5,
+            57.8
+          ],
+          "colour_centroid_px": [
+            185.5,
+            57.67
+          ],
+          "old_minus_colour_px": [
+            0.0,
+            -0.13
+          ],
+          "distance_px": 0.13,
+          "green_pixels": 30
+        },
+        {
+          "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "colour_centroid_px": [
+            138.67,
+            98.75
+          ],
+          "old_minus_colour_px": [
+            -1.33,
+            -1.25
+          ],
+          "distance_px": 1.825,
+          "green_pixels": 12
+        },
+        {
+          "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "colour_centroid_px": [
+            138.8,
+            98.0
+          ],
+          "old_minus_colour_px": [
+            -1.2,
+            -2.0
+          ],
+          "distance_px": 2.332,
+          "green_pixels": 10
+        },
+        {
+          "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+          "old_reference_px": [
+            140.0,
+            100.0
+          ],
+          "colour_centroid_px": [
+            138.7,
+            97.7
+          ],
+          "old_minus_colour_px": [
+            -1.3,
+            -2.3
+          ],
+          "distance_px": 2.642,
+          "green_pixels": 10
+        },
+        {
+          "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "colour_centroid_px": [
+            224.5,
+            115.0
+          ],
+          "old_minus_colour_px": [
+            -0.5,
+            0.0
+          ],
+          "distance_px": 0.5,
+          "green_pixels": 24
+        },
+        {
+          "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "colour_centroid_px": [
+            224.46,
+            113.62
+          ],
+          "old_minus_colour_px": [
+            -0.54,
+            -1.38
+          ],
+          "distance_px": 1.482,
+          "green_pixels": 24
+        },
+        {
+          "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+          "old_reference_px": [
+            225.0,
+            115.0
+          ],
+          "colour_centroid_px": [
+            224.62,
+            113.17
+          ],
+          "old_minus_colour_px": [
+            -0.38,
+            -1.83
+          ],
+          "distance_px": 1.869,
+          "green_pixels": 24
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_201.png",
+          "old_reference_px": [
+            260.9,
+            37.2
+          ],
+          "colour_centroid_px": [
+            260.72,
+            37.09
+          ],
+          "old_minus_colour_px": [
+            -0.18,
+            -0.11
+          ],
+          "distance_px": 0.211,
+          "green_pixels": 43
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_206.png",
+          "old_reference_px": [
+            170.6,
+            31.5
+          ],
+          "colour_centroid_px": [
+            170.47,
+            31.28
+          ],
+          "old_minus_colour_px": [
+            -0.13,
+            -0.22
+          ],
+          "distance_px": 0.256,
+          "green_pixels": 47
+        },
+        {
+          "frame_id": "test_reverse_south-follow_only_g2_212.png",
+          "old_reference_px": [
+            104.6,
+            26.5
+          ],
+          "colour_centroid_px": [
+            104.49,
+            26.76
+          ],
+          "old_minus_colour_px": [
+            -0.11,
+            0.26
+          ],
+          "distance_px": 0.282,
+          "green_pixels": 49
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_186.png",
+          "old_reference_px": [
+            260.6,
+            62.0
+          ],
+          "colour_centroid_px": [
+            260.67,
+            61.88
+          ],
+          "old_minus_colour_px": [
+            0.07,
+            -0.12
+          ],
+          "distance_px": 0.139,
+          "green_pixels": 24
+        },
+        {
+          "frame_id": "test_north_0-follow_only_g3_192.png",
+          "old_reference_px": [
+            210.7,
+            63.0
+          ],
+          "colour_centroid_px": [
+            210.5,
+            63.0
+          ],
+          "old_minus_colour_px": [
+            -0.2,
+            0.0
+          ],
+          "distance_px": 0.2,
+          "green_pixels": 26
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_3.png",
+          "old_reference_px": [
+            184.2,
+            102.8
+          ],
+          "colour_centroid_px": [
+            184.44,
+            102.75
+          ],
+          "old_minus_colour_px": [
+            0.24,
+            -0.05
+          ],
+          "distance_px": 0.245,
+          "green_pixels": 16
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_4.png",
+          "old_reference_px": [
+            184.2,
+            102.8
+          ],
+          "colour_centroid_px": [
+            184.41,
+            101.88
+          ],
+          "old_minus_colour_px": [
+            0.21,
+            -0.92
+          ],
+          "distance_px": 0.944,
+          "green_pixels": 17
+        },
+        {
+          "frame_id": "test_static_oblique-follow_only_g4_5.png",
+          "old_reference_px": [
+            184.2,
+            102.8
+          ],
+          "colour_centroid_px": [
+            184.12,
+            101.59
+          ],
+          "old_minus_colour_px": [
+            -0.08,
+            -1.21
+          ],
+          "distance_px": 1.213,
+          "green_pixels": 17
+        }
+      ],
+      "distance_px": {
+        "n": 17,
+        "mean": 0.871,
+        "median": 0.43,
+        "p90": 2.054,
+        "min": 0.1,
+        "max": 2.642
+      }
+    },
+    "old_bbox_centre_vs_old_reference_bearing_abs_deg": {
+      "n": 17,
+      "mean": 3.406,
+      "median": 1.581,
+      "p90": 6.926,
+      "min": 0.28,
+      "max": 18.221
+    },
+    "semantic_check_by_old_source": {
+      "geometry_test_labels_v2": {
+        "records": 12,
+        "fields": {
+          "present": {
+            "comparable": 12,
+            "agree": 12,
+            "mismatch": 0
+          },
+          "visibility": {
+            "comparable": 12,
+            "agree": 8,
+            "mismatch": 4
+          },
+          "truncated": {
+            "comparable": 0,
+            "agree": 0,
+            "mismatch": 0
+          },
+          "negative_type": {
+            "comparable": 0,
+            "agree": 0,
+            "mismatch": 0
+          },
+          "reference_status": {
+            "comparable": 12,
+            "agree": 12,
+            "mismatch": 0
+          }
+        },
+        "mismatch_detail": [
+          {
+            "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          }
+        ]
+      },
+      "annotation_sample_v1": {
+        "records": 12,
+        "fields": {
+          "present": {
+            "comparable": 12,
+            "agree": 12,
+            "mismatch": 0
+          },
+          "visibility": {
+            "comparable": 12,
+            "agree": 8,
+            "mismatch": 4
+          },
+          "truncated": {
+            "comparable": 12,
+            "agree": 8,
+            "mismatch": 4
+          },
+          "negative_type": {
+            "comparable": 3,
+            "agree": 0,
+            "mismatch": 3
+          },
+          "reference_status": {
+            "comparable": 12,
+            "agree": 12,
+            "mismatch": 0
+          }
+        },
+        "mismatch_detail": [
+          {
+            "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+            "field": "truncated",
+            "blind": true,
+            "old": false
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+            "field": "truncated",
+            "blind": true,
+            "old": false
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+            "field": "truncated",
+            "blind": true,
+            "old": false
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+            "field": "visibility",
+            "blind": "PARTIAL",
+            "old": "FULL"
+          },
+          {
+            "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+            "field": "truncated",
+            "blind": true,
+            "old": false
+          },
+          {
+            "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+            "field": "negative_type",
+            "blind": "SIMILAR_STRUCTURE",
+            "old": "TARGET_ABSENT_HARD_NEGATIVE"
+          },
+          {
+            "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+            "field": "negative_type",
+            "blind": "SIMILAR_STRUCTURE",
+            "old": "TARGET_ABSENT_HARD_NEGATIVE"
+          },
+          {
+            "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+            "field": "negative_type",
+            "blind": "SIMILAR_STRUCTURE",
+            "old": "TARGET_ABSENT_HARD_NEGATIVE"
+          }
+        ]
+      },
+      "landmark_independent_labels_v1": {
+        "records": 9,
+        "fields": {
+          "present": {
+            "comparable": 9,
+            "agree": 9,
+            "mismatch": 0
+          },
+          "visibility": {
+            "comparable": 9,
+            "agree": 8,
+            "mismatch": 1
+          },
+          "truncated": {
+            "comparable": 0,
+            "agree": 0,
+            "mismatch": 0
+          },
+          "negative_type": {
+            "comparable": 0,
+            "agree": 0,
+            "mismatch": 0
+          },
+          "reference_status": {
+            "comparable": 9,
+            "agree": 9,
+            "mismatch": 0
+          }
+        },
+        "mismatch_detail": [
+          {
+            "frame_id": "test_reverse_south-follow_only_g2_206.png",
+            "field": "visibility",
+            "blind": "FULL",
+            "old": "PARTIAL"
+          }
+        ]
+      }
+    },
+    "per_frame_rows": [
+      {
+        "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+        "family": "geo_north_test",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "substantive_disagreement",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "mismatch",
+        "bbox_iou": 0.605,
+        "keypoint_dist_px": 1.9,
+        "bearing_delta_deg": 0.4,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+        "family": "geo_north_test",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "consistent",
+        "bbox_class": "consistent",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.7498,
+        "keypoint_dist_px": 1.3,
+        "bearing_delta_deg": 0.0,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+        "family": "geo_north_test",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.4149,
+        "keypoint_dist_px": 0.2,
+        "bearing_delta_deg": 0.0,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+        "family": "geo_static_a",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.5423,
+        "keypoint_dist_px": 1.803,
+        "bearing_delta_deg": -0.352,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+        "family": "geo_static_a",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "acceptable_deviation",
+        "semantic_class": "match",
+        "bbox_iou": 0.5355,
+        "keypoint_dist_px": 2.236,
+        "bearing_delta_deg": -0.352,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+        "family": "geo_static_a",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "acceptable_deviation",
+        "semantic_class": "match",
+        "bbox_iou": 0.5355,
+        "keypoint_dist_px": 2.236,
+        "bearing_delta_deg": -0.352,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+        "family": "geo_static_b",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "substantive_disagreement",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "mismatch",
+        "bbox_iou": 0.5753,
+        "keypoint_dist_px": 1.0,
+        "bearing_delta_deg": 0.307,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+        "family": "geo_static_b",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "substantive_disagreement",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "mismatch",
+        "bbox_iou": 0.5753,
+        "keypoint_dist_px": 1.118,
+        "bearing_delta_deg": 0.154,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+        "family": "geo_static_b",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "substantive_disagreement",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "mismatch",
+        "bbox_iou": 0.5753,
+        "keypoint_dist_px": 1.0,
+        "bearing_delta_deg": 0.0,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "test_reverse_south-follow_only_g2_201.png",
+        "family": "reverse_south",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "consistent",
+        "bbox_class": "consistent",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.8967,
+        "keypoint_dist_px": 0.806,
+        "bearing_delta_deg": 0.026,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "PARTIAL"
+      },
+      {
+        "frame_id": "test_reverse_south-follow_only_g2_206.png",
+        "family": "reverse_south",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "substantive_disagreement",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "mismatch",
+        "bbox_iou": 0.6801,
+        "keypoint_dist_px": 0.51,
+        "bearing_delta_deg": -0.036,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "PARTIAL"
+      },
+      {
+        "frame_id": "test_reverse_south-follow_only_g2_212.png",
+        "family": "reverse_south",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "consistent",
+        "bbox_class": "consistent",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.7353,
+        "keypoint_dist_px": 0.64,
+        "bearing_delta_deg": 0.128,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "test_north_0-follow_only_g3_181.png",
+        "family": "north",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "undeterminable",
+        "bbox_class": "consistent",
+        "keypoint_class": "undeterminable",
+        "semantic_class": "match",
+        "bbox_iou": 0.797,
+        "keypoint_dist_px": null,
+        "bearing_delta_deg": null,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "PARTIAL"
+      },
+      {
+        "frame_id": "test_north_0-follow_only_g3_186.png",
+        "family": "north",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "consistent",
+        "bbox_class": "consistent",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.7952,
+        "keypoint_dist_px": 1.345,
+        "bearing_delta_deg": 0.23,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "PARTIAL"
+      },
+      {
+        "frame_id": "test_north_0-follow_only_g3_192.png",
+        "family": "north",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "consistent",
+        "bbox_class": "consistent",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.7008,
+        "keypoint_dist_px": 1.044,
+        "bearing_delta_deg": 0.098,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "PARTIAL",
+        "old_visibility": "PARTIAL"
+      },
+      {
+        "frame_id": "test_static_oblique-follow_only_g4_3.png",
+        "family": "static_test_oblique",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.6542,
+        "keypoint_dist_px": 0.825,
+        "bearing_delta_deg": 0.28,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "test_static_oblique-follow_only_g4_4.png",
+        "family": "static_test_oblique",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.6542,
+        "keypoint_dist_px": 0.854,
+        "bearing_delta_deg": 0.28,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "test_static_oblique-follow_only_g4_5.png",
+        "family": "static_test_oblique",
+        "old_source": "landmark_independent_labels_v1",
+        "combined": "acceptable_deviation",
+        "bbox_class": "acceptable_deviation",
+        "keypoint_class": "consistent",
+        "semantic_class": "match",
+        "bbox_iou": 0.6542,
+        "keypoint_dist_px": 0.825,
+        "bearing_delta_deg": -0.07,
+        "blind_present": true,
+        "old_present": true,
+        "blind_visibility": "FULL",
+        "old_visibility": "FULL"
+      },
+      {
+        "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+        "family": "geo_static_c",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "undeterminable",
+        "bbox_class": "undeterminable",
+        "keypoint_class": "undeterminable",
+        "semantic_class": "match",
+        "bbox_iou": null,
+        "keypoint_dist_px": null,
+        "bearing_delta_deg": null,
+        "blind_present": false,
+        "old_present": false,
+        "blind_visibility": "ABSENT",
+        "old_visibility": "ABSENT"
+      },
+      {
+        "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+        "family": "geo_static_c",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "undeterminable",
+        "bbox_class": "undeterminable",
+        "keypoint_class": "undeterminable",
+        "semantic_class": "match",
+        "bbox_iou": null,
+        "keypoint_dist_px": null,
+        "bearing_delta_deg": null,
+        "blind_present": false,
+        "old_present": false,
+        "blind_visibility": "ABSENT",
+        "old_visibility": "ABSENT"
+      },
+      {
+        "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+        "family": "geo_static_c",
+        "old_source": "geometry_test_labels_v2",
+        "combined": "undeterminable",
+        "bbox_class": "undeterminable",
+        "keypoint_class": "undeterminable",
+        "semantic_class": "match",
+        "bbox_iou": null,
+        "keypoint_dist_px": null,
+        "bearing_delta_deg": null,
+        "blind_present": false,
+        "old_present": false,
+        "blind_visibility": "ABSENT",
+        "old_visibility": "ABSENT"
+      }
+    ],
+    "colour_cue_rule": "g>=90, g-r>=25, g-b>=25, 4-connectivity, largest component >=2 px (same rule disclosed in the blind pass view aids)",
+    "deg_per_px": 0.3581
+  }
+}

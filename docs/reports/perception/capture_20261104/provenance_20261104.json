@@ -1,0 +1,632 @@
+{
+ "schema_version": "dsh.landmark_final_capture_provenance.v1",
+ "status": "COLLECTION_PASS_DATA_ONLY",
+ "status_note": "data collection and image-based condition labeling only; no model effect, no board, no navigation acceptance",
+ "task": "task-1 T1 landmark final candidate pool: >=3 new trajectory families, 200-400 accepted RGB frames, visible foreground GUI",
+ "operator": "teammate capture",
+ "generated_at": "2026-11-04T18:22:20+08:00",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head_commit": "43fee3e02de57840e54297e8595924e2f213d722",
+  "head_short": "43fee3e",
+  "worktree_note": "other teammates had untracked files in the worktree during capture; none touched by this task (write scope: configs/scenarios/landmark_final_cases_v1.json, docs/reports/perception/capture_20261104)"
+ },
+ "runtime": {
+  "gui_mode": true,
+  "headless": false,
+  "renderer": "DirectX / D3D12 (--/app/vulkan=false)",
+  "isaac_sim": "5.1.0",
+  "gpu": "NVIDIA GeForce RTX 5080 16GB",
+  "gpu_driver": "581.80",
+  "cuda_reported": "13.0",
+  "os": "Windows 11 Pro for Workstations 10.0 (26H1) build 28120",
+  "python": "3.11.9 (E:/isaac/env_isaaclab/Scripts/python.exe)",
+  "visible_window_evidence": "docs/reports/perception/capture_20261104/gui_window_*.png (mid-run desktop captures)"
+ },
+ "commands": {
+  "smoke": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_final_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_final_smoke_20261104_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --only-cases lmf_sweep_0 --code-commit 43fee3e02de57840e54297e8595924e2f213d722 --working-tree landmark final candidate collection; smoke run; branch feat/v2.2-simulation-perception --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_final_smoke_20261104",
+  "full": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_final_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_final_candidate_20261104_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --code-commit 43fee3e02de57840e54297e8595924e2f213d722 --working-tree landmark final candidate collection; full run; branch feat/v2.2-simulation-perception; HEAD 43fee3e --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_final_candidate_20261104"
+ },
+ "map": {
+  "asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15"
+ },
+ "cases": {
+  "file": "configs/scenarios/landmark_final_cases_v1.json",
+  "sha256": "43645338b71c5e446f875dc3d19874978ce67d82de7a72fff99cb735177b2aaa",
+  "schema_version": "boom_birds.map_cases.v2",
+  "case_count": 6,
+  "case_ids": [
+   "lmf_sweep_0",
+   "lmf_backoff_0",
+   "lmf_near_0",
+   "lmf_edge_0",
+   "lmf_similar_negative_0",
+   "lmf_side_negative_0"
+  ],
+  "region_note": "MID is a data-collection observation zone added only for case/goal validation; it is NOT a real region in the V2.2 region topology and must not be consumed as one",
+  "families": [
+   {
+    "case_id": "lmf_sweep_0",
+    "family": "lateral_sweep",
+    "kind": "dynamic_route",
+    "route_id": "lmf_sweep",
+    "start_position_world_m": [
+     8.6,
+     -1.3,
+     1
+    ],
+    "start_yaw_rad": 0,
+    "waypoint_count": 7,
+    "accepted_rgb_frames": 111,
+    "sequence_range": [
+     3,
+     113
+    ],
+    "distance_to_tower_m_range": [
+     2.83,
+     5.52
+    ],
+    "bearing_relative_deg_range": [
+     -22.8,
+     24.7
+    ],
+    "green_light_pixels_range": [
+     1,
+     15
+    ],
+    "frames_predicted_tower_edge_truncated": 0,
+    "conditions": [
+     "normal_front",
+     "scale_distance",
+     "lateral_bearing"
+    ],
+    "image_review_frames": [
+     "lmf_sweep_0-follow_only_g1_3.png",
+     "lmf_sweep_0-follow_only_g1_10.png",
+     "lmf_sweep_0-follow_only_g1_18.png",
+     "lmf_sweep_0-follow_only_g1_22.png",
+     "lmf_sweep_0-follow_only_g1_25.png",
+     "lmf_sweep_0-follow_only_g1_30.png",
+     "lmf_sweep_0-follow_only_g1_40.png",
+     "lmf_sweep_0-follow_only_g1_60.png",
+     "lmf_sweep_0-follow_only_g1_78.png",
+     "lmf_sweep_0-follow_only_g1_113.png"
+    ]
+   },
+   {
+    "case_id": "lmf_backoff_0",
+    "family": "scale_backoff",
+    "kind": "dynamic_route",
+    "route_id": "lmf_backoff",
+    "start_position_world_m": [
+     9.4,
+     -0.4,
+     0.95
+    ],
+    "start_yaw_rad": 0,
+    "waypoint_count": 8,
+    "accepted_rgb_frames": 76,
+    "sequence_range": [
+     3,
+     78
+    ],
+    "distance_to_tower_m_range": [
+     2.06,
+     8.37
+    ],
+    "bearing_relative_deg_range": [
+     -3.9,
+     11.0
+    ],
+    "green_light_pixels_range": [
+     0,
+     23
+    ],
+    "frames_predicted_tower_edge_truncated": 0,
+    "conditions": [
+     "scale_distance",
+     "elevation_change"
+    ],
+    "image_review_frames": [
+     "lmf_backoff_0-follow_only_g2_3.png",
+     "lmf_backoff_0-follow_only_g2_10.png",
+     "lmf_backoff_0-follow_only_g2_18.png",
+     "lmf_backoff_0-follow_only_g2_22.png",
+     "lmf_backoff_0-follow_only_g2_25.png",
+     "lmf_backoff_0-follow_only_g2_30.png",
+     "lmf_backoff_0-follow_only_g2_40.png",
+     "lmf_backoff_0-follow_only_g2_60.png",
+     "lmf_backoff_0-follow_only_g2_78.png"
+    ]
+   },
+   {
+    "case_id": "lmf_near_0",
+    "family": "near_patrol",
+    "kind": "dynamic_route",
+    "route_id": "lmf_near",
+    "start_position_world_m": [
+     9.8,
+     -0.35,
+     0.9
+    ],
+    "start_yaw_rad": 0,
+    "waypoint_count": 5,
+    "accepted_rgb_frames": 23,
+    "sequence_range": [
+     3,
+     25
+    ],
+    "distance_to_tower_m_range": [
+     1.46,
+     1.78
+    ],
+    "bearing_relative_deg_range": [
+     -11.7,
+     13.1
+    ],
+    "green_light_pixels_range": [
+     26,
+     41
+    ],
+    "frames_predicted_tower_edge_truncated": 0,
+    "conditions": [
+     "near_close_range"
+    ],
+    "image_review_frames": [
+     "lmf_near_0-follow_only_g3_3.png",
+     "lmf_near_0-follow_only_g3_10.png",
+     "lmf_near_0-follow_only_g3_18.png",
+     "lmf_near_0-follow_only_g3_22.png",
+     "lmf_near_0-follow_only_g3_25.png"
+    ]
+   },
+   {
+    "case_id": "lmf_edge_0",
+    "family": "edge_truncation",
+    "kind": "dynamic_route",
+    "route_id": "lmf_edge",
+    "start_position_world_m": [
+     8.2,
+     0,
+     1
+    ],
+    "start_yaw_rad": 0.6,
+    "waypoint_count": 5,
+    "accepted_rgb_frames": 28,
+    "sequence_range": [
+     3,
+     30
+    ],
+    "distance_to_tower_m_range": [
+     2.51,
+     3.23
+    ],
+    "bearing_relative_deg_range": [
+     -40.1,
+     -28.6
+    ],
+    "green_light_pixels_range": [
+     15,
+     28
+    ],
+    "frames_predicted_tower_edge_truncated": 26,
+    "conditions": [
+     "yaw_lateral",
+     "frame_edge_truncation"
+    ],
+    "image_review_frames": [
+     "lmf_edge_0-follow_only_g4_3.png",
+     "lmf_edge_0-follow_only_g4_10.png",
+     "lmf_edge_0-follow_only_g4_18.png",
+     "lmf_edge_0-follow_only_g4_22.png",
+     "lmf_edge_0-follow_only_g4_25.png",
+     "lmf_edge_0-follow_only_g4_30.png"
+    ]
+   },
+   {
+    "case_id": "lmf_similar_negative_0",
+    "family": "similar_structure_negative",
+    "kind": "dynamic_route",
+    "route_id": "lmf_similar_negative",
+    "start_position_world_m": [
+     8,
+     0,
+     1.2
+    ],
+    "start_yaw_rad": 3.141592653589793,
+    "waypoint_count": 5,
+    "accepted_rgb_frames": 38,
+    "sequence_range": [
+     3,
+     40
+    ],
+    "distance_to_tower_m_range": [
+     3.64,
+     6.42
+    ],
+    "bearing_relative_deg_range": [
+     -179.9,
+     179.8
+    ],
+    "green_light_pixels_range": [
+     0,
+     3
+    ],
+    "frames_predicted_tower_edge_truncated": 0,
+    "conditions": [
+     "target_absent",
+     "similar_structure_hard_negative"
+    ],
+    "image_review_frames": [
+     "lmf_similar_negative_0-follow_only_g5_3.png",
+     "lmf_similar_negative_0-follow_only_g5_10.png",
+     "lmf_similar_negative_0-follow_only_g5_18.png",
+     "lmf_similar_negative_0-follow_only_g5_22.png",
+     "lmf_similar_negative_0-follow_only_g5_25.png",
+     "lmf_similar_negative_0-follow_only_g5_30.png",
+     "lmf_similar_negative_0-follow_only_g5_40.png"
+    ]
+   },
+   {
+    "case_id": "lmf_side_negative_0",
+    "family": "side_negative",
+    "kind": "dynamic_route",
+    "route_id": "lmf_side_negative",
+    "start_position_world_m": [
+     9.6,
+     0.6,
+     1
+    ],
+    "start_yaw_rad": 1.5707963267948966,
+    "waypoint_count": 2,
+    "accepted_rgb_frames": 3,
+    "sequence_range": [
+     3,
+     5
+    ],
+    "distance_to_tower_m_range": [
+     2.07,
+     2.07
+    ],
+    "bearing_relative_deg_range": [
+     -110.8,
+     -110.8
+    ],
+    "green_light_pixels_range": [
+     0,
+     0
+    ],
+    "frames_predicted_tower_edge_truncated": 0,
+    "conditions": [
+     "target_out_of_fov"
+    ],
+    "image_review_frames": [
+     "lmf_side_negative_0-follow_only_g6_3.png"
+    ]
+   }
+  ]
+ },
+ "sensor_shadow": {
+  "config": "configs/sensors/sensor_shadow_v1.json",
+  "config_sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55",
+  "mode": "SHADOW_ONLY_NOT_IN_CONTROL",
+  "control_source": "ORACLE_STATE",
+  "sample_period_steps": 5,
+  "measured_accepted_rgb_rate_hz": 4.0,
+  "rate_evidence": "capture_interval_ns=250000000 in observations; control dt=0.05 s x 5 steps = 0.25 s; sweep episode 27.8 s -> 111 accepted RGB. This contradicts an assumed 12 frames/s, so 60-90 s trajectories yield ~240-360 frames, not >400."
+ },
+ "runs": {
+  "full": {
+   "dir": "outputs/sensor_shadow/lm_final_candidate_20261104",
+   "sensor_dir": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor",
+   "started_at": "2026-11-04T18:15:35.547178+08:00",
+   "finished_at": "2026-11-04T18:17:54.527253+08:00",
+   "episodes": 6,
+   "outcomes": {
+    "follow_only": {
+     "SUCCESS": 6,
+     "COLLISION": 0,
+     "TIMEOUT": 0,
+     "OUT_OF_BOUNDS": 0,
+     "ABORT": 0,
+     "INVALID": 0
+    }
+   },
+   "run_complete": true,
+   "error_file": false
+  },
+  "smoke": {
+   "dir": "outputs/sensor_shadow/lm_final_smoke_20261104",
+   "sensor_dir": "outputs/sensor_shadow/lm_final_smoke_20261104_sensor",
+   "case": "lmf_sweep_0",
+   "outcome": "SUCCESS",
+   "accepted_rgb": 111,
+   "purpose": "GUI smoke: window visible, non-headless, observation output generated; not part of the final pool"
+  }
+ },
+ "counts": {
+  "records_total": 594,
+  "accepted_rgb": 279,
+  "accepted_depth": 74,
+  "rgb_samples_total_including_warmup": 297,
+  "warmup_rgb_invalid": 18,
+  "accepted_rgb_before_sampling": 279,
+  "final_pool_accepted_rgb": 279,
+  "within_200_400": true
+ },
+ "sampling": {
+  "rule": "N=1: keep all 279 accepted RGB frames; no frame dropped, no score/detector-based selection, rule fixed before any model work",
+  "applied": false,
+  "raw_total_accepted_rgb": 279,
+  "sampled_total_accepted_rgb": 279,
+  "per_family_after_sampling": {
+   "lmf_sweep_0": 111,
+   "lmf_backoff_0": 76,
+   "lmf_near_0": 23,
+   "lmf_edge_0": 28,
+   "lmf_similar_negative_0": 38,
+   "lmf_side_negative_0": 3
+  },
+  "fallback_rule_if_ever_over_400": "deterministic fixed stride per family: for each family keep every k-th accepted frame in sequence order with k=ceil(n_family*target_total/400)/n_family... use published script rule; not applied here",
+  "non_selection_guarantee": "no detector output was computed or used to include/exclude any frame"
+ },
+ "artifacts_sha256": {
+  "observations_jsonl": "4a7481e4c85a2b508603f2941f159d32402792f9fba4fe3a585b3ec221d07def",
+  "sensor_summary_json": "2a74d90fe18df4eeea139ed46c61bc1b1f7f719aabe060cfd868b8278364c88a",
+  "run_manifest_json": "266eaa10b2944c06b6c17cc85f413dd2ce20c1c996fce4f375d3a761567eb468",
+  "run_summary_json": "e2935798728e805be0f10abd8c92eea97bfbd4ddd5fb6cc1a70a99f4b077f9c2",
+  "run_complete_json": "baa7e89c6cff74774153503856e815dfb80d53f9d8c7cd98a2a5061f8b75cb80",
+  "episodes_jsonl": "0eb79fc6eb6156f895491c38a2442d38fa40eac369e0e4a8994e89ac96446be5",
+  "steps_jsonl": "da590835cfb563469f9b16dce53e5f4614660fc61a655f0fecd7fa018451731c",
+  "gui_log": "2ffe8206c7a58b52ca442fd4b08d50a8e104c1f0e46c257c7eca5bfb6d642fa1"
+ },
+ "raw_artifacts_policy": "raw 320x240 PNGs and observations.jsonl/steps.jsonl stay in gitignored outputs/sensor_shadow/*; only small evidence copies, hashes and reports are placed in docs/reports/perception/capture_20261104; image files are at outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/<frame_id>.png",
+ "condition_evidence": {
+  "method": "every accepted frame geometry computed from recorded camera pose (episode observations) plus a triangulated tower position; green-light pixel detection (G>100, G>1.25R, G>1.15B) used only to confirm target/reference visibility, never for frame selection",
+  "tower_position_triangulated_from_existing_labeled_frames": [
+   11.52,
+   -0.01,
+   1.25
+  ],
+  "geometry_model_validation": "accepted RGB frames where green light detected: |detected u - predicted u| median 1.0-1.8 px, p90 <= 3.2 px (positive families); see frame_conditions.json",
+  "claims": [
+   {
+    "condition": "normal_front",
+    "families": [
+     "lmf_sweep_0",
+     "lmf_backoff_0",
+     "lmf_near_0"
+    ],
+    "reviewed_frames": [
+     "lmf_sweep_0-follow_only_g1_3.png",
+     "lmf_sweep_0-follow_only_g1_60.png",
+     "lmf_sweep_0-follow_only_g1_113.png",
+     "lmf_backoff_0-follow_only_g2_3.png",
+     "lmf_near_0-follow_only_g3_3.png",
+     "lmf_near_0-follow_only_g3_18.png"
+    ],
+    "observed": "target tower present in all accepted frames of lmf_sweep_0 (110/111 frames with >=2 green-light pixels, one frame with 1 px); lmf_backoff_0 target present in all frames, green light >=2 px only in 51/76 (far frames below ~6 m to 8.4 m yield 0-1 px)"
+   },
+   {
+    "condition": "scale_distance",
+    "families": [
+     "lmf_backoff_0",
+     "lmf_sweep_0"
+    ],
+    "reviewed_frames": [
+     "lmf_backoff_0-follow_only_g2_3.png",
+     "lmf_backoff_0-follow_only_g2_40.png",
+     "lmf_backoff_0-follow_only_g2_78.png"
+    ],
+    "observed": "tower apparent size changes from close (about 1.7 m body width filling frame at 2.06 m) to small (about 30 px width at 8.37 m); distances from frame_conditions.json"
+   },
+   {
+    "condition": "yaw_lateral",
+    "families": [
+     "lmf_edge_0",
+     "lmf_sweep_0"
+    ],
+    "reviewed_frames": [
+     "lmf_edge_0-follow_only_g4_3.png",
+     "lmf_edge_0-follow_only_g4_22.png",
+     "lmf_edge_0-follow_only_g4_30.png"
+    ],
+    "observed": "yaw +0.6 rad family places target at bearing -28.6..-40.1 deg (image right side; detected green-light u 246..293); sweep provides lateral bearing -22.8..+24.7 deg"
+   },
+   {
+    "condition": "frame_edge_truncation",
+    "families": [
+     "lmf_edge_0"
+    ],
+    "reviewed_frames": [
+     "lmf_edge_0-follow_only_g4_22.png",
+     "lmf_edge_0-follow_only_g4_30.png"
+    ],
+    "observed": "26/28 accepted frames have predicted tower right extent beyond image border (up to u=413); zoomed right-border crops of g4_22 and g4_30 show the top-bar right arm cut at the frame edge; the green reference light itself stays inside (u 246..293)"
+   },
+   {
+    "condition": "near_close_range",
+    "families": [
+     "lmf_near_0"
+    ],
+    "reviewed_frames": [
+     "lmf_near_0-follow_only_g3_3.png",
+     "lmf_near_0-follow_only_g3_18.png"
+    ],
+    "observed": "distance 1.46-1.78 m; green light 26-41 px; tower body fills frame; pedestal partly outside the bottom of frame; no horizontal truncation (predicted span inside 0..320)"
+   },
+   {
+    "condition": "target_absent",
+    "families": [
+     "lmf_similar_negative_0",
+     "lmf_side_negative_0"
+    ],
+    "reviewed_frames": [
+     "lmf_similar_negative_0-follow_only_g5_10.png",
+     "lmf_similar_negative_0-follow_only_g5_30.png",
+     "lmf_side_negative_0-follow_only_g6_4.png"
+    ],
+    "observed": "lmf_similar_negative_0 frames show the central-field highland/energy-mechanism structure (blue accents) with target tower behind camera; green-light pixels 0-3 px (isolated noise-level, not the target light). lmf_side_negative_0 shows walls/empty field, 0 green pixels, target outside FOV (bearing -110.8 deg)"
+   },
+   {
+    "condition": "similar_structure_hard_negative",
+    "families": [
+     "lmf_similar_negative_0"
+    ],
+    "reviewed_frames": [
+     "lmf_similar_negative_0-follow_only_g5_10.png",
+     "lmf_similar_negative_0-follow_only_g5_30.png"
+    ],
+    "observed": "central-field structure with blue/colored elements visible at 3.6-6.4 m; a plausible similar-structure false-positive source, target absent"
+   }
+  ],
+  "not_obtained": [
+   "scene-structure occlusion of the target (a wall/object between camera and tower) was not deliberately constructed; only frame-edge truncation and near-range partial-in-frame views are provided",
+   "no target-absent view of the target tower location itself (tower is always in the map); negatives are view-level / other-structure negatives"
+  ],
+  "image_review_limitation": "condition verification is agent manual visual inspection plus geometric prediction, not user expert annotation; T6 must do its own annotation"
+ },
+ "overlap_check": {
+  "image_sha256_cross_check": {
+   "formal6": 0,
+   "lm_pilot": 0,
+   "lm_independence": 0,
+   "geo_test": 0
+  },
+  "within_pool_duplicate_image_hashes": 0,
+  "paired_existing_images": {
+   "formal6": 864,
+   "lm_pilot": 18,
+   "lm_independence": 613,
+   "geo_test": 207
+  },
+  "identical_waypoint_sequences": 0,
+  "nearest_existing_start_pose": {
+   "lmf_sweep_0": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_c",
+    "distance_m": 0.412,
+    "yaw_difference_rad": 3.142
+   },
+   "lmf_backoff_0": {
+    "run": "lm_independence",
+    "case_id": "test_static_away",
+    "distance_m": 0.45,
+    "yaw_difference_rad": 3.142
+   },
+   "lmf_near_0": {
+    "run": "lm_independence",
+    "case_id": "test_static_away",
+    "distance_m": 0.702,
+    "yaw_difference_rad": 3.142
+   },
+   "lmf_edge_0": {
+    "run": "lm_pilot",
+    "case_id": "pilot_east_center",
+    "distance_m": 0.3,
+    "yaw_difference_rad": 0.6
+   },
+   "lmf_similar_negative_0": {
+    "run": "lm_pilot",
+    "case_id": "pilot_east_away",
+    "distance_m": 0.539,
+    "yaw_difference_rad": 0.0
+   },
+   "lmf_side_negative_0": {
+    "run": "lm_independence",
+    "case_id": "test_reverse_south",
+    "distance_m": 0.481,
+    "yaw_difference_rad": 1.571
+   }
+  },
+  "note": "nearest existing start pose for lmf_edge_0 is pilot_east_center at 0.30 m but yaw differs by 0.6 rad and the family is a 28-frame moving patrol; lmf_similar_negative_0 starts 0.54 m from pilot_east_away with the same yaw (dev-only static pose) but moves 3.8 m through mid-field. Image hashes are all distinct, so no frame is reused from exposed data."
+ },
+ "gui_evidence": {
+  "screenshots": [
+   {
+    "file": "docs/reports/perception/capture_20261104/gui_window_smoke_startup_20261104.png",
+    "taken": "2026-11-04T18:13:04+08:00",
+    "content": "Isaac Sim 5.1.0 window open at start of smoke run"
+   },
+   {
+    "file": "docs/reports/perception/capture_20261104/gui_window_smoke_run_20261104.png",
+    "taken": "2026-11-04T18:13:48+08:00",
+    "content": "Isaac Sim window with map loaded during smoke run (mid-run)"
+   },
+   {
+    "file": "docs/reports/perception/capture_20261104/gui_window_full_run_20261104.png",
+    "taken": "2026-11-04T18:16:22+08:00",
+    "content": "Isaac Sim window with map visible during the full 6-case run (mid-run desktop capture)"
+   }
+  ],
+  "desktop_full": "docs/reports/perception/capture_20261104/desktop_full_run_1280x720.png (downscaled desktop capture)",
+  "non_headless_proof": [
+   "manifest.gui_mode=true and gui_evidence.headless=false",
+   "script raises RuntimeError on --headless",
+   "window title bar visible in screenshots"
+  ],
+  "note": "--screenshots was passed but follow_only episodes do not emit Sim viewport screenshots by design (only supervisor success/contact paths do); GUI proof therefore uses desktop captures"
+ },
+ "failures_and_retries": [
+  {
+   "item": "smoke run",
+   "result": "PASS",
+   "detail": "lmf_sweep_0 SUCCESS in 27.8 s, 111 accepted RGB; used to confirm visible GUI and observation output before the full run"
+  },
+  {
+   "item": "full run",
+   "result": "PASS",
+   "detail": "6/6 SUCCESS, 0 collision/timeout/invalid; no retry needed"
+  },
+  {
+   "item": "gui/driver",
+   "result": "no failure",
+   "detail": "DirectX/D3D12 on driver 581.80; no GUI startup failure, no headless fallback"
+  }
+ ],
+ "limitations": [
+  "single environment, current synthetic RMUC2027 asset; not real arena/camera/lighting",
+  "SIM_RENDER_RGB is a simulated pinhole camera, not OV9782 hardware; PROPOSED resolution/FOV/mount",
+  "frames are 4 Hz sim samples on a moving camera; adjacent frames are correlated; no independent-group claim beyond physical trajectory families",
+  "far-range frames (>~7 m) can have 0-1 green-light pixels: reference-point annotation may be UNAVAILABLE there; presence of the tower structure is still visible",
+  "no annotations, no model training, no detector evaluation, no perception/navigation/board claim",
+  "MID zone is collection-only, not a real region topology node"
+ ],
+ "frame_table": {
+  "file": "frame_conditions.json",
+  "frames": 279,
+  "fields": [
+   "frame_id",
+   "episode_id",
+   "generation",
+   "sequence",
+   "image_sha256",
+   "file_sha256",
+   "capture_sim_ns",
+   "camera_position_world_m",
+   "yaw_rad",
+   "target_world_deg",
+   "bearing_relative_deg",
+   "distance_to_tower_m",
+   "predicted_target_u_px",
+   "predicted_tower_span_u_px",
+   "truncated_right",
+   "truncated_left",
+   "green_pixels",
+   "green_centroid_uv",
+   "green_vs_predicted_u_err_px"
+  ],
+  "raw_image_root": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/",
+  "family_mapping": "episode_id = <case_id>-follow_only"
+ },
+ "repo_test_result": {
+  "command": "E:/isaac/env_isaaclab/Scripts/python.exe -m pytest -q (repo root)",
+  "result": "853 passed, 19 failed, 46.95 s",
+  "failure_scope": "all 19 failures are in tests/evaluation/test_landmark_annotations.py (NameError: yolo_pose_target is not defined), from concurrent teammate edits to src/boom_birds/evaluation/landmark_annotations.py and that test file (git status shows both modified)",
+  "t1_relation": "T1 wrote only configs/scenarios/landmark_final_cases_v1.json and docs/reports/perception/capture_20261104/; it did not touch src/ or tests/ and cannot cause those failures",
+  "status": "NOT_CAUSED_BY_T1_UNRESOLVED_IN_PARALLEL_WORK"
+ }
+}

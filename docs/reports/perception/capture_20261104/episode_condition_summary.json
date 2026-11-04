@@ -1,0 +1,104 @@
+{
+ "lmf_sweep_0-follow_only": {
+  "frames": 111,
+  "dist_min": 2.825,
+  "dist_max": 5.521,
+  "bearing_min": -22.82,
+  "bearing_max": 24.73,
+  "green_frames": 110,
+  "green_px_max": 15,
+  "truncated_right_frames": 0,
+  "truncated_left_frames": 0,
+  "seq_range": [
+   3,
+   113
+  ],
+  "u_pred_min": 86.3,
+  "u_pred_max": 227.3
+ },
+ "lmf_backoff_0-follow_only": {
+  "frames": 76,
+  "dist_min": 2.061,
+  "dist_max": 8.367,
+  "bearing_min": -3.93,
+  "bearing_max": 11.03,
+  "green_frames": 51,
+  "green_px_max": 23,
+  "truncated_right_frames": 0,
+  "truncated_left_frames": 0,
+  "seq_range": [
+   3,
+   78
+  ],
+  "u_pred_min": 128.8,
+  "u_pred_max": 171.0
+ },
+ "lmf_near_0-follow_only": {
+  "frames": 23,
+  "dist_min": 1.458,
+  "dist_max": 1.783,
+  "bearing_min": -11.67,
+  "bearing_max": 13.11,
+  "green_frames": 23,
+  "green_px_max": 41,
+  "truncated_right_frames": 0,
+  "truncated_left_frames": 0,
+  "seq_range": [
+   3,
+   25
+  ],
+  "u_pred_min": 122.7,
+  "u_pred_max": 193.1
+ },
+ "lmf_edge_0-follow_only": {
+  "frames": 28,
+  "dist_min": 2.511,
+  "dist_max": 3.232,
+  "bearing_min": -40.07,
+  "bearing_max": -28.58,
+  "green_frames": 28,
+  "green_px_max": 28,
+  "truncated_right_frames": 26,
+  "truncated_left_frames": 0,
+  "seq_range": [
+   3,
+   30
+  ],
+  "u_pred_min": 247.1,
+  "u_pred_max": 294.6
+ },
+ "lmf_similar_negative_0-follow_only": {
+  "frames": 38,
+  "dist_min": 3.641,
+  "dist_max": 6.419,
+  "bearing_min": -179.94,
+  "bearing_max": 179.85,
+  "green_frames": 6,
+  "green_px_max": 3,
+  "truncated_right_frames": 0,
+  "truncated_left_frames": 0,
+  "seq_range": [
+   3,
+   40
+  ],
+  "u_pred_min": 147.0,
+  "u_pred_max": 172.3
+ },
+ "lmf_side_negative_0-follow_only": {
+  "frames": 3,
+  "dist_min": 2.071,
+  "dist_max": 2.073,
+  "bearing_min": -110.82,
+  "bearing_max": -110.82,
+  "green_frames": 0,
+  "green_px_max": 0,
+  "truncated_right_frames": 0,
+  "truncated_left_frames": 0,
+  "seq_range": [
+   3,
+   5
+  ],
+  "u_pred_min": -260.8,
+  "u_pred_max": -260.8
+ }
+}

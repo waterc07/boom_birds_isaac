@@ -1,0 +1,956 @@
+{
+  "schema_version": "dsh.license_export_evidence.v1",
+  "status": "READ_ONLY_EVIDENCE_PENDING_USER_DECISION",
+  "generated_by": "teammate license (task-3)",
+  "last_checked": "2026-11-04",
+  "repo": {
+    "path": "E:\\isaac\\proj_boom_birds",
+    "branch": "feat/v2.2-simulation-perception",
+    "head": "43fee3e02de57840e54297e8595924e2f213d722",
+    "head_date": "2026-11-04 01:01:40 +0800",
+    "worktree_note": "核查时存在其他并行 teammate 的未跟踪新文件（landmark_training_plan_v2.json、LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md、annotation_verify_20261104/、2026-11-04-landmark-training-admission.md、test_landmark_dataset.py）；本任务未修改这些文件，也未 commit/push。",
+    "policy_assertions": {
+      "installed_training_deps": false,
+      "downloaded_model_weights": false,
+      "ran_training_or_model_forward_or_export": false,
+      "modified_isaac_env": false,
+      "ran_isaac_or_headless": false,
+      "wrote_only_this_scope": "docs/reports/perception/license_evidence_20261104",
+      "git_commit_or_push": false
+    }
+  },
+  "scope": {
+    "models": [
+      "Ultralytics YOLOv8n-pose (main candidate)",
+      "YOLOX-Nano (backup only; no automatic switch)",
+      "RKNN Model Zoo / RKNN Toolkit2 toolchain"
+    ],
+    "questions": [
+      "license obligations and open interpretations",
+      "official release/version facts",
+      "pose and custom kpt_shape support",
+      "ONNX export path",
+      "custom 1-keypoint RKNN export (UNKNOWN)",
+      "RTX 5080 sm_120 / torch 2.7.0+cu128 / CUDA 12.8 compatibility",
+      "host read-only facts"
+    ],
+    "not_in_scope": [
+      "model accuracy/effect",
+      "RK3576 board acceptance",
+      "navigation acceptance",
+      "legal advice",
+      "license acceptance"
+    ]
+  },
+  "evidence_domain_legend": {
+    "【来源陈述】": "official project/organization statement; sample size = number of fetched official pages/files",
+    "【项目决策】": "project decision recorded in repo configs/docs",
+    "【未确认解释】": "interpretation requiring legal/technical review; this file does not decide",
+    "本机只读事实": "single-host read-only query, N=1",
+    "UNKNOWN": "not measured / not determinable from retrieved evidence"
+  },
+  "local_facts": {
+    "checked_at": "2026-11-04",
+    "python_executable": "E:\\isaac\\env_isaaclab\\Scripts\\python.exe",
+    "python_version": "3.11.9",
+    "platform": "Windows-10-10.0.28120-SP0",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "memory_total_mib": 16303,
+      "driver_version": "581.80",
+      "nvidia_smi_cuda_version": "13.0",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "sm": "sm_120"
+    },
+    "torch": {
+      "version": "2.7.0+cu128",
+      "cuda": "12.8",
+      "cuda_available": true,
+      "device_count": 1,
+      "arch_list": [
+        "sm_50",
+        "sm_60",
+        "sm_61",
+        "sm_70",
+        "sm_75",
+        "sm_80",
+        "sm_86",
+        "sm_90",
+        "sm_100",
+        "sm_120"
+      ],
+      "cudnn_version": "9.7.1 (90701)",
+      "torch_load_weights_only_default": true
+    },
+    "packages_present": {
+      "torchvision": "0.22.0+cu128",
+      "onnx": "1.22.0",
+      "cv2": "4.11.0",
+      "Pillow": "11.3.0",
+      "numpy": "1.26.0"
+    },
+    "packages_absent": [
+      "ultralytics",
+      "onnxruntime",
+      "rknn",
+      "rknn-toolkit2",
+      "rknn-toolkit-lite2",
+      "tensorrt",
+      "openvino"
+    ],
+    "model_artifacts": {
+      "landmark_onnx_pt_rknn": "none found",
+      "unrelated_pt_found": [
+        "external/NavRL/quick-demos/ckpts/navrl_checkpoint.pt",
+        "logs/rsl_rl/quadcopter_direct/2026-10-11_18-12-23/model_0.pt"
+      ],
+      "note": "no .onnx/.rknn in repo outside .git; the two .pt files are unrelated to the landmark task"
+    },
+    "not_evidence_of": [
+      "model accuracy",
+      "training compatibility",
+      "RKNN board performance"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "E-01",
+      "topic": "Ultralytics v8.2.0 LICENSE",
+      "claim": "Ultralytics v8.2.0 tag LICENSE is the GNU AGPL v3 (2007-11-19) full text and byte-identical to the FSF AGPL-3.0 text.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official files, N=2 (Ultralytics v8.2.0 LICENSE + gnu.org agpl-3.0.txt)",
+      "sample_size": 2,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/LICENSE",
+        "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.2.0/LICENSE",
+        "https://www.gnu.org/licenses/agpl-3.0.txt"
+      ],
+      "quote": "GNU AFFERO GENERAL PUBLIC LICENSE / Version 3, 19 November 2007",
+      "sha256": {
+        "ultralytics_v820_license": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+        "fsf_agpl_3_0_txt": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+        "length_bytes": 34523
+      }
+    },
+    {
+      "id": "E-02",
+      "topic": "Official licensing statement",
+      "claim": "Ultralytics README declares a dual license: AGPL-3.0 for open source; commercial use may buy an Enterprise License that bypasses AGPL open-source requirements.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official README v8.2.0, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/README.md#L269-L274",
+        "https://ultralytics.com/license"
+      ],
+      "quote": "AGPL-3.0 License ... Enterprise License: Designed for commercial use, this license permits seamless integration of Ultralytics software and AI models into commercial goods and services, bypassing the open-source requirements of AGPL-3.0.",
+      "note": "No commercial license application was made and no commercial license text was obtained in this task."
+    },
+    {
+      "id": "E-03",
+      "topic": "AGPL section 13",
+      "claim": "AGPL section 13 requires a modified version that supports remote network interaction to offer Corresponding Source to remote users; the clause itself does not decide onboard inference or weight status.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_TEXT / UNKNOWN_APPLICABILITY",
+      "evidence_domain": "gnu.org AGPL-3.0 text, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://www.gnu.org/licenses/agpl-3.0.txt",
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/LICENSE"
+      ],
+      "quote": "if you modify the Program, your modified version must prominently offer all users interacting with it remotely through a computer network (if your version supports such interaction) an opportunity to receive the Corresponding Source of your version ..."
+    },
+    {
+      "id": "E-04",
+      "topic": "AGPL covered work / modified version definitions",
+      "claim": "Covered work means the unmodified Program or a work based on the Program; modified version is defined via copying/adapting.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_DEFINITION / UNKNOWN_WEIGHTS",
+      "evidence_domain": "gnu.org AGPL-3.0 text, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://www.gnu.org/licenses/agpl-3.0.txt"
+      ],
+      "quote": "A covered work means either the unmodified Program or a work based on the Program."
+    },
+    {
+      "id": "E-05",
+      "topic": "AGPL output clause (section 2)",
+      "claim": "AGPL states that output from running a covered work is covered only if the output itself constitutes a covered work; this is the key unresolved hinge for trained weights.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_TEXT / UNKNOWN_INTERPRETATION",
+      "evidence_domain": "gnu.org AGPL-3.0 text, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://www.gnu.org/licenses/agpl-3.0.txt"
+      ],
+      "quote": "The output from running a covered work is covered by this License only if the output, given its content, constitutes a covered work."
+    },
+    {
+      "id": "E-06",
+      "topic": "AGPL Corresponding Source definition",
+      "claim": "Corresponding Source includes all source needed to generate, install and run the object code, and source for shared libraries/dynamically linked subprograms the work is specifically designed to require.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_DEFINITION",
+      "evidence_domain": "gnu.org AGPL-3.0 text, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://www.gnu.org/licenses/agpl-3.0.txt"
+      ],
+      "quote": "Corresponding Source includes interface definition files ... and the source code for shared libraries and dynamically linked subprograms that the work is specifically designed to require ..."
+    },
+    {
+      "id": "E-07",
+      "topic": "ultralytics 8.2.0 release metadata",
+      "claim": "PyPI ultralytics 8.2.0 uploaded 2024-04-17T04:38:42, license field AGPL-3.0, requires_python >=3.8, dependency torch>=1.8.0, export extra onnx>=1.12.0, classifiers Python 3.8-3.12.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "PyPI JSON metadata, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://pypi.org/pypi/ultralytics/8.2.0/json",
+        "https://pypi.org/project/ultralytics/8.2.0/"
+      ],
+      "quote": "requires_python >=3.8; torch>=1.8.0; onnx>=1.12.0 (export extra); License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)"
+    },
+    {
+      "id": "E-08",
+      "topic": "official pose task support",
+      "claim": "v8.2.0 docs describe the pose task, -pose model names, and the CLI yolo pose train with a yolov8n-pose.pt model.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "v8.2.0 docs, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/docs/en/tasks/pose.md"
+      ],
+      "quote": "YOLOv8 pose models use the -pose suffix, i.e. yolov8n-pose.pt ... yolo pose train data=coco8-pose.yaml model=yolov8n-pose.pt epochs=100 imgsz=640"
+    },
+    {
+      "id": "E-09",
+      "topic": "kpt_shape data format and custom datasets",
+      "claim": "v8.2.0 dataset guide documents kpt_shape as [number of keypoints, dims] with dims 2 or 3, optional flip_idx, a 12-keypoint animal-pose example, and guidance for custom datasets.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "v8.2.0 docs, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/docs/en/datasets/pose/index.md"
+      ],
+      "quote": "kpt_shape: [17, 3]  # number of keypoints, number of dims (2 for x,y or 3 for x,y,visible) ... If you have your own dataset ... ensure that it follows the format specified above"
+    },
+    {
+      "id": "E-10",
+      "topic": "kpt_shape code path",
+      "claim": "v8.2.0 reads kpt_shape from the data yaml, raises if missing/invalid, PoseTrainer passes data kpt_shape into PoseModel(data_kpt_shape=...), and PoseModel overrides the model yaml kpt_shape.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_CODE_PATH",
+      "evidence_domain": "v8.2.0 source, N=3 files",
+      "sample_size": 3,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/ultralytics/data/dataset.py#L80-L85",
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/ultralytics/models/yolo/pose/train.py#L40-L49",
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/ultralytics/nn/tasks.py#L377-L384"
+      ],
+      "quote": "nkpt, ndim = self.data.get('kpt_shape', (0, 0)) ... raise ValueError(...) ; model = PoseModel(cfg, ch=3, nc=self.data['nc'], data_kpt_shape=self.data['kpt_shape']); if any(data_kpt_shape) and list(data_kpt_shape) != list(cfg['kpt_shape']): cfg['kpt_shape'] = data_kpt_shape"
+    },
+    {
+      "id": "E-11",
+      "topic": "pretrained 17-keypoint head transfer",
+      "claim": "BaseModel.load uses intersect_dicts keeping only same-name same-shape tensors, so a 17-keypoint pretrained pose head is not transferred to a 1-keypoint head.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_CODE",
+      "evidence_domain": "v8.2.0 source, N=2 files",
+      "sample_size": 2,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/ultralytics/nn/tasks.py#L240-L253",
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/ultralytics/utils/torch_utils.py"
+      ],
+      "quote": "def intersect_dicts(da, db, exclude=()): return {k: v for k, v in da.items() if k in db and ... and v.shape == db[k].shape}"
+    },
+    {
+      "id": "E-12",
+      "topic": "ONNX export command and args",
+      "claim": "v8.2.0 export docs give yolo export model=... format=onnx and args imgsz/half/dynamic/simplify/opset; opset None means latest supported.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "v8.2.0 docs, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/docs/en/modes/export.md"
+      ],
+      "quote": "yolo export model=path/to/best.pt format=onnx ... opset: If not set, uses the latest supported version."
+    },
+    {
+      "id": "E-13",
+      "topic": "ONNX export limitations documented",
+      "claim": "export docs do not state pose-specific restrictions; ONNX is a generic format; exporting requires onnx (export extra onnx>=1.12.0).",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_DOC_FACT / LIMITATIONS_NOT_ENUMERATED",
+      "evidence_domain": "v8.2.0 docs + PyPI metadata, N=2",
+      "sample_size": 2,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/blob/v8.2.0/docs/en/modes/export.md",
+        "https://pypi.org/pypi/ultralytics/8.2.0/json"
+      ]
+    },
+    {
+      "id": "E-14",
+      "topic": "pose to ONNX exists in official ecosystem",
+      "claim": "RKNN Model Zoo provides a yolov8n-pose.onnx asset and conversion example, showing pose to ONNX is used in the official ecosystem.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_EXISTENCE",
+      "evidence_domain": "RKNN README/example, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo",
+        "https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose"
+      ]
+    },
+    {
+      "id": "E-15",
+      "topic": "torch.load weights_only default",
+      "claim": "Host torch 2.7.0 has torch.load defaulting to weights_only=True (signature shows weights_only=None, doc signature shows weights_only=True).",
+      "classification": "本机只读事实",
+      "status": "EVIDENCED",
+      "evidence_domain": "host read-only query, N=1",
+      "sample_size": 1,
+      "sources": [
+        "host: inspect.signature(torch.load); torch.load.__doc__"
+      ],
+      "quote": "load(f, map_location=None, pickle_module=pickle, *, weights_only=True, mmap=None, **pickle_load_args)"
+    },
+    {
+      "id": "E-16",
+      "topic": "8.2.0 predates torch 2.6/2.7 default change",
+      "claim": "ultralytics 8.2.0 (2024-04) predates the torch 2.6/2.7 weights_only default; PyPI only declares torch>=1.8.0 with no upper bound and no 2.7 compatibility statement.",
+      "classification": "【来源陈述】+ 时间线推断",
+      "status": "EVIDENCED_FACT / UNKNOWN_COMPATIBILITY",
+      "evidence_domain": "PyPI metadata + torch behavior, N=2",
+      "sample_size": 2,
+      "sources": [
+        "https://pypi.org/pypi/ultralytics/8.2.0/json",
+        "host: torch 2.7.0 torch.load doc"
+      ]
+    },
+    {
+      "id": "E-17",
+      "topic": "later safe-load work upstream",
+      "claim": "Ultralytics later added an opt-in ULTRALYTICS_SAFE_LOAD flag (PR #24829), indicating interplay between newer torch defaults and older loading logic required dedicated handling.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_EXISTENCE",
+      "evidence_domain": "official PR page, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/ultralytics/ultralytics/pull/24829"
+      ]
+    },
+    {
+      "id": "E-18",
+      "topic": "YOLOX LICENSE",
+      "claim": "YOLOX repo LICENSE is Apache License 2.0 with appendix copyright (c) 2021-2022 Megvii Inc.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official file, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/Megvii-BaseDetection/YOLOX/blob/main/LICENSE",
+        "https://raw.githubusercontent.com/Megvii-BaseDetection/YOLOX/main/LICENSE"
+      ],
+      "quote": "Apache License Version 2.0, January 2004 ... Copyright (c) 2021-2022 Megvii Inc. All rights reserved. Licensed under the Apache License, Version 2.0",
+      "sha256": "0ec3668d3274bcf29e8a29e9576d5a2cd96fc78d3c5bec4387355a796e5d9088",
+      "length_bytes": 11371
+    },
+    {
+      "id": "E-19",
+      "topic": "YOLOX-Nano benchmark facts",
+      "claim": "YOLOX README model zoo table lists YOLOX-Nano 416 input, AP 25.8 val, 0.91M params, 1.08 GFLOPs, weights yolox_nano.pth from release 0.1.1rc0.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official README, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/Megvii-BaseDetection/YOLOX",
+        "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_nano.pth"
+      ],
+      "quote": "YOLOX-Nano | 416 | 25.8 | 0.91 | 1.08 | yolox_nano.pth"
+    },
+    {
+      "id": "E-20",
+      "topic": "YOLOX ONNX support",
+      "claim": "YOLOX README lists ONNX export and an ONNXRuntime demo (demo/ONNXRuntime).",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official README, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/Megvii-BaseDetection/YOLOX"
+      ],
+      "quote": "ONNX export and an ONNXRuntime (./demo/ONNXRuntime)"
+    },
+    {
+      "id": "E-21",
+      "topic": "YOLOX weights license statement",
+      "claim": "The repo LICENSE covers repository software; no separate weights license text was found on the repo or the weights download page.",
+      "classification": "【未确认解释】",
+      "status": "UNKNOWN",
+      "evidence_domain": "1 page + 1 LICENSE file, N=2",
+      "sample_size": 2,
+      "sources": [
+        "https://github.com/Megvii-BaseDetection/YOLOX",
+        "https://github.com/Megvii-BaseDetection/YOLOX/blob/main/LICENSE"
+      ]
+    },
+    {
+      "id": "E-22",
+      "topic": "COCO dataset terms",
+      "claim": "Official COCO Terms of Use page is JS-rendered; retrieved HTML only contained navigation/footer; raw repo paths tried returned 404, so the terms text was not obtained.",
+      "classification": "无法确证",
+      "status": "UNKNOWN",
+      "evidence_domain": "5 URLs attempted, 0 valid text samples",
+      "sample_size": 0,
+      "sources": [
+        "https://cocodataset.org/#termsofuse",
+        "https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/termsofuse.md (404)",
+        "https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/main/termsofuse.md (404)"
+      ],
+      "note": "Do not claim COCO pretrained weights are free for commercial use until the official terms are read."
+    },
+    {
+      "id": "E-23",
+      "topic": "backup switch policy",
+      "claim": "Main candidate YOLOv8n-pose, backup YOLOX-Nano; if AGPL is unacceptable, evaluate the backup first, but never switch automatically and never decide on behalf of the user.",
+      "classification": "【项目决策】",
+      "status": "PROPOSED / PENDING_USER_DECISION",
+      "evidence_domain": "repo config, no measurement",
+      "sample_size": 1,
+      "sources": [
+        "configs/perception/landmark_model_selection_v1.json",
+        "configs/perception/landmark_training_plan_v2.json"
+      ]
+    },
+    {
+      "id": "E-24",
+      "topic": "RKNN model zoo yolov8_pose row and RK3576",
+      "claim": "RKNN Model Zoo platform list includes RK3576; the model table has a Body Pose yolov8_pose INT8 yolov8n-pose.onnx row listing RK3576.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official README, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo"
+      ],
+      "quote": "Body Pose | yolov8_pose | INT8 | ./yolov8n-pose.onnx | RK3562|RK3566|RK3568|RK3576|RK3588|RV1126B"
+    },
+    {
+      "id": "E-25",
+      "topic": "official example benchmark 75.0 FPS",
+      "claim": "Benchmark table column RK3576 @single_core gives 75.0 for yolov8_pose / yolov8n-pose / [1,3,640,640] / INT8; this is an official example benchmark, not our model result.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_OFFICIAL_EXAMPLE_ONLY",
+      "evidence_domain": "official README benchmark table, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo"
+      ],
+      "quote": "yolov8_pose | yolov8n-pose | [1, 3, 640, 640] | INT8 | 23.7 | 32.4 | 58.3 | 75.0 | 59.1 | / | / | /",
+      "note": "MUST NOT be reported as our model effect, board acceptance, or navigation capability."
+    },
+    {
+      "id": "E-26",
+      "topic": "RKNN model zoo versions",
+      "claim": "Release notes: 2.1.0 added yolov8_pose; 2.0.0 added RK3576; current latest 2.5.0 pairs with RKNPU2 SDK >=2.5.0.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official README, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo"
+      ],
+      "quote": "2.1.0 New demo release, including yolov8_pose ... 2.0.0 Add support for RK3576 ... 2.5.0 | >=2.5.0"
+    },
+    {
+      "id": "E-27",
+      "topic": "yolov8_pose example commands and asset",
+      "claim": "Example README lists platforms incl. RK3576, convert.py fp/i8/hybrid commands, notes the C demo only supports 8-bit quantization, and links yolov8n-pose.pt to the v8.2.0 assets release.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official example README, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose"
+      ],
+      "quote": "python convert.py <onnx_model> <TARGET_PLATFORM> <dtype(optional)>; # Currently the C code demo only supports 8-bit quantization",
+      "note": "yolov8n-pose.pt link: https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n-pose.pt"
+    },
+    {
+      "id": "E-28",
+      "topic": "RKNN convert.py hardcoded calibration and node names",
+      "claim": "RKNN example convert.py hardcodes DATASET_PATH to the COCO subset and hardcodes YOLOv8 head node names in hybrid quantization config.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_CODE",
+      "evidence_domain": "official source, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo/blob/main/examples/yolov8_pose/python/convert.py"
+      ],
+      "quote": "DATASET_PATH = '../../../datasets/COCO/coco_subset_20.txt' ... custom_hybrid=[['/model.22/cv4.0/cv4.0.0/act/Mul_output_0', ...]]"
+    },
+    {
+      "id": "E-29",
+      "topic": "RKNN demo assumes 17 keypoints",
+      "claim": "The official Python demo post-processing assumes 17 COCO keypoints (kpt_color of 17 entries, 17-point skeleton, reshape(-1,3)).",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_CODE",
+      "evidence_domain": "official source, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo/blob/main/examples/yolov8_pose/python/yolov8_pose.py"
+      ],
+      "quote": "kpt_color = pose_palette[[16, 16, 16, 16, 16, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9]]; skeleton = [[16, 14], [14, 12], [17, 15], ...]"
+    },
+    {
+      "id": "E-30",
+      "topic": "custom 1-keypoint RKNN export",
+      "claim": "No official documentation or script parameter is provided for converting/quantizing a custom kpt_shape=1 model to RKNN; the path remains UNKNOWN and requires rewriting conversion/calibration/post-processing and testing.",
+      "classification": "【来源陈述】（缺失即事实）/ 解释性",
+      "status": "UNKNOWN",
+      "evidence_domain": "official example docs + code, N=2; no counter-example found",
+      "sample_size": 2,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo/tree/main/examples/yolov8_pose",
+        "https://github.com/airockchip/rknn_model_zoo/blob/main/examples/yolov8_pose/python/convert.py"
+      ]
+    },
+    {
+      "id": "E-31",
+      "topic": "RKNN Model Zoo license",
+      "claim": "rknn_model_zoo LICENSE is Apache License 2.0.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official LICENSE, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn_model_zoo/blob/main/LICENSE"
+      ],
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "length_bytes": 11357
+    },
+    {
+      "id": "E-32",
+      "topic": "RKNN Toolkit2 license",
+      "claim": "rknn-toolkit2 LICENSE is NOT Apache-2.0; it is Rockchip proprietary RKNN SDK License (limited license for design/development/testing of applications compatible with Rockchip products; restrictions; PRC law, Fuzhou jurisdiction).",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED_NEW_FINDING",
+      "evidence_domain": "official LICENSE, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn-toolkit2/blob/master/LICENSE"
+      ],
+      "quote": "RKNN SDK License ... limited, non-exclusive, royalty-free copyright license ... solely for the design, development and testing of applications that are compatible with Products ... of Rockchip ... governed by ... the laws of the People's Republic of China ... Fuzhou City",
+      "sha256": "eaadd949941ed3b072ffdf0a0d4341501cfa1cf2ec3526ce3f60cf7bf513790f",
+      "length_bytes": 7561,
+      "note": "This corrects the earlier package which only recorded Model Zoo Apache-2.0 and did not record the Toolkit2 license."
+    },
+    {
+      "id": "E-33",
+      "topic": "RKNN Toolkit2 platform/version",
+      "claim": "rknn-toolkit2 README lists RK3576 Series support, latest version v2.5.0, Python 3.6-3.12.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official README, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://github.com/airockchip/rknn-toolkit2"
+      ],
+      "quote": "Support Platform: RK3576 Series ... Latest version:v2.5.0 ... Python 3.6 / 3.7 / ... / 3.12"
+    },
+    {
+      "id": "E-34",
+      "topic": "PyTorch 2.7 Blackwell and cu128",
+      "claim": "Official PyTorch 2.7 release announcement states support for NVIDIA Blackwell GPU architecture and prebuilt CUDA 12.8 wheels (announcement text mentions Linux x86 and arm64).",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official blog, N=1, datePublished 2025-04-23/24",
+      "sample_size": 1,
+      "sources": [
+        "https://pytorch.org/blog/pytorch-2-7/"
+      ],
+      "quote": "support for the NVIDIA Blackwell GPU architecture and pre-built wheels for CUDA 12.8 across Linux x86 and arm64 architectures"
+    },
+    {
+      "id": "E-35",
+      "topic": "cu128 Windows cp311 wheel exists",
+      "claim": "Official PyTorch cu128 wheel index contains torch-2.7.0+cu128-cp311-cp311-win_amd64.whl uploaded 2025-04-22; cp311 matches host Python 3.11.",
+      "classification": "【来源陈述】",
+      "status": "EVIDENCED",
+      "evidence_domain": "official wheel index, N=1",
+      "sample_size": 1,
+      "sources": [
+        "https://download.pytorch.org/whl/cu128/torch/"
+      ],
+      "quote": "torch-2.7.0%2Bcu128-cp311-cp311-win_amd64.whl (data-upload-time 2025-04-22T18:20:15Z)"
+    },
+    {
+      "id": "E-36",
+      "topic": "host torch compiled for sm_120",
+      "claim": "Host torch arch list includes sm_120 and device capability is (12,0), so the installed wheel targets RTX 5080 (sm_120).",
+      "classification": "本机只读事实",
+      "status": "EVIDENCED",
+      "evidence_domain": "host query, N=1",
+      "sample_size": 1,
+      "sources": [
+        "host: torch.cuda.get_arch_list(), torch.cuda.get_device_capability(0)"
+      ],
+      "quote": "arch_list includes sm_50, sm_60, sm_61, sm_70, sm_75, sm_80, sm_86, sm_90, sm_100, sm_120; device capability (12, 0)"
+    },
+    {
+      "id": "E-37",
+      "topic": "8.2.0 x torch 2.7 combined compatibility",
+      "claim": "The combination RTX 5080 + torch 2.7.0+cu128 + ultralytics 8.2.0 has no official compatibility statement and was not tested; only the torch/CUDA/sm_120 layer is demonstrated.",
+      "classification": "【未确认解释】",
+      "status": "UNKNOWN",
+      "evidence_domain": "no official statement found; no measurement performed",
+      "sample_size": 0,
+      "sources": [
+        "https://pypi.org/pypi/ultralytics/8.2.0/json",
+        "host: torch 2.7.0"
+      ],
+      "note": "Requires isolated-env smoke (load, forward, 1-epoch, onnx export) after user authorization; installing is forbidden in this task."
+    }
+  ],
+  "pending_decisions": [
+    {
+      "pending_decision_id": "PD-001",
+      "subject": "AGPL-3.0 acceptance for the main candidate",
+      "classification": "【未确认解释】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "A1 admission",
+        "main-recipe training",
+        "any distribution/export of deliverables"
+      ],
+      "impact": "If AGPL obligations are unacceptable or unresolved, the main YOLOv8n-pose recipe cannot be trained or distributed; selecting backup or buying a commercial license changes the whole plan.",
+      "evidence_ids": [
+        "E-01",
+        "E-02",
+        "E-03",
+        "E-04",
+        "E-05",
+        "E-06"
+      ],
+      "minimal_decision_question": "Does the project accept AGPL-3.0 obligations? If yes, is it internal research only (no distribution), or is open-source distribution allowed? If no, buy an Ultralytics commercial license or switch to the backup?",
+      "options": [
+        "accept AGPL for internal-only use (no distribution)",
+        "accept AGPL and open-source the required parts",
+        "buy Ultralytics Enterprise License (terms must be reviewed)",
+        "reject AGPL and evaluate the backup route"
+      ],
+      "default_if_unanswered": "no training, no distribution, no deliverable export",
+      "owner": "USER (legal review required)"
+    },
+    {
+      "pending_decision_id": "PD-002",
+      "subject": "Do self-trained weights and exported ONNX count as derivative works",
+      "classification": "【未确认解释】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "distribution of weights/ONNX",
+        "license notice strategy",
+        "whether AGPL applies to artifacts"
+      ],
+      "impact": "Determines whether our trained weights and exported ONNX must be treated as AGPL-covered artifacts; affects any release, demo, or sharing.",
+      "evidence_ids": [
+        "E-03",
+        "E-04",
+        "E-05"
+      ],
+      "minimal_decision_question": "Do we adopt the conservative interpretation that self-trained weights and exported ONNX are based on the Program and thus AGPL-covered (pending written legal opinion)?",
+      "options": [
+        "adopt conservative interpretation (AGPL applies)",
+        "obtain a written legal opinion first",
+        "obtain a commercial license covering weights/ONNX"
+      ],
+      "default_if_unanswered": "treat artifacts as AGPL-covered: do not distribute weights/ONNX",
+      "owner": "USER (legal review required)"
+    },
+    {
+      "pending_decision_id": "PD-003",
+      "subject": "AGPL section 13 remote-network-interaction trigger scope",
+      "classification": "【未确认解释】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "deployment topology",
+        "source-offer obligation",
+        "any networked ground station feature"
+      ],
+      "impact": "If any deployment form involves remote interaction over a network with modified code, section 13 source-offer obligations may apply.",
+      "evidence_ids": [
+        "E-03",
+        "E-06"
+      ],
+      "minimal_decision_question": "Will any deployment form include external network services or remote interaction? If so, who provides the Corresponding Source and how?",
+      "default_if_unanswered": "assume section 13 may trigger; do not promise network-facing services",
+      "owner": "USER (architecture + legal)"
+    },
+    {
+      "pending_decision_id": "PD-004",
+      "subject": "Allow bounded internal training while AGPL is unresolved",
+      "classification": "【项目决策】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "A1 admission",
+        "start of the bounded training experiment"
+      ],
+      "impact": "Decides whether a bounded internal experiment may start before the license decision, with no distributable artifacts.",
+      "evidence_ids": [
+        "E-02",
+        "E-23"
+      ],
+      "minimal_decision_question": "Is a bounded, internal-only training experiment allowed (no distribution of weights/ONNX), or must training wait for the license decision?",
+      "options": [
+        "allow internal-only bounded training",
+        "wait for license decision",
+        "forbid until commercial license or legal opinion"
+      ],
+      "default_if_unanswered": "do not start training",
+      "owner": "USER"
+    },
+    {
+      "pending_decision_id": "PD-005",
+      "subject": "Backup YOLOX-Nano activation condition",
+      "classification": "【项目决策】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "route switch",
+        "backup training"
+      ],
+      "impact": "YOLOX-Nano is bbox-only with classical anchor; switching routes changes the technical plan and does not by itself fix anchor accuracy/recall.",
+      "evidence_ids": [
+        "E-18",
+        "E-19",
+        "E-20",
+        "E-21",
+        "E-23"
+      ],
+      "minimal_decision_question": "If AGPL is unacceptable, is the backup YOLOX-Nano (bbox-only + classical anchor) authorized as the first evaluated route?",
+      "options": [
+        "authorize backup evaluation",
+        "stay blocked until license decision",
+        "choose another route"
+      ],
+      "default_if_unanswered": "no automatic model switch; backup not started",
+      "owner": "USER"
+    },
+    {
+      "pending_decision_id": "PD-006",
+      "subject": "YOLOX weights and COCO dataset terms",
+      "classification": "【未确认解释】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "backup training",
+        "backup distribution"
+      ],
+      "impact": "The repo LICENSE is Apache-2.0, but the weights license text and COCO dataset terms were not obtained; this must be resolved before using COCO pretrained weights.",
+      "evidence_ids": [
+        "E-18",
+        "E-21",
+        "E-22"
+      ],
+      "minimal_decision_question": "Do we accept the risk of unverified COCO-pretrained weight/dataset terms, or require training from scratch / a separate terms review?",
+      "options": [
+        "obtain official terms review first",
+        "train from scratch",
+        "accept documented residual risk"
+      ],
+      "default_if_unanswered": "backup route not released for training",
+      "owner": "USER (legal review required)"
+    },
+    {
+      "pending_decision_id": "PD-007",
+      "subject": "RKNN Toolkit2 proprietary license and conversion artifacts",
+      "classification": "【未确认解释】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "toolchain installation",
+        "CI usage",
+        "distribution of .rknn artifacts"
+      ],
+      "impact": "Toolkit2 is proprietary under the RKNN SDK License (PRC law); installing/using it in CI and distributing converted models may be constrained.",
+      "evidence_ids": [
+        "E-31",
+        "E-32",
+        "E-33"
+      ],
+      "minimal_decision_question": "Does the project accept the RKNN SDK License? May the toolchain be installed on dev machines/CI? May .rknn artifacts be distributed?",
+      "options": [
+        "accept for internal development only",
+        "legal review before CI use",
+        "avoid distribution of .rknn"
+      ],
+      "default_if_unanswered": "do not install toolchain; do not distribute .rknn",
+      "owner": "USER (legal review required)"
+    },
+    {
+      "pending_decision_id": "PD-008",
+      "subject": "Custom 1-keypoint RKNN export/quantization path",
+      "classification": "UNKNOWN",
+      "status": "PENDING_USER_DECISION / UNKNOWN",
+      "blocks": [
+        "A5 deployment evidence",
+        "training stop conditions"
+      ],
+      "impact": "If the custom 1-keypoint model cannot be converted/quantized to RKNN, the intended RK3576 deployment is not achievable with this recipe; this is a training-stage stop condition.",
+      "evidence_ids": [
+        "E-27",
+        "E-28",
+        "E-29",
+        "E-30"
+      ],
+      "minimal_decision_question": "Is a post-training RKNN feasibility check (custom 1-kpt ONNX -> RKNN i8 -> board latency) required before any accuracy claim, accepting that it may fail?",
+      "options": [
+        "require feasibility check before accuracy acceptance",
+        "defer until a board is available",
+        "accept UNKNOWN and keep shadow-only"
+      ],
+      "default_if_unanswered": "do not claim RK3576 deployability; no board claims",
+      "owner": "USER (hardware availability)"
+    },
+    {
+      "pending_decision_id": "PD-009",
+      "subject": "8.2.0 x torch 2.7 compatibility smoke test",
+      "classification": "【未确认解释】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "version pin validation",
+        "training start"
+      ],
+      "impact": "Without an isolated-environment smoke test, training compatibility of the pinned combination is unknown; installation is forbidden in this task.",
+      "evidence_ids": [
+        "E-15",
+        "E-16",
+        "E-17",
+        "E-37"
+      ],
+      "minimal_decision_question": "Is an isolated venv (.venv/landmark-train) authorized for a minimal load/forward/1-epoch/onnx-export smoke test of ultralytics 8.2.0 with torch 2.7.0+cu128?",
+      "options": [
+        "authorize isolated smoke test",
+        "upgrade ultralytics pin instead",
+        "keep pin unverified (no training)"
+      ],
+      "default_if_unanswered": "no install, no training",
+      "owner": "USER"
+    },
+    {
+      "pending_decision_id": "PD-010",
+      "subject": "Version pin strategy (8.2.0 vs upgrade)",
+      "classification": "【项目决策】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "reproducibility",
+        "zoo asset alignment"
+      ],
+      "impact": "8.2.0 matches the RKNN zoo's referenced yolov8n-pose.pt asset but predates torch 2.7; upgrading may improve torch 2.7 support but breaks alignment with the zoo example.",
+      "evidence_ids": [
+        "E-07",
+        "E-14",
+        "E-16",
+        "E-27",
+        "E-37"
+      ],
+      "minimal_decision_question": "Keep ultralytics==8.2.0 (zoo-aligned, unverified with torch 2.7) or allow upgrading to a version officially tested with torch 2.7?",
+      "options": [
+        "keep 8.2.0 pin",
+        "allow upgrade after smoke test",
+        "pin a different verified version"
+      ],
+      "default_if_unanswered": "keep 8.2.0 pin but mark unverified",
+      "owner": "USER"
+    },
+    {
+      "pending_decision_id": "PD-011",
+      "subject": "ONNX opset freeze and RKNN operator support",
+      "classification": "UNKNOWN",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "export reproducibility",
+        "quantization quality"
+      ],
+      "impact": "Opset affects reproducibility and RKNN operator support; export success and quantization drop are unknown.",
+      "evidence_ids": [
+        "E-12",
+        "E-13",
+        "E-28",
+        "E-30"
+      ],
+      "minimal_decision_question": "Accept the plan: export ONNX with fixed opset=18, then run RKNN operator/quantization checks, adjusting opset or structure if it fails?",
+      "options": [
+        "accept plan",
+        "require opset decision after operator analysis",
+        "defer export"
+      ],
+      "default_if_unanswered": "do not promise export success",
+      "owner": "USER"
+    },
+    {
+      "pending_decision_id": "PD-012",
+      "subject": "Usage boundary for official benchmark numbers",
+      "classification": "【项目决策】",
+      "status": "PENDING_USER_DECISION",
+      "blocks": [
+        "reporting wording"
+      ],
+      "impact": "Prevents accidental conversion of RKNN zoo example metrics (e.g., 75.0 FPS) into our model effect, board acceptance, or navigation capability.",
+      "evidence_ids": [
+        "E-25"
+      ],
+      "minimal_decision_question": "Confirm that RKNN zoo's 75.0 FPS is cited only as evidence that an official example exists, never as our model/board/navigation metric?",
+      "options": [
+        "confirm",
+        "no citation of the number at all"
+      ],
+      "default_if_unanswered": "enforce no-citation-as-our-metric",
+      "owner": "USER"
+    }
+  ],
+  "unknowns": [
+    "AGPL scope for self-trained weights / ONNX / onboard binaries (PD-002); section 13 applicability (PD-003); Ultralytics commercial license terms (not obtained)",
+    "YOLOX weights license statement; COCO dataset terms text (JS-rendered page; not obtained)",
+    "RKNN SDK License constraints on distributing .rknn artifacts and installing in CI",
+    "Custom 1-keypoint ONNX to RKNN conversion/quantization/operator fallback/board latency/thermal (no board, no toolchain)",
+    "ultralytics 8.2.0 load/train/export behavior on torch 2.7.0+cu128 (not installed, not tested)",
+    "Whether the 4-10 px green light is separable at 640 input (data/model issue, not license)",
+    "Whether any Ultralytics version has regression coverage for kpt_shape=1 (official docs only show 17/12 keypoints)"
+  ],
+  "corrections_to_prior_package": [
+    "docs/reports/perception/dsh_landmark_deployment_feasibility_20261104.json says model_artifacts_found is none (.onnx/.pt/.rknn search returned no files); two unrelated .pt files do exist (external/NavRL/.../navrl_checkpoint.pt and logs/rsl_rl/.../model_0.pt); the conclusion (no landmark weights, no .onnx/.rknn) still holds but the wording is inaccurate.",
+    "Prior package recorded only Model Zoo Apache-2.0 and did not record the RKNN-Toolkit2 proprietary RKNN SDK License; this file adds it (PD-007).",
+    "RKNN versions can be stated precisely: Model Zoo latest 2.5.0 with RKNPU2 SDK >=2.5.0; yolov8_pose added in 2.1.0; RK3576 added in 2.0.0; example references the v8.2.0 yolov8n-pose.pt asset.",
+    "kpt_shape [1,3] is allowed by code/format, but official docs only show 17/12 keypoints; keep the one-keypoint plan as PROPOSED, not verified support."
+  ],
+  "usage_boundaries": [
+    "This file is not a license acceptance, legal approval, or training/deployment release.",
+    "RKNN zoo benchmark numbers are official example metrics only; they are not our model effect, board acceptance, or navigation capability.",
+    "Existence of the official yolov8_pose example does not mean our custom 1-keypoint model is deployable to RK3576 (UNKNOWN).",
+    "RTX 5080 + torch 2.7.0+cu128 detection does not mean ultralytics 8.2.0 training/export is verified (UNKNOWN).",
+    "Do not switch to the backup model automatically because of license risk.",
+    "Admission criteria remain those in LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 4; the conclusion remains: evidence reaches this point, decision is pending user."
+  ],
+  "deliverables": {
+    "markdown": "docs/reports/perception/license_evidence_20261104/LICENSE_AND_EXPORT_EVIDENCE_20261104.md",
+    "markdown_sha256": "c4f29f8ce7ce385793bf9835f87363741aa3155ad4b161941b810cfc48d629a5",
+    "markdown_bytes": 44807,
+    "json": "docs/reports/perception/license_evidence_20261104/license_export_evidence_20261104.json"
+  },
+  "read_only_commands": [
+    "E:\\isaac\\env_isaaclab\\Scripts\\python.exe -c \"import torch;print(torch.__version__, torch.version.cuda, torch.cuda.get_device_capability(0), torch.cuda.get_arch_list())\"",
+    "E:\\isaac\\env_isaaclab\\Scripts\\python.exe -m pip list",
+    "nvidia-smi --query-gpu=name,driver_version,memory.total,compute_cap --format=csv,noheader",
+    "Get-ChildItem -Recurse -File E:\\isaac\\proj_boom_birds -Include *.pt,*.onnx,*.rknn,*.pth,*.engine"
+  ]
+}

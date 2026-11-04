@@ -36,6 +36,7 @@ def main():
             errors.append(item.get('frame_id', '?') + ': overlay ' + repr(error))
     report = {
         'schema_version': 'dsh.annotation_qa.v1',
+        'document_schema_version': document.get('schema_version'),
         'annotations': str(args.annotations),
         'annotations_sha256': sha(args.annotations),
         'root': str(args.root),
@@ -44,7 +45,7 @@ def main():
         'warnings': warnings,
         'overlays': overlays,
         'status': 'PASS' if not errors else 'FAIL',
-        'limits': 'agent manual approximate labels; not user expert review; not a sealed test',
+        'limits': 'schema v1/v2 data QA only (coordinates, enums, combination rules); agent proxy annotations are not expert or human independent review; not a sealed test',
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n',

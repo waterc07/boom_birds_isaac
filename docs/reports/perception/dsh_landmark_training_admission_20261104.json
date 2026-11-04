@@ -1,0 +1,240 @@
+{
+  "schema_version": "dsh.landmark_training_admission.v1",
+  "status": "INCOMPLETE",
+  "training_start": "BLOCKED",
+  "generated_at": "2026-11-04",
+  "generated_by": "lead",
+  "repo": {
+    "path": "E:\\isaac\\proj_boom_birds",
+    "branch": "feat/v2.2-simulation-perception",
+    "head_before_commit": "43fee3e02de57840e54297e8595924e2f213d722"
+  },
+  "scope": "pre-training closure and data preparation; no training, no dependency install, no model download, no Isaac environment change; all Isaac runs used a visible foreground GUI",
+  "evidence_domain": "documents + configs + unit tests + offline data/annotation QA + simulated GUI capture; NOT model effect, board, navigation or gate acceptance",
+  "verdict": {
+    "overall": "INCOMPLETE",
+    "training_start": "BLOCKED",
+    "blocking_reason_codes": [
+      "A1_LICENSE_USER_DECISION",
+      "A3_FINAL_LABELS_PENDING",
+      "A4_PROXY_ONLY_ANNOTATION",
+      "A6_PREREGISTRATION_OPEN",
+      "A8_IDENTITY_DENOMINATOR_INSUFFICIENT"
+    ],
+    "note": "overall INCOMPLETE because A3/A4/A6/A8 are team-actionable gaps; training start is BLOCKED because A1 needs a user decision. No gate is promoted."
+  },
+  "items": {
+    "A1_license_decision": {
+      "status": "BLOCKED",
+      "user_decision": true,
+      "basis": "Ultralytics AGPL-3.0 confirmed from official text; AGPL section 13 scope, weight derivative status and closed-distribution obligations remain unresolved interpretations; no user acceptance assumed; no automatic switch to the Apache-2.0 backup",
+      "evidence": [
+        "docs/reports/perception/license_evidence_20261104/LICENSE_AND_EXPORT_EVIDENCE_20261104.md",
+        "docs/reports/perception/license_evidence_20261104/license_export_evidence_20261104.json"
+      ]
+    },
+    "A2_independent_groups": {
+      "status": "PASS_WITH_HELD_OUT_INCOMPLETE",
+      "basis": "dev freeze v2: 19 groups / 6 families, train 7 groups 1320 frames (1272 accepted), val 3 groups 575 frames (566 accepted), excluded 9 groups 1107 frames; 0 error for group exclusivity, consecutive-frame crossing, family crossing, duplicate sha across splits; limitation: val is only the north corridor family and static viewpoints have 3 accepted frames each -> dev selection only",
+      "evidence": [
+        "configs/perception/landmark_split_freeze_v2.json",
+        "docs/reports/perception/dataset_freeze_20261104/landmark_dataset_verify_v2_20261104.json",
+        "docs/reports/perception/dataset_freeze_20261104/DATASET_SPLIT_AND_LEAKAGE_20261104.md"
+      ]
+    },
+    "A3_sealed_final_pool": {
+      "status": "INCOMPLETE",
+      "basis": "pool frozen: 6 new families, 297 RGB / 279 accepted in 200-400, sampling N=1 fixed rule, 0 image-sha overlap with all 3002 dev frames, 0 family/group overlap with dev freeze, GUI provenance complete; pilot annotation 34/279 frames PASS 34/34 with spec v2; missing: full semantic labels (PILOT_ONLY 34/279), no constructed full occlusion (HN2), no verified green-light similar structure (HN1 only old static_c candidate); spec v2.1 needed before full labels",
+      "evidence": [
+        "configs/perception/landmark_final_pool_seal_v1.json",
+        "configs/scenarios/landmark_final_cases_v1.json",
+        "docs/reports/perception/capture_20261104/CAPTURE_20261104.md",
+        "docs/reports/perception/dataset_freeze_20261104/FINAL_POOL_SEAL_20261104.md"
+      ]
+    },
+    "A4_annotation_semantics": {
+      "status": "INCOMPLETE",
+      "basis": "format QA PASS 21/21 blind sample and PASS 34/34 final-pool pilot; blind proxy re-annotation n=21/33 old records: bbox IoU 0.649, keypoint 1.155 px = 0.414 deg, bearing 0.180 deg, undeterminable 19.0%, visibility 5/21 mismatch; spec v2 lead-approved for pilot; still single-agent proxy, no independent human review or adjudication, P1-P3 open before full labels",
+      "evidence": [
+        "docs/reports/perception/annotation_verify_20261104/ANNOTATION_VERIFICATION_20261104.md",
+        "docs/reports/perception/annotation_verify_20261104/annotation_verification_20261104.json",
+        "configs/perception/landmark_annotation_spec_v2.json"
+      ]
+    },
+    "A5_version_gpu_export_evidence": {
+      "status": "PASS_EVIDENCE_ONLY",
+      "basis": "version pins, AGPL text, YOLOX Apache text, RKNN zoo example, RKNN-Toolkit2 proprietary license discovery, RTX 5080 sm_120 + torch 2.7.0+cu128 arch list + official cu128 win cp311 wheel, no ultralytics/onnxruntime/rknn installed; custom 1-keypoint ONNX/RKNN path explicitly UNKNOWN; official example benchmarks marked as not our results",
+      "evidence": [
+        "docs/reports/perception/license_evidence_20261104/LICENSE_AND_EXPORT_EVIDENCE_20261104.md"
+      ]
+    },
+    "A6_preregistration": {
+      "status": "INCOMPLETE",
+      "basis": "task definition, training plan v2, dev split freeze and final pool seal are recorded; the final pool full labels, threshold freeze basis and final protocol cannot be frozen until A3/A4 close and A1 is decided",
+      "evidence": [
+        "docs/reports/perception/LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md",
+        "configs/perception/landmark_training_plan_v2.json"
+      ]
+    },
+    "A7_isolated_environment_plan": {
+      "status": "PASS_PLAN_ONLY",
+      "basis": "isolated .venv/landmark-train plan and pins recorded; not executed because this round forbids installs; Isaac venv untouched",
+      "evidence": [
+        "configs/perception/landmark_training_plan_v2.json"
+      ]
+    },
+    "A8_sample_adequacy": {
+      "status": "INCOMPLETE",
+      "basis": "279 accepted frames / 6 families meet the data-preparation budget, but the identity high-confidence false-match denominator is too small, no similar-structure green-light negatives exist in the final pool, and the 0.5% target cannot be certified; report INCOMPLETE rather than PASS",
+      "evidence": [
+        "configs/perception/landmark_final_pool_seal_v1.json",
+        "docs/reports/perception/annotation_verify_20261104/ANNOTATION_VERIFICATION_20261104.md"
+      ]
+    }
+  },
+  "task_definition": {
+    "class_vs_identity": "class 'tower' is class evidence only; landmark_id identity requires uniqueness assumptions U1-U3, single candidate and valid reference handling",
+    "uniqueness_assumptions": [
+      "U1 at most one tower-like instance in the current asset",
+      "U2 central tower is the only tower with a green roof light",
+      "U3 this experiment targets the central tower only"
+    ],
+    "hard_negatives": [
+      "HN1 similar structure",
+      "HN2 full occlusion",
+      "HN3 frame-edge truncation",
+      "HN4 far small target",
+      "HN5 target absent",
+      "HN6 same-colour non-landmark"
+    ],
+    "rejection_conditions": [
+      "M1 MULTIPLE_CANDIDATES",
+      "M2 TARGET_AMBIGUOUS",
+      "M3 REFERENCE_UNAVAILABLE",
+      "M4 OCCLUDED/TRUNCATED",
+      "M5 STALE/DUPLICATE/GENERATION_MISMATCH",
+      "M6 MISSING_CALIBRATION/INVALID_IMAGE"
+    ],
+    "metric_denominators": {
+      "presence": [
+        "N_pos all GT present",
+        "N_neg all GT absent incl hard negatives",
+        "GT-unobservable frames excluded and reported separately"
+      ],
+      "reference": [
+        "N_avail GT visible reference",
+        "N_unavail GT reference unavailable"
+      ],
+      "identity": [
+        "claims",
+        "N_pos",
+        "N_neg"
+      ],
+      "joint": [
+        "N_joint_eval complete GT bbox+reference",
+        "all-positive lower bound joint_tp/N_pos",
+        "coverage N_joint_eval/N_pos"
+      ]
+    },
+    "warmup_early_stop": "warmup 15 epochs with no early stop and no joint<0.60 verdict; patience 20 after warmup; diagnostic triggers are written review, not automatic abort",
+    "seed_and_final_protocol": "3 seeds compared/selected and thresholds frozen on validation only; one final run on the sealed pool with the pre-selected scheme; no post-final callback, no rerun"
+  },
+  "data_status": {
+    "exposed_dev_data": {
+      "directories": 13,
+      "rgb_frames": 3002,
+      "accepted_frames": 2909,
+      "unique_sha": 2940,
+      "warmup_duplicate_clusters": 31
+    },
+    "dev_split": {
+      "freeze_v1_canonical_sha256": "47b535f4…",
+      "freeze_v2_canonical_sha256": "269d9a659db387beee345daff33cf1a3508261d099f548aeb93353b94c33afed",
+      "recommended": "v2 conservative",
+      "train": {
+        "groups": 7,
+        "frames": 1320,
+        "accepted": 1272
+      },
+      "val": {
+        "groups": 3,
+        "frames": 575,
+        "accepted": 566
+      },
+      "excluded": {
+        "groups": 9,
+        "frames": 1107,
+        "accepted": 1071
+      },
+      "sealed": false
+    },
+    "final_pool": {
+      "seal_file": "configs/perception/landmark_final_pool_seal_v1.json",
+      "freeze_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+      "families": 6,
+      "rgb_frames": 297,
+      "accepted_frames": 279,
+      "warmup_invalid_frames": 18,
+      "sampling_rule": "N=1 all included; fallback fixed-stride rule recorded",
+      "cross_run_sha_overlap": 0,
+      "family_overlap_with_dev": 0,
+      "gui": "visible foreground GUI, D3D12, RTX 5080 driver 581.80",
+      "labels": "PILOT_ONLY_34_OF_279",
+      "sealed_claim": "process isolation + hash commitment only, not third-party independent",
+      "pilot_annotation": {
+        "frames": 34,
+        "positives": 25,
+        "negatives": 9,
+        "reference_available": 21,
+        "reference_unavailable": 4,
+        "reference_unavailable_reason": "REFERENCE_TOO_SMALL",
+        "truncated": 10,
+        "undecidable": 0,
+        "ambiguous": 0,
+        "occluded": 0,
+        "format_qa": "PASS 34/34, 0 error / 0 warning (dsh.tower_annotation.v2)",
+        "selection_rule": "fixed midpoint systematic over seal accepted frames; no model/detector score, no random draw",
+        "spec": "configs/perception/landmark_annotation_spec_v2.json",
+        "spec_sha256": "b0b7dae6300086fbcdc6bdf08033f8abd47381695e3d12a900f313a93372f749",
+        "labels_path_ignored": "outputs/perception/landmark_final_annotations_20261104/labels_v1.json",
+        "labels_sha256": "fe8d47d03e6de8740099822830621edd76f97cb14633a6cb3e44ef08c12c8942",
+        "report": "docs/reports/perception/annotation_verify_20261104/FINAL_POOL_PILOT_ANNOTATION_20261104.md",
+        "not_a_full_test_label": true,
+        "not_used_for_training_or_thresholds": true
+      },
+      "spec_v2_1_required_before_full_labels": [
+        "P1 four-edge truncation metadata in capture (near bottom cut currently missing)",
+        "P2 reference availability pixel criterion (green_pixels>=3 declared for this pilot only)",
+        "P3 clean state for TARGET_ABSENT plus visible unverified confuser"
+      ]
+    }
+  },
+  "user_decisions_minimal": [
+    {
+      "id": "D1_license_route",
+      "question": "主候选是否走 AGPL-3.0 路线（含许可未决期间内部有界训练与后续分发义务），或购买商业许可，或切换到 Apache-2.0 的 YOLOX-Nano 备选（不自动切换）？",
+      "blocking": true
+    },
+    {
+      "id": "D2_annotation_sealing_independence",
+      "question": "final 池完整语义标注与模型开发是否允许同一执行者；是否投入 ≥2 名独立人工标注 + 仲裁（否则方位精度只能是代理自洽）；是否接受 hash+流程记录作为封存证据？",
+      "blocking": true
+    },
+    {
+      "id": "D3_raw_data_retention",
+      "question": "279 帧 final 池与 3002 帧 dev 原始包是否需要在仓库外/远端做带 hash 备份，以保证可复验性？",
+      "blocking": false
+    }
+  ],
+  "not_done": [
+    "final pool full semantic labels (279 frames; pilot 34/279 only)",
+    "spec v2.1 (four-edge truncation metadata, reference availability criterion, unverified confuser state)",
+    "independent human re-annotation and adjudication",
+    "HN1 green-light similar-structure and HN2 full-occlusion acquisition",
+    "isolated venv 8.2.0 x torch 2.7 compatibility smoke",
+    "custom 1-keypoint ONNX export and RKNN conversion",
+    "training, model metrics, board deployment, navigation",
+    "any BB22 gate promotion"
+  ],
+  "boundary": "Data preparation, format QA and official deployment examples are not model effect, board or navigation acceptance; RKNN 75 FPS and similar figures are official example benchmarks, not our results"
+}

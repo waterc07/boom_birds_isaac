@@ -30,6 +30,11 @@ dist/
 *.mp4
 *.avi
 
+# Annotation/verification scratch material and sealed-pool labels stay outside version control
+/docs/reports/perception/annotation_verify_20261104/work/
+/docs/reports/perception/annotation_verify_20261104/pilot/grid/
+/outputs/perception/
+
 # Local editor and operating-system files
 .vscode/settings.json
 .DS_Store

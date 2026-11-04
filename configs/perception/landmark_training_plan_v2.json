@@ -1,0 +1,227 @@
+{
+  "schema_version": "dsh.landmark_training_plan.v2",
+  "status": "PLANNED_NOT_STARTED",
+  "supersedes": "configs/perception/landmark_training_plan_v1.json#training_budget/stop_conditions/proposed_consumer_thresholds (v1 kept for history, not executable)",
+  "selection_ref": "configs/perception/landmark_model_selection_v1.json",
+  "task_definition_ref": "docs/reports/perception/LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md",
+  "definition_status": "PROPOSED_NOT_CONTRACT",
+  "scope": "bounded supervised landmark experiment (one class tower + one green-light keypoint); shadow only; no PPO; no control; no board acceptance",
+  "license_gate": {
+    "main": "AGPL-3.0 obligations unresolved; do not start main-recipe training on the assumption the user accepts AGPL",
+    "backup": "YOLOX-Nano Apache-2.0 code; COCO weights/dataset terms still require review",
+    "rule": "no automatic model switch; user decision required before any training start"
+  },
+  "task_semantics": {
+    "class_vs_identity": "class output 'tower' is class evidence only; landmark_id is identity evidence and requires the uniqueness assumptions to hold, a single candidate, and valid reference handling",
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "uniqueness_assumptions": [
+      "U1: at most one tower-like instance in the current asset",
+      "U2: the central tower is the only tower with a green roof light",
+      "U3: this experiment targets the central tower only"
+    ],
+    "uniqueness_invalidated_if": [
+      "asset or map version changes",
+      "a second tower-like structure appears",
+      "hard-negative frames show a high-similarity green/roof-light structure"
+    ],
+    "hard_negatives_required": [
+      "HN1 similar structure without central tower",
+      "HN2 central tower fully occluded, similar structure visible",
+      "HN3 truncated central tower at frame edge",
+      "HN4 far small target (green light only a few pixels)",
+      "HN5 target absent",
+      "HN6 other same-colour light/texture non-landmark"
+    ]
+  },
+  "input_output": {
+    "input": "front_rgb v2 observation, 320x240, 90 deg HFOV (fx=160 px, cx0=160); training letterbox 640x640",
+    "class_map": {
+      "0": "tower"
+    },
+    "keypoint_count": 1,
+    "keypoint_definition": "green roof-light center; visibility encoded per annotation spec; UNAVAILABLE represented as null keypoint + reference_status UNAVAILABLE",
+    "output": "class score + bbox (auxiliary) + one keypoint; image bearing atan2(x-cx0, fx)",
+    "mask": "not produced",
+    "distance": "not produced",
+    "reject_reasons": [
+      "MULTIPLE_CANDIDATES",
+      "TARGET_AMBIGUOUS",
+      "REFERENCE_UNAVAILABLE",
+      "OCCLUDED",
+      "TRUNCATED",
+      "STALE",
+      "DUPLICATE",
+      "GENERATION_MISMATCH",
+      "MISSING_CALIBRATION",
+      "INVALID_IMAGE"
+    ]
+  },
+  "proposed_thresholds_to_freeze_on_validation": {
+    "tau_det": "PROPOSED: minimum class score for a candidate; freeze on validation",
+    "tau_margin": "PROPOSED: minimum top1-top2 score margin when >=2 candidates; freeze on validation",
+    "tau_iou": "0.3 (diagnostic); note blind re-annotation bbox IoU mean 0.649 so a 0.3 gate is loose and must not be read as precise box quality",
+    "tau_px": "PROPOSED 3 px (1.07 deg at fx=160); basis: blind re-annotation keypoint difference mean 1.155 px / max 2.236 px (n=17); freeze on validation, never below annotation noise",
+    "tau_conf": "PROPOSED: smallest score satisfying validation identity precision >= 0.95",
+    "freeze_rule": "all thresholds frozen from validation only, before final; no post-final adjustment"
+  },
+  "metrics_definition": {
+    "presence": {
+      "tp": "GT present AND tower candidate with bbox IoU >= tau_iou",
+      "fn": "GT present AND no candidate AND not UNKNOWN/REJECTED",
+      "fp": "GT absent AND candidate present",
+      "tn": "GT absent AND no candidate",
+      "positives_denominator": "all GT present frames",
+      "negatives_denominator": "all GT absent frames incl. HN1-HN6",
+      "unknown_policy": "UNKNOWN/REJECTED counted outside the 2x2 and reported separately; never TN"
+    },
+    "reference": {
+      "avail_denominator": "GT present with visible keypoint",
+      "unavail_denominator": "GT present with reference UNAVAILABLE",
+      "coverage": "correct keypoint emissions / N_avail",
+      "false_reference_rate": "keypoint emissions on N_unavail / N_unavail (semantic error; target 0)",
+      "error_stats": "median/P90/max pixel error and image-bearing degrees on correct emissions subset",
+      "pixel_scale_note": "fx=160 px; 1 px = 0.358 deg; 4-10 px green light = 1.43-3.58 deg; do not claim sub-pixel physical accuracy"
+    },
+    "identity": {
+      "claims_denominator": "all non-null landmark_id claims",
+      "positives_denominator": "all GT present frames",
+      "precision": "correct claims / all claims",
+      "recall": "correct claims / all GT present",
+      "high_confidence_false_match": "wrong landmark_id with score >= tau_conf / all GT absent frames",
+      "single_landmark_limitation": "without similar-structure negatives the identity metric is not evaluated"
+    },
+    "joint": {
+      "per_frame": "presence correct AND identity correct AND reference handling correct AND observation valid",
+      "narrow_primary": "joint_tp / N_joint_eval where N_joint_eval = positives with complete GT bbox+reference",
+      "all_positive_lower_bound": "joint_tp / N_pos reported as a lower bound, not as a failure count",
+      "coverage": "N_joint_eval / N_pos",
+      "bbox_iou": "diagnostic only, own denominator (positives with GT bbox); not part of primary joint",
+      "stratified_reporting": [
+        "normal",
+        "scale/distance",
+        "yaw/lateral",
+        "occlusion",
+        "truncation",
+        "target absent",
+        "similar structure"
+      ]
+    }
+  },
+  "training_protocol": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "epochs_max": 100,
+    "batch": 16,
+    "imgsz": 640,
+    "amp": true,
+    "warmup_epochs": 15,
+    "warmup_rule": "no early stopping, no abort, and no 'joint<0.60 therefore failed' verdict during warmup; validation metrics are logged only",
+    "early_stopping": {
+      "patience": 20,
+      "start_after_warmup": true,
+      "monitored_metric": "validation joint narrow-primary",
+      "tie_break": "lower validation FP"
+    },
+    "diagnostic_triggers_not_abort": [
+      "validation joint < 0.60 for 3 consecutive evaluations after warmup",
+      "train/validation gap > 20 percentage points",
+      "validation metric monotonically worsening after warmup"
+    ],
+    "hard_abort_conditions": [
+      "engineering failure (OOM/corrupt data/environment not reproducible)",
+      "annotation QA failure or leakage discovered",
+      "validation metric decreasing for 3 consecutive evaluations and below 0.40 after warmup",
+      "export/quantization path proven impossible for the intended deployment (when that stage is in scope)"
+    ],
+    "seed_selection_rule": "compare seeds on validation only; pick highest validation joint, tie-break lower FP, then lower seed; report all 3 seeds including worst",
+    "checkpoint_selection": "within each seed, validation joint narrow-primary; tie-break lower FP; never inspect final test",
+    "threshold_freeze": "on the selected checkpoint, using validation outputs only: tau_conf = smallest score with validation identity precision >= 0.95; tau_margin/tau_px/tau_iou derived identically and recorded",
+    "preregistration_artifacts": [
+      "frozen data split and frame manifest hashes",
+      "frozen label hashes",
+      "landmark_yolo_pose_v1.yaml",
+      "model/code version pins and environment",
+      "this plan (v2) and task definition",
+      "final protocol and failure criteria"
+    ]
+  },
+  "final_protocol": {
+    "runs": 1,
+    "dataset": "sealed final pool frozen before training; >=3 new trajectory families, 200-400 frames, covering HN1-HN6 where constructible",
+    "preconditions": [
+      "A1-A8 admission decision recorded",
+      "all pre-registration hashes recorded"
+    ],
+    "records": [
+      "artifact hash",
+      "thresholds",
+      "data manifest/label hashes",
+      "code commit",
+      "environment",
+      "command",
+      "start/end time",
+      "full metrics with denominators"
+    ],
+    "post_final_rule": "report only; no tuning, no retraining, no threshold change, no rerun on the same sealed pool; a new evaluation requires new sealed data and a new pre-registration",
+    "failure_consequence": "recipe judged FAIL for the recorded gates; do not reinterpret as model/navigation/board acceptance"
+  },
+  "admission_gates": {
+    "A1_license_decision": "user decision required; do not assume AGPL acceptance",
+    "A2_independent_groups": "existing exposed data must form disjoint train/validation groups; verify with tooling",
+    "A3_sealed_final_pool": ">=3 new families, 200-400 frames, frozen group/list/label/hash",
+    "A4_annotation_semantics": "spec can express presence/reference/ambiguity; blind re-annotation differences quantified; proxy limitations stated",
+    "A5_version_gpu_export_evidence": "version pins, RTX 5080/CUDA evidence, custom one-keypoint export path evidence or explicit UNKNOWN",
+    "A6_preregistration": "all artifacts frozen with hashes",
+    "A7_isolated_training_env": "isolated env plan; Isaac venv untouched",
+    "A8_sample_adequacy": "enough independent groups and evaluable negatives, or report INCOMPLETE"
+  },
+  "verdict_rule": {
+    "PASS": "A1-A8 all evidenced and no pending user decision",
+    "INCOMPLETE": "remaining gaps are team-actionable (more capture/annotation/evidence) and no user decision is required to close them",
+    "BLOCKED": "at least one item requires a user decision or an external condition (license acceptance/commercial license/RK3576 board)"
+  },
+  "effect_gates_proposed_not_competition": {
+    "identity_presence_precision": 0.95,
+    "identity_presence_recall": 0.85,
+    "high_confidence_false_match_rate_max": 0.005,
+    "keypoint_visible_coverage": 0.9,
+    "anchor_bearing_median_deg": 3,
+    "anchor_bearing_p90_deg": 5,
+    "joint_narrow_primary": 0.8,
+    "bbox_iou_diagnostic": 0.3,
+    "caveat": "sample size in the final pool may not certify the 0.5% false-match target; report INCOMPLETE when the denominator is insufficient"
+  },
+  "not_in_scope": [
+    "PPO",
+    "control/setpoints",
+    "board/student acceptance",
+    "real camera",
+    "SITL/HIL",
+    "navigation or gate promotion"
+  ],
+  "planned_commands_not_run": [
+    "# create isolated env outside the Isaac venv (not executed in this package)",
+    "python -m venv .venv/landmark-train",
+    ".venv/landmark-train/Scripts/pip install ultralytics==8.2.0 torch==2.7.0 torchvision==0.22.0 onnx==1.22.0",
+    "yolo pose train model=yolov8n-pose.pt data=configs/perception/landmark_yolo_pose_v1.yaml epochs=100 imgsz=640 batch=16 seed=0 patience=20 project=outputs/landmark/train",
+    "yolo pose val model=best.pt data=configs/perception/landmark_yolo_pose_v1.yaml imgsz=640",
+    "yolo export model=best.pt format=onnx imgsz=640 opset=18 simplify=True",
+    "# separate Linux RKNN environment; planned, not run",
+    "python rknn_model_zoo/examples/yolov8_pose/python/convert.py best.onnx rk3576 i8"
+  ],
+  "this_package": {
+    "training_started": false,
+    "training_dependencies_installed": false,
+    "model_downloaded": false,
+    "isaac_environment_modified": false
+  },
+  "annotation_and_label_policy": {
+    "spec": "configs/perception/landmark_annotation_spec_v2.json (bbox object extent, visibility/truncation priority, reference_unavailable_reason, ambiguous candidate list, undecidable tri-state, annotator provenance)",
+    "bbox_extent": "visible target structure only (tower body + top light assembly); exclude ground/arena platform/shadow; truncated frames cover only the visible in-image part with truncated=true",
+    "keypoint_mapping": "YOLO 1-keypoint: v in {0,1}; reference unavailable -> bbox + placeholder coords + v=0; v=0 excluded from anchor/coverage denominators; absent -> empty label with explicit frame list; ambiguous excluded from positives; sidecar records truncated/occluded/ambiguous/reference_status/reference_unavailable_reason",
+    "proxy_limitation": "single-agent blind re-annotation is not expert or human independent review; bearing-accuracy validation needs >=2 independent human annotators plus arbitration or physical calibration (pending user/organisation decision)"
+  }
+}

@@ -1,0 +1,26 @@
+[INFO][AppLauncher]: Using device: cuda:0
+[INFO][AppLauncher]: Loading experience file: E:\isaac\IsaacLab\apps\isaaclab.python.rendering.kit
+| Driver Version: 581.80        | Graphics API: D3D12
+| 0   | NVIDIA GeForce RTX 5080          | Yes: 0 |     | 15889   MB | 10de      | 4b60a29d.. |
+| OS: Windows 11 Pro for Workstations, Version: 10.0 (26H1), Build: 28120, Kernel: 10.0.28000.3302
+| Processor: 12th Gen Intel(R) Core(TM) i5-12600K
+[stage] load contract and cases
+[stage] create env
+[INFO]: Time taken for simulation start : 5.057613 seconds
+Creating window for environment.
+[stage] disable default ground and spawn map
+[stage] bind obstacle from scene
+[dynamic] obstacle prim=/World/envs/env_0/Obstacle
+[stage] declare kinematic contact inference
+[stage] configure map dones
+[stage] measure body envelope
+[dynamic] body envelope=<omitted long line>
+[stage] run dynamic paired cases
+[episode] lmf_sweep_0-follow_only SUCCESS ROUTE_COMPLETE
+[episode] lmf_backoff_0-follow_only SUCCESS ROUTE_COMPLETE
+[episode] lmf_near_0-follow_only SUCCESS ROUTE_COMPLETE
+[episode] lmf_edge_0-follow_only SUCCESS ROUTE_COMPLETE
+[episode] lmf_similar_negative_0-follow_only SUCCESS ROUTE_COMPLETE
+[episode] lmf_side_negative_0-follow_only SUCCESS ROUTE_COMPLETE
+[stage] write outputs
+DYNAMIC_EVAL_PASS {"follow_only": {"SUCCESS": 6, "COLLISION": 0, "TIMEOUT": 0, "OUT_OF_BOUNDS": 0, "ABORT": 0, "INVALID": 0}}

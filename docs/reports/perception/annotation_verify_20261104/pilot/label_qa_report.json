@@ -1,0 +1,150 @@
+{
+  "schema_version": "dsh.annotation_qa.v1",
+  "document_schema_version": "dsh.tower_annotation.v2",
+  "annotations": "outputs\\perception\\landmark_final_annotations_20261104\\labels_v1.json",
+  "annotations_sha256": "fe8d47d03e6de8740099822830621edd76f97cb14633a6cb3e44ef08c12c8942",
+  "root": ".",
+  "count": 34,
+  "errors": [],
+  "warnings": [],
+  "overlays": [
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+      "overlay_sha256": "1bbfb1cab6c0dde469c3d8eb1c266642d4f8bdfb0168e953544ab97938bff958"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_23.png",
+      "overlay_sha256": "e9675ba66f5154b87627f8446a309ff5c7925b697fdfdf3711afee393328446d"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_37.png",
+      "overlay_sha256": "e9fe7e675e376777aa2a2b12ff51552430b91f7319460f177dedff1ef76fa2fa"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_51.png",
+      "overlay_sha256": "8316b0543ab96ad5d578a954fc1ece42205d338caa1f0a650012443d8bdc7894"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_65.png",
+      "overlay_sha256": "a2ef02e10a2d9634b3541a4a8befd9bb5a3d31da64dc5753d1bfa53b7b65617e"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_79.png",
+      "overlay_sha256": "fb039c0c7b0fc66924eb187e237035377b71778baf0ad55e800281c81e8793e6"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_93.png",
+      "overlay_sha256": "d0744473024c1a514089979c28efd7049cac62f4ecdc16362da44c3bc8afc360"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_107.png",
+      "overlay_sha256": "d7bb24e6c132c15c48b7a110754b922b247e7088c87d231c3304a4759bd46bb5"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_3.png",
+      "overlay_sha256": "2c28ebc02faa4e196e01e9a142a4cff52d39e92e8fbeb66f0c09aa354ff4d926"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_22.png",
+      "overlay_sha256": "51cb75f224eb7e750398163a71ac4d24af560484f43d54d9d8cc6dd2c80387f8"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_34.png",
+      "overlay_sha256": "f092b1d6bac11a938e8ca0128c1b2178eb1c960aa2056c2edd61575f9bdbc98e"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_47.png",
+      "overlay_sha256": "dda3ba53d8700ad1b6048761d3962d8a663baa0cea0ca6440128ac246d8112b9"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+      "overlay_sha256": "ae1b0d5a806d172123728aeb78495a9931d89b3d06c4a36d795affcdfb7c2d32"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_67.png",
+      "overlay_sha256": "2247a1474f96df1b62261c0f305511cf7df084423f6b2c9aba754a1aa61fdbb3"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_5.png",
+      "overlay_sha256": "186dabe5a6714b4b59c04504b009966d360db61bb526923d064035d37a36fcdb"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_9.png",
+      "overlay_sha256": "6bbe68324359f5f688a522e1f0901f35f6f9d8ea76014ef8533f9ecca5931797"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_14.png",
+      "overlay_sha256": "d09a32b4e958116ddd522d96f60d075fd2d470c4007282ba29835daf188a9b0e"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_19.png",
+      "overlay_sha256": "c30784fe62cfcb9e29fdbcf1dc584ccdb5e597534ac99b2357ca8d95971370df"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_23.png",
+      "overlay_sha256": "981a53af9b5f82e91ea34b4798be925d3220a9957ec71ef7f0ef739bc9dd95fe"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_5.png",
+      "overlay_sha256": "d727d051dba629bd24b380d424ac3da37023e16937aa8069d5c7037e2cd7f533"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+      "overlay_sha256": "4ddb5406edaafc07a2e2ccc3ef889b862028668e92bb44ac8e64b235260c941f"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_14.png",
+      "overlay_sha256": "d29d1e4c8db8101bc26fce7327ef1c69c193502a617143701cae952dac3036ad"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_19.png",
+      "overlay_sha256": "0808d201bbca7fa5027c7937bc4e1a2ad93340fda910b3ddf4ebc187d02567e5"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_24.png",
+      "overlay_sha256": "a4864f6e28b4f94cda0e1798e1c1fd91b9b632743d088955972c3aa5d30427d2"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_29.png",
+      "overlay_sha256": "1c12152540193d0d15aa5294179df0b80e7fdd0d08c5a228c1d38d95de40c686"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+      "overlay_sha256": "f03c950691456c551d26bd26e36a8cf834d67dd93433c6abcab78e5c533c813f"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_12.png",
+      "overlay_sha256": "d89b274d95107fb61f0c4502811c304c84cbe9d2062b74a9a4a580f0e2a951e0"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_18.png",
+      "overlay_sha256": "c95aa2dcd5eb1ac4ab089d7f3e7a2192e328ad0dd3b32e96cde87193ee962147"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_25.png",
+      "overlay_sha256": "a4fc29407cf89a3d7f9749d643263d9fd428d30fac8f5c3d3cab907851c8fcda"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_31.png",
+      "overlay_sha256": "b044fa36e623414a07380ebc15472b7659531343b89456bead0b8f295a73a96d"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_37.png",
+      "overlay_sha256": "89f533ef5753f758b0609583de8fddf1138e0e210665a4e504eab4452cf82547"
+    },
+    {
+      "frame_id": "lmf_side_negative_0-follow_only_g6_3.png",
+      "overlay_sha256": "8306a0269e58f381c55079c5bff481d5b143b86e227bd42f3c3a6db24f68d234"
+    },
+    {
+      "frame_id": "lmf_side_negative_0-follow_only_g6_4.png",
+      "overlay_sha256": "990442700afc31b5189a8263e08ddca5ea9af1c58868b1bb0a8b3ef63c000735"
+    },
+    {
+      "frame_id": "lmf_side_negative_0-follow_only_g6_5.png",
+      "overlay_sha256": "e7eb1dc118bf96063812bdf5ecdb504a6c8c47f4049671bcc5fa7cca4eca0ea5"
+    }
+  ],
+  "status": "PASS",
+  "limits": "schema v1/v2 data QA only (coordinates, enums, combination rules); agent proxy annotations are not expert or human independent review; not a sealed test"
+}

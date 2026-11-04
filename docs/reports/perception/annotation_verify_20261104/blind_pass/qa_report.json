@@ -1,0 +1,98 @@
+{
+  "schema_version": "dsh.annotation_qa.v1",
+  "document_schema_version": "dsh.tower_annotation.v1",
+  "annotations": "docs\\reports\\perception\\annotation_verify_20261104\\blind_pass\\annotations_blind.json",
+  "annotations_sha256": "aeb322cd815ecc03517ec4b6d801d64a1685ef2ba2e53228e9d2a6f6f3e487d2",
+  "root": ".",
+  "count": 21,
+  "errors": [],
+  "warnings": [],
+  "overlays": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "overlay_sha256": "04ded9b0425cf66e3f554102a59484bb0f4ce1fd0ecb886cef5277c4697caa38"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "overlay_sha256": "9fbf4e089803b2697195c0cab07df60051ed4313b54bfea14820bc7132b50039"
+    },
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_188.png",
+      "overlay_sha256": "b9bc2ada5d322607a4ea7c13d7b88008cfdf268990fa2c459b58b32152536c2a"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "overlay_sha256": "63754edf6751cf082208f280bcaac40b073db5989c6e2f2367477c4337dd6ed7"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_4.png",
+      "overlay_sha256": "d95e09c2760cd81d1724352e79463d2f019e898d4c4017850ef2fedbb4d429f8"
+    },
+    {
+      "frame_id": "geo_test_static_a-follow_only_g2_5.png",
+      "overlay_sha256": "c5e86239348a02be5a0e9bd5275e83f1f5aecc69e00c20e5a5d752a6cd47a193"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_3.png",
+      "overlay_sha256": "ca0bd815748f497791dd155a0f24eaa79ccd3a6537ed08ae5b5d22f6f559cbc2"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "overlay_sha256": "a7f4e01c85b3364b5c6db8f5ea3f3c91710cfe2f0c42ef26fe46809d22960b70"
+    },
+    {
+      "frame_id": "geo_test_static_b-follow_only_g3_5.png",
+      "overlay_sha256": "b0bd13073c29af4277a6a80b26148ddbf53312f71f31f5ed3dae5a929e3a9e5d"
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_201.png",
+      "overlay_sha256": "e665563080b8aa6507bad280845cea7f5d76180d99d579d1a91c20f25d9fe4c3"
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_206.png",
+      "overlay_sha256": "9c16f821c26f0c25d75d8f06b200d40802ce3000b0e995ab633194ee47cbe8ed"
+    },
+    {
+      "frame_id": "test_reverse_south-follow_only_g2_212.png",
+      "overlay_sha256": "8d41f1f440f29199ecbccef2860ac247505456d479b82fbf82932b0ff7d9bab6"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_181.png",
+      "overlay_sha256": "0c3be60e6a7c9983138ecbffec5cae20211d7ee69cd127e0e973d50b56701eef"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_186.png",
+      "overlay_sha256": "bfe89245d66b77f46cdc0598e15ebcf4b9c0bd656090dbea25d3316a1a877ed3"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_192.png",
+      "overlay_sha256": "90e9a0158b15075df3cc5b5ab23828629615ce4b8d494a75cd429c27e46fbb51"
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_3.png",
+      "overlay_sha256": "c8a60b13151caf4477c8ff2bf8a2d25b0ab941d1181b9ac23c36154d70b348e9"
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_4.png",
+      "overlay_sha256": "eab5d7c63dcff122b36074d2c612b8d752ffb75cf5c29721227e2068b5db30a9"
+    },
+    {
+      "frame_id": "test_static_oblique-follow_only_g4_5.png",
+      "overlay_sha256": "af1c97a57763688c66b5987ef7ebfa33dd1806b18d1372732c6f284de301e1a8"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "overlay_sha256": "2e281830e77ce5b63a6bf59921572e7d7ec7c9e41c4fc959e479296b809954aa"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_4.png",
+      "overlay_sha256": "dab429672348bfae6abf2e272bfbf3eb269ed5005e4a6444dd740c3b9055468e"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_5.png",
+      "overlay_sha256": "1b30978bb43906bf1996b9e131b46087adf2d58d5f8da8603de20f6b35332b71"
+    }
+  ],
+  "status": "PASS",
+  "limits": "schema v1/v2 data QA only (coordinates, enums, combination rules); agent proxy annotations are not expert or human independent review; not a sealed test"
+}

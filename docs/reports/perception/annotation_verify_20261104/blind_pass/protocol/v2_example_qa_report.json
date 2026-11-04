@@ -1,0 +1,26 @@
+{
+  "schema_version": "dsh.annotation_qa.v1",
+  "document_schema_version": "dsh.tower_annotation.v2",
+  "annotations": "docs\\reports\\perception\\annotation_verify_20261104\\blind_pass\\protocol\\v2_example_annotations.json",
+  "annotations_sha256": "b7a8d2b4e118271d0b5bc38bd9ff2ffba1ef65ee112db3579e5225c272decbb7",
+  "root": ".",
+  "count": 3,
+  "errors": [],
+  "warnings": [],
+  "overlays": [
+    {
+      "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+      "overlay_sha256": "9fbf4e089803b2697195c0cab07df60051ed4313b54bfea14820bc7132b50039"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_181.png",
+      "overlay_sha256": "0c3be60e6a7c9983138ecbffec5cae20211d7ee69cd127e0e973d50b56701eef"
+    },
+    {
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "overlay_sha256": "d7b341af961d7d6730bc3ca7136a8f6c679c619bc1fd75e85e573e0a1d062f84"
+    }
+  ],
+  "status": "PASS",
+  "limits": "schema v1/v2 data QA only (coordinates, enums, combination rules); agent proxy annotations are not expert or human independent review; not a sealed test"
+}

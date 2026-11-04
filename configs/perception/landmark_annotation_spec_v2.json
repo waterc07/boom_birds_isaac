@@ -1,0 +1,285 @@
+{
+  "schema_version": "dsh.landmark_annotation_spec.v2",
+  "status": "PILOT_FROZEN_LEAD_APPROVED_2026-11-04_NOT_FINAL_PRODUCTION",
+  "supersedes": "configs/perception/landmark_annotation_spec_v1.json",
+  "v1_preserved_unchanged": true,
+  "created_at_local": "2026-11-04",
+  "document_schema": "dsh.tower_annotation.v2",
+  "target": "RMUC2027 central tower, current synthetic map asset",
+  "source_policy": {
+    "allowed_sources": [
+      "existing exposed development images",
+      "new frozen GUI acquisition batches"
+    ],
+    "detector_predictions_as_truth": false,
+    "projection_aid": "may be used only as a visual aid after checking visibility/occlusion; must be marked in geometry.reference_source and never treated as independent truth",
+    "split_label": "each frame carries group_id and exposure state; the split field must not claim sealed_test for already exposed data",
+    "independent_annotation": "preferred: >=2 human annotators with adjudication; a single agent proxy annotation is allowed only with annotator.annotator_type=AGENT_PROXY and review_status recording its limit"
+  },
+  "units_and_coordinates": {
+    "bbox": "xywh, source-image pixels, origin top-left, no normalization in source labels",
+    "keypoint": "source-image pixels (x, y) and boolean visible; not normalized",
+    "candidates": "source-image pixels, same convention as bbox/keypoint",
+    "model_export": "normalization happens only in the exporter; letterbox scale/pad must be recorded"
+  },
+  "bbox_scope": {
+    "rule": "axis-aligned box of the visible target object itself = head/top light-rack plus tapering body (and, if present and attached to the tower, its stepped base pedestal); clipping at image borders is mandatory",
+    "includes": [
+      "head and its two arms / top light rack",
+      "tapering tower body",
+      "attached stepped base pedestal that is visually part of the tower"
+    ],
+    "excludes": [
+      "ground / arena platform / stage surface",
+      "ground markings and painted lines",
+      "shadows and reflections",
+      "unrelated structures (walls, benches, robots, lamp posts)"
+    ],
+    "truncation": "for a truncated frame the bbox covers ONLY the part visible inside the image; clip at the border; never extrapolate an off-frame extent; set target.truncated=true",
+    "compatibility": "NOT compatible with the v1-era boxes that included the arena platform: measured median height difference 37 px (n=18, blind vs old). Do not mix these conventions in one training/evaluation label set.",
+    "evidence": "docs/reports/perception/annotation_verify_20261104/ANNOTATION_VERIFICATION_20261104.md sections 5 and 8"
+  },
+  "fields": {
+    "frame_id": "stable image basename",
+    "image": "relative path + sha256 + width + height",
+    "source": "{run, family, group_id, generation, sequence, split, origin_split_in_freeze}",
+    "source.group_id": "physical trajectory/reset/static near-identical frames share one group_id; required for grouped splitting",
+    "target.landmark_id": "proposed stable ID such as RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "target.class": "tower",
+    "target.present": "true/false; see presence states below",
+    "target.undecidable": "boolean; true only when presence itself cannot be settled; use instead of writing uncertainty into present=false",
+    "target.visibility": "FULL | PARTIAL | OCCLUDED | ABSENT | UNKNOWN (see visibility and truncation rules)",
+    "target.truncated": "boolean; any part of the target structure falls outside the image bounds",
+    "target.occluded": "boolean; target hidden by another object/structure (frame-edge cutting is NOT occlusion)",
+    "target.ambiguous": "boolean; target identity/multiple similar structures uncertain",
+    "target.ambiguous_reason": "MULTIPLE_SIMILAR_STRUCTURES | IDENTITY_UNRESOLVED | OTHER_LANDMARK_POSSIBLE | OCCLUSION_IDENTITY | NONE",
+    "target.undecidable_reason": "SIMILAR_STRUCTURE_CANDIDATE | IDENTITY_UNRESOLVED | OCCLUSION | IMAGE_QUALITY | ANNOTATOR_UNDECIDABLE; required when undecidable=true",
+    "geometry.bbox_xywh": "pixels, origin top-left; required for present targets except full OCCLUDED where the object is not directly visible",
+    "geometry.keypoint": "{name: green_roof_light_center, x, y, visible}; null when the reference point is not visible; never guess",
+    "geometry.reference_status": "MANUAL_APPROX | UNAVAILABLE | NOT_APPLICABLE (strict enum)",
+    "geometry.reference_unavailable_reason": "REFERENCE_OCCLUDED | REFERENCE_OUT_OF_FRAME | REFERENCE_TOO_SMALL | REFERENCE_NOT_PRESENT | ANNOTATOR_UNDECIDABLE; required when reference_status=UNAVAILABLE",
+    "geometry.reference_source": "MANUAL_VISUAL | COLOR_CUE_ASSISTED | PROJECTION_AID | TEMPLATE_ANCHOR | NOT_APPLICABLE; records how the reference point was obtained (independence disclosure)",
+    "candidates": "list of competing structures: {candidate_id, bbox_xywh|null, keypoint|null, green_cue|null, source: ANNOTATOR|COLOR_CUE, note}; required when ambiguous=true or negative_type in {SIMILAR_STRUCTURE, OTHER_LANDMARK}",
+    "negative_type": "TARGET_ABSENT | SIMILAR_STRUCTURE | OTHER_LANDMARK | NONE (strict enum); must be null when present=true or undecidable=true",
+    "annotator.annotator_type": "AGENT_PROXY | HUMAN",
+    "annotator.annotator_id": "stable identifier",
+    "annotator.independent_of_model_dev": "boolean; false when the annotator is also the model/algorithm developer for this task",
+    "annotator.independent_of_detector_cue": "boolean; false when the reference point comes from the same colour cue used by the detector",
+    "annotator.review_status": "UNREVIEWED | SELF_CHECKED | HUMAN_REVIEWED | ADJUDICATED",
+    "pixel_basis": "{image_width, image_height, fx_px, cx_px, cy_px, projection_model: PINHOLE, bearing_formula}; must match the image dimensions",
+    "notes": "free text; must explain ambiguous/undecidable judgements",
+    "target.full_occlusion_note": "present=true + visibility=OCCLUDED + no bbox is allowed; such a GT frame is labelled GT_UNOBSERVABLE for detection metrics"
+  },
+  "presence_states": [
+    {
+      "present": true,
+      "undecidable": false,
+      "meaning": "target confirmed present",
+      "geometry": "bbox required; keypoint per reference rules"
+    },
+    {
+      "present": false,
+      "undecidable": false,
+      "meaning": "target confirmed absent",
+      "geometry": "no bbox/keypoint; negative_type required; reference_status=NOT_APPLICABLE"
+    },
+    {
+      "present": false,
+      "undecidable": true,
+      "meaning": "presence cannot be decided (e.g. similar structure candidate)",
+      "geometry": "no bbox/keypoint; negative_type must be null; undecidable_reason required; visibility=UNKNOWN; reference_status=NOT_APPLICABLE; excluded from BOTH positive and negative denominators and reported separately as UNDECIDABLE"
+    }
+  ],
+  "visibility_and_truncation_rules": {
+    "definitions": {
+      "FULL": "whole target object visible, no frame-edge cut, no occlusion",
+      "PARTIAL": "target object visible but either frame-edge cut or partly hidden by another object",
+      "OCCLUDED": "target fully hidden behind another object; not directly visible",
+      "ABSENT": "target not in the scene (confirmed absent)",
+      "UNKNOWN": "visibility cannot be judged; only allowed together with undecidable=true"
+    },
+    "precedence": [
+      "1. full occlusion -> visibility=OCCLUDED, occluded=true, keypoint=null, reference_status=UNAVAILABLE, reference_unavailable_reason=REFERENCE_OCCLUDED",
+      "2. partial visibility caused by another object -> visibility=PARTIAL, occluded=true, truncated=false (unless also cut)",
+      "3. partial visibility caused by frame edge -> visibility=PARTIAL, truncated=true, occluded=false",
+      "4. frame edge cut AND in-scene occlusion -> visibility=PARTIAL, truncated=true, occluded=true; occlusion is the primary reason, both flags stay set",
+      "5. fully inside frame and fully visible -> visibility=FULL, truncated=false, occluded=false",
+      "6. absent -> visibility=ABSENT, truncated=false, occluded=false",
+      "frame-edge cutting is never described as occlusion, and truncation is never hidden inside visibility alone"
+    ],
+    "constraints": [
+      "truncated=true requires visibility=PARTIAL",
+      "visibility=FULL requires truncated=false and occluded=false",
+      "occluded=true requires visibility PARTIAL or OCCLUDED",
+      "visibility=PARTIAL requires truncated=true or occluded=true",
+      "visibility=OCCLUDED requires occluded=true and reference_status=UNAVAILABLE"
+    ]
+  },
+  "reference_rules": {
+    "point": "green roof-light centre (top light rack)",
+    "visible": "keypoint.visible=true, reference_status=MANUAL_APPROX, reference_source records the method",
+    "hidden": "keypoint=null, reference_status=UNAVAILABLE, reference_unavailable_reason required; do not guess",
+    "absent_or_undecidable": "reference_status=NOT_APPLICABLE, keypoint=null",
+    "circularity_guard": "if reference_source is COLOR_CUE_ASSISTED or TEMPLATE_ANCHOR and the same cue is used by the detector, the anchor error is NOT independent evidence; report annotator.independent_of_detector_cue=false and say so"
+  },
+  "ambiguity_rules": {
+    "set_ambiguous": "any unresolved target identity or multiple similar structures",
+    "candidates": "list every competing structure with bbox or green_cue and source; >=1 candidate when ambiguous=true; >=2 when ambiguous_reason=MULTIPLE_SIMILAR_STRUCTURES",
+    "keypoint": "never emit a guessed keypoint for an ambiguous frame",
+    "training": "ambiguous frames are excluded from identity-positive training by default; keep them as explicit difficult examples",
+    "downstream": "V2.2 section 7.6 requires multi-hypothesis retention; candidates[] is the transport for it"
+  },
+  "negative_rules": {
+    "SIMILAR_STRUCTURE": "confirmed target absent but a similar-looking structure exists; candidates must record it so a green-seeded detector FP can be counted against the label",
+    "OTHER_LANDMARK": "the visible structure is a different landmark; record it in candidates",
+    "TARGET_ABSENT": "confirmed absent with no competing structure to record",
+    "NONE": "only for internal consistency checks; not a usable negative label"
+  },
+  "annotator_provenance": {
+    "required": [
+      "annotator_type",
+      "annotator_id",
+      "independent_of_model_dev",
+      "independent_of_detector_cue",
+      "review_status"
+    ],
+    "disclosure": "AGENT_PROXY means an agent proxy annotation; it is not an expert or human independent review",
+    "preferred": "HUMAN with HUMAN_REVIEWED/ADJUDICATED; >=2 independent annotators plus adjudication for any precision claim"
+  },
+  "pixel_basis": {
+    "fields": [
+      "image_width",
+      "image_height",
+      "fx_px",
+      "cx_px",
+      "cy_px",
+      "projection_model",
+      "bearing_formula"
+    ],
+    "rule": "record the actual intrinsics and image size used for the annotation; do not reuse intrinsics across resolutions",
+    "bearing": "image bearing = atan2(x_px - cx_px, fx_px); it is an image angle, not a world bearing and not a distance",
+    "measured_scale": "for the current 320x240 front RGB, fx=160, cx=160, cy=120: 1 px ~= 0.3581 deg near the optical axis; the green light core is 4-9 px wide (area 10-49 px) at 320x240, i.e. about 8-18 px wide after 2x letterbox to 640"
+  },
+  "derived_model_format": {
+    "task": "one-class pose/detection (YOLOv8-pose candidate)",
+    "class_map": {
+      "0": "tower"
+    },
+    "keypoint_count": 1,
+    "keypoint_channels": [
+      "x",
+      "y",
+      "visibility"
+    ],
+    "visibility_values": [
+      0,
+      1
+    ],
+    "mapping_rules": [
+      "present + reference visible -> bbox + (kx, ky, v=1) after letterbox transform",
+      "present + reference invisible -> bbox + placeholder coordinate (bbox centre in model input) + v=0; the placeholder is never a reference estimate and v=0 frames are excluded from anchor/bearing/coverage denominators",
+      "present + visibility=OCCLUDED with no bbox -> no positive label (excluded; cannot train a box for an invisible object)",
+      "absent (present=false, undecidable=false) -> empty label file; the image must be listed explicitly in the dataset manifest (never silently dropped)",
+      "undecidable=true -> no positive label; excluded from both positive and negative denominators; reported separately",
+      "ambiguous=true -> no positive label by default; keep as explicit difficult example",
+      "truncated=true -> keep the box clipped at the image border; v per reference visibility; truncation itself must live in the sidecar",
+      "do not use v=2: this data cannot reliably distinguish visible/occluded/out-of-frame"
+    ],
+    "sidecar_required_fields": [
+      "frame_id",
+      "image_sha256",
+      "group_id",
+      "split",
+      "present",
+      "undecidable",
+      "visibility",
+      "truncated",
+      "occluded",
+      "ambiguous",
+      "ambiguous_reason",
+      "negative_type",
+      "reference_status",
+      "reference_unavailable_reason",
+      "reference_source",
+      "annotator_type",
+      "independent_of_model_dev",
+      "review_status"
+    ],
+    "sidecar_reason": "YOLO labels cannot carry truncation/occlusion/ambiguity/reference provenance; stratified reporting and FP attribution require the sidecar",
+    "exporter": "src/boom_birds/evaluation/landmark_annotations.py : yolo_pose_target() (tested in tests/evaluation/test_landmark_annotations.py)"
+  },
+  "quality_gate": {
+    "required_checks": [
+      "image sha/dim and pixel_basis consistency",
+      "bbox bounds and truncation clipping",
+      "keypoint bounds / inside box warning",
+      "absent/undecidable has no geometry",
+      "reference_status enum and unavailable-reason presence",
+      "visibility/truncated/occluded combination rules",
+      "ambiguous requires candidates; candidates bounds and source enum",
+      "annotator provenance present",
+      "source split not mislabelled as sealed_test",
+      "no duplicate frame_id",
+      "letterbox/hflip roundtrip"
+    ],
+    "tool": "scripts/validate_landmark_annotations.py (v1+v2 dispatch)",
+    "tests": "tests/evaluation/test_landmark_annotations.py",
+    "sample_status": "v2 example document validated in docs/reports/perception/annotation_verify_20261104/blind_pass/protocol/ (PASS); v2 is DRAFT and not yet used for a production label batch",
+    "denominator_rules": {
+      "detection_fourfold": "GT fully occluded (visibility=OCCLUDED, no bbox) or undecidable=true frames are excluded from TP/FP/FN/TN and counted separately as GT_UNOBSERVABLE",
+      "gt_unobservable_vs_model_unknown": "GT_UNOBSERVABLE is an annotation-side state; model-side UNKNOWN is a detector output. They must be reported as separate counts and never merged",
+      "presence_and_joint": "presence and joint reports must display the GT_UNOBSERVABLE count next to the fourfold",
+      "keypoint_anchor": "anchor/bearing denominators only include present frames with reference_status=MANUAL_APPROX (v=1 in export)",
+      "keypoint_coverage": "coverage denominator = present frames with reference_status=MANUAL_APPROX; frames with UNAVAILABLE reference are excluded and counted separately",
+      "absent_negative_denominator": "confirmed absent frames (negative_type in TARGET_ABSENT/SIMILAR_STRUCTURE/OTHER_LANDMARK) form the negative denominator; undecidable frames are not negatives",
+      "ambiguous": "ambiguous frames are excluded from identity-positive and from negative denominators by default; if kept, report separately"
+    }
+  },
+  "v1_to_v2_mapping": {
+    "G1 bbox scope": "bbox_scope (frozen definition + compatibility warning)",
+    "G2 visibility/truncated": "visibility_and_truncation_rules (precedence + constraints)",
+    "G3 reference unavailable reason": "geometry.reference_unavailable_reason enum",
+    "G4 present three-state": "target.present + target.undecidable + presence_states",
+    "G5 competing candidates": "candidates[] + target.ambiguous_reason; required for ambiguous and SIMILAR_STRUCTURE/OTHER_LANDMARK negatives",
+    "G6 negative_type enum": "strict NEGATIVE_TYPES_V2; undecidable must not carry negative_type",
+    "G7 reference_status enum": "strict enum + validator error (old free-text value now rejected)",
+    "G8 annotation provenance": "geometry.reference_source + annotator.* (type/independent fields/review status)",
+    "G9 truncation bbox rule": "bbox_scope.truncation (clip, never extrapolate)",
+    "G10 pixel basis": "pixel_basis block + measured_scale statement"
+  },
+  "open_items_for_lead_review": [
+    "resolved by lead on 2026-11-04; see lead_review.open_items_resolutions"
+  ],
+  "lead_review": {
+    "reviewed_by": "lead",
+    "reviewed_at_local": "2026-11-04",
+    "decision": "APPROVED_FOR_T6_PILOT",
+    "freeze_point": "the content of this file as reviewed is PILOT FROZEN for T6; it is NOT a final production frozen spec",
+    "record_note": "lead approval recorded here per lead instruction (2026-11-04); T6 feedback that requires changes must produce v2.1 with a diff note and must not rewrite this pilot record",
+    "open_items_resolutions": [
+      {
+        "item": "bbox_scope includes/excludes",
+        "decision": "APPROVED as written: head/light-rack + tapering body + attached stepped base pedestal are inside; arena platform/ground/painted lines/shadows/unrelated structures are outside; truncated frames clip to the visible part and never extrapolate"
+      },
+      {
+        "item": "full occlusion present=true with no bbox",
+        "decision": "APPROVED: reference UNAVAILABLE; such a GT frame is not used as a bbox positive. Added denominator rule: GT fully occluded or undecidable frames are excluded from the detection TP/FP/FN/TN fourfold and counted separately as GT_UNOBSERVABLE (distinct from model-side UNKNOWN); presence/joint reports must show that count"
+      },
+      {
+        "item": "review_status HUMAN_REVIEWED/ADJUDICATED",
+        "decision": "PROPOSED / pending user: no human annotator is available in this round. T6 pilot annotations may only use annotator_type=AGENT_PROXY with review_status=SELF_CHECKED and must never be written as HUMAN_REVIEWED or ADJUDICATED"
+      },
+      {
+        "item": "spec freeze timing",
+        "decision": "v2 with the reviewed content is PILOT FROZEN for T6 (sha256 recorded in the T6 pilot label file and report). Changes requested by pilot feedback produce v2.1 with an explicit diff note; this pilot record is not rewritten"
+      }
+    ]
+  },
+  "pilot_freeze": {
+    "status": "PILOT_FROZEN_FOR_T6",
+    "frozen_at_local": "2026-11-04",
+    "frozen_for": "T6 final-pool pilot annotation (24-36 frames)",
+    "sha256_record_note": "the sha256 of this file is recorded in outputs/perception/landmark_final_annotations_20261104/labels_v1.json and in FINAL_POOL_PILOT_ANNOTATION_20261104.md; it is not embedded here to avoid self-reference",
+    "not_final_production_freeze": true
+  }
+}

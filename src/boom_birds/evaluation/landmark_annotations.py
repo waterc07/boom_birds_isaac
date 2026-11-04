@@ -12,7 +12,25 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 ANNOTATION_VERSION = 'dsh.tower_annotation.v1'
+ANNOTATION_VERSION_V2 = 'dsh.tower_annotation.v2'
 BBOX_FORMAT = 'xywh_pixels_origin_top_left'
+
+VISIBILITY_VALUES = ('FULL', 'PARTIAL', 'OCCLUDED', 'ABSENT', 'UNKNOWN')
+REFERENCE_STATUS_VALUES = ('MANUAL_APPROX', 'UNAVAILABLE', 'NOT_APPLICABLE')
+REFERENCE_SOURCES = ('MANUAL_VISUAL', 'COLOR_CUE_ASSISTED', 'PROJECTION_AID',
+                     'TEMPLATE_ANCHOR', 'NOT_APPLICABLE')
+REFERENCE_UNAVAILABLE_REASONS = ('REFERENCE_OCCLUDED', 'REFERENCE_OUT_OF_FRAME',
+                                 'REFERENCE_TOO_SMALL', 'REFERENCE_NOT_PRESENT',
+                                 'ANNOTATOR_UNDECIDABLE')
+AMBIGUOUS_REASONS = ('MULTIPLE_SIMILAR_STRUCTURES', 'IDENTITY_UNRESOLVED',
+                     'OTHER_LANDMARK_POSSIBLE', 'OCCLUSION_IDENTITY', 'NONE')
+CANDIDATE_SOURCES = ('ANNOTATOR', 'COLOR_CUE')
+NEGATIVE_TYPES_V2 = ('TARGET_ABSENT', 'SIMILAR_STRUCTURE', 'OTHER_LANDMARK', 'NONE')
+UNDECIDABLE_REASONS = ('SIMILAR_STRUCTURE_CANDIDATE', 'IDENTITY_UNRESOLVED',
+                       'OCCLUSION', 'IMAGE_QUALITY', 'ANNOTATOR_UNDECIDABLE')
+ANNOTATOR_TYPES = ('AGENT_PROXY', 'HUMAN')
+REVIEW_STATUSES = ('UNREVIEWED', 'SELF_CHECKED', 'HUMAN_REVIEWED', 'ADJUDICATED')
+PIXEL_PROJECTION_MODELS = ('PINHOLE',)
 
 
 def _sha(path):
@@ -20,6 +38,16 @@ def _sha(path):
 
 
 def validate_document(document, root: Path):
+    """Validate a v1 or v2 annotation document; v1 documents stay supported."""
+    version = document.get('schema_version')
+    if version == ANNOTATION_VERSION_V2:
+        return _validate_v2(document, root)
+    if version == ANNOTATION_VERSION:
+        return _validate_v1(document, root)
+    return ['unsupported schema_version'], []
+
+
+def _validate_v1(document, root: Path):
     errors = []
     warnings = []
     if document.get('schema_version') != ANNOTATION_VERSION:
@@ -142,7 +170,19 @@ def roundtrip_letterbox(annotation, source_width, source_height,
 def render_annotation_overlay(annotation, image_path, out_path):
     image = Image.open(image_path).convert('RGB')
     draw = ImageDraw.Draw(image)
-    geometry = annotation['geometry']
+    geometry = annotation.get('geometry', {})
+    for candidate in annotation.get('candidates') or []:
+        bbox = candidate.get('bbox_xywh')
+        if bbox is not None:
+            cid = str(candidate.get('candidate_id', 'candidate'))
+            draw.rectangle([bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]],
+                           outline=(255, 128, 0), width=1)
+            draw.text((bbox[0] + 1, bbox[1] + 1), cid, fill=(255, 128, 0))
+        green_cue = candidate.get('green_cue')
+        if green_cue is not None:
+            draw.ellipse([green_cue['x'] - 2, green_cue['y'] - 2,
+                          green_cue['x'] + 2, green_cue['y'] + 2],
+                         outline=(0, 200, 255), width=1)
     if geometry.get('bbox_xywh') is not None:
         x, y, w, h = geometry['bbox_xywh']
         draw.rectangle([x, y, x + w, y + h], outline=(0, 255, 0), width=2)
@@ -154,3 +194,336 @@ def render_annotation_overlay(annotation, image_path, out_path):
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
     image.save(out_path)
     return out_path
+
+
+def _valid_bbox(bbox, width, height):
+    if not isinstance(bbox, list) or len(bbox) != 4:
+        return 'missing or malformed bbox_xywh'
+    x, y, w, h = [float(v) for v in bbox]
+    if w <= 0 or h <= 0:
+        return 'bbox non-positive size'
+    if not (0 <= x < width and 0 <= y < height
+            and x + w <= width + 1e-6 and y + h <= height + 1e-6):
+        return 'bbox out of bounds'
+    return None
+
+
+def _valid_point(point, width, height, what):
+    if not isinstance(point, dict):
+        return what + ' must be an object'
+    try:
+        x, y = float(point.get('x')), float(point.get('y'))
+    except (TypeError, ValueError):
+        return what + ' has non-numeric coordinates'
+    if not (0 <= x < width and 0 <= y < height):
+        return what + ' out of bounds'
+    return None
+
+
+def _validate_v2(document, root: Path):
+    """Strict validation for dsh.tower_annotation.v2 (see spec v2)."""
+    errors = []
+    warnings = []
+    root = Path(root)
+    seen = set()
+    for index, item in enumerate(document.get('annotations', [])):
+        prefix = 'annotations[%d]' % index
+        frame = item.get('frame_id')
+        if not frame:
+            errors.append(prefix + ': missing frame_id')
+            continue
+        if frame in seen:
+            errors.append(prefix + ': duplicate frame_id')
+        seen.add(frame)
+        image_path = root / item.get('image', '')
+        if not image_path.is_file():
+            errors.append(prefix + ': image missing')
+            continue
+        if item.get('image_sha256') != _sha(image_path):
+            errors.append(prefix + ': image sha mismatch')
+        with Image.open(image_path) as image:
+            width, height = image.size
+        if [width, height] != [item.get('image_width'), item.get('image_height')]:
+            errors.append(prefix + ': image dimensions mismatch')
+
+        source = item.get('source', {})
+        for field in ('run', 'family', 'group_id', 'split'):
+            if not source.get(field):
+                errors.append(prefix + ': source missing ' + field)
+        if source.get('split') == 'sealed_test':
+            errors.append(prefix + ': annotation sample must not claim sealed_test')
+
+        annotator = item.get('annotator', {})
+        if annotator.get('annotator_type') not in ANNOTATOR_TYPES:
+            errors.append(prefix + ': annotator_type must be one of ' +
+                          ', '.join(ANNOTATOR_TYPES))
+        if not annotator.get('annotator_id'):
+            errors.append(prefix + ': annotator missing annotator_id')
+        if not isinstance(annotator.get('independent_of_model_dev'), bool):
+            errors.append(prefix + ': annotator missing boolean independent_of_model_dev')
+        if annotator.get('review_status') not in REVIEW_STATUSES:
+            errors.append(prefix + ': annotator review_status must be one of ' +
+                          ', '.join(REVIEW_STATUSES))
+
+        pixel_basis = item.get('pixel_basis')
+        if not isinstance(pixel_basis, dict):
+            errors.append(prefix + ': pixel_basis missing')
+        else:
+            if [pixel_basis.get('image_width'), pixel_basis.get('image_height')] != [width, height]:
+                errors.append(prefix + ': pixel_basis image_width/image_height does not match image')
+            if pixel_basis.get('projection_model') not in PIXEL_PROJECTION_MODELS:
+                errors.append(prefix + ': pixel_basis projection_model must be one of ' +
+                              ', '.join(PIXEL_PROJECTION_MODELS))
+            for field in ('fx_px', 'cx_px', 'cy_px'):
+                value = pixel_basis.get(field)
+                if not isinstance(value, (int, float)) or float(value) <= 0:
+                    errors.append(prefix + ': pixel_basis ' + field + ' must be a positive number')
+            if not pixel_basis.get('bearing_formula'):
+                errors.append(prefix + ': pixel_basis bearing_formula missing')
+
+        target = item.get('target', {})
+        if target.get('class') != 'tower':
+            errors.append(prefix + ': unsupported target class')
+        if not target.get('landmark_id'):
+            errors.append(prefix + ': target missing landmark_id')
+        present = target.get('present')
+        undecidable = target.get('undecidable')
+        visibility = target.get('visibility')
+        if not isinstance(present, bool):
+            errors.append(prefix + ': target.present must be boolean')
+        if not isinstance(undecidable, bool):
+            errors.append(prefix + ': target.undecidable must be boolean')
+        if visibility not in VISIBILITY_VALUES:
+            errors.append(prefix + ': visibility must be one of ' + ', '.join(VISIBILITY_VALUES))
+        truncated = target.get('truncated')
+        occluded = target.get('occluded')
+        ambiguous = target.get('ambiguous')
+        for name, flag in (('truncated', truncated), ('occluded', occluded),
+                           ('ambiguous', ambiguous)):
+            if not isinstance(flag, bool):
+                errors.append(prefix + ': target.' + name + ' must be boolean')
+
+        geometry = item.get('geometry', {})
+        bbox = geometry.get('bbox_xywh')
+        keypoint = geometry.get('keypoint')
+        reference_status = geometry.get('reference_status')
+        unavailable_reason = geometry.get('reference_unavailable_reason')
+        reference_source = geometry.get('reference_source')
+        if reference_status not in REFERENCE_STATUS_VALUES:
+            errors.append(prefix + ': reference_status must be one of ' +
+                          ', '.join(REFERENCE_STATUS_VALUES))
+        if reference_source not in REFERENCE_SOURCES:
+            errors.append(prefix + ': reference_source must be one of ' +
+                          ', '.join(REFERENCE_SOURCES))
+        if bbox is not None:
+            problem = _valid_bbox(bbox, width, height)
+            if problem:
+                errors.append(prefix + ': ' + problem)
+        if keypoint is not None:
+            problem = _valid_point(keypoint, width, height, 'keypoint')
+            if problem:
+                errors.append(prefix + ': ' + problem)
+            elif bbox is not None:
+                kx, ky = float(keypoint['x']), float(keypoint['y'])
+                bx, by, bw, bh = [float(v) for v in bbox]
+                if not (bx - 2 <= kx <= bx + bw + 2 and by - 2 <= ky <= by + bh + 2):
+                    warnings.append(prefix + ': keypoint outside bbox (verify)')
+        negative_type = item.get('negative_type')
+        candidates = item.get('candidates', [])
+
+        if present is True and undecidable is True:
+            errors.append(prefix + ': present=true cannot be combined with undecidable=true '
+                          '(use present/undecidable states from spec v2)')
+        if present is False and undecidable is False:
+            if bbox is not None:
+                errors.append(prefix + ': absent target has bbox')
+            if keypoint is not None:
+                errors.append(prefix + ': absent target has keypoint')
+            if visibility != 'ABSENT':
+                errors.append(prefix + ': absent target visibility must be ABSENT')
+            if not negative_type:
+                errors.append(prefix + ': absent target lacks negative_type')
+            elif negative_type not in NEGATIVE_TYPES_V2:
+                errors.append(prefix + ': negative_type must be one of ' +
+                              ', '.join(NEGATIVE_TYPES_V2))
+            if negative_type in ('SIMILAR_STRUCTURE', 'OTHER_LANDMARK') and not candidates:
+                errors.append(prefix + ': negative_type=' + negative_type +
+                              ' requires candidates (record the competing structure)')
+            if reference_status != 'NOT_APPLICABLE':
+                errors.append(prefix + ': absent target reference_status must be NOT_APPLICABLE')
+        elif present is False and undecidable is True:
+            if bbox is not None or keypoint is not None:
+                errors.append(prefix + ': undecidable target must not carry bbox/keypoint')
+            if negative_type is not None:
+                errors.append(prefix + ': undecidable target must not carry negative_type '
+                              '(never write uncertainty as absence)')
+            if visibility != 'UNKNOWN':
+                errors.append(prefix + ': undecidable target visibility must be UNKNOWN')
+            if target.get('undecidable_reason') not in UNDECIDABLE_REASONS:
+                errors.append(prefix + ': undecidable target needs undecidable_reason in ' +
+                              ', '.join(UNDECIDABLE_REASONS))
+            if reference_status != 'NOT_APPLICABLE':
+                errors.append(prefix + ': undecidable target reference_status must be NOT_APPLICABLE')
+        elif present is True and undecidable is False:
+            if negative_type is not None:
+                errors.append(prefix + ': positive has negative_type')
+            if visibility == 'ABSENT':
+                errors.append(prefix + ': present target cannot be ABSENT')
+            if reference_status == 'MANUAL_APPROX':
+                if keypoint is None:
+                    errors.append(prefix + ': MANUAL_APPROX requires a keypoint')
+                elif keypoint.get('visible') is not True:
+                    errors.append(prefix + ': MANUAL_APPROX keypoint must be visible=true')
+                if unavailable_reason is not None:
+                    errors.append(prefix + ': MANUAL_APPROX must not carry reference_unavailable_reason')
+            elif reference_status == 'UNAVAILABLE':
+                if keypoint is not None:
+                    errors.append(prefix + ': UNAVAILABLE requires keypoint=null')
+                if unavailable_reason not in REFERENCE_UNAVAILABLE_REASONS:
+                    errors.append(prefix + ': reference_unavailable_reason must be one of ' +
+                                  ', '.join(REFERENCE_UNAVAILABLE_REASONS))
+            elif reference_status == 'NOT_APPLICABLE':
+                errors.append(prefix + ': present target cannot use NOT_APPLICABLE reference_status')
+            if visibility == 'OCCLUDED':
+                if occluded is not True:
+                    errors.append(prefix + ': visibility OCCLUDED requires occluded=true')
+                if reference_status != 'UNAVAILABLE':
+                    errors.append(prefix + ': visibility OCCLUDED requires UNAVAILABLE reference_status')
+            else:
+                if bbox is None:
+                    errors.append(prefix + ': present target missing bbox')
+            if visibility == 'FULL' and truncated is True:
+                errors.append(prefix + ': truncated=true requires visibility PARTIAL')
+            if visibility == 'FULL' and occluded is True:
+                errors.append(prefix + ': occluded=true requires visibility PARTIAL or OCCLUDED')
+            if visibility == 'PARTIAL' and not (truncated or occluded):
+                errors.append(prefix + ': visibility PARTIAL requires truncated=true or occluded=true')
+            if truncated is True and visibility != 'PARTIAL':
+                errors.append(prefix + ': truncated=true requires visibility PARTIAL')
+            if occluded is True and visibility not in ('PARTIAL', 'OCCLUDED'):
+                errors.append(prefix + ': occluded=true requires visibility PARTIAL or OCCLUDED')
+
+        ambiguous_reason = target.get('ambiguous_reason')
+        if not isinstance(candidates, list):
+            errors.append(prefix + ': candidates must be a list')
+            candidates = []
+        for cindex, candidate in enumerate(candidates):
+            cprefix = prefix + ': candidates[%d]' % cindex
+            if not isinstance(candidate, dict):
+                errors.append(cprefix + ': candidate must be an object')
+                continue
+            if not candidate.get('candidate_id'):
+                errors.append(cprefix + ': candidate missing candidate_id')
+            if candidate.get('source') not in CANDIDATE_SOURCES:
+                errors.append(cprefix + ': candidate source must be one of ' +
+                              ', '.join(CANDIDATE_SOURCES))
+            if candidate.get('bbox_xywh') is not None:
+                problem = _valid_bbox(candidate['bbox_xywh'], width, height)
+                if problem:
+                    errors.append(cprefix + ': ' + problem)
+            elif candidate.get('green_cue') is None:
+                errors.append(cprefix + ': candidate needs bbox_xywh or green_cue')
+            if candidate.get('green_cue') is not None:
+                problem = _valid_point(candidate['green_cue'], width, height,
+                                       'candidate green_cue')
+                if problem:
+                    errors.append(cprefix + ': ' + problem)
+            if candidate.get('keypoint') is not None:
+                problem = _valid_point(candidate['keypoint'], width, height,
+                                       'candidate keypoint')
+                if problem:
+                    errors.append(cprefix + ': ' + problem)
+        if ambiguous is True:
+            if ambiguous_reason not in AMBIGUOUS_REASONS or ambiguous_reason == 'NONE':
+                errors.append(prefix + ': ambiguous=true requires ambiguous_reason in ' +
+                              ', '.join(AMBIGUOUS_REASONS))
+            if not candidates:
+                errors.append(prefix + ': ambiguous=true requires non-empty candidates list')
+        else:
+            if ambiguous_reason not in (None, 'NONE'):
+                errors.append(prefix + ': ambiguous_reason must be null/NONE when ambiguous=false')
+            if candidates and negative_type not in ('SIMILAR_STRUCTURE', 'OTHER_LANDMARK'):
+                errors.append(prefix + ': candidates are only allowed for ambiguous frames '
+                              'or SIMILAR_STRUCTURE/OTHER_LANDMARK negatives')
+
+    return errors, warnings
+
+
+def yolo_pose_target(annotation, model_width=640, model_height=640):
+    """Map one v2 annotation to a YOLO 1-keypoint (pose) target.
+
+    Returns (target, sidecar, exclusion_reason).  target is None when no
+    positive label may be written (absent/ambiguous/undecidable), with
+    exclusion_reason saying why.  When the reference point is unavailable the
+    keypoint is written with visibility=0 and a placeholder coordinate (the
+    bbox centre in model input space); v=0 targets must be excluded from
+    anchor/coverage denominators and never used as keypoint regression targets.
+    """
+    target = annotation.get('target', {})
+    geometry = annotation.get('geometry', {})
+    source = annotation.get('source', {})
+    annotator = annotation.get('annotator', {})
+    sidecar = {
+        'frame_id': annotation.get('frame_id'),
+        'image': annotation.get('image'),
+        'image_sha256': annotation.get('image_sha256'),
+        'run': source.get('run'),
+        'family': source.get('family'),
+        'group_id': source.get('group_id'),
+        'split': source.get('split'),
+        'present': target.get('present'),
+        'undecidable': target.get('undecidable'),
+        'visibility': target.get('visibility'),
+        'truncated': target.get('truncated'),
+        'occluded': target.get('occluded'),
+        'ambiguous': target.get('ambiguous'),
+        'ambiguous_reason': target.get('ambiguous_reason'),
+        'negative_type': annotation.get('negative_type'),
+        'reference_status': geometry.get('reference_status'),
+        'reference_unavailable_reason': geometry.get('reference_unavailable_reason'),
+        'reference_source': geometry.get('reference_source'),
+        'annotator_type': annotator.get('annotator_type'),
+        'independent_of_model_dev': annotator.get('independent_of_model_dev'),
+        'review_status': annotator.get('review_status'),
+        'included_in_training': False,
+        'exclusion_reason': None,
+    }
+    if target.get('undecidable') is True:
+        sidecar['exclusion_reason'] = 'UNDECIDABLE'
+        return None, sidecar, 'UNDECIDABLE'
+    if target.get('ambiguous') is True:
+        sidecar['exclusion_reason'] = 'AMBIGUOUS'
+        return None, sidecar, 'AMBIGUOUS'
+    if target.get('present') is not True:
+        sidecar['exclusion_reason'] = annotation.get('negative_type') or 'TARGET_ABSENT'
+        return None, sidecar, sidecar['exclusion_reason']
+    bbox = geometry.get('bbox_xywh')
+    if bbox is None:
+        sidecar['exclusion_reason'] = 'NO_BBOX'
+        return None, sidecar, 'NO_BBOX'
+    width = float(annotation['image_width'])
+    height = float(annotation['image_height'])
+    transformed = letterbox_annotation(annotation, width, height, model_width, model_height)
+    x, y, w, h = transformed['bbox_xywh']
+    cx, cy = x + w / 2.0, y + h / 2.0
+    bbox_norm = [cx / model_width, cy / model_height, w / model_width, h / model_height]
+    keypoint = geometry.get('keypoint')
+    reference_visible = (keypoint is not None
+                         and keypoint.get('visible') is True
+                         and geometry.get('reference_status') == 'MANUAL_APPROX')
+    if reference_visible:
+        kx, ky = transformed['keypoint']
+        visibility = 1
+    else:
+        kx, ky = cx, cy  # placeholder only; never a reference estimate
+        visibility = 0
+    sidecar['included_in_training'] = True
+    return {
+        'class_id': 0,
+        'bbox_norm': [round(v, 6) for v in bbox_norm],
+        'keypoint_norm': [round(kx / model_width, 6), round(ky / model_height, 6)],
+        'keypoint_visibility': visibility,
+        'letterbox': {'scale': transformed['scale'],
+                      'pad_x': transformed['pad_x'],
+                      'pad_y': transformed['pad_y']},
+    }, sidecar, None

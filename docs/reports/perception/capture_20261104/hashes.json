@@ -1,0 +1,190 @@
+{
+ "copied": [
+  {
+   "source": "configs/scenarios/landmark_final_cases_v1.json",
+   "target": "docs/reports/perception/capture_20261104/landmark_final_cases_v1.json",
+   "sha256": "43645338b71c5e446f875dc3d19874978ce67d82de7a72fff99cb735177b2aaa",
+   "bytes": 15257
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/manifest.json",
+   "target": "docs/reports/perception/capture_20261104/run_manifest.json",
+   "sha256": "266eaa10b2944c06b6c17cc85f413dd2ce20c1c996fce4f375d3a761567eb468",
+   "bytes": 22400
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/summary.json",
+   "target": "docs/reports/perception/capture_20261104/run_summary.json",
+   "sha256": "e2935798728e805be0f10abd8c92eea97bfbd4ddd5fb6cc1a70a99f4b077f9c2",
+   "bytes": 74067
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/run.complete.json",
+   "target": "docs/reports/perception/capture_20261104/run_complete.json",
+   "sha256": "baa7e89c6cff74774153503856e815dfb80d53f9d8c7cd98a2a5061f8b75cb80",
+   "bytes": 194
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/episodes.jsonl",
+   "target": "docs/reports/perception/capture_20261104/episodes.jsonl",
+   "sha256": "0eb79fc6eb6156f895491c38a2442d38fa40eac369e0e4a8994e89ac96446be5",
+   "bytes": 46222
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/summary.json",
+   "target": "docs/reports/perception/capture_20261104/sensor_summary.json",
+   "sha256": "2a74d90fe18df4eeea139ed46c61bc1b1f7f719aabe060cfd868b8278364c88a",
+   "bytes": 35063
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_smoke_20261104/manifest.json",
+   "target": "docs/reports/perception/capture_20261104/smoke_run_manifest.json",
+   "sha256": "3bb6d7dcc84f8946d25bf55f15a3e5eefe1ab899115c51854ce32b358b505a78",
+   "bytes": 13331
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_smoke_20261104/summary.json",
+   "target": "docs/reports/perception/capture_20261104/smoke_run_summary.json",
+   "sha256": "89c4f8a0c197494bfffc7549bb5f87a4e37465da7fb4a8d78736084bfe58088d",
+   "bytes": 23806
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_smoke_20261104/run.complete.json",
+   "target": "docs/reports/perception/capture_20261104/smoke_run_complete.json",
+   "sha256": "7cb1eb76a027da04b87d5629a168ca8167c6a5246596e673d55ac6dd8db3ac36",
+   "bytes": 194
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/window_check/desktop_full_run_w1456.png",
+   "target": "docs/reports/perception/capture_20261104/gui_window_full_run_20261104.png",
+   "sha256": "7a64e8f8928896f123331b6ea36517382637bb517c7383a7174e9b5096ca0e2d",
+   "bytes": 323517
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/window_check/desktop_smoke_run_1815_w1456.png",
+   "target": "docs/reports/perception/capture_20261104/gui_window_smoke_run_20261104.png",
+   "sha256": "1c2bc3ee24c2c2d169f1013250ec6a080216a01fd4b63129de6796e54c12e799",
+   "bytes": 446822
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/window_check/desktop_smoke_1813_w1456.png",
+   "target": "docs/reports/perception/capture_20261104/gui_window_smoke_startup_20261104.png",
+   "sha256": "6bf2badf4e5a29291ad4ce61eeeca28f14d1e2d317b83d53dca539b281483aba",
+   "bytes": 161306
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/desktop_full_run.png",
+   "target": "docs/reports/perception/capture_20261104/desktop_full_run_1280x720.png",
+   "sha256": "9118577ee4b75a0e2a98d9ff82776c4129d12da13ff9d50d0f0f9145ccfd8939",
+   "bytes": 544946
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_sweep_0-follow_only_g1_3.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_sweep_0-follow_only_g1_3.png",
+   "sha256": "aaf7ac446cbf77e50b6d0112f2acfca7bd7a0bc63d5edcdca858e43bbf23f4ad",
+   "bytes": 32467
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_sweep_0-follow_only_g1_60.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_sweep_0-follow_only_g1_60.png",
+   "sha256": "2c74a762b886f9363df19ecf1b80daa0f2a3f3e7fb860316d1f88c627a176775",
+   "bytes": 30262
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_sweep_0-follow_only_g1_113.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_sweep_0-follow_only_g1_113.png",
+   "sha256": "b35ae0682476d3f6305f6f4c740c019b20513660a3ea2c96d19245cab7b34b9b",
+   "bytes": 27737
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_backoff_0-follow_only_g2_3.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_backoff_0-follow_only_g2_3.png",
+   "sha256": "e16a490bfc5e8fa0b7a18f9d8153e17252362d53e2ed66ca176d0d324d865b98",
+   "bytes": 30612
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_backoff_0-follow_only_g2_40.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_backoff_0-follow_only_g2_40.png",
+   "sha256": "e6660de92bda7dd0793304d3002838a87ac43d9e69bc822ba8528374f1cd3e97",
+   "bytes": 27154
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_backoff_0-follow_only_g2_78.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_backoff_0-follow_only_g2_78.png",
+   "sha256": "aa2ce7df87d3dfde649194024dc5903110cce73a0f9b8536c6350c11e047257f",
+   "bytes": 29050
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_near_0-follow_only_g3_3.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_near_0-follow_only_g3_3.png",
+   "sha256": "242e78f3031ba56203194b8c82b6fcd528561dfeccf757455785950e31eab497",
+   "bytes": 38027
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_near_0-follow_only_g3_18.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_near_0-follow_only_g3_18.png",
+   "sha256": "638c3d3e89d8254d7aef67fa7ad2e0fe61fe3a945d4fe9b55734f9f455cf0d14",
+   "bytes": 33154
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_edge_0-follow_only_g4_22.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_edge_0-follow_only_g4_22.png",
+   "sha256": "8546a201b1c3c91592ec8b21079b02fb246e195d025bb824d2b637c2d83e4ff7",
+   "bytes": 26227
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_edge_0-follow_only_g4_30.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_edge_0-follow_only_g4_30.png",
+   "sha256": "6ab39929afb5042773565728d5e28df7e2922ce6194f2fca8ee833435429972e",
+   "bytes": 30413
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_similar_negative_0-follow_only_g5_10.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_similar_negative_0-follow_only_g5_10.png",
+   "sha256": "d00f2b0f01d6c55c80c12ee34c26054d9cdfaf0df211342317ef29e3c3d61c8a",
+   "bytes": 33200
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_similar_negative_0-follow_only_g5_30.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_similar_negative_0-follow_only_g5_30.png",
+   "sha256": "c9d0bbdc1a8a9873f99d52d7830f813e27b8bec423b8fe1d19444b39a737f805",
+   "bytes": 30048
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_side_negative_0-follow_only_g6_4.png",
+   "target": "docs/reports/perception/capture_20261104/samples/lmf_side_negative_0-follow_only_g6_4.png",
+   "sha256": "3af2668448e93b95804819f04f956439bae11f0d67458cadc679070c96d05c8a",
+   "bytes": 23597
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/frame_conditions.json",
+   "target": "docs/reports/perception/capture_20261104/frame_conditions.json",
+   "sha256": "dff34a09ee261cbfd010a9191cf0c61c08ec81faa28fa08a9ac8b526dc2eeff5",
+   "bytes": 225089
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/episode_condition_summary.json",
+   "target": "docs/reports/perception/capture_20261104/episode_condition_summary.json",
+   "sha256": "281ae4cf9441c4dcbaeb95e999f13d291f461a054207ee0daf1b7e2ba555f190",
+   "bytes": 2078
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/duplicate_hash_check.json",
+   "target": "docs/reports/perception/capture_20261104/duplicate_hash_check.json",
+   "sha256": "b2650d0bdfe99b9ce46fa720e1c6ac3228f27bbf97ce29a5ba11837666146682",
+   "bytes": 146
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/_evidence/overlap_check.json",
+   "target": "docs/reports/perception/capture_20261104/overlap_check.json",
+   "sha256": "d90847ac892f0150283a5ee2d74a00fe3130c2ed11ef7d9fd751b8f4f0c39655",
+   "bytes": 3619
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_final_candidate_20261104/gui.log (excerpt)",
+   "target": "docs/reports/perception/capture_20261104/gui_log_excerpt.txt",
+   "sha256": "f31b2ef04ba4db40c30b00acb3b00dfff9054a36b7370f7ac9b32ce6d4ef4b86",
+   "bytes": 1426
+  }
+ ]
+}

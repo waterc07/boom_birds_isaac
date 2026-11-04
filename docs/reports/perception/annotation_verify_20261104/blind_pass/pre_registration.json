@@ -1,0 +1,27 @@
+{
+  "schema_version": "dsh.annotation_verification_prereg.v1",
+  "written_before_opening_old_label_geometry": true,
+  "written_at_local": "2026-11-04T18:15+08:00",
+  "blind_annotations": "docs/reports/perception/annotation_verify_20261104/blind_pass/annotations_blind.json",
+  "blind_sha256": "aeb322cd815ecc03517ec4b6d801d64a1685ef2ba2e53228e9d2a6f6f3e487d2",
+  "classification_rules": {
+    "consistent": "bbox IoU >= 0.70 AND keypoint px diff <= 2.0 (<=0.72 deg) AND present/visibility/reference_status semantics match",
+    "acceptable_deviation": "(0.30 <= IoU < 0.70) OR (2.0 < keypoint diff <= 4.0 px, i.e. 0.72-1.43 deg), with semantics matching",
+    "substantive_disagreement": "IoU < 0.30 OR keypoint diff > 4.0 px OR any semantic mismatch in present/visibility/reference_status/negative_type",
+    "undeterminable": "reference point unavailable on either side (no keypoint comparison possible) OR target identity flagged ambiguous OR one side has no bbox on a present target"
+  },
+  "threshold_justification": {
+    "iou_0.70": "two independent annotators of the same object normally exceed 0.7 when the bbox extent convention agrees; lower IoU indicates extent-convention or boundary disagreement",
+    "iou_0.30": "the proposed downstream bbox-assist threshold (configs/perception/geometry_test_freeze_v2.json / labels v2 iou_threshold_proposed), below which the box is not usable as the same object",
+    "keypoint_2px": "0.5x the 4-8 px green-light core width, i.e. a plausible independent-annotator centre difference",
+    "keypoint_4px": ">=1x green-light core width and ~1.4 deg; beyond a defensible manual centre difference; note this is still below the proposed 5 deg bearing gate (=~14 px), so it matters for annotation consistency, not necessarily for downstream bearing acceptance"
+  },
+  "bearing_model": {
+    "fx_px": 160,
+    "cx_px": 160,
+    "width": 320,
+    "height": 240
+  },
+  "sensitivity_check": "a pure colour-cue centroid (mask: g>=90, g-r>=25, g-b>=25, 4-connectivity, >=2 px) is computed for every present frame as an independent reference-point estimator; old labels are reported against BOTH the visual blind pick and the colour-cue centroid",
+  "note": "these thresholds are PROPOSED for this verification only; they are not competition metrics and not a frozen acceptance gate"
+}

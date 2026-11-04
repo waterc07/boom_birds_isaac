@@ -1,0 +1,217 @@
+{
+ "schema_version": "dsh.tower_annotation.v2",
+ "status": "V2_VALIDATOR_EXAMPLE_REAL_FRAMES_NOT_PRODUCTION_NOT_SEALED",
+ "note": "3 exposed frames re-expressed in schema v2 to exercise the validator: FULL+visible reference, PARTIAL/truncated+unavailable reference, ABSENT+similar structure candidate. Not a production label batch.",
+ "annotations": [
+  {
+   "frame_id": "geo_test_north_0-follow_only_g1_182.png",
+   "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_north_0-follow_only_g1_182.png",
+   "image_sha256": "a4bfe0dba005384860434a613518f8ad721a829f067a32965fdbc81dd0d10589",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "sensor_shadow",
+    "family": "geo_north_test",
+    "group_id": "geo_north_test_g1182",
+    "split": "exposed_development",
+    "origin_split_in_freeze": "sealed_test",
+    "generation": 1182,
+    "sequence": 182
+   },
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     158,
+     52,
+     159,
+     163
+    ],
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 229.0,
+     "y": 59.5,
+     "visible": true
+    },
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "MANUAL_VISUAL"
+   },
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "full tower visible; reference point visually picked from 16x zoom"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "full tower visible; reference point visually picked from 16x zoom"
+  },
+  {
+   "frame_id": "test_north_0-follow_only_g3_181.png",
+   "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_181.png",
+   "image_sha256": "0df2454b9fb39252044cd0e0c59a3f55025f28c49b510ebb401e62228efcca04",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "sensor_shadow",
+    "family": "north",
+    "group_id": "north_g3181",
+    "split": "exposed_development",
+    "origin_split_in_freeze": "sealed_test",
+    "generation": 3181,
+    "sequence": 181
+   },
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "PARTIAL",
+    "truncated": true,
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     247,
+     60,
+     73,
+     140
+    ],
+    "keypoint": null,
+    "reference_status": "UNAVAILABLE",
+    "reference_unavailable_reason": "REFERENCE_OUT_OF_FRAME",
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "target present at right edge; head partly out of frame; green roof light not visible; no keypoint guessed"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "target present at right edge; head partly out of frame; green roof light not visible; no keypoint guessed"
+  },
+  {
+   "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+   "image": "outputs/sensor_shadow/geo_test_sensor/images/geo_test_static_c-follow_only_g4_3.png",
+   "image_sha256": "06300eca28495fd669b2023e9be88b1f0e26a47ce4052da3431c2ecc6475d800",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "sensor_shadow",
+    "family": "geo_static_c",
+    "group_id": "geo_static_c_g43",
+    "split": "exposed_development",
+    "origin_split_in_freeze": "sealed_test",
+    "generation": 43,
+    "sequence": 3
+   },
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": false,
+    "visibility": "ABSENT",
+    "truncated": false,
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "keypoint": null,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "candidates": [
+    {
+     "candidate_id": "c_green_tip_pillar",
+     "bbox_xywh": [
+      121,
+      108,
+      9,
+      29
+     ],
+     "keypoint": null,
+     "green_cue": {
+      "x": 123,
+      "y": 110
+     },
+     "source": "ANNOTATOR",
+     "note": "distant tapered structure with dim green tip; identity unresolved"
+    },
+    {
+     "candidate_id": "c_dark_pillar",
+     "bbox_xywh": [
+      288,
+      99,
+      24,
+      42
+     ],
+     "keypoint": null,
+     "green_cue": null,
+     "source": "ANNOTATOR",
+     "note": "dark gray column; not the central tower"
+    }
+   ],
+   "negative_type": "SIMILAR_STRUCTURE",
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "target-absent pose (yaw=pi); competing structures recorded so a green-seeded FP can be counted"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "target-absent pose (yaw=pi); competing structures recorded so a green-seeded FP can be counted"
+  }
+ ]
+}

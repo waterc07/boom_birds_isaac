@@ -1,0 +1,59 @@
+{
+  "schema_version": "dsh.landmark_final_pilot_manifest.v1",
+  "status": "T6_PILOT_LABELS_PRODUCED_NOT_FULL_TEST_LABELS",
+  "generated_at_local": "2026-11-04T18:32:57+0800",
+  "seal": {
+    "path": "configs/perception/landmark_final_pool_seal_v1.json",
+    "freeze_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+    "freeze_id": "landmark_final_pool_seal_v1"
+  },
+  "annotation_spec": {
+    "path": "configs/perception/landmark_annotation_spec_v2.json",
+    "sha256": "b0b7dae6300086fbcdc6bdf08033f8abd47381695e3d12a900f313a93372f749",
+    "status": "PILOT_FROZEN_LEAD_APPROVED_2026-11-04"
+  },
+  "selection": {
+    "path": "docs/reports/perception/annotation_verify_20261104/pilot/selection.json",
+    "rule_id": "pilot_midpoint_systematic_v1",
+    "total_frames": 34,
+    "counts": {
+      "lmf_sweep": 8,
+      "lmf_backoff": 6,
+      "lmf_near": 5,
+      "lmf_edge": 6,
+      "lmf_similar_negative": 6,
+      "lmf_side_negative": 3
+    }
+  },
+  "label_file": {
+    "path": "outputs/perception/landmark_final_annotations_20261104/labels_v1.json",
+    "sha256": "fe8d47d03e6de8740099822830621edd76f97cb14633a6cb3e44ef08c12c8942",
+    "gitignored": true,
+    "in_git": false
+  },
+  "counts": {
+    "frames": 34,
+    "by_family": {
+      "lmf_sweep": 8,
+      "lmf_backoff": 6,
+      "lmf_near": 5,
+      "lmf_edge": 6,
+      "lmf_similar_negative": 6,
+      "lmf_side_negative": 3
+    },
+    "present": 25,
+    "absent": 9,
+    "reference_available": 21,
+    "reference_unavailable": 4,
+    "undecidable": 0,
+    "ambiguous": 0,
+    "truncated": 10,
+    "occluded": 0,
+    "negative_type": {
+      "TARGET_ABSENT": 9,
+      "SIMILAR_STRUCTURE": 0,
+      "OTHER_LANDMARK": 0
+    }
+  },
+  "boundary": "pilot only; same agent annotates and may later develop the model -> process isolation + hash commitment, no statistical independence; labels not in git"
+}

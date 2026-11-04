@@ -1,0 +1,560 @@
+{
+  "schema_version": "dsh.landmark_final_pilot_selection.v1",
+  "seal": {
+    "path": "configs/perception/landmark_final_pool_seal_v1.json",
+    "freeze_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+    "freeze_id": "landmark_final_pool_seal_v1",
+    "status": "SEALED_TEST_POOL_FROZEN_LABELS_PENDING"
+  },
+  "condition_source": "docs/reports/perception/capture_20261104/frame_conditions.json",
+  "spec_v2": "configs/perception/landmark_annotation_spec_v2.json",
+  "rule": {
+    "rule_id": "pilot_midpoint_systematic_v1",
+    "text": "R1 accepted frames from seal, sorted by integer sequence; R2 midpoint systematic sampling idx=floor((i+0.5)*n/k); R3 backoff force-include max/min distance frames; R4 edge force-include one truncated=false frame; R5 side_negative=all 3. No model/detector score used; capture-derived pose/distance/truncation metadata only.",
+    "k_per_family": {
+      "lmf_sweep": 8,
+      "lmf_backoff": 6,
+      "lmf_near": 5,
+      "lmf_edge": 6,
+      "lmf_similar_negative": 6,
+      "lmf_side_negative": 3
+    },
+    "frozen_before_image_inspection": true
+  },
+  "counts": {
+    "lmf_sweep": 8,
+    "lmf_backoff": 6,
+    "lmf_near": 5,
+    "lmf_edge": 6,
+    "lmf_similar_negative": 6,
+    "lmf_side_negative": 3
+  },
+  "total_frames": 34,
+  "family_notes": {
+    "lmf_backoff": "forced max-distance and min-distance frames",
+    "lmf_edge": "forced one truncated=false frame to cover the boundary",
+    "lmf_side_negative": "all accepted frames (3)"
+  },
+  "frames": [
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 9,
+      "distance_to_tower_m": 3.739,
+      "bearing_relative_deg": 20.22,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 8,
+      "green_centroid_uv": [
+        99.9,
+        109.9
+      ],
+      "image_sha256": "fb7c1c26bb67f316aa0c95686471d719efeb8058e65404aaf6ddfe4ee54740f9"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_23.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 23,
+      "distance_to_tower_m": 5.509,
+      "bearing_relative_deg": 13.22,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 4,
+      "green_centroid_uv": [
+        122.2,
+        107.0
+      ],
+      "image_sha256": "3a6115af1b31209647211d7c1625e7189f7c0b5db8be5dd1b94ef927b54a9b14"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_37.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 37,
+      "distance_to_tower_m": 5.421,
+      "bearing_relative_deg": -9.3,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 2,
+      "green_centroid_uv": [
+        185.5,
+        115.0
+      ],
+      "image_sha256": "f2ff5242b7ce2cff4656245c65883b1dcf134ae0a13fd271aae6bf8b0dc9c24b"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_51.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 51,
+      "distance_to_tower_m": 4.172,
+      "bearing_relative_deg": -17.23,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 6,
+      "green_centroid_uv": [
+        209.0,
+        113.5
+      ],
+      "image_sha256": "cffd021def6b2801cedb44268ef43710d822f1f13013e986fd363336a70c4dbd"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_65.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 65,
+      "distance_to_tower_m": 3.093,
+      "bearing_relative_deg": -8.49,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 13,
+      "green_centroid_uv": [
+        182.8,
+        113.2
+      ],
+      "image_sha256": "33386d69b65752f8b860652cfec5fd38a7df23bfe3b1cf987919d9ec3695de7d"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_79.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 79,
+      "distance_to_tower_m": 3.341,
+      "bearing_relative_deg": 21.06,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 11,
+      "green_centroid_uv": [
+        96.6,
+        123.1
+      ],
+      "image_sha256": "9d1bceae7a505129a47f6898ada48096de21dd4daf93396c709520755d666965"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_93.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 93,
+      "distance_to_tower_m": 5.054,
+      "bearing_relative_deg": 0.52,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 4,
+      "green_centroid_uv": [
+        157.0,
+        105.8
+      ],
+      "image_sha256": "b15f4fd95301b0ec6a2d9c939d01e3a3f4ec548dd653644737404dae93a96d43"
+    },
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_107.png",
+      "family_id": "lmf_sweep",
+      "group_id": "g_lmf_sweep",
+      "sequence": 107,
+      "distance_to_tower_m": 3.411,
+      "bearing_relative_deg": -0.0,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 8,
+      "green_centroid_uv": [
+        159.1,
+        119.1
+      ],
+      "image_sha256": "d11207c2d3f37ece2ccacb27ba91036aab95077e0be319e6cac9db1e8ace64ff"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_3.png",
+      "family_id": "lmf_backoff",
+      "group_id": "g_lmf_backoff",
+      "sequence": 3,
+      "distance_to_tower_m": 2.061,
+      "bearing_relative_deg": 11.03,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 23,
+      "green_centroid_uv": [
+        127.0,
+        97.2
+      ],
+      "image_sha256": "e16a490bfc5e8fa0b7a18f9d8153e17252362d53e2ed66ca176d0d324d865b98"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_22.png",
+      "family_id": "lmf_backoff",
+      "group_id": "g_lmf_backoff",
+      "sequence": 22,
+      "distance_to_tower_m": 4.254,
+      "bearing_relative_deg": 4.52,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 5,
+      "green_centroid_uv": [
+        146.4,
+        112.8
+      ],
+      "image_sha256": "ed7961550e1ec5d8746f103461f96b2fe31a30a37bdac59fa04c25ba7c9ed1e4"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_34.png",
+      "family_id": "lmf_backoff",
+      "group_id": "g_lmf_backoff",
+      "sequence": 34,
+      "distance_to_tower_m": 5.596,
+      "bearing_relative_deg": 0.3,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 4,
+      "green_centroid_uv": [
+        158.5,
+        121.5
+      ],
+      "image_sha256": "95ade55dbb0e62d0b3ec04aea1e58574bb627957316a7041212d216cd51df47c"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_47.png",
+      "family_id": "lmf_backoff",
+      "group_id": "g_lmf_backoff",
+      "sequence": 47,
+      "distance_to_tower_m": 7.004,
+      "bearing_relative_deg": -3.6,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 2,
+      "green_centroid_uv": [
+        169.0,
+        115.5
+      ],
+      "image_sha256": "96544041ceee9e7aa4bd284fbb824dcd02e73c85c751a1812c76dcc061888d07"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+      "family_id": "lmf_backoff",
+      "group_id": "g_lmf_backoff",
+      "sequence": 60,
+      "distance_to_tower_m": 7.981,
+      "bearing_relative_deg": -0.2,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 1,
+      "green_centroid_uv": null,
+      "image_sha256": "6bb6e38ee6f897eba1a63e1f6e69bee3e70710d10f084a653141fb615bcc8649"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_67.png",
+      "family_id": "lmf_backoff",
+      "group_id": "g_lmf_backoff",
+      "sequence": 67,
+      "distance_to_tower_m": 8.367,
+      "bearing_relative_deg": 4.08,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 2,
+      "green_centroid_uv": [
+        148.0,
+        111.5
+      ],
+      "image_sha256": "4471c40115c1d055d22b817495b34725deea61edbfe085054ea30dd5825b0a8c"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_5.png",
+      "family_id": "lmf_near",
+      "group_id": "g_lmf_near",
+      "sequence": 5,
+      "distance_to_tower_m": 1.655,
+      "bearing_relative_deg": 8.51,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 31,
+      "green_centroid_uv": [
+        137.3,
+        83.3
+      ],
+      "image_sha256": "a6a7e951406252e70aee2eee7c0acbac5785d53b0e58d7c786bc2df2eec12c36"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_9.png",
+      "family_id": "lmf_near",
+      "group_id": "g_lmf_near",
+      "sequence": 9,
+      "distance_to_tower_m": 1.645,
+      "bearing_relative_deg": -9.17,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 29,
+      "green_centroid_uv": [
+        182.5,
+        90.2
+      ],
+      "image_sha256": "688ea8475fcfcad0e72816d0e2aae8ec346c167423e028d3af459bca4e94d069"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_14.png",
+      "family_id": "lmf_near",
+      "group_id": "g_lmf_near",
+      "sequence": 14,
+      "distance_to_tower_m": 1.568,
+      "bearing_relative_deg": -5.48,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 38,
+      "green_centroid_uv": [
+        173.1,
+        94.9
+      ],
+      "image_sha256": "0a9e555dd136df357f14b7064519248f804f0ca3f06e858076197d47af3ca7d1"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_19.png",
+      "family_id": "lmf_near",
+      "group_id": "g_lmf_near",
+      "sequence": 19,
+      "distance_to_tower_m": 1.459,
+      "bearing_relative_deg": 12.85,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 40,
+      "green_centroid_uv": [
+        121.8,
+        109.5
+      ],
+      "image_sha256": "b3d0b8f9c87cd590376951c96159d7b62b798d3fb0c4705940f69b9265814095"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_23.png",
+      "family_id": "lmf_near",
+      "group_id": "g_lmf_near",
+      "sequence": 23,
+      "distance_to_tower_m": 1.718,
+      "bearing_relative_deg": 11.69,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 30,
+      "green_centroid_uv": [
+        124.6,
+        84.5
+      ],
+      "image_sha256": "f7d8cf20a98810c4b49d9e165dd04d441caa58b42b39784afb1317deeb7a3ee7"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_5.png",
+      "family_id": "lmf_edge",
+      "group_id": "g_lmf_edge",
+      "sequence": 5,
+      "distance_to_tower_m": 3.138,
+      "bearing_relative_deg": -36.38,
+      "truncated_right": true,
+      "truncated_left": false,
+      "green_pixels": 16,
+      "green_centroid_uv": [
+        277.2,
+        90.7
+      ],
+      "image_sha256": "b5db39e91eb860829f04393a09cbac40013208ff517d398d8a26645b2c7715e9"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+      "family_id": "lmf_edge",
+      "group_id": "g_lmf_edge",
+      "sequence": 10,
+      "distance_to_tower_m": 2.673,
+      "bearing_relative_deg": -40.07,
+      "truncated_right": true,
+      "truncated_left": false,
+      "green_pixels": 28,
+      "green_centroid_uv": [
+        293.1,
+        117.9
+      ],
+      "image_sha256": "f4fbfe1f54c0794719b2f65bb47442064b0a02271aa73e71ccfbf8193e38899f"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_14.png",
+      "family_id": "lmf_edge",
+      "group_id": "g_lmf_edge",
+      "sequence": 14,
+      "distance_to_tower_m": 2.741,
+      "bearing_relative_deg": -35.72,
+      "truncated_right": true,
+      "truncated_left": false,
+      "green_pixels": 22,
+      "green_centroid_uv": [
+        274.1,
+        105.0
+      ],
+      "image_sha256": "331cf7f62f5d2082320ee086a46db298d7bcdfa29a6354941c550085ec726096"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_19.png",
+      "family_id": "lmf_edge",
+      "group_id": "g_lmf_edge",
+      "sequence": 19,
+      "distance_to_tower_m": 2.691,
+      "bearing_relative_deg": -33.78,
+      "truncated_right": true,
+      "truncated_left": false,
+      "green_pixels": 25,
+      "green_centroid_uv": [
+        265.6,
+        107.0
+      ],
+      "image_sha256": "85aaa4480038ab1d0435181de4522c64af3713f5ddbb249695ef4f5197eb98ff"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_24.png",
+      "family_id": "lmf_edge",
+      "group_id": "g_lmf_edge",
+      "sequence": 24,
+      "distance_to_tower_m": 2.571,
+      "bearing_relative_deg": -34.38,
+      "truncated_right": true,
+      "truncated_left": false,
+      "green_pixels": 25,
+      "green_centroid_uv": [
+        268.0,
+        125.2
+      ],
+      "image_sha256": "54bd8a40f208f9e9f34f438c32208e8a01c0c50036ddaa425f559201b7de2d54"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_29.png",
+      "family_id": "lmf_edge",
+      "group_id": "g_lmf_edge",
+      "sequence": 29,
+      "distance_to_tower_m": 3.018,
+      "bearing_relative_deg": -28.72,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 16,
+      "green_centroid_uv": [
+        246.8,
+        101.4
+      ],
+      "image_sha256": "842f65bbed83487c9d1c58ce60a0c35943fb52d74f55a53ab826e2bbac84adc1"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+      "family_id": "lmf_similar_negative",
+      "group_id": "g_lmf_similar_negative",
+      "sequence": 6,
+      "distance_to_tower_m": 3.849,
+      "bearing_relative_deg": -178.94,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 0,
+      "green_centroid_uv": null,
+      "image_sha256": "9bb18bbdc0d645e5338c64f2cc1831ebbc68d3dff59b04c9128d89b583ca3e2e"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_12.png",
+      "family_id": "lmf_similar_negative",
+      "group_id": "g_lmf_similar_negative",
+      "sequence": 12,
+      "distance_to_tower_m": 4.611,
+      "bearing_relative_deg": -175.38,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 0,
+      "green_centroid_uv": null,
+      "image_sha256": "de30b8e112dd69b96752d9de46d7780740eb6af89406470a48f3d6de55c60899"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_18.png",
+      "family_id": "lmf_similar_negative",
+      "group_id": "g_lmf_similar_negative",
+      "sequence": 18,
+      "distance_to_tower_m": 5.112,
+      "bearing_relative_deg": -178.97,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 1,
+      "green_centroid_uv": null,
+      "image_sha256": "fc2104b89e09cbffe6a4d7262a8fab58d358c9cb7d10e2ee2f4b2b58ec249603"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_25.png",
+      "family_id": "lmf_similar_negative",
+      "group_id": "g_lmf_similar_negative",
+      "sequence": 25,
+      "distance_to_tower_m": 5.701,
+      "bearing_relative_deg": 177.54,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 0,
+      "green_centroid_uv": null,
+      "image_sha256": "5714f91f5f9472a0d226a96aaea7a88cad169db65a484804e87f7f462002e141"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_31.png",
+      "family_id": "lmf_similar_negative",
+      "group_id": "g_lmf_similar_negative",
+      "sequence": 31,
+      "distance_to_tower_m": 6.397,
+      "bearing_relative_deg": 175.61,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 2,
+      "green_centroid_uv": [
+        72.5,
+        124.0
+      ],
+      "image_sha256": "90155457181cfd74d46987f3e1cbfd7f58b59f3353edd74b03322aaf773e6f3d"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_37.png",
+      "family_id": "lmf_similar_negative",
+      "group_id": "g_lmf_similar_negative",
+      "sequence": 37,
+      "distance_to_tower_m": 6.255,
+      "bearing_relative_deg": -179.62,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 2,
+      "green_centroid_uv": [
+        84.0,
+        118.5
+      ],
+      "image_sha256": "5d6b2521dc95809ead6019755d8132d03a45629f08879811b7d310ea7fb08702"
+    },
+    {
+      "frame_id": "lmf_side_negative_0-follow_only_g6_3.png",
+      "family_id": "lmf_side_negative",
+      "group_id": "g_lmf_side_negative",
+      "sequence": 3,
+      "distance_to_tower_m": 2.071,
+      "bearing_relative_deg": -110.82,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 0,
+      "green_centroid_uv": null,
+      "image_sha256": "1bfad6d57b464625e14818b14e2fd6081e9f8cc1ed756e75c2b904a7947dd63e"
+    },
+    {
+      "frame_id": "lmf_side_negative_0-follow_only_g6_4.png",
+      "family_id": "lmf_side_negative",
+      "group_id": "g_lmf_side_negative",
+      "sequence": 4,
+      "distance_to_tower_m": 2.073,
+      "bearing_relative_deg": -110.82,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 0,
+      "green_centroid_uv": null,
+      "image_sha256": "3af2668448e93b95804819f04f956439bae11f0d67458cadc679070c96d05c8a"
+    },
+    {
+      "frame_id": "lmf_side_negative_0-follow_only_g6_5.png",
+      "family_id": "lmf_side_negative",
+      "group_id": "g_lmf_side_negative",
+      "sequence": 5,
+      "distance_to_tower_m": 2.073,
+      "bearing_relative_deg": -110.82,
+      "truncated_right": false,
+      "truncated_left": false,
+      "green_pixels": 0,
+      "green_centroid_uv": null,
+      "image_sha256": "e0a83d957c37e48534a2bb0359599dd0e71f68c5624e24885f2b7739772494c9"
+    }
+  ]
+}

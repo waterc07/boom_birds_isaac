@@ -1,0 +1,134 @@
+{
+ "schema_version": "dsh.landmark_final_overlap_check.v1",
+ "existing_case_count": 18,
+ "existing_runs": [
+  "formal6",
+  "lm_pilot",
+  "lm_independence",
+  "geo_test"
+ ],
+ "new_cases": [
+  {
+   "case_id": "lmf_sweep_0",
+   "family": "lmf_sweep",
+   "start_position_world_m": [
+    8.6,
+    -1.3,
+    1
+   ],
+   "start_yaw_rad": 0,
+   "waypoint_count": 7,
+   "path_length_m": 15.157,
+   "nearest_existing_case": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_c",
+    "distance_m": 0.412,
+    "yaw_difference_rad": 3.142
+   },
+   "identical_waypoint_sequence_with_existing": [],
+   "corridor_used": "east-area / mid-field (not south/north corridor routes)"
+  },
+  {
+   "case_id": "lmf_backoff_0",
+   "family": "lmf_backoff",
+   "start_position_world_m": [
+    9.4,
+    -0.4,
+    0.95
+   ],
+   "start_yaw_rad": 0,
+   "waypoint_count": 8,
+   "path_length_m": 8.288,
+   "nearest_existing_case": {
+    "run": "lm_independence",
+    "case_id": "test_static_away",
+    "distance_m": 0.45,
+    "yaw_difference_rad": 3.142
+   },
+   "identical_waypoint_sequence_with_existing": [],
+   "corridor_used": "east-area / mid-field (not south/north corridor routes)"
+  },
+  {
+   "case_id": "lmf_near_0",
+   "family": "lmf_near",
+   "start_position_world_m": [
+    9.8,
+    -0.35,
+    0.9
+   ],
+   "start_yaw_rad": 0,
+   "waypoint_count": 5,
+   "path_length_m": 2.053,
+   "nearest_existing_case": {
+    "run": "lm_independence",
+    "case_id": "test_static_away",
+    "distance_m": 0.702,
+    "yaw_difference_rad": 3.142
+   },
+   "identical_waypoint_sequence_with_existing": [],
+   "corridor_used": "east-area / mid-field (not south/north corridor routes)"
+  },
+  {
+   "case_id": "lmf_edge_0",
+   "family": "lmf_edge",
+   "start_position_world_m": [
+    8.2,
+    0,
+    1
+   ],
+   "start_yaw_rad": 0.6,
+   "waypoint_count": 5,
+   "path_length_m": 2.307,
+   "nearest_existing_case": {
+    "run": "lm_pilot",
+    "case_id": "pilot_east_center",
+    "distance_m": 0.3,
+    "yaw_difference_rad": 0.6
+   },
+   "identical_waypoint_sequence_with_existing": [],
+   "corridor_used": "east-area / mid-field (not south/north corridor routes)"
+  },
+  {
+   "case_id": "lmf_similar_negative_0",
+   "family": "lmf_similar_negative",
+   "start_position_world_m": [
+    8,
+    0,
+    1.2
+   ],
+   "start_yaw_rad": 3.141592653589793,
+   "waypoint_count": 5,
+   "path_length_m": 3.842,
+   "nearest_existing_case": {
+    "run": "lm_pilot",
+    "case_id": "pilot_east_away",
+    "distance_m": 0.539,
+    "yaw_difference_rad": 0.0
+   },
+   "identical_waypoint_sequence_with_existing": [],
+   "corridor_used": "east-area / mid-field (not south/north corridor routes)"
+  },
+  {
+   "case_id": "lmf_side_negative_0",
+   "family": "lmf_side_negative",
+   "start_position_world_m": [
+    9.6,
+    0.6,
+    1
+   ],
+   "start_yaw_rad": 1.5707963267948966,
+   "waypoint_count": 2,
+   "path_length_m": 0.0,
+   "nearest_existing_case": {
+    "run": "lm_independence",
+    "case_id": "test_reverse_south",
+    "distance_m": 0.481,
+    "yaw_difference_rad": 1.571
+   },
+   "identical_waypoint_sequence_with_existing": [],
+   "corridor_used": "east-area / mid-field (not south/north corridor routes)"
+  }
+ ],
+ "method": "Euclidean distance between new start poses and every existing case start pose; yaw difference; exact waypoint-sequence equality; image sha256 cross-check in duplicate_hash_check.json",
+ "limitation": "start-pose proximity is not trajectory identity; families differ by full waypoint path, yaw and duration"
+}

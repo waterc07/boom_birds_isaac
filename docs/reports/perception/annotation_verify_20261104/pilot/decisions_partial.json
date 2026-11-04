@@ -1,0 +1,414 @@
+[
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+  "bbox": [
+   97,
+   106,
+   83,
+   74
+  ],
+  "kp": [
+   99.9,
+   109.9
+  ],
+  "notes": "full tower visible"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_23.png",
+  "bbox": [
+   107,
+   104,
+   38,
+   52
+  ],
+  "kp": [
+   122.2,
+   107
+  ],
+  "notes": "full tower; right background stage structure is not the target"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_37.png",
+  "bbox": [
+   178,
+   110,
+   20,
+   35
+  ],
+  "kp": null,
+  "notes": "green 2px <=2 pilot threshold; reference UNAVAILABLE/REFERENCE_TOO_SMALL"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_51.png",
+  "bbox": [
+   200,
+   108,
+   42,
+   60
+  ],
+  "kp": [
+   209,
+   113.5
+  ],
+  "notes": "full tower visible"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_65.png",
+  "bbox": [
+   158,
+   110,
+   67,
+   86
+  ],
+  "kp": [
+   182.8,
+   113.2
+  ],
+  "notes": "full tower visible"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_79.png",
+  "bbox": [
+   80,
+   108,
+   70,
+   92
+  ],
+  "kp": [
+   96.6,
+   123.1
+  ],
+  "notes": "full tower visible"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_93.png",
+  "bbox": [
+   150,
+   104,
+   36,
+   47
+  ],
+  "kp": [
+   157,
+   105.8
+  ],
+  "notes": "full tower visible (small in frame); bbox top adjusted to keep colour-cue keypoint inside box"
+ },
+ {
+  "frame_id": "lmf_sweep_0-follow_only_g1_107.png",
+  "bbox": [
+   132,
+   110,
+   80,
+   95
+  ],
+  "kp": [
+   159.1,
+   119.1
+  ],
+  "notes": "full tower visible"
+ },
+ {
+  "frame_id": "lmf_backoff_0-follow_only_g2_3.png",
+  "bbox": [
+   45,
+   88,
+   155,
+   118
+  ],
+  "kp": [
+   127,
+   97.2
+  ],
+  "notes": "close view; attached stepped base included; bottom base/platform touches frame edge -> truncated"
+ },
+ {
+  "frame_id": "lmf_backoff_0-follow_only_g2_22.png",
+  "bbox": [
+   125,
+   108,
+   58,
+   53
+  ],
+  "kp": [
+   146.4,
+   112.8
+  ],
+  "notes": "mid-distance full tower visible"
+ },
+ {
+  "frame_id": "lmf_backoff_0-follow_only_g2_34.png",
+  "bbox": [
+   143,
+   115,
+   40,
+   39
+  ],
+  "kp": [
+   158.5,
+   121.5
+  ],
+  "notes": "far full tower visible"
+ },
+ {
+  "frame_id": "lmf_backoff_0-follow_only_g2_47.png",
+  "bbox": [
+   160,
+   112,
+   20,
+   27
+  ],
+  "kp": null,
+  "notes": "7.0 m; green 2px <=2 pilot threshold; reference UNAVAILABLE/REFERENCE_TOO_SMALL"
+ },
+ {
+  "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+  "bbox": [
+   149,
+   132,
+   24,
+   27
+  ],
+  "kp": null,
+  "notes": "8.0 m; green 1px; reference UNAVAILABLE/REFERENCE_TOO_SMALL"
+ },
+ {
+  "frame_id": "lmf_backoff_0-follow_only_g2_67.png",
+  "bbox": [
+   145,
+   112,
+   22,
+   28
+  ],
+  "kp": null,
+  "notes": "8.4 m; green 2px; reference UNAVAILABLE/REFERENCE_TOO_SMALL"
+ },
+ {
+  "frame_id": "lmf_near_0-follow_only_g3_5.png",
+  "bbox": [
+   55,
+   75,
+   190,
+   165
+  ],
+  "kp": [
+   137.3,
+   83.3
+  ],
+  "truncated": true,
+  "notes": "very near; attached base pedestal reaches bottom frame edge -> truncated (seal metadata only tracked left/right)"
+ },
+ {
+  "frame_id": "lmf_near_0-follow_only_g3_9.png",
+  "bbox": [
+   118,
+   80,
+   160,
+   160
+  ],
+  "kp": [
+   182.5,
+   90.2
+  ],
+  "truncated": true,
+  "notes": "very near; base pedestal reaches bottom frame edge -> truncated"
+ },
+ {
+  "frame_id": "lmf_near_0-follow_only_g3_14.png",
+  "bbox": [
+   95,
+   85,
+   175,
+   155
+  ],
+  "kp": [
+   173.1,
+   94.9
+  ],
+  "truncated": true,
+  "notes": "very near; base pedestal reaches bottom frame edge -> truncated"
+ },
+ {
+  "frame_id": "lmf_near_0-follow_only_g3_19.png",
+  "bbox": [
+   70,
+   100,
+   190,
+   140
+  ],
+  "kp": [
+   121.8,
+   109.5
+  ],
+  "truncated": true,
+  "notes": "very near; base pedestal reaches bottom frame edge -> truncated"
+ },
+ {
+  "frame_id": "lmf_near_0-follow_only_g3_23.png",
+  "bbox": [
+   80,
+   78,
+   120,
+   162
+  ],
+  "kp": [
+   124.6,
+   84.5
+  ],
+  "truncated": true,
+  "notes": "very near; base pedestal reaches bottom frame edge -> truncated"
+ },
+ {
+  "frame_id": "lmf_edge_0-follow_only_g4_5.png",
+  "bbox": [
+   235,
+   75,
+   85,
+   160
+  ],
+  "kp": [
+   277.2,
+   90.7
+  ],
+  "truncated": true,
+  "notes": "tower at right frame edge; right side cut"
+ },
+ {
+  "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+  "bbox": [
+   245,
+   100,
+   75,
+   140
+  ],
+  "kp": [
+   293.1,
+   117.9
+  ],
+  "truncated": true,
+  "notes": "extreme right edge; most of right side cut"
+ },
+ {
+  "frame_id": "lmf_edge_0-follow_only_g4_14.png",
+  "bbox": [
+   230,
+   95,
+   90,
+   145
+  ],
+  "kp": [
+   274.1,
+   105
+  ],
+  "truncated": true,
+  "notes": "right-edge truncation"
+ },
+ {
+  "frame_id": "lmf_edge_0-follow_only_g4_19.png",
+  "bbox": [
+   222,
+   100,
+   98,
+   140
+  ],
+  "kp": [
+   265.6,
+   107
+  ],
+  "truncated": true,
+  "notes": "right-edge truncation"
+ },
+ {
+  "frame_id": "lmf_edge_0-follow_only_g4_24.png",
+  "bbox": [
+   225,
+   105,
+   95,
+   135
+  ],
+  "kp": [
+   268,
+   125.2
+  ],
+  "truncated": true,
+  "notes": "right-edge truncation"
+ },
+ {
+  "frame_id": "lmf_edge_0-follow_only_g4_29.png",
+  "bbox": [
+   185,
+   90,
+   125,
+   128
+  ],
+  "kp": [
+   246.8,
+   101.4
+  ],
+  "truncated": false,
+  "notes": "right-edge family but this frame is fully inside (truncated=false), boundary sample"
+ },
+ {
+  "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "target behind camera (bearing ~-179 deg); central-field props/robot visible but identity unverified; no verified similar tower -> TARGET_ABSENT; green false clue 0 px"
+ },
+ {
+  "frame_id": "lmf_similar_negative_0-follow_only_g5_12.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "target absent (behind camera); visible props identity unverified; green false clue 0 px"
+ },
+ {
+  "frame_id": "lmf_similar_negative_0-follow_only_g5_18.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "target absent; green false clue 1 px (<3 px); no verified similar tower"
+ },
+ {
+  "frame_id": "lmf_similar_negative_0-follow_only_g5_25.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "target absent; green false clue 0 px; visible props identity unverified"
+ },
+ {
+  "frame_id": "lmf_similar_negative_0-follow_only_g5_31.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "target absent; green false clue 2 px at (72.5,124), below 3px; no verified similar tower"
+ },
+ {
+  "frame_id": "lmf_similar_negative_0-follow_only_g5_37.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "target absent (behind camera); green false clue 2 px at (84,118.5), below 3px; no verified similar tower"
+ },
+ {
+  "frame_id": "lmf_side_negative_0-follow_only_g6_3.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "tower physically present but fully outside camera FOV (yaw +pi/2, bearing -110.8 deg); empty floor/wall scene; no green"
+ },
+ {
+  "frame_id": "lmf_side_negative_0-follow_only_g6_4.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "same static side pose; target out of FOV; no green"
+ },
+ {
+  "frame_id": "lmf_side_negative_0-follow_only_g6_5.png",
+  "bbox": null,
+  "kp": null,
+  "negative_type": "TARGET_ABSENT",
+  "notes": "same static side pose; target out of FOV; no green"
+ }
+]

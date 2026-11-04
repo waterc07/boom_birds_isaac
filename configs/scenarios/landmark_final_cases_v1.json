@@ -1,0 +1,758 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515
+    },
+    {
+      "region_id": "MID",
+      "x_min": 3,
+      "x_max": 7.9,
+      "y_min": -3,
+      "y_max": 3,
+      "ground_z_min": -0.2,
+      "ground_z_max": 0.5
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "lmf_sweep",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          8.6,
+          -1.3,
+          1
+        ],
+        [
+          6,
+          -1.3,
+          1
+        ],
+        [
+          6,
+          1.3,
+          1.05
+        ],
+        [
+          8.4,
+          1.3,
+          1.05
+        ],
+        [
+          8.4,
+          -1.3,
+          1.1
+        ],
+        [
+          6.2,
+          0,
+          1.15
+        ],
+        [
+          8.6,
+          0,
+          1.2
+        ]
+      ],
+      "corridor_y": null,
+      "sample_count": 0,
+      "blocked_count": 0,
+      "note": "east-area lateral serpentine facing +X; target kept in view; new family"
+    },
+    {
+      "route_id": "lmf_backoff",
+      "start_region": "E",
+      "goal_region": "MID",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          9.4,
+          -0.4,
+          0.95
+        ],
+        [
+          8.2,
+          -0.5,
+          1.05
+        ],
+        [
+          6.8,
+          -0.3,
+          1.15
+        ],
+        [
+          5.2,
+          0.1,
+          1.3
+        ],
+        [
+          4.2,
+          0.5,
+          1.4
+        ],
+        [
+          3.4,
+          0.1,
+          1.5
+        ],
+        [
+          3,
+          -0.6,
+          1.55
+        ],
+        [
+          4.2,
+          -0.4,
+          1.55
+        ]
+      ],
+      "corridor_y": null,
+      "sample_count": 0,
+      "blocked_count": 0,
+      "note": "back-off (reverse flight) from near tower to mid-field, facing +X; scale/distance family"
+    },
+    {
+      "route_id": "lmf_near",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          9.8,
+          -0.35,
+          0.9
+        ],
+        [
+          9.8,
+          0.35,
+          0.95
+        ],
+        [
+          10,
+          0.35,
+          1.05
+        ],
+        [
+          10,
+          -0.35,
+          1.05
+        ],
+        [
+          9.6,
+          -0.35,
+          0.9
+        ]
+      ],
+      "corridor_y": null,
+      "sample_count": 0,
+      "blocked_count": 0,
+      "note": "near/close-range box patrol around east approach; near/edge-truncation family"
+    },
+    {
+      "route_id": "lmf_edge",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          8.2,
+          0,
+          1
+        ],
+        [
+          8.8,
+          0.2,
+          1.1
+        ],
+        [
+          8.6,
+          -0.2,
+          1
+        ],
+        [
+          9,
+          0,
+          1.15
+        ],
+        [
+          8.4,
+          -0.4,
+          1
+        ]
+      ],
+      "corridor_y": null,
+      "sample_count": 0,
+      "blocked_count": 0,
+      "note": "fixed +0.6 rad yaw offset patrol; target deliberately near right frame edge for truncation family"
+    },
+    {
+      "route_id": "lmf_similar_negative",
+      "start_region": "E",
+      "goal_region": "MID",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          8,
+          0,
+          1.2
+        ],
+        [
+          7,
+          -0.4,
+          1.3
+        ],
+        [
+          6,
+          0.2,
+          1.4
+        ],
+        [
+          5.2,
+          0.5,
+          1.5
+        ],
+        [
+          5.4,
+          -0.2,
+          1.45
+        ]
+      ],
+      "corridor_y": null,
+      "sample_count": 0,
+      "blocked_count": 0,
+      "note": "target behind camera; central-field similar structure in view; hard-negative family"
+    },
+    {
+      "route_id": "lmf_side_negative",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          9.6,
+          0.6,
+          1
+        ],
+        [
+          9.6,
+          0.6,
+          1
+        ]
+      ],
+      "corridor_y": null,
+      "sample_count": 0,
+      "blocked_count": 0,
+      "note": "static pose yaw +pi/2; target physically present but fully outside FOV; negative family"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "lmf_sweep_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_sweep",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.6,
+        -1.3,
+        1
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        8.6,
+        0,
+        1.2
+      ],
+      "waypoints": [
+        [
+          8.6,
+          -1.3,
+          1
+        ],
+        [
+          6,
+          -1.3,
+          1
+        ],
+        [
+          6,
+          1.3,
+          1.05
+        ],
+        [
+          8.4,
+          1.3,
+          1.05
+        ],
+        [
+          8.4,
+          -1.3,
+          1.1
+        ],
+        [
+          6.2,
+          0,
+          1.15
+        ],
+        [
+          8.6,
+          0,
+          1.2
+        ]
+      ],
+      "timeout_s": 90,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lmf_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "family=lateral_sweep; condition=normal/scale(3.3-5.9 m)/lateral bearing; target +X in view; not an existing corridor"
+    },
+    {
+      "case_id": "lmf_backoff_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_backoff",
+      "region_id": "E",
+      "goal_region_id": "MID",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.4,
+        -0.4,
+        0.95
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        4.2,
+        -0.4,
+        1.55
+      ],
+      "waypoints": [
+        [
+          9.4,
+          -0.4,
+          0.95
+        ],
+        [
+          8.2,
+          -0.5,
+          1.05
+        ],
+        [
+          6.8,
+          -0.3,
+          1.15
+        ],
+        [
+          5.2,
+          0.1,
+          1.3
+        ],
+        [
+          4.2,
+          0.5,
+          1.4
+        ],
+        [
+          3.4,
+          0.1,
+          1.5
+        ],
+        [
+          3,
+          -0.6,
+          1.55
+        ],
+        [
+          4.2,
+          -0.4,
+          1.55
+        ]
+      ],
+      "timeout_s": 90,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lmf_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "family=scale_backoff; condition=scale(1.5-8.5 m)/elevation; reverse flight facing +X; new approach direction"
+    },
+    {
+      "case_id": "lmf_near_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_near",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.8,
+        -0.35,
+        0.9
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.6,
+        -0.35,
+        0.9
+      ],
+      "waypoints": [
+        [
+          9.8,
+          -0.35,
+          0.9
+        ],
+        [
+          9.8,
+          0.35,
+          0.95
+        ],
+        [
+          10,
+          0.35,
+          1.05
+        ],
+        [
+          10,
+          -0.35,
+          1.05
+        ],
+        [
+          9.6,
+          -0.35,
+          0.9
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lmf_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "family=near_patrol; condition=near/close range (1.45-2.1 m), partial in-frame truncation; new static-area trajectory"
+    },
+    {
+      "case_id": "lmf_edge_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_edge",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.2,
+        0,
+        1
+      ],
+      "start_yaw_rad": 0.6,
+      "goal_position_world_m": [
+        8.4,
+        -0.4,
+        1
+      ],
+      "waypoints": [
+        [
+          8.2,
+          0,
+          1
+        ],
+        [
+          8.8,
+          0.2,
+          1.1
+        ],
+        [
+          8.6,
+          -0.2,
+          1
+        ],
+        [
+          9,
+          0,
+          1.15
+        ],
+        [
+          8.4,
+          -0.4,
+          1
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lmf_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "family=edge_truncation; condition=yaw(+0.6 rad lateral) + target near right frame edge (bbox truncated); new yaw/pose family"
+    },
+    {
+      "case_id": "lmf_similar_negative_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_similar_negative",
+      "region_id": "E",
+      "goal_region_id": "MID",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8,
+        0,
+        1.2
+      ],
+      "start_yaw_rad": 3.141592653589793,
+      "goal_position_world_m": [
+        5.4,
+        -0.2,
+        1.45
+      ],
+      "waypoints": [
+        [
+          8,
+          0,
+          1.2
+        ],
+        [
+          7,
+          -0.4,
+          1.3
+        ],
+        [
+          6,
+          0.2,
+          1.4
+        ],
+        [
+          5.2,
+          0.5,
+          1.5
+        ],
+        [
+          5.4,
+          -0.2,
+          1.45
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lmf_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "family=similar_structure_negative; condition=target absent (behind camera), central-field similar structure in view; hard negative - presence to be confirmed on images"
+    },
+    {
+      "case_id": "lmf_side_negative_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_side_negative",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.6,
+        0.6,
+        1
+      ],
+      "start_yaw_rad": 1.5707963267948966,
+      "goal_position_world_m": [
+        9.6,
+        0.6,
+        1
+      ],
+      "waypoints": [
+        [
+          9.6,
+          0.6,
+          1
+        ],
+        [
+          9.6,
+          0.6,
+          1
+        ]
+      ],
+      "timeout_s": 10,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_lmf_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "family=side_negative; condition=target out of FOV (yaw +pi/2), plain negative; target physically present behind/side"
+    }
+  ],
+  "collection_plan": {
+    "purpose": "landmark final candidate pool (sealed-test candidate); new trajectory families only",
+    "status": "PROPOSED_COLLECTION_PLAN_NOT_FROZEN",
+    "coverage_conditions": {
+      "normal_front": [
+        "lmf_sweep_0",
+        "lmf_near_0"
+      ],
+      "scale_distance": [
+        "lmf_backoff_0",
+        "lmf_sweep_0"
+      ],
+      "yaw_lateral": [
+        "lmf_edge_0"
+      ],
+      "occlusion_truncation": [
+        "lmf_edge_0",
+        "lmf_near_0"
+      ],
+      "target_absent": [
+        "lmf_similar_negative_0",
+        "lmf_side_negative_0"
+      ],
+      "similar_structure_hard_negative": [
+        "lmf_similar_negative_0"
+      ]
+    },
+    "existing_families_avoided": [
+      "formal6: sensor_static_0/1, sensor_route_0/1, sensor_reset_0/1",
+      "lm_pilot: pilot_east_center/left/away",
+      "lm_independence: dev_south_new, test_reverse_south, test_north_0, test_static_oblique, test_static_away",
+      "geo_test: geo_test_north_0, geo_test_static_a/b/c"
+    ],
+    "sampling_rule": "sensor_shadow sample_period_steps=5 (4 Hz accepted RGB, config fixed; no detector-based frame selection)",
+    "new_family_reason": "east-area lateral serpentine, mid-field reverse back-off, near box patrol, fixed-yaw edge-truncation patrol, target-behind similar-structure negative, side negative; none reuse the south/north corridor routes or the exposed static poses",
+    "expected_accepted_rgb": "TBD_AFTER_CAPTURE (planning estimate 250-360)"
+  },
+  "notes": [
+    "landmark final candidate collection (2026-11-04); GUI foreground only; sensor shadow measured_hard_reset defaults",
+    "MID is a data-collection observation zone used only for case validation; it is not a map corridor or a navigation region"
+  ]
+}
