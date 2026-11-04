@@ -1,0 +1,239 @@
+{
+  "schema_version": "dsh.landmark_train_protocol.v1",
+  "status": "PREREGISTERED",
+  "created_at": "2026-11-04",
+  "scope": "bounded internal landmark experiment (one class tower + one green-light keypoint); shadow only; no PPO; no control; no board/navigation/Gate acceptance",
+  "license": {
+    "main_candidate": "ultralytics 8.2.0 / YOLOv8n-pose",
+    "status": "AGPL-3.0 obligations unresolved; user authorised INTERNAL bounded research/evaluation on 2026-11-04 only; external distribution is a separate decision; this is not a legal conclusion and the alternative model is not switched automatically",
+    "weight_derivation": "pretrained yolov8n-pose.pt is used for internal bounded research only; derivative/distribution status remains UNRESOLVED"
+  },
+  "refs": {
+    "training_plan": {
+      "path": "configs\\perception\\landmark_training_plan_v2.json",
+      "sha256": "88deff45e4d290f2c2bf5d2d4798b821f0d9bd0016d3481504caf2d51f881185"
+    },
+    "task_definition": {
+      "path": "docs\\reports\\perception\\LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md",
+      "sha256": "35b2928098c95be156df5950aa297fb709dde4a81cd2b88a7801c8bccfb73f9c"
+    },
+    "annotation_spec": {
+      "path": "configs\\perception\\landmark_annotation_spec_v2_1.json",
+      "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac"
+    },
+    "split_freeze_v3": {
+      "path": "configs\\perception\\landmark_split_freeze_v3.json",
+      "sha256": "50c064c120effea4fab904853b2970756d95382ed9376ec806f937b8b44feec2"
+    },
+    "label_lists": {
+      "path": "configs\\perception\\landmark_dev_label_lists_v1.json",
+      "sha256": "befbbea1b587261ed861a081706fe44a8a761aa90b04743fb137ddbd85c27701"
+    },
+    "labels_train": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_train.json",
+      "sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df"
+    },
+    "labels_val": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_val.json",
+      "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d"
+    },
+    "labels_hn_val": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_hn_val.json",
+      "sha256": "3dff20b6d99249a0cf71b7703eddea08ff223c8e2ff3d0466acfefc6ce283dc2"
+    },
+    "labels_manifest": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_manifest.json",
+      "sha256": "34fd3fd0f525423fee41b7ce6217b8fbfdadcb1b7909ecbb7c1c4e03401d4b0a"
+    },
+    "dataset_data_yaml": {
+      "path": "outputs\\landmark_train\\dataset\\dev_full\\data.yaml",
+      "sha256": "359f014e64dc37ff3527e6d9fadb0b7bb6902d32c5c921893ab65f651aefbe1e"
+    },
+    "dataset_manifest_train": {
+      "path": "outputs\\landmark_train\\dataset\\dev_full\\manifest_train.json",
+      "sha256": "8209353888602266bd0bffcc8b92773d1ecab7bede9e2d9e077e6a0aae0aea7d"
+    },
+    "dataset_manifest_val": {
+      "path": "outputs\\landmark_train\\dataset\\dev_full\\manifest_val.json",
+      "sha256": "5e5d2c9afb9a6852804ad2e11e92bf56053fa7da728b7269947515cbe4b9c301"
+    },
+    "model_yaml": {
+      "path": "outputs\\landmark_train\\dataset\\landmark_yolov8n-pose-1kpt.yaml",
+      "sha256": "82646f4acb3fb792f60d0fb79b254f5f82b0b7dbdd3ddc3f065859d9f330be91"
+    },
+    "overfit_subset": {
+      "path": "outputs\\landmark_train\\dataset\\overfit_annotations\\annotations_train_subset.json",
+      "sha256": "41e73ebaecc6e1cda2da1621226da9d2bba51e711612a33d30ecc695f93ed065"
+    }
+  },
+  "code": {
+    "git_head": "800c53b (branch feat/v2.2-simulation-perception; working tree dirty with parallel teammates' uncommitted work - no commits are made by this task)",
+    "label_converter": "src/boom_birds/evaluation/landmark_yolo.py::convert_annotation_document",
+    "label_converter_note": "the converter currently writes model-canvas normalised coordinates; this protocol's datasets are built with the source-normalised inverse (outputs/landmark_train/scripts/build_yolo_dataset.py) until evaltool fixes it",
+    "evidence_scripts": [
+      "outputs/landmark_train/scripts/build_yolo_dataset.py",
+      "outputs/landmark_train/scripts/diagnose_label_convention.py",
+      "outputs/landmark_train/scripts/validate_dev_labels.py",
+      "outputs/landmark_train/scripts/verify_preregistration.py",
+      "outputs/landmark_train/scripts/run_overfit.py",
+      "outputs/landmark_train/scripts/run_pilot.py"
+    ]
+  },
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "venv": "E:\\isaac\\proj_boom_birds\\.venv\\landmark-train",
+    "venv_isolated": true,
+    "torch": "2.7.0+cu128",
+    "cuda": "12.8",
+    "torch_arch_list": [
+      "sm_50",
+      "sm_60",
+      "sm_61",
+      "sm_70",
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90",
+      "sm_100",
+      "sm_120"
+    ],
+    "sm_120_supported": true,
+    "gpu": [
+      "NVIDIA GeForce RTX 5080"
+    ],
+    "ultralytics": "8.2.0",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.31.1",
+    "pins": [
+      "ml_dtypes==0.5.4",
+      "numpy==1.26.4",
+      "onnx==1.22.0",
+      "onnxruntime==1.31.1",
+      "onnxsim==0.8.1",
+      "opencv-python==4.10.0.84",
+      "pandas==2.2.3",
+      "torch==2.7.0+cu128",
+      "torchvision==0.22.0+cu128",
+      "ultralytics==8.2.0"
+    ],
+    "isaac_venv_modified": false,
+    "isaac_venv_pip_freeze_sha256": "470ecc15d2f0610059510e1b6287286e1c4edb969cc17b320742a7912d19f4a2"
+  },
+  "data": {
+    "train_frames": 160,
+    "train_groups": 10,
+    "train_dataset_images": 157,
+    "train_positive_labels": 105,
+    "train_empty_negatives": 52,
+    "train_excluded_gt_unobservable": 3,
+    "val_frames": 134,
+    "val_groups": 7,
+    "val_dataset_images": 120,
+    "val_positive_labels": 95,
+    "val_empty_negatives": 25,
+    "val_excluded_gt_unobservable": 14,
+    "val_composition": {
+      "target_absent": 12,
+      "similar_structure_hn1": 13,
+      "gt_unobservable_hn2": 11,
+      "undecidable": 3
+    },
+    "split_note": "HN2 GT_UNOBSERVABLE frames are excluded from the 2x2 and from training loss; HN1 verified confuser negatives are empty labels (true negatives)"
+  },
+  "task": {
+    "classes": {
+      "0": "tower"
+    },
+    "keypoints": 1,
+    "kpt_shape": [
+      1,
+      3
+    ],
+    "keypoint_visibility": [
+      0,
+      1
+    ],
+    "model_input": {
+      "imgsz": 640,
+      "letterbox": "center pad, scale/pad per frame",
+      "label_convention": "source-image normalised (YOLO txt)"
+    }
+  },
+  "protocol": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "epochs_max": 100,
+    "batch": 16,
+    "imgsz": 640,
+    "amp": true,
+    "warmup_epochs": 15,
+    "warmup_rule": "no early stopping, no abort and no 'joint<0.60 => failed' verdict during warmup; validation metrics are logged only",
+    "early_stopping": {
+      "patience": 20,
+      "start_after_warmup": true,
+      "monitored_metric": "validation joint narrow-primary (evaltool metrics.json)"
+    },
+    "checkpoint_candidates": "last.pt + best.pt (ultralytics fitness) + save_period every 5 epochs; each candidate evaluated on val with evaltool scripts/evaluate_landmark_yolo.py",
+    "seed_selection_rule": "compare seeds on validation only: highest val joint narrow-primary, tie-break lower validation FP, then lower seed; report all seeds including worst",
+    "threshold_freeze": "on the selected checkpoint using validation outputs only: tau_conf = smallest score with val identity precision >= 0.95; tau_det = det score floor giving val presence precision >= 0.95; tau_margin from the multi-candidate subset; tau_px from 3*blind-annotation keypoint noise (>= 3 px) and never below annotation noise 2.236 px; tau_iou = 0.3 diagnostic; all frozen before final and recorded with the val metrics that justify them",
+    "final_protocol": "lead runs the sealed final pool exactly once after freeze; no retraining, no threshold change, no rerun; a new evaluation needs new sealed data and a new pre-registration"
+  },
+  "hard_abort_conditions": [
+    "engineering failure (OOM/corrupt data/environment not reproducible)",
+    "annotation QA failure or leakage discovered",
+    "validation metric decreasing for 3 consecutive evaluations and below 0.40 after warmup",
+    "export path proven impossible for the intended deployment"
+  ],
+  "budget": {
+    "status": "MEASURED",
+    "planned_epochs_per_seed": 100,
+    "planned_seeds": 3,
+    "measured": {
+      "pilot_epochs": 20,
+      "epoch_seconds_mean": 3.677,
+      "peak_memory_allocated_mib": 1967.6,
+      "projected_100_epochs_seconds": 367.7,
+      "projected_3seeds_100_epochs_seconds": 1103.1,
+      "tolerance": "if measured wall time exceeds the time box, run seed 0 first and add seeds 1/2 only if the remaining budget allows; the worst seed is still reported"
+    }
+  },
+  "known_deltas_from_upstream": [
+    "ultralytics 8.2.0 x numpy 2.4 is not usable (np.trapz removed in numpy 2.4) -> numpy pinned to 1.26.4",
+    "evaltool landmark_yolo label export writes model-canvas normalised coordinates; overfit with those labels is INVALID (loss does not decrease). Datasets here use source-normalised labels and the convention was verified with the ultralytics loader (max delta 0.0003 px)",
+    "pilot runs 20 epochs, i.e. entirely inside warmup_epochs=15; its val numbers are an early snapshot",
+    "pilot uses the HN-merged val (134 frames). Final threshold freezing must use the frozen v3 val revision; any val change is recorded here before use"
+  ],
+  "not_in_scope": [
+    "PPO",
+    "control/setpoints",
+    "board/student acceptance",
+    "real camera",
+    "SITL/HIL",
+    "navigation",
+    "Gate promotion"
+  ],
+  "update_log": [
+    {
+      "date": "2026-11-04",
+      "change": "initial pre-registration; budget TBD until the pilot measurement is appended"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "budget filled from the single-seed pilot measurement (3.677 s/epoch, 1967.6 MiB peak, projected 3x100 epochs ~18.4 min)"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "bounded-training execution delta: epochs 60 instead of 100 (<= epochs_max, time box); early stopping re-implemented as 'patience 20 counted from the first post-warmup evaluation' because ultralytics' internal patience counted from the all-time best epoch and stopped a run at epoch 24; run documented as protocol delta"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "thresholds frozen on the selected validation checkpoint; see docs/reports/perception/training_20261104/threshold_freeze_val_20261104.json and configs/perception/landmark_model_freeze_v1.json"
+    }
+  ],
+  "preregistration_check": {
+    "pass": true
+  }
+}

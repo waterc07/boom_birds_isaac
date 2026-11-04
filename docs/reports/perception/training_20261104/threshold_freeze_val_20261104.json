@@ -1,0 +1,726 @@
+{
+  "schema_version": "dsh.landmark_threshold_freeze.v1",
+  "status": "FROZEN_ON_VALIDATION",
+  "created_at": "2026-11-04",
+  "source": {
+    "predictions": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_last\\predictions.jsonl",
+      "sha256": "a0df2a535f45892d7919a50b39f67f265a6df740c0895e6a5262ef329084c45a"
+    },
+    "labels": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_val.json",
+      "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d"
+    },
+    "checkpoint": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\bounded_1\\weights\\last.pt",
+      "sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1"
+    },
+    "selection_context": "thresholds frozen on the validation split only, after seed/checkpoint selection; final pool never read"
+  },
+  "method": {
+    "tau_conf": "smallest score with validation identity precision >= 0.95",
+    "tau_det": "smallest score with validation presence precision >= 0.95",
+    "tau_margin": "smallest top1-top2 margin whose accepted multi-candidate validation frames are all TP",
+    "tau_px": "3.0 px (>= measured blind re-annotation noise max 2.236 px; 1 px = 0.358 deg at fx=160)",
+    "tau_iou": "0.3 diagnostic gate from training plan v2"
+  },
+  "sweep": [
+    {
+      "tau": 0.05,
+      "tp": 81,
+      "fp": 10,
+      "precision": 0.8901098901098901
+    },
+    {
+      "tau": 0.1,
+      "tp": 81,
+      "fp": 10,
+      "precision": 0.8901098901098901
+    },
+    {
+      "tau": 0.15,
+      "tp": 81,
+      "fp": 10,
+      "precision": 0.8901098901098901
+    },
+    {
+      "tau": 0.2,
+      "tp": 81,
+      "fp": 10,
+      "precision": 0.8901098901098901
+    },
+    {
+      "tau": 0.25,
+      "tp": 81,
+      "fp": 10,
+      "precision": 0.8901098901098901
+    },
+    {
+      "tau": 0.25349,
+      "tp": 80,
+      "fp": 10,
+      "precision": 0.8888888888888888
+    },
+    {
+      "tau": 0.28858,
+      "tp": 79,
+      "fp": 10,
+      "precision": 0.8876404494382022
+    },
+    {
+      "tau": 0.3,
+      "tp": 79,
+      "fp": 10,
+      "precision": 0.8876404494382022
+    },
+    {
+      "tau": 0.307506,
+      "tp": 79,
+      "fp": 10,
+      "precision": 0.8876404494382022
+    },
+    {
+      "tau": 0.307623,
+      "tp": 77,
+      "fp": 10,
+      "precision": 0.8850574712643678
+    },
+    {
+      "tau": 0.313514,
+      "tp": 76,
+      "fp": 10,
+      "precision": 0.8837209302325582
+    },
+    {
+      "tau": 0.318451,
+      "tp": 75,
+      "fp": 10,
+      "precision": 0.8823529411764706
+    },
+    {
+      "tau": 0.318461,
+      "tp": 74,
+      "fp": 10,
+      "precision": 0.8809523809523809
+    },
+    {
+      "tau": 0.331058,
+      "tp": 74,
+      "fp": 10,
+      "precision": 0.8809523809523809
+    },
+    {
+      "tau": 0.337591,
+      "tp": 73,
+      "fp": 9,
+      "precision": 0.8902439024390244
+    },
+    {
+      "tau": 0.35,
+      "tp": 73,
+      "fp": 9,
+      "precision": 0.8902439024390244
+    },
+    {
+      "tau": 0.359824,
+      "tp": 73,
+      "fp": 9,
+      "precision": 0.8902439024390244
+    },
+    {
+      "tau": 0.367229,
+      "tp": 71,
+      "fp": 9,
+      "precision": 0.8875
+    },
+    {
+      "tau": 0.373057,
+      "tp": 70,
+      "fp": 9,
+      "precision": 0.8860759493670886
+    },
+    {
+      "tau": 0.37413,
+      "tp": 70,
+      "fp": 9,
+      "precision": 0.8860759493670886
+    },
+    {
+      "tau": 0.374823,
+      "tp": 69,
+      "fp": 9,
+      "precision": 0.8846153846153846
+    },
+    {
+      "tau": 0.377802,
+      "tp": 67,
+      "fp": 9,
+      "precision": 0.881578947368421
+    },
+    {
+      "tau": 0.4,
+      "tp": 67,
+      "fp": 9,
+      "precision": 0.881578947368421
+    },
+    {
+      "tau": 0.407274,
+      "tp": 66,
+      "fp": 9,
+      "precision": 0.88
+    },
+    {
+      "tau": 0.422889,
+      "tp": 66,
+      "fp": 8,
+      "precision": 0.8918918918918919
+    },
+    {
+      "tau": 0.45,
+      "tp": 66,
+      "fp": 8,
+      "precision": 0.8918918918918919
+    },
+    {
+      "tau": 0.460675,
+      "tp": 66,
+      "fp": 7,
+      "precision": 0.9041095890410958
+    },
+    {
+      "tau": 0.472803,
+      "tp": 66,
+      "fp": 6,
+      "precision": 0.9166666666666666
+    },
+    {
+      "tau": 0.491004,
+      "tp": 66,
+      "fp": 6,
+      "precision": 0.9166666666666666
+    },
+    {
+      "tau": 0.493142,
+      "tp": 65,
+      "fp": 6,
+      "precision": 0.9154929577464789
+    },
+    {
+      "tau": 0.5,
+      "tp": 64,
+      "fp": 6,
+      "precision": 0.9142857142857143
+    },
+    {
+      "tau": 0.500739,
+      "tp": 63,
+      "fp": 6,
+      "precision": 0.9130434782608695
+    },
+    {
+      "tau": 0.508371,
+      "tp": 62,
+      "fp": 6,
+      "precision": 0.9117647058823529
+    },
+    {
+      "tau": 0.523035,
+      "tp": 62,
+      "fp": 6,
+      "precision": 0.9117647058823529
+    },
+    {
+      "tau": 0.53999,
+      "tp": 61,
+      "fp": 6,
+      "precision": 0.9104477611940298
+    },
+    {
+      "tau": 0.55,
+      "tp": 61,
+      "fp": 5,
+      "precision": 0.9242424242424242
+    },
+    {
+      "tau": 0.558104,
+      "tp": 61,
+      "fp": 5,
+      "precision": 0.9242424242424242
+    },
+    {
+      "tau": 0.571577,
+      "tp": 60,
+      "fp": 5,
+      "precision": 0.9230769230769231
+    },
+    {
+      "tau": 0.582906,
+      "tp": 59,
+      "fp": 4,
+      "precision": 0.9365079365079365
+    },
+    {
+      "tau": 0.595224,
+      "tp": 58,
+      "fp": 4,
+      "precision": 0.9354838709677419
+    },
+    {
+      "tau": 0.6,
+      "tp": 58,
+      "fp": 4,
+      "precision": 0.9354838709677419
+    },
+    {
+      "tau": 0.603364,
+      "tp": 58,
+      "fp": 4,
+      "precision": 0.9354838709677419
+    },
+    {
+      "tau": 0.605476,
+      "tp": 58,
+      "fp": 3,
+      "precision": 0.9508196721311475
+    },
+    {
+      "tau": 0.607737,
+      "tp": 57,
+      "fp": 3,
+      "precision": 0.95
+    },
+    {
+      "tau": 0.631766,
+      "tp": 56,
+      "fp": 2,
+      "precision": 0.9655172413793104
+    },
+    {
+      "tau": 0.65,
+      "tp": 56,
+      "fp": 2,
+      "precision": 0.9655172413793104
+    },
+    {
+      "tau": 0.667187,
+      "tp": 55,
+      "fp": 2,
+      "precision": 0.9649122807017544
+    },
+    {
+      "tau": 0.674781,
+      "tp": 54,
+      "fp": 2,
+      "precision": 0.9642857142857143
+    },
+    {
+      "tau": 0.67839,
+      "tp": 54,
+      "fp": 2,
+      "precision": 0.9642857142857143
+    },
+    {
+      "tau": 0.679029,
+      "tp": 52,
+      "fp": 2,
+      "precision": 0.9629629629629629
+    },
+    {
+      "tau": 0.681018,
+      "tp": 52,
+      "fp": 1,
+      "precision": 0.9811320754716981
+    },
+    {
+      "tau": 0.684766,
+      "tp": 51,
+      "fp": 1,
+      "precision": 0.9807692307692307
+    },
+    {
+      "tau": 0.7,
+      "tp": 51,
+      "fp": 1,
+      "precision": 0.9807692307692307
+    },
+    {
+      "tau": 0.720666,
+      "tp": 51,
+      "fp": 1,
+      "precision": 0.9807692307692307
+    },
+    {
+      "tau": 0.729564,
+      "tp": 49,
+      "fp": 1,
+      "precision": 0.98
+    },
+    {
+      "tau": 0.731372,
+      "tp": 48,
+      "fp": 1,
+      "precision": 0.9795918367346939
+    },
+    {
+      "tau": 0.740387,
+      "tp": 47,
+      "fp": 1,
+      "precision": 0.9791666666666666
+    },
+    {
+      "tau": 0.75,
+      "tp": 47,
+      "fp": 1,
+      "precision": 0.9791666666666666
+    },
+    {
+      "tau": 0.756691,
+      "tp": 46,
+      "fp": 1,
+      "precision": 0.9787234042553191
+    },
+    {
+      "tau": 0.757765,
+      "tp": 45,
+      "fp": 1,
+      "precision": 0.9782608695652174
+    },
+    {
+      "tau": 0.76058,
+      "tp": 45,
+      "fp": 1,
+      "precision": 0.9782608695652174
+    },
+    {
+      "tau": 0.762184,
+      "tp": 43,
+      "fp": 1,
+      "precision": 0.9772727272727273
+    },
+    {
+      "tau": 0.767334,
+      "tp": 43,
+      "fp": 1,
+      "precision": 0.9772727272727273
+    },
+    {
+      "tau": 0.773308,
+      "tp": 42,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.774791,
+      "tp": 42,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.777042,
+      "tp": 40,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.779177,
+      "tp": 39,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.787253,
+      "tp": 39,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.789768,
+      "tp": 38,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.8,
+      "tp": 37,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.807718,
+      "tp": 36,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.812089,
+      "tp": 35,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.813575,
+      "tp": 35,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.815607,
+      "tp": 34,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.816292,
+      "tp": 32,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.82443,
+      "tp": 32,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.824772,
+      "tp": 31,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.826733,
+      "tp": 29,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.827134,
+      "tp": 29,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.83056,
+      "tp": 27,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.830838,
+      "tp": 26,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.831558,
+      "tp": 25,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.832202,
+      "tp": 25,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.832877,
+      "tp": 24,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.834166,
+      "tp": 22,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.834978,
+      "tp": 21,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.835518,
+      "tp": 20,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.836133,
+      "tp": 20,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.836645,
+      "tp": 18,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.83998,
+      "tp": 18,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.840741,
+      "tp": 16,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.845089,
+      "tp": 16,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.85,
+      "tp": 15,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.869756,
+      "tp": 14,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.871949,
+      "tp": 14,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.873603,
+      "tp": 12,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.877091,
+      "tp": 12,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.878644,
+      "tp": 11,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.880323,
+      "tp": 10,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.88072,
+      "tp": 9,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.88147,
+      "tp": 7,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.88225,
+      "tp": 7,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.888151,
+      "tp": 6,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.897978,
+      "tp": 5,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.9,
+      "tp": 4,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.901937,
+      "tp": 4,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.902702,
+      "tp": 2,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.904813,
+      "tp": 2,
+      "fp": 0,
+      "precision": 1.0
+    },
+    {
+      "tau": 0.926286,
+      "tp": 0,
+      "fp": 0,
+      "precision": null
+    },
+    {
+      "tau": 0.95,
+      "tp": 0,
+      "fp": 0,
+      "precision": null
+    }
+  ],
+  "gt_observable_frames": 120,
+  "gt_unobservable_frames": 14,
+  "multi_candidate_validation": {
+    "frames": 0,
+    "absence_frames": [],
+    "sample": []
+  },
+  "frozen": {
+    "tau_conf": 0.605476,
+    "tau_det": 0.605476,
+    "tau_margin": {
+      "value": 0.1,
+      "status": "PROPOSED_NO_MULTI_CANDIDATE_FRAMES"
+    },
+    "tau_px": 3.0,
+    "tau_iou": 0.3,
+    "tau_kpt": {
+      "value": 0.5,
+      "status": "PROPOSED_NOT_FROZEN",
+      "note": "evaltool decoder keypoint-confidence default; not part of training plan v2 freeze list"
+    },
+    "tau_green_pixels": {
+      "value": 3,
+      "status": "FROZEN_BY_SPEC_V2_1",
+      "note": "annotation-side reference usability rule, not a model threshold"
+    }
+  },
+  "precision_at_frozen": {
+    "tau": 0.605476,
+    "tp": 58,
+    "fp": 3,
+    "precision": 0.9508196721311475
+  },
+  "limitations": [
+    "validation negatives are 25 empty-label frames (12 TARGET_ABSENT + 13 synthetic HN1); the false-match denominator is not certification-sized (C4 INCOMPLETE)",
+    "if there is no qualifying score the threshold stays null and must be re-derived after more data"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+ "window": "2026-11-04 dev capture batches (visible foreground GUI only; no headless fallback)",
+ "runs": [
+  {
+   "run": "smoke_hn1_first",
+   "dir": "outputs/sensor_shadow/lm_dev_smoke_20261104",
+   "purpose": "first HN1 injection smoke",
+   "result": "FAILED",
+   "error": "AttributeError: Prim object has no attribute GetActive (pxr API misuse in set_injection_active)",
+   "fix": "use Prim.IsActive() instead of Prim.GetActive()",
+   "completion_marker": false,
+   "kept_evidence": "summary.error.txt + gui.log in ignored outputs; error excerpt copied to evidence"
+  },
+  {
+   "run": "smoke_static_low",
+   "dir": "outputs/sensor_shadow/lm_dev_smoke2_20261104",
+   "purpose": "non-injection GUI smoke before batch1",
+   "result": "PASS",
+   "frames": 21,
+   "completion_marker": true
+  },
+  {
+   "run": "smoke_hn1_second",
+   "dir": "outputs/sensor_shadow/lm_dev_smoke_hn1_20261104",
+   "purpose": "second HN1 injection smoke after API fix",
+   "result": "FAILED",
+   "error": "IndexError: index 3 is out of bounds for dimension 0 with size 1 (injection spawn loop reused variable name index, shadowing the torch env index tensor used by set_robot_pose)",
+   "fix": "renamed loop variable to part_index",
+   "completion_marker": false,
+   "kept_evidence": "summary.error.txt + gui.log in ignored outputs; error excerpt copied to evidence"
+  },
+  {
+   "run": "smoke_hn1_third",
+   "dir": "outputs/sensor_shadow/lm_dev_smoke_hn1b_20261104",
+   "purpose": "HN1 injection smoke retry2",
+   "result": "PASS",
+   "frames": 27,
+   "completion_marker": true
+  },
+  {
+   "run": "batch1",
+   "dir": "outputs/sensor_shadow/lm_dev_capture_20261104",
+   "purpose": "formal batch1 (5 non-injection dev cases)",
+   "result": "PASS 5/5 SUCCESS",
+   "accepted_rgb": 322,
+   "completion_marker": true
+  },
+  {
+   "run": "batch2_hn",
+   "dir": "outputs/sensor_shadow/lm_dev_hn_capture_20261104",
+   "purpose": "formal batch2 (HN1 + HN2 injection cases)",
+   "result": "PASS 2/2 SUCCESS",
+   "accepted_rgb": 53,
+   "completion_marker": true
+  }
+ ],
+ "exit_code_note": "the PowerShell wrapper recorded exit=0 even for the two failed python smokes; the authoritative success signal is the positive completion marker run.complete.json (present for PASS runs, absent for FAILED runs) plus summary.error.txt for failures. This is documented instead of relying on the process exit code.",
+ "headless": "never used; the runner raises RuntimeError on --headless and sensor shadow requires a visible GUI"
+}

@@ -1,24 +1,40 @@
-"""Metric definitions for the pre-training landmark experiment (definition only).
+"""Metric definitions for the pre-training landmark experiment (denominator audit).
 
 This module makes the denominator rules from
 docs/reports/perception/LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md
-executable and testable.  It contains no model, no training, no detector and no
+executable and auditable.  It contains no model, no training, no detector and no
 ground-truth channel into any deployed actor; it only scores already-recorded
 predictions against independent annotations.
 
-Key rules encoded here:
+Corrected denominator rules (see
+docs/reports/perception/TRAINING_EVAL_TOOLING_20261104.md for the old/new
+comparison):
 
-- UNKNOWN/REJECTED observations are never counted as TP/FN/TN/FP; they are
-  reported as unobservable and only lower evaluable coverage;
-- a target-present frame whose reference point is annotated UNAVAILABLE is a
-  reference success when the model declares UNAVAILABLE (no keypoint) and a
-  semantic error when it emits a keypoint;
-- an unlabelled reference frame is not a joint failure; it only lowers joint
-  coverage, and the all-positive lower bound stays explicitly separate;
-- identity is evaluated only when claims or negatives exist; a single-landmark
-  experiment without similar-structure negatives cannot claim identity results.
+1. A prediction of UNKNOWN/REJECTED on a GT-observable positive is a MISS.  It
+   stays inside the recall, reference-coverage and joint denominators, and is
+   additionally listed by prediction status and reject reason.  It is never
+   silently dropped and never counted as a true negative.
+2. An annotation-side unobservable frame (undecidable=true, fully occluded target
+   with no visible GT box, or ambiguous=true) is excluded from the presence
+   fourfold and from every denominator.  It is reported separately as
+   GT_UNOBSERVABLE with a reason.  GT_UNOBSERVABLE (annotation state) and
+   prediction UNKNOWN (model state) are counted in separate buckets.
+3. A prediction of UNKNOWN/REJECTED on a GT-absent frame is not credited as TN;
+   the frame stays in the negative denominator, so negative coverage cannot be
+   inflated by a non-functioning detector.
+4. A positive whose GT reference point is annotated UNAVAILABLE is still
+   presence/recall material, but it never enters the anchor/bearing error
+   denominators.  Emitting a keypoint there is a semantic error (false
+   reference), not an accuracy issue.
+5. The joint narrow denominator is the set of GT-observable positives with a
+   complete bbox+reference label.  A rejected/UNKNOWN prediction is a joint
+   failure inside that denominator; an unlabelled reference only lowers joint
+   coverage.
+6. Stratified reporting exposes the worst condition with numerator and
+   denominator (insufficient strata are marked, not ranked as worst).
 
-Units: bbox in pixels (origin top-left, xywh), keypoints in pixels.
+Units: bbox in pixels (origin top-left, xywh), keypoints in pixels, bearings in
+degrees from the image bearing formula atan2(x - cx_px, fx_px).
 """
 from collections import Counter
 import math
@@ -27,19 +43,35 @@ __all__ = [
     'MetricDefinitionError',
     'PRED_STATUSES',
     'REFERENCE_LABELS',
+    'GT_UNOBSERVABLE_REASONS',
+    'image_bearing_deg',
+    'error_stats',
     'evaluate_frame',
     'summarize',
+    'stratified_summary',
 ]
 
 PRED_STATUSES = ('DETECTED', 'NOT_DETECTED', 'UNKNOWN', 'REJECTED')
 REFERENCE_LABELS = (None, 'VISIBLE', 'UNAVAILABLE')
+GT_UNOBSERVABLE_REASONS = ('UNDECIDABLE', 'FULL_OCCLUSION', 'AMBIGUOUS',
+                           'NO_VISIBLE_GT_BBOX')
 GT_REQUIRED = ('frame_id', 'present', 'landmark_id', 'bbox_xywh', 'reference')
 
 PRESENCE_TP = 'TP'
 PRESENCE_FP = 'FP'
 PRESENCE_FN = 'FN'
 PRESENCE_TN = 'TN'
-PRESENCE_UNOBSERVABLE = 'UNOBSERVABLE'
+PRESENCE_GT_UNOBSERVABLE = 'GT_UNOBSERVABLE'
+PRESENCE_NEGATIVE_UNOBSERVABLE = 'NEGATIVE_UNOBSERVABLE'
+
+#: primary metrics used by the stratified "worst condition" report, ordered by
+#: priority; each entry is (public name, numerator path, denominator path).
+STRATIFIED_METRICS = (
+    ('joint_narrow_rate', ('joint', 'narrow_tp'), ('joint', 'narrow_denominator')),
+    ('presence_recall', ('presence', 'tp'), None),
+    ('reference_coverage', ('reference', 'correct_keypoint_emissions'),
+     ('reference', 'available_denominator')),
+)
 
 
 class MetricDefinitionError(ValueError):
@@ -64,147 +96,244 @@ def _check_range(name, value, low, high):
         raise MetricDefinitionError('%s out of range: %r' % (name, value))
 
 
-def _validate(gt, pred, tau_iou, tau_px, tau_conf):
+def image_bearing_deg(x_px, *, fx_px, cx_px):
+    """Image bearing in degrees; an image angle, not a world bearing/distance."""
+    return math.degrees(math.atan2(float(x_px) - float(cx_px), float(fx_px)))
+
+
+def error_stats(values, unit='px'):
+    """median / P90 / max with the sample count as an explicit denominator."""
+    values = [float(v) for v in values]
+    if not values:
+        return {'count': 0, 'median_' + unit: None, 'p90_' + unit: None,
+                'max_' + unit: None}
+    ordered = sorted(values)
+    n = len(ordered)
+    if n % 2:
+        median = ordered[n // 2]
+    else:
+        median = 0.5 * (ordered[n // 2 - 1] + ordered[n // 2])
+    p90 = ordered[max(0, min(n - 1, int(math.ceil(0.9 * n)) - 1))]
+    return {'count': n, 'median_' + unit: median, 'p90_' + unit: p90,
+            'max_' + unit: ordered[-1]}
+
+
+def _validate(gt, pred, tau_iou, tau_px, tau_conf, fx_px, cx_px):
     if not isinstance(gt, dict) or not isinstance(pred, dict):
         raise MetricDefinitionError('gt and pred must be dicts')
     missing = [key for key in GT_REQUIRED if key not in gt]
     if missing:
-        raise MetricDefinitionError('ground truth missing fields: ' + ', '.join(missing))
+        raise MetricDefinitionError('ground truth missing fields: '
+                                    + ', '.join(missing))
     if not isinstance(gt['present'], bool):
         raise MetricDefinitionError('gt.present must be bool')
+    undecidable = gt.get('undecidable', False)
+    ambiguous = gt.get('ambiguous', False)
+    if not isinstance(undecidable, bool) or not isinstance(ambiguous, bool):
+        raise MetricDefinitionError('gt.undecidable / gt.ambiguous must be bool')
+    if undecidable and gt['present']:
+        raise MetricDefinitionError('present=true cannot be combined with '
+                                    'undecidable=true')
+    if undecidable and gt['bbox_xywh'] is not None:
+        raise MetricDefinitionError('undecidable ground truth must not carry a bbox')
+    if undecidable and gt['reference'] is not None:
+        raise MetricDefinitionError('undecidable ground truth must not carry a '
+                                    'reference label')
     if gt['present']:
         bbox = gt['bbox_xywh']
-        if not isinstance(bbox, list) or len(bbox) != 4:
+        if bbox is not None and (not isinstance(bbox, list) or len(bbox) != 4):
             raise MetricDefinitionError('present gt requires bbox_xywh of length 4')
         if not gt['landmark_id']:
             raise MetricDefinitionError('present gt requires landmark_id')
+        if bbox is None and gt['reference'] == 'VISIBLE':
+            raise MetricDefinitionError('present gt without a visible bbox cannot '
+                                        'declare a VISIBLE reference')
+    else:
+        if gt['reference'] is not None:
+            raise MetricDefinitionError('absent target must not carry a reference label')
+        if gt['bbox_xywh'] is not None:
+            raise MetricDefinitionError('absent target must not carry a bbox')
     if gt['reference'] not in REFERENCE_LABELS:
-        raise MetricDefinitionError('unsupported gt.reference: %r' % (gt['reference'],))
+        raise MetricDefinitionError('unsupported gt.reference: %r'
+                                    % (gt['reference'],))
     status = pred.get('status')
     if status not in PRED_STATUSES:
         raise MetricDefinitionError('unsupported prediction status: %r' % (status,))
     _check_range('tau_iou', tau_iou, 0.0, 1.0)
     _check_range('tau_px', tau_px, 0.0, 1e6)
     _check_range('tau_conf', tau_conf, 0.0, 1.0)
+    if (fx_px is None) != (cx_px is None):
+        raise MetricDefinitionError('fx_px and cx_px must be provided together')
+    if fx_px is not None:
+        if float(fx_px) <= 0:
+            raise MetricDefinitionError('fx_px must be positive')
+        _check_range('cx_px', cx_px, -1e6, 1e6)
 
 
-def evaluate_frame(gt, pred, *, tau_iou, reference_px, tau_px, tau_conf):
+def _gt_observability(gt):
+    """Return (observable, reason).  Unobservable GT never enters a denominator."""
+    if gt.get('undecidable') is True:
+        return False, 'UNDECIDABLE'
+    if gt.get('ambiguous') is True:
+        return False, 'AMBIGUOUS'
+    if gt['present'] and gt['bbox_xywh'] is None:
+        if gt.get('visibility') == 'OCCLUDED':
+            return False, 'FULL_OCCLUSION'
+        return False, 'NO_VISIBLE_GT_BBOX'
+    return True, None
+
+
+def evaluate_frame(gt, pred, *, tau_iou, reference_px, tau_px, tau_conf,
+                   fx_px=None, cx_px=None, strata=None):
     """Classify one frame against the frozen presence/reference/identity/joint rules."""
-    _validate(gt, pred, tau_iou, tau_px, tau_conf)
+    _validate(gt, pred, tau_iou, tau_px, tau_conf, fx_px, cx_px)
     status = pred['status']
     bbox = pred.get('bbox_xywh')
-    present = bool(gt['present'])
     keypoint = pred.get('keypoint_px')
+    present = bool(gt['present'])
     gt_bbox = gt['bbox_xywh']
     ref_label = gt['reference']
+    score = pred.get('score')
+    claim = pred.get('landmark_id') is not None
+    observable, unobservable_reason = _gt_observability(gt)
+    unobservable_pred = status in ('UNKNOWN', 'REJECTED')
 
-    unobservable = status in ('UNKNOWN', 'REJECTED')
-    counted = not unobservable
+    row = {
+        'frame_id': gt['frame_id'],
+        'gt_present': present,
+        'gt_bbox_present': gt_bbox is not None,
+        'gt_observable': observable,
+        'gt_unobservable_reason': unobservable_reason,
+        'pred_status': status,
+        'pred_reject_reason': pred.get('reject_reason'),
+        'counted_in_confusion': False,
+        'presence_class': PRESENCE_GT_UNOBSERVABLE,
+        'pred_present': None,
+        'bbox_iou': None,
+        'reference_class': 'GT_UNOBSERVABLE',
+        'reference_correct': None,
+        'anchor_error_px': None,
+        'gt_bearing_deg': None,
+        'pred_bearing_deg': None,
+        'bearing_error_deg': None,
+        'identity_claim': claim,
+        'identity_correct': None,
+        'high_confidence_false_match': False,
+        'joint_evaluable': False,
+        'joint_ok': None,
+        'joint_fail_reason': None,
+        'strata': dict(strata or {}),
+    }
+    if not observable:
+        return row
 
     # --- presence -------------------------------------------------------
-    if unobservable:
-        presence_class = PRESENCE_UNOBSERVABLE
+    if unobservable_pred:
+        presence_class = PRESENCE_FN if present else PRESENCE_NEGATIVE_UNOBSERVABLE
         pred_present = None
     else:
-        pred_present = status == 'DETECTED' and bbox is not None and (
-            not present or _iou(bbox, gt_bbox) >= float(tau_iou))
+        pred_present = (status == 'DETECTED' and bbox is not None
+                        and (not present or _iou(bbox, gt_bbox) >= float(tau_iou)))
         if present:
             presence_class = PRESENCE_TP if pred_present else PRESENCE_FN
         else:
-            presence_class = PRESENCE_FP if status == 'DETECTED' else PRESENCE_TN
+            presence_class = PRESENCE_FP if pred_present else PRESENCE_TN
+    row['presence_class'] = presence_class
+    row['pred_present'] = pred_present
+    row['counted_in_confusion'] = presence_class in (PRESENCE_TP, PRESENCE_FP,
+                                                     PRESENCE_FN, PRESENCE_TN)
+    if present and gt_bbox is not None and bbox is not None:
+        row['bbox_iou'] = _iou(bbox, gt_bbox)
 
     # --- reference ------------------------------------------------------
-    anchor_error_px = None
     if ref_label is None:
         reference_class = 'NOT_LABELLED'
         reference_correct = None
     elif ref_label == 'VISIBLE':
-        if not present:
-            raise MetricDefinitionError('VISIBLE reference on an absent target is invalid')
         if keypoint is None:
             reference_class = 'PRESENT_NO_KEYPOINT'
             reference_correct = False
         elif reference_px is None:
-            raise MetricDefinitionError('VISIBLE gt reference with an emitted keypoint '
-                                        'requires reference_px')
+            raise MetricDefinitionError('VISIBLE gt reference with an emitted '
+                                        'keypoint requires reference_px')
         else:
-            anchor_error_px = math.hypot(float(keypoint[0]) - float(reference_px[0]),
-                                         float(keypoint[1]) - float(reference_px[1]))
-            if anchor_error_px <= float(tau_px):
-                reference_class = 'PRESENT_AND_AVAILABLE'
-                reference_correct = True
-            else:
-                reference_class = 'PRESENT_WRONG_ANCHOR'
-                reference_correct = False
-    else:  # UNAVAILABLE
-        if not present:
-            raise MetricDefinitionError('UNAVAILABLE reference on an absent target is invalid')
+            anchor_error = math.hypot(float(keypoint[0]) - float(reference_px[0]),
+                                      float(keypoint[1]) - float(reference_px[1]))
+            row['anchor_error_px'] = anchor_error
+            reference_correct = anchor_error <= float(tau_px)
+            reference_class = ('PRESENT_AND_AVAILABLE' if reference_correct
+                               else 'PRESENT_WRONG_ANCHOR')
+            if fx_px is not None:
+                gt_bearing = image_bearing_deg(reference_px[0], fx_px=fx_px,
+                                               cx_px=cx_px)
+                pred_bearing = image_bearing_deg(keypoint[0], fx_px=fx_px,
+                                                 cx_px=cx_px)
+                row['gt_bearing_deg'] = gt_bearing
+                row['pred_bearing_deg'] = pred_bearing
+                row['bearing_error_deg'] = abs(pred_bearing - gt_bearing)
+    else:  # UNAVAILABLE: GT reference point is not visible
         if keypoint is None:
             reference_class = 'UNAVAILABLE_DECLARED'
             reference_correct = True
         else:
             reference_class = 'UNAVAILABLE_EMITTED_KEYPOINT'
             reference_correct = False
+    row['reference_class'] = reference_class
+    row['reference_correct'] = reference_correct
 
     # --- identity -------------------------------------------------------
-    claim = pred.get('landmark_id') is not None
+    identity_correct = None
     if claim:
         identity_correct = bool(present and pred.get('landmark_id') == gt['landmark_id'])
-    else:
-        identity_correct = None
-    score = pred.get('score')
-    high_conf_false_match = bool(
+    row['identity_correct'] = identity_correct
+    row['high_confidence_false_match'] = bool(
         (not present) and claim and score is not None
         and float(score) >= float(tau_conf))
 
     # --- joint ----------------------------------------------------------
-    joint_evaluable = bool(present and gt_bbox is not None and ref_label is not None)
-    joint_fail_reason = None
-    if not joint_evaluable:
-        joint_ok = None
-    elif presence_class != PRESENCE_TP:
-        joint_ok = False
-        joint_fail_reason = presence_class
-    elif identity_correct is not True:
-        joint_ok = False
-        joint_fail_reason = 'IDENTITY'
-    elif reference_correct is not True:
-        joint_ok = False
-        joint_fail_reason = 'REFERENCE'
-    else:
-        joint_ok = True
-
-    return {
-        'frame_id': gt['frame_id'],
-        'gt_present': present,
-        'pred_status': status,
-        'counted_in_confusion': counted,
-        'presence_class': presence_class,
-        'pred_present': pred_present,
-        'reference_class': reference_class,
-        'reference_correct': reference_correct,
-        'anchor_error_px': anchor_error_px,
-        'identity_claim': claim,
-        'identity_correct': identity_correct,
-        'high_confidence_false_match': high_conf_false_match,
-        'joint_evaluable': joint_evaluable,
-        'joint_ok': joint_ok,
-        'joint_fail_reason': joint_fail_reason,
-    }
+    joint_evaluable = bool(gt_bbox is not None and ref_label is not None)
+    row['joint_evaluable'] = joint_evaluable
+    if joint_evaluable:
+        if presence_class != PRESENCE_TP:
+            joint_ok = False
+            joint_fail_reason = 'PRESENCE'
+        elif identity_correct is not True:
+            joint_ok = False
+            joint_fail_reason = 'IDENTITY'
+        elif reference_correct is not True:
+            joint_ok = False
+            joint_fail_reason = 'REFERENCE'
+        else:
+            joint_ok = True
+            joint_fail_reason = None
+        row['joint_ok'] = joint_ok
+        row['joint_fail_reason'] = joint_fail_reason
+    return row
 
 
 def _rate(numerator, denominator):
     return (float(numerator) / denominator) if denominator else None
 
 
-def _error_stats(values):
-    if not values:
-        return {'count': 0, 'median_px': None, 'p90_px': None, 'max_px': None}
-    ordered = sorted(values)
-    n = len(ordered)
-    median = (ordered[n // 2] if n % 2 else 0.5 * (ordered[n // 2 - 1] + ordered[n // 2]))
-    p90 = ordered[max(0, min(n - 1, int(math.ceil(0.9 * n)) - 1))]
-    return {'count': n, 'median_px': median, 'p90_px': p90, 'max_px': ordered[-1]}
+def _metric_entries(summary):
+    """Flat numerator/denominator view used by the worst-condition report."""
+    presence = summary['presence']
+    entries = {}
+    for name, num_path, den_path in STRATIFIED_METRICS:
+        numerator = summary[num_path[0]][num_path[1]]
+        if name == 'presence_recall':
+            denominator = presence['tp'] + presence['fn']
+        else:
+            denominator = summary[den_path[0]][den_path[1]]
+        if name == 'joint_narrow_rate':
+            rate = summary['joint']['narrow_rate']
+        elif name == 'presence_recall':
+            rate = presence['recall']
+        else:
+            rate = summary['reference']['coverage']
+        entries[name] = {'numerator': numerator, 'denominator': denominator,
+                         'rate': rate}
+    return entries
 
 
 def summarize(rows):
@@ -213,79 +342,171 @@ def summarize(rows):
     presence = Counter()
     reference = Counter()
     joint_failures = Counter()
+    fn_by_pred_status = Counter()
+    unknown_by_status = Counter()
+    unknown_by_reason = Counter()
+    gt_unobservable_reasons = Counter()
     anchors = []
+    bearings = []
+    anchors_correct = []
+    bearings_correct = []
+    bbox_ious = []
 
     positives = 0
     negatives = 0
+    gt_unobservable = 0
+    negative_unobservable = 0
+    bbox_denominator = 0
+    unknown_on_positive = 0
+    unknown_on_negative = 0
+    unknown_on_gt_unobservable = 0
     joint_denominator = 0
     joint_tp = 0
     claims = 0
     correct_claims = 0
+    claims_on_gt_unobservable = 0
     high_conf_false_matches = 0
+    ref_available = 0
+    ref_unavailable = 0
+    ref_not_labelled = 0
+    ref_correct_emissions = 0
 
     for row in rows:
-        if row['gt_present']:
-            positives += 1
-        else:
-            negatives += 1
         presence[row['presence_class']] += 1
+        if row['presence_class'] == PRESENCE_GT_UNOBSERVABLE:
+            gt_unobservable += 1
+            gt_unobservable_reasons[row['gt_unobservable_reason']
+                                    or 'UNSPECIFIED'] += 1
+        if row['presence_class'] == PRESENCE_NEGATIVE_UNOBSERVABLE:
+            negative_unobservable += 1
+        if row['gt_observable']:
+            if row['gt_present']:
+                positives += 1
+            else:
+                negatives += 1
+        if row['bbox_iou'] is not None:
+            bbox_ious.append(row['bbox_iou'])
+        if row['gt_observable'] and row['gt_present'] and row['presence_class'] == PRESENCE_FN:
+            fn_by_pred_status[row['pred_status']] += 1
+        if row['gt_observable'] and row['gt_present'] and row['gt_bbox_present']:
+            bbox_denominator += 1
+        if row['pred_status'] in ('UNKNOWN', 'REJECTED'):
+            unknown_by_status[row['pred_status']] += 1
+            unknown_by_reason[row['pred_reject_reason'] or 'UNSPECIFIED'] += 1
+            if row['presence_class'] == PRESENCE_GT_UNOBSERVABLE:
+                unknown_on_gt_unobservable += 1
+            elif row['gt_present']:
+                unknown_on_positive += 1
+            else:
+                unknown_on_negative += 1
         reference[row['reference_class']] += 1
+        if row['gt_observable'] and row['gt_present']:
+            if row['reference_class'] == 'NOT_LABELLED':
+                ref_not_labelled += 1
+            elif row['reference_class'].startswith('PRESENT_'):
+                ref_available += 1
+                if row['reference_class'] == 'PRESENT_AND_AVAILABLE':
+                    ref_correct_emissions += 1
+            elif row['reference_class'].startswith('UNAVAILABLE_'):
+                ref_unavailable += 1
         if row['anchor_error_px'] is not None:
             anchors.append(row['anchor_error_px'])
-        if row['identity_claim']:
-            claims += 1
-            if row['identity_correct']:
-                correct_claims += 1
-        if row['high_confidence_false_match']:
-            high_conf_false_matches += 1
+            if row['reference_correct']:
+                anchors_correct.append(row['anchor_error_px'])
+        if row['bearing_error_deg'] is not None:
+            bearings.append(row['bearing_error_deg'])
+            if row['reference_correct']:
+                bearings_correct.append(row['bearing_error_deg'])
+        if row['gt_observable']:
+            if row['identity_claim']:
+                claims += 1
+                if row['identity_correct']:
+                    correct_claims += 1
+            if row['high_confidence_false_match']:
+                high_conf_false_matches += 1
+        elif row['identity_claim']:
+            claims_on_gt_unobservable += 1
         if row['joint_evaluable']:
             joint_denominator += 1
             if row['joint_ok']:
                 joint_tp += 1
             else:
-                joint_failures[row['joint_fail_reason'] or 'UNKNOWN'] += 1
+                joint_failures[row['joint_fail_reason'] or 'UNSPECIFIED'] += 1
 
     tp = presence[PRESENCE_TP]
     fp = presence[PRESENCE_FP]
     fn = presence[PRESENCE_FN]
     tn = presence[PRESENCE_TN]
-    unknown = presence[PRESENCE_UNOBSERVABLE]
-    accounted = tp + fp + fn + tn + unknown
-    if accounted != len(rows):
+    accountable = (tp + fp + fn + tn + presence[PRESENCE_GT_UNOBSERVABLE]
+                   + presence[PRESENCE_NEGATIVE_UNOBSERVABLE])
+    if accountable != len(rows):
         raise MetricDefinitionError('frame accounting mismatch: %d != %d'
-                                    % (accounted, len(rows)))
+                                    % (accountable, len(rows)))
 
-    ref_avail = (reference['PRESENT_AND_AVAILABLE']
-                 + reference['PRESENT_WRONG_ANCHOR']
-                 + reference['PRESENT_NO_KEYPOINT'])
-    ref_unavail = reference['UNAVAILABLE_DECLARED'] + reference['UNAVAILABLE_EMITTED_KEYPOINT']
-    ref_correct_emissions = reference['PRESENT_AND_AVAILABLE']
+    iou_count = len(bbox_ious)
+    iou_ordered = sorted(bbox_ious)
+    iou_stats = {
+        'count': iou_count,
+        'denominator': bbox_denominator,
+        'median': (_median(iou_ordered) if iou_ordered else None),
+        'p90': (_p90(iou_ordered) if iou_ordered else None),
+        'max': (iou_ordered[-1] if iou_ordered else None),
+    }
 
     summary = {
         'frames': len(rows),
-        'positives': positives,
-        'negatives': negatives,
+        'denominators': {
+            'frames': len(rows),
+            'positives': positives,
+            'negatives': negatives,
+            'gt_unobservable': gt_unobservable,
+            'negative_unobservable': negative_unobservable,
+            'reference_available': ref_available,
+            'reference_unavailable': ref_unavailable,
+            'reference_not_labelled': ref_not_labelled,
+            'joint_evaluable': joint_denominator,
+            'positive_frames_with_gt_bbox': bbox_denominator,
+            'identity_claims': claims,
+        },
+        'gt_unobservable_by_reason': dict(sorted(gt_unobservable_reasons.items())),
         'presence': {
             'tp': tp, 'fp': fp, 'fn': fn, 'tn': tn,
-            'unknown_rejected': unknown,
+            'gt_unobservable': presence[PRESENCE_GT_UNOBSERVABLE],
+            'negative_unobservable': presence[PRESENCE_NEGATIVE_UNOBSERVABLE],
             'precision': _rate(tp, tp + fp),
             'recall': _rate(tp, tp + fn),
-            'evaluable_positive_coverage': _rate(tp + fn, positives),
-            'negative_coverage': _rate(fp + tn, negatives),
-            'counted_denominator': tp + fp + fn + tn,
+            'negative_coverage': _rate(tn, negatives),
+            'fn_by_pred_status': dict(sorted(fn_by_pred_status.items())),
+            'unknown_rejected': {
+                'total': sum(unknown_by_status.values()),
+                'on_positive': unknown_on_positive,
+                'on_negative': unknown_on_negative,
+                'on_gt_unobservable': unknown_on_gt_unobservable,
+                'by_status': dict(sorted(unknown_by_status.items())),
+                'by_reason': dict(sorted(unknown_by_reason.items())),
+            },
+            'bbox_iou_diagnostic': iou_stats,
         },
         'reference': {
-            'available_denominator': ref_avail,
-            'unavailable_denominator': ref_unavail,
+            'available_denominator': ref_available,
+            'unavailable_denominator': ref_unavailable,
+            'not_labelled': ref_not_labelled,
             'correct_keypoint_emissions': ref_correct_emissions,
-            'coverage': _rate(ref_correct_emissions, ref_avail),
-            'false_reference_rate': _rate(reference['UNAVAILABLE_EMITTED_KEYPOINT'], ref_unavail),
-            'not_labelled': reference['NOT_LABELLED'],
-            'anchor_error': _error_stats(anchors),
+            'wrong_anchor_emissions': _count_reference(rows, ('PRESENT_WRONG_ANCHOR',)),
+            'no_keypoint_emissions': _count_reference(rows, ('PRESENT_NO_KEYPOINT',)),
+            'coverage': _rate(ref_correct_emissions, ref_available),
+            'false_reference_rate': _rate(
+                reference['UNAVAILABLE_EMITTED_KEYPOINT'], ref_unavailable),
+            'anchor_error_px': error_stats(anchors, unit='px'),
+            'anchor_error_px_correct_only': error_stats(anchors_correct, unit='px'),
+            'bearing_error_deg': error_stats(bearings, unit='deg'),
+            'bearing_error_deg_correct_only': error_stats(bearings_correct,
+                                                          unit='deg'),
         },
         'identity': {
             'claims': claims,
             'correct_claims': correct_claims,
+            'claims_on_gt_unobservable': claims_on_gt_unobservable,
             'precision': _rate(correct_claims, claims),
             'recall': _rate(correct_claims, positives),
             'high_confidence_false_matches': high_conf_false_matches,
@@ -304,10 +525,80 @@ def summarize(rows):
     }
     gaps = [name for name, value in (
         ('presence_tp_plus_fn', tp + fn),
-        ('reference_available', ref_avail),
+        ('reference_available', ref_available),
         ('identity_negatives', negatives),
         ('joint_narrow', joint_denominator),
     ) if value == 0]
     summary['metric_status'] = 'INCOMPLETE' if gaps else 'COMPUTED'
     summary['insufficient_denominators'] = gaps
     return summary
+
+
+def _median(ordered):
+    n = len(ordered)
+    if n % 2:
+        return ordered[n // 2]
+    return 0.5 * (ordered[n // 2 - 1] + ordered[n // 2])
+
+
+def _p90(ordered):
+    n = len(ordered)
+    return ordered[max(0, min(n - 1, int(math.ceil(0.9 * n)) - 1))]
+
+
+def _count_reference(rows, classes):
+    return sum(1 for row in rows if row['reference_class'] in classes)
+
+
+def stratified_summary(rows, dimensions=('family',)):
+    """Per-dimension summaries plus the worst condition of each dimension.
+
+    Ties are broken toward the larger denominator (more evidence), then toward
+    the lexicographically smaller stratum name.  Strata whose primary
+    denominator is zero are reported as INSUFFICIENT_DENOMINATOR and are never
+    ranked as the worst condition.
+    """
+    rows = list(rows)
+    dimensions = list(dimensions)
+    report = {'overall': summarize(rows), 'strata': {}, 'worst_conditions': {}}
+    for dimension in dimensions:
+        groups = {}
+        for row in rows:
+            key = (row.get('strata') or {}).get(dimension)
+            if key is None:
+                key = 'UNSPECIFIED'
+            groups.setdefault(str(key), []).append(row)
+        summaries = {name: summarize(items)
+                     for name, items in sorted(groups.items())}
+        report['strata'][dimension] = summaries
+        worst = {}
+        for name, _, _ in STRATIFIED_METRICS:
+            best = None
+            insufficient = None
+            for stratum_name, summary in summaries.items():
+                entry = _metric_entries(summary)[name]
+                record = {
+                    'stratum': stratum_name,
+                    'numerator': entry['numerator'],
+                    'denominator': entry['denominator'],
+                    'rate': entry['rate'],
+                }
+                if not entry['denominator']:
+                    record['status'] = 'INSUFFICIENT_DENOMINATOR'
+                    if insufficient is None:
+                        insufficient = record
+                    continue
+                record['status'] = 'WORST'
+                rank = (entry['rate'], -entry['denominator'], stratum_name)
+                if best is None or rank < best[0]:
+                    best = (rank, record)
+            if best is not None:
+                worst[name] = best[1]
+            elif insufficient is not None:
+                worst[name] = insufficient
+            else:
+                worst[name] = {'stratum': None, 'numerator': None,
+                               'denominator': 0, 'rate': None,
+                               'status': 'NO_STRATA'}
+        report['worst_conditions'][dimension] = worst
+    return report

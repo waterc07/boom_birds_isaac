@@ -1,0 +1,97 @@
+{
+ "existing_case_count": 24,
+ "existing_runs": [
+  "formal6",
+  "lm_pilot",
+  "lm_independence",
+  "geo_test",
+  "final_pool_v1"
+ ],
+ "new_cases": [
+  {
+   "case_id": "lmf_dev_inner_north_0",
+   "waypoints": 6,
+   "path_length_m": 21.38,
+   "nearest_existing_start": {
+    "run": "geo_test",
+    "case_id": "geo_test_north_0",
+    "distance_m": 0.447,
+    "yaw_difference_rad": 0.0
+   },
+   "identical_waypoint_sequence_with_existing": []
+  },
+  {
+   "case_id": "lmf_dev_inner_south_0",
+   "waypoints": 5,
+   "path_length_m": 14.21,
+   "nearest_existing_start": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_c",
+    "distance_m": 0.4,
+    "yaw_difference_rad": 3.142
+   },
+   "identical_waypoint_sequence_with_existing": []
+  },
+  {
+   "case_id": "lmf_dev_static_high_0",
+   "waypoints": 4,
+   "path_length_m": 1.94,
+   "nearest_existing_start": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_similar_negative_0",
+    "distance_m": 1.118,
+    "yaw_difference_rad": 3.092
+   },
+   "identical_waypoint_sequence_with_existing": []
+  },
+  {
+   "case_id": "lmf_dev_static_low_0",
+   "waypoints": 4,
+   "path_length_m": 1.6,
+   "nearest_existing_start": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_near_0",
+    "distance_m": 0.77,
+    "yaw_difference_rad": 0.2
+   },
+   "identical_waypoint_sequence_with_existing": []
+  },
+  {
+   "case_id": "lmf_dev_static_negative_0",
+   "waypoints": 4,
+   "path_length_m": 1.58,
+   "nearest_existing_start": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_b",
+    "distance_m": 0.283,
+    "yaw_difference_rad": 2.45
+   },
+   "identical_waypoint_sequence_with_existing": []
+  },
+  {
+   "case_id": "lmf_dev_hn1_confuser_0",
+   "waypoints": 4,
+   "path_length_m": 2.48,
+   "nearest_existing_start": {
+    "run": "lm_pilot",
+    "case_id": "pilot_east_away",
+    "distance_m": 0.3,
+    "yaw_difference_rad": 1.571
+   },
+   "identical_waypoint_sequence_with_existing": []
+  },
+  {
+   "case_id": "lmf_dev_hn2_occluder_0",
+   "waypoints": 4,
+   "path_length_m": 2.47,
+   "nearest_existing_start": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_backoff_0",
+    "distance_m": 0.415,
+    "yaw_difference_rad": 0.0
+   },
+   "identical_waypoint_sequence_with_existing": []
+  }
+ ],
+ "note": "start-pose proximity is not trajectory identity; new families use inner corridors y approx +3.0 / -3.0 or new static poses, none reuse south y=-6.2 / north y=5.8 corridor waypoint sequences"
+}

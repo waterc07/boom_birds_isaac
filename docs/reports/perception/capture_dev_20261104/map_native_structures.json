@@ -1,0 +1,50 @@
+{
+ "schema_version": "dsh.landmark_map_native_structures.v1",
+ "scope": "map-native (non-synthetic) structures observed in the 2026-11-04 dev capture; they exist in the RMUC2027 synthetic terrain asset and were NOT injected by this capture",
+ "important_separation": "map-native structures (this file) vs injected synthetic confuser/occluder (hn_injections_20261104.json) are different evidence classes and must not be mixed in reports or labels",
+ "structures": [
+  {
+   "structure_id": "MAP_NATIVE_GREEN_LAMP_PILLAR_MS1",
+   "world_position_estimate_m": {
+    "x": 3.0,
+    "y": 4.0,
+    "top_z": 1.78,
+    "green_lamp_z": 1.71,
+    "uncertainty_m": 0.1
+   },
+   "position_basis": [
+    "map probe 0.5 m grid: vertical down-ray at (3.0, 4.0) hits a structure top at ground_z=1.78 m, upward clearance 6 m, collision prim /World/Terrain/Collisions/collision_019",
+    "detected green lamp pixel in inner_north g1_90 projects from camera (1.87,3.03,1.03) consistent with world (3.0,4.0,~1.71) within ~1 px after fitting",
+    "seen from the east in static_negative frames at projected pixel (51.9,103.9) vs observed column ~(51,107), consistent with the same structure"
+   ],
+   "appearance": "slender grey rectangular/tapered column about 0.5 m wide (image estimate, exact dimensions UNKNOWN), flat top module, blue accent strips on the side, bright green lamp near the top on a side face",
+   "height_estimate_m": "about 1.83 (top 1.78 above local ground about -0.05)",
+   "green_visibility": "green lamp pixels detected from the west/south approach (inner_north, up to 55 px at about 1.5 m); NOT detected from the east view (static_negative, 0 green pixels) - the lamp appears directional/one-sided",
+   "evidence_frames": {
+    "inner_north_green_positive": "lmf_dev_inner_north_0-follow_only_g1_90.png (55 green px) and green detections across seq 4-91; zoom: _evidence/zoom/inner_north_g1_90_pole_zoom.png",
+    "static_negative_same_structure_no_green": "lmf_dev_static_negative_0-follow_only_g5_3/12/23.png (0 green px); zoom: _evidence/zoom/lmf_dev_static_negative_0-follow_only_g5_3_left_zoom.png"
+   },
+   "difference_from_central_tower": "central tower (target) is at world about (11.52,-0.01) with a wide tapered body + 1.7 m top light rack, visible green roof-light near z about 1.25-1.3, R mark and white stepped pedestal; MS1 is a slender flat-topped column with a side green lamp and no top light rack, so it is a similar-structure confuser but not the same object",
+   "implication_for_uniqueness_assumptions": "observation: the current asset contains at least this map-native green-lamp tower-like structure (and a symmetric candidate MS2), which challenges training-plan assumptions U1 (at most one tower-like instance) and U2 (central tower is the only green-light tower). This is recorded as an asset observation; interpreting/updating U1/U2 is a lead/decision item, not changed by this capture."
+  },
+  {
+   "structure_id": "MAP_NATIVE_SYMMETRIC_CANDIDATE_MS2",
+   "world_position_estimate_m": {
+    "x": -3.0,
+    "y": -4.0,
+    "top_z": 1.78
+   },
+   "position_basis": [
+    "map probe 0.5 m grid down-ray at (-3.0,-4.0) hits a structure top at ground_z=1.78 m (same height as MS1); appearance not observed in this batch"
+   ],
+   "appearance": "UNKNOWN (not in view of the captured families)",
+   "evidence_frames": [],
+   "note": "symmetric candidate only; do not claim it is visible in any frame"
+  }
+ ],
+ "implications": [
+  "HN1-like (similar green structure) evidence already exists map-natively, in addition to the injected HN1 confuser; final/HN reporting must separate the two classes",
+  "the map-native pillar is visible in dev train (inner_north) frames while the central tower is also visible in later frames; it is a natural hard-negative/confuser source",
+  "no conclusion about real-arena distribution; this is a synthetic asset observation only"
+ ]
+}

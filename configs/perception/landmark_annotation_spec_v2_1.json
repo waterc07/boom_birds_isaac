@@ -1,0 +1,312 @@
+{
+  "schema_version": "dsh.landmark_annotation_spec.v2_1",
+  "status": "FROZEN_FOR_DATA",
+  "supersedes": "configs/perception/landmark_annotation_spec_v2.json",
+  "v2_preserved_unchanged": true,
+  "backward_compatible_with_v2": true,
+  "created_at_local": "2026-11-04",
+  "document_schema": "dsh.tower_annotation.v2_1",
+  "based_on_evidence": [
+    "docs/reports/perception/annotation_verify_20261104/ANNOTATION_VERIFICATION_20261104.md",
+    "docs/reports/perception/annotation_verify_20261104/FINAL_POOL_PILOT_ANNOTATION_20261104.md"
+  ],
+  "target": "RMUC2027 central tower, current synthetic map asset",
+  "delta_from_v2": {
+    "D1_four_edge_truncation": "target.truncated_edges {left,right,top,bottom} required; truncated = any edge; per-edge truncation_source; capture-vs-annotator conflict resolution (annotator wins) recorded in truncation_conflicts",
+    "D2_reference_pixel_criterion": "geometry.green_pixels required for present frames; keypoint may only be non-null when green_pixels >= 3 AND visually confirmed; otherwise keypoint=null + UNAVAILABLE + REFERENCE_TOO_SMALL",
+    "D3_unverified_confusers": "new confusers[] list with verified=false allowed together with negative_type=TARGET_ABSENT; SIMILAR_STRUCTURE/OTHER_LANDMARK require at least one verified confuser; unverified confusers must never be written as verified similar structures",
+    "D4_bbox_source": "geometry.bbox_source enum records ANNOTATOR_VISUAL / ANNOTATOR_VISUAL_WITH_PROJECTION_AID / PROJECTION_AID_CALIBRATED",
+    "D5_annotation_mode": "annotator.annotation_mode enum records FRAME_BY_FRAME_VISUAL / BULK_CALIBRATED_WITH_FULL_VISUAL_QA",
+    "D6_dataset_role": "annotation.dataset_role enum enables the pilot-34 -> development/annotation-calibration transfer without deleting files",
+    "D7_near_bottom_truncation_fact": "the pilot found near-family frames whose base pedestal is cut by the bottom frame edge while the capture metadata only tracked left/right truncation; v2.1 requires all four edges and records the metadata conflict"
+  },
+  "source_policy": {
+    "allowed_sources": [
+      "existing exposed development images",
+      "new frozen GUI acquisition batches"
+    ],
+    "detector_predictions_as_truth": false,
+    "projection_aid": "pose/geometry projection may be used only as a visual aid or a draft prior; it must be marked in geometry.bbox_source and never treated as unconditional truth",
+    "visual_qa_required": "a projection-derived or calibrated draft bbox must be visually checked for every frame; corrected frames must be marked and re-checked",
+    "split_label": "split is recorded per frame; a frame set already exposed for pilot/calibration must not be re-declared as sealed",
+    "independent_annotation": "human independent annotation with adjudication is the only path to certification-grade labels; agent proxy annotations stay disclosed"
+  },
+  "units_and_coordinates": {
+    "bbox": "xywh, source-image pixels, origin top-left, no normalization in source labels",
+    "keypoint": "source-image pixels (x, y) and boolean visible",
+    "truncated_edges": "booleans per image edge; a true edge means the target structure continues past that edge and is clipped",
+    "model_export": "normalization only in the exporter; letterbox scale/pad recorded"
+  },
+  "bbox_scope": {
+    "rule": "axis-aligned box of the visible target object itself = head/top light-rack plus tapering body (and, if present and attached, its stepped base pedestal); clipped at every image edge",
+    "includes": [
+      "head and its two arms / top light rack",
+      "tapering tower body",
+      "attached stepped base pedestal that is visually part of the tower"
+    ],
+    "excludes": [
+      "ground / arena platform / stage surface",
+      "ground markings",
+      "shadows",
+      "unrelated structures"
+    ],
+    "truncation": "bbox covers only the visible part; clip at every edge; never extrapolate; set the corresponding truncated_edges flags",
+    "compatibility": "NOT compatible with v1-era boxes that included the arena platform (median height difference 37 px, n=18); do not mix label conventions in one training/evaluation set"
+  },
+  "fields": {
+    "frame_id": "stable image basename",
+    "image": "relative path + sha256 + width + height",
+    "source": "{run, family, group_id, generation, sequence, split, origin_split_in_freeze}",
+    "dataset_role": "EXPLORATORY_EVAL | DEVELOPMENT | ANNOTATION_CALIBRATION | TRAIN | VALIDATION; records what the frame may be used for without deleting it",
+    "target.landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "target.class": "tower",
+    "target.present": "true/false",
+    "target.undecidable": "boolean; true only when presence itself cannot be settled",
+    "target.visibility": "FULL | PARTIAL | OCCLUDED | ABSENT | UNKNOWN",
+    "target.truncated": "boolean; derived from truncated_edges (any edge true)",
+    "target.truncated_edges": "{left, right, top, bottom} booleans; REQUIRED in v2.1",
+    "target.truncation_source": "per true edge: ANNOTATOR_VISUAL | CAPTURE_METADATA | BOTH",
+    "target.truncation_conflicts": "optional list [{edge, capture, annotator, resolution: ANNOTATOR_OVER_CAPTURE}] when capture metadata and visual annotation disagree",
+    "target.occluded": "boolean; hidden by another structure (frame-edge cutting is not occlusion)",
+    "target.ambiguous": "boolean; identity/multiple target candidates uncertain",
+    "target.ambiguous_reason": "MULTIPLE_SIMILAR_STRUCTURES | IDENTITY_UNRESOLVED | OTHER_LANDMARK_POSSIBLE | OCCLUSION_IDENTITY | NONE",
+    "target.undecidable_reason": "SIMILAR_STRUCTURE_CANDIDATE | IDENTITY_UNRESOLVED | OCCLUSION | IMAGE_QUALITY | ANNOTATOR_UNDECIDABLE",
+    "geometry.bbox_xywh": "pixels; required for present targets except full OCCLUDED",
+    "geometry.bbox_source": "ANNOTATOR_VISUAL | ANNOTATOR_VISUAL_WITH_PROJECTION_AID | PROJECTION_AID_CALIBRATED",
+    "geometry.keypoint": "{name, x, y, visible}; null when not visible",
+    "geometry.green_pixels": "integer green-cue pixel count used for the reference-availability decision; required for present frames",
+    "geometry.reference_status": "MANUAL_APPROX | UNAVAILABLE | NOT_APPLICABLE",
+    "geometry.reference_unavailable_reason": "REFERENCE_OCCLUDED | REFERENCE_OUT_OF_FRAME | REFERENCE_TOO_SMALL | REFERENCE_NOT_PRESENT | ANNOTATOR_UNDECIDABLE",
+    "geometry.reference_source": "MANUAL_VISUAL | COLOR_CUE_ASSISTED | PROJECTION_AID | TEMPLATE_ANCHOR | NOT_APPLICABLE",
+    "confusers": "list of visible structures that could confuse the detector but are not the verified target: {confuser_id, description, bbox_xywh|null, green_cue|null, verified, verification_source, verification_note, source}",
+    "candidates": "ambiguous target candidates only (v2 semantics, unchanged)",
+    "negative_type": "TARGET_ABSENT | SIMILAR_STRUCTURE | OTHER_LANDMARK | NONE",
+    "annotator.annotator_type": "AGENT_PROXY | HUMAN",
+    "annotator.annotator_id": "stable identifier",
+    "annotator.annotation_mode": "FRAME_BY_FRAME_VISUAL | BULK_CALIBRATED_WITH_FULL_VISUAL_QA",
+    "annotator.independent_of_model_dev": "boolean",
+    "annotator.independent_of_detector_cue": "boolean; must be false when reference_source=COLOR_CUE_ASSISTED",
+    "annotator.review_status": "UNREVIEWED | SELF_CHECKED | HUMAN_REVIEWED | ADJUDICATED",
+    "pixel_basis": "{image_width, image_height, fx_px, cx_px, cy_px, projection_model, bearing_formula}",
+    "notes": "free text; explain ambiguous/undecidable/confluser decisions"
+  },
+  "presence_states": [
+    {
+      "present": true,
+      "undecidable": false,
+      "meaning": "target confirmed present",
+      "geometry": "bbox required; keypoint per reference rules"
+    },
+    {
+      "present": false,
+      "undecidable": false,
+      "meaning": "target confirmed absent",
+      "geometry": "no bbox/keypoint; negative_type required; may carry unverified confusers"
+    },
+    {
+      "present": false,
+      "undecidable": true,
+      "meaning": "presence cannot be decided",
+      "geometry": "no bbox/keypoint; negative_type null; undecidable_reason required; excluded from positive and negative denominators as GT_UNOBSERVABLE"
+    }
+  ],
+  "visibility_and_truncation_rules": {
+    "definitions": {
+      "FULL": "whole target visible, no frame-edge cut, no occlusion",
+      "PARTIAL": "visible but frame-edge cut and/or partly hidden",
+      "OCCLUDED": "fully hidden behind another object",
+      "ABSENT": "target not in scene",
+      "UNKNOWN": "only with undecidable=true"
+    },
+    "truncated_edges_rule": [
+      "each of left/right/top/bottom is true iff the target structure continues past that image edge and is clipped",
+      "target.truncated = any(truncated_edges)",
+      "bbox is clipped to the visible part; no extrapolation across a true edge",
+      "truncation_source is required for every true edge: ANNOTATOR_VISUAL when seen in the image, CAPTURE_METADATA when taken from acquisition metadata, BOTH when they agree",
+      "when capture metadata and visual annotation disagree the annotator wins; record the conflict in truncation_conflicts with resolution ANNOTATOR_OVER_CAPTURE",
+      "near-family fact: the bottom base pedestal can be clipped while acquisition metadata only tracked left/right; bottom edges must be checked visually"
+    ],
+    "precedence": [
+      "full occlusion -> visibility=OCCLUDED, occluded=true, keypoint=null, reference UNAVAILABLE/REFERENCE_OCCLUDED",
+      "partial by another object -> visibility=PARTIAL, occluded=true; truncation_edges as observed",
+      "frame-edge cut -> visibility=PARTIAL, truncated_edges set; occluded=false unless also hidden",
+      "both -> visibility=PARTIAL, occluded=true, truncated_edges set; record both",
+      "none -> visibility=FULL"
+    ],
+    "constraints": [
+      "truncated must equal any(truncated_edges)",
+      "visibility FULL requires all truncated_edges false and occluded false",
+      "visibility PARTIAL requires truncated or occluded",
+      "occluded=true requires visibility PARTIAL or OCCLUDED"
+    ]
+  },
+  "reference_rules": {
+    "point": "green roof-light centre",
+    "availability_criterion": "keypoint may be non-null ONLY when geometry.green_pixels >= 3 AND the green light is visually confirmed at the annotated position; otherwise keypoint=null + reference_status=UNAVAILABLE + reference_unavailable_reason=REFERENCE_TOO_SMALL (or the specific reason)",
+    "green_pixels_recording": "geometry.green_pixels records the strict green-cue pixel count used for the decision (rule: g>=90, g-r>=25, g-b>=25, largest 4-connected component)",
+    "provenance": "reference_source=COLOR_CUE_ASSISTED requires annotator.independent_of_detector_cue=false; the anchor residual is then not independent evidence",
+    "absent_or_undecidable": "reference_status=NOT_APPLICABLE, keypoint=null"
+  },
+  "confuser_rules": {
+    "purpose": "record structures that could be mistaken for the central tower without claiming they are verified similar structures",
+    "fields": "confuser_id, description, bbox_xywh|null, green_cue|null, verified (boolean), verification_source (null | WORLD_POSE_OR_MAP_DB | HUMAN_ADJUDICATION | EXTERNAL_EVIDENCE), verification_note, source (ANNOTATOR | COLOR_CUE)",
+    "unverified": "verified=false confusers are allowed together with negative_type=TARGET_ABSENT and must never be promoted to SIMILAR_STRUCTURE",
+    "verified": "verified=true requires a non-empty verification_source and verification_note",
+    "negative_type_similar_structure": "SIMILAR_STRUCTURE and OTHER_LANDMARK require at least one verified=true confuser",
+    "no_invention": "do not invent confusers; record only structures actually visible in the frame"
+  },
+  "ambiguity_rules": {
+    "set_ambiguous": "unresolved target identity or multiple equally plausible target candidates",
+    "candidates": "ambiguous target candidates only; required when ambiguous=true",
+    "keypoint": "never emit a guessed keypoint for an ambiguous frame",
+    "training": "ambiguous frames are excluded from positive training by default"
+  },
+  "annotator_provenance": {
+    "required": [
+      "annotator_type",
+      "annotator_id",
+      "annotation_mode",
+      "independent_of_model_dev",
+      "independent_of_detector_cue",
+      "review_status"
+    ],
+    "disclosure": "AGENT_PROXY is not expert or human independent review; a hash plus process record is only process isolation, not statistical independence",
+    "bulk_mode": "BULK_CALIBRATED_WITH_FULL_VISUAL_QA must be used when bboxes were initialised from a calibrated projection prior and all frames were visually reviewed; frame-level corrections must be recorded"
+  },
+  "pixel_basis": {
+    "rule": "record actual image size and intrinsics; do not reuse intrinsics across resolutions",
+    "bearing": "image bearing = atan2(x_px - cx_px, fx_px); image angle, not world bearing or distance",
+    "measured_scale": "current 320x240 front RGB: fx=160, cx=160, cy=120, 1 px ~= 0.3581 deg; green light core 4-9 px wide (area 10-49 px) at 320x240"
+  },
+  "derived_model_format": {
+    "task": "one-class pose/detection (YOLOv8-pose candidate)",
+    "class_map": {
+      "0": "tower"
+    },
+    "keypoint_count": 1,
+    "keypoint_channels": [
+      "x",
+      "y",
+      "visibility"
+    ],
+    "visibility_values": [
+      0,
+      1
+    ],
+    "mapping_rules": [
+      "present + keypoint non-null -> bbox + (kx, ky, v=1)",
+      "present + keypoint null (green_pixels < 3 or not visible) -> bbox + placeholder coordinate (bbox centre) + v=0; v=0 excluded from anchor/bearing/coverage denominators",
+      "present + full OCCLUDED with no bbox -> no positive label",
+      "absent -> empty label file, image listed explicitly in the manifest",
+      "undecidable -> no positive label; excluded from both positive and negative denominators",
+      "ambiguous -> no positive label by default",
+      "truncated_edges -> keep the clipped box; all edge flags go to the sidecar",
+      "do not use v=2"
+    ],
+    "sidecar_required_fields": [
+      "frame_id",
+      "image_sha256",
+      "group_id",
+      "split",
+      "dataset_role",
+      "present",
+      "undecidable",
+      "visibility",
+      "truncated",
+      "truncated_edges",
+      "occluded",
+      "ambiguous",
+      "negative_type",
+      "reference_status",
+      "reference_unavailable_reason",
+      "reference_source",
+      "green_pixels",
+      "bbox_source",
+      "annotator_type",
+      "annotation_mode",
+      "independent_of_model_dev",
+      "review_status"
+    ],
+    "exporter": "src/boom_birds/evaluation/landmark_annotations.py : yolo_pose_target() (v2 and v2.1 compatible)"
+  },
+  "quality_gate": {
+    "denominator_rules": {
+      "detection_fourfold": "GT fully occluded or undecidable frames are excluded from TP/FP/FN/TN and counted separately as GT_UNOBSERVABLE",
+      "gt_unobservable_vs_model_unknown": "annotation-side GT_UNOBSERVABLE must never be merged with model-side UNKNOWN",
+      "keypoint_anchor": "anchor/bearing denominators include only present frames with keypoint non-null (v=1)",
+      "keypoint_coverage": "coverage denominator = present frames with reference_status=MANUAL_APPROX; green<3 frames are excluded and counted",
+      "absent_negative": "confirmed absent frames form the negative denominator; undecidable frames are not negatives",
+      "ambiguous": "ambiguous frames excluded from positive and negative denominators by default"
+    },
+    "required_checks": [
+      "image sha/dim and pixel_basis consistency",
+      "bbox bounds and four-edge clipping",
+      "truncated == any(truncated_edges) and per-edge truncation_source",
+      "green_pixels recorded and keypoint non-null only when green_pixels >= 3",
+      "absent/undecidable has no geometry; undecidable has no negative_type",
+      "reference_status enum and unavailable reason",
+      "confusers validated; SIMILAR_STRUCTURE requires verified confuser",
+      "bbox_source and annotation_mode enums",
+      "dataset_role enum",
+      "annotator provenance",
+      "no duplicate frame_id",
+      "letterbox/hflip roundtrip"
+    ],
+    "tool": "scripts/validate_landmark_annotations.py (v1/v2/v2.1 dispatch)",
+    "tests": "tests/evaluation/test_landmark_annotations.py"
+  },
+  "v2_to_v2_1_mapping": {
+    "target.truncated": "still present, now derived from truncated_edges",
+    "target.truncated_edges": "new",
+    "target.truncation_source / truncation_conflicts": "new",
+    "geometry.green_pixels": "new required-for-present field",
+    "geometry.bbox_source": "new",
+    "annotator.annotation_mode": "new",
+    "dataset_role": "new",
+    "confusers[]": "new (TARGET_ABSENT may carry unverified confusers)",
+    "candidates[]": "unchanged (ambiguous target candidates only)",
+    "SIMILAR_STRUCTURE": "now requires a verified confuser; unverified structures must use TARGET_ABSENT + confusers(verified=false)"
+  },
+  "open_items_for_lead_review": [
+    "approve four-edge truncation + truncation_source/conflict rules",
+    "approve the green_pixels>=3 reference-availability criterion and COLOR_CUE_ASSISTED disclosure",
+    "approve unverified confusers under TARGET_ABSENT and the SIMILAR_STRUCTURE verified-confuser requirement",
+    "approve bbox_source/annotation_mode/dataset_role for the bulk 279-frame exploratory annotation",
+    "confirm v2.1 freeze status (DRAFT -> FROZEN_FOR_DATA) and record the sha in labels/report"
+  ],
+  "lead_review": {
+    "reviewed_by": "lead",
+    "reviewed_at_local": "2026-11-04",
+    "decision": "APPROVED_ALL_OPEN_ITEMS",
+    "freeze_point": "this content is FROZEN_FOR_DATA for the 279-frame exploratory annotation and the pilot-34 development transfer; not a certification-grade annotation standard",
+    "rulings": [
+      {
+        "item": "D1 four-edge truncation + truncation_source/conflict rules",
+        "decision": "APPROVED; keep the recorded fact that capture metadata only tracked left/right"
+      },
+      {
+        "item": "D2 green_pixels>=3 reference availability + COLOR_CUE_ASSISTED disclosure",
+        "decision": "APPROVED; write into spec and QA"
+      },
+      {
+        "item": "D3 unverified confusers under TARGET_ABSENT; SIMILAR_STRUCTURE/OTHER_LANDMARK require verified confuser",
+        "decision": "APPROVED"
+      },
+      {
+        "item": "D4 bbox_source / annotation_mode / dataset_role",
+        "decision": "APPROVED; dataset_role records the pilot-34 development transfer; bulk 279 uses FRAME_BY_FRAME_VISUAL or BULK_CALIBRATED_WITH_FULL_VISUAL_QA and must record visual review"
+      },
+      {
+        "item": "D5 freeze status",
+        "decision": "DRAFT -> FROZEN_FOR_DATA; record the final sha256 in the label manifest and report"
+      }
+    ],
+    "record_note": "any later change produces v2.2 with a diff note; this frozen record is not rewritten"
+  },
+  "frozen_summary": {
+    "status": "FROZEN_FOR_DATA",
+    "frozen_at_local": "2026-11-04",
+    "sha256_recorded_in": "outputs/perception/final_exploratory_20261104/labels_v1.json + labels_manifest.json + FINAL_EXPLORATORY_ANNOTATION_20261104.md",
+    "backward_compatibility": "v1 and v2 documents continue to validate unchanged"
+  }
+}

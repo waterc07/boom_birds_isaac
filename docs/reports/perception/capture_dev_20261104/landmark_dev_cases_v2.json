@@ -1,0 +1,1004 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "lmf_dev_inner_north",
+      "start_region": "W",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          -9.4,
+          1,
+          0.512
+        ],
+        [
+          -8.8,
+          2.6,
+          1
+        ],
+        [
+          -2,
+          3.1,
+          1
+        ],
+        [
+          6,
+          3,
+          1
+        ],
+        [
+          8.6,
+          2.6,
+          1
+        ],
+        [
+          9.4,
+          0.6,
+          0.9
+        ]
+      ],
+      "corridor_y": 3,
+      "note": "inner-north corridor W->E at y about +3.0 (not the north perimeter corridor at y=5.8, not the south corridor); new approach into E from the north"
+    },
+    {
+      "route_id": "lmf_dev_inner_south",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          9.4,
+          -1.2,
+          1
+        ],
+        [
+          8,
+          -3,
+          1.1
+        ],
+        [
+          3,
+          -3,
+          1.1
+        ],
+        [
+          7,
+          -2.2,
+          1
+        ],
+        [
+          9.2,
+          -0.4,
+          1
+        ]
+      ],
+      "corridor_y": -3,
+      "note": "inner-south out-and-back approach: E -> y=-3.0 heading west -> return to E; target seen from the south side and from far range; new family, not the south corridor"
+    },
+    {
+      "route_id": "lmf_dev_static_high",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          8,
+          1,
+          1.7
+        ],
+        [
+          8.5,
+          1.3,
+          1.75
+        ],
+        [
+          8.2,
+          0.6,
+          1.65
+        ],
+        [
+          8.7,
+          0.9,
+          1.7
+        ]
+      ],
+      "corridor_y": null,
+      "note": "new static-ish high/far view (z=1.65-1.75, target above optical axis slightly)"
+    },
+    {
+      "route_id": "lmf_dev_static_low",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          9.9,
+          -1,
+          1.3
+        ],
+        [
+          9.6,
+          -0.6,
+          1.35
+        ],
+        [
+          10.1,
+          -0.7,
+          1.3
+        ],
+        [
+          9.8,
+          -1.2,
+          1.3
+        ]
+      ],
+      "corridor_y": null,
+      "note": "new static-ish low oblique view close to the target (1.9-2.1 m)"
+    },
+    {
+      "route_id": "lmf_dev_static_negative",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          10,
+          1.4,
+          1.2
+        ],
+        [
+          9.7,
+          1.1,
+          1.25
+        ],
+        [
+          10.2,
+          1,
+          1.2
+        ],
+        [
+          9.8,
+          1.5,
+          1.2
+        ]
+      ],
+      "corridor_y": null,
+      "note": "new static-ish negative pose yaw=+2.2 rad; central tower outside the field of view"
+    },
+    {
+      "route_id": "lmf_dev_hn1_confuser",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          8.6,
+          -0.2,
+          1.2
+        ],
+        [
+          8.5,
+          0.6,
+          1.25
+        ],
+        [
+          8.9,
+          0,
+          1.3
+        ],
+        [
+          8.4,
+          0.8,
+          1.2
+        ]
+      ],
+      "corridor_y": null,
+      "note": "HN1: yaw=+pi/2 faces +Y; synthetic green-light confuser at (8.5,4.2) is in view while the central tower is behind the camera"
+    },
+    {
+      "route_id": "lmf_dev_hn2_occluder",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "collection_family",
+      "corridor_waypoints": [
+        [
+          9,
+          -0.5,
+          1
+        ],
+        [
+          9.3,
+          0.3,
+          1.1
+        ],
+        [
+          8.8,
+          0.8,
+          1
+        ],
+        [
+          9.2,
+          0,
+          1.1
+        ]
+      ],
+      "corridor_y": null,
+      "note": "HN2: facing +X with a synthetic wall between camera and central tower; target exists but is fully occluded"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "lmf_dev_inner_north_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_inner_north",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.4,
+        1,
+        0.512
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.4,
+        0.6,
+        0.9
+      ],
+      "waypoints": [
+        [
+          -9.4,
+          1,
+          0.512
+        ],
+        [
+          -8.8,
+          2.6,
+          1
+        ],
+        [
+          -2,
+          3.1,
+          1
+        ],
+        [
+          6,
+          3,
+          1
+        ],
+        [
+          8.6,
+          2.6,
+          1
+        ],
+        [
+          9.4,
+          0.6,
+          0.9
+        ]
+      ],
+      "timeout_s": 150,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=val; family=inner_north; new corridor at y about +3.0 and new north-side approach into E; conditions: normal/scale/late edge-near"
+    },
+    {
+      "case_id": "lmf_dev_inner_south_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_inner_south",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.4,
+        -1.2,
+        1
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.2,
+        -0.4,
+        1
+      ],
+      "waypoints": [
+        [
+          9.4,
+          -1.2,
+          1
+        ],
+        [
+          8,
+          -3,
+          1.1
+        ],
+        [
+          3,
+          -3,
+          1.1
+        ],
+        [
+          7,
+          -2.2,
+          1
+        ],
+        [
+          9.2,
+          -0.4,
+          1
+        ]
+      ],
+      "timeout_s": 90,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=train; family=inner_south; out-and-back approach from the south; conditions: normal/scale(3.5-8.5 m)/left-edge near-far"
+    },
+    {
+      "case_id": "lmf_dev_static_high_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_static_high",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8,
+        1,
+        1.7
+      ],
+      "start_yaw_rad": 0.05,
+      "goal_position_world_m": [
+        8,
+        1,
+        1.7
+      ],
+      "waypoints": [
+        [
+          8,
+          1,
+          1.7
+        ],
+        [
+          8.5,
+          1.3,
+          1.75
+        ],
+        [
+          8.2,
+          0.6,
+          1.65
+        ],
+        [
+          8.7,
+          0.9,
+          1.7
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=train; family=static_high_far; new static viewpoint z=1.7 at 3.7-4.3 m; conditions: normal/scale/high elevation"
+    },
+    {
+      "case_id": "lmf_dev_static_low_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_static_low",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.9,
+        -1,
+        1.3
+      ],
+      "start_yaw_rad": 0.2,
+      "goal_position_world_m": [
+        9.8,
+        -1.2,
+        1.3
+      ],
+      "waypoints": [
+        [
+          9.9,
+          -1,
+          1.3
+        ],
+        [
+          9.6,
+          -0.6,
+          1.35
+        ],
+        [
+          10.1,
+          -0.7,
+          1.3
+        ],
+        [
+          9.8,
+          -1.2,
+          1.3
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=val; family=static_low_oblique; new low oblique close view (1.9-2.1 m) with yaw +0.2 rad; conditions: near/yaw/partial truncation"
+    },
+    {
+      "case_id": "lmf_dev_static_negative_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_static_negative",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        10,
+        1.4,
+        1.2
+      ],
+      "start_yaw_rad": 2.2,
+      "goal_position_world_m": [
+        9.8,
+        1.5,
+        1.2
+      ],
+      "waypoints": [
+        [
+          10,
+          1.4,
+          1.2
+        ],
+        [
+          9.7,
+          1.1,
+          1.25
+        ],
+        [
+          10.2,
+          1,
+          1.2
+        ],
+        [
+          9.8,
+          1.5,
+          1.2
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=train; family=target_out_of_view_negative; new negative pose yaw=+2.2 rad; central tower outside FOV (presence to be confirmed on images)"
+    },
+    {
+      "case_id": "lmf_dev_hn1_confuser_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_hn1_confuser",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.6,
+        -0.2,
+        1.2
+      ],
+      "start_yaw_rad": 1.5707963267948966,
+      "goal_position_world_m": [
+        8.4,
+        0.8,
+        1.2
+      ],
+      "waypoints": [
+        [
+          8.6,
+          -0.2,
+          1.2
+        ],
+        [
+          8.5,
+          0.6,
+          1.25
+        ],
+        [
+          8.9,
+          0,
+          1.3
+        ],
+        [
+          8.4,
+          0.8,
+          1.2
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "injection_id": "hn1_confuser_v1",
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=val; family=HN1 green-light similar structure (synthetic confuser injection hn1_confuser_v1); central tower out of view (yaw +pi/2)"
+    },
+    {
+      "case_id": "lmf_dev_hn2_occluder_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "lmf_dev_hn2_occluder",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9,
+        -0.5,
+        1
+      ],
+      "start_yaw_rad": 0,
+      "goal_position_world_m": [
+        9.2,
+        0,
+        1.1
+      ],
+      "waypoints": [
+        [
+          9,
+          -0.5,
+          1
+        ],
+        [
+          9.3,
+          0.3,
+          1.1
+        ],
+        [
+          8.8,
+          0.8,
+          1
+        ],
+        [
+          9.2,
+          0,
+          1.1
+        ]
+      ],
+      "timeout_s": 60,
+      "repeats": 1,
+      "injection_id": "hn2_occluder_v1",
+      "obstacle": {
+        "obstacle_id": "obs_dev_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0,
+          0,
+          50
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "dev split=val; family=HN2 full occlusion (synthetic visual-only wall injection hn2_occluder_v1); central tower present but fully hidden"
+    }
+  ],
+  "scene_injections": {
+    "hn1_confuser_v1": {
+      "purpose": "HN1 hard negative: synthetic tower-like confuser with a green top light, placed north of the E-area camera so it is in view while the central tower is behind the camera",
+      "synthetic_intervention": true,
+      "not_arena_asset": true,
+      "distribution_disclaimer": "synthetic confuser constructed for this capture only; it is NOT part of the RMUC2027 arena asset and does NOT represent the real-arena distribution of similar structures",
+      "visual_only": true,
+      "collision_enabled": false,
+      "placement_method": "spawned as USDGeom prims at /World/DevInjection_hn1_confuser_v1_partNN, active only during the associated case episode; material PreviewSurfaceCfg (diffuse + emissive), no rigid body / no collision",
+      "world_pose_note": "prims are static world poses; parent /World (identity)",
+      "parts": [
+        {
+          "name": "pedestal",
+          "kind": "cuboid",
+          "size_m": [
+            0.9,
+            0.9,
+            0.2
+          ],
+          "translation_center_m": [
+            8.5,
+            4.2,
+            0.18
+          ],
+          "diffuse_color": [
+            0.72,
+            0.72,
+            0.72
+          ],
+          "emissive_color": [
+            0,
+            0,
+            0
+          ],
+          "roughness": 0.6
+        },
+        {
+          "name": "body",
+          "kind": "cylinder",
+          "radius_m": 0.3,
+          "height_m": 1.5,
+          "axis": "Z",
+          "translation_center_m": [
+            8.5,
+            4.2,
+            1.03
+          ],
+          "diffuse_color": [
+            0.55,
+            0.56,
+            0.58
+          ],
+          "emissive_color": [
+            0,
+            0,
+            0
+          ],
+          "roughness": 0.5
+        },
+        {
+          "name": "top_bar",
+          "kind": "cuboid",
+          "size_m": [
+            1.5,
+            0.18,
+            0.12
+          ],
+          "translation_center_m": [
+            8.5,
+            4.2,
+            1.84
+          ],
+          "diffuse_color": [
+            0.45,
+            0.46,
+            0.48
+          ],
+          "emissive_color": [
+            0,
+            0,
+            0
+          ],
+          "roughness": 0.5
+        },
+        {
+          "name": "green_light",
+          "kind": "sphere",
+          "radius_m": 0.1,
+          "translation_center_m": [
+            8.5,
+            4.2,
+            1.93
+          ],
+          "diffuse_color": [
+            0.1,
+            0.65,
+            0.15
+          ],
+          "emissive_color": [
+            0.05,
+            0.9,
+            0.1
+          ],
+          "roughness": 0.4
+        }
+      ]
+    },
+    "hn2_occluder_v1": {
+      "purpose": "HN2 hard negative: synthetic visual-only wall between the E-area camera and the central tower so the tower is fully occluded while it remains present in the scene",
+      "synthetic_intervention": true,
+      "not_arena_asset": true,
+      "distribution_disclaimer": "synthetic occluder constructed for this capture only; it is NOT part of the RMUC2027 arena asset",
+      "visual_only": true,
+      "collision_enabled": false,
+      "placement_method": "spawned as USDGeom cuboid at /World/DevInjection_hn2_occluder_v1_part00, active only during the associated case episode; no rigid body / no collision",
+      "camera_tower_occluder_relationship": {
+        "tower_reference_world_m": [
+          11.52,
+          -0.01,
+          1.25
+        ],
+        "camera_patrol_box_m": {
+          "x": [
+            8.8,
+            9.3
+          ],
+          "y": [
+            -0.5,
+            0.8
+          ],
+          "z": [
+            1,
+            1.1
+          ]
+        },
+        "occluder_center_world_m": [
+          10.6,
+          0,
+          0.95
+        ],
+        "occluder_size_m": [
+          0.4,
+          2.4,
+          1.9
+        ],
+        "geometry_check": "for the patrol box, the line of sight from camera to every sampled tower point (light, top-bar ends, body/pedestal corners, z from 0.0 to about 1.9 m) crosses x=10.4..10.8 inside |y|<=1.2 and 0<=z<=1.9; wall top 1.9 m at 1.6 m range keeps the tower top (about 1.9 m) below the sight line over the wall (needs z>2.36 m to peek)"
+      },
+      "parts": [
+        {
+          "name": "wall",
+          "kind": "cuboid",
+          "size_m": [
+            0.4,
+            2.4,
+            1.9
+          ],
+          "translation_center_m": [
+            10.6,
+            0,
+            0.95
+          ],
+          "diffuse_color": [
+            0.62,
+            0.62,
+            0.64
+          ],
+          "emissive_color": [
+            0,
+            0,
+            0
+          ],
+          "roughness": 0.7
+        }
+      ]
+    }
+  },
+  "split_plan": {
+    "purpose": "new dev trajectory/pose families; train/val both get new data so validation is no longer only the north corridor",
+    "train_cases": [
+      "lmf_dev_inner_south_0",
+      "lmf_dev_static_high_0",
+      "lmf_dev_static_negative_0"
+    ],
+    "val_cases": [
+      "lmf_dev_inner_north_0",
+      "lmf_dev_static_low_0",
+      "lmf_dev_hn1_confuser_0",
+      "lmf_dev_hn2_occluder_0"
+    ],
+    "family_by_case": {
+      "lmf_dev_inner_north_0": {
+        "family": "dev_inner_north",
+        "split": "val"
+      },
+      "lmf_dev_inner_south_0": {
+        "family": "dev_inner_south",
+        "split": "train"
+      },
+      "lmf_dev_static_high_0": {
+        "family": "dev_static_high_far",
+        "split": "train"
+      },
+      "lmf_dev_static_low_0": {
+        "family": "dev_static_low_oblique",
+        "split": "val"
+      },
+      "lmf_dev_static_negative_0": {
+        "family": "dev_target_out_of_view_negative",
+        "split": "train"
+      },
+      "lmf_dev_hn1_confuser_0": {
+        "family": "dev_HN1_similar_structure",
+        "split": "val"
+      },
+      "lmf_dev_hn2_occluder_0": {
+        "family": "dev_HN2_full_occlusion",
+        "split": "val"
+      }
+    },
+    "groups_rule": "one physical trajectory/pose family per group; no frame-random split; HN1/HN2 synthetic families are val-only and must never be mixed into the sealed final pool",
+    "conditions": {
+      "normal_front": [
+        "lmf_dev_inner_north_0",
+        "lmf_dev_inner_south_0",
+        "lmf_dev_static_high_0",
+        "lmf_dev_static_low_0"
+      ],
+      "scale_distance": [
+        "lmf_dev_inner_north_0",
+        "lmf_dev_inner_south_0",
+        "lmf_dev_static_high_0",
+        "lmf_dev_static_low_0"
+      ],
+      "yaw_lateral": [
+        "lmf_dev_inner_south_0",
+        "lmf_dev_static_low_0"
+      ],
+      "occlusion_truncation": [
+        "lmf_dev_inner_north_0",
+        "lmf_dev_inner_south_0",
+        "lmf_dev_static_low_0"
+      ],
+      "target_absent": [
+        "lmf_dev_static_negative_0"
+      ],
+      "HN1_similar_structure": [
+        "lmf_dev_hn1_confuser_0"
+      ],
+      "HN2_full_occlusion": [
+        "lmf_dev_hn2_occluder_0"
+      ]
+    }
+  },
+  "notes": [
+    "dev capture 2026-11-04; visible foreground GUI; sensor shadow measured_hard_reset defaults; no changes to configs/sensors/sensor_shadow_v1.json semantics",
+    "HN1 confuser and HN2 occluder are synthetic interventions for this capture only (visual-only USDGeom prims, no collision); they are not arena assets and must not be described as real-arena distribution",
+    "no E-area lateral sweep / south corridor / north perimeter corridor family is reused as a new family here"
+  ]
+}

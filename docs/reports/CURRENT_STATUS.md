@@ -12,7 +12,7 @@
 | 延迟和净空 | 到达队列、模拟双时钟、clearance 字段化、有限制动支持区间 | [延迟](map_eval/MAP_LATENCY_ENVELOPE_REPORT.md)、[边界](map_eval/MAP_CLEARANCE_BOUNDARY_REPORT.md)；旧结果的验收变更和包络修正须一并阅读 |
 | 单环境接触评价 | hard reset、分离握手、generation、原始向量 L2 读出、真实碰撞几何包络；新模式已成为单环境动态入口默认 | [自由飞行阳性](map_eval/contact_envelope/DSH_FREE_FLIGHT_POSITIVE_20261103.md)、[默认升级](map_eval/contact_envelope/DSH_DYNAMIC_DEFAULT_UPGRADE_20261103.md)；零测力仍 UNKNOWN，传送后陈旧力未做底层修复 |
 | 模拟传感器 | 渲染 RGB/深度、v2 消息溯源和 shadow 消费 | [采集](map_eval/contact_envelope/DSH_SENSOR_SHADOW_20261103.md)、[统计与时间勘误](map_eval/contact_envelope/DSH_SENSOR_SHADOW_ERRATA_20261103.md)；SIM_UPDATE_SAMPLE_TIME 不是真实曝光时间，单像素深度不是 ToF 或目标距离 |
-| 自然地标感知 | 模板和几何/绿灯消费者已完成有界实验，均停止作为当前主候选；训练前任务定义、数据准备、标注可用性与许可证据已闭环到准入判定 | [独立测试](perception/DSH_LANDMARK_INDEPENDENT_20261103.md)、[根因审查](perception/DSH_LANDMARK_ROOT_CAUSE_20261103.md)、[几何方法](perception/DSH_GEOMETRY_GREEN_20261104.md)、**[训练准入结论](perception/TRAINING_ADMISSION_20261104.md)**；软件交付完成，感知/导航能力未达标，不进入地标关联控制 |
+| 自然地标感知 | 模板和几何/绿灯消费者已完成有界实验，均停止作为当前主候选；训练前任务定义、数据准备、标注可用性、许可证据闭环到准入判定；**2026-11-04 二阶段完成有界训练与一次性 exploratory 评价（效果门未达）** | [独立测试](perception/DSH_LANDMARK_INDEPENDENT_20261103.md)、[根因审查](perception/DSH_LANDMARK_ROOT_CAUSE_20261103.md)、[几何方法](perception/DSH_GEOMETRY_GREEN_20261104.md)、**[训练准入结论](perception/TRAINING_ADMISSION_20261104.md)**；软件交付完成，感知/导航能力未达标，不进入地标关联控制 |
 
 ## 地标训练前闭环（2026-11-04 工作包）
 
@@ -22,6 +22,16 @@
 - 标注：盲复标 21 帧/33 旧记录，bbox IoU 0.649、绿灯 keypoint 1.155 px（0.414°）、不可判定 19.0%、visibility 5/21 分歧；旧 .036° anchor 被证实为同源绿色质心循环证据；规范缺口升 [spec v2](../../configs/perception/landmark_annotation_spec_v2.json)。final 池试点标注 34/279 帧（25 正/9 负）v2 校验 **PASS 34/34**，暴露 P1–P3 三项可执行性缺口 → 完整标签前先出 spec v2.1。见 [标注可用性报告](perception/annotation_verify_20261104/ANNOTATION_VERIFICATION_20261104.md) 与 [试点标注报告](perception/annotation_verify_20261104/FINAL_POOL_PILOT_ANNOTATION_20261104.md)。
 - 许可/部署：[证据清单](perception/license_evidence_20261104/LICENSE_AND_EXPORT_EVIDENCE_20261104.md)：AGPL-3.0 原文确证、AGPL 义务/权重衍生未决、RKNN-Toolkit2 为专有许可、RTX 5080 sm_120 与 torch 2.7.0+cu128 有证据、自定义 1-keypoint ONNX/RKNN 路径 UNKNOWN；不擅自认定接受 AGPL、不自动切备选。
 - 需用户决定的最少事项：许可路线；final 标注与开发的独立性/是否投入 ≥2 独立人工标注；原始数据外部备份。详见 [训练准入结论 §8](perception/TRAINING_ADMISSION_20261104.md)。
+
+## 地标探索实验执行（2026-11-04 二阶段）
+
+- 结果：**链路全部跑通、模型效果未达计划门限、认证未完成**。详见 [探索实验结果](perception/LANDMARK_EXPLORATORY_RESULTS_20261104.md) 与 [训练执行报告](perception/training_20261104/TRAINING_20261104.md)。
+- 数据：[dev v3](../../configs/perception/landmark_split_freeze_v3.json)（train 10 组/train 1475 帧、val 7 组/816 帧含 HN1/HN2）、[暴露登记](../../configs/perception/landmark_exposure_registry_v1.json)（26 exposed / 6 exploratory / 0 untouched）、final 6 族整体 exploratory；泄漏审计 0；外部产物 3695 帧可读/hash 一致。
+- 标注：[spec v2.1](../../configs/perception/landmark_annotation_spec_v2_1.json) FROZEN；dev train 160/val 134 帧、final exploratory 279 帧完整标注（代理标注，非人工独立）；U1/U2 唯一性假设被 map-native 绿灯相似结构 MS1 证伪。
+- 训练：隔离 `.venv/landmark-train`（torch 2.7.0+cu128/ultralytics 8.2.0）；3 seed × 60 epoch；val joint 0.484/0.579/0.442 → 选中 seed1；[模型/阈值冻结](../../configs/perception/landmark_model_freeze_v1.json)（tau_conf 0.605476，仅 val）。
+- 一次性 exploratory final（279 帧，只读一次）：presence TP218/FP0/FN20/TN41（P1.000/R0.916）、reference coverage 62/218=0.284、joint 71/238=0.298、identity P1.000（池内无已验证 HN1，不作认证）；anchor 正确子集中位 1.95 px / bearing 0.30°；最差 lmf_near joint 3/23。
+- 工程发现：YOLO 标签坐标域 bug（模型画布归一化误写 txt）已用 loader 复现并修复，旧 30 epoch 运行判 INVALID；ONNX opset18 主机数值一致；RKNN/板端 UNKNOWN/NOT RUN。
+- 认证缺口：许可分发、独立人工标注、未触碰 sealed final、false-match 分母、RK3576 板卡、真实相机/场地、重复性——C1–C8 多数 INCOMPLETE/UNKNOWN。
 
 ## 当前能力限制
 

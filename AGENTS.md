@@ -13,7 +13,7 @@
 
 ## 当前状态与延续入口（2026-11-04）
 
-先查 [当前状态索引](docs/reports/CURRENT_STATUS.md) 和最新工作包交接，再使用下方历史记录。单环境动态评价已默认使用 `reference_origin_v2` / `measured_hard_reset`；传感器和地标感知仅 shadow。模板与几何/绿灯候选已按独立测试停止，不进入关联/控制。2026-11-04 已完成地标训练前闭环与数据准备（任务/实验定义、dev 划分冻结、6 族 279 帧 final 池 GUI 采集与封存、盲复标与 spec v2、许可与导出证据），训练准入判定 **INCOMPLETE**、训练启动 **BLOCKED**（许可需用户决策，final 标签未生产）；不自动开始训练、不自动切换备选模型。真实 PX4 Sender、板端 Student、项目 PPO 和各 Gate 均未完成验收。
+先查 [当前状态索引](docs/reports/CURRENT_STATUS.md) 和最新工作包交接，再使用下方历史记录。单环境动态评价已默认使用 `reference_origin_v2` / `measured_hard_reset`；传感器和地标感知仅 shadow。模板与几何/绿灯候选已按独立测试停止，不进入关联/控制。2026-11-04 已完成地标训练前闭环与数据准备（任务/实验定义、dev 划分冻结、6 族 279 帧 final 池 GUI 采集与封存、盲复标与 spec v2、许可与导出证据），训练准入判定 **INCOMPLETE**、训练启动 **BLOCKED**（许可需用户决策，final 标签未生产）；不自动开始训练、不自动切换备选模型。同日二阶段在用户**仅内部有界研究**授权下完成探索实验：dev v3 冻结与泄漏审计、spec v2.1 全程标注、隔离 venv + 3 seed×60 epoch 有界训练、仅 val 冻结阈值、final 改为 exploratory 且只评一次；结果为 presence P1.000/R0.916、joint 0.298、效果门未达，**能力认证 INCOMPLETE**，不提升 Gate。真实 PX4 Sender、板端 Student、项目 PPO 和各 Gate 均未完成验收。
 
 ## 历史状态与证据索引
 

@@ -1,0 +1,34 @@
+{
+  "schema_version": "dsh.annotation_qa.v1",
+  "document_schema_version": "dsh.tower_annotation.v2_1",
+  "annotations": "docs\\reports\\perception\\annotation_verify_20261104\\pilot\\v2_1_example_annotations.json",
+  "annotations_sha256": "90a0663cf65b0d004c75f90aec6e288e4d2c452a653f5d357d97aa0d9490f902",
+  "root": ".",
+  "count": 5,
+  "errors": [],
+  "warnings": [],
+  "overlays": [
+    {
+      "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+      "overlay_sha256": "1bbfb1cab6c0dde469c3d8eb1c266642d4f8bdfb0168e953544ab97938bff958"
+    },
+    {
+      "frame_id": "lmf_near_0-follow_only_g3_5.png",
+      "overlay_sha256": "186dabe5a6714b4b59c04504b009966d360db61bb526923d064035d37a36fcdb"
+    },
+    {
+      "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+      "overlay_sha256": "4ddb5406edaafc07a2e2ccc3ef889b862028668e92bb44ac8e64b235260c941f"
+    },
+    {
+      "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+      "overlay_sha256": "ae1b0d5a806d172123728aeb78495a9931d89b3d06c4a36d795affcdfb7c2d32"
+    },
+    {
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+      "overlay_sha256": "f03c950691456c551d26bd26e36a8cf834d67dd93433c6abcab78e5c533c813f"
+    }
+  ],
+  "status": "PASS",
+  "limits": "schema v1/v2 data QA only (coordinates, enums, combination rules); agent proxy annotations are not expert or human independent review; not a sealed test"
+}

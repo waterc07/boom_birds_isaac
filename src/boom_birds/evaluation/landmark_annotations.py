@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw
 
 ANNOTATION_VERSION = 'dsh.tower_annotation.v1'
 ANNOTATION_VERSION_V2 = 'dsh.tower_annotation.v2'
+ANNOTATION_VERSION_V2_1 = 'dsh.tower_annotation.v2_1'
 BBOX_FORMAT = 'xywh_pixels_origin_top_left'
 
 VISIBILITY_VALUES = ('FULL', 'PARTIAL', 'OCCLUDED', 'ABSENT', 'UNKNOWN')
@@ -31,6 +32,16 @@ UNDECIDABLE_REASONS = ('SIMILAR_STRUCTURE_CANDIDATE', 'IDENTITY_UNRESOLVED',
 ANNOTATOR_TYPES = ('AGENT_PROXY', 'HUMAN')
 REVIEW_STATUSES = ('UNREVIEWED', 'SELF_CHECKED', 'HUMAN_REVIEWED', 'ADJUDICATED')
 PIXEL_PROJECTION_MODELS = ('PINHOLE',)
+TRUNCATION_SOURCES = ('ANNOTATOR_VISUAL', 'CAPTURE_METADATA', 'BOTH')
+TRUNCATION_EDGES = ('left', 'right', 'top', 'bottom')
+BBOX_SOURCES = ('ANNOTATOR_VISUAL', 'ANNOTATOR_VISUAL_WITH_PROJECTION_AID',
+                'PROJECTION_AID_CALIBRATED')
+ANNOTATION_MODES = ('FRAME_BY_FRAME_VISUAL', 'BULK_CALIBRATED_WITH_FULL_VISUAL_QA')
+DATASET_ROLES = ('EXPLORATORY_EVAL', 'DEVELOPMENT', 'ANNOTATION_CALIBRATION',
+                 'TRAIN', 'VALIDATION')
+CONFLUSER_SOURCES = ('ANNOTATOR', 'COLOR_CUE')
+CONFLUSER_VERIFICATION_SOURCES = ('WORLD_POSE_OR_MAP_DB', 'HUMAN_ADJUDICATION',
+                                  'EXTERNAL_EVIDENCE')
 
 
 def _sha(path):
@@ -41,7 +52,9 @@ def validate_document(document, root: Path):
     """Validate a v1 or v2 annotation document; v1 documents stay supported."""
     version = document.get('schema_version')
     if version == ANNOTATION_VERSION_V2:
-        return _validate_v2(document, root)
+        return _validate_common(document, root, v21=False)
+    if version == ANNOTATION_VERSION_V2_1:
+        return _validate_common(document, root, v21=True)
     if version == ANNOTATION_VERSION:
         return _validate_v1(document, root)
     return ['unsupported schema_version'], []
@@ -220,8 +233,8 @@ def _valid_point(point, width, height, what):
     return None
 
 
-def _validate_v2(document, root: Path):
-    """Strict validation for dsh.tower_annotation.v2 (see spec v2)."""
+def _validate_common(document, root: Path, v21: bool = False):
+    """Strict validation for dsh.tower_annotation.v2 and v2_1."""
     errors = []
     warnings = []
     root = Path(root)
@@ -346,9 +359,16 @@ def _validate_v2(document, root: Path):
             elif negative_type not in NEGATIVE_TYPES_V2:
                 errors.append(prefix + ': negative_type must be one of ' +
                               ', '.join(NEGATIVE_TYPES_V2))
-            if negative_type in ('SIMILAR_STRUCTURE', 'OTHER_LANDMARK') and not candidates:
-                errors.append(prefix + ': negative_type=' + negative_type +
-                              ' requires candidates (record the competing structure)')
+            if negative_type in ('SIMILAR_STRUCTURE', 'OTHER_LANDMARK'):
+                if v21:
+                    if not any(isinstance(c, dict) and c.get('verified') is True
+                               for c in (item.get('confusers') or [])):
+                        errors.append(prefix + ': negative_type=' + negative_type +
+                                      ' requires at least one verified confuser '
+                                      '(unverified structures use TARGET_ABSENT + confusers)')
+                elif not candidates:
+                    errors.append(prefix + ': negative_type=' + negative_type +
+                                  ' requires candidates (record the competing structure)')
             if reference_status != 'NOT_APPLICABLE':
                 errors.append(prefix + ': absent target reference_status must be NOT_APPLICABLE')
         elif present is False and undecidable is True:
@@ -446,18 +466,139 @@ def _validate_v2(document, root: Path):
                 errors.append(prefix + ': candidates are only allowed for ambiguous frames '
                               'or SIMILAR_STRUCTURE/OTHER_LANDMARK negatives')
 
+        if v21:
+            edges = target.get('truncated_edges')
+            if not isinstance(edges, dict) or set(edges) != set(TRUNCATION_EDGES):
+                errors.append(prefix + ': truncated_edges must have exactly left/right/top/bottom')
+                edges = {}
+            else:
+                for edge in TRUNCATION_EDGES:
+                    if not isinstance(edges.get(edge), bool):
+                        errors.append(prefix + ': truncated_edges.' + edge + ' must be boolean')
+                if isinstance(truncated, bool) and truncated != any(
+                        edges.get(edge) is True for edge in TRUNCATION_EDGES):
+                    errors.append(prefix + ': truncated must equal any(truncated_edges)')
+            source_map = target.get('truncation_source') or {}
+            if not isinstance(source_map, dict):
+                errors.append(prefix + ': truncation_source must be an object')
+                source_map = {}
+            for edge, value in source_map.items():
+                if edge not in TRUNCATION_EDGES:
+                    errors.append(prefix + ': truncation_source has unknown edge ' + str(edge))
+                if value not in TRUNCATION_SOURCES:
+                    errors.append(prefix + ': truncation_source[' + str(edge) +
+                                  '] must be one of ' + ', '.join(TRUNCATION_SOURCES))
+            if isinstance(edges, dict):
+                for edge in TRUNCATION_EDGES:
+                    if edges.get(edge) is True and edge not in source_map:
+                        errors.append(prefix + ': truncation_source missing for true edge ' + edge)
+                    if edges.get(edge) is False and edge in source_map:
+                        errors.append(prefix + ': truncation_source set for non-truncated edge ' + edge)
+            conflicts = target.get('truncation_conflicts') or []
+            if not isinstance(conflicts, list):
+                errors.append(prefix + ': truncation_conflicts must be a list')
+            else:
+                for cindex, conflict in enumerate(conflicts):
+                    cprefix = prefix + ': truncation_conflicts[%d]' % cindex
+                    if not isinstance(conflict, dict):
+                        errors.append(cprefix + ': conflict must be an object')
+                        continue
+                    if conflict.get('edge') not in TRUNCATION_EDGES:
+                        errors.append(cprefix + ': edge must be one of ' + ', '.join(TRUNCATION_EDGES))
+                    if not isinstance(conflict.get('capture'), bool) or \
+                            not isinstance(conflict.get('annotator'), bool):
+                        errors.append(cprefix + ': capture/annotator must be booleans')
+                    if conflict.get('resolution') != 'ANNOTATOR_OVER_CAPTURE':
+                        errors.append(cprefix + ': resolution must be ANNOTATOR_OVER_CAPTURE')
+            green_pixels = geometry.get('green_pixels')
+            if present is True and not isinstance(green_pixels, int):
+                errors.append(prefix + ': green_pixels required for present frames')
+            if isinstance(green_pixels, int):
+                if green_pixels < 0:
+                    errors.append(prefix + ': green_pixels must be >= 0')
+                if keypoint is not None and green_pixels < 3:
+                    errors.append(prefix + ': keypoint requires green_pixels >= 3 '
+                                  '(reference availability criterion)')
+            if geometry.get('bbox_source') not in BBOX_SOURCES:
+                errors.append(prefix + ': bbox_source must be one of ' +
+                              ', '.join(BBOX_SOURCES))
+            if annotator.get('annotation_mode') not in ANNOTATION_MODES:
+                errors.append(prefix + ': annotation_mode must be one of ' +
+                              ', '.join(ANNOTATION_MODES))
+            if item.get('dataset_role') not in DATASET_ROLES:
+                errors.append(prefix + ': dataset_role must be one of ' +
+                              ', '.join(DATASET_ROLES))
+            confusers = item.get('confusers') or []
+            if not isinstance(confusers, list):
+                errors.append(prefix + ': confusers must be a list')
+                confusers = []
+            for kindex, confuser in enumerate(confusers):
+                kprefix = prefix + ': confusers[%d]' % kindex
+                if not isinstance(confuser, dict):
+                    errors.append(kprefix + ': confuser must be an object')
+                    continue
+                if not confuser.get('confuser_id'):
+                    errors.append(kprefix + ': confuser missing confuser_id')
+                if not confuser.get('description'):
+                    errors.append(kprefix + ': confuser missing description')
+                if confuser.get('source') not in CONFLUSER_SOURCES:
+                    errors.append(kprefix + ': confuser source must be one of ' +
+                                  ', '.join(CONFLUSER_SOURCES))
+                if not isinstance(confuser.get('verified'), bool):
+                    errors.append(kprefix + ': confuser verified must be boolean')
+                if confuser.get('verified') is True:
+                    if confuser.get('verification_source') not in CONFLUSER_VERIFICATION_SOURCES:
+                        errors.append(kprefix + ': verified confuser requires verification_source in ' +
+                                      ', '.join(CONFLUSER_VERIFICATION_SOURCES))
+                    if not confuser.get('verification_note'):
+                        errors.append(kprefix + ': verified confuser requires verification_note')
+                elif confuser.get('verification_source') is not None:
+                    errors.append(kprefix + ': unverified confuser must not carry verification_source')
+                if confuser.get('bbox_xywh') is not None:
+                    problem = _valid_bbox(confuser['bbox_xywh'], width, height)
+                    if problem:
+                        errors.append(kprefix + ': ' + problem)
+                if confuser.get('green_cue') is not None:
+                    problem = _valid_point(confuser['green_cue'], width, height,
+                                           'confuser green_cue')
+                    if problem:
+                        errors.append(kprefix + ': ' + problem)
+                if confuser.get('bbox_xywh') is None and confuser.get('green_cue') is None:
+                    errors.append(kprefix + ': confuser needs bbox_xywh or green_cue')
+            if negative_type in ('SIMILAR_STRUCTURE', 'OTHER_LANDMARK'):
+                if not any(isinstance(c, dict) and c.get('verified') is True
+                           for c in confusers):
+                    errors.append(prefix + ': negative_type=' + negative_type +
+                                  ' requires at least one verified confuser')
+
     return errors, warnings
 
 
+
 def yolo_pose_target(annotation, model_width=640, model_height=640):
-    """Map one v2 annotation to a YOLO 1-keypoint (pose) target.
+    """Map one v2 annotation to a 1-keypoint pose target in MODEL-CANVAS space.
+
+    .. warning::
+       The returned bbox_norm / keypoint_norm are normalized to the
+       letterboxed MODEL CANVAS (e.g. 640x640 after scale+pad), which is an
+       intermediate representation.  They are **NOT a YOLO txt label**.  A
+       YOLO txt file needs coordinates normalized by the SOURCE image size;
+       writing this dict directly as YOLO labels double-applies the
+       letterbox transform.  For dataset export use the source-normalized
+       converter in boom_birds.evaluation.landmark_yolo (source_normalized_target)
+       or an equivalent inverse-letterbox step, and keep its
+       label_normalization='SOURCE_IMAGE_PX_OVER_SOURCE_SIZE' marker.
 
     Returns (target, sidecar, exclusion_reason).  target is None when no
     positive label may be written (absent/ambiguous/undecidable), with
-    exclusion_reason saying why.  When the reference point is unavailable the
-    keypoint is written with visibility=0 and a placeholder coordinate (the
-    bbox centre in model input space); v=0 targets must be excluded from
-    anchor/coverage denominators and never used as keypoint regression targets.
+    exclusion_reason saying why.  The returned target carries
+    coordinate_space='MODEL_CANVAS_NORMALIZED' as an explicit marker; it
+    deliberately does NOT carry label_normalization so that exporters
+    applying the source-normalization step are not skipped.  When the
+    reference point is unavailable the keypoint is written with visibility=0
+    and a placeholder coordinate (the bbox centre in model input space); v=0
+    targets must be excluded from anchor/coverage denominators and never used
+    as keypoint regression targets.
     """
     target = annotation.get('target', {})
     geometry = annotation.get('geometry', {})
@@ -485,6 +626,12 @@ def yolo_pose_target(annotation, model_width=640, model_height=640):
         'annotator_type': annotator.get('annotator_type'),
         'independent_of_model_dev': annotator.get('independent_of_model_dev'),
         'review_status': annotator.get('review_status'),
+        'dataset_role': annotation.get('dataset_role'),
+        'truncated_edges': target.get('truncated_edges'),
+        'truncation_source': target.get('truncation_source'),
+        'green_pixels': geometry.get('green_pixels'),
+        'bbox_source': geometry.get('bbox_source'),
+        'annotation_mode': annotator.get('annotation_mode'),
         'included_in_training': False,
         'exclusion_reason': None,
     }
@@ -520,6 +667,10 @@ def yolo_pose_target(annotation, model_width=640, model_height=640):
     sidecar['included_in_training'] = True
     return {
         'class_id': 0,
+        # model-canvas normalized intermediate representation; NOT a YOLO txt
+        # label (source-image normalization happens in the exporter, see
+        # landmark_yolo.source_normalized_target)
+        'coordinate_space': 'MODEL_CANVAS_NORMALIZED',
         'bbox_norm': [round(v, 6) for v in bbox_norm],
         'keypoint_norm': [round(kx / model_width, 6), round(ky / model_height, 6)],
         'keypoint_visibility': visibility,

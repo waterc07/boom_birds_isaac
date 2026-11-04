@@ -1,0 +1,72 @@
+{
+  "schema_version": "dsh.landmark_exposure_registry_evidence.v1",
+  "status": "PASS",
+  "generated_at": "2026-11-04T11:30:53.331691+00:00",
+  "registry": {
+    "path": "configs/perception/landmark_exposure_registry_v1.json",
+    "sha256": "643d27c56a11a5baedcadaa741a1104893923500994601ccbe7a12ea34c52640"
+  },
+  "sources": {
+    "dev_v3": {
+      "path": "configs/perception/landmark_split_freeze_v3.json",
+      "canonical_sha256": "bc037e301d6370bb3de3232b1cc3573ae29c80a3465055114f5ef2d2ae422ce1"
+    },
+    "final_seal": {
+      "path": "configs/perception/landmark_final_pool_seal_v1.json",
+      "canonical_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007"
+    }
+  },
+  "checks": {
+    "errors": [],
+    "warnings": []
+  },
+  "stats": {
+    "datasets": {},
+    "groups": 32,
+    "families": 0,
+    "frame_total": 0,
+    "accepted_frame_total": 0,
+    "split_frame_counts": {
+      "train": 0,
+      "val": 0,
+      "test": 0,
+      "excluded": 0
+    },
+    "split_accepted_frame_counts": {
+      "train": 0,
+      "val": 0,
+      "test": 0,
+      "excluded": 0
+    },
+    "split_group_counts": {
+      "train": 0,
+      "val": 0,
+      "test": 0,
+      "excluded": 0
+    },
+    "duplicate_sha_groups": 0,
+    "intra_group_duplicate_sha_groups": 0,
+    "frames_unassigned": 0,
+    "episode_split_conflicts": 0,
+    "consecutive_frame_split_violations": 0,
+    "family_split_leaks": 0,
+    "sealed_groups_in_dev": 0,
+    "label_frame_total": 0,
+    "label_split_claim_counts": {},
+    "label_split_claim_conflicts": 0,
+    "view_cluster_split_warnings": 0,
+    "images_verified": 0,
+    "images_missing": 0,
+    "image_sha_mismatches": 0,
+    "events": 6,
+    "group_overrides": 328,
+    "sources": [
+      "dev_v3",
+      "final_seal"
+    ]
+  },
+  "limits": [
+    "exposure registry PASS means the record is internally consistent with the freezes; it does not prove nobody looked at the data",
+    "no sealed/untouched claim is allowed once an exposure event exists"
+  ]
+}

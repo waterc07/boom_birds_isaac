@@ -1,0 +1,111 @@
+{
+ "method": "geometric projection of an 8-point tower model (light, top-bar ends/top, body-base corners, pedestal corners) through the recorded camera pose/intrinsics; flags when the predicted span crosses the image border. Visual confirmation by 3x zoom crops of the relevant border for representative frames (see truncation_crops/).",
+ "image_geometry": "320x240, fx=fy=160, cx=160, cy=120",
+ "four_side_truncation": {
+  "left": {
+   "frames": [
+    "lmf_dev_inner_south_0-follow_only_g2_3.png",
+    "lmf_dev_inner_south_0-follow_only_g2_4.png",
+    "lmf_dev_inner_south_0-follow_only_g2_5.png",
+    "lmf_dev_inner_south_0-follow_only_g2_6.png",
+    "lmf_dev_inner_south_0-follow_only_g2_7.png",
+    "lmf_dev_inner_south_0-follow_only_g2_8.png",
+    "lmf_dev_inner_south_0-follow_only_g2_9.png",
+    "lmf_dev_inner_south_0-follow_only_g2_10.png",
+    "lmf_dev_inner_south_0-follow_only_g2_11.png",
+    "lmf_dev_inner_south_0-follow_only_g2_12.png",
+    "lmf_dev_inner_south_0-follow_only_g2_13.png",
+    "lmf_dev_inner_south_0-follow_only_g2_14.png",
+    "lmf_dev_inner_south_0-follow_only_g2_15.png",
+    "lmf_dev_inner_south_0-follow_only_g2_16.png",
+    "lmf_dev_inner_south_0-follow_only_g2_17.png",
+    "lmf_dev_inner_south_0-follow_only_g2_18.png",
+    "lmf_dev_inner_south_0-follow_only_g2_19.png",
+    "lmf_dev_inner_south_0-follow_only_g2_20.png",
+    "lmf_dev_inner_south_0-follow_only_g2_21.png",
+    "lmf_dev_inner_south_0-follow_only_g2_22.png",
+    "lmf_dev_inner_south_0-follow_only_g2_23.png",
+    "lmf_dev_inner_south_0-follow_only_g2_24.png",
+    "lmf_dev_inner_south_0-follow_only_g2_25.png",
+    "lmf_dev_inner_south_0-follow_only_g2_26.png"
+   ]
+  },
+  "right": {
+   "frames": [
+    "lmf_dev_inner_north_0-follow_only_g1_131.png",
+    "lmf_dev_inner_north_0-follow_only_g1_132.png",
+    "lmf_dev_inner_north_0-follow_only_g1_133.png",
+    "lmf_dev_inner_north_0-follow_only_g1_134.png",
+    "lmf_dev_inner_north_0-follow_only_g1_135.png",
+    "lmf_dev_inner_north_0-follow_only_g1_136.png",
+    "lmf_dev_inner_north_0-follow_only_g1_137.png",
+    "lmf_dev_inner_north_0-follow_only_g1_138.png",
+    "lmf_dev_inner_north_0-follow_only_g1_139.png",
+    "lmf_dev_inner_north_0-follow_only_g1_140.png",
+    "lmf_dev_inner_north_0-follow_only_g1_141.png",
+    "lmf_dev_inner_north_0-follow_only_g1_142.png",
+    "lmf_dev_inner_north_0-follow_only_g1_143.png",
+    "lmf_dev_inner_north_0-follow_only_g1_144.png",
+    "lmf_dev_inner_north_0-follow_only_g1_145.png",
+    "lmf_dev_inner_north_0-follow_only_g1_146.png",
+    "lmf_dev_inner_north_0-follow_only_g1_147.png",
+    "lmf_dev_inner_north_0-follow_only_g1_148.png",
+    "lmf_dev_inner_north_0-follow_only_g1_149.png",
+    "lmf_dev_inner_north_0-follow_only_g1_150.png",
+    "lmf_dev_inner_north_0-follow_only_g1_151.png",
+    "lmf_dev_inner_north_0-follow_only_g1_152.png",
+    "lmf_dev_static_high_0-follow_only_g3_10.png",
+    "lmf_dev_static_high_0-follow_only_g3_11.png"
+   ]
+  },
+  "top": {
+   "frames": []
+  },
+  "bottom": {
+   "frames": [
+    "lmf_dev_static_low_0-follow_only_g4_3.png",
+    "lmf_dev_static_low_0-follow_only_g4_4.png",
+    "lmf_dev_static_low_0-follow_only_g4_5.png",
+    "lmf_dev_static_low_0-follow_only_g4_6.png",
+    "lmf_dev_static_low_0-follow_only_g4_7.png",
+    "lmf_dev_static_low_0-follow_only_g4_9.png",
+    "lmf_dev_static_low_0-follow_only_g4_12.png",
+    "lmf_dev_static_low_0-follow_only_g4_13.png",
+    "lmf_dev_static_low_0-follow_only_g4_14.png",
+    "lmf_dev_static_low_0-follow_only_g4_15.png",
+    "lmf_dev_static_low_0-follow_only_g4_16.png",
+    "lmf_dev_static_low_0-follow_only_g4_17.png",
+    "lmf_dev_static_low_0-follow_only_g4_18.png",
+    "lmf_dev_static_low_0-follow_only_g4_19.png",
+    "lmf_dev_static_low_0-follow_only_g4_20.png",
+    "lmf_dev_static_low_0-follow_only_g4_21.png",
+    "lmf_dev_static_low_0-follow_only_g4_22.png",
+    "lmf_dev_static_low_0-follow_only_g4_23.png"
+   ]
+  }
+ },
+ "visual_review": [
+  {
+   "crop": "truncation_crops/lmf_dev_inner_south_0-follow_only_g2_3_left_x3.png",
+   "observed": "tower body/top-bar left extent is cut by the left image border (visible part starts at x=0) - left truncation confirmed"
+  },
+  {
+   "crop": "truncation_crops/lmf_dev_inner_north_0-follow_only_g1_140_right_x3.png",
+   "observed": "tower top-bar right arm reaches/crosses the right image border - right truncation confirmed"
+  },
+  {
+   "crop": "truncation_crops/lmf_dev_static_low_0-follow_only_g4_3_bottom_x3.png",
+   "observed": "tower pedestal/body continues below the bottom image border (pedestal not visible) - bottom truncation confirmed"
+  },
+  {
+   "crop": "truncation_crops/lmf_dev_inner_north_0-follow_only_g1_150_right_x3.png",
+   "observed": "right-border crop of another right-truncated frame (target near right edge)"
+  },
+  {
+   "crop": "truncation_crops/lmf_dev_static_low_0-follow_only_g4_12_bottom_x3.png",
+   "observed": "second bottom-truncation frame"
+  }
+ ],
+ "top_truncation": "NONE found in this batch (predicted top flags = 0); do not claim top-edge truncation coverage",
+ "note": "static_high has only 2 frames with predicted right border crossing at 1.5-6.5 px (minor); no visual zoom kept for those two (minor)"
+}

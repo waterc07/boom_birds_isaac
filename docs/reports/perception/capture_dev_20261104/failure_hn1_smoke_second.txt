@@ -1,0 +1,13 @@
+stages: ["load contract and cases", "create env", "disable default ground and spawn map", "bind obstacle from scene", "declare kinematic contact inference", "configure map dones", "measure body envelope", "run dynamic paired cases"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 1201, in <module>
+    set_robot_pose(case.start_position_world_m, case.start_yaw_rad)
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 637, in set_robot_pose
+    env._robot.write_root_pose_to_sim(pose, index)
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/articulation/articulation.py", line 408, in write_root_pose_to_sim
+    self.write_root_link_pose_to_sim(root_pose, env_ids=env_ids)
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/articulation/articulation.py", line 427, in write_root_link_pose_to_sim
+    self._data.root_link_pose_w[env_ids] = root_pose.clone()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+IndexError: index 3 is out of bounds for dimension 0 with size 1

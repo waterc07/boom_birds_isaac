@@ -1,0 +1,1144 @@
+{
+  "schema_version": "dsh.landmark_model_freeze.v1",
+  "status": "FROZEN_PENDING_LEAD_FINAL",
+  "created_at": "2026-11-04",
+  "freeze_scope": "bounded internal landmark experiment, dev validation only; no final-pool read; no board/navigation/Gate claim",
+  "selection_rule": "highest validation joint narrow-primary; tie-break lower validation FP; then lower seed; within a seed the same rule over candidate checkpoints",
+  "selected": {
+    "seed": 1,
+    "checkpoint_candidate": "last",
+    "weights": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\bounded_1\\weights\\last.pt",
+      "sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1"
+    },
+    "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_last\\metrics.json",
+    "selected_summary": {
+      "status": "COMPUTED",
+      "joint_narrow_rate": 0.5789473684210527,
+      "joint_all_positive_lower_bound": 0.5789473684210527,
+      "joint_coverage": 1.0,
+      "joint_evaluable": 95,
+      "positives": 95,
+      "negatives": 25,
+      "gt_unobservable": 14,
+      "presence_tp": 75,
+      "presence_fp": 10,
+      "presence_fn": 20,
+      "presence_tn": 15,
+      "presence_precision": 0.8823529411764706,
+      "presence_recall": 0.7894736842105263,
+      "reference_coverage": 0.5121951219512195,
+      "reference_available": 41,
+      "identity_precision": 0.8901098901098901
+    }
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "epochs_completed": 60,
+      "wall_seconds": 185.92,
+      "epoch_seconds_mean": 3.099,
+      "peak_memory_allocated_mib": 1967.6,
+      "selected_candidate": "last",
+      "selected_weights": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed0\\bounded_0\\weights\\last.pt",
+      "selected_weights_sha256": "914eae1432c7e566e76dc8d3d4742c63f43cf334b38d93c855486063a1b612c0",
+      "selected_summary": {
+        "status": "COMPUTED",
+        "joint_narrow_rate": 0.4842105263157895,
+        "joint_all_positive_lower_bound": 0.4842105263157895,
+        "joint_coverage": 1.0,
+        "joint_evaluable": 95,
+        "positives": 95,
+        "negatives": 25,
+        "gt_unobservable": 14,
+        "presence_tp": 77,
+        "presence_fp": 12,
+        "presence_fn": 18,
+        "presence_tn": 13,
+        "presence_precision": 0.8651685393258427,
+        "presence_recall": 0.8105263157894737,
+        "reference_coverage": 0.36585365853658536,
+        "reference_available": 41,
+        "identity_precision": 0.8791208791208791
+      },
+      "selected_metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed0\\eval_last\\metrics.json",
+      "candidate_summaries": [
+        {
+          "candidate": "last",
+          "joint_narrow_rate": 0.4842105263157895,
+          "presence_fp": 12,
+          "presence_precision": 0.8651685393258427,
+          "presence_recall": 0.8105263157894737,
+          "reference_coverage": 0.36585365853658536,
+          "identity_precision": 0.8791208791208791,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed0\\eval_last\\metrics.json"
+        },
+        {
+          "candidate": "best",
+          "joint_narrow_rate": 0.43157894736842106,
+          "presence_fp": 2,
+          "presence_precision": 0.974025974025974,
+          "presence_recall": 0.7894736842105263,
+          "reference_coverage": 0.2682926829268293,
+          "identity_precision": 0.987012987012987,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed0\\eval_best\\metrics.json"
+        },
+        {
+          "candidate": "epoch20",
+          "joint_narrow_rate": 0.18947368421052632,
+          "presence_fp": 0,
+          "presence_precision": 1.0,
+          "presence_recall": 0.2631578947368421,
+          "reference_coverage": 0.024390243902439025,
+          "identity_precision": 1.0,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed0\\eval_epoch20\\metrics.json"
+        },
+        {
+          "candidate": "epoch40",
+          "joint_narrow_rate": 0.14736842105263157,
+          "presence_fp": 0,
+          "presence_precision": 1.0,
+          "presence_recall": 0.5052631578947369,
+          "reference_coverage": 0.024390243902439025,
+          "identity_precision": 1.0,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed0\\eval_epoch40\\metrics.json"
+        }
+      ],
+      "early_stop": {
+        "rule": "patience 20 counted from the first evaluation after warmup 15",
+        "inner_ultralytics_patience": "inert (epochs)",
+        "state": {
+          "best_fitness": 1.00968,
+          "best_epoch": 50,
+          "stopped_at": null
+        }
+      },
+      "evidence_path": "outputs\\landmark_train\\runs\\bounded_v2\\seed0\\bounded_evidence_seed0.json",
+      "evidence_sha256": "968d7c546e7621742fbf82c0d064f55b981107836767961d846f1a4341df38bf"
+    },
+    {
+      "seed": 1,
+      "epochs_completed": 59,
+      "wall_seconds": 177.42,
+      "epoch_seconds_mean": 3.007,
+      "peak_memory_allocated_mib": 2016.7,
+      "selected_candidate": "last",
+      "selected_weights": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\bounded_1\\weights\\last.pt",
+      "selected_weights_sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1",
+      "selected_summary": {
+        "status": "COMPUTED",
+        "joint_narrow_rate": 0.5789473684210527,
+        "joint_all_positive_lower_bound": 0.5789473684210527,
+        "joint_coverage": 1.0,
+        "joint_evaluable": 95,
+        "positives": 95,
+        "negatives": 25,
+        "gt_unobservable": 14,
+        "presence_tp": 75,
+        "presence_fp": 10,
+        "presence_fn": 20,
+        "presence_tn": 15,
+        "presence_precision": 0.8823529411764706,
+        "presence_recall": 0.7894736842105263,
+        "reference_coverage": 0.5121951219512195,
+        "reference_available": 41,
+        "identity_precision": 0.8901098901098901
+      },
+      "selected_metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_last\\metrics.json",
+      "candidate_summaries": [
+        {
+          "candidate": "last",
+          "joint_narrow_rate": 0.5789473684210527,
+          "presence_fp": 10,
+          "presence_precision": 0.8823529411764706,
+          "presence_recall": 0.7894736842105263,
+          "reference_coverage": 0.5121951219512195,
+          "identity_precision": 0.8901098901098901,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_last\\metrics.json"
+        },
+        {
+          "candidate": "best",
+          "joint_narrow_rate": 0.3894736842105263,
+          "presence_fp": 3,
+          "presence_precision": 0.9605263157894737,
+          "presence_recall": 0.7684210526315789,
+          "reference_coverage": 0.1951219512195122,
+          "identity_precision": 0.9620253164556962,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_best\\metrics.json"
+        },
+        {
+          "candidate": "epoch20",
+          "joint_narrow_rate": 0.11578947368421053,
+          "presence_fp": 6,
+          "presence_precision": 0.8846153846153846,
+          "presence_recall": 0.4842105263157895,
+          "reference_coverage": 0.07317073170731707,
+          "identity_precision": 0.9206349206349206,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_epoch20\\metrics.json"
+        },
+        {
+          "candidate": "epoch40",
+          "joint_narrow_rate": 0.4842105263157895,
+          "presence_fp": 9,
+          "presence_precision": 0.898876404494382,
+          "presence_recall": 0.8421052631578947,
+          "reference_coverage": 0.12195121951219512,
+          "identity_precision": 0.9,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_epoch40\\metrics.json"
+        }
+      ],
+      "early_stop": {
+        "rule": "patience 20 counted from the first evaluation after warmup 15",
+        "inner_ultralytics_patience": "inert (epochs)",
+        "state": {
+          "best_fitness": 0.99156,
+          "best_epoch": 39,
+          "stopped_at": 59
+        }
+      },
+      "evidence_path": "outputs\\landmark_train\\runs\\bounded_v2\\seed1\\bounded_evidence_seed1.json",
+      "evidence_sha256": "31095ce5d59ca3b5b2b0163f2e9d6ebf027b7417cd43b661b73d35b14be10526"
+    },
+    {
+      "seed": 2,
+      "epochs_completed": 60,
+      "wall_seconds": 191.25,
+      "epoch_seconds_mean": 3.187,
+      "peak_memory_allocated_mib": 2003.1,
+      "selected_candidate": "epoch40",
+      "selected_weights": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed2\\bounded_2\\weights\\epoch40.pt",
+      "selected_weights_sha256": "bcca4ea0f756d192b4751d82c4d71f9dc136dd79e2bd9e6cad4c765f72f47825",
+      "selected_summary": {
+        "status": "COMPUTED",
+        "joint_narrow_rate": 0.4421052631578947,
+        "joint_all_positive_lower_bound": 0.4421052631578947,
+        "joint_coverage": 1.0,
+        "joint_evaluable": 95,
+        "positives": 95,
+        "negatives": 25,
+        "gt_unobservable": 14,
+        "presence_tp": 80,
+        "presence_fp": 1,
+        "presence_fn": 15,
+        "presence_tn": 24,
+        "presence_precision": 0.9876543209876543,
+        "presence_recall": 0.8421052631578947,
+        "reference_coverage": 0.14634146341463414,
+        "reference_available": 41,
+        "identity_precision": 0.9876543209876543
+      },
+      "selected_metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed2\\eval_epoch40\\metrics.json",
+      "candidate_summaries": [
+        {
+          "candidate": "last",
+          "joint_narrow_rate": 0.3157894736842105,
+          "presence_fp": 7,
+          "presence_precision": 0.9054054054054054,
+          "presence_recall": 0.7052631578947368,
+          "reference_coverage": 0.0975609756097561,
+          "identity_precision": 0.9178082191780822,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed2\\eval_last\\metrics.json"
+        },
+        {
+          "candidate": "best",
+          "joint_narrow_rate": 0.4105263157894737,
+          "presence_fp": 1,
+          "presence_precision": 0.9871794871794872,
+          "presence_recall": 0.8105263157894737,
+          "reference_coverage": 0.0975609756097561,
+          "identity_precision": 1.0,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed2\\eval_best\\metrics.json"
+        },
+        {
+          "candidate": "epoch20",
+          "joint_narrow_rate": 0.09473684210526316,
+          "presence_fp": 2,
+          "presence_precision": 0.9354838709677419,
+          "presence_recall": 0.30526315789473685,
+          "reference_coverage": 0.04878048780487805,
+          "identity_precision": 0.9666666666666667,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed2\\eval_epoch20\\metrics.json"
+        },
+        {
+          "candidate": "epoch40",
+          "joint_narrow_rate": 0.4421052631578947,
+          "presence_fp": 1,
+          "presence_precision": 0.9876543209876543,
+          "presence_recall": 0.8421052631578947,
+          "reference_coverage": 0.14634146341463414,
+          "identity_precision": 0.9876543209876543,
+          "metrics_path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed2\\eval_epoch40\\metrics.json"
+        }
+      ],
+      "early_stop": {
+        "rule": "patience 20 counted from the first evaluation after warmup 15",
+        "inner_ultralytics_patience": "inert (epochs)",
+        "state": {
+          "best_fitness": 0.99709,
+          "best_epoch": 52,
+          "stopped_at": null
+        }
+      },
+      "evidence_path": "outputs\\landmark_train\\runs\\bounded_v2\\seed2\\bounded_evidence_seed2.json",
+      "evidence_sha256": "f0a8b586a0dde4542977be80c5d405f059a0118bb52d1d3b57fd31224abd271a"
+    }
+  ],
+  "worst_seed": {
+    "seed": 2,
+    "selected_summary": {
+      "status": "COMPUTED",
+      "joint_narrow_rate": 0.4421052631578947,
+      "joint_all_positive_lower_bound": 0.4421052631578947,
+      "joint_coverage": 1.0,
+      "joint_evaluable": 95,
+      "positives": 95,
+      "negatives": 25,
+      "gt_unobservable": 14,
+      "presence_tp": 80,
+      "presence_fp": 1,
+      "presence_fn": 15,
+      "presence_tn": 24,
+      "presence_precision": 0.9876543209876543,
+      "presence_recall": 0.8421052631578947,
+      "reference_coverage": 0.14634146341463414,
+      "reference_available": 41,
+      "identity_precision": 0.9876543209876543
+    },
+    "note": "reported per protocol: all seeds including the worst must be shown"
+  },
+  "thresholds": {
+    "schema_version": "dsh.landmark_threshold_freeze.v1",
+    "status": "FROZEN_ON_VALIDATION",
+    "created_at": "2026-11-04",
+    "source": {
+      "predictions": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_last\\predictions.jsonl",
+        "sha256": "a0df2a535f45892d7919a50b39f67f265a6df740c0895e6a5262ef329084c45a"
+      },
+      "labels": {
+        "path": "outputs\\perception\\dev_annotations_20261104\\labels_val.json",
+        "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d"
+      },
+      "checkpoint": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\bounded_1\\weights\\last.pt",
+        "sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1"
+      },
+      "selection_context": "thresholds frozen on the validation split only, after seed/checkpoint selection; final pool never read"
+    },
+    "method": {
+      "tau_conf": "smallest score with validation identity precision >= 0.95",
+      "tau_det": "smallest score with validation presence precision >= 0.95",
+      "tau_margin": "smallest top1-top2 margin whose accepted multi-candidate validation frames are all TP",
+      "tau_px": "3.0 px (>= measured blind re-annotation noise max 2.236 px; 1 px = 0.358 deg at fx=160)",
+      "tau_iou": "0.3 diagnostic gate from training plan v2"
+    },
+    "sweep": [
+      {
+        "tau": 0.05,
+        "tp": 81,
+        "fp": 10,
+        "precision": 0.8901098901098901
+      },
+      {
+        "tau": 0.1,
+        "tp": 81,
+        "fp": 10,
+        "precision": 0.8901098901098901
+      },
+      {
+        "tau": 0.15,
+        "tp": 81,
+        "fp": 10,
+        "precision": 0.8901098901098901
+      },
+      {
+        "tau": 0.2,
+        "tp": 81,
+        "fp": 10,
+        "precision": 0.8901098901098901
+      },
+      {
+        "tau": 0.25,
+        "tp": 81,
+        "fp": 10,
+        "precision": 0.8901098901098901
+      },
+      {
+        "tau": 0.25349,
+        "tp": 80,
+        "fp": 10,
+        "precision": 0.8888888888888888
+      },
+      {
+        "tau": 0.28858,
+        "tp": 79,
+        "fp": 10,
+        "precision": 0.8876404494382022
+      },
+      {
+        "tau": 0.3,
+        "tp": 79,
+        "fp": 10,
+        "precision": 0.8876404494382022
+      },
+      {
+        "tau": 0.307506,
+        "tp": 79,
+        "fp": 10,
+        "precision": 0.8876404494382022
+      },
+      {
+        "tau": 0.307623,
+        "tp": 77,
+        "fp": 10,
+        "precision": 0.8850574712643678
+      },
+      {
+        "tau": 0.313514,
+        "tp": 76,
+        "fp": 10,
+        "precision": 0.8837209302325582
+      },
+      {
+        "tau": 0.318451,
+        "tp": 75,
+        "fp": 10,
+        "precision": 0.8823529411764706
+      },
+      {
+        "tau": 0.318461,
+        "tp": 74,
+        "fp": 10,
+        "precision": 0.8809523809523809
+      },
+      {
+        "tau": 0.331058,
+        "tp": 74,
+        "fp": 10,
+        "precision": 0.8809523809523809
+      },
+      {
+        "tau": 0.337591,
+        "tp": 73,
+        "fp": 9,
+        "precision": 0.8902439024390244
+      },
+      {
+        "tau": 0.35,
+        "tp": 73,
+        "fp": 9,
+        "precision": 0.8902439024390244
+      },
+      {
+        "tau": 0.359824,
+        "tp": 73,
+        "fp": 9,
+        "precision": 0.8902439024390244
+      },
+      {
+        "tau": 0.367229,
+        "tp": 71,
+        "fp": 9,
+        "precision": 0.8875
+      },
+      {
+        "tau": 0.373057,
+        "tp": 70,
+        "fp": 9,
+        "precision": 0.8860759493670886
+      },
+      {
+        "tau": 0.37413,
+        "tp": 70,
+        "fp": 9,
+        "precision": 0.8860759493670886
+      },
+      {
+        "tau": 0.374823,
+        "tp": 69,
+        "fp": 9,
+        "precision": 0.8846153846153846
+      },
+      {
+        "tau": 0.377802,
+        "tp": 67,
+        "fp": 9,
+        "precision": 0.881578947368421
+      },
+      {
+        "tau": 0.4,
+        "tp": 67,
+        "fp": 9,
+        "precision": 0.881578947368421
+      },
+      {
+        "tau": 0.407274,
+        "tp": 66,
+        "fp": 9,
+        "precision": 0.88
+      },
+      {
+        "tau": 0.422889,
+        "tp": 66,
+        "fp": 8,
+        "precision": 0.8918918918918919
+      },
+      {
+        "tau": 0.45,
+        "tp": 66,
+        "fp": 8,
+        "precision": 0.8918918918918919
+      },
+      {
+        "tau": 0.460675,
+        "tp": 66,
+        "fp": 7,
+        "precision": 0.9041095890410958
+      },
+      {
+        "tau": 0.472803,
+        "tp": 66,
+        "fp": 6,
+        "precision": 0.9166666666666666
+      },
+      {
+        "tau": 0.491004,
+        "tp": 66,
+        "fp": 6,
+        "precision": 0.9166666666666666
+      },
+      {
+        "tau": 0.493142,
+        "tp": 65,
+        "fp": 6,
+        "precision": 0.9154929577464789
+      },
+      {
+        "tau": 0.5,
+        "tp": 64,
+        "fp": 6,
+        "precision": 0.9142857142857143
+      },
+      {
+        "tau": 0.500739,
+        "tp": 63,
+        "fp": 6,
+        "precision": 0.9130434782608695
+      },
+      {
+        "tau": 0.508371,
+        "tp": 62,
+        "fp": 6,
+        "precision": 0.9117647058823529
+      },
+      {
+        "tau": 0.523035,
+        "tp": 62,
+        "fp": 6,
+        "precision": 0.9117647058823529
+      },
+      {
+        "tau": 0.53999,
+        "tp": 61,
+        "fp": 6,
+        "precision": 0.9104477611940298
+      },
+      {
+        "tau": 0.55,
+        "tp": 61,
+        "fp": 5,
+        "precision": 0.9242424242424242
+      },
+      {
+        "tau": 0.558104,
+        "tp": 61,
+        "fp": 5,
+        "precision": 0.9242424242424242
+      },
+      {
+        "tau": 0.571577,
+        "tp": 60,
+        "fp": 5,
+        "precision": 0.9230769230769231
+      },
+      {
+        "tau": 0.582906,
+        "tp": 59,
+        "fp": 4,
+        "precision": 0.9365079365079365
+      },
+      {
+        "tau": 0.595224,
+        "tp": 58,
+        "fp": 4,
+        "precision": 0.9354838709677419
+      },
+      {
+        "tau": 0.6,
+        "tp": 58,
+        "fp": 4,
+        "precision": 0.9354838709677419
+      },
+      {
+        "tau": 0.603364,
+        "tp": 58,
+        "fp": 4,
+        "precision": 0.9354838709677419
+      },
+      {
+        "tau": 0.605476,
+        "tp": 58,
+        "fp": 3,
+        "precision": 0.9508196721311475
+      },
+      {
+        "tau": 0.607737,
+        "tp": 57,
+        "fp": 3,
+        "precision": 0.95
+      },
+      {
+        "tau": 0.631766,
+        "tp": 56,
+        "fp": 2,
+        "precision": 0.9655172413793104
+      },
+      {
+        "tau": 0.65,
+        "tp": 56,
+        "fp": 2,
+        "precision": 0.9655172413793104
+      },
+      {
+        "tau": 0.667187,
+        "tp": 55,
+        "fp": 2,
+        "precision": 0.9649122807017544
+      },
+      {
+        "tau": 0.674781,
+        "tp": 54,
+        "fp": 2,
+        "precision": 0.9642857142857143
+      },
+      {
+        "tau": 0.67839,
+        "tp": 54,
+        "fp": 2,
+        "precision": 0.9642857142857143
+      },
+      {
+        "tau": 0.679029,
+        "tp": 52,
+        "fp": 2,
+        "precision": 0.9629629629629629
+      },
+      {
+        "tau": 0.681018,
+        "tp": 52,
+        "fp": 1,
+        "precision": 0.9811320754716981
+      },
+      {
+        "tau": 0.684766,
+        "tp": 51,
+        "fp": 1,
+        "precision": 0.9807692307692307
+      },
+      {
+        "tau": 0.7,
+        "tp": 51,
+        "fp": 1,
+        "precision": 0.9807692307692307
+      },
+      {
+        "tau": 0.720666,
+        "tp": 51,
+        "fp": 1,
+        "precision": 0.9807692307692307
+      },
+      {
+        "tau": 0.729564,
+        "tp": 49,
+        "fp": 1,
+        "precision": 0.98
+      },
+      {
+        "tau": 0.731372,
+        "tp": 48,
+        "fp": 1,
+        "precision": 0.9795918367346939
+      },
+      {
+        "tau": 0.740387,
+        "tp": 47,
+        "fp": 1,
+        "precision": 0.9791666666666666
+      },
+      {
+        "tau": 0.75,
+        "tp": 47,
+        "fp": 1,
+        "precision": 0.9791666666666666
+      },
+      {
+        "tau": 0.756691,
+        "tp": 46,
+        "fp": 1,
+        "precision": 0.9787234042553191
+      },
+      {
+        "tau": 0.757765,
+        "tp": 45,
+        "fp": 1,
+        "precision": 0.9782608695652174
+      },
+      {
+        "tau": 0.76058,
+        "tp": 45,
+        "fp": 1,
+        "precision": 0.9782608695652174
+      },
+      {
+        "tau": 0.762184,
+        "tp": 43,
+        "fp": 1,
+        "precision": 0.9772727272727273
+      },
+      {
+        "tau": 0.767334,
+        "tp": 43,
+        "fp": 1,
+        "precision": 0.9772727272727273
+      },
+      {
+        "tau": 0.773308,
+        "tp": 42,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.774791,
+        "tp": 42,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.777042,
+        "tp": 40,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.779177,
+        "tp": 39,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.787253,
+        "tp": 39,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.789768,
+        "tp": 38,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.8,
+        "tp": 37,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.807718,
+        "tp": 36,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.812089,
+        "tp": 35,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.813575,
+        "tp": 35,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.815607,
+        "tp": 34,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.816292,
+        "tp": 32,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.82443,
+        "tp": 32,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.824772,
+        "tp": 31,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.826733,
+        "tp": 29,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.827134,
+        "tp": 29,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.83056,
+        "tp": 27,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.830838,
+        "tp": 26,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.831558,
+        "tp": 25,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.832202,
+        "tp": 25,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.832877,
+        "tp": 24,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.834166,
+        "tp": 22,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.834978,
+        "tp": 21,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.835518,
+        "tp": 20,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.836133,
+        "tp": 20,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.836645,
+        "tp": 18,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.83998,
+        "tp": 18,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.840741,
+        "tp": 16,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.845089,
+        "tp": 16,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.85,
+        "tp": 15,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.869756,
+        "tp": 14,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.871949,
+        "tp": 14,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.873603,
+        "tp": 12,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.877091,
+        "tp": 12,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.878644,
+        "tp": 11,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.880323,
+        "tp": 10,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.88072,
+        "tp": 9,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.88147,
+        "tp": 7,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.88225,
+        "tp": 7,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.888151,
+        "tp": 6,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.897978,
+        "tp": 5,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.9,
+        "tp": 4,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.901937,
+        "tp": 4,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.902702,
+        "tp": 2,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.904813,
+        "tp": 2,
+        "fp": 0,
+        "precision": 1.0
+      },
+      {
+        "tau": 0.926286,
+        "tp": 0,
+        "fp": 0,
+        "precision": null
+      },
+      {
+        "tau": 0.95,
+        "tp": 0,
+        "fp": 0,
+        "precision": null
+      }
+    ],
+    "gt_observable_frames": 120,
+    "gt_unobservable_frames": 14,
+    "multi_candidate_validation": {
+      "frames": 0,
+      "absence_frames": [],
+      "sample": []
+    },
+    "frozen": {
+      "tau_conf": 0.605476,
+      "tau_det": 0.605476,
+      "tau_margin": {
+        "value": 0.1,
+        "status": "PROPOSED_NO_MULTI_CANDIDATE_FRAMES"
+      },
+      "tau_px": 3.0,
+      "tau_iou": 0.3,
+      "tau_kpt": {
+        "value": 0.5,
+        "status": "PROPOSED_NOT_FROZEN",
+        "note": "evaltool decoder keypoint-confidence default; not part of training plan v2 freeze list"
+      },
+      "tau_green_pixels": {
+        "value": 3,
+        "status": "FROZEN_BY_SPEC_V2_1",
+        "note": "annotation-side reference usability rule, not a model threshold"
+      }
+    },
+    "precision_at_frozen": {
+      "tau": 0.605476,
+      "tp": 58,
+      "fp": 3,
+      "precision": 0.9508196721311475
+    },
+    "limitations": [
+      "validation negatives are 25 empty-label frames (12 TARGET_ABSENT + 13 synthetic HN1); the false-match denominator is not certification-sized (C4 INCOMPLETE)",
+      "if there is no qualifying score the threshold stays null and must be re-derived after more data"
+    ]
+  },
+  "onnx": {
+    "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\onnx_trained_seed1\\last_opset18.onnx",
+    "sha256": "4ee4071da9eb92ee6182181058302503a10c6801efc28c63ba41e025c3e3b61c",
+    "opset_import": {
+      "ai.onnx": 18
+    },
+    "verdict": {
+      "opset18": true,
+      "native_predict_consistent": true,
+      "eval_backend_consistent": null,
+      "eval_backend_note": "evaltool's raw onnxruntime decoder path was not evaluated in this run; the .pt evaluation path is unaffected and the selection/freeze runs use .pt",
+      "overall": true
+    },
+    "evidence_path": "outputs\\landmark_train\\runs\\onnx_trained_seed1\\onnx_trained_consistency.json"
+  },
+  "rknn": {
+    "status": "UNKNOWN_NOT_RUN",
+    "reason": "no RK3576 board; RKNN-Toolkit2 is proprietary and was not installed; ONNX host export does not prove board-side INT8/latency/thermal behaviour"
+  },
+  "data": {
+    "split_freeze_v3": {
+      "path": "configs\\perception\\landmark_split_freeze_v3.json",
+      "sha256": "50c064c120effea4fab904853b2970756d95382ed9376ec806f937b8b44feec2"
+    },
+    "label_lists": {
+      "path": "configs\\perception\\landmark_dev_label_lists_v1.json",
+      "sha256": "befbbea1b587261ed861a081706fe44a8a761aa90b04743fb137ddbd85c27701"
+    },
+    "labels_train": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_train.json",
+      "sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df"
+    },
+    "labels_val": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_val.json",
+      "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d"
+    },
+    "labels_hn_val": {
+      "path": "outputs\\perception\\dev_annotations_20261104\\labels_hn_val.json",
+      "sha256": "3dff20b6d99249a0cf71b7703eddea08ff223c8e2ff3d0466acfefc6ce283dc2"
+    },
+    "annotation_spec_v2_1": {
+      "path": "configs\\perception\\landmark_annotation_spec_v2_1.json",
+      "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac"
+    },
+    "dataset_data_yaml": {
+      "path": "outputs\\landmark_train\\dataset\\dev_full\\data.yaml",
+      "sha256": "359f014e64dc37ff3527e6d9fadb0b7bb6902d32c5c921893ab65f651aefbe1e"
+    },
+    "dataset_manifest_train": {
+      "path": "outputs\\landmark_train\\dataset\\dev_full\\manifest_train.json",
+      "sha256": "8209353888602266bd0bffcc8b92773d1ecab7bede9e2d9e077e6a0aae0aea7d"
+    },
+    "dataset_manifest_val": {
+      "path": "outputs\\landmark_train\\dataset\\dev_full\\manifest_val.json",
+      "sha256": "5e5d2c9afb9a6852804ad2e11e92bf56053fa7da728b7269947515cbe4b9c301"
+    }
+  },
+  "protocol": {
+    "config": {
+      "path": "configs\\perception\\landmark_train_protocol_v1.json",
+      "sha256": "7637b92a6b6ce9cb9453272f97864fca9fc330cee47a47e33f8fdf986ac7450b"
+    },
+    "epochs_used": "60 (<= protocol epochs_max 100; delta recorded)",
+    "batch": 16,
+    "imgsz": 640,
+    "amp": true,
+    "warmup_epochs": 15,
+    "early_stopping": "patience 20 counted from the first evaluation after warmup (ultralytics internal patience made inert via a custom stopper)",
+    "deltas": [
+      "epochs 60 instead of the planned 100 (time box; still within epochs_max)",
+      "numpy pinned to 1.26.4 because ultralytics 8.2.0 uses np.trapz (removed in numpy 2.4)",
+      "training labels regenerated source-image-normalised after the label-coordinate bug fix"
+    ]
+  },
+  "code": {
+    "git_head": "800c53b",
+    "branch": "feat/v2.2-simulation-perception",
+    "working_tree_dirty_note": "parallel teammates' uncommitted work; this task makes no commits"
+  },
+  "environment": {
+    "venv": "E:\\isaac\\proj_boom_birds\\.venv\\landmark-train",
+    "torch": "2.7.0+cu128",
+    "cuda": "12.8",
+    "gpu": [
+      "NVIDIA GeForce RTX 5080"
+    ],
+    "ultralytics": "8.2.0",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.31.1"
+  },
+  "final_protocol": {
+    "runs": 1,
+    "executor": "lead",
+    "dataset": "sealed final pool only after lead's own freeze; the exploratory final pool must not be treated as sealed certification data",
+    "rule": "report only; no retraining, threshold change, or rerun; a new evaluation requires new sealed data and a new pre-registration",
+    "post_final_rule": "no callback"
+  },
+  "license": {
+    "main_candidate": "ultralytics 8.2.0 / YOLOv8n-pose (AGPL-3.0)",
+    "status": "internal bounded research/evaluation authorised by the user on 2026-11-04; external distribution undecided; not a legal conclusion; pretrained-weight derivation/distribution UNRESOLVED"
+  },
+  "evidence": {
+    "threshold_freeze": "docs\\reports\\perception\\training_20261104\\threshold_freeze_val_20261104.json",
+    "pilot": "outputs/landmark_train/runs/pilot_seed0/pilot_evidence_seed0.json",
+    "overfit": "outputs/landmark_train/runs/overfit_pretrained_noaug/overfit_evidence_seed0.json",
+    "label_convention": "outputs/landmark_train/dataset/label_convention_diagnostic.json",
+    "export_crosscheck": "outputs/landmark_train/dataset/label_export_crosscheck.json",
+    "preregistration": "outputs/landmark_train/dataset/preregistration_consistency.json"
+  }
+}

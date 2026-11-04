@@ -556,3 +556,251 @@ def test_conservative_freeze_v2_keeps_only_north_in_val():
     assert report.stats['split_frame_counts']['val'] == 575
     assert report.stats['split_frame_counts']['train'] == 1320
     assert 'VIEW_CLUSTER_SPLIT' not in report.warning_codes
+
+
+# ---------------------------------------------------------------------------
+# exposure registry + split leakage audit (T12)
+# ---------------------------------------------------------------------------
+
+from boom_birds.evaluation.landmark_dataset import (
+    EXPOSURE_SCHEMA, EXPOSURE_STATUSES, audit_split_leakage,
+    validate_exposure_registry)
+
+
+def make_registry(freeze, source='dev_freeze', events=None,
+                  group_status='exposed_development', certification=None,
+                  frame_overrides=None, groups=None):
+    events = events or []
+    if groups is None:
+        groups = []
+        for item in freeze['groups']:
+            groups.append({
+                'group_id': item['group_id'],
+                'source': source,
+                'family_id': item['family_id'],
+                'status': group_status,
+                'exposure_events': [event['event_id'] for event in events],
+                'certification': 'EXPOSED',
+                'contamination': {'group_level': bool(events)},
+            })
+    return {
+        'schema_version': EXPOSURE_SCHEMA,
+        'policy': {'statuses': list(EXPOSURE_STATUSES)},
+        'freezes': {source: {
+            'path': 'freeze.json',
+            'canonical_sha256': freeze_sha256(freeze),
+            'groups': len(freeze['groups']),
+        }},
+        'groups': groups,
+        'events': events,
+        'frame_overrides': frame_overrides or [],
+        'certification': certification or {
+            'can_claim_sealed': False, 'conclusion': 'INCOMPLETE'},
+    }
+
+
+def test_exposure_registry_clean_passes(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    registry = make_registry(freeze)
+    report = validate_exposure_registry(registry, {'dev_freeze': freeze},
+                                        tmp_path, verify_evidence=False)
+    assert report.ok, [issue.code for issue in report.errors]
+    assert report.stats['groups'] == 2
+
+
+def test_exposure_registry_requires_every_freeze_group(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    registry = make_registry(freeze)
+    registry['groups'] = registry['groups'][:-1]
+    report = validate_exposure_registry(registry, {'dev_freeze': freeze},
+                                        tmp_path, verify_evidence=False)
+    assert 'EXPOSURE_GROUP_MISSING' in report.error_codes
+
+
+def test_exposure_registry_rejects_touched_group_marked_untouched(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    event = {'event_id': 'ev1', 'type': 'annotation_calibration',
+             'date': '2026-11-04', 'executor': 'agent',
+             'frames_touched': 1}
+    registry = make_registry(freeze, events=[event],
+                             group_status='untouched')
+    report = validate_exposure_registry(registry, {'dev_freeze': freeze},
+                                        tmp_path, verify_evidence=False)
+    assert 'EXPOSURE_TOUCHED_MARKED_UNTOUCHED' in report.error_codes
+
+
+def test_exposure_registry_rejects_sealed_claim(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    registry = make_registry(freeze)
+    registry['groups'][0]['certification'] = 'SEALED'
+    report = validate_exposure_registry(registry, {'dev_freeze': freeze},
+                                        tmp_path, verify_evidence=False)
+    assert 'EXPOSURE_SEALED_CLAIM' in report.error_codes
+
+
+def test_exposure_registry_verifies_event_evidence_hash(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    evidence = tmp_path / 'docs' / 'evidence.json'
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text('{"ok": true}', encoding='utf-8')
+    event = {'event_id': 'ev1', 'type': 'development_use',
+             'date': '2026-11-04', 'executor': 'agent',
+             'evidence_path': 'docs/evidence.json',
+             'evidence_sha256': sha('0'), 'frames_touched': 1}
+    registry = make_registry(freeze, events=[event])
+    report = validate_exposure_registry(registry, {'dev_freeze': freeze},
+                                        tmp_path, verify_evidence=True)
+    assert 'EXPOSURE_EVIDENCE_SHA_MISMATCH' in report.error_codes
+
+
+def test_exposure_registry_frame_override_must_exist(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    event = {'event_id': 'ev1', 'type': 'annotation_calibration',
+             'date': '2026-11-04', 'executor': 'agent', 'frames_touched': 1}
+    registry = make_registry(freeze, events=[event], frame_overrides=[{
+        'frame_id': 'nope-follow_only_g1_0.png',
+        'group_id': freeze['groups'][0]['group_id'],
+        'source': 'dev_freeze', 'status': 'annotation_calibration',
+        'event_id': 'ev1',
+    }])
+    report = validate_exposure_registry(registry, {'dev_freeze': freeze},
+                                        tmp_path, verify_evidence=False)
+    assert 'EXPOSURE_FRAME_UNKNOWN' in report.error_codes
+
+
+def test_exposure_registry_final_pool_must_be_downgraded(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    event = {'event_id': 'ev_pilot', 'type': 'annotation_calibration',
+             'date': '2026-11-04', 'executor': 'agent', 'frames_touched': 1}
+    registry = make_registry(freeze, source='final_seal', events=[event],
+                             group_status='untouched')
+    report = validate_exposure_registry(registry,
+                                        {'final_seal': freeze}, tmp_path,
+                                        verify_evidence=False)
+    assert 'EXPOSURE_TOUCHED_MARKED_UNTOUCHED' in report.error_codes
+    assert 'EXPOSURE_FINAL_NOT_DOWNGRADED' in report.error_codes
+
+
+def test_audit_split_leakage_clean_freeze(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    result = audit_split_leakage(freeze)
+    assert result['ok'] is True
+    assert result['stats']['family_leaks'] == 0
+    assert result['stats']['sha_leaks'] == 0
+    assert result['stats']['trajectory_leaks'] == 0
+
+
+def test_audit_split_leakage_detects_family_cross_split(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    freeze['families'] = [{'family_id': 'fam_shared',
+                           'groups': ['g1', 'g2']}]
+    freeze['groups'][0]['family_id'] = 'fam_shared'
+    freeze['groups'][1]['family_id'] = 'fam_shared'
+    result = audit_split_leakage(freeze)
+    assert result['ok'] is False
+    assert result['stats']['family_leaks'] == 1
+
+
+def test_audit_split_leakage_detects_duplicate_sha_across_split(tmp_path):
+    freeze, _, _, _ = clean_fixture(tmp_path)
+    freeze['groups'][1]['frames'][0]['sha256'] = \
+        freeze['groups'][0]['frames'][0]['sha256']
+    result = audit_split_leakage(freeze)
+    assert result['ok'] is False
+    assert result['stats']['sha_leaks'] == 1
+
+
+def test_audit_split_leakage_detects_same_trajectory_cross_split(tmp_path):
+    frames = [(frame_id('ep_shared', 1, i), sha(chr(ord('a') + i)), True)
+              for i in range(4)]
+    datasets = {'ds_a': dataset_entry(tmp_path, 'ds_a', frames)}
+    groups = [
+        group('g1', 'fam_one', 'ds_a', ['ep_shared'], 'train', frames[:2]),
+        group('g2', 'fam_two', 'ds_a', ['ep_shared'], 'val', frames[2:]),
+    ]
+    splits = {'train': ['g1'], 'val': ['g2'], 'test': [], 'excluded': []}
+    freeze = make_freeze(datasets, groups, splits)
+    result = audit_split_leakage(freeze)
+    assert result['ok'] is False
+    assert result['stats']['trajectory_leaks'] >= 1
+
+
+# ---------------------------------------------------------------------------
+# committed v3 freeze + exposure registry (T12)
+# ---------------------------------------------------------------------------
+
+FREEZE_V3_PATH = (REPO_ROOT / 'configs' / 'perception'
+                  / 'landmark_split_freeze_v3.json')
+EXPOSURE_REGISTRY_PATH = (REPO_ROOT / 'configs' / 'perception'
+                          / 'landmark_exposure_registry_v1.json')
+SEAL_PATH = (REPO_ROOT / 'configs' / 'perception'
+             / 'landmark_final_pool_seal_v1.json')
+
+
+@pytest.mark.skipif(not (FREEZE_V3_PATH.is_file() and RAW_FORMAL6.is_file()),
+                    reason='raw sensor outputs are ignored and absent here')
+def test_committed_v3_freeze_verifies_and_matches_annot2_lists():
+    freeze = json.loads(FREEZE_V3_PATH.read_text(encoding='utf-8'))
+    report = validate_freeze(freeze, REPO_ROOT, verify_input_hashes=True,
+                             require_images=False)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert freeze['freeze_id'] == 'landmark_split_freeze_v3'
+    assert len(freeze['datasets']) == 15
+    assert report.stats['frame_total'] == 3398
+    assert report.stats['split_frame_counts']['train'] == 1475
+    assert report.stats['split_frame_counts']['val'] == 816
+    assert report.stats['split_frame_counts']['excluded'] == 1107
+    assert report.stats['split_frame_counts']['test'] == 0
+    val_groups = freeze['splits']['val']
+    assert set(val_groups) == {
+        'g_lm_ind_north', 'g_geo_north', 'g_lm_pilot_north',
+        'g_lmf_dev_inner_north', 'g_lmf_dev_static_low',
+        'g_lmf_dev_hn1_confuser', 'g_lmf_dev_hn2_occluder'}
+    val_families = {item['family_id'] for item in freeze['groups']
+                    if item['split'] == 'val'}
+    assert {'fam_north', 'fam_inner_north', 'fam_static_low_oblique',
+            'fam_HN1_confuser', 'fam_HN2_occluder'} <= val_families
+    alignment = freeze['annotation_frame_lists']
+    assert alignment['status'] == 'PASS'
+    assert alignment['checked_frames'] == 294
+    assert alignment['hn_val_pending'] is False
+    assert alignment['config']['sha256'] == (
+        'befbbea1b587261ed861a081706fe44a8a761aa90b04743fb137ddbd85c27701')
+    assert alignment['labels']['train']['sha256'].startswith('01977b9f')
+    assert alignment['labels']['val']['sha256'].startswith('c3944e08')
+    assert freeze['delta_from_v2']['new_frames'] == 396
+    assert audit_split_leakage(freeze)['ok'] is True
+
+
+@pytest.mark.skipif(not (EXPOSURE_REGISTRY_PATH.is_file()
+                         and FREEZE_V3_PATH.is_file()
+                         and SEAL_PATH.is_file()),
+                    reason='registry/freezes absent')
+def test_exposure_registry_marks_final_pool_exploratory():
+    registry = json.loads(EXPOSURE_REGISTRY_PATH.read_text(encoding='utf-8'))
+    freeze_documents = {
+        'dev_v3': json.loads(FREEZE_V3_PATH.read_text(encoding='utf-8')),
+        'final_seal': json.loads(SEAL_PATH.read_text(encoding='utf-8')),
+    }
+    report = validate_exposure_registry(registry, freeze_documents, REPO_ROOT,
+                                        verify_evidence=True)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert registry['certification']['can_claim_sealed'] is False
+    assert registry['certification']['conclusion'] == 'INCOMPLETE'
+    assert registry['summary']['untouched_groups'] == 0
+    assert registry['summary']['final_groups_contaminated'] == 6
+    groups = {item['group_id']: item for item in registry['groups']}
+    assert groups['g_lmf_dev_hn1_confuser']['status'] == 'exposed_development'
+    assert groups['g_lmf_sweep']['status'] == 'exploratory_eval_candidate'
+    assert 'ev_final_exploratory_labels_279_20261104' in {
+        event['event_id'] for event in registry['events']}
+    assert 'ev_map_native_ms1_identity_conflict_20261104' in {
+        event['event_id'] for event in registry['events']}
+    identity = registry['identity_certification']
+    assert identity['U1_at_most_one_tower_like_instance'] == 'FALSIFIED'
+    assert identity['U2_central_tower_is_only_green_light_tower'] == 'FALSIFIED'
+    assert identity['identity_status'] == 'INCOMPLETE'
+    assert len(registry['frame_overrides']) == 328
+

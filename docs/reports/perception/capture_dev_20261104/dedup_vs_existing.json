@@ -1,0 +1,103 @@
+{
+ "new_pool_frames": 375,
+ "new_pool_unique_sha": 375,
+ "within_pool_duplicate": {},
+ "existing_runs": {
+  "debug_all6_sensor": {
+   "images": 864,
+   "unique_sha": 852,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "debug_static4_sensor": {
+   "images": 6,
+   "unique_sha": 4,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "debug_static5_sensor": {
+   "images": 6,
+   "unique_sha": 4,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "debug_static6_sensor": {
+   "images": 6,
+   "unique_sha": 4,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "debug_static7_sensor": {
+   "images": 6,
+   "unique_sha": 4,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "formal6_sensor": {
+   "images": 864,
+   "unique_sha": 852,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "geo_test_sensor": {
+   "images": 207,
+   "unique_sha": 199,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "gui_evidence2_sensor": {
+   "images": 213,
+   "unique_sha": 211,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "gui_evidence_sensor": {
+   "images": 6,
+   "unique_sha": 4,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_dev_smoke2_20261104_sensor": {
+   "images": 24,
+   "unique_sha": 22,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_dev_smoke_hn1b_20261104_sensor": {
+   "images": 30,
+   "unique_sha": 28,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_final_candidate_20261104_sensor": {
+   "images": 297,
+   "unique_sha": 285,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_final_smoke_20261104_sensor": {
+   "images": 114,
+   "unique_sha": 112,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_independence_sensor": {
+   "images": 613,
+   "unique_sha": 603,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_pilot_north_sensor": {
+   "images": 193,
+   "unique_sha": 191,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  },
+  "lm_pilot_sensor": {
+   "images": 18,
+   "unique_sha": 12,
+   "overlap_with_new_pool": 0,
+   "overlap_examples": []
+  }
+ }
+}

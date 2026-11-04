@@ -223,3 +223,15 @@
 | 原始采集（ignored） | `outputs/sensor_shadow/lm_final_candidate_20261104{,_sensor}/` |
 
 **边界声明：** 本文所有数值都是**数据准备/格式 QA/仿真采集/证据核查**结果，不构成模型效果、板端、导航或规则合规验收；官方示例（RKNN 75 FPS 等）不是我们的模型指标。
+
+---
+
+## 12. 2026-11-04 二阶段执行更新（探索实验已完成，认证仍 INCOMPLETE）
+
+- **判定拆分**：本文 §4 的 A1–A8 已拆成探索启动条件 E1–E5 与认证条件 C1–C8（见任务定义 §4.1/§4.2）。用户已授权主候选**仅内部有界研究**（分发另行决策），因此 E 阶段全部执行；C 阶段多数仍 INCOMPLETE/UNKNOWN。
+- **实际执行**：隔离 venv（torch 2.7.0+cu128 / ultralytics 8.2.0）→ GPU 单关键点 smoke → 小样本过拟合（修正标签 bug 后 PASS）→ ONNX opset18（主机数值一致）→ pilot（3.677 s/epoch）→ **3 seed × 60 epoch 有界训练** → 仅 val 冻结阈值 → **一次性 exploratory final**（279 帧，只读一次）。
+- **结果**：val joint 0.484/0.579/0.442（选中 seed1）；final exploratory：presence P1.000/R0.916、reference coverage 0.284、joint 0.298、identity P1.000（池内无已验证 HN1，不作认证）。计划效果门未达到，按不回调规则停止。
+- **新证据**：§3.3 的 final 6 族池降级为 exploratory（34 帧试点污染 6/6 族，0 untouched）；采集发现 map-native 绿灯相似结构 MS1 → **U1/U2 唯一性假设证伪**，identity 认证 INCOMPLETE。
+- **认证状态**：C1 INCOMPLETE（分发未决）、C2 INCOMPLETE（单代理）、C3 INCOMPLETE（无未触碰 sealed final）、C4 INCOMPLETE（负例分母 41）、C5 UNKNOWN（无板卡）、C6 INCOMPLETE（合成域）、C7 INCOMPLETE（单次）、C8 INCOMPLETE。
+- 详细数字、命令、hash 与限制见 [LANDMARK_EXPLORATORY_RESULTS_20261104.md](LANDMARK_EXPLORATORY_RESULTS_20261104.md) 与 [training 报告](training_20261104/TRAINING_20261104.md)。
+

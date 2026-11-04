@@ -1,0 +1,409 @@
+{
+ "schema_version": "dsh.tower_annotation.v2_1",
+ "status": "V21_VALIDATOR_EXAMPLE_REAL_FRAMES_NOT_PRODUCTION",
+ "annotation_spec": {
+  "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+  "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+  "status": "FROZEN_FOR_DATA"
+ },
+ "note": "5 real frames re-expressed in v2.1 to exercise the validator: normal, bottom truncation (metadata conflict), right truncation (metadata agree), unavailable reference, TARGET_ABSENT + unverified confuser.",
+ "annotations": [
+  {
+   "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+   "image": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_sweep_0-follow_only_g1_9.png",
+   "image_sha256": "fb7c1c26bb67f316aa0c95686471d719efeb8058e65404aaf6ddfe4ee54740f9",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_final_candidate_20261104_sensor",
+    "family": "lmf_sweep",
+    "group_id": "g_lmf_sweep",
+    "split": "test",
+    "origin_split_in_freeze": "test",
+    "generation": 19,
+    "sequence": 9
+   },
+   "dataset_role": "ANNOTATION_CALIBRATION",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     97,
+     106,
+     83,
+     74
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 99.9,
+     "y": 109.9,
+     "visible": true
+    },
+    "green_pixels": 8,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "v2.1 validator example on real pilot frames; not a production label batch"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "normal full tower; reference from colour cue, green_pixels=8"
+  },
+  {
+   "frame_id": "lmf_near_0-follow_only_g3_5.png",
+   "image": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_near_0-follow_only_g3_5.png",
+   "image_sha256": "a6a7e951406252e70aee2eee7c0acbac5785d53b0e58d7c786bc2df2eec12c36",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_final_candidate_20261104_sensor",
+    "family": "lmf_near",
+    "group_id": "g_lmf_near",
+    "split": "test",
+    "origin_split_in_freeze": "test",
+    "generation": 35,
+    "sequence": 5
+   },
+   "dataset_role": "ANNOTATION_CALIBRATION",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "PARTIAL",
+    "truncated": true,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": true
+    },
+    "truncation_source": {
+     "bottom": "ANNOTATOR_VISUAL"
+    },
+    "truncation_conflicts": [
+     {
+      "edge": "bottom",
+      "capture": false,
+      "annotator": true,
+      "resolution": "ANNOTATOR_OVER_CAPTURE"
+     }
+    ],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     55,
+     75,
+     190,
+     165
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 137.3,
+     "y": 83.3,
+     "visible": true
+    },
+    "green_pixels": 31,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "v2.1 validator example on real pilot frames; not a production label batch"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "bottom base pedestal clipped; capture metadata only tracked left/right (recorded conflict)"
+  },
+  {
+   "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+   "image": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_edge_0-follow_only_g4_10.png",
+   "image_sha256": "f4fbfe1f54c0794719b2f65bb47442064b0a02271aa73e71ccfbf8193e38899f",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_final_candidate_20261104_sensor",
+    "family": "lmf_edge",
+    "group_id": "g_lmf_edge",
+    "split": "test",
+    "origin_split_in_freeze": "test",
+    "generation": 410,
+    "sequence": 10
+   },
+   "dataset_role": "ANNOTATION_CALIBRATION",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "PARTIAL",
+    "truncated": true,
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {
+     "right": "BOTH"
+    },
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     245,
+     100,
+     75,
+     140
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 293.1,
+     "y": 117.9,
+     "visible": true
+    },
+    "green_pixels": 28,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "v2.1 validator example on real pilot frames; not a production label batch"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "right-edge truncation; capture metadata and annotator agree"
+  },
+  {
+   "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+   "image": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_backoff_0-follow_only_g2_60.png",
+   "image_sha256": "6bb6e38ee6f897eba1a63e1f6e69bee3e70710d10f084a653141fb615bcc8649",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_final_candidate_20261104_sensor",
+    "family": "lmf_backoff",
+    "group_id": "g_lmf_backoff",
+    "split": "test",
+    "origin_split_in_freeze": "test",
+    "generation": 260,
+    "sequence": 60
+   },
+   "dataset_role": "ANNOTATION_CALIBRATION",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     149,
+     132,
+     24,
+     27
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 1,
+    "reference_status": "UNAVAILABLE",
+    "reference_unavailable_reason": "REFERENCE_TOO_SMALL",
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "v2.1 validator example on real pilot frames; not a production label batch"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "8.0 m; green_pixels=1 < 3 -> UNAVAILABLE/REFERENCE_TOO_SMALL"
+  },
+  {
+   "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+   "image": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images/lmf_similar_negative_0-follow_only_g5_6.png",
+   "image_sha256": "9bb18bbdc0d645e5338c64f2cc1831ebbc68d3dff59b04c9128d89b583ca3e2e",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_final_candidate_20261104_sensor",
+    "family": "lmf_similar_negative",
+    "group_id": "g_lmf_similar_negative",
+    "split": "test",
+    "origin_split_in_freeze": "test",
+    "generation": 56,
+    "sequence": 6
+   },
+   "dataset_role": "ANNOTATION_CALIBRATION",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": false,
+    "visibility": "ABSENT",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "c_dark_pillar",
+     "description": "distant dark tower-like pillar at the right edge; identity unverified",
+     "bbox_xywh": [
+      300,
+      95,
+      20,
+      65
+     ],
+     "green_cue": null,
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; no world-pose/map check, NOT a verified similar tower",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "negative_type": "TARGET_ABSENT",
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "v2.1 validator example on real pilot frames; not a production label batch"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160.0,
+    "cx_px": 160.0,
+    "cy_px": 120.0,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "notes": "target absent (camera yaw ~180 deg); central-field structure recorded as unverified confuser"
+  }
+ ]
+}

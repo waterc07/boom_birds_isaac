@@ -396,3 +396,205 @@ def test_yolo_sidecar_keeps_hidden_annotation_fields():
     for field in ('truncated', 'occluded', 'ambiguous', 'reference_status',
                   'reference_unavailable_reason', 'group_id', 'split'):
         assert field in sidecar
+
+
+# ---------------------------------------------------------------------------
+# schema v2.1 (dsh.tower_annotation.v2_1): four-edge truncation, green-pixel
+# reference criterion, unverified confusers, bbox_source, annotation_mode,
+# dataset_role.  v2 documents keep validating through the v2 path.
+# ---------------------------------------------------------------------------
+
+V21 = 'dsh.tower_annotation.v2_1'
+
+
+def v21_annotation():
+    ann = v2_annotation()
+    ann['target']['truncated_edges'] = {'left': False, 'right': False,
+                                        'top': False, 'bottom': False}
+    ann['target']['truncation_source'] = {}
+    ann['target']['truncation_conflicts'] = []
+    ann['geometry']['green_pixels'] = 10
+    ann['geometry']['bbox_source'] = 'ANNOTATOR_VISUAL'
+    ann['annotator']['annotation_mode'] = 'FRAME_BY_FRAME_VISUAL'
+    ann['dataset_role'] = 'EXPLORATORY_EVAL'
+    ann['confusers'] = []
+    return ann
+
+
+def v21_doc():
+    return {'schema_version': V21, 'annotations': [v21_annotation()]}
+
+
+def prepared_v21(tmp_path):
+    doc = v21_doc()
+    image_path = tmp_path / 'images' / 'f1.png'
+    image_path.parent.mkdir(parents=True, exist_ok=True)
+    Image.new('RGB', (320, 240), (128, 128, 128)).save(image_path)
+    doc['annotations'][0]['image_sha256'] = hashlib.sha256(
+        image_path.read_bytes()).hexdigest()
+    return doc
+
+
+def test_v21_valid_document_passes(tmp_path):
+    errors = errors_of(prepared_v21(tmp_path), tmp_path)
+    assert errors == []
+
+
+def test_v21_truncated_edges_required_and_consistent(tmp_path):
+    doc = prepared_v21(tmp_path)
+    del doc['annotations'][0]['target']['truncated_edges']
+    assert any('truncated_edges' in error for error in errors_of(doc, tmp_path))
+    doc = prepared_v21(tmp_path)
+    doc['annotations'][0]['target']['truncated_edges'] = {'left': False, 'right': True,
+                                                          'top': False, 'bottom': False}
+    # right edge true but truncated=false
+    assert any('truncated' in error for error in errors_of(doc, tmp_path))
+
+
+def test_v21_true_edge_requires_source_and_partial(tmp_path):
+    doc = prepared_v21(tmp_path)
+    ann = doc['annotations'][0]
+    ann['target']['truncated'] = True
+    ann['target']['visibility'] = 'PARTIAL'
+    ann['target']['truncated_edges']['right'] = True
+    errors = errors_of(doc, tmp_path)
+    assert any('truncation_source' in error for error in errors)
+    ann['target']['truncation_source'] = {'right': 'ANNOTATOR_VISUAL'}
+    assert errors_of(doc, tmp_path) == []
+
+
+def test_v21_truncation_conflict_resolution_enum(tmp_path):
+    doc = prepared_v21(tmp_path)
+    ann = doc['annotations'][0]
+    ann['target']['truncation_conflicts'] = [
+        {'edge': 'bottom', 'capture': False, 'annotator': True,
+         'resolution': 'WHATEVER'}]
+    assert any('truncation_conflic' in error for error in errors_of(doc, tmp_path))
+
+
+def test_v21_green_pixels_required_for_present(tmp_path):
+    doc = prepared_v21(tmp_path)
+    del doc['annotations'][0]['geometry']['green_pixels']
+    assert any('green_pixels' in error for error in errors_of(doc, tmp_path))
+
+
+def test_v21_keypoint_requires_three_green_pixels(tmp_path):
+    doc = prepared_v21(tmp_path)
+    doc['annotations'][0]['geometry']['green_pixels'] = 2
+    errors = errors_of(doc, tmp_path)
+    assert any('green_pixels' in error for error in errors)
+
+
+def test_v21_unavailable_reference_with_low_green_pixels_passes(tmp_path):
+    doc = prepared_v21(tmp_path)
+    ann = doc['annotations'][0]
+    ann['geometry']['keypoint'] = None
+    ann['geometry']['green_pixels'] = 1
+    ann['geometry']['reference_status'] = 'UNAVAILABLE'
+    ann['geometry']['reference_unavailable_reason'] = 'REFERENCE_TOO_SMALL'
+    assert errors_of(doc, tmp_path) == []
+
+
+def test_v21_bbox_source_enum(tmp_path):
+    doc = prepared_v21(tmp_path)
+    doc['annotations'][0]['geometry']['bbox_source'] = 'MAGIC'
+    assert any('bbox_source' in error for error in errors_of(doc, tmp_path))
+
+
+def test_v21_annotation_mode_and_dataset_role_enums(tmp_path):
+    doc = prepared_v21(tmp_path)
+    doc['annotations'][0]['annotator']['annotation_mode'] = 'VIBES'
+    doc['annotations'][0]['dataset_role'] = 'SEALED'
+    errors = errors_of(doc, tmp_path)
+    assert any('annotation_mode' in error for error in errors)
+    assert any('dataset_role' in error for error in errors)
+
+
+def test_v21_unverified_confuser_allowed_with_target_absent(tmp_path):
+    doc = prepared_v21(tmp_path)
+    ann = doc['annotations'][0]
+    ann['target'].update({'present': False, 'visibility': 'ABSENT'})
+    ann['geometry'] = {'bbox_xywh': None, 'keypoint': None,
+                       'reference_status': 'NOT_APPLICABLE',
+                       'reference_unavailable_reason': None,
+                       'reference_source': 'NOT_APPLICABLE',
+                       'green_pixels': 0, 'bbox_source': 'ANNOTATOR_VISUAL'}
+    ann['negative_type'] = 'TARGET_ABSENT'
+    ann['confusers'] = [{'confuser_id': 'c1', 'description': 'central field pillar',
+                         'bbox_xywh': [10, 10, 20, 30], 'green_cue': None,
+                         'verified': False, 'verification_source': None,
+                         'verification_note': 'identity unverified',
+                         'source': 'ANNOTATOR'}]
+    assert errors_of(doc, tmp_path) == []
+
+
+def test_v21_verified_confuser_requires_source_and_note(tmp_path):
+    doc = prepared_v21(tmp_path)
+    ann = doc['annotations'][0]
+    ann['target'].update({'present': False, 'visibility': 'ABSENT'})
+    ann['geometry'] = {'bbox_xywh': None, 'keypoint': None,
+                       'reference_status': 'NOT_APPLICABLE',
+                       'reference_unavailable_reason': None,
+                       'reference_source': 'NOT_APPLICABLE',
+                       'green_pixels': 0, 'bbox_source': 'ANNOTATOR_VISUAL'}
+    ann['negative_type'] = 'TARGET_ABSENT'
+    ann['confusers'] = [{'confuser_id': 'c1', 'description': 'tower-like pillar',
+                         'bbox_xywh': [10, 10, 20, 30], 'green_cue': None,
+                         'verified': True, 'verification_source': None,
+                         'verification_note': '', 'source': 'ANNOTATOR'}]
+    errors = errors_of(doc, tmp_path)
+    assert any('verification' in error for error in errors)
+
+
+def test_v21_similar_structure_requires_verified_confuser(tmp_path):
+    doc = prepared_v21(tmp_path)
+    ann = doc['annotations'][0]
+    ann['target'].update({'present': False, 'visibility': 'ABSENT'})
+    ann['geometry'] = {'bbox_xywh': None, 'keypoint': None,
+                       'reference_status': 'NOT_APPLICABLE',
+                       'reference_unavailable_reason': None,
+                       'reference_source': 'NOT_APPLICABLE',
+                       'green_pixels': 0, 'bbox_source': 'ANNOTATOR_VISUAL'}
+    ann['negative_type'] = 'SIMILAR_STRUCTURE'
+    ann['confusers'] = [{'confuser_id': 'c1', 'description': 'unverified pillar',
+                         'bbox_xywh': [10, 10, 20, 30], 'green_cue': None,
+                         'verified': False, 'verification_source': None,
+                         'verification_note': 'identity unverified',
+                         'source': 'ANNOTATOR'}]
+    assert any('verified confuser' in error for error in errors_of(doc, tmp_path))
+    ann['confusers'][0].update({'verified': True,
+                                'verification_source': 'HUMAN_ADJUDICATION',
+                                'verification_note': 'adjudicated as similar structure'})
+    assert errors_of(doc, tmp_path) == []
+
+
+def test_yolo_sidecar_carries_v21_fields():
+    ann = v21_annotation()
+    ann['target'].update({'truncated': True, 'visibility': 'PARTIAL',
+                          'truncated_edges': {'left': False, 'right': False,
+                                              'top': False, 'bottom': True}})
+    ann['target']['truncation_source'] = {'bottom': 'ANNOTATOR_VISUAL'}
+    ann['geometry']['bbox_source'] = 'PROJECTION_AID_CALIBRATED'
+    ann['dataset_role'] = 'EXPLORATORY_EVAL'
+    _, sidecar, _ = yolo_pose_target(ann, 640, 640)
+    assert sidecar['truncated_edges'] == {'left': False, 'right': False,
+                                          'top': False, 'bottom': True}
+    assert sidecar['green_pixels'] == 10
+    assert sidecar['bbox_source'] == 'PROJECTION_AID_CALIBRATED'
+    assert sidecar['dataset_role'] == 'EXPLORATORY_EVAL'
+
+
+def test_yolo_target_declares_model_canvas_coordinate_space():
+    """Clarification pin: yolo_pose_target is model-canvas normalized, not YOLO txt."""
+    target, sidecar, reason = yolo_pose_target(v2_annotation(), 640, 640)
+    assert reason is None
+    assert target['coordinate_space'] == 'MODEL_CANVAS_NORMALIZED'
+    # deliberately absent: the exporter must still apply source normalization
+    assert 'label_normalization' not in target
+    # numeric values intentionally remain model-canvas normalized
+    assert target['keypoint_norm'] == pytest.approx([0.4375, 0.296875])
+    # a YOLO txt needs source-image normalization (55/240), not (55*2+80)/640
+    assert target['keypoint_norm'][1] != pytest.approx(55.0 / 240.0, abs=1e-6)
+    doc = yolo_pose_target.__doc__ or ''
+    assert 'MODEL-CANVAS' in doc or 'model-canvas' in doc.lower()
+    assert 'NOT a YOLO txt label' in doc

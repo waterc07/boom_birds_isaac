@@ -1,0 +1,832 @@
+{
+ "schema_version": "dsh.landmark_dev_label_lists.v1",
+ "status": "DRAFT_FOR_DATAFREEZE_VAL_HN_MINIMAL_MERGED",
+ "note": "explicit dev train/val frame lists with group attribution, negative types and label hashes; produced by scripts/landmark_dedup_sampling.py + outputs/perception/dev_annotations_20261104/tools/*; labels themselves stay in gitignored outputs; HN1/HN2 second dev batch is not yet included in val",
+ "generated_at_local": "2026-11-04T19:26:48+0800",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head": "800c53b0e8c1f075d7492be93c19aab06ef339e7",
+  "head_short": "800c53b"
+ },
+ "annotation_spec": {
+  "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+  "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+  "status": "FROZEN_FOR_DATA"
+ },
+ "sampling": {
+  "rule_id": "dev_dedup_stride_v1",
+  "script": "scripts/landmark_dedup_sampling.py",
+  "script_sha256": "8c5b2cde820b4928af11bbe452ed35edc55c01d2a465a65fe49660b11e92100c",
+  "report": "outputs/perception/dev_annotations_20261104/dedup_sampling_report.json",
+  "report_sha256": "b3c317a98712942b02fa138a04fb500285f7667d324f26f894f1cfd2572e168a",
+  "main_split_freeze": {
+   "path": "configs/perception/landmark_split_freeze_v2.json",
+   "sha256": "5d1d3dbcc1d950e73dfd74d4d7c64c2d307aab9786367a0b674f04e163c02407",
+   "freeze_sha256": "269d9a659db387beee345daff33cf1a3508261d099f548aeb93353b94c33afed"
+  },
+  "extra_dev_batch": {
+   "path": "outputs/perception/dev_annotations_20261104/dev_extra_groups_20261104.json",
+   "sha256": "8cbcdf8937b2c8635a20839fbcbd80fd48bbcf501047290a9076431f40232acc",
+   "freeze_id": "dev_extra_groups_20261104",
+   "status": "T9_FIRST_BATCH_PLACEHOLDER_NOT_A_FROZEN_SPLIT"
+  },
+  "rules": {
+   "rule_id": "dev_dedup_stride_v1",
+   "frozen_before_image_inspection": true,
+   "no_model_or_detector_score_used": true,
+   "R1_roster": "accepted frames of dev groups (train/val) in freeze v2; order = (episode, sequence)",
+   "R2_exact": "same sha256 in group -> first roster frame; duplicates never selected; cross-group duplicates reported",
+   "R3_near_duplicate": {
+    "dhash64_hamming_max": 6,
+    "thumb_mad_max": 3.0,
+    "thumb_scale": "64x48 grayscale, 0..255 mean absolute difference"
+   },
+   "R4_representative": "cluster medoid by sum dHash hamming among unique members; tie -> smaller roster order",
+   "R5_fixed_stride": "static groups = all reps; dynamic = endpoints + midpoint systematic floor((i+0.5)*n/k)",
+   "R6_overrides": [
+    "force_min_distance",
+    "force_max_distance",
+    "force_max_abs_bearing",
+    "force_predicted_truncation",
+    "force_small_usable_green",
+    "force_unusable_green"
+   ],
+   "R7_budgets": {
+    "train": 160,
+    "val": 110,
+    "min_per_dynamic_group": 8,
+    "static_group_accepted_threshold": 32
+   },
+   "R8_exclusion_recording": "every roster frame has exactly one status; SELECTED only for cluster reps",
+   "tower_estimate": {
+    "world_m": [
+     11.52,
+     -0.01,
+     1.25
+    ],
+    "provenance": "triangulated capture aid (existing labels + camera poses); not truth; coverage metadata only",
+    "half_bar_m": 0.85
+   },
+   "green_rule": "g>=90, g-r>=25, g-b>=25, largest 4-connected component (spec v2.1 reference criterion)",
+   "R9_extra_dev_batch": "T9 first dev batch consumed via --extra-freeze: group = capture episode, split per Lead instruction 2026-11-04 (inner_north/static_low -> val; inner_south/static_high/static_negative -> train); HN1/HN2 second batch will be appended to val only"
+  },
+  "selections": {
+   "train": {
+    "path": "outputs/perception/dev_annotations_20261104/selection_train.json",
+    "sha256": "334870604bd4f67611f05b22b77d40a36b71c6b4543cfdeb90899afd10b486d7",
+    "frames": 160
+   },
+   "val": {
+    "path": "outputs/perception/dev_annotations_20261104/selection_val.json",
+    "sha256": "129b95e021d24e8dffdc694d19871debfb8c6028640bb5e2bb1eb74363495dae",
+    "frames": 110
+   }
+  }
+ },
+ "labels": {
+  "train": {
+   "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
+   "sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df",
+   "gitignored": true,
+   "schema_version": "dsh.tower_annotation.v2_1",
+   "counts": {
+    "frames": 160,
+    "present": 105,
+    "absent": 52,
+    "undecidable": 3,
+    "gt_unobservable": 0,
+    "reference_available": 56,
+    "reference_unavailable": 49,
+    "truncated": 9,
+    "edge_counts": {
+     "left": 9,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "confusers": 6,
+    "confusers_verified": 0,
+    "negative_type": {
+     "TARGET_ABSENT": 52,
+     "SIMILAR_STRUCTURE": 0,
+     "OTHER_LANDMARK": 0
+    },
+    "by_group": {
+     "g_lm_ind_devSouth": {
+      "frames": 39,
+      "present": 37,
+      "absent": 0,
+      "undecidable": 2,
+      "keypoints": 16
+     },
+     "g_geo_staticE": {
+      "frames": 3,
+      "present": 2,
+      "absent": 1,
+      "undecidable": 0,
+      "keypoints": 2
+     },
+     "g_lmf_dev_inner_south_0": {
+      "frames": 20,
+      "present": 20,
+      "absent": 0,
+      "undecidable": 0,
+      "keypoints": 16
+     },
+     "g_lmf_dev_static_high_0": {
+      "frames": 12,
+      "present": 12,
+      "absent": 0,
+      "undecidable": 0,
+      "keypoints": 12
+     },
+     "g_lmf_dev_static_negative_0": {
+      "frames": 8,
+      "present": 0,
+      "absent": 8,
+      "undecidable": 0,
+      "keypoints": 0
+     },
+     "g_lm_pilot_staticE": {
+      "frames": 3,
+      "present": 2,
+      "absent": 1,
+      "undecidable": 0,
+      "keypoints": 2
+     },
+     "g_formal6_southA": {
+      "frames": 41,
+      "present": 29,
+      "absent": 11,
+      "undecidable": 1,
+      "keypoints": 7
+     },
+     "g_formal6_staticW": {
+      "frames": 2,
+      "present": 2,
+      "absent": 0,
+      "undecidable": 0,
+      "keypoints": 0
+     },
+     "g_lm_ind_reverseSouth": {
+      "frames": 30,
+      "present": 0,
+      "absent": 30,
+      "undecidable": 0,
+      "keypoints": 0
+     },
+     "g_lm_ind_staticEtest": {
+      "frames": 2,
+      "present": 1,
+      "absent": 1,
+      "undecidable": 0,
+      "keypoints": 1
+     }
+    }
+   }
+  },
+  "val": {
+   "path": "outputs/perception/dev_annotations_20261104/labels_val.json",
+   "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d",
+   "gitignored": true,
+   "schema_version": "dsh.tower_annotation.v2_1",
+   "counts": {
+    "frames": 134,
+    "present": 106,
+    "absent": 25,
+    "undecidable": 3,
+    "gt_unobservable": 11,
+    "reference_available": 41,
+    "reference_unavailable": 65,
+    "truncated": 17,
+    "edge_counts": {
+     "left": 0,
+     "right": 10,
+     "top": 0,
+     "bottom": 7
+    },
+    "confusers": 43,
+    "confusers_verified": 13,
+    "negative_type": {
+     "TARGET_ABSENT": 12,
+     "SIMILAR_STRUCTURE": 13,
+     "OTHER_LANDMARK": 0
+    },
+    "by_group": {
+     "g_lm_pilot_north": {
+      "frames": 20,
+      "present": 15,
+      "absent": 5,
+      "undecidable": 0,
+      "keypoints": 7
+     },
+     "g_geo_north": {
+      "frames": 26,
+      "present": 21,
+      "absent": 3,
+      "undecidable": 2,
+      "keypoints": 6
+     },
+     "g_lmf_dev_inner_north_0": {
+      "frames": 30,
+      "present": 30,
+      "absent": 0,
+      "undecidable": 0,
+      "keypoints": 7
+     },
+     "g_lmf_dev_static_low_0": {
+      "frames": 15,
+      "present": 15,
+      "absent": 0,
+      "undecidable": 0,
+      "keypoints": 15
+     },
+     "g_lm_ind_north": {
+      "frames": 19,
+      "present": 14,
+      "absent": 4,
+      "undecidable": 1,
+      "keypoints": 6
+     },
+     "g_lmf_dev_hn1_confuser_0": {
+      "frames": 13,
+      "present": 0,
+      "absent": 13,
+      "undecidable": 0,
+      "keypoints": 0
+     },
+     "g_lmf_dev_hn2_occluder_0": {
+      "frames": 11,
+      "present": 11,
+      "absent": 0,
+      "undecidable": 0,
+      "keypoints": 0
+     }
+    }
+   }
+  }
+ },
+ "splits": {
+  "train": {
+   "total_frames": 160,
+   "groups": [
+    {
+     "group_id": "g_formal6_southA",
+     "family_id": "fam_south_A",
+     "split": "train",
+     "frames": [
+      "sensor_reset_0-follow_only_g5_114.png",
+      "sensor_reset_0-follow_only_g5_168.png",
+      "sensor_reset_0-follow_only_g5_175.png",
+      "sensor_reset_0-follow_only_g5_178.png",
+      "sensor_reset_0-follow_only_g5_180.png",
+      "sensor_reset_0-follow_only_g5_188.png",
+      "sensor_reset_0-follow_only_g5_203.png",
+      "sensor_reset_0-follow_only_g5_205.png",
+      "sensor_reset_0-follow_only_g5_208.png",
+      "sensor_reset_0-follow_only_g5_210.png",
+      "sensor_reset_0-follow_only_g5_24.png",
+      "sensor_reset_0-follow_only_g5_27.png",
+      "sensor_reset_0-follow_only_g5_29.png",
+      "sensor_reset_0-follow_only_g5_33.png",
+      "sensor_reset_0-follow_only_g5_35.png",
+      "sensor_reset_0-follow_only_g5_38.png",
+      "sensor_reset_0-follow_only_g5_40.png",
+      "sensor_reset_0-follow_only_g5_42.png",
+      "sensor_reset_0-follow_only_g5_47.png",
+      "sensor_reset_0-follow_only_g5_52.png",
+      "sensor_reset_0-follow_only_g5_6.png",
+      "sensor_reset_0-follow_only_g5_61.png",
+      "sensor_reset_0-follow_only_g5_63.png",
+      "sensor_reset_0-follow_only_g5_67.png",
+      "sensor_reset_1-follow_only_g6_147.png",
+      "sensor_reset_1-follow_only_g6_173.png",
+      "sensor_reset_1-follow_only_g6_183.png",
+      "sensor_reset_1-follow_only_g6_185.png",
+      "sensor_reset_1-follow_only_g6_190.png",
+      "sensor_reset_1-follow_only_g6_193.png",
+      "sensor_reset_1-follow_only_g6_195.png",
+      "sensor_reset_1-follow_only_g6_198.png",
+      "sensor_reset_1-follow_only_g6_200.png",
+      "sensor_reset_1-follow_only_g6_56.png",
+      "sensor_reset_1-follow_only_g6_58.png",
+      "sensor_reset_1-follow_only_g6_7.png",
+      "sensor_route_0-follow_only_g3_171.png",
+      "sensor_route_1-follow_only_g4_8.png",
+      "sensor_route_1-follow_only_g4_87.png",
+      "sensor_route_1-follow_only_g4_89.png",
+      "sensor_route_1-follow_only_g4_90.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 11
+     },
+     "frame_count": 41
+    },
+    {
+     "group_id": "g_formal6_staticW",
+     "family_id": "fam_static_W_start",
+     "split": "train",
+     "frames": [
+      "sensor_static_0-follow_only_g1_3.png",
+      "sensor_static_1-follow_only_g2_3.png"
+     ],
+     "negative_types": {},
+     "frame_count": 2
+    },
+    {
+     "group_id": "g_geo_staticE",
+     "family_id": "fam_static_E_test",
+     "split": "train",
+     "frames": [
+      "geo_test_static_a-follow_only_g2_3.png",
+      "geo_test_static_b-follow_only_g3_4.png",
+      "geo_test_static_c-follow_only_g4_3.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 1
+     },
+     "frame_count": 3
+    },
+    {
+     "group_id": "g_lm_ind_devSouth",
+     "family_id": "fam_south_A",
+     "split": "train",
+     "frames": [
+      "dev_south_new-follow_only_g1_137.png",
+      "dev_south_new-follow_only_g1_141.png",
+      "dev_south_new-follow_only_g1_151.png",
+      "dev_south_new-follow_only_g1_156.png",
+      "dev_south_new-follow_only_g1_158.png",
+      "dev_south_new-follow_only_g1_161.png",
+      "dev_south_new-follow_only_g1_163.png",
+      "dev_south_new-follow_only_g1_166.png",
+      "dev_south_new-follow_only_g1_168.png",
+      "dev_south_new-follow_only_g1_170.png",
+      "dev_south_new-follow_only_g1_173.png",
+      "dev_south_new-follow_only_g1_176.png",
+      "dev_south_new-follow_only_g1_178.png",
+      "dev_south_new-follow_only_g1_181.png",
+      "dev_south_new-follow_only_g1_183.png",
+      "dev_south_new-follow_only_g1_186.png",
+      "dev_south_new-follow_only_g1_188.png",
+      "dev_south_new-follow_only_g1_191.png",
+      "dev_south_new-follow_only_g1_193.png",
+      "dev_south_new-follow_only_g1_194.png",
+      "dev_south_new-follow_only_g1_20.png",
+      "dev_south_new-follow_only_g1_22.png",
+      "dev_south_new-follow_only_g1_25.png",
+      "dev_south_new-follow_only_g1_28.png",
+      "dev_south_new-follow_only_g1_3.png",
+      "dev_south_new-follow_only_g1_31.png",
+      "dev_south_new-follow_only_g1_38.png",
+      "dev_south_new-follow_only_g1_49.png",
+      "dev_south_new-follow_only_g1_5.png",
+      "dev_south_new-follow_only_g1_51.png",
+      "dev_south_new-follow_only_g1_54.png",
+      "dev_south_new-follow_only_g1_57.png",
+      "dev_south_new-follow_only_g1_60.png",
+      "dev_south_new-follow_only_g1_62.png",
+      "dev_south_new-follow_only_g1_65.png",
+      "dev_south_new-follow_only_g1_67.png",
+      "dev_south_new-follow_only_g1_70.png",
+      "dev_south_new-follow_only_g1_9.png",
+      "dev_south_new-follow_only_g1_96.png"
+     ],
+     "negative_types": {},
+     "frame_count": 39
+    },
+    {
+     "group_id": "g_lm_ind_reverseSouth",
+     "family_id": "fam_south_A",
+     "split": "train",
+     "frames": [
+      "test_reverse_south-follow_only_g2_10.png",
+      "test_reverse_south-follow_only_g2_113.png",
+      "test_reverse_south-follow_only_g2_13.png",
+      "test_reverse_south-follow_only_g2_144.png",
+      "test_reverse_south-follow_only_g2_147.png",
+      "test_reverse_south-follow_only_g2_157.png",
+      "test_reverse_south-follow_only_g2_166.png",
+      "test_reverse_south-follow_only_g2_168.png",
+      "test_reverse_south-follow_only_g2_171.png",
+      "test_reverse_south-follow_only_g2_174.png",
+      "test_reverse_south-follow_only_g2_177.png",
+      "test_reverse_south-follow_only_g2_180.png",
+      "test_reverse_south-follow_only_g2_183.png",
+      "test_reverse_south-follow_only_g2_185.png",
+      "test_reverse_south-follow_only_g2_194.png",
+      "test_reverse_south-follow_only_g2_196.png",
+      "test_reverse_south-follow_only_g2_199.png",
+      "test_reverse_south-follow_only_g2_201.png",
+      "test_reverse_south-follow_only_g2_203.png",
+      "test_reverse_south-follow_only_g2_207.png",
+      "test_reverse_south-follow_only_g2_208.png",
+      "test_reverse_south-follow_only_g2_210.png",
+      "test_reverse_south-follow_only_g2_211.png",
+      "test_reverse_south-follow_only_g2_3.png",
+      "test_reverse_south-follow_only_g2_36.png",
+      "test_reverse_south-follow_only_g2_4.png",
+      "test_reverse_south-follow_only_g2_58.png",
+      "test_reverse_south-follow_only_g2_62.png",
+      "test_reverse_south-follow_only_g2_65.png",
+      "test_reverse_south-follow_only_g2_9.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 30
+     },
+     "frame_count": 30
+    },
+    {
+     "group_id": "g_lm_ind_staticEtest",
+     "family_id": "fam_static_E_test",
+     "split": "train",
+     "frames": [
+      "test_static_away-follow_only_g5_5.png",
+      "test_static_oblique-follow_only_g4_4.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 1
+     },
+     "frame_count": 2
+    },
+    {
+     "group_id": "g_lm_pilot_staticE",
+     "family_id": "fam_static_E_dev",
+     "split": "train",
+     "frames": [
+      "pilot_east_away-follow_only_g3_3.png",
+      "pilot_east_center-follow_only_g1_3.png",
+      "pilot_east_left-follow_only_g2_4.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 1
+     },
+     "frame_count": 3
+    },
+    {
+     "group_id": "g_lmf_dev_inner_south_0",
+     "family_id": "fam_dev_inner_south",
+     "split": "train",
+     "frames": [
+      "lmf_dev_inner_south_0-follow_only_g2_10.png",
+      "lmf_dev_inner_south_0-follow_only_g2_101.png",
+      "lmf_dev_inner_south_0-follow_only_g2_103.png",
+      "lmf_dev_inner_south_0-follow_only_g2_13.png",
+      "lmf_dev_inner_south_0-follow_only_g2_15.png",
+      "lmf_dev_inner_south_0-follow_only_g2_18.png",
+      "lmf_dev_inner_south_0-follow_only_g2_20.png",
+      "lmf_dev_inner_south_0-follow_only_g2_23.png",
+      "lmf_dev_inner_south_0-follow_only_g2_3.png",
+      "lmf_dev_inner_south_0-follow_only_g2_4.png",
+      "lmf_dev_inner_south_0-follow_only_g2_43.png",
+      "lmf_dev_inner_south_0-follow_only_g2_6.png",
+      "lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "lmf_dev_inner_south_0-follow_only_g2_8.png",
+      "lmf_dev_inner_south_0-follow_only_g2_80.png",
+      "lmf_dev_inner_south_0-follow_only_g2_82.png",
+      "lmf_dev_inner_south_0-follow_only_g2_84.png",
+      "lmf_dev_inner_south_0-follow_only_g2_95.png",
+      "lmf_dev_inner_south_0-follow_only_g2_97.png",
+      "lmf_dev_inner_south_0-follow_only_g2_99.png"
+     ],
+     "negative_types": {},
+     "frame_count": 20
+    },
+    {
+     "group_id": "g_lmf_dev_static_high_0",
+     "family_id": "fam_dev_static_high",
+     "split": "train",
+     "frames": [
+      "lmf_dev_static_high_0-follow_only_g3_14.png",
+      "lmf_dev_static_high_0-follow_only_g3_15.png",
+      "lmf_dev_static_high_0-follow_only_g3_16.png",
+      "lmf_dev_static_high_0-follow_only_g3_18.png",
+      "lmf_dev_static_high_0-follow_only_g3_21.png",
+      "lmf_dev_static_high_0-follow_only_g3_24.png",
+      "lmf_dev_static_high_0-follow_only_g3_3.png",
+      "lmf_dev_static_high_0-follow_only_g3_4.png",
+      "lmf_dev_static_high_0-follow_only_g3_5.png",
+      "lmf_dev_static_high_0-follow_only_g3_6.png",
+      "lmf_dev_static_high_0-follow_only_g3_7.png",
+      "lmf_dev_static_high_0-follow_only_g3_9.png"
+     ],
+     "negative_types": {},
+     "frame_count": 12
+    },
+    {
+     "group_id": "g_lmf_dev_static_negative_0",
+     "family_id": "fam_dev_static_negative",
+     "split": "train",
+     "frames": [
+      "lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "lmf_dev_static_negative_0-follow_only_g5_11.png",
+      "lmf_dev_static_negative_0-follow_only_g5_13.png",
+      "lmf_dev_static_negative_0-follow_only_g5_16.png",
+      "lmf_dev_static_negative_0-follow_only_g5_17.png",
+      "lmf_dev_static_negative_0-follow_only_g5_20.png",
+      "lmf_dev_static_negative_0-follow_only_g5_22.png",
+      "lmf_dev_static_negative_0-follow_only_g5_6.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 8
+     },
+     "frame_count": 8
+    }
+   ]
+  },
+  "val": {
+   "total_frames": 134,
+   "groups": [
+    {
+     "group_id": "g_geo_north",
+     "family_id": "fam_north",
+     "split": "val",
+     "frames": [
+      "geo_test_north_0-follow_only_g1_102.png",
+      "geo_test_north_0-follow_only_g1_123.png",
+      "geo_test_north_0-follow_only_g1_13.png",
+      "geo_test_north_0-follow_only_g1_135.png",
+      "geo_test_north_0-follow_only_g1_138.png",
+      "geo_test_north_0-follow_only_g1_143.png",
+      "geo_test_north_0-follow_only_g1_146.png",
+      "geo_test_north_0-follow_only_g1_153.png",
+      "geo_test_north_0-follow_only_g1_160.png",
+      "geo_test_north_0-follow_only_g1_165.png",
+      "geo_test_north_0-follow_only_g1_174.png",
+      "geo_test_north_0-follow_only_g1_177.png",
+      "geo_test_north_0-follow_only_g1_180.png",
+      "geo_test_north_0-follow_only_g1_183.png",
+      "geo_test_north_0-follow_only_g1_186.png",
+      "geo_test_north_0-follow_only_g1_187.png",
+      "geo_test_north_0-follow_only_g1_3.png",
+      "geo_test_north_0-follow_only_g1_4.png",
+      "geo_test_north_0-follow_only_g1_49.png",
+      "geo_test_north_0-follow_only_g1_53.png",
+      "geo_test_north_0-follow_only_g1_56.png",
+      "geo_test_north_0-follow_only_g1_68.png",
+      "geo_test_north_0-follow_only_g1_71.png",
+      "geo_test_north_0-follow_only_g1_74.png",
+      "geo_test_north_0-follow_only_g1_77.png",
+      "geo_test_north_0-follow_only_g1_99.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 3
+     },
+     "frame_count": 26
+    },
+    {
+     "group_id": "g_lm_ind_north",
+     "family_id": "fam_north",
+     "split": "val",
+     "frames": [
+      "test_north_0-follow_only_g3_126.png",
+      "test_north_0-follow_only_g3_14.png",
+      "test_north_0-follow_only_g3_141.png",
+      "test_north_0-follow_only_g3_160.png",
+      "test_north_0-follow_only_g3_162.png",
+      "test_north_0-follow_only_g3_170.png",
+      "test_north_0-follow_only_g3_174.png",
+      "test_north_0-follow_only_g3_179.png",
+      "test_north_0-follow_only_g3_183.png",
+      "test_north_0-follow_only_g3_186.png",
+      "test_north_0-follow_only_g3_188.png",
+      "test_north_0-follow_only_g3_191.png",
+      "test_north_0-follow_only_g3_192.png",
+      "test_north_0-follow_only_g3_5.png",
+      "test_north_0-follow_only_g3_54.png",
+      "test_north_0-follow_only_g3_57.png",
+      "test_north_0-follow_only_g3_60.png",
+      "test_north_0-follow_only_g3_78.png",
+      "test_north_0-follow_only_g3_80.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 4
+     },
+     "frame_count": 19
+    },
+    {
+     "group_id": "g_lm_pilot_north",
+     "family_id": "fam_north",
+     "split": "val",
+     "frames": [
+      "dynamic_A_north_0-follow_only_g1_102.png",
+      "dynamic_A_north_0-follow_only_g1_116.png",
+      "dynamic_A_north_0-follow_only_g1_14.png",
+      "dynamic_A_north_0-follow_only_g1_141.png",
+      "dynamic_A_north_0-follow_only_g1_153.png",
+      "dynamic_A_north_0-follow_only_g1_161.png",
+      "dynamic_A_north_0-follow_only_g1_165.png",
+      "dynamic_A_north_0-follow_only_g1_170.png",
+      "dynamic_A_north_0-follow_only_g1_177.png",
+      "dynamic_A_north_0-follow_only_g1_183.png",
+      "dynamic_A_north_0-follow_only_g1_186.png",
+      "dynamic_A_north_0-follow_only_g1_188.png",
+      "dynamic_A_north_0-follow_only_g1_191.png",
+      "dynamic_A_north_0-follow_only_g1_192.png",
+      "dynamic_A_north_0-follow_only_g1_23.png",
+      "dynamic_A_north_0-follow_only_g1_52.png",
+      "dynamic_A_north_0-follow_only_g1_55.png",
+      "dynamic_A_north_0-follow_only_g1_59.png",
+      "dynamic_A_north_0-follow_only_g1_77.png",
+      "dynamic_A_north_0-follow_only_g1_79.png"
+     ],
+     "negative_types": {
+      "TARGET_ABSENT": 5
+     },
+     "frame_count": 20
+    },
+    {
+     "group_id": "g_lmf_dev_hn1_confuser_0",
+     "family_id": "fam_dev_hn1_confuser",
+     "split": "val",
+     "frames": [
+      "lmf_dev_hn1_confuser_0-follow_only_g1_10.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_14.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_16.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_18.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_20.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_22.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_24.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_26.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_28.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_4.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_6.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_8.png"
+     ],
+     "negative_types": {
+      "SIMILAR_STRUCTURE": 13
+     },
+     "frame_count": 13
+    },
+    {
+     "group_id": "g_lmf_dev_hn2_occluder_0",
+     "family_id": "fam_dev_hn2_occluder",
+     "split": "val",
+     "frames": [
+      "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_4.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_6.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_8.png"
+     ],
+     "negative_types": {},
+     "frame_count": 11
+    },
+    {
+     "group_id": "g_lmf_dev_inner_north_0",
+     "family_id": "fam_dev_inner_north",
+     "split": "val",
+     "frames": [
+      "lmf_dev_inner_north_0-follow_only_g1_105.png",
+      "lmf_dev_inner_north_0-follow_only_g1_120.png",
+      "lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "lmf_dev_inner_north_0-follow_only_g1_140.png",
+      "lmf_dev_inner_north_0-follow_only_g1_143.png",
+      "lmf_dev_inner_north_0-follow_only_g1_147.png",
+      "lmf_dev_inner_north_0-follow_only_g1_151.png",
+      "lmf_dev_inner_north_0-follow_only_g1_154.png",
+      "lmf_dev_inner_north_0-follow_only_g1_156.png",
+      "lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "lmf_dev_inner_north_0-follow_only_g1_27.png",
+      "lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "lmf_dev_inner_north_0-follow_only_g1_37.png",
+      "lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "lmf_dev_inner_north_0-follow_only_g1_40.png",
+      "lmf_dev_inner_north_0-follow_only_g1_43.png",
+      "lmf_dev_inner_north_0-follow_only_g1_46.png",
+      "lmf_dev_inner_north_0-follow_only_g1_49.png",
+      "lmf_dev_inner_north_0-follow_only_g1_52.png",
+      "lmf_dev_inner_north_0-follow_only_g1_55.png",
+      "lmf_dev_inner_north_0-follow_only_g1_58.png",
+      "lmf_dev_inner_north_0-follow_only_g1_61.png",
+      "lmf_dev_inner_north_0-follow_only_g1_65.png",
+      "lmf_dev_inner_north_0-follow_only_g1_69.png",
+      "lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "lmf_dev_inner_north_0-follow_only_g1_82.png",
+      "lmf_dev_inner_north_0-follow_only_g1_85.png",
+      "lmf_dev_inner_north_0-follow_only_g1_88.png",
+      "lmf_dev_inner_north_0-follow_only_g1_91.png",
+      "lmf_dev_inner_north_0-follow_only_g1_94.png"
+     ],
+     "negative_types": {},
+     "frame_count": 30
+    },
+    {
+     "group_id": "g_lmf_dev_static_low_0",
+     "family_id": "fam_dev_static_low",
+     "split": "val",
+     "frames": [
+      "lmf_dev_static_low_0-follow_only_g4_10.png",
+      "lmf_dev_static_low_0-follow_only_g4_12.png",
+      "lmf_dev_static_low_0-follow_only_g4_13.png",
+      "lmf_dev_static_low_0-follow_only_g4_14.png",
+      "lmf_dev_static_low_0-follow_only_g4_16.png",
+      "lmf_dev_static_low_0-follow_only_g4_18.png",
+      "lmf_dev_static_low_0-follow_only_g4_19.png",
+      "lmf_dev_static_low_0-follow_only_g4_20.png",
+      "lmf_dev_static_low_0-follow_only_g4_22.png",
+      "lmf_dev_static_low_0-follow_only_g4_3.png",
+      "lmf_dev_static_low_0-follow_only_g4_4.png",
+      "lmf_dev_static_low_0-follow_only_g4_5.png",
+      "lmf_dev_static_low_0-follow_only_g4_6.png",
+      "lmf_dev_static_low_0-follow_only_g4_7.png",
+      "lmf_dev_static_low_0-follow_only_g4_8.png"
+     ],
+     "negative_types": {},
+     "frame_count": 15
+    }
+   ]
+  }
+ },
+ "hn_second_batch": {
+  "status": "MINIMAL_VAL_MERGED",
+  "selection": {
+   "path": "outputs/perception/dev_annotations_20261104/selection_hn.json",
+   "sha256": "17627ea4a45cd18ad3b3d2656755b0b194c39d49dbeae37237a5196fbc4609d6",
+   "rule_id": "hn_midpoint_systematic_v1",
+   "counts": {
+    "hn1_injected_confuser_negatives": 13,
+    "hn2_full_occlusion_gt_unobservable": 11,
+    "total": 24
+   }
+  },
+  "label_file": {
+   "path": "outputs/perception/dev_annotations_20261104/labels_hn_val.json",
+   "sha256": "3dff20b6d99249a0cf71b7703eddea08ff223c8e2ff3d0466acfefc6ce283dc2",
+   "gitignored": true
+  },
+  "requirement": "HN frames are appended to VAL only; HN1 = TARGET_ABSENT + verified synthetic confuser (construction record, EXTERNAL_EVIDENCE); HN2 = present=true + occluded=true + visibility=OCCLUDED + no bbox = GT_UNOBSERVABLE, not a negative sample",
+  "remaining": "the remaining HN frames are not annotated yet (59 published RGB records / 53 gate.accepted in the second batch; 24 annotated, 29 remaining)",
+  "source": "outputs/sensor_shadow/lm_dev_hn_capture_20261104{,_sensor}",
+  "construction_record": {
+   "path": "configs/scenarios/landmark_dev_cases_v2.json",
+   "sha256": "10b55544e4d6565dd1520e699f7c51aaded8bc6fc305f452d3000c566f2db1bc"
+  }
+ },
+ "boundary": [
+  "single-agent proxy annotation (AGENT_PROXY + SELF_CHECKED); not human/expert independent review; no adjudication",
+  "bboxes derive from a projection-aid draft calibrated on capture pose/geometry + strict green cue, then visually checked on zoom sheets; bbox_source=PROJECTION_AID_CALIBRATED",
+  "reference keypoints come from the strict green cue (COLOR_CUE_ASSISTED, independent_of_detector_cue=false); anchor residual is not independent evidence",
+  "these are dev labels for training/model selection only; they are not final-pool/sealed evaluation labels",
+  "val currently covers the north corridor + one new corridor; the HN1/HN2 hard negatives are still missing until the second batch is merged"
+ ],
+ "condition_coverage": {
+  "train": {
+   "distance_bins": {
+    "2.5-4": 35,
+    "4-5.5": 19,
+    "5.5-7": 5,
+    "7-10": 7,
+    ">10": 64,
+    "near<=2.5": 30
+   },
+   "bearing_bins": {
+    "10-25": 42,
+    "25-45": 33,
+    "|b|<=10": 30,
+    "|b|>45": 55
+   },
+   "green_bins": {
+    "3-6": 11,
+    "7-15": 25,
+    ">15": 34,
+    "green<3": 90
+   },
+   "truncated": 12,
+   "keypoints": 56,
+   "present_hint": 108
+  },
+  "val": {
+   "distance_bins": {
+    "2.5-4": 12,
+    "4-5.5": 9,
+    "5.5-7": 4,
+    "7-10": 9,
+    ">10": 47,
+    "near<=2.5": 29
+   },
+   "bearing_bins": {
+    "10-25": 50,
+    "25-45": 24,
+    "|b|<=10": 20,
+    "|b|>45": 16
+   },
+   "green_bins": {
+    "3-6": 22,
+    "7-15": 8,
+    ">15": 41,
+    "green<3": 39
+   },
+   "truncated": 20,
+   "keypoints": 41,
+   "present_hint": 98
+  }
+ }
+}

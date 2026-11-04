@@ -1,0 +1,181 @@
+{
+  "schema_version": "dsh.landmark_exploratory_labels_manifest.v1",
+  "status": "EXPLORATORY_LABELS_AGENT_PROXY_BULK_CALIBRATED_WITH_FULL_VISUAL_QA",
+  "generated_at_local": "2026-11-04",
+  "label_file": {
+    "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+    "sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504",
+    "gitignored": true,
+    "in_git": false
+  },
+  "draft_file": {
+    "path": "outputs/perception/final_exploratory_20261104/labels_draft.json",
+    "sha256": "a7f6db70669a2615c410980f46a18c0a0fb162cc3871cb7c6cc6da69268e52b2"
+  },
+  "annotation_spec": {
+    "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+    "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+    "status": "FROZEN_FOR_DATA"
+  },
+  "seal": {
+    "path": "configs/perception/landmark_final_pool_seal_v1.json",
+    "freeze_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+    "freeze_id": "landmark_final_pool_seal_v1",
+    "original_status": "SEALED_TEST_POOL_FROZEN_LABELS_PENDING",
+    "effective_status": "DOWNGRADED_TO_DEVELOPMENT_EXPLORATORY_AFTER_34_FRAME_PILOT"
+  },
+  "dataset_role": "DEVELOPMENT_EXPLORATORY",
+  "pilot_to_development_transfer": {
+    "pilot_frames": 34,
+    "pilot_status": "MOVED_TO_DEVELOPMENT_ANNOTATION_CALIBRATION",
+    "reason": "representatives of every one of the 6 families were viewed during the 34-frame pilot, so the whole 6-family pool is contaminated for sealed-final purposes; removing the 34 frames is not enough",
+    "not_sealed": true,
+    "same_group_contamination": "all 6 families are affected (6/6); no family remains untouched"
+  },
+  "counts": {
+    "frames": 279,
+    "present": 238,
+    "absent": 41,
+    "reference_available": 218,
+    "reference_unavailable": 20,
+    "truncated": 48,
+    "truncated_edges": {
+      "left": 0,
+      "right": 24,
+      "top": 0,
+      "bottom": 42
+    },
+    "undecidable": 0,
+    "ambiguous": 0,
+    "occluded": 0,
+    "gt_unobservable": 0,
+    "negative_type": {
+      "TARGET_ABSENT": 41,
+      "SIMILAR_STRUCTURE": 0,
+      "OTHER_LANDMARK": 0
+    },
+    "annotation_calibration_frames": 34,
+    "exploratory_frames": 245,
+    "by_family": {
+      "lmf_sweep": {
+        "frames": 111,
+        "present": 111,
+        "absent": 0,
+        "reference_available": 111,
+        "reference_unavailable": 0,
+        "truncated": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "lmf_backoff": {
+        "frames": 76,
+        "present": 76,
+        "absent": 0,
+        "reference_available": 56,
+        "reference_unavailable": 20,
+        "truncated": 1,
+        "right": 0,
+        "bottom": 1
+      },
+      "lmf_near": {
+        "frames": 23,
+        "present": 23,
+        "absent": 0,
+        "reference_available": 23,
+        "reference_unavailable": 0,
+        "truncated": 23,
+        "right": 0,
+        "bottom": 23
+      },
+      "lmf_edge": {
+        "frames": 28,
+        "present": 28,
+        "absent": 0,
+        "reference_available": 28,
+        "reference_unavailable": 0,
+        "truncated": 24,
+        "right": 24,
+        "bottom": 18
+      },
+      "lmf_similar_negative": {
+        "frames": 38,
+        "present": 0,
+        "absent": 38,
+        "reference_available": 0,
+        "reference_unavailable": 0,
+        "truncated": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "lmf_side_negative": {
+        "frames": 3,
+        "present": 0,
+        "absent": 3,
+        "reference_available": 0,
+        "reference_unavailable": 0,
+        "truncated": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  },
+  "visual_qa": {
+    "method": "BULK_CALIBRATED_WITH_FULL_VISUAL_QA",
+    "bbox_prior": "capture predicted tower span + calibrated 0.85/1.0 factors, top = green_y - 6",
+    "calibration_pilot_frames": 25,
+    "calibration_pilot_bbox_iou": {
+      "mean": 0.669,
+      "median": 0.682
+    },
+    "visual_review": "all 279 frames rendered as 24 contact sheets (12 frames per sheet, native resolution, bbox+keypoint overlay) and reviewed",
+    "contact_sheets": 24,
+    "contact_sheet_dir": "docs/reports/perception/annotation_verify_20261104/pilot/qa_sheets",
+    "contact_sheet_index_sha256": "f8e602f73485fb012b2b469eeef3c7fb1182a03afb2abe4b59a3ac8afcfc1407",
+    "per_frame_corrections": [
+      "lmf_backoff_0-follow_only_g2_69.png"
+    ],
+    "flags": {
+      "anchor_relaxed_green": 43,
+      "anchor_neighbour_interpolated": 6,
+      "anchor_frame_center_fallback": 3,
+      "note": "the 3 frame-centre fallbacks belong to lmf_side_negative (absent frames, no bbox); the only present frame with a fallback/interpolated anchor (g2_69) was corrected visually"
+    },
+    "disputed_frames": [],
+    "expected_sequence_outliers": "19 centre/size jumps coincide with trajectory waypoint transitions (camera height/yaw changes), reviewed and accepted"
+  },
+  "pilot_label_consistency": {
+    "frames": 34,
+    "presence_agree": 34,
+    "truncated_agree": 34,
+    "keypoint_compared": 21,
+    "keypoint_dist_px": {
+      "n": 21,
+      "mean": 0.164,
+      "median": 0.2,
+      "min": 0,
+      "max": 0.316
+    },
+    "bbox_iou": {
+      "n": 25,
+      "mean": 0.669,
+      "median": 0.682,
+      "min": 0.284,
+      "max": 0.956
+    }
+  },
+  "validator": {
+    "status": "PASS",
+    "errors": 0,
+    "warnings": 0,
+    "count": 279,
+    "qa_report": "docs/reports/perception/annotation_verify_20261104/pilot/exploratory_label_qa_report.json",
+    "qa_report_sha256": "220928047282c2cffdf6828f57c852eb8ac193d3d468ea8029087bcd22883bc3",
+    "command": "python scripts/validate_landmark_annotations.py --annotations outputs/perception/final_exploratory_20261104/labels_v1.json --root . --overlay-dir outputs/perception/final_exploratory_20261104/label_overlays --output docs/reports/perception/annotation_verify_20261104/pilot/exploratory_label_qa_report.json"
+  },
+  "boundary": "exploratory/development labels produced by a single agent proxy (bbox from a calibrated projection prior + full visual QA, reference point from the green colour cue); not human independent annotation, not certification-grade, not for sealed-final claims",
+  "overlays": {
+    "full_dir_ignored": "outputs/perception/final_exploratory_20261104/label_overlays",
+    "repo_sample_dir": "docs/reports/perception/annotation_verify_20261104/pilot/exploratory_overlays_sample",
+    "sample_count": 12
+  }
+}

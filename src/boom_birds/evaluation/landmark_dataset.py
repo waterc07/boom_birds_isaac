@@ -743,3 +743,289 @@ def validate_freeze(freeze, repo_root, *, verify_input_hashes=True,
                     report.stats['label_split_claim_conflicts'] += 1
 
     return report
+
+
+# ---------------------------------------------------------------------------
+# exposure registry (T12)
+# ---------------------------------------------------------------------------
+
+EXPOSURE_SCHEMA = 'dsh.landmark_exposure_registry.v1'
+EXPOSURE_PROTOCOL = 'landmark_exposure_group_level_v1'
+EXPOSURE_STATUSES = ('exposed_development', 'annotation_calibration',
+                     'exploratory_eval_candidate', 'untouched',
+                     'excluded_debug', 'empty_capture')
+EXPOSURE_TOUCH_EVIDENCE = ('annotation_calibration',
+                           'exploratory_eval_candidate')
+
+
+def validate_exposure_registry(registry, freeze_documents, repo_root, *,
+                               verify_evidence=True):
+    """Validate an exposure registry against the frozen split documents.
+
+    The registry is the honest record of what was viewed, annotated or used.
+    It must never claim sealed/untouched for a group that has exposure events.
+    """
+    root = Path(repo_root)
+    report = ValidationReport()
+    if registry.get('schema_version') != EXPOSURE_SCHEMA:
+        report.add_error('EXPOSURE_SCHEMA',
+                         'expected %s, found %r'
+                         % (EXPOSURE_SCHEMA, registry.get('schema_version')))
+    statuses = set((registry.get('policy') or {}).get('statuses')
+                   or EXPOSURE_STATUSES)
+    unknown_statuses = statuses - set(EXPOSURE_STATUSES)
+    if unknown_statuses:
+        report.add_error('EXPOSURE_STATUS_UNKNOWN',
+                         'registry policy has unknown statuses: %s'
+                         % sorted(unknown_statuses))
+
+    events = {}
+    for event in registry.get('events') or []:
+        event_id = event.get('event_id')
+        if not event_id:
+            report.add_error('EXPOSURE_EVENT_MALFORMED',
+                             'event without event_id')
+            continue
+        if event_id in events:
+            report.add_error('EXPOSURE_EVENT_DUPLICATE',
+                             'duplicate event id %s' % event_id)
+            continue
+        events[event_id] = event
+        for field_name in ('type', 'date', 'executor'):
+            if not event.get(field_name):
+                report.add_error('EXPOSURE_EVENT_MALFORMED',
+                                 'event %s missing %s' % (event_id, field_name))
+        if event.get('frames_touched') is None:
+            report.add_error('EXPOSURE_EVENT_MALFORMED',
+                             'event %s missing frames_touched' % event_id)
+        if verify_evidence:
+            relative = event.get('evidence_path')
+            expected = event.get('evidence_sha256')
+            if not relative:
+                report.add_error('EXPOSURE_EVIDENCE_MISSING',
+                                 'event %s has no evidence_path' % event_id)
+            else:
+                path = root / relative
+                if not path.is_file():
+                    report.add_error('EXPOSURE_EVIDENCE_MISSING',
+                                     'event %s evidence missing: %s'
+                                     % (event_id, relative))
+                elif expected and sha256_bytes(path.read_bytes()) != expected:
+                    report.add_error('EXPOSURE_EVIDENCE_SHA_MISMATCH',
+                                     'event %s evidence hash changed: %s'
+                                     % (event_id, relative))
+    report.stats['events'] = len(events)
+
+    groups_doc = {}
+    for entry in registry.get('groups') or []:
+        group_id = entry.get('group_id')
+        if group_id:
+            groups_doc[group_id] = entry
+
+    verify_evidence_checked = 0
+    for source, freeze in freeze_documents.items():
+        frozen_groups = {}
+        frozen_frame_ids = set()
+        for item in freeze.get('groups') or []:
+            frozen_groups[item['group_id']] = item
+            for frame in item.get('frames') or []:
+                frozen_frame_ids.add(frame.get('frame_id'))
+        registered = {group_id: entry for group_id, entry in groups_doc.items()
+                      if entry.get('source') == source}
+        missing = set(frozen_groups) - set(registered)
+        extra = set(registered) - set(frozen_groups)
+        if missing:
+            report.add_error('EXPOSURE_GROUP_MISSING',
+                             '%s groups missing from registry: %s'
+                             % (source, sorted(missing)))
+        if extra:
+            report.add_error('EXPOSURE_GROUP_UNKNOWN',
+                             '%s registry groups not in freeze: %s'
+                             % (source, sorted(extra)))
+        for group_id, entry in registered.items():
+            status = entry.get('status')
+            if status not in statuses or status not in EXPOSURE_STATUSES:
+                report.add_error('EXPOSURE_STATUS_INVALID',
+                                 'group %s has invalid status %r'
+                                 % (group_id, status))
+            event_ids = entry.get('exposure_events') or []
+            for event_id in event_ids:
+                if event_id not in events:
+                    report.add_error('EXPOSURE_EVENT_UNKNOWN',
+                                     'group %s references unknown event %s'
+                                     % (group_id, event_id))
+            if event_ids and status == 'untouched':
+                report.add_error('EXPOSURE_TOUCHED_MARKED_UNTOUCHED',
+                                 'group %s has exposure events but is marked '
+                                 'untouched' % group_id)
+            if status in EXPOSURE_TOUCH_EVIDENCE and not event_ids:
+                report.add_warning('EXPOSURE_TERMINAL_WITHOUT_EVENT',
+                                   'group %s is %s but lists no event'
+                                   % (group_id, status))
+            if entry.get('certification') == 'SEALED':
+                report.add_error('EXPOSURE_SEALED_CLAIM',
+                                 'group %s is certified SEALED although the '
+                                 'registry records exposure risk' % group_id)
+            if not isinstance(entry.get('contamination'), dict):
+                report.add_warning('EXPOSURE_CONTAMINATION_MISSING',
+                                   'group %s has no contamination record'
+                                   % group_id)
+        # frame-level overrides
+        overrides = [item for item in registry.get('frame_overrides') or []
+                     if item.get('source') == source]
+        for index, override in enumerate(overrides):
+            frame_id = override.get('frame_id')
+            if frame_id not in frozen_frame_ids:
+                report.add_error('EXPOSURE_FRAME_UNKNOWN',
+                                 '%s override frame %r is not in the freeze'
+                                 % (source, frame_id))
+                continue
+            event_id = override.get('event_id')
+            if event_id not in events:
+                report.add_error('EXPOSURE_EVENT_UNKNOWN',
+                                 'frame override %s references unknown event %r'
+                                 % (frame_id, event_id))
+            group_id = override.get('group_id')
+            entry = registered.get(group_id)
+            if entry is None:
+                report.add_error('EXPOSURE_FRAME_GROUP_MISMATCH',
+                                 'frame %s override group %r is not in %s'
+                                 % (frame_id, group_id, source))
+            elif entry.get('status') == 'untouched':
+                report.add_error('EXPOSURE_TOUCHED_MARKED_UNTOUCHED',
+                                 'frame %s is overridden but its group is '
+                                 'untouched' % frame_id)
+            status = override.get('status')
+            if status not in EXPOSURE_STATUSES:
+                report.add_error('EXPOSURE_STATUS_INVALID',
+                                 'frame override %s invalid status %r'
+                                 % (frame_id, status))
+            verify_evidence_checked += 1
+    report.stats['group_overrides'] = verify_evidence_checked
+
+    # any freeze whose namespace is the final sealed pool must be downgraded
+    for source, freeze in freeze_documents.items():
+        if source != 'final_seal':
+            continue
+        final_entries = [entry for entry in groups_doc.values()
+                         if entry.get('source') == source]
+        not_downgraded = [entry['group_id'] for entry in final_entries
+                          if entry.get('status') not in
+                          ('exploratory_eval_candidate', 'excluded_debug',
+                           'empty_capture')]
+        if not_downgraded:
+            report.add_error('EXPOSURE_FINAL_NOT_DOWNGRADED',
+                             'final seal groups not downgraded to exploratory: '
+                             '%s' % sorted(not_downgraded))
+    certification = registry.get('certification') or {}
+    if certification.get('can_claim_sealed'):
+        report.add_error('EXPOSURE_SEALED_CLAIM',
+                         'registry still claims a sealed data pool')
+    if certification.get('conclusion') != 'INCOMPLETE':
+        report.add_warning('EXPOSURE_CONCLUSION',
+                           'registry conclusion should be INCOMPLETE while '
+                           'any exposure exists')
+    report.stats['groups'] = len(groups_doc)
+    report.stats['sources'] = sorted(freeze_documents)
+    return report
+
+
+# ---------------------------------------------------------------------------
+# split leakage audit (T12)
+# ---------------------------------------------------------------------------
+
+def _frame_meta(freeze):
+    group_split = {}
+    for split in SPLITS:
+        for group_id in (freeze.get('splits') or {}).get(split) or []:
+            group_split[group_id] = split
+    meta = []
+    for group in freeze.get('groups') or []:
+        group_id = group.get('group_id')
+        split = group_split.get(group_id)
+        dataset = group.get('dataset')
+        for frame in group.get('frames') or []:
+            parsed = parse_frame_id(frame.get('frame_id'))
+            meta.append({
+                'group_id': group_id,
+                'family_id': group.get('family_id'),
+                'split': split,
+                'dataset': dataset,
+                'episode_id': parsed['episode_id'] if parsed else None,
+                'sequence': parsed['sequence'] if parsed else None,
+                'sha256': frame.get('sha256'),
+                'frame_id': frame.get('frame_id'),
+            })
+    return meta
+
+
+def audit_split_leakage(freeze):
+    """Return structural leakage findings for one freeze document."""
+    meta = _frame_meta(freeze)
+    issues = []
+    group_splits = {}
+    family_splits = {}
+    sha_splits = {}
+    episode_splits = {}
+    for item in meta:
+        group_splits.setdefault(item['group_id'], set()).add(item['split'])
+        family_splits.setdefault(item['family_id'], set()).add(item['split'])
+        sha_splits.setdefault(item['sha256'], set()).add(item['split'])
+        episode_splits.setdefault(
+            (item['dataset'], item['episode_id']), set()).add(item['split'])
+    for group_id, split_set in group_splits.items():
+        if len(split_set) > 1:
+            issues.append({'code': 'GROUP_CROSS_SPLIT', 'group_id': group_id,
+                           'splits': sorted(split_set)})
+    family_leaks = 0
+    for family_id, split_set in family_splits.items():
+        if 'train' in split_set and split_set & {'val', 'test'}:
+            issues.append({'code': 'FAMILY_CROSS_SPLIT',
+                           'family_id': family_id,
+                           'splits': sorted(split_set)})
+            family_leaks += 1
+    sha_leaks = 0
+    for sha, split_set in sha_splits.items():
+        if len(split_set) > 1:
+            issues.append({'code': 'SHA_CROSS_SPLIT', 'sha256': sha,
+                           'splits': sorted(split_set)})
+            sha_leaks += 1
+    trajectory_leaks = 0
+    for (dataset, episode), split_set in episode_splits.items():
+        if len(split_set) > 1:
+            issues.append({'code': 'TRAJECTORY_CROSS_SPLIT',
+                           'dataset': dataset, 'episode_id': episode,
+                           'splits': sorted(split_set)})
+            trajectory_leaks += 1
+    # adjacent frames of one trajectory must share a split
+    ordered = {}
+    for item in meta:
+        if item['episode_id'] is None:
+            continue
+        ordered.setdefault((item['dataset'], item['episode_id']),
+                          []).append(item)
+    for key, frames in ordered.items():
+        frames.sort(key=lambda item: item['sequence'])
+        for previous, current in zip(frames, frames[1:]):
+            if current['sequence'] != previous['sequence'] + 1:
+                continue
+            if previous['split'] != current['split']:
+                issues.append({'code': 'ADJACENT_FRAME_CROSS_SPLIT',
+                               'frame_id': current['frame_id'],
+                               'splits': [previous['split'], current['split']]})
+    return {
+        'ok': not issues,
+        'issues': issues,
+        'stats': {
+            'groups': len(group_splits),
+            'frames': len(meta),
+            'families': len(family_splits),
+            'group_leaks': sum(1 for issue in issues
+                               if issue['code'] == 'GROUP_CROSS_SPLIT'),
+            'family_leaks': family_leaks,
+            'sha_leaks': sha_leaks,
+            'trajectory_leaks': trajectory_leaks,
+            'adjacent_leaks': sum(1 for issue in issues
+                                  if issue['code'] == 'ADJACENT_FRAME_CROSS_SPLIT'),
+        },
+    }

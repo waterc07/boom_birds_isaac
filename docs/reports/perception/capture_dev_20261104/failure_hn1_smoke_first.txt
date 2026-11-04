@@ -1,0 +1,9 @@
+stages: ["load contract and cases", "create env", "disable default ground and spawn map", "bind obstacle from scene", "declare kinematic contact inference", "configure map dones", "measure body envelope", "run dynamic paired cases"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 1186, in <module>
+    set_injection_active(case_injection_ids.get(case.case_id))
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 518, in set_injection_active
+    if prim.IsValid() and bool(prim.GetActive()) != active:
+                               ^^^^^^^^^^^^^^
+AttributeError: 'Prim' object has no attribute 'GetActive'

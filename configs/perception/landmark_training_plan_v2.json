@@ -223,5 +223,43 @@
     "bbox_extent": "visible target structure only (tower body + top light assembly); exclude ground/arena platform/shadow; truncated frames cover only the visible in-image part with truncated=true",
     "keypoint_mapping": "YOLO 1-keypoint: v in {0,1}; reference unavailable -> bbox + placeholder coords + v=0; v=0 excluded from anchor/coverage denominators; absent -> empty label with explicit frame list; ambiguous excluded from positives; sidecar records truncated/occluded/ambiguous/reference_status/reference_unavailable_reason",
     "proxy_limitation": "single-agent blind re-annotation is not expert or human independent review; bearing-accuracy validation needs >=2 independent human annotators plus arbitration or physical calibration (pending user/organisation decision)"
+  },
+  "phase2_2026_11_04": {
+    "license_decision": {
+      "decided_at": "2026-11-04",
+      "decision": "user authorized the main candidate (YOLOv8n-pose / ultralytics AGPL-3.0) for internal bounded research and evaluation only; external distribution remains a separate, undecided matter",
+      "scope": "isolated .venv/landmark-train install, bounded training, ONNX export for host-side consistency checks, internal reports",
+      "not_legal_conclusion": true,
+      "no_automatic_backup_switch": true,
+      "evidence": "user message in the 2026-11-04 session (recorded here as project decision, not as legal advice)"
+    },
+    "exploratory_start_conditions": {
+      "E1_license": "PASS (internal bounded research authorized; distribution pending)",
+      "E2_data": "in progress: full dev train/val labels + full exploratory-test labels required before training",
+      "E3_toolchain": "in progress: conversion/inference/stratified evaluation + UNKNOWN/REJECTED denominator audit",
+      "E4_environment": "in progress: isolated venv, pins, GPU/kpt smoke",
+      "E5_protocol": "pre-registration frozen before bounded training (data/source/budget/threshold/seed/final rules)"
+    },
+    "certification_conditions": {
+      "C1_license_distribution": "INCOMPLETE (undecided by user)",
+      "C2_independent_human_annotation": "INCOMPLETE (single-agent proxy only)",
+      "C3_sealed_final": "INCOMPLETE (existing 6-family pool downgraded to exploratory after 34-frame pilot; no untouched sealed final)",
+      "C4_denominator_adequacy": "INCOMPLETE (false-match 0.5% not certifiable)",
+      "C5_board_rknn": "UNKNOWN (no RK3576 board)",
+      "C6_real_camera_distribution": "INCOMPLETE (synthetic asset only)",
+      "C7_repeatability": "INCOMPLETE",
+      "C8_contract_alignment": "INCOMPLETE"
+    }
+  },
+  "exposure_policy": {
+    "pilot_34_frames": "moved to development/annotation calibration; the whole 6-family exploratory pool is downgraded to development/exploratory evaluation because representatives of each family were viewed during the pilot",
+    "final_eval_label": "exploratory evaluation, run once after model/threshold freeze, not a sealed final",
+    "future_certification": "requires a new untouched sealed pool plus C1-C8 conditions"
+  },
+  "denominator_audit": {
+    "prediction_unknown_rejected": "must remain in recall/coverage/joint denominators as misses and be reported separately; must not be dropped from the denominator",
+    "gt_unobservable": "excluded from four-cell and denominators, reported separately as GT_UNOBSERVABLE",
+    "gt_reference_unavailable": "presence still evaluated; anchor error not evaluated",
+    "joint": "denominator = GT-observable positives with complete labels; prediction UNKNOWN/REJECTED counts as joint failure"
   }
 }

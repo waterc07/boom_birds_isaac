@@ -1,0 +1,142 @@
+{
+  "schema_version": "dsh.landmark_final_eval_protocol.v1",
+  "status": "EXECUTED_ONCE_2026_11_04_EXPLORATORY_ONLY",
+  "decided_at": "2026-11-04",
+  "decided_by": "lead",
+  "scope": "one-shot exploratory evaluation of the frozen landmark model on the development/exploratory 279-frame pool; not a sealed final, not certification",
+  "preconditions": {
+    "model_and_thresholds_frozen": "required before running this protocol",
+    "thresholds_source": "validation only (labels_val sha c3944e08..., dev freeze v3)",
+    "final_pool_usage": "may be read exactly once for metrics after freezing; never for training/checkpoint/threshold/stop-rule selection",
+    "no_callback": "no retraining, threshold change or rerun on the same pool after viewing metrics"
+  },
+  "data": {
+    "labels": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+    "labels_sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504",
+    "images": "outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images",
+    "spec": "configs/perception/landmark_annotation_spec_v2_1.json",
+    "spec_sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+    "dataset_role": "DEVELOPMENT_EXPLORATORY (34 pilot frames -> annotation calibration; all 6 families contaminated for sealed use)",
+    "counts": {
+      "frames": 279,
+      "present": 238,
+      "absent": 41,
+      "reference_available": 218,
+      "reference_unavailable": 20,
+      "truncated": 48,
+      "undecidable": 0,
+      "gt_unobservable": 0,
+      "similar_structure_verified": 0
+    }
+  },
+  "model": {
+    "path": "outputs/landmark_train/runs/bounded_v2/seed1/bounded_1/weights/last.pt",
+    "sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1",
+    "code_commit": "TBD",
+    "export_onnx": "TBD if exported (host-side consistency only)",
+    "checkpoint_source": "configs/perception/landmark_model_freeze_v1.json (selected seed1/last on validation joint)",
+    "freeze_manifest_sha256": "16618b7caebf850c190974a47915dc1893dd092009984e4e70716eebeaa11cba",
+    "onnx_host_export": {
+      "path": "outputs/landmark_train/runs/onnx_trained_seed1/last_opset18.onnx",
+      "sha256": "ca28a5c9aadfc0fc6c0b6789f8dc0ee8d9995ddc98f7358f9f72cfebe5cefb8a",
+      "opset": 18,
+      "note": "host-side only; RKNN/board NOT RUN"
+    }
+  },
+  "thresholds": {
+    "source": "validation (labels_val sha c3944e08..., dev freeze v3)",
+    "tau_det": 0.605476,
+    "tau_conf": 0.605476,
+    "tau_margin": 0.1,
+    "tau_margin_status": "PROPOSED_NO_MULTI_CANDIDATE_VAL_FRAMES",
+    "tau_px": 3.0,
+    "tau_iou": 0.3,
+    "tau_kpt": 0.5,
+    "tau_kpt_status": "PROPOSED_NOT_FROZEN"
+  },
+  "evaluation": {
+    "script": "scripts/evaluate_landmark_yolo.py",
+    "command_template": ".venv/landmark-train/Scripts/python.exe scripts/evaluate_landmark_yolo.py --model <frozen.pt> --images <images> --labels <labels> --split test --output-dir outputs/perception/final_exploratory_eval_20261104 --tau-iou <...> --tau-px <...> --tau-conf <...> --tau-det <...> --tau-margin <...>",
+    "output": "outputs/perception/final_exploratory_eval_20261104/{predictions.jsonl,metrics.json}",
+    "one_shot": "script refuses to overwrite metrics.json without --overwrite; do not pass --overwrite",
+    "stratifications": [
+      "family",
+      "group_id",
+      "visibility",
+      "scale_bucket",
+      "negative_type",
+      "truncation"
+    ],
+    "metrics": [
+      "presence TP/FP/FN/TN with explicit denominators",
+      "reference coverage, false-reference rate, pixel and bearing error median/P90/max",
+      "identity claims/precision/recall/high-confidence false match",
+      "joint narrow + all-positive lower bound + coverage",
+      "UNKNOWN/REJECTED counts by status/reason",
+      "bbox IoU auxiliary"
+    ],
+    "denominator_audit": "prediction UNKNOWN/REJECTED stay in recall/coverage/joint denominators as misses; GT_UNOBSERVABLE excluded and reported separately; GT reference-unavailable positives keep presence only"
+  },
+  "known_limitations": [
+    "exploratory pool is not sealed: 34 pilot frames were viewed and all 6 families are contaminated",
+    "labels are single-agent proxy annotations (AGENT_PROXY + SELF_CHECKED), projected-aid bboxes, colour-cue reference; not human independent",
+    "no verified green-light similar-structure frame in this pool (HN1 coverage 0); identity/false-match conclusion INCOMPLETE",
+    "no full-occlusion frame in this pool; GT_UNOBSERVABLE branch not exercised here",
+    "synthetic Isaac asset and simulated camera; not real arena distribution",
+    "no RK3576 board measurement"
+  ],
+  "reporting_rules": [
+    "label results as exploratory evaluation, never 'sealed final' or certification",
+    "report all denominators, UNKNOWN/REJECTED counts and worst stratum",
+    "do not tune thresholds/stop rules/architecture after viewing metrics",
+    "record artifact hashes and exact command in the report"
+  ],
+  "execution": {
+    "executed_at": "2026-11-04",
+    "executor": "lead",
+    "command": "$env:TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1; .venv/landmark-train/Scripts/python.exe scripts/evaluate_landmark_yolo.py --model <last.pt> --labels outputs/perception/final_exploratory_20261104/labels_v1.json --split test --images outputs/sensor_shadow/lm_final_candidate_20261104_sensor/images --output-dir outputs/perception/final_exploratory_eval_20261104 --tau-iou 0.3 --tau-px 3.0 --tau-conf 0.605476 --tau-det 0.605476 --tau-margin 0.1",
+    "first_attempt": "failed before inference (torch.load weights_only default in torch 2.7; no metrics produced); fixed by the trusted-load environment flag; still the first and only final read",
+    "output_metrics_sha256": "a01c08ec878e93487f77896c86365531164df99a6b384d987a9b644e596cd972",
+    "output_predictions_sha256": "8cdfe558b455fb2e25c4de7a3f4852690554ae3e4254b6a472cdb9f26f991716",
+    "no_rerun": true,
+    "no_callback": true
+  },
+  "result_summary": {
+    "frames": 279,
+    "positives": 238,
+    "negatives": 41,
+    "presence": {
+      "tp": 218,
+      "fp": 0,
+      "fn": 20,
+      "tn": 41,
+      "precision": 1.0,
+      "recall": 0.9159663865546218
+    },
+    "reference": {
+      "coverage": 0.28440366972477066,
+      "false_reference_rate": 0.0,
+      "anchor_correct_only_median_px": 1.9527211135750777,
+      "anchor_all_median_px": 3.724076144656293,
+      "bearing_all_median_deg": 0.54620033177469
+    },
+    "identity": {
+      "claims": 218,
+      "precision": 1.0,
+      "false_match_rate": 0.0,
+      "evaluable_caveat": "no verified HN1/similar-structure frame in this exploratory pool, so this is not an identity certification"
+    },
+    "joint": {
+      "narrow_tp": 71,
+      "narrow_denominator": 238,
+      "narrow_rate": 0.29831932773109243,
+      "fail_reasons": {
+        "PRESENCE": 20,
+        "REFERENCE": 147
+      }
+    },
+    "worst_family_joint": "lmf_near 3/23=0.130",
+    "proposed_effect_gates_met": false
+  },
+  "certification_status": "INCOMPLETE: C1-C8 remain incomplete/unknown; this run is exploratory evidence only"
+}

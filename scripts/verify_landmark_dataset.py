@@ -21,11 +21,12 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from boom_birds.evaluation.landmark_dataset import (  # noqa: E402
-    FREEZE_SCHEMA, GROUPING_PROTOCOL, DatasetInputError, freeze_sha256,
+    FREEZE_SCHEMA, GROUPING_PROTOCOL, SPLITS, DatasetInputError, freeze_sha256,
     load_dataset_frames, parse_frame_id, sha256_bytes, validate_freeze)
 
 
 DEFAULT_FREEZE = 'configs/perception/landmark_split_freeze_v1.json'
+DEFAULT_FREEZE_V2 = 'configs/perception/landmark_split_freeze_v2.json'
 DEFAULT_OUTPUT = ('docs/reports/perception/dataset_freeze_20261104/'
                   'landmark_dataset_verify_20261104.json')
 INVENTORY = 'docs/reports/perception/dsh_landmark_data_inventory_20261104.json'
@@ -173,6 +174,16 @@ DATASETS = [
     {'dataset': 'debug_static3_sensor', 'run': 'debug_static3',
      'role': 'empty_capture', 'in_inventory': False, 'empty_capture': True,
      'description': 'failed/empty capture: observations.jsonl has no records'},
+    {'dataset': 'lm_dev_capture_20261104_sensor',
+     'run': 'lm_dev_capture_20261104', 'role': 'dev_new_family',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v3',
+     'description': 'T9 dev batch1: inner-north/inner-south corridors, '
+                    'static high/low, target-out-of-view negative'},
+    {'dataset': 'lm_dev_hn_capture_20261104_sensor',
+     'run': 'lm_dev_hn_capture_20261104', 'role': 'dev_hard_negative',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v3',
+     'description': 'T9 dev batch2: HN1 synthetic green-light confuser and '
+                    'HN2 synthetic visual-only wall full occlusion'},
 ]
 
 #: dataset episode-id -> group id.  Every episode must be mapped exactly once.
@@ -219,6 +230,17 @@ EPISODE_GROUPS = {
     'debug_static6_sensor': {'sensor_static_0': 'g_debug_static6'},
     'debug_static7_sensor': {'sensor_static_0': 'g_debug_static7'},
     'debug_static3_sensor': {},
+    'lm_dev_capture_20261104_sensor': {
+        'lmf_dev_inner_north_0': 'g_lmf_dev_inner_north',
+        'lmf_dev_inner_south_0': 'g_lmf_dev_inner_south',
+        'lmf_dev_static_high_0': 'g_lmf_dev_static_high',
+        'lmf_dev_static_low_0': 'g_lmf_dev_static_low',
+        'lmf_dev_static_negative_0': 'g_lmf_dev_static_negative',
+    },
+    'lm_dev_hn_capture_20261104_sensor': {
+        'lmf_dev_hn1_confuser_0': 'g_lmf_dev_hn1_confuser',
+        'lmf_dev_hn2_occluder_0': 'g_lmf_dev_hn2_occluder',
+    },
 }
 
 GROUP_DEFS = [
@@ -311,6 +333,54 @@ GROUP_DEFS = [
      'dataset': 'debug_static3_sensor', 'split': 'excluded',
      'view_cluster': None, 'route': 'none',
      'notes': 'failed/empty capture; observations.jsonl has no records'},
+    # --- T9 dev new families (introduced in v3) ---
+    {'group_id': 'g_lmf_dev_inner_south', 'family_id': 'fam_inner_south',
+     'dataset': 'lm_dev_capture_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v3',
+     'route': 'E -> inner-south out-and-back [9.4,-1.2,1] -> [8,-3,1.1] -> '
+              '[3,-3,1.1] -> [7,-2.2,1] -> [9.2,-0.4,1]',
+     'notes': 'new inner-south approach (y about -3.0), not the south '
+              'perimeter corridor; target seen from the south side/far range'},
+    {'group_id': 'g_lmf_dev_static_high', 'family_id': 'fam_static_high_far',
+     'dataset': 'lm_dev_capture_20261104_sensor', 'split': 'train',
+     'view_cluster': 'static_E_new_views', 'introduced_in': 'v3',
+     'route': 'static-ish high/far E view z=1.65-1.75 at 3.7-4.3 m',
+     'notes': 'new high/far static viewpoint, target slightly above optical '
+              'axis'},
+    {'group_id': 'g_lmf_dev_static_negative',
+     'family_id': 'fam_static_negative_E',
+     'dataset': 'lm_dev_capture_20261104_sensor', 'split': 'train',
+     'view_cluster': 'static_E_new_views', 'introduced_in': 'v3',
+     'route': 'static-ish E pose yaw=+2.2 rad, tower outside FOV',
+     'notes': 'target-out-of-view negative pose; presence to be confirmed on '
+              'images and labels'},
+    {'group_id': 'g_lmf_dev_inner_north', 'family_id': 'fam_inner_north',
+     'dataset': 'lm_dev_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v3',
+     'route': 'inner-north corridor W -> E at y about +3.0 (not the y=5.8 '
+              'north perimeter corridor)',
+     'notes': 'new north-side approach; val includes north-like route but a '
+              'different corridor geometry'},
+    {'group_id': 'g_lmf_dev_static_low', 'family_id': 'fam_static_low_oblique',
+     'dataset': 'lm_dev_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': 'static_E_new_views', 'introduced_in': 'v3',
+     'route': 'static-ish low oblique close E view (1.9-2.1 m) yaw +0.2 rad',
+     'notes': 'new near/low oblique viewpoint; partial truncation expected'},
+    {'group_id': 'g_lmf_dev_hn1_confuser', 'family_id': 'fam_HN1_confuser',
+     'dataset': 'lm_dev_hn_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v3',
+     'route': 'yaw +pi/2 facing +Y; synthetic green-light confuser at '
+              '(8.5,4.2) in view, central tower behind camera',
+     'notes': 'HN1 hard negative via synthetic visual-only confuser injection '
+              'hn1_confuser_v1; synthetic, not arena asset, no collision'},
+    {'group_id': 'g_lmf_dev_hn2_occluder', 'family_id': 'fam_HN2_occluder',
+     'dataset': 'lm_dev_hn_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v3',
+     'route': 'facing +X with synthetic visual-only wall between camera and '
+              'central tower',
+     'notes': 'HN2 full occlusion via synthetic visual-only wall injection '
+              'hn2_occluder_v1; geometric metadata recorded in the case '
+              'manifest'},
 ]
 
 #: Named dev-split profiles.  'v1' keeps the original split; 'conservative'
@@ -322,6 +392,13 @@ PROFILE_OVERRIDES = {
         'g_lm_ind_staticEtest': 'train',
         'g_geo_staticE': 'train',
     },
+    # v3 = conservative dev split + T9 new dev families.  New groups carry
+    # their own train/val assignment in GROUP_DEFS; legacy groups keep the
+    # conservative assignment.
+    'v3': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+    },
 }
 PROFILE_DESCRIPTIONS = {
     'v1': 'val = north corridor family + E static test viewpoint cluster '
@@ -329,10 +406,14 @@ PROFILE_DESCRIPTIONS = {
     'conservative': 'val = north corridor family only; the whole E static '
                     'viewpoint cluster is moved into train to remove the '
                     'train/val viewpoint overlap',
+    'v3': 'v2 conservative split plus T9 dev new families; val covers the '
+          'north corridor, inner-north corridor, a new low static view and '
+          'the HN1 confuser / HN2 occluder hard negatives',
 }
 PROFILE_FREEZE_IDS = {
     'v1': 'landmark_split_freeze_v1',
     'conservative': 'landmark_split_freeze_v2',
+    'v3': 'landmark_split_freeze_v3',
 }
 #: Why the conservative profile moves the whole E static cluster into train.
 #: Poses come from the frozen case files (configs/scenarios/*.json); the
@@ -393,6 +474,20 @@ FAMILY_DEFS = [
      'physical_trajectory': 'north corridor'},
     {'family_id': 'fam_debug_empty',
      'description': 'empty / failed debug capture placeholder'},
+    {'family_id': 'fam_inner_south', 'introduced_in': 'v3',
+     'description': 'T9 inner-south out-and-back approach (y about -3.0)'},
+    {'family_id': 'fam_static_high_far', 'introduced_in': 'v3',
+     'description': 'T9 high/far static E viewpoint'},
+    {'family_id': 'fam_static_negative_E', 'introduced_in': 'v3',
+     'description': 'T9 target-out-of-view negative pose at E'},
+    {'family_id': 'fam_inner_north', 'introduced_in': 'v3',
+     'description': 'T9 inner-north corridor W -> E at y about +3.0'},
+    {'family_id': 'fam_static_low_oblique', 'introduced_in': 'v3',
+     'description': 'T9 low oblique close E viewpoint'},
+    {'family_id': 'fam_HN1_confuser', 'introduced_in': 'v3',
+     'description': 'T9 HN1 synthetic green-light confuser hard negative'},
+    {'family_id': 'fam_HN2_occluder', 'introduced_in': 'v3',
+     'description': 'T9 HN2 synthetic visual-only wall full occlusion'},
 ]
 
 
@@ -421,11 +516,13 @@ def cases_path_from_command(command):
     return match.group(1).replace('\\', '/')
 
 
-def build_datasets(repo_root):
+def build_datasets(repo_root, profile='v1'):
     root = Path(repo_root)
     datasets_doc = {}
     loaded_frames = {}
     for spec in DATASETS:
+        if spec.get('introduced_in') and spec['introduced_in'] != profile:
+            continue
         name = spec['dataset']
         dataset_root = 'outputs/sensor_shadow/' + name
         observations = dataset_root + '/observations.jsonl'
@@ -494,6 +591,9 @@ def build_groups(repo_root, datasets_doc, loaded_frames, profile='v1'):
     overrides = PROFILE_OVERRIDES.get(profile, {})
     group_by_id = {}
     for definition in GROUP_DEFS:
+        if (definition.get('introduced_in')
+                and definition['introduced_in'] != profile):
+            continue
         group = dict(definition)
         group['session'] = group['dataset']
         group['render_version'] = render_version_for(
@@ -522,6 +622,9 @@ def build_groups(repo_root, datasets_doc, loaded_frames, profile='v1'):
                 group['episodes'].append(frame.episode_id)
     groups = []
     for definition in GROUP_DEFS:
+        if (definition.get('introduced_in')
+                and definition['introduced_in'] != profile):
+            continue
         group = group_by_id[definition['group_id']]
         group['frames'].sort(key=lambda item: (
             parse_frame_id(item['frame_id'])['episode_id'],
@@ -573,7 +676,7 @@ def build_labels(repo_root, frame_index):
 
 def build_freeze(repo_root, profile='v1'):
     root = Path(repo_root)
-    datasets_doc, loaded_frames = build_datasets(repo_root)
+    datasets_doc, loaded_frames = build_datasets(repo_root, profile)
     groups = build_groups(repo_root, datasets_doc, loaded_frames, profile)
     frame_index = {}
     for loaded in loaded_frames.values():
@@ -589,6 +692,9 @@ def build_freeze(repo_root, profile='v1'):
             group['group_id'])
     families = []
     for definition in FAMILY_DEFS:
+        if (definition.get('introduced_in')
+                and definition['introduced_in'] != profile):
+            continue
         family = dict(definition)
         family['groups'] = family_groups.get(definition['family_id'], [])
         families.append(family)
@@ -731,36 +837,252 @@ def build_freeze(repo_root, profile='v1'):
         ],
     }
     if profile != 'v1':
-        v1_path = root / DEFAULT_FREEZE
-        supersedes = None
-        if v1_path.is_file():
-            supersedes = {
-                'path': DEFAULT_FREEZE,
-                'canonical_sha256': freeze_sha256(load_json(v1_path)),
-                'reason': 'conservative variant: the E static viewpoint '
-                          'cluster is moved into train so val keeps only the '
-                          'held-out north corridor family; v1 is retained as '
-                          'history and must not be used for new training',
-            }
         freeze['split_profile'] = {
             'name': profile,
             'description': PROFILE_DESCRIPTIONS[profile],
         }
         if profile in PROFILE_EVIDENCE:
             freeze['split_profile']['evidence'] = PROFILE_EVIDENCE[profile]
-        freeze['supersedes'] = supersedes
-        freeze['access_boundary']['final_pool'] = {
-            'freeze_registers_exposed_data_only': True,
-            'final_pool_labels_location': 'ignored external directory; the '
-                'repository stores only the frame manifest and sha256 values',
-            'same_executor_claim': 'process isolation + hash commitment only',
-            'blindness_not_proven_by_hash': True,
-        }
-        freeze['notes'].append(
-            'conservative v2: val keeps only the north corridor family; the '
-            'E static viewpoint cluster is train data.')
+        if profile == 'v3':
+            v2_path = root / DEFAULT_FREEZE_V2
+            supersedes = None
+            delta = {
+                'base_path': DEFAULT_FREEZE_V2,
+                'base_canonical_sha256': None,
+                'new_groups': sorted(
+                    {group['group_id'] for group in groups}
+                    - {group['group_id']
+                       for group in (load_json(v2_path).get('groups') or [])
+                       if v2_path.is_file()}),
+                'new_frames': None,
+                'frame_total': sum(len(group.get('frames') or [])
+                                   for group in groups),
+                'split_frame_counts': {
+                    split: sum(len(group.get('frames') or [])
+                               for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'split_group_counts': {
+                    split: sum(1 for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'note': 'v3 = conservative v2 split + T9 dev new families; '
+                        'legacy v2 groups keep their frames and splits',
+            }
+            if v2_path.is_file():
+                v2_document = load_json(v2_path)
+                supersedes = {
+                    'path': DEFAULT_FREEZE_V2,
+                    'canonical_sha256': freeze_sha256(v2_document),
+                    'reason': 'v3 adds the T9 dev new families on top of the '
+                              'conservative v2 split; v2 remains the frozen '
+                              'base, v1 stays history',
+                }
+                delta['base_canonical_sha256'] = freeze_sha256(v2_document)
+                v2_frame_total = sum(len(group.get('frames') or [])
+                                     for group in v2_document.get('groups') or [])
+                delta['new_frames'] = delta['frame_total'] - v2_frame_total
+            freeze['supersedes'] = supersedes
+            freeze['delta_from_v2'] = delta
+            annotation_lists = _annot2_alignment(root, groups)
+            freeze['annotation_frame_lists'] = annotation_lists
+            if annotation_lists['status'] != 'PASS':
+                raise SystemExit(
+                    'annot2 train/val frame lists are not consistent with the '
+                    'v3 split: %d mismatches, %d unresolved'
+                    % (len(annotation_lists['mismatches']),
+                       len(annotation_lists['unresolved_frames'])))
+            freeze['exposure_registry'] = {
+                'path': 'configs/perception/landmark_exposure_registry_v1.json',
+                'status': 'PRODUCED_SEPARATELY_WITH_ITS_OWN_VERIFY_EVIDENCE',
+                'note': 'the registry records exposure state; it is built after '
+                        'this freeze and therefore referenced without a hash '
+                        'here to avoid a circular hash dependency',
+            }
+            freeze['notes'].append(
+                'v3 adds T9 dev new families: val covers the north corridor, '
+                'inner-north corridor, a new low static view and the HN1 '
+                'confuser / HN2 occluder hard negatives.')
+        else:
+            v1_path = root / DEFAULT_FREEZE
+            supersedes = None
+            if v1_path.is_file():
+                supersedes = {
+                    'path': DEFAULT_FREEZE,
+                    'canonical_sha256': freeze_sha256(load_json(v1_path)),
+                    'reason': 'conservative variant: the E static viewpoint '
+                              'cluster is moved into train so val keeps only '
+                              'the held-out north corridor family; v1 is '
+                              'retained as history and must not be used for '
+                              'new training',
+                }
+            freeze['supersedes'] = supersedes
+            freeze['access_boundary']['final_pool'] = {
+                'freeze_registers_exposed_data_only': True,
+                'final_pool_labels_location': 'ignored external directory; '
+                    'the repository stores only the frame manifest and sha256 '
+                    'values',
+                'same_executor_claim': 'process isolation + hash commitment '
+                    'only',
+                'blindness_not_proven_by_hash': True,
+            }
+            freeze['notes'].append(
+                'conservative v2: val keeps only the north corridor family; '
+                'the E static viewpoint cluster is train data.')
     freeze['freeze_sha256'] = freeze_sha256(freeze)
     return freeze
+
+
+def _annot2_alignment(repo_root, groups):
+    """Check the annot2 dev train/val label lists against the v3 groups.
+
+    The authoritative source is configs/perception/landmark_dev_label_lists_v1
+    .json (explicit train/val frame lists + label hashes).  Fallback: the
+    selection JSONs.  Frame ids must be resolved through the group, because
+    ids like sensor_reset_0-... also exist in the excluded debug_all6 dataset.
+    """
+    root = Path(repo_root)
+    group_info = {}
+    for group in groups:
+        group_info[group.get('group_id')] = {
+            'split': group.get('split'),
+            'family_id': group.get('family_id'),
+            'episodes': set(group.get('episodes') or []),
+            'frames': {frame.get('frame_id')
+                       for frame in group.get('frames') or []},
+        }
+
+    def _resolve_group(group_id, frame_id):
+        entry = group_info.get(group_id)
+        if entry is not None and frame_id in entry['frames']:
+            return group_id, entry
+        parsed = parse_frame_id(frame_id)
+        episode = parsed['episode_id'] if parsed else None
+        if episode:
+            candidates = [
+                candidate for candidate, info in group_info.items()
+                if episode in info['episodes']
+                and frame_id in info['frames']]
+            if len(candidates) == 1:
+                return candidates[0], group_info[candidates[0]]
+        return None, None
+    result = {
+        'config': None,
+        'annotation_spec': None,
+        'labels': {},
+        'source_lists': [],
+        'checked_frames': 0,
+        'unresolved_frames': [],
+        'mismatches': [],
+        'hn_val_pending': True,
+        'status': 'PASS',
+    }
+    config_relative = ('configs/perception/'
+                       'landmark_dev_label_lists_v1.json')
+    if (root / config_relative).is_file():
+        document = load_json(root / config_relative)
+        result['config'] = {
+            'path': config_relative,
+            'sha256': sha256_file(root / config_relative),
+            'status': document.get('status'),
+            'generated_at_local': document.get('generated_at_local'),
+        }
+        result['annotation_spec'] = document.get('annotation_spec')
+        result['labels'] = document.get('labels') or {}
+        val_labels = ((document.get('labels') or {}).get('val') or {})
+        val_groups = (((val_labels.get('counts') or {}).get('by_group')) or {})
+        result['hn_val_pending'] = not any(
+            'hn' in str(group_id).lower() for group_id in val_groups)
+        for split in ('train', 'val'):
+            split_doc = (document.get('splits') or {}).get(split) or {}
+            # some doc versions keep groups under splits.train.groups
+            groups_doc = split_doc.get('groups') or []
+            result['source_lists'].append({
+                'split': split,
+                'frames': split_doc.get('total_frames'),
+                'groups': len(groups_doc),
+                'label_sha256': ((document.get('labels') or {})
+                                 .get(split) or {}).get('sha256'),
+            })
+            for group in groups_doc:
+                declared_group_id = group.get('group_id')
+                for frame_id in group.get('frames') or []:
+                    group_id, entry = _resolve_group(declared_group_id,
+                                                     frame_id)
+                    if entry is None:
+                        result['unresolved_frames'].append({
+                            'frame_id': frame_id,
+                            'group_id': declared_group_id,
+                            'reason': 'FRAME_OR_GROUP_NOT_IN_V3',
+                        })
+                        continue
+                    result['checked_frames'] += 1
+                    if entry['split'] != split:
+                        result['mismatches'].append({
+                            'frame_id': frame_id,
+                            'group_id': group_id,
+                            'reason': 'SPLIT_MISMATCH',
+                            'selection_split': split,
+                            'v3_split': entry['split'],
+                        })
+        if (result['mismatches'] or result['unresolved_frames']):
+            result['status'] = 'FAIL'
+        result['note'] = ('the annot2 label-list config is the authoritative '
+                          'train/val frame list; v3 must keep every listed '
+                          'frame in the same split. When hn_val_pending is '
+                          'true the second-batch HN val frames are not yet in '
+                          'the lists, so v3 must not claim complete HN '
+                          'annotation coverage.')
+        return result
+    # fallback: selection JSONs without label-list config
+    sources = [
+        ('train', 'outputs/perception/dev_annotations_20261104/'
+                  'selection_train.json'),
+        ('val', 'outputs/perception/dev_annotations_20261104/'
+                'selection_val.json'),
+    ]
+    for split, relative in sources:
+        path = root / relative
+        if not path.is_file():
+            continue
+        document = load_json(path)
+        frames = document.get('frames') or []
+        result['source_lists'].append({
+            'path': relative,
+            'sha256': sha256_file(path),
+            'split': split,
+            'frames': len(frames),
+            'rule_id': document.get('rule_id'),
+        })
+        for item in frames:
+            frame_id = item.get('frame_id')
+            cluster = str(item.get('cluster_id') or '')
+            group_id = cluster.split('_c')[0] if '_c' in cluster else None
+            resolved_group_id, entry = _resolve_group(group_id, frame_id)
+            if entry is None:
+                candidates = [candidate for candidate, info
+                              in group_info.items()
+                              if frame_id in info['frames']]
+                result['unresolved_frames'].append({
+                    'frame_id': frame_id,
+                    'cluster_id': cluster,
+                    'candidate_groups': candidates,
+                })
+                continue
+            group_id = resolved_group_id
+            result['checked_frames'] += 1
+            if entry['split'] != split:
+                result['mismatches'].append({
+                    'frame_id': frame_id,
+                    'group_id': group_id,
+                    'reason': 'SPLIT_MISMATCH',
+                    'selection_split': split,
+                    'v3_split': entry['split'],
+                })
+    if result['mismatches'] or result['unresolved_frames']:
+        result['status'] = 'FAIL'
+    result['note'] = 'fallback selection lists used; label-list config missing'
+    return result
 
 
 def _provenance_entry(repo_root, relative):
@@ -1424,6 +1746,876 @@ def admission_block(seal, report):
     }
 
 
+# ---------------------------------------------------------------------------
+# T12: near-duplicate / leakage audit and external product index
+# ---------------------------------------------------------------------------
+T12_AUDIT_OUTPUT = ('docs/reports/perception/dataset_freeze_20261104/'
+                    'landmark_leakage_audit_20261104.json')
+T12_INDEX_OUTPUT = ('docs/reports/perception/dataset_freeze_20261104/'
+                    'landmark_external_index_20261104.json')
+NEAR_DUP_DOWNSAMPLE = (16, 12)
+NEAR_DUP_DOWNSAMPLE_THRESHOLD = 2.0   # mean abs diff on 0-255 grayscale
+NEAR_DUP_FULL_MEAN_THRESHOLD = 3.0
+NEAR_DUP_FULL_MAX_THRESHOLD = 40
+
+
+def _frame_records(repo_root, freeze, set_name):
+    records = []
+    datasets = freeze.get('datasets') or {}
+    for group in freeze.get('groups') or []:
+        dataset_name = group.get('dataset')
+        dataset_root = (datasets.get(dataset_name) or {}).get('root') or (
+            'outputs/sensor_shadow/' + str(dataset_name))
+        for frame in group.get('frames') or []:
+            parsed = parse_frame_id(frame.get('frame_id')) or {}
+            records.append({
+                'set': set_name,
+                'split': group.get('split'),
+                'group_id': group.get('group_id'),
+                'family_id': group.get('family_id'),
+                'dataset': dataset_name,
+                'frame_id': frame.get('frame_id'),
+                'sha256': frame.get('sha256'),
+                'accepted': frame.get('accepted'),
+                'episode_id': parsed.get('episode_id'),
+                'sequence': parsed.get('sequence'),
+                'ref': dataset_root + '/images/' + str(frame.get('frame_id')),
+            })
+    return records
+
+
+def _image_signatures(repo_root, records):
+    try:
+        from PIL import Image
+        import numpy as np
+    except Exception:  # pragma: no cover - optional dependency
+        return None, records, {'available': False}
+    root = Path(repo_root)
+    signatures = []
+    kept = []
+    missing = 0
+    unreadable = 0
+    for record in records:
+        path = root / record['ref']
+        if not path.is_file():
+            missing += 1
+            continue
+        try:
+            with Image.open(path) as image:
+                signature = np.asarray(
+                    image.convert('L').resize(NEAR_DUP_DOWNSAMPLE),
+                    dtype=np.float32).reshape(-1)
+        except Exception:
+            unreadable += 1
+            continue
+        signatures.append(signature)
+        kept.append(record)
+    array = np.asarray(signatures) if signatures else None
+    return array, kept, {'available': True, 'missing': missing,
+                         'unreadable': unreadable}
+
+
+def _scan_cross_signatures(left, right, threshold):
+    candidates = []
+    if left is None or right is None or not len(left) or not len(right):
+        return candidates
+    import numpy as np
+    for start in range(0, len(left), 128):
+        block = left[start:start + 128]
+        distances = np.abs(block[:, None, :] - right[None, :, :]).mean(axis=2)
+        for row, column in np.argwhere(distances <= threshold):
+            candidates.append((start + int(row), int(column),
+                               float(distances[row, column])))
+    return candidates
+
+
+def _full_resolution_diff(repo_root, first_ref, second_ref):
+    try:
+        from PIL import Image
+        import numpy as np
+    except Exception:  # pragma: no cover
+        return None
+    first = Path(repo_root) / first_ref
+    second = Path(repo_root) / second_ref
+    with Image.open(first) as image_a, Image.open(second) as image_b:
+        if image_a.size != image_b.size:
+            return None
+        array_a = np.asarray(image_a.convert('RGB'), dtype=np.int16)
+        array_b = np.asarray(image_b.convert('RGB'), dtype=np.int16)
+    difference = np.abs(array_a - array_b)
+    return {
+        'mean_abs': float(difference.mean()),
+        'max': int(difference.max()),
+        'p99': float(np.percentile(difference, 99)),
+    }
+
+
+def _structural_audit(freeze_path_docs):
+    try:
+        from boom_birds.evaluation.landmark_dataset import audit_split_leakage
+    except Exception:  # pragma: no cover
+        return {}
+    return {path: audit_split_leakage(document)
+            for path, document in freeze_path_docs.items()}
+
+
+def run_near_duplicate_audit(repo_root, freeze_paths, seal_path):
+    root = Path(repo_root)
+    freeze_docs = {}
+    records = []
+    for relative in freeze_paths:
+        path = root / relative
+        if not path.is_file():
+            raise SystemExit('audit freeze missing: %s' % relative)
+        document = load_json(path)
+        freeze_docs[relative] = document
+        records.extend(_frame_records(root, document, 'dev'))
+    if seal_path:
+        seal_file = root / seal_path
+        if not seal_file.is_file():
+            raise SystemExit('audit seal missing: %s' % seal_path)
+        seal_document = load_json(seal_file)
+        records.extend(_frame_records(root, seal_document, 'exploratory'))
+    sets = {}
+    for record in records:
+        key = (record['set'], record['split'])
+        sets.setdefault(key, []).append(record)
+    train_val_records = [record for record in records
+                         if record['set'] == 'dev']
+    exploratory_records = [record for record in records
+                           if record['set'] == 'exploratory']
+    # sha-level cross-set overlap
+    sha_train = {record['sha256'] for record in train_val_records
+                 if record['split'] == 'train'}
+    sha_val = {record['sha256'] for record in train_val_records
+               if record['split'] == 'val'}
+    sha_exploratory = {record['sha256'] for record in exploratory_records}
+    sha_cross = {
+        'train_val': len(sha_train & sha_val),
+        'exploratory_dev': len(sha_exploratory & (sha_train | sha_val)),
+    }
+    # pixel-level near duplicates between sets
+    near_duplicate_pairs = []
+    scan_meta = {}
+    left_array, left_records, left_meta = _image_signatures(
+        root, [record for record in train_val_records
+               if record['split'] == 'train'])
+    right_array, right_records, right_meta = _image_signatures(
+        root, [record for record in train_val_records
+               if record['split'] == 'val'])
+    scan_meta['train'] = left_meta
+    scan_meta['val'] = right_meta
+    for index_left, index_right, distance in _scan_cross_signatures(
+            left_array, right_array, NEAR_DUP_DOWNSAMPLE_THRESHOLD):
+        record_left = left_records[index_left]
+        record_right = right_records[index_right]
+        full = _full_resolution_diff(root, record_left['ref'],
+                                     record_right['ref'])
+        pair = {
+            'set_pair': 'train_vs_val',
+            'left': {'frame_id': record_left['frame_id'],
+                     'group_id': record_left['group_id']},
+            'right': {'frame_id': record_right['frame_id'],
+                      'group_id': record_right['group_id']},
+            'downsample_mean_abs': round(distance, 4),
+            'full_resolution': full,
+        }
+        if full and full['mean_abs'] <= NEAR_DUP_FULL_MEAN_THRESHOLD \
+                and full['max'] <= NEAR_DUP_FULL_MAX_THRESHOLD:
+            pair['near_duplicate'] = True
+            near_duplicate_pairs.append(pair)
+    dev_records = left_records + right_records
+    if left_array is not None and right_array is not None:
+        import numpy as np
+        dev_array = np.concatenate([left_array, right_array], axis=0)
+    else:
+        dev_array = None
+    if exploratory_records:
+        exp_array, exp_records, exp_meta = _image_signatures(
+            root, exploratory_records)
+        scan_meta['exploratory'] = exp_meta
+        for index_dev, index_exp, distance in _scan_cross_signatures(
+                dev_array, exp_array, NEAR_DUP_DOWNSAMPLE_THRESHOLD):
+            record_dev = dev_records[index_dev]
+            record_exp = exp_records[index_exp]
+            full = _full_resolution_diff(root, record_dev['ref'],
+                                         record_exp['ref'])
+            pair = {
+                'set_pair': 'dev_vs_exploratory',
+                'left': {'frame_id': record_dev['frame_id'],
+                         'group_id': record_dev['group_id'],
+                         'split': record_dev['split']},
+                'right': {'frame_id': record_exp['frame_id'],
+                          'group_id': record_exp['group_id']},
+                'downsample_mean_abs': round(distance, 4),
+                'full_resolution': full,
+            }
+            if full and full['mean_abs'] <= NEAR_DUP_FULL_MEAN_THRESHOLD \
+                    and full['max'] <= NEAR_DUP_FULL_MAX_THRESHOLD:
+                pair['near_duplicate'] = True
+                near_duplicate_pairs.append(pair)
+    # same-trajectory adjacent frames: expected similarity, neighbour check
+    episodes = {}
+    for record in records:
+        episodes.setdefault((record['dataset'], record['episode_id']),
+                            []).append(record)
+    same_trajectory_neighbours = 0
+    same_trajectory_cross_split = 0
+    for key, items in episodes.items():
+        items.sort(key=lambda item: item['sequence'])
+        for previous, current in zip(items, items[1:]):
+            if current['sequence'] != previous['sequence'] + 1:
+                continue
+            same_trajectory_neighbours += 1
+            if previous['split'] != current['split']:
+                same_trajectory_cross_split += 1
+    structural = _structural_audit(freeze_docs)
+    leakage_pairs = [pair for pair in near_duplicate_pairs
+                     if pair['set_pair'] == 'train_vs_val']
+    contamination_pairs = [pair for pair in near_duplicate_pairs
+                           if pair['set_pair'] == 'dev_vs_exploratory']
+    status = 'PASS' if (not leakage_pairs and not contamination_pairs
+                        and sha_cross['train_val'] == 0
+                        and sha_cross['exploratory_dev'] == 0
+                        and same_trajectory_cross_split == 0) else 'FAIL'
+    result = {
+        'schema_version': 'dsh.landmark_near_duplicate_audit.v1',
+        'generated_at': datetime.datetime.now(
+            datetime.timezone.utc).isoformat(),
+        'status': status,
+        'freeze_paths': list(freeze_paths),
+        'seal_path': seal_path,
+        'set_sizes': {
+            'train': len([record for record in train_val_records
+                          if record['split'] == 'train']),
+            'val': len([record for record in train_val_records
+                        if record['split'] == 'val']),
+            'exploratory': len(exploratory_records),
+        },
+        'thresholds': {
+            'downsample': list(NEAR_DUP_DOWNSAMPLE),
+            'downsample_mean_abs_le': NEAR_DUP_DOWNSAMPLE_THRESHOLD,
+            'full_resolution_mean_abs_le': NEAR_DUP_FULL_MEAN_THRESHOLD,
+            'full_resolution_max_le': NEAR_DUP_FULL_MAX_THRESHOLD,
+            'units': '0-255 grayscale/RGB mean absolute difference',
+            'method': '16x12 grayscale signature prefilters pairs; full-'
+                      'resolution mean/max confirms near duplicates; sha256 '
+                      'equality is checked separately',
+        },
+        'sha_cross_set': sha_cross,
+        'near_duplicate_pairs': near_duplicate_pairs,
+        'counts': {
+            'near_duplicate_pairs': len(near_duplicate_pairs),
+            'train_val_leakage_pairs': len(leakage_pairs),
+            'dev_exploratory_contamination_pairs': len(contamination_pairs),
+            'same_trajectory_adjacent_pairs': same_trajectory_neighbours,
+            'same_trajectory_cross_split': same_trajectory_cross_split,
+        },
+        'scan_meta': scan_meta,
+        'structural': structural,
+        'limits': [
+            'pixel near-duplicate audit is a heuristic; it does not replace '
+            'a human visual review',
+            'the exploratory pool is already downgraded; contamination pairs '
+            'are reported as evidence, not as a failure of the dev split',
+        ],
+    }
+    return result
+
+
+def run_external_index(repo_root, freeze_paths, seal_path):
+    try:
+        from PIL import Image
+    except Exception:  # pragma: no cover
+        Image = None
+    root = Path(repo_root)
+    datasets = []
+    totals = {'frames': 0, 'png_readable': 0, 'png_missing': 0,
+              'png_sha_mismatch': 0, 'observations_sha_mismatch': 0}
+    for relative in freeze_paths + ([seal_path] if seal_path else []):
+        path = root / relative
+        if not path.is_file():
+            raise SystemExit('external index freeze missing: %s' % relative)
+        document = load_json(path)
+        for dataset_name, dataset in (document.get('datasets') or {}).items():
+            dataset_root = dataset.get('root') or (
+                'outputs/sensor_shadow/' + dataset_name)
+            observations = dataset.get('observations') or (
+                dataset_root + '/observations.jsonl')
+            entry = {'freeze': relative, 'dataset': dataset_name,
+                     'root': dataset_root, 'observations': observations}
+            try:
+                loaded = load_dataset_frames(
+                    root, dataset_name, dataset_root, observations,
+                    allow_empty=bool(dataset.get('empty_capture')),
+                    verify_images=False)
+            except DatasetInputError as error:
+                entry['status'] = 'OBSERVATIONS_ERROR'
+                entry['error'] = str(error)
+                datasets.append(entry)
+                continue
+            entry['observations_sha256'] = loaded.observations_sha256
+            expected = dataset.get('observations_sha256')
+            entry['observations_sha256_match'] = (
+                bool(expected) and expected == loaded.observations_sha256)
+            if expected and expected != loaded.observations_sha256:
+                totals['observations_sha_mismatch'] += 1
+            frames = 0
+            readable = 0
+            missing = 0
+            mismatch = 0
+            unreadable = 0
+            for frame in loaded.frames:
+                frames += 1
+                image_path = root / frame.ref
+                if not image_path.is_file():
+                    missing += 1
+                    continue
+                if sha256_file(image_path) != frame.sha256:
+                    mismatch += 1
+                    continue
+                if Image is not None:
+                    try:
+                        with Image.open(image_path) as image:
+                            image.verify()
+                        with Image.open(image_path) as image:
+                            width, height = image.size
+                        if [width, height] != [320, 240]:
+                            unreadable += 1
+                            continue
+                    except Exception:
+                        unreadable += 1
+                        continue
+                readable += 1
+            entry.update({
+                'frames': frames,
+                'png_readable_sha_match': readable,
+                'png_missing': missing,
+                'png_sha_mismatch': mismatch,
+                'png_unreadable_or_wrong_size': unreadable,
+                'empty_capture': not loaded.frames,
+                'status': ('PASS' if not missing and not mismatch
+                           and not unreadable else 'FAIL'),
+            })
+            totals['frames'] += frames
+            totals['png_readable'] += readable
+            totals['png_missing'] += missing
+            totals['png_sha_mismatch'] += mismatch
+            datasets.append(entry)
+    status = 'PASS' if (totals['png_missing'] == 0
+                        and totals['png_sha_mismatch'] == 0
+                        and totals['observations_sha_mismatch'] == 0) else 'FAIL'
+    return {
+        'schema_version': 'dsh.landmark_external_product_index.v1',
+        'generated_at': datetime.datetime.now(
+            datetime.timezone.utc).isoformat(),
+        'status': status,
+        'freeze_paths': list(freeze_paths),
+        'seal_path': seal_path,
+        'datasets': datasets,
+        'totals': totals,
+        'backup_recommendation': [
+            'keep the ignored outputs/ raw directories on at least one '
+            'external disk or NAS; do not upload without user approval',
+            'store the freeze/seal JSON plus this index with the raw package '
+            'so a future re-verification can compare sha256 without git',
+            'the repository only stores manifests/hashes/reports; raw PNG and '
+            'observations stay outside git',
+            'external backup is a recommendation, not a blocker for this '
+            'data-format QA',
+        ],
+        'limits': [
+            'readability check decodes PNG and checks 320x240 size; it does '
+            'not validate image content',
+            'observations hash is checked against the freeze record, and PNG '
+            'bytes against the per-frame payload sha256',
+        ],
+    }
+
+
+REGISTRY_PATH = 'configs/perception/landmark_exposure_registry_v1.json'
+REGISTRY_OUTPUT = ('docs/reports/perception/dataset_freeze_20261104/'
+                   'landmark_exposure_registry_verify_20261104.json')
+REGISTRY_SOURCES = {
+    'dev_v3': 'configs/perception/landmark_split_freeze_v3.json',
+    'final_seal': 'configs/perception/landmark_final_pool_seal_v1.json',
+}
+
+
+EXPOSURE_SCHEMA = 'dsh.landmark_exposure_registry.v1'
+EXPOSURE_PROTOCOL = 'landmark_exposure_group_level_v1'
+EXPOSURE_STATUSES = ('exposed_development', 'annotation_calibration',
+                     'exploratory_eval_candidate', 'untouched',
+                     'excluded_debug', 'empty_capture')
+PILOT_SELECTION = ('docs/reports/perception/annotation_verify_20261104/'
+                   'pilot/selection.json')
+PILOT_LABELS_MANIFEST = ('docs/reports/perception/annotation_verify_20261104/'
+                         'pilot/labels_manifest.json')
+EXPLORATORY_LABELS_MANIFEST = ('outputs/perception/'
+                               'final_exploratory_20261104/'
+                               'labels_manifest.json')
+DEV_SELECTION_TRAIN = ('outputs/perception/dev_annotations_20261104/'
+                       'selection_train.json')
+DEV_SELECTION_VAL = ('outputs/perception/dev_annotations_20261104/'
+                     'selection_val.json')
+DEV_DEDUP_REPORT = ('outputs/perception/dev_annotations_20261104/'
+                    'dedup_sampling_report.json')
+V3_PATH = 'configs/perception/landmark_split_freeze_v3.json'
+SEAL_PATH = 'configs/perception/landmark_final_pool_seal_v1.json'
+
+
+def _json_if_exists(root, relative):
+    path = Path(root) / relative
+    if not path.is_file():
+        return None
+    return load_json(path), {
+        'path': relative.replace('\\', '/'),
+        'sha256': sha256_file(path),
+    }
+
+
+def build_exposure_registry(repo_root):
+    root = Path(repo_root)
+    v3 = load_json(root / V3_PATH)
+    seal = load_json(root / SEAL_PATH)
+    dev_groups = {group['group_id']: group for group in v3.get('groups') or []}
+    final_groups = {group['group_id']: group
+                    for group in seal.get('groups') or []}
+    events = []
+    # 1) historical development use of the pre-T9 dev data (templates,
+    #    geometry diagnostics, independent landmark evaluations)
+    history_evidence = []
+    for relative in ('configs/perception/landmark_freeze_v4.json',
+                     'configs/perception/independent_freeze_v3.json',
+                     'configs/perception/geometry_test_freeze_v2.json'):
+        entry = _json_if_exists(root, relative)
+        if entry:
+            history_evidence.append(entry[1])
+    def _is_t9(dataset_name):
+        return str(dataset_name or '').startswith(('lm_dev_capture',
+                                                   'lm_dev_hn_capture'))
+
+    history_groups = sorted(
+        group['group_id'] for group in v3.get('groups') or []
+        if not _is_t9(group.get('dataset')))
+    events.append({
+        'event_id': 'ev_dev_detection_history_20261103',
+        'type': 'exposed_development',
+        'date': '2026-11-03',
+        'executor': 'agent (template / geometry / independent landmark dev)',
+        'frames_touched': sum(len(dev_groups[group_id].get('frames') or [])
+                              for group_id in history_groups),
+        'groups': history_groups,
+        'evidence_path': history_evidence[0]['path'] if history_evidence
+        else None,
+        'evidence_sha256': history_evidence[0]['sha256']
+        if history_evidence else None,
+        'evidence_extra': history_evidence[1:],
+        'extent': 'all pre-T9 dev groups were used for development or '
+                  'diagnostics; group-level exposure',
+    })
+    # 2) annot2 dev annotation selection (label-list config preferred)
+    selection_entries = []
+    annotated_dev_frames = []
+    dev_label_lists = _json_if_exists(
+        root, 'configs/perception/landmark_dev_label_lists_v1.json')
+    if dev_label_lists:
+        document, reference = dev_label_lists
+        selection_entries.append({
+            'path': 'configs/perception/landmark_dev_label_lists_v1.json',
+            'sha256': reference['sha256'],
+            'status': document.get('status'),
+            'annotation_spec': document.get('annotation_spec'),
+            'labels': document.get('labels'),
+        })
+        for split in ('train', 'val'):
+            split_doc = (document.get('splits') or {}).get(split) or {}
+            for group in split_doc.get('groups') or []:
+                for frame_id in group.get('frames') or []:
+                    annotated_dev_frames.append({
+                        'frame_id': frame_id,
+                        'group_id': group.get('group_id'),
+                        'split': split,
+                    })
+    else:
+        for relative, split in ((DEV_SELECTION_TRAIN, 'train'),
+                                (DEV_SELECTION_VAL, 'val')):
+            entry = _json_if_exists(root, relative)
+            if not entry:
+                continue
+            document, reference = entry
+            selection_entries.append({
+                'path': relative,
+                'sha256': reference['sha256'],
+                'split': split,
+                'frames': document.get('total_frames'),
+                'rule_id': document.get('rule_id'),
+                'base_freeze': (document.get('freeze') or {}).get('path'),
+            })
+            annotated_dev_frames.extend(document.get('frames') or [])
+    dedup_entry = _json_if_exists(root, DEV_DEDUP_REPORT)
+    events.append({
+        'event_id': 'ev_dev_dedup_annotation_selection_20261104',
+        'type': 'annotation_calibration',
+        'date': '2026-11-04',
+        'executor': 'annot2 (agent proxy)',
+        'frames_touched': len(annotated_dev_frames),
+        'groups': sorted({group for group in
+                          (frame.get('cluster_id', '').split('_c')[0]
+                           for frame in annotated_dev_frames) if group}),
+        'evidence_path': (selection_entries[0]['path']
+                          if selection_entries else (DEV_DEDUP_REPORT
+                                                    if dedup_entry else None)),
+        'evidence_sha256': (selection_entries[0]['sha256']
+                            if selection_entries else (
+                                dedup_entry[1]['sha256']
+                                if dedup_entry else None)),
+        'evidence_extra': selection_entries,
+        'extent': 'dedup representative frames selected from the v2 train/val '
+                  'groups for dev annotation; no T9 frames were in the list '
+                  'when the registry was built unless the lists were updated',
+    })
+    # 3) T9 dev capture (batch1 and batch2 are separate runs)
+    t9_frames = 0
+    t9_groups = sorted(group['group_id'] for group in v3.get('groups') or []
+                       if _is_t9(group.get('dataset')))
+    t9_datasets = sorted(
+        name for name in (v3.get('datasets') or {})
+        if _is_t9(name))
+    t9_run_manifests = []
+    for dataset_name in t9_datasets:
+        dataset = v3['datasets'][dataset_name]
+        run_dir = (dataset.get('run') or '').rstrip('/')
+        manifest_relative = (run_dir + '/manifest.json') if run_dir else None
+        if manifest_relative:
+            entry = _json_if_exists(root, manifest_relative)
+            if entry:
+                t9_run_manifests.append({'path': manifest_relative,
+                                         'sha256': entry[1]['sha256']})
+        for group in v3.get('groups') or []:
+            if group.get('dataset') == dataset_name:
+                t9_frames += len(group.get('frames') or [])
+    if t9_run_manifests:
+        events.append({
+            'event_id': 'ev_t9_dev_capture_20261104',
+            'type': 'exposed_development',
+            'date': '2026-11-04',
+            'executor': 'capture (visible foreground Isaac GUI)',
+            'frames_touched': t9_frames,
+            'groups': t9_groups,
+            'evidence_path': t9_run_manifests[0]['path'],
+            'evidence_sha256': t9_run_manifests[0]['sha256'],
+            'evidence_extra': t9_run_manifests[1:],
+            'extent': 'T9 dev new families captured, condition metadata '
+                      'inspected and used for the v3 split; HN1/HN2 use '
+                      'synthetic visual-only injections',
+        })
+    # 3b) map-native green-lamp pillar MS1 falsifies identity uniqueness U1/U2
+    native_entry = _json_if_exists(
+        root, 'docs/reports/perception/capture_dev_20261104/'
+              'map_native_structures.json')
+    ms1_event_id = 'ev_map_native_ms1_identity_conflict_20261104'
+    events.append({
+        'event_id': ms1_event_id,
+        'type': 'identity_conflict_evidence',
+        'date': '2026-11-04',
+        'executor': 'capture + datafreeze review (map probe + green cue)',
+        'frames_touched': 0,
+        'groups': ['g_lmf_dev_inner_north', 'g_lmf_dev_static_negative'],
+        'evidence_path': ('docs/reports/perception/capture_dev_20261104/'
+                          'map_native_structures.json')
+        if native_entry else None,
+        'evidence_sha256': native_entry[1]['sha256'] if native_entry else None,
+        'extent': 'map-native (not injected) green-lamp pillar MS1 at about '
+                  '(3.0,4.0, green lamp z~1.71) is visible from inner_north '
+                  '(up to 55 green px) and from static_negative without green; '
+                  'this falsifies U1/U2 (at most one tower-like instance / '
+                  'central tower is the only green-light tower) for identity '
+                  'claims. It is a different evidence class from the synthetic '
+                  'HN1 confuser and must not be mixed with it.',
+        'identity_impact': 'U1/U2 falsified; identity certification '
+                           'INCOMPLETE',
+    })
+    # 4) final pool 34-frame pilot annotation
+    pilot_frames = []
+    pilot_entry = _json_if_exists(root, PILOT_SELECTION)
+    pilot_manifest = _json_if_exists(root, PILOT_LABELS_MANIFEST)
+    if pilot_entry:
+        pilot_frames = pilot_entry[0].get('frames') or []
+    events.append({
+        'event_id': 'ev_final_pilot_annotation_34_20261104',
+        'type': 'annotation_calibration',
+        'date': '2026-11-04',
+        'executor': 'annot (agent proxy)',
+        'frames_touched': len(pilot_frames),
+        'groups': sorted({frame.get('group_id') for frame in pilot_frames
+                          if frame.get('group_id')}),
+        'evidence_path': PILOT_LABELS_MANIFEST if pilot_manifest else None,
+        'evidence_sha256': pilot_manifest[1]['sha256'] if pilot_manifest else None,
+        'extent': '34/279 frames annotated across all 6 final families; the '
+                  'whole 6-family pool is contaminated for sealed-final use',
+    })
+    # 5) full exploratory labels for the final pool
+    exploratory_entry = _json_if_exists(root, EXPLORATORY_LABELS_MANIFEST)
+    exploratory_manifest = exploratory_entry[0] if exploratory_entry else {}
+    exploratory_counts = exploratory_manifest.get('counts') or {}
+    events.append({
+        'event_id': 'ev_final_exploratory_labels_279_20261104',
+        'type': 'exploratory_eval_candidate',
+        'date': '2026-11-04',
+        'executor': 'annot (agent proxy, spec v2.1)',
+        'frames_touched': exploratory_counts.get('frames', 0),
+        'groups': sorted(final_groups),
+        'evidence_path': EXPLORATORY_LABELS_MANIFEST
+        if exploratory_entry else None,
+        'evidence_sha256': exploratory_entry[1]['sha256']
+        if exploratory_entry else None,
+        'extent': 'full 279-frame exploratory labels; dataset_role='
+                  'DEVELOPMENT_EXPLORATORY; 34 frames are annotation '
+                  'calibration, 245 exploratory; no sealed final remains',
+        'label_file': (exploratory_manifest.get('label_file') or {}),
+        'dataset_role': exploratory_manifest.get('dataset_role'),
+    })
+    t9_event_ids = ['ev_t9_dev_capture_20261104']
+    dev_event_ids = ['ev_dev_detection_history_20261103',
+                     'ev_dev_dedup_annotation_selection_20261104']
+    groups_doc = []
+    for group_id, group in sorted(dev_groups.items()):
+        is_t9 = _is_t9(group.get('dataset'))
+        group_events = list(dev_event_ids)
+        if is_t9 and t9_run_manifests:
+            group_events = list(t9_event_ids)
+        if group.get('family_id') in ('fam_inner_north',
+                                      'fam_static_negative_E'):
+            group_events = group_events + [ms1_event_id]
+        groups_doc.append({
+            'group_id': group_id,
+            'source': 'dev_v3',
+            'family_id': group.get('family_id'),
+            'dataset': group.get('dataset'),
+            'split': group.get('split'),
+            'status': 'exposed_development',
+            'exposure_events': group_events,
+            'certification': 'EXPOSED',
+            'contamination': {
+                'group_level': True,
+                'reason': 'development / annotation-selection exposure',
+            },
+        })
+    for group_id, group in sorted(final_groups.items()):
+        groups_doc.append({
+            'group_id': group_id,
+            'source': 'final_seal',
+            'family_id': group.get('family_id'),
+            'dataset': group.get('dataset'),
+            'split': group.get('split'),
+            'status': 'exploratory_eval_candidate',
+            'exposure_events': ['ev_final_pilot_annotation_34_20261104',
+                                'ev_final_exploratory_labels_279_20261104'],
+            'certification': 'EXPOSED',
+            'contamination': {
+                'group_level': True,
+                'reason': '34-frame pilot annotation viewed representatives of '
+                          'every family and the full 279-frame exploratory '
+                          'labels were produced; removing the 34 frames is not '
+                          'enough to recover a sealed pool',
+                'neighbor_radius': 'same episode / same group / same family',
+            },
+        })
+    frame_overrides = []
+    for frame in pilot_frames:
+        frame_overrides.append({
+            'source': 'final_seal',
+            'group_id': frame.get('group_id'),
+            'frame_id': frame.get('frame_id'),
+            'status': 'annotation_calibration',
+            'event_id': 'ev_final_pilot_annotation_34_20261104',
+            'dataset_role': 'ANNOTATION_CALIBRATION',
+        })
+    dev_episode_groups = {}
+    for group_id, group in dev_groups.items():
+        for episode in group.get('episodes') or []:
+            dev_episode_groups[episode] = group_id
+    for frame in annotated_dev_frames:
+        frame_id = frame.get('frame_id')
+        group_id = frame.get('group_id')
+        if group_id not in dev_groups:
+            parsed = parse_frame_id(frame_id) or {}
+            group_id = dev_episode_groups.get(parsed.get('episode_id'))
+        if not group_id or group_id not in dev_groups:
+            continue
+        frame_overrides.append({
+            'source': 'dev_v3',
+            'group_id': group_id,
+            'frame_id': frame_id,
+            'status': 'annotation_calibration',
+            'event_id': 'ev_dev_dedup_annotation_selection_20261104',
+            'dataset_role': 'ANNOTATION_CALIBRATION',
+        })
+    registry = {
+        'schema_version': EXPOSURE_SCHEMA,
+        'protocol': EXPOSURE_PROTOCOL,
+        'generated_at': datetime.datetime.now(
+            datetime.timezone.utc).isoformat(),
+        'generated_by': 'scripts/verify_landmark_dataset.py '
+                        '--build-exposure-registry',
+        'status': 'PARTIAL_EXPOSURE_AUDIT',
+        'policy': {
+            'statuses': list(EXPOSURE_STATUSES),
+            'group_level_rule': 'if any frame of a group was viewed, selected '
+                                'or annotated, the whole group is exposed; '
+                                'removing single frames does not make the '
+                                'remaining frames untouched',
+            'sealed_rule': 'no group may be called sealed after an exposure '
+                           'event; the final pool is development/exploratory',
+            'near_neighbor_rule': 'same episode / same group / same family '
+                                  'counts as the same contamination unit',
+            'project_decision': 'user 2026-11-04 authorised the main candidate '
+                                'for bounded internal research only; '
+                                'distribution is a separate decision and is '
+                                'NOT a solved license question',
+        },
+        'freezes': {
+            'dev_v3': {
+                'path': V3_PATH,
+                'canonical_sha256': freeze_sha256(v3),
+                'groups': len(dev_groups),
+                'frames': sum(len(group.get('frames') or [])
+                              for group in dev_groups.values()),
+            },
+            'final_seal': {
+                'path': SEAL_PATH,
+                'canonical_sha256': freeze_sha256(seal),
+                'groups': len(final_groups),
+                'frames': sum(len(group.get('frames') or [])
+                              for group in final_groups.values()),
+                'downgraded_to': 'development_exploratory',
+            },
+        },
+        'events': events,
+        'groups': groups_doc,
+        'frame_overrides': frame_overrides,
+        'summary': {
+            'exposed_development_groups': sum(
+                1 for entry in groups_doc
+                if entry['status'] == 'exposed_development'),
+            'exploratory_eval_candidate_groups': sum(
+                1 for entry in groups_doc
+                if entry['status'] == 'exploratory_eval_candidate'),
+            'untouched_groups': sum(1 for entry in groups_doc
+                                    if entry['status'] == 'untouched'),
+            'annotation_calibration_frames': len(frame_overrides),
+            'final_groups_contaminated': len(final_groups),
+            't9_groups': len(t9_groups),
+        },
+        'identity_certification': {
+            'U1_at_most_one_tower_like_instance': 'FALSIFIED',
+            'U2_central_tower_is_only_green_light_tower': 'FALSIFIED',
+            'evidence': 'map-native green-lamp pillar MS1 at about (3.0,4.0, '
+                        'green lamp z~1.71) is visible from the inner_north '
+                        'dev route (55 green px at g1_90) and is not the '
+                        'central tower; it is map-native, not synthetic',
+            'final_pool_verified_HN1_frames': 0,
+            'final_pool_HN1_status': 'the final pool similar_negative is '
+                                    'target-absent with <=3 px green false '
+                                    'clues; no verified similar-structure '
+                                    'frame exists there',
+            'identity_status': 'INCOMPLETE',
+            'note': 'tower class detection can still be trained, but landmark '
+                    'identity claims require a revised uniqueness statement or '
+                    'an explicit multi-landmark candidate design',
+        },
+        'certification': {
+            'can_claim_sealed': False,
+            'untouched_final_groups': 0,
+            'conclusion': 'INCOMPLETE',
+            'reasons': [
+                'all 279 final-pool frames were annotated as exploratory '
+                'development labels, and a 34-frame pilot was annotated '
+                'before that',
+                'the 34 pilot frames cannot simply be removed: all 6 families '
+                'were represented in the pilot, so group-level contamination '
+                'applies',
+                'T9 dev data is development/calibration data, not a sealed '
+                'holdout',
+                'no third-party independent sealing exists; only process '
+                'isolation + hash commitment is claimed',
+                'identity uniqueness U1/U2 is falsified by the map-native '
+                'green-lamp pillar MS1; the final pool has no verified HN1 '
+                'frame, so identity certification is INCOMPLETE',
+            ],
+        },
+        'notes': [
+            'PASS for this registry means the exposure record is consistent '
+            'with the freezes; it does not prove nobody looked at the data.',
+            'The final seal file keeps its original bytes and historical '
+            'sealed_test label; this registry is the authoritative exposure '
+            'state and downgrades it to exploratory.',
+        ],
+    }
+    return registry
+
+
+def verify_exposure_registry_mode(repo_root, registry_relative,
+                                  sources=None, output_relative=REGISTRY_OUTPUT):
+    from boom_birds.evaluation.landmark_dataset import (
+        validate_exposure_registry)
+    root = Path(repo_root)
+    registry_path = root / registry_relative
+    if not registry_path.is_file():
+        raise SystemExit('exposure registry missing: %s' % registry_relative)
+    registry = load_json(registry_path)
+    source_map = sources or REGISTRY_SOURCES
+    freeze_documents = {}
+    missing_sources = []
+    for source, relative in source_map.items():
+        path = root / relative
+        if not path.is_file():
+            missing_sources.append(relative)
+            continue
+        freeze_documents[source] = load_json(path)
+    if missing_sources:
+        raise SystemExit('registry source freeze missing: %s'
+                         % ', '.join(missing_sources))
+    report = validate_exposure_registry(
+        registry, freeze_documents, root, verify_evidence=True)
+    evidence = {
+        'schema_version': 'dsh.landmark_exposure_registry_evidence.v1',
+        'status': 'PASS' if report.ok else 'FAIL',
+        'generated_at': datetime.datetime.now(
+            datetime.timezone.utc).isoformat(),
+        'registry': {
+            'path': registry_relative,
+            'sha256': sha256_file(registry_path),
+        },
+        'sources': {source: {
+            'path': relative,
+            'canonical_sha256': freeze_sha256(freeze_documents[source]),
+        } for source, relative in source_map.items()},
+        'checks': {
+            'errors': [issue.__dict__ for issue in report.errors],
+            'warnings': [issue.__dict__ for issue in report.warnings],
+        },
+        'stats': report.stats,
+        'limits': [
+            'exposure registry PASS means the record is internally consistent '
+            'with the freezes; it does not prove nobody looked at the data',
+            'no sealed/untouched claim is allowed once an exposure event '
+            'exists',
+        ],
+    }
+    output = (root / output_relative
+              if not Path(output_relative).is_absolute()
+              else Path(output_relative))
+    write_json(output, evidence)
+    print(json.dumps({'status': evidence['status'],
+                      'output': str(output),
+                      'errors': len(report.errors),
+                      'warnings': len(report.warnings),
+                      'stats': report.stats}, ensure_ascii=False))
+    return 0 if report.ok else 1
+
+
 def write_json(path, document):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1455,8 +2647,76 @@ def main(argv=None):
                         help='fail when a raw PNG referenced by a frame is missing')
     parser.add_argument('--skip-image-bytes', action='store_true',
                         help='skip hashing raw PNG bytes')
+    parser.add_argument('--audit-near-duplicates', action='store_true',
+                        help='T12: near-duplicate / split leakage audit')
+    parser.add_argument('--audit-freezes', default=None,
+                        help='comma separated dev freeze paths for the audit')
+    parser.add_argument('--audit-seal', default=None,
+                        help='optional final seal path for the audit')
+    parser.add_argument('--audit-output', default=T12_AUDIT_OUTPUT)
+    parser.add_argument('--external-index', action='store_true',
+                        help='T12: verify the ignored raw product directory')
+    parser.add_argument('--index-freezes', default=None,
+                        help='comma separated freeze paths for the index')
+    parser.add_argument('--index-seal', default=None)
+    parser.add_argument('--index-output', default=T12_INDEX_OUTPUT)
+    parser.add_argument('--build-exposure-registry', action='store_true',
+                        help='T12: build the exposure registry then verify it')
+    parser.add_argument('--verify-exposure-registry', action='store_true',
+                        help='T12: verify the exposure registry')
+    parser.add_argument('--registry', default=REGISTRY_PATH)
+    parser.add_argument('--registry-output', default=REGISTRY_OUTPUT)
     args = parser.parse_args(argv)
     repo_root = args.repo_root.resolve()
+    if args.build_exposure_registry:
+        registry = build_exposure_registry(repo_root)
+        write_json(repo_root / args.registry, registry)
+        return verify_exposure_registry_mode(
+            repo_root, args.registry, output_relative=args.registry_output)
+    if args.verify_exposure_registry:
+        return verify_exposure_registry_mode(
+            repo_root, args.registry, output_relative=args.registry_output)
+    if args.audit_near_duplicates or args.external_index:
+        default_dev = ('configs/perception/landmark_split_freeze_v3.json'
+                       if (repo_root / 'configs/perception/'
+                           'landmark_split_freeze_v3.json').is_file()
+                       else DEFAULT_FREEZE_V2)
+        default_seal = ('configs/perception/'
+                        'landmark_final_pool_seal_v1.json')
+        audit_freezes = [item.strip() for item in
+                         (args.audit_freezes or default_dev).split(',')
+                         if item.strip()]
+        index_freezes = [item.strip() for item in
+                         (args.index_freezes or default_dev).split(',')
+                         if item.strip()]
+        selected_seal = args.audit_seal or (
+            default_seal if (repo_root / default_seal).is_file() else None)
+        selected_index_seal = args.index_seal or (
+            default_seal if (repo_root / default_seal).is_file() else None)
+        if args.audit_near_duplicates:
+            result = run_near_duplicate_audit(
+                repo_root, audit_freezes, selected_seal)
+            output = (repo_root / args.audit_output
+                      if not Path(args.audit_output).is_absolute()
+                      else Path(args.audit_output))
+            write_json(output, result)
+            print(json.dumps({'status': result['status'],
+                              'output': str(output),
+                              'counts': result['counts'],
+                              'sha_cross_set': result['sha_cross_set']},
+                             ensure_ascii=False))
+            return 0 if result['status'] == 'PASS' else 1
+        result = run_external_index(
+            repo_root, index_freezes, selected_index_seal)
+        output = (repo_root / args.index_output
+                  if not Path(args.index_output).is_absolute()
+                  else Path(args.index_output))
+        write_json(output, result)
+        print(json.dumps({'status': result['status'],
+                          'output': str(output),
+                          'totals': result['totals']},
+                         ensure_ascii=False))
+        return 0 if result['status'] == 'PASS' else 1
     final_pool_mode = args.final_pool or args.build_final_pool
     freeze_relative = args.freeze or (
         DEFAULT_FINAL_POOL_FREEZE if final_pool_mode else DEFAULT_FREEZE)

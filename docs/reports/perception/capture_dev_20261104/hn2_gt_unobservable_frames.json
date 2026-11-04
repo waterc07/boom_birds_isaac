@@ -1,0 +1,68 @@
+{
+ "task": "HN2 full occlusion - guide for annotator/GT labelling (scene-derived, not image-observable)",
+ "frame_count": 26,
+ "frame_ids": [
+  "lmf_dev_hn2_occluder_0-follow_only_g2_3.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_4.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_5.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_6.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_7.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_8.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_9.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_10.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_12.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_14.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_15.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_17.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_19.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_21.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_22.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_24.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_26.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_28.png"
+ ],
+ "label_guidance": "present=true, visibility=OCCLUDED, occluded=true, truncated=false, bbox=null, geometry.keypoint=null, reference_status=UNAVAILABLE, reference_unavailable_reason=REFERENCE_OCCLUDED (spec v2); such GT frames are GT_UNOBSERVABLE for detection fourfold and must be reported separately (not a normal negative)",
+ "epistemic_note": "the image alone cannot prove the target exists behind the wall; present=true comes from the recorded scene configuration (target tower at world (11.52,-0.01,1.25) + synthetic wall), so this is GT_UNOBSERVABLE/scene-derived GT, NOT an image-observable positive",
+ "geometry": {
+  "camera_patrol_box_m": {
+   "x": [
+    8.8,
+    9.3
+   ],
+   "y": [
+    -0.5,
+    0.8
+   ],
+   "z": [
+    1.0,
+    1.1
+   ]
+  },
+  "tower_light_world_m": [
+   11.52,
+   -0.01,
+   1.25
+  ],
+  "wall_center_world_m": [
+   10.6,
+   0.0,
+   0.95
+  ],
+  "wall_size_m": [
+   0.4,
+   2.4,
+   1.9
+  ],
+  "wall_prim_path": "/World/DevInjection_hn2_occluder_v1_part00",
+  "rays_blocked": "all 8 sampled tower points ray->box blocked in 26/26 accepted frames",
+  "wall_projection_note": "wall spans most of the frame; its projection u/v span recorded per frame in injected_wall_projection_px"
+ }
+}

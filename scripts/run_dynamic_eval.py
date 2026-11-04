@@ -182,6 +182,30 @@ try:
         raise RuntimeError('methods must be follow_only and/or supervisor')
     if not cases:
         raise RuntimeError('no cases selected')
+    # Optional synthetic scene injections (dev hard-negative confuser / occluder).
+    # The definitions live in the cases document under "scene_injections"; the
+    # associated cases carry an "injection_id".  Injections are visual-only prims
+    # (no collision, no rigid body) and are toggled per episode so they cannot
+    # leak into other cases' frames.
+    case_payload_document = {}
+    try:
+        case_payload_document = json.loads(args.cases.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        case_payload_document = {}
+    injection_specs = case_payload_document.get('scene_injections', {}) or {}
+    case_injection_ids = {
+        item.get('case_id'): item.get('injection_id')
+        for item in case_payload_document.get('cases', [])
+        if item.get('injection_id')}
+    selected_injection_ids = {
+        case_injection_ids[case.case_id] for case in cases
+        if case.case_id in case_injection_ids}
+    missing_injections = selected_injection_ids - set(injection_specs)
+    if missing_injections:
+        raise RuntimeError('case references unknown scene injection: '
+                           + str(sorted(missing_injections)))
+    injections_used = {injection_id: injection_specs[injection_id]
+                       for injection_id in sorted(selected_injection_ids)}
     case_sha = hashlib.sha256(args.cases.read_bytes()).hexdigest()
     map_cfg_sha = hashlib.sha256(args.map_config.read_bytes()).hexdigest()
     vehicle_config_sha = hashlib.sha256(args.vehicle_config.read_bytes()).hexdigest()
@@ -427,6 +451,73 @@ try:
                     PhysxSchema.PhysxContactReportAPI.Apply(prim)
         except Exception as error:
             print('[dynamic] map reporter warning: ' + repr(error), flush=True)
+
+        injection_prim_paths = {}
+        if injections_used:
+            def spawn_injection_part(path, part):
+                material = sim_utils.PreviewSurfaceCfg(
+                    diffuse_color=tuple(float(v) for v in part.get(
+                        'diffuse_color', (0.45, 0.45, 0.45))),
+                    emissive_color=tuple(float(v) for v in part.get(
+                        'emissive_color', (0.0, 0.0, 0.0))),
+                    roughness=float(part.get('roughness', 0.55)),
+                    metallic=float(part.get('metallic', 0.0)))
+                translation = tuple(float(v) for v in
+                                    part['translation_center_m'])
+                kind = str(part['kind'])
+                if kind == 'cuboid':
+                    cfg = sim_utils.CuboidCfg(
+                        size=tuple(float(v) for v in part['size_m']),
+                        visual_material=material)
+                    sim_utils.spawn_cuboid(path, cfg, translation=translation)
+                elif kind == 'cylinder':
+                    cfg = sim_utils.CylinderCfg(
+                        radius=float(part['radius_m']),
+                        height=float(part['height_m']),
+                        axis=str(part.get('axis', 'Z')),
+                        visual_material=material)
+                    sim_utils.spawn_cylinder(path, cfg, translation=translation)
+                elif kind == 'sphere':
+                    cfg = sim_utils.SphereCfg(
+                        radius=float(part['radius_m']),
+                        visual_material=material)
+                    sim_utils.spawn_sphere(path, cfg, translation=translation)
+                else:
+                    raise RuntimeError('unknown injected part kind: ' + kind)
+
+            for injection_id in sorted(injections_used):
+                paths = []
+                for part_index, part in enumerate(
+                        injections_used[injection_id].get('parts', [])):
+                    path = '/World/DevInjection_%s_part%02d' % (
+                        injection_id, part_index)
+                    spawn_injection_part(path, part)
+                    paths.append(path)
+                injection_prim_paths[injection_id] = paths
+            for _ in range(3):
+                app.update()
+            for paths in injection_prim_paths.values():
+                for path in paths:
+                    prim = stage.GetPrimAtPath(path)
+                    if prim.IsValid():
+                        prim.SetActive(False)
+            app.update()
+            print('[dynamic] scene injections spawned (inactive): '
+                  + json.dumps({injection_id: len(paths) for injection_id, paths
+                                in injection_prim_paths.items()}), flush=True)
+
+        def set_injection_active(injection_id):
+            # Injected prims are visual-only and are only active for their own
+            # case, so they cannot leak into other episodes' frames.
+            if not injection_prim_paths:
+                return
+            for other_id, paths in injection_prim_paths.items():
+                active = (other_id == injection_id)
+                for path in paths:
+                    prim = stage.GetPrimAtPath(path)
+                    if prim.IsValid() and bool(prim.IsActive()) != active:
+                        prim.SetActive(active)
+            app.update()
 
         mark('bind obstacle from scene')
         obstacle = env.scene['obstacle']
@@ -1092,6 +1183,7 @@ try:
         mark('run dynamic paired cases')
         with torch.inference_mode():
             for case in cases:
+                set_injection_active(case_injection_ids.get(case.case_id))
                 obstacle_spec = load_obstacle_spec(case.obstacle)
                 case_obs_delay_s = float(obstacle_spec.observation_delay_s)
                 case_obs_delay_ns = int(round(case_obs_delay_s * 1_000_000_000))
@@ -2021,6 +2113,19 @@ try:
                 'config_sha256': sensor_config_sha,
                 'summary': (Path(args.sensor_shadow) / 'summary.json').as_posix()
                 if sensor_shadow is not None else '',
+            },
+            'scene_injections': {
+                'enabled': bool(injection_prim_paths),
+                'synthetic_intervention': True,
+                'visual_only_no_collision': True,
+                'disclaimer': ('synthetic confuser/occluder prims added for '
+                               'hard-negative coverage only; NOT an arena asset '
+                               'and NOT a real-arena distribution claim'),
+                'definitions': injections_used,
+                'prim_paths': injection_prim_paths,
+                'case_mapping': ({case.case_id: case_injection_ids.get(case.case_id)
+                                  for case in cases}
+                                 if injections_used else {}),
             },
             'obstacle_time_clamp': bool(args.obstacle_time_clamp),
             'clock_plan': {

@@ -1,0 +1,3574 @@
+{
+  "schema_version": "dsh.landmark_exposure_registry.v1",
+  "protocol": "landmark_exposure_group_level_v1",
+  "generated_at": "2026-11-04T11:30:53.303916+00:00",
+  "generated_by": "scripts/verify_landmark_dataset.py --build-exposure-registry",
+  "status": "PARTIAL_EXPOSURE_AUDIT",
+  "policy": {
+    "statuses": [
+      "exposed_development",
+      "annotation_calibration",
+      "exploratory_eval_candidate",
+      "untouched",
+      "excluded_debug",
+      "empty_capture"
+    ],
+    "group_level_rule": "if any frame of a group was viewed, selected or annotated, the whole group is exposed; removing single frames does not make the remaining frames untouched",
+    "sealed_rule": "no group may be called sealed after an exposure event; the final pool is development/exploratory",
+    "near_neighbor_rule": "same episode / same group / same family counts as the same contamination unit",
+    "project_decision": "user 2026-11-04 authorised the main candidate for bounded internal research only; distribution is a separate decision and is NOT a solved license question"
+  },
+  "freezes": {
+    "dev_v3": {
+      "path": "configs/perception/landmark_split_freeze_v3.json",
+      "canonical_sha256": "bc037e301d6370bb3de3232b1cc3573ae29c80a3465055114f5ef2d2ae422ce1",
+      "groups": 26,
+      "frames": 3398
+    },
+    "final_seal": {
+      "path": "configs/perception/landmark_final_pool_seal_v1.json",
+      "canonical_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+      "groups": 6,
+      "frames": 297,
+      "downgraded_to": "development_exploratory"
+    }
+  },
+  "events": [
+    {
+      "event_id": "ev_dev_detection_history_20261103",
+      "type": "exposed_development",
+      "date": "2026-11-03",
+      "executor": "agent (template / geometry / independent landmark dev)",
+      "frames_touched": 3002,
+      "groups": [
+        "g_debug_all6_southA",
+        "g_debug_all6_staticW",
+        "g_debug_static3_empty",
+        "g_debug_static4",
+        "g_debug_static5",
+        "g_debug_static6",
+        "g_debug_static7",
+        "g_formal6_southA",
+        "g_formal6_staticW",
+        "g_geo_north",
+        "g_geo_staticE",
+        "g_gui_evidence2_route0",
+        "g_gui_evidence_static",
+        "g_lm_ind_devSouth",
+        "g_lm_ind_north",
+        "g_lm_ind_reverseSouth",
+        "g_lm_ind_staticEtest",
+        "g_lm_pilot_north",
+        "g_lm_pilot_staticE"
+      ],
+      "evidence_path": "configs/perception/landmark_freeze_v4.json",
+      "evidence_sha256": "e812a64e07d57f5e6a77319f7a028c66e2cdd6cf4f6defb25be108540042b641",
+      "evidence_extra": [
+        {
+          "path": "configs/perception/independent_freeze_v3.json",
+          "sha256": "6493f653df1fc4066211c146789fb0c3052270fd53401076e18a3fd2bf252978"
+        },
+        {
+          "path": "configs/perception/geometry_test_freeze_v2.json",
+          "sha256": "b5897274746fcc07a3e5d14d84d8f7022f131af3fa04aa1b290a35e8e3c3f0e5"
+        }
+      ],
+      "extent": "all pre-T9 dev groups were used for development or diagnostics; group-level exposure"
+    },
+    {
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot2 (agent proxy)",
+      "frames_touched": 294,
+      "groups": [],
+      "evidence_path": "configs/perception/landmark_dev_label_lists_v1.json",
+      "evidence_sha256": "befbbea1b587261ed861a081706fe44a8a761aa90b04743fb137ddbd85c27701",
+      "evidence_extra": [
+        {
+          "path": "configs/perception/landmark_dev_label_lists_v1.json",
+          "sha256": "befbbea1b587261ed861a081706fe44a8a761aa90b04743fb137ddbd85c27701",
+          "status": "DRAFT_FOR_DATAFREEZE_VAL_HN_MINIMAL_MERGED",
+          "annotation_spec": {
+            "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+            "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+            "status": "FROZEN_FOR_DATA"
+          },
+          "labels": {
+            "train": {
+              "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
+              "sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df",
+              "gitignored": true,
+              "schema_version": "dsh.tower_annotation.v2_1",
+              "counts": {
+                "frames": 160,
+                "present": 105,
+                "absent": 52,
+                "undecidable": 3,
+                "gt_unobservable": 0,
+                "reference_available": 56,
+                "reference_unavailable": 49,
+                "truncated": 9,
+                "edge_counts": {
+                  "left": 9,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                },
+                "confusers": 6,
+                "confusers_verified": 0,
+                "negative_type": {
+                  "TARGET_ABSENT": 52,
+                  "SIMILAR_STRUCTURE": 0,
+                  "OTHER_LANDMARK": 0
+                },
+                "by_group": {
+                  "g_lm_ind_devSouth": {
+                    "frames": 39,
+                    "present": 37,
+                    "absent": 0,
+                    "undecidable": 2,
+                    "keypoints": 16
+                  },
+                  "g_geo_staticE": {
+                    "frames": 3,
+                    "present": 2,
+                    "absent": 1,
+                    "undecidable": 0,
+                    "keypoints": 2
+                  },
+                  "g_lmf_dev_inner_south_0": {
+                    "frames": 20,
+                    "present": 20,
+                    "absent": 0,
+                    "undecidable": 0,
+                    "keypoints": 16
+                  },
+                  "g_lmf_dev_static_high_0": {
+                    "frames": 12,
+                    "present": 12,
+                    "absent": 0,
+                    "undecidable": 0,
+                    "keypoints": 12
+                  },
+                  "g_lmf_dev_static_negative_0": {
+                    "frames": 8,
+                    "present": 0,
+                    "absent": 8,
+                    "undecidable": 0,
+                    "keypoints": 0
+                  },
+                  "g_lm_pilot_staticE": {
+                    "frames": 3,
+                    "present": 2,
+                    "absent": 1,
+                    "undecidable": 0,
+                    "keypoints": 2
+                  },
+                  "g_formal6_southA": {
+                    "frames": 41,
+                    "present": 29,
+                    "absent": 11,
+                    "undecidable": 1,
+                    "keypoints": 7
+                  },
+                  "g_formal6_staticW": {
+                    "frames": 2,
+                    "present": 2,
+                    "absent": 0,
+                    "undecidable": 0,
+                    "keypoints": 0
+                  },
+                  "g_lm_ind_reverseSouth": {
+                    "frames": 30,
+                    "present": 0,
+                    "absent": 30,
+                    "undecidable": 0,
+                    "keypoints": 0
+                  },
+                  "g_lm_ind_staticEtest": {
+                    "frames": 2,
+                    "present": 1,
+                    "absent": 1,
+                    "undecidable": 0,
+                    "keypoints": 1
+                  }
+                }
+              }
+            },
+            "val": {
+              "path": "outputs/perception/dev_annotations_20261104/labels_val.json",
+              "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d",
+              "gitignored": true,
+              "schema_version": "dsh.tower_annotation.v2_1",
+              "counts": {
+                "frames": 134,
+                "present": 106,
+                "absent": 25,
+                "undecidable": 3,
+                "gt_unobservable": 11,
+                "reference_available": 41,
+                "reference_unavailable": 65,
+                "truncated": 17,
+                "edge_counts": {
+                  "left": 0,
+                  "right": 10,
+                  "top": 0,
+                  "bottom": 7
+                },
+                "confusers": 43,
+                "confusers_verified": 13,
+                "negative_type": {
+                  "TARGET_ABSENT": 12,
+                  "SIMILAR_STRUCTURE": 13,
+                  "OTHER_LANDMARK": 0
+                },
+                "by_group": {
+                  "g_lm_pilot_north": {
+                    "frames": 20,
+                    "present": 15,
+                    "absent": 5,
+                    "undecidable": 0,
+                    "keypoints": 7
+                  },
+                  "g_geo_north": {
+                    "frames": 26,
+                    "present": 21,
+                    "absent": 3,
+                    "undecidable": 2,
+                    "keypoints": 6
+                  },
+                  "g_lmf_dev_inner_north_0": {
+                    "frames": 30,
+                    "present": 30,
+                    "absent": 0,
+                    "undecidable": 0,
+                    "keypoints": 7
+                  },
+                  "g_lmf_dev_static_low_0": {
+                    "frames": 15,
+                    "present": 15,
+                    "absent": 0,
+                    "undecidable": 0,
+                    "keypoints": 15
+                  },
+                  "g_lm_ind_north": {
+                    "frames": 19,
+                    "present": 14,
+                    "absent": 4,
+                    "undecidable": 1,
+                    "keypoints": 6
+                  },
+                  "g_lmf_dev_hn1_confuser_0": {
+                    "frames": 13,
+                    "present": 0,
+                    "absent": 13,
+                    "undecidable": 0,
+                    "keypoints": 0
+                  },
+                  "g_lmf_dev_hn2_occluder_0": {
+                    "frames": 11,
+                    "present": 11,
+                    "absent": 0,
+                    "undecidable": 0,
+                    "keypoints": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "extent": "dedup representative frames selected from the v2 train/val groups for dev annotation; no T9 frames were in the list when the registry was built unless the lists were updated"
+    },
+    {
+      "event_id": "ev_t9_dev_capture_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "capture (visible foreground Isaac GUI)",
+      "frames_touched": 396,
+      "groups": [
+        "g_lmf_dev_hn1_confuser",
+        "g_lmf_dev_hn2_occluder",
+        "g_lmf_dev_inner_north",
+        "g_lmf_dev_inner_south",
+        "g_lmf_dev_static_high",
+        "g_lmf_dev_static_low",
+        "g_lmf_dev_static_negative"
+      ],
+      "evidence_path": "outputs/sensor_shadow/lm_dev_capture_20261104/manifest.json",
+      "evidence_sha256": "21cb56f1a21b344fcea2e9a080ca8a969f7190fda96505996d6b3f9bac967641",
+      "evidence_extra": [
+        {
+          "path": "outputs/sensor_shadow/lm_dev_hn_capture_20261104/manifest.json",
+          "sha256": "4e9935c6103a66434e62a6f465594e6d7f8b301b0078293bdb284090704c6d0a"
+        }
+      ],
+      "extent": "T9 dev new families captured, condition metadata inspected and used for the v3 split; HN1/HN2 use synthetic visual-only injections"
+    },
+    {
+      "event_id": "ev_map_native_ms1_identity_conflict_20261104",
+      "type": "identity_conflict_evidence",
+      "date": "2026-11-04",
+      "executor": "capture + datafreeze review (map probe + green cue)",
+      "frames_touched": 0,
+      "groups": [
+        "g_lmf_dev_inner_north",
+        "g_lmf_dev_static_negative"
+      ],
+      "evidence_path": "docs/reports/perception/capture_dev_20261104/map_native_structures.json",
+      "evidence_sha256": "cb0deffa787050b1b13694a406ed62e4a10f14ddc4c80e063a3cc681628678b4",
+      "extent": "map-native (not injected) green-lamp pillar MS1 at about (3.0,4.0, green lamp z~1.71) is visible from inner_north (up to 55 green px) and from static_negative without green; this falsifies U1/U2 (at most one tower-like instance / central tower is the only green-light tower) for identity claims. It is a different evidence class from the synthetic HN1 confuser and must not be mixed with it.",
+      "identity_impact": "U1/U2 falsified; identity certification INCOMPLETE"
+    },
+    {
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot (agent proxy)",
+      "frames_touched": 34,
+      "groups": [
+        "g_lmf_backoff",
+        "g_lmf_edge",
+        "g_lmf_near",
+        "g_lmf_side_negative",
+        "g_lmf_similar_negative",
+        "g_lmf_sweep"
+      ],
+      "evidence_path": "docs/reports/perception/annotation_verify_20261104/pilot/labels_manifest.json",
+      "evidence_sha256": "e31ac902526e6eb582a61ae5102279473c5207a4067f4da91b3496b351dbf5a5",
+      "extent": "34/279 frames annotated across all 6 final families; the whole 6-family pool is contaminated for sealed-final use"
+    },
+    {
+      "event_id": "ev_final_exploratory_labels_279_20261104",
+      "type": "exploratory_eval_candidate",
+      "date": "2026-11-04",
+      "executor": "annot (agent proxy, spec v2.1)",
+      "frames_touched": 279,
+      "groups": [
+        "g_lmf_backoff",
+        "g_lmf_edge",
+        "g_lmf_near",
+        "g_lmf_side_negative",
+        "g_lmf_similar_negative",
+        "g_lmf_sweep"
+      ],
+      "evidence_path": "outputs/perception/final_exploratory_20261104/labels_manifest.json",
+      "evidence_sha256": "8f06e1560265e8d82b669f6308280ec5fd182ebf0e93efb39bfcfae7540dc7ae",
+      "extent": "full 279-frame exploratory labels; dataset_role=DEVELOPMENT_EXPLORATORY; 34 frames are annotation calibration, 245 exploratory; no sealed final remains",
+      "label_file": {
+        "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+        "sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504",
+        "gitignored": true,
+        "in_git": false
+      },
+      "dataset_role": "DEVELOPMENT_EXPLORATORY"
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "g_debug_all6_southA",
+      "source": "dev_v3",
+      "family_id": "fam_south_A",
+      "dataset": "debug_all6_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_all6_staticW",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_all6_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static3_empty",
+      "source": "dev_v3",
+      "family_id": "fam_debug_empty",
+      "dataset": "debug_static3_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static4",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static4_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static5",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static5_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static6",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static6_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static7",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static7_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_formal6_southA",
+      "source": "dev_v3",
+      "family_id": "fam_south_A",
+      "dataset": "formal6_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_formal6_staticW",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "formal6_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_geo_north",
+      "source": "dev_v3",
+      "family_id": "fam_north",
+      "dataset": "geo_test_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_geo_staticE",
+      "source": "dev_v3",
+      "family_id": "fam_static_E_test",
+      "dataset": "geo_test_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_gui_evidence2_route0",
+      "source": "dev_v3",
+      "family_id": "fam_south_A",
+      "dataset": "gui_evidence2_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_gui_evidence_static",
+      "source": "dev_v3",
+      "family_id": "fam_static_W_start",
+      "dataset": "gui_evidence_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_devSouth",
+      "source": "dev_v3",
+      "family_id": "fam_south_A",
+      "dataset": "lm_independence_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_north",
+      "source": "dev_v3",
+      "family_id": "fam_north",
+      "dataset": "lm_independence_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_reverseSouth",
+      "source": "dev_v3",
+      "family_id": "fam_south_A",
+      "dataset": "lm_independence_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_staticEtest",
+      "source": "dev_v3",
+      "family_id": "fam_static_E_test",
+      "dataset": "lm_independence_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_pilot_north",
+      "source": "dev_v3",
+      "family_id": "fam_north",
+      "dataset": "lm_pilot_north_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_pilot_staticE",
+      "source": "dev_v3",
+      "family_id": "fam_static_E_dev",
+      "dataset": "lm_pilot_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_dev_dedup_annotation_selection_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "source": "dev_v3",
+      "family_id": "fam_HN1_confuser",
+      "dataset": "lm_dev_hn_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "source": "dev_v3",
+      "family_id": "fam_HN2_occluder",
+      "dataset": "lm_dev_hn_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_inner_north",
+      "source": "dev_v3",
+      "family_id": "fam_inner_north",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104",
+        "ev_map_native_ms1_identity_conflict_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_inner_south",
+      "source": "dev_v3",
+      "family_id": "fam_inner_south",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_static_high",
+      "source": "dev_v3",
+      "family_id": "fam_static_high_far",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_static_low",
+      "source": "dev_v3",
+      "family_id": "fam_static_low_oblique",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_static_negative",
+      "source": "dev_v3",
+      "family_id": "fam_static_negative_E",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_t9_dev_capture_20261104",
+        "ev_map_native_ms1_identity_conflict_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation-selection exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_backoff",
+      "source": "final_seal",
+      "family_id": "lmf_backoff",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "test",
+      "status": "exploratory_eval_candidate",
+      "exposure_events": [
+        "ev_final_pilot_annotation_34_20261104",
+        "ev_final_exploratory_labels_279_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "34-frame pilot annotation viewed representatives of every family and the full 279-frame exploratory labels were produced; removing the 34 frames is not enough to recover a sealed pool",
+        "neighbor_radius": "same episode / same group / same family"
+      }
+    },
+    {
+      "group_id": "g_lmf_edge",
+      "source": "final_seal",
+      "family_id": "lmf_edge",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "test",
+      "status": "exploratory_eval_candidate",
+      "exposure_events": [
+        "ev_final_pilot_annotation_34_20261104",
+        "ev_final_exploratory_labels_279_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "34-frame pilot annotation viewed representatives of every family and the full 279-frame exploratory labels were produced; removing the 34 frames is not enough to recover a sealed pool",
+        "neighbor_radius": "same episode / same group / same family"
+      }
+    },
+    {
+      "group_id": "g_lmf_near",
+      "source": "final_seal",
+      "family_id": "lmf_near",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "test",
+      "status": "exploratory_eval_candidate",
+      "exposure_events": [
+        "ev_final_pilot_annotation_34_20261104",
+        "ev_final_exploratory_labels_279_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "34-frame pilot annotation viewed representatives of every family and the full 279-frame exploratory labels were produced; removing the 34 frames is not enough to recover a sealed pool",
+        "neighbor_radius": "same episode / same group / same family"
+      }
+    },
+    {
+      "group_id": "g_lmf_side_negative",
+      "source": "final_seal",
+      "family_id": "lmf_side_negative",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "test",
+      "status": "exploratory_eval_candidate",
+      "exposure_events": [
+        "ev_final_pilot_annotation_34_20261104",
+        "ev_final_exploratory_labels_279_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "34-frame pilot annotation viewed representatives of every family and the full 279-frame exploratory labels were produced; removing the 34 frames is not enough to recover a sealed pool",
+        "neighbor_radius": "same episode / same group / same family"
+      }
+    },
+    {
+      "group_id": "g_lmf_similar_negative",
+      "source": "final_seal",
+      "family_id": "lmf_similar_negative",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "test",
+      "status": "exploratory_eval_candidate",
+      "exposure_events": [
+        "ev_final_pilot_annotation_34_20261104",
+        "ev_final_exploratory_labels_279_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "34-frame pilot annotation viewed representatives of every family and the full 279-frame exploratory labels were produced; removing the 34 frames is not enough to recover a sealed pool",
+        "neighbor_radius": "same episode / same group / same family"
+      }
+    },
+    {
+      "group_id": "g_lmf_sweep",
+      "source": "final_seal",
+      "family_id": "lmf_sweep",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "test",
+      "status": "exploratory_eval_candidate",
+      "exposure_events": [
+        "ev_final_pilot_annotation_34_20261104",
+        "ev_final_exploratory_labels_279_20261104"
+      ],
+      "certification": "EXPOSED",
+      "contamination": {
+        "group_level": true,
+        "reason": "34-frame pilot annotation viewed representatives of every family and the full 279-frame exploratory labels were produced; removing the 34 frames is not enough to recover a sealed pool",
+        "neighbor_radius": "same episode / same group / same family"
+      }
+    }
+  ],
+  "frame_overrides": [
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_37.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_51.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_79.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_93.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_107.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_34.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_47.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_67.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_29.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_31.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_37.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_side_negative",
+      "frame_id": "lmf_side_negative_0-follow_only_g6_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_side_negative",
+      "frame_id": "lmf_side_negative_0-follow_only_g6_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "final_seal",
+      "group_id": "g_lmf_side_negative",
+      "frame_id": "lmf_side_negative_0-follow_only_g6_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_114.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_168.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_175.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_178.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_180.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_203.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_205.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_208.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_210.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_29.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_33.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_35.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_38.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_40.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_42.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_47.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_52.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_61.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_63.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_67.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_147.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_173.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_185.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_190.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_193.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_195.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_198.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_200.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_56.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_58.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_route_0-follow_only_g3_171.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_87.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_89.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_90.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_staticW",
+      "frame_id": "sensor_static_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_formal6_staticW",
+      "frame_id": "sensor_static_1-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_staticE",
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_staticE",
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_staticE",
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_137.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_141.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_151.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_156.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_158.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_161.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_163.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_166.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_168.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_170.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_173.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_176.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_178.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_181.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_191.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_193.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_194.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_28.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_31.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_38.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_49.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_51.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_54.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_57.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_60.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_62.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_67.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_70.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_96.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_113.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_144.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_147.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_157.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_166.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_168.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_171.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_174.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_177.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_180.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_185.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_194.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_196.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_199.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_201.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_203.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_207.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_208.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_210.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_211.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_36.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_58.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_62.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_staticEtest",
+      "frame_id": "test_static_away-follow_only_g5_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_staticEtest",
+      "frame_id": "test_static_oblique-follow_only_g4_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_staticE",
+      "frame_id": "pilot_east_away-follow_only_g3_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_staticE",
+      "frame_id": "pilot_east_center-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_staticE",
+      "frame_id": "pilot_east_left-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_101.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_103.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_15.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_43.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_80.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_82.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_84.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_95.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_97.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_99.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_15.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_21.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_11.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_17.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_102.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_123.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_138.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_143.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_146.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_153.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_160.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_165.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_174.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_180.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_187.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_49.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_53.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_56.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_68.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_71.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_74.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_77.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_99.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_126.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_141.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_160.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_162.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_170.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_174.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_179.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_191.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_192.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_54.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_57.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_60.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_78.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_80.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_102.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_141.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_161.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_165.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_170.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_177.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_191.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_192.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_52.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_55.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_59.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_77.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_79.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_26.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_28.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_105.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_120.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_140.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_143.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_147.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_151.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_154.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_156.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_37.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_40.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_43.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_46.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_49.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_52.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_55.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_58.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_61.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_69.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_82.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_85.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_88.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_91.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_94.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    },
+    {
+      "source": "dev_v3",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_dedup_annotation_selection_20261104",
+      "dataset_role": "ANNOTATION_CALIBRATION"
+    }
+  ],
+  "summary": {
+    "exposed_development_groups": 26,
+    "exploratory_eval_candidate_groups": 6,
+    "untouched_groups": 0,
+    "annotation_calibration_frames": 328,
+    "final_groups_contaminated": 6,
+    "t9_groups": 7
+  },
+  "identity_certification": {
+    "U1_at_most_one_tower_like_instance": "FALSIFIED",
+    "U2_central_tower_is_only_green_light_tower": "FALSIFIED",
+    "evidence": "map-native green-lamp pillar MS1 at about (3.0,4.0, green lamp z~1.71) is visible from the inner_north dev route (55 green px at g1_90) and is not the central tower; it is map-native, not synthetic",
+    "final_pool_verified_HN1_frames": 0,
+    "final_pool_HN1_status": "the final pool similar_negative is target-absent with <=3 px green false clues; no verified similar-structure frame exists there",
+    "identity_status": "INCOMPLETE",
+    "note": "tower class detection can still be trained, but landmark identity claims require a revised uniqueness statement or an explicit multi-landmark candidate design"
+  },
+  "certification": {
+    "can_claim_sealed": false,
+    "untouched_final_groups": 0,
+    "conclusion": "INCOMPLETE",
+    "reasons": [
+      "all 279 final-pool frames were annotated as exploratory development labels, and a 34-frame pilot was annotated before that",
+      "the 34 pilot frames cannot simply be removed: all 6 families were represented in the pilot, so group-level contamination applies",
+      "T9 dev data is development/calibration data, not a sealed holdout",
+      "no third-party independent sealing exists; only process isolation + hash commitment is claimed",
+      "identity uniqueness U1/U2 is falsified by the map-native green-lamp pillar MS1; the final pool has no verified HN1 frame, so identity certification is INCOMPLETE"
+    ]
+  },
+  "notes": [
+    "PASS for this registry means the exposure record is consistent with the freezes; it does not prove nobody looked at the data.",
+    "The final seal file keeps its original bytes and historical sealed_test label; this registry is the authoritative exposure state and downgrades it to exploratory."
+  ]
+}
