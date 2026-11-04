@@ -1,0 +1,104 @@
+{
+ "files": [
+  {
+   "path": "t25_cases_manifest_after_t25.json",
+   "sha256": "861cbec170c4cce22e75da5412f749fd116e2efaabbb4e0131def5d3d36a133d",
+   "bytes": 27736
+  },
+  {
+   "path": "t25_episode_conditions_pilot.json",
+   "sha256": "71ef55e58e29361ae6fd6c796df0d1bafef5b34102662e1b63e826362e334a1d",
+   "bytes": 1107
+  },
+  {
+   "path": "t25_formal_failure_cuda_oom_attempt2.txt",
+   "sha256": "097d74826056828074f1e50f87b7b667d51ad00783b32c4f231af47c1d9bf3e9",
+   "bytes": 2394
+  },
+  {
+   "path": "t25_formal_failure_torch_import_attempt1.txt",
+   "sha256": "cb151ed8f974c5390a1862028e40559741a5249ec97e3695abce10866fbf24c4",
+   "bytes": 6195
+  },
+  {
+   "path": "t25_formal_gui.log",
+   "sha256": "90c015e149c7e45c5bdf5fdb86c1b5c9f4fb0772e85dba164182e0e71b50ed0b",
+   "bytes": 11091
+  },
+  {
+   "path": "t25_formal_summary_error.txt",
+   "sha256": "097d74826056828074f1e50f87b7b667d51ad00783b32c4f231af47c1d9bf3e9",
+   "bytes": 2394
+  },
+  {
+   "path": "t25_frame_conditions_pilot.json",
+   "sha256": "ccb3896ba7cba6cc0de1fb1becdb90ba4a20cc44760c15bf7ad1d2d6767651f0",
+   "bytes": 134537
+  },
+  {
+   "path": "t25_gui_window_formal_attempt2.png",
+   "sha256": "89f5272e7b4dc536d708d99d480ea53226c87df3afbadf3922e328da14d75a00",
+   "bytes": 324847
+  },
+  {
+   "path": "t25_gui_window_pilot.png",
+   "sha256": "6d0cf3f38b39bf06c46597a361b065ffcd6bba8fd6bb9839e9966e8ed955b456",
+   "bytes": 359823
+  },
+  {
+   "path": "t25_pilot_complete.json",
+   "sha256": "250b2037c40d238194510efe3f4b4caccb671f6541996112ddb004867d654847",
+   "bytes": 194
+  },
+  {
+   "path": "t25_pilot_counts_and_dedup.json",
+   "sha256": "54fb30f843ad6b0897729de7cd65a57a6232a31cf50f13839fc68f0f5f909744",
+   "bytes": 2407
+  },
+  {
+   "path": "t25_pilot_gui.log",
+   "sha256": "eb9cba4194043a77afb80592248bcafc019e6b3e39e103270806c511f39f2eba",
+   "bytes": 10686
+  },
+  {
+   "path": "t25_pilot_manifest.json",
+   "sha256": "bc8f630cf5cdaeb383eb8c4e591d45ab064d00d725a1d2258b84897d33d26670",
+   "bytes": 15677
+  },
+  {
+   "path": "t25_pilot_sensor_summary.json",
+   "sha256": "b0f90a4423f23596dd4db9c263626bd0b89e153c269334d6cfb8225ac6e3237f",
+   "bytes": 13487
+  },
+  {
+   "path": "t25_pilot_summary.json",
+   "sha256": "68175dc8094842e6138f96110eb10c0b4288676262915602413b0c2ac75212fd",
+   "bytes": 25242
+  },
+  {
+   "path": "t25_provenance_20261104.json",
+   "sha256": "b513d82ce729f9aec4e962c1e4c837774766a3ee44efe761b8abebe7eee021a5",
+   "bytes": 9006
+  },
+  {
+   "path": "T25_CAPTURE_INCOMPLETE_20261104.md",
+   "sha256": "440f528d9862520563d715a834034ee27d8a00a0d40144605786647f6167b29f",
+   "bytes": 8265
+  },
+  {
+   "path": "holdout_plan/HOLDOUT_CASE_MANIFEST_DRAFT_v1.json",
+   "sha256": "dcee5ca2887bb8a4c875d9a44e9d33f4548873d05973fd339ae5251353db72f4",
+   "bytes": 23179
+  },
+  {
+   "path": "holdout_plan/HOLDOUT_PLAN_v1.md",
+   "sha256": "ae77d33cfe15fbb320eeb786ab025c4e016964c4b8c91cc4824bc1462b37336f",
+   "bytes": 8033
+  },
+  {
+   "path": "holdout_plan/holdout_overlap_vs_existing_families.json",
+   "sha256": "b1209bcb7c136ec6d948f4a69a23a2681ee49fd6b3a4a029f61d209fa36aa833",
+   "bytes": 2343
+  }
+ ]
+}

@@ -2,7 +2,7 @@
   "schema_version": "dsh.landmark_exposure_registry.v1",
   "protocol": "landmark_exposure_group_level_v1",
   "registry_version": "v2",
-  "generated_at": "2026-11-04T12:28:52.941317+00:00",
+  "generated_at": "2026-11-04T14:10:28.588974+00:00",
   "generated_by": "scripts/verify_landmark_dataset.py --build-exposure-registry-v2",
   "status": "EXPOSURE_AUDIT_V2_ALL_DATA_DEVELOPMENT",
   "supersedes": {
@@ -55,6 +55,15 @@
       "identity_groups": 7,
       "identity_frames": 190,
       "identity_accepted_frames": 169,
+      "reused_train_groups": 6
+    },
+    "dev_v5": {
+      "path": "configs/perception/landmark_split_freeze_v5.json",
+      "canonical_sha256": "7815936c9cf2d7c5f23cf6160bab455bf85259e2afb90596a5ca1d261be3f358",
+      "groups": 39,
+      "frames": 3885,
+      "identity_train_groups": 3,
+      "identity_val_groups": 4,
       "reused_train_groups": 6
     }
   },
@@ -278,12 +287,28 @@
       "evidence_sha256": "8cdfe558b455fb2e25c4de7a3f4852690554ae3e4254b6a472cdb9f26f991716",
       "evidence_extra": [
         {
+          "path": "docs/reports/perception/posteval_20261104/CONSUMER_REQUIREMENT_20261104.json",
+          "sha256": "ec021bf21eea0c7cda65aad1b7b74b1ffb26f55daae23db69d974a1c7a0f060b"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/IDENTITY_APPEARANCE_FEATURES_20261104.json",
+          "sha256": "19981b1f54651b00483ecdede9bdb2fc969aa8d7671f3b5f954d0bb7c0411209"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/MS1_IDENTITY_ANALYSIS_20261104.json",
+          "sha256": "1e9a45ad3fdc9817cd2a064da7b7c5a5271bc4ed12eadda36eac03e0519c2838"
+        },
+        {
           "path": "docs/reports/perception/posteval_20261104/MS1_VISUAL_CUES_20261104.json",
           "sha256": "52f1fc6334bf7cf1d8485eb5f6a367a7661d71c852cd8c4867d1c4f53a7d7a13"
         },
         {
+          "path": "docs/reports/perception/posteval_20261104/OLD_RESULT_USAGE_REGISTER_20261104.json",
+          "sha256": "af6381abcccdca6a8672a4913ae01b92c2bfccb25bdf9ae8d1827092346e95c4"
+        },
+        {
           "path": "docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSIS_20261104.md",
-          "sha256": "523cc9fd41c229c0fdea46cdf83bc8942fce0ab094766fb605ac3676be2ea3db"
+          "sha256": "b2a62df5c9803e805a963c49b3738b4f75fefcdc434a7c69278e77a7c790baf5"
         },
         {
           "path": "docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSTICS_20261104.json",
@@ -328,7 +353,7 @@
       "frames_touched": 0,
       "groups": [],
       "evidence_path": "configs/scenarios/landmark_dev_identity_cases_v1.json",
-      "evidence_sha256": "e73350802a400cb1836cce14ec0c5cc278f888b6ff5e726b4692e9ac39b7a0c7",
+      "evidence_sha256": "861cbec170c4cce22e75da5412f749fd116e2efaabbb4e0131def5d3d36a133d",
       "ingest_status": "INGESTED_V4_2",
       "note": "the T15 identity cases are captured/being captured; they are not part of v4 unless present before the freeze, so this event records the capture manifest only"
     },
@@ -383,12 +408,47 @@
           "sha256": "9cfa52bf29e0b234c9b3a62bafc6901197de12e625a7d560d7147a22d619f05b"
         }
       ]
+    },
+    {
+      "event_id": "ev_t25_identity_capture_failed_20261104",
+      "type": "exposed_development_attempt",
+      "date": "2026-11-04",
+      "executor": "capture (visible foreground Isaac GUI)",
+      "purpose": "T25 mutual-occlusion / far-MS1 identity capture (60-120 accepted)",
+      "frames_touched": 0,
+      "groups": [],
+      "status": "FAILED_CUDA_OOM_NO_RUN_COMPLETE_NOT_INGESTED",
+      "evidence_path": "configs/scenarios/landmark_dev_identity_cases_v1.json",
+      "evidence_sha256": "861cbec170c4cce22e75da5412f749fd116e2efaabbb4e0131def5d3d36a133d",
+      "extent": "formal run failed (CUDA OOM); pilot data and the provisional annotations are excluded from v5; a re-capture is required before any later freeze"
+    },
+    {
+      "event_id": "ev_t26_identity_t25_provisional_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot (agent proxy)",
+      "purpose": "provisional annotation of 28 T25 pilot frames (mutual overlap 14 + far MS1 14)",
+      "frames_touched": 28,
+      "groups": [
+        "g_devid_mutual_overlap",
+        "g_devid_ms1_far"
+      ],
+      "status": "PROVISIONAL_DIAGNOSTIC_ONLY_NOT_GT_NOT_INGESTED",
+      "evidence_path": "outputs/perception/dev_annotations_20261104/identity_t25/labels_v1.json",
+      "evidence_sha256": "7164a5d6e25982a235a0fa131eb5c61bf6f4785578b303aa9554226200311755",
+      "evidence_extra": [
+        {
+          "path": "docs/reports/perception/annotation_verify_20261104/T26_IDENTITY_T25_READINESS_20261104.md",
+          "sha256": "c5555918aa457c289299405c1ef0ab1348e3ae1798190e6bc7bb8310b7470d7a"
+        }
+      ],
+      "extent": "top-level status 'PROVISIONAL_DIAGNOSTIC_ONLY'; must not be used as v5 val_identity GT or consumer denominator"
     }
   ],
   "groups": [
     {
       "group_id": "g_formal6_southA",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_south_A",
       "dataset": "formal6_sensor",
       "split": "train",
@@ -406,7 +466,7 @@
     },
     {
       "group_id": "g_formal6_staticW",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "formal6_sensor",
       "split": "train",
@@ -424,7 +484,7 @@
     },
     {
       "group_id": "g_lm_pilot_staticE",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_E_dev",
       "dataset": "lm_pilot_sensor",
       "split": "train",
@@ -442,7 +502,7 @@
     },
     {
       "group_id": "g_lm_ind_devSouth",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_south_A",
       "dataset": "lm_independence_sensor",
       "split": "train",
@@ -460,7 +520,7 @@
     },
     {
       "group_id": "g_lm_ind_reverseSouth",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_south_A",
       "dataset": "lm_independence_sensor",
       "split": "train",
@@ -478,7 +538,7 @@
     },
     {
       "group_id": "g_lm_ind_north",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_north",
       "dataset": "lm_independence_sensor",
       "split": "val",
@@ -496,7 +556,7 @@
     },
     {
       "group_id": "g_lm_ind_staticEtest",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_E_test",
       "dataset": "lm_independence_sensor",
       "split": "train",
@@ -514,7 +574,7 @@
     },
     {
       "group_id": "g_geo_north",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_north",
       "dataset": "geo_test_sensor",
       "split": "val",
@@ -532,7 +592,7 @@
     },
     {
       "group_id": "g_geo_staticE",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_E_test",
       "dataset": "geo_test_sensor",
       "split": "train",
@@ -550,7 +610,7 @@
     },
     {
       "group_id": "g_lm_pilot_north",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_north",
       "dataset": "lm_pilot_north_sensor",
       "split": "val",
@@ -568,7 +628,7 @@
     },
     {
       "group_id": "g_debug_all6_staticW",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "debug_all6_sensor",
       "split": "excluded",
@@ -586,7 +646,7 @@
     },
     {
       "group_id": "g_debug_all6_southA",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_south_A",
       "dataset": "debug_all6_sensor",
       "split": "excluded",
@@ -604,7 +664,7 @@
     },
     {
       "group_id": "g_gui_evidence2_route0",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_south_A",
       "dataset": "gui_evidence2_sensor",
       "split": "excluded",
@@ -622,7 +682,7 @@
     },
     {
       "group_id": "g_gui_evidence_static",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "gui_evidence_sensor",
       "split": "excluded",
@@ -640,7 +700,7 @@
     },
     {
       "group_id": "g_debug_static4",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "debug_static4_sensor",
       "split": "excluded",
@@ -658,7 +718,7 @@
     },
     {
       "group_id": "g_debug_static5",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "debug_static5_sensor",
       "split": "excluded",
@@ -676,7 +736,7 @@
     },
     {
       "group_id": "g_debug_static6",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "debug_static6_sensor",
       "split": "excluded",
@@ -694,7 +754,7 @@
     },
     {
       "group_id": "g_debug_static7",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_W_start",
       "dataset": "debug_static7_sensor",
       "split": "excluded",
@@ -712,7 +772,7 @@
     },
     {
       "group_id": "g_debug_static3_empty",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_debug_empty",
       "dataset": "debug_static3_sensor",
       "split": "excluded",
@@ -730,7 +790,7 @@
     },
     {
       "group_id": "g_lmf_dev_inner_south",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_inner_south",
       "dataset": "lm_dev_capture_20261104_sensor",
       "split": "train",
@@ -748,7 +808,7 @@
     },
     {
       "group_id": "g_lmf_dev_static_high",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_high_far",
       "dataset": "lm_dev_capture_20261104_sensor",
       "split": "train",
@@ -766,7 +826,7 @@
     },
     {
       "group_id": "g_lmf_dev_static_negative",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_negative_E",
       "dataset": "lm_dev_capture_20261104_sensor",
       "split": "train",
@@ -784,7 +844,7 @@
     },
     {
       "group_id": "g_lmf_dev_inner_north",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_inner_north",
       "dataset": "lm_dev_capture_20261104_sensor",
       "split": "val",
@@ -802,7 +862,7 @@
     },
     {
       "group_id": "g_lmf_dev_static_low",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_static_low_oblique",
       "dataset": "lm_dev_capture_20261104_sensor",
       "split": "val",
@@ -820,7 +880,7 @@
     },
     {
       "group_id": "g_lmf_dev_hn1_confuser",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_HN1_confuser",
       "dataset": "lm_dev_hn_capture_20261104_sensor",
       "split": "val",
@@ -838,7 +898,7 @@
     },
     {
       "group_id": "g_lmf_dev_hn2_occluder",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "fam_HN2_occluder",
       "dataset": "lm_dev_hn_capture_20261104_sensor",
       "split": "val",
@@ -856,7 +916,7 @@
     },
     {
       "group_id": "g_reuse_lmf_sweep",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "lmf_sweep",
       "dataset": "lm_final_candidate_20261104_sensor",
       "split": "train",
@@ -874,7 +934,7 @@
     },
     {
       "group_id": "g_reuse_lmf_backoff",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "lmf_backoff",
       "dataset": "lm_final_candidate_20261104_sensor",
       "split": "train",
@@ -892,7 +952,7 @@
     },
     {
       "group_id": "g_reuse_lmf_near",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "lmf_near",
       "dataset": "lm_final_candidate_20261104_sensor",
       "split": "train",
@@ -910,7 +970,7 @@
     },
     {
       "group_id": "g_reuse_lmf_edge",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "lmf_edge",
       "dataset": "lm_final_candidate_20261104_sensor",
       "split": "train",
@@ -928,7 +988,7 @@
     },
     {
       "group_id": "g_reuse_lmf_similar_negative",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "lmf_similar_negative",
       "dataset": "lm_final_candidate_20261104_sensor",
       "split": "train",
@@ -946,7 +1006,7 @@
     },
     {
       "group_id": "g_reuse_lmf_side_negative",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "lmf_side_negative",
       "dataset": "lm_final_candidate_20261104_sensor",
       "split": "train",
@@ -964,10 +1024,10 @@
     },
     {
       "group_id": "g_devid_target_alone",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_target_alone",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
-      "split": "val",
+      "split": "train",
       "status": "exposed_development",
       "certification": "EXPOSED_DEVELOPMENT",
       "exposure_events": [
@@ -975,7 +1035,7 @@
         "ev_identity_cases_capture_20261104",
         "ev_identity_dev_annotation_20261104"
       ],
-      "dataset_role": "DEVELOPMENT",
+      "dataset_role": "DEVELOPMENT_TRAIN",
       "contamination": {
         "group_level": true,
         "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
@@ -983,10 +1043,10 @@
     },
     {
       "group_id": "g_devid_ms1_alone",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_ms1_alone",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
-      "split": "val",
+      "split": "train",
       "status": "exposed_development",
       "certification": "EXPOSED_DEVELOPMENT",
       "exposure_events": [
@@ -994,7 +1054,7 @@
         "ev_identity_cases_capture_20261104",
         "ev_identity_dev_annotation_20261104"
       ],
-      "dataset_role": "DEVELOPMENT",
+      "dataset_role": "DEVELOPMENT_TRAIN",
       "contamination": {
         "group_level": true,
         "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
@@ -1002,7 +1062,7 @@
     },
     {
       "group_id": "g_devid_both_scale_lateral",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_both_scale_lateral",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
       "split": "val",
@@ -1021,7 +1081,7 @@
     },
     {
       "group_id": "g_devid_both_mid_similar_scale",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_both_mid_similar_scale",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
       "split": "val",
@@ -1040,7 +1100,7 @@
     },
     {
       "group_id": "g_devid_both_same_bearing",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_both_same_bearing",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
       "split": "val",
@@ -1059,10 +1119,10 @@
     },
     {
       "group_id": "g_devid_target_near_trunc",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_target_near_trunc",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
-      "split": "val",
+      "split": "train",
       "status": "exposed_development",
       "certification": "EXPOSED_DEVELOPMENT",
       "exposure_events": [
@@ -1070,7 +1130,7 @@
         "ev_identity_cases_capture_20261104",
         "ev_identity_dev_annotation_20261104"
       ],
-      "dataset_role": "DEVELOPMENT",
+      "dataset_role": "DEVELOPMENT_TRAIN",
       "contamination": {
         "group_level": true,
         "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
@@ -1078,7 +1138,7 @@
     },
     {
       "group_id": "g_devid_full_occlusion",
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "family_id": "devid_full_occlusion",
       "dataset": "lm_dev_identity_capture_20261104_sensor",
       "split": "val",
@@ -1098,2499 +1158,2499 @@
   ],
   "frame_overrides": [
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_23.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_37.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_51.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_65.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_79.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_93.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_sweep",
       "frame_id": "lmf_sweep_0-follow_only_g1_107.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_backoff",
       "frame_id": "lmf_backoff_0-follow_only_g2_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_backoff",
       "frame_id": "lmf_backoff_0-follow_only_g2_22.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_backoff",
       "frame_id": "lmf_backoff_0-follow_only_g2_34.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_backoff",
       "frame_id": "lmf_backoff_0-follow_only_g2_47.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_backoff",
       "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_backoff",
       "frame_id": "lmf_backoff_0-follow_only_g2_67.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_near",
       "frame_id": "lmf_near_0-follow_only_g3_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_near",
       "frame_id": "lmf_near_0-follow_only_g3_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_near",
       "frame_id": "lmf_near_0-follow_only_g3_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_near",
       "frame_id": "lmf_near_0-follow_only_g3_19.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_near",
       "frame_id": "lmf_near_0-follow_only_g3_23.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_edge",
       "frame_id": "lmf_edge_0-follow_only_g4_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_edge",
       "frame_id": "lmf_edge_0-follow_only_g4_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_edge",
       "frame_id": "lmf_edge_0-follow_only_g4_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_edge",
       "frame_id": "lmf_edge_0-follow_only_g4_19.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_edge",
       "frame_id": "lmf_edge_0-follow_only_g4_24.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_edge",
       "frame_id": "lmf_edge_0-follow_only_g4_29.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_similar_negative",
       "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_similar_negative",
       "frame_id": "lmf_similar_negative_0-follow_only_g5_12.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_similar_negative",
       "frame_id": "lmf_similar_negative_0-follow_only_g5_18.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_similar_negative",
       "frame_id": "lmf_similar_negative_0-follow_only_g5_25.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_similar_negative",
       "frame_id": "lmf_similar_negative_0-follow_only_g5_31.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_similar_negative",
       "frame_id": "lmf_similar_negative_0-follow_only_g5_37.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_side_negative",
       "frame_id": "lmf_side_negative_0-follow_only_g6_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_side_negative",
       "frame_id": "lmf_side_negative_0-follow_only_g6_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_reuse_lmf_side_negative",
       "frame_id": "lmf_side_negative_0-follow_only_g6_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_final_pilot_annotation_34_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_114.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_168.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_175.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_178.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_180.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_188.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_203.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_205.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_208.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_210.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_24.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_27.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_29.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_33.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_35.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_38.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_40.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_42.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_47.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_52.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_61.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_63.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_0-follow_only_g5_67.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_147.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_173.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_183.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_185.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_190.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_193.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_195.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_198.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_200.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_56.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_58.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_reset_1-follow_only_g6_7.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_gui_evidence2_route0",
       "frame_id": "sensor_route_0-follow_only_g3_171.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_route_1-follow_only_g4_8.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_route_1-follow_only_g4_87.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_route_1-follow_only_g4_89.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_southA",
       "frame_id": "sensor_route_1-follow_only_g4_90.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_static7",
       "frame_id": "sensor_static_0-follow_only_g1_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_debug_all6_staticW",
       "frame_id": "sensor_static_1-follow_only_g2_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_staticE",
       "frame_id": "geo_test_static_a-follow_only_g2_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_staticE",
       "frame_id": "geo_test_static_b-follow_only_g3_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_staticE",
       "frame_id": "geo_test_static_c-follow_only_g4_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_137.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_141.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_151.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_156.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_158.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_161.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_163.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_166.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_168.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_170.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_173.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_176.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_178.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_181.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_183.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_186.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_188.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_191.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_193.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_194.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_20.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_22.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_25.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_28.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_31.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_38.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_49.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_51.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_54.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_57.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_60.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_62.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_65.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_67.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_70.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_devSouth",
       "frame_id": "dev_south_new-follow_only_g1_96.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_113.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_144.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_147.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_157.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_166.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_168.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_171.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_174.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_177.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_180.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_183.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_185.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_194.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_196.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_199.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_201.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_203.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_207.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_208.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_210.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_211.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_36.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_58.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_62.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_65.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_reverseSouth",
       "frame_id": "test_reverse_south-follow_only_g2_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_staticEtest",
       "frame_id": "test_static_away-follow_only_g5_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_staticEtest",
       "frame_id": "test_static_oblique-follow_only_g4_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_staticE",
       "frame_id": "pilot_east_away-follow_only_g3_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_staticE",
       "frame_id": "pilot_east_center-follow_only_g1_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_staticE",
       "frame_id": "pilot_east_left-follow_only_g2_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_101.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_103.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_15.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_18.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_20.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_23.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_43.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_8.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_80.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_82.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_84.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_95.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_97.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_south",
       "frame_id": "lmf_dev_inner_south_0-follow_only_g2_99.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_15.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_16.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_18.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_21.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_24.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_7.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_high",
       "frame_id": "lmf_dev_static_high_0-follow_only_g3_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_11.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_16.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_17.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_20.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_22.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_negative",
       "frame_id": "lmf_dev_static_negative_0-follow_only_g5_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_102.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_123.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_135.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_138.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_143.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_146.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_153.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_160.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_165.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_174.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_177.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_180.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_183.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_186.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_187.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_49.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_53.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_56.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_68.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_71.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_74.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_77.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_geo_north",
       "frame_id": "geo_test_north_0-follow_only_g1_99.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_126.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_141.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_160.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_162.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_170.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_174.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_179.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_183.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_186.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_188.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_191.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_192.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_54.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_57.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_60.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_78.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_ind_north",
       "frame_id": "test_north_0-follow_only_g3_80.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_102.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_141.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_161.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_165.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_170.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_177.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_186.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_188.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_191.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_192.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_52.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_55.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_59.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_77.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lm_pilot_north",
       "frame_id": "dynamic_A_north_0-follow_only_g1_79.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_7.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_8.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_11.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_15.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_16.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_17.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_18.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_19.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_20.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_21.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_22.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_23.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_24.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_25.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_26.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_27.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_28.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn1_confuser",
       "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_29.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_7.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_8.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_9.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_12.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_15.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_17.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_19.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_21.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_22.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_24.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_26.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_hn2_occluder",
       "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_28.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_105.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_120.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_140.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_143.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_147.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_151.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_154.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_156.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_27.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_37.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_40.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_43.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_46.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_49.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_52.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_55.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_58.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_61.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_65.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_69.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_82.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_85.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_88.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_91.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_inner_north",
       "frame_id": "lmf_dev_inner_north_0-follow_only_g1_94.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_10.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_13.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_16.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_18.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_19.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_20.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_3.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_4.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_5.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_6.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_7.png",
       "status": "annotation_calibration",
       "event_id": "ev_dev_annotation_selection_20261104"
     },
     {
-      "source": "dev_v4_2",
+      "source": "dev_v5",
       "group_id": "g_lmf_dev_static_low",
       "frame_id": "lmf_dev_static_low_0-follow_only_g4_8.png",
       "status": "annotation_calibration",
@@ -3615,7 +3675,12 @@
     "identity_dev_accepted_frames": 169,
     "identity_annotation_frames": 62,
     "val_main_groups": 7,
-    "val_identity_groups": 7
+    "val_identity_groups": 4,
+    "identity_train_groups": 3,
+    "identity_val_groups": 4,
+    "t25_capture_status": "FAILED_CUDA_OOM_EXCLUDED_FROM_V5",
+    "t26_labels_status": "PROVISIONAL_DIAGNOSTIC_ONLY",
+    "t26_ingested_in_v5": false
   },
   "identity_certification": {
     "U1_at_most_one_tower_like_instance": "FALSIFIED",
@@ -3639,7 +3704,8 @@
     "PASS means the exposure record is consistent with the freezes; it does not prove nobody looked at the data.",
     "The old seal file keeps its original bytes/history; this registry is the authoritative exposure state and downgrades it.",
     "v4.1 revision: the old exploratory pool is development TRAIN data; it is no longer final/sealed/independent.",
-    "v4.2 revision: identity/confuser development cases are in val_identity; all data remains exposed development, never final."
+    "v4.2 revision: identity/confuser development cases are in val_identity; all data remains exposed development, never final.",
+    "v5 revision: identity train/val split frozen; T25 formal capture failed and T26 labels are PROVISIONAL_DIAGNOSTIC_ONLY (excluded); all data remains exposed development, never final."
   ],
-  "revision_for_freeze": "v4_2"
+  "revision_for_freeze": "v5"
 }

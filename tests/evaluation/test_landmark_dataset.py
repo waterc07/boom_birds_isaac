@@ -816,6 +816,12 @@ FREEZE_V4_1_PATH = (REPO_ROOT / 'configs' / 'perception'
                     / 'landmark_split_freeze_v4_1.json')
 FREEZE_V4_2_PATH = (REPO_ROOT / 'configs' / 'perception'
                     / 'landmark_split_freeze_v4_2.json')
+FREEZE_V5_PATH = (REPO_ROOT / 'configs' / 'perception'
+                  / 'landmark_split_freeze_v5.json')
+HOLDOUT_V2_PATH = (REPO_ROOT / 'configs' / 'perception'
+                   / 'landmark_holdout_freeze_v2.json')
+SNAPSHOT_V5_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_run_snapshot_v5.json')
 HOLDOUT_PATH = (REPO_ROOT / 'configs' / 'perception'
                 / 'landmark_holdout_freeze_v1.json')
 
@@ -854,7 +860,7 @@ def test_committed_v4_freeze_keeps_v3_structure_with_hn_labels():
 def test_exposure_registry_v2_downgrades_old_final_to_development():
     registry = json.loads(REGISTRY_V2_PATH.read_text(encoding='utf-8'))
     freeze_documents = {
-        'dev_v4_2': json.loads(FREEZE_V4_2_PATH.read_text(encoding='utf-8')),
+        'dev_v5': json.loads(FREEZE_V5_PATH.read_text(encoding='utf-8')),
     }
     report = validate_exposure_registry(registry, freeze_documents, REPO_ROOT,
                                         verify_evidence=True)
@@ -868,7 +874,11 @@ def test_exposure_registry_v2_downgrades_old_final_to_development():
     assert summary['reused_exploratory_train_groups'] == 6
     assert summary['reused_exploratory_accepted_frames'] == 279
     assert summary['identity_dev_groups'] == 7
-    assert summary['val_identity_groups'] == 7
+    assert summary['identity_train_groups'] == 3
+    assert summary['identity_val_groups'] == 4
+    assert summary['val_identity_groups'] == 4
+    assert summary['t26_labels_status'] == 'PROVISIONAL_DIAGNOSTIC_ONLY'
+    assert summary['t26_ingested_in_v5'] is False
     assert summary['identity_cases_pending'] is False
     assert summary['hn_val_complete'] is True
     assert registry['certification']['can_claim_sealed'] is False
@@ -877,13 +887,16 @@ def test_exposure_registry_v2_downgrades_old_final_to_development():
     assert groups['g_reuse_lmf_sweep']['status'] == 'exposed_development'
     assert groups['g_reuse_lmf_sweep']['dataset_role'] == 'DEVELOPMENT_TRAIN'
     assert groups['g_devid_ms1_alone']['status'] == 'exposed_development'
-    assert groups['g_devid_ms1_alone']['dataset_role'] == 'DEVELOPMENT'
+    assert groups['g_devid_ms1_alone']['dataset_role'] == 'DEVELOPMENT_TRAIN'
+    assert groups['g_devid_both_same_bearing']['dataset_role'] == 'DEVELOPMENT'
     assert groups['g_lmf_dev_hn1_confuser']['status'] == 'exposed_development'
     event_ids = {event['event_id'] for event in registry['events']}
     assert 'ev_exploratory_one_shot_eval_20261104' in event_ids
     assert 'ev_posteval_diag_view_20261104' in event_ids
     assert 'ev_exploratory_reused_as_train_20261104' in event_ids
     assert 'ev_identity_dev_annotation_20261104' in event_ids
+    assert 'ev_t25_identity_capture_failed_20261104' in event_ids
+    assert 'ev_t26_identity_t25_provisional_20261104' in event_ids
     identity = registry['identity_certification']
     assert identity['U1_at_most_one_tower_like_instance'] == 'FALSIFIED'
     assert identity['identity_status'] == 'INCOMPLETE'
@@ -967,3 +980,83 @@ def test_committed_v4_2_adds_identity_val_subset():
     assert sources['val_identity']['frames'] == 62
     assert audit_split_leakage(freeze)['ok'] is True
 
+
+
+@pytest.mark.skipif(not (FREEZE_V5_PATH.is_file() and RAW_FORMAL6.is_file()),
+                    reason='raw sensor outputs are ignored and absent here')
+def test_committed_v5_splits_identity_train_val_without_frame_leak():
+    freeze = json.loads(FREEZE_V5_PATH.read_text(encoding='utf-8'))
+    report = validate_freeze(freeze, REPO_ROOT, verify_input_hashes=True,
+                             require_images=False)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert freeze['freeze_id'] == 'landmark_split_freeze_v5'
+    assert report.stats['split_group_counts']['train'] == 19
+    assert report.stats['split_frame_counts']['train'] == 1857
+    assert report.stats['split_frame_counts']['val'] == 921
+    assert report.stats['split_frame_counts']['excluded'] == 1107
+    identity = freeze['identity_split']
+    assert len(identity['train_groups']) == 3
+    assert set(identity['train_groups']) == {
+        'g_devid_target_alone', 'g_devid_target_near_trunc',
+        'g_devid_ms1_alone'}
+    assert len(identity['val_groups']) == 4
+    assert set(identity['val_groups']) == {
+        'g_devid_both_scale_lateral', 'g_devid_both_mid_similar_scale',
+        'g_devid_both_same_bearing', 'g_devid_full_occlusion'}
+    assert not (set(identity['train_groups']) & set(identity['val_groups']))
+    subset = freeze['splits_subset']
+    assert len(subset['val_main']['groups']) == 7
+    assert identity['labels_train_identity_frames'] == 27
+    moves = {item['group_id'] for item in
+             freeze['delta_from_v4_2']['split_changes']}
+    assert moves == set(identity['train_groups'])
+    assert freeze['run_snapshot_reference']['path'] == (
+        'configs/perception/landmark_run_snapshot_v5.json')
+    assert freeze['holdout_reference']['path'] == (
+        'configs/perception/landmark_holdout_freeze_v2.json')
+    extra = freeze['identity_extra_cases']
+    assert extra['status'] == 'EXCLUDED_T25_PENDING_CAPTURE_CONFIRMATION'
+    assert extra['mutual_occlusion_case_present'] is True
+    assert extra['far_ms1_case_present'] is True
+    assert extra['t26_provisional_diagnostic_only'] is True
+    assert extra['t25_formal_run_status'] == 'FAILED_CUDA_OOM_NO_RUN_COMPLETE'
+
+
+@pytest.mark.skipif(not HOLDOUT_V2_PATH.is_file(), reason='holdout v2 absent')
+def test_holdout_v2_spec_is_frozen_but_not_triggered():
+    document = json.loads(HOLDOUT_V2_PATH.read_text(encoding='utf-8'))
+    assert document['schema_version'] == 'dsh.landmark_holdout_freeze.v2'
+    assert document['status'] == 'SPEC_FROZEN_NOT_TRIGGERED'
+    assert document['captured'] is False
+    spec = document['specification']
+    assert spec['min_new_families'] >= 3
+    assert spec['frames_range'] == [200, 400]
+    conditions = {item['condition'] for item in spec['required_conditions']}
+    assert {'near_range_large_target', 'far_small_target',
+            'edge_truncation', 'ms1_confuser_alone',
+            'same_frame_ambiguity', 'target_absent'} <= conditions
+    assert sum(item['min_frames'] for item in spec['required_conditions']) == 200
+    sampling = spec['sampling_rule']
+    assert sampling['frozen_before_capture'] is True
+    assert sampling['no_prediction_based_selection'] is True
+    assert spec['evaluation_rule']['runs'] == 1
+    assert spec['evaluation_rule']['no_rerun'] is True
+
+
+@pytest.mark.skipif(not SNAPSHOT_V5_PATH.is_file(), reason='snapshot v5 absent')
+def test_snapshot_v5_manifest_covers_frozen_inputs():
+    document = json.loads(SNAPSHOT_V5_PATH.read_text(encoding='utf-8'))
+    assert document['schema_version'] == 'dsh.landmark_run_snapshot.v1'
+    assert document['checks']['phases'] == [
+        'pre_train', 'pre_selection', 'post_train']
+    artifacts = {item['id']: item for item in document['tracked_artifacts']}
+    assert artifacts['split_freeze_v5']['path'] == (
+        'configs/perception/landmark_split_freeze_v5.json')
+    assert artifacts['val_main_labels']['path'].endswith(
+        'labels_val_validation163.json')
+    assert artifacts['identity_train_labels']['path'].endswith(
+        'labels_identity_dev.json')
+    for item in document['tracked_artifacts']:
+        assert not item['path'].startswith(('C:', '/', '\\\\'))
+        assert item['kind']

@@ -1,0 +1,86 @@
+{
+ "draft_manifest": "docs/reports/perception/capture_dev_20261104/holdout_plan/HOLDOUT_CASE_MANIFEST_DRAFT_v1.json",
+ "existing_case_count": 40,
+ "existing_runs": [
+  "sensor_shadow",
+  "lm_pilot",
+  "lm_independence",
+  "geo_test",
+  "final_pool_v1",
+  "dev_v2",
+  "identity_v1"
+ ],
+ "new_cases": [
+  {
+   "case_id": "holdout_sw_inner_corridor_0",
+   "nearest_existing_start": {
+    "run": "lm_independence",
+    "case_id": "dev_south_new",
+    "distance_m": 0.447,
+    "yaw_difference_rad": 0.3
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "holdout_nw_inner_corridor_0",
+   "nearest_existing_start": {
+    "run": "dev_v2",
+    "case_id": "lmf_dev_static_negative_0",
+    "distance_m": 0.283,
+    "yaw_difference_rad": 2.2
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "holdout_near_static_0",
+   "nearest_existing_start": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_side_negative_0",
+    "distance_m": 0.224,
+    "yaw_difference_rad": 1.671
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "holdout_far_small_target_0",
+   "nearest_existing_start": {
+    "run": "dev_v2",
+    "case_id": "lmf_dev_inner_north_0",
+    "distance_m": 0.821,
+    "yaw_difference_rad": 0.05
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "holdout_ms1_confuser_alone_0",
+   "nearest_existing_start": {
+    "run": "dev_v2",
+    "case_id": "lmf_dev_static_high_0",
+    "distance_m": 2.147,
+    "yaw_difference_rad": 2.875
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "holdout_both_ambiguous_0",
+   "nearest_existing_start": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_a",
+    "distance_m": 3.0,
+    "yaw_difference_rad": 1.14
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "holdout_target_absent_0",
+   "nearest_existing_start": {
+    "run": "lm_independence",
+    "case_id": "test_static_oblique",
+    "distance_m": 0.61,
+    "yaw_difference_rad": 2.643
+   },
+   "identical_waypoint_sequence": []
+  }
+ ],
+ "note": "start-pose proximity is not trajectory identity; holdout families use new corridors at y about -5.2 and +5.0 plus new static/viewpoint poses; no identical waypoint sequences expected; image sha dedup will be done after capture"
+}

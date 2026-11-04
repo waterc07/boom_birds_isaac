@@ -1,0 +1,62 @@
+{
+ "lmf_devid_mutual_overlap_0-follow_only": {
+  "frames": 44,
+  "target_in_fov": 44,
+  "target_green": 22,
+  "ms1_in_fov": 44,
+  "ms1_green": 44,
+  "both_in_fov": 44,
+  "both_green": 22,
+  "overlap_ge_0.10_frames": 31,
+  "overlap_ge_0.25_frames": 20,
+  "light_inside_ms1_frames": 8,
+  "target_dist_range": [
+   11.78,
+   12.98
+  ],
+  "ms1_dist_range": [
+   2.42,
+   3.62
+  ],
+  "trunc_left": 0,
+  "trunc_right": 0,
+  "trunc_top": 0,
+  "trunc_bottom": 0,
+  "green_min": 8,
+  "green_max": 17,
+  "seq_range": [
+   3,
+   46
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only": {
+  "frames": 41,
+  "target_in_fov": 41,
+  "target_green": 7,
+  "ms1_in_fov": 41,
+  "ms1_green": 21,
+  "both_in_fov": 41,
+  "both_green": 5,
+  "overlap_ge_0.10_frames": 0,
+  "overlap_ge_0.25_frames": 0,
+  "light_inside_ms1_frames": 0,
+  "target_dist_range": [
+   16.21,
+   17.29
+  ],
+  "ms1_dist_range": [
+   10.11,
+   11.09
+  ],
+  "trunc_left": 0,
+  "trunc_right": 0,
+  "trunc_top": 0,
+  "trunc_bottom": 0,
+  "green_min": 0,
+  "green_max": 6,
+  "seq_range": [
+   3,
+   43
+  ]
+ }
+}

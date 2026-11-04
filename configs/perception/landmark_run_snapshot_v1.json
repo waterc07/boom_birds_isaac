@@ -1,0 +1,88 @@
+{
+  "schema_version": "dsh.landmark_run_snapshot.v1",
+  "status": "ACTIVE",
+  "purpose": "immutable run snapshot for bounded landmark trainings: record sha256 of the frozen training dataset/labels/annotation spec/protocol/gate artifacts before training, re-verify before checkpoint selection and after training; any mismatch makes the whole run INVALID",
+  "tracked_artifacts": [
+    {
+      "id": "split_freeze_v4_1",
+      "path": "configs/perception/landmark_split_freeze_v4_1.json",
+      "kind": "data_split"
+    },
+    {
+      "id": "dev_train_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
+      "kind": "labels"
+    },
+    {
+      "id": "reuse_train_labels",
+      "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "train_merged_labels",
+      "path": "outputs/landmark_train/dataset/labels_train_v4_1_merged.json",
+      "kind": "labels"
+    },
+    {
+      "id": "val_main_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_val_validation163.json",
+      "kind": "labels"
+    },
+    {
+      "id": "annotation_spec_v2_1",
+      "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+      "kind": "annotation_spec"
+    },
+    {
+      "id": "training_protocol",
+      "path": "configs/perception/landmark_train_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "improvement_protocol",
+      "path": "configs/perception/landmark_improvement_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "improvement_gate",
+      "path": "configs/perception/landmark_improvement_gate_v1.json",
+      "kind": "gate"
+    },
+    {
+      "id": "train_cli_config",
+      "path": "configs/perception/landmark_train_cli_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "model_yaml",
+      "path": "outputs/landmark_train/dataset/landmark_yolov8n-pose-1kpt.yaml",
+      "kind": "model"
+    },
+    {
+      "id": "dataset_build_v4_1",
+      "path": "outputs/landmark_train/dataset/dev_v4_1/dataset_build.json",
+      "kind": "dataset"
+    },
+    {
+      "id": "dataset_data_yaml",
+      "path": "outputs/landmark_train/dataset/dev_v4_1/data.yaml",
+      "kind": "dataset"
+    }
+  ],
+  "checks": {
+    "phases": [
+      "pre_train",
+      "pre_selection",
+      "post_train"
+    ],
+    "rule": "create the snapshot immediately before training; verify at every phase; any sha/size/existence mismatch marks the run INVALID and the training CLI must exit non-zero without writing a selectable model",
+    "immutable": "the snapshot file is never rewritten after creation; verification results are appended to a separate check log"
+  },
+  "notes": [
+    "only repo-relative paths; no machine-private absolute paths",
+    "labels are never shared as mutable files: training and evaluation read the frozen paths recorded here",
+    "weights and logs stay in ignored outputs/; the snapshot records hashes only"
+  ],
+  "scope": "bounded internal landmark experiment; shadow only; no PPO/control/board/navigation/Gate claims",
+  "license": "internal bounded research only (user 2026-11-04); external distribution undecided; not a legal conclusion"
+}

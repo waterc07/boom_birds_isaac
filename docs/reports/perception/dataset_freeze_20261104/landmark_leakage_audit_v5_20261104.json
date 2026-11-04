@@ -1,0 +1,69 @@
+{
+  "schema_version": "dsh.landmark_near_duplicate_audit.v1",
+  "generated_at": "2026-11-04T14:10:14.307600+00:00",
+  "status": "PASS",
+  "freeze_paths": [
+    "configs/perception/landmark_split_freeze_v5.json"
+  ],
+  "seal_path": null,
+  "set_sizes": {
+    "train": 1857,
+    "val": 921,
+    "exploratory": 0
+  },
+  "thresholds": {
+    "downsample": [
+      16,
+      12
+    ],
+    "downsample_mean_abs_le": 2.0,
+    "full_resolution_mean_abs_le": 3.0,
+    "full_resolution_max_le": 40,
+    "units": "0-255 grayscale/RGB mean absolute difference",
+    "method": "16x12 grayscale signature prefilters pairs; full-resolution mean/max confirms near duplicates; sha256 equality is checked separately"
+  },
+  "sha_cross_set": {
+    "train_val": 0,
+    "exploratory_dev": 0
+  },
+  "near_duplicate_pairs": [],
+  "counts": {
+    "near_duplicate_pairs": 0,
+    "train_val_leakage_pairs": 0,
+    "dev_exploratory_contamination_pairs": 0,
+    "same_trajectory_adjacent_pairs": 3834,
+    "same_trajectory_cross_split": 0
+  },
+  "scan_meta": {
+    "train": {
+      "available": true,
+      "missing": 0,
+      "unreadable": 0
+    },
+    "val": {
+      "available": true,
+      "missing": 0,
+      "unreadable": 0
+    }
+  },
+  "structural": {
+    "configs/perception/landmark_split_freeze_v5.json": {
+      "ok": true,
+      "issues": [],
+      "stats": {
+        "groups": 38,
+        "frames": 3885,
+        "families": 25,
+        "group_leaks": 0,
+        "family_leaks": 0,
+        "sha_leaks": 0,
+        "trajectory_leaks": 0,
+        "adjacent_leaks": 0
+      }
+    }
+  },
+  "limits": [
+    "pixel near-duplicate audit is a heuristic; it does not replace a human visual review",
+    "the exploratory pool is already downgraded; contamination pairs are reported as evidence, not as a failure of the dev split"
+  ]
+}

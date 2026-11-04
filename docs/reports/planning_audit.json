@@ -1,7 +1,7 @@
 {
   "scope": "Current planning links (existence), fixed arithmetic anchors and local source hash integrity. No semantic/source applicability/flight proof.",
   "files_checked": 31,
-  "local_links_checked": 168,
+  "local_links_checked": 173,
   "checks": {
     "360 scenarios": true,
     "120mm mass 175.5g": true,
@@ -31,8 +31,8 @@
   "file_sha256": {
     "README.md": "77bb2a2b10afc4135a77a5d3f43f4bf3efcf38fe565fb5e140f9ab3bf462cc4a",
     "PROJECT_PLAN.md": "fecb5292e74c6a51ccdc6d465d597d9e9e4094aff1b9699000b95e8e95acf079",
-    "AGENTS.md": "12bccf113bebb66585cb2872e0bfe27dd15efeed267e4432622e7b5c8dd4b88a",
-    "docs\\reports\\CURRENT_STATUS.md": "729a68955fdb6e8632f25a6627f7d8dc00fe51621c2dff1ace79bdcff117e6df",
+    "AGENTS.md": "1f9a2bdea2435dcb30650785a31e2e50788c3e19aa6b75279af0c9b8c704b935",
+    "docs\\reports\\CURRENT_STATUS.md": "47291d774b42883aad56eb114dc41797a2a695fd9b48493b7afac84f7abc1998",
     "docs\\design\\01_PROJECT_DESIGN.md": "c0fc977b9d9dbbe4534657e148d4bf46128e923e53d533ec7db6c9ef35024c8f",
     "docs\\design\\02_ARCHITECTURE.md": "34bacfeeddbc16eaa8adc0f1a4616bb55fad2162d5667fce84b23adc5f2a9c32",
     "docs\\design\\03_ROADMAP.md": "e8c6f54c4b40724befb144dd2cf7c493bfe92fb4fa1ec6fbbfc27d9f3c27cbd8",

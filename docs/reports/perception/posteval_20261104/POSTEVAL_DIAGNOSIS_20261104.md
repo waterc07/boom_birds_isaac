@@ -1,8 +1,8 @@
 # 地标 post-evaluation 诊断：评价定义审计、reference 失败分解与 MS1/TINY 分析（2026-11-04）
 
-> **状态：** POST_EVAL_DIAGNOSIS / INCOMPLETE（只读诊断；TINY 盲标已完成并判定 INCOMPLETE/FAIL；**不是**重跑 final、**不是**能力认证、**不修改**旧 exploratory 结果、不提升任何 Gate）
-> **来源章节：** SYSTEM_ARCHITECTURE_V2_2.md §7.4/§7.5/§7.7/§9.1/§11.1/§20.2/§20.11；任务定义 LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md（presence/reference/identity/joint 分母）
-> **证据域：** 离线分析（旧 exploratory final predictions.jsonl + labels_v1.json + 帧图像 + dev 标签）；无 Isaac 运行、无模型推理重跑、无板端/SITL/HIL/实飞；旧 final 输出保持原字节
+> **状态：** POST_EVAL_DIAGNOSIS / INCOMPLETE（T24 增补：consumer requirement 追溯 PROPOSED、MS1/身份可测量特征与单网络证据、TINY 口径收敛与旧结果用途登记；**不是**重跑 final、**不是**能力认证、**不修改**旧 exploratory 结果、不提升任何 Gate）
+> **来源章节：** SYSTEM_ARCHITECTURE_V2_2.md §7.4/§7.5/§7.6/§7.7/§9.1/§11.1/§20.2/§20.11；任务定义 LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md（presence/reference/identity/joint 分母）；configs/perception/landmark_improvement_gate_v1.json + protocol
+> **证据域：** 离线只读分析（旧 exploratory final predictions.jsonl + labels_v1.json + 帧图像 + dev 标签）+ **dev identity 62 帧上冻结模型一次性诊断推理** + dev identity 帧图像特征测量；无旧 final 重跑、无 Isaac 运行、无训练/调参、无板端/SITL/HIL/实飞；旧 final 输出保持原字节
 > **最后核对：** 2026-11-04
 
 旧结果（presence P1.000/R0.916、reference coverage 62/218=0.284、joint 71/238=0.298、anchor 正确子集 1.95px、bearing 0.30 度）**原样保留**；本文只做新口径分解与诊断，不构成新评价结论，不得用新口径宣布旧实验通过。
@@ -21,6 +21,9 @@
 6. **标注同源性已量化**：final 标签 218/218 个参考点与严格绿光最大 4 连通块质心重合（中位 0.022px、P90 0.050px、max 0.071px），218/218 记录 green_pixels 与实测面积完全一致、218/218 最近连通块即最大连通块 → GT 参考与模型 cue **同源**，标签锚点可被严格绿光规则逐帧复现；因此该误差不是独立物理精度，且无法用该 GT 独立验证模型“看绿光”的物理能力。
 7. **MS1 preliminary**：map-native 带绿灯柱与中央塔图像线索可区分（细长平顶+侧挂灯+蓝侧条 vs 宽锥塔身+顶灯架+居中绿顶灯+R+阶梯底座）；但单类 tower 输出无身份判别通道，30/30 inner_north val 保存预测只给 1 个候选（只检中央塔），MS1 在保存预测中未被检出 → 风险未验证（identity INCOMPLETE），非已观测误配。
 8. **TINY/4-10px 盲复标结果：TINY 标尺不可盲标**。22 帧中 annot 盲标 14 帧 undecidable（63.6%，全 LOW），其中 **12/12 个 9.3-14px TINY 正例全部 undecidable**；预注册 presence 一致率 8/22=0.364（<0.90 FAIL）、bbox IoU 中位 0.434（<0.50 FAIL）、kpt 中位 0.823px/P90 2.159px（PASS，同源绿光）；8 个可判定帧 presence/ref-availability 一致 8/8。→ TINY（9.3-14px）标签只能靠采集投影先验，不是独立可视觉复现的 GT；小绿 cue（3-49px，目标 21-124px）参考点可复现。
+9. **消费者真正消费的是四件东西**（V2.2 §7.4/§7.5/§7.6/§7.7/§9.1/§11.1）：身份、参考点可用性、水平图像 bearing、新鲜有效性；世界方位/距离/GT 位置/oracle region/bbox 中心当物理锚点一律禁止。四项各自有独立分母与拒绝规则；joint 不是消费者指标。详见 §3.4（PROPOSED，供 lead 冻结 consumer protocol）。
+10. **单网络不足以承担身份**：冻结单类模型在 62 帧 dev identity 上 0/9 MS1-alone 误认、0/9 GT-unobservable 误认（frame 级 95% 上限 28.3%），但模型无身份通道、行为随阈值/视角变化（同 bearing 帧 frozen 0/9 vs raw 4/9），且 v4 重训基线在 1/30 inner_north 帧检出 MS1 第二候选。图像特征上 **bbox aspect ratio 与 green_rel_y 可分开**（44 目标 vs 35 MS1，AUC 1.0；aspect 阈值 0.50/0.60 → 0 误拦/0 漏拦），建议 appearance gate（PROPOSED）：aspect>=0.50 且（发射 kpt 时）green_rel_y>=0.18，否则 UNKNOWN。详见 §3.5。
+11. **TINY 口径收敛**：结论改为“**当前样本/方法下不可标注**”，而不是泛化的“TINY 不行”；全域分母/GT 不确定/预测拒绝/适用域分列，难例不删除；旧 TINY 数字与旧 3px/joint/identity 数字的用途与勘误建议见 §8 登记表。
 
 ---
 
@@ -155,7 +158,7 @@ joint 分母 = GT 可观测正例且 bbox+reference 标签完整（238）。分�
 ### 3.2 单类 tower 输出不能无条件映射中央塔 ID 的证据
 
 1. **类别不含身份**：模型输出 landmark_class=tower + 单 kpt；decode 的 appearance_check=NOT_EVALUATED、green probe 未使用；identity_claimed 仅由“单候选+score>=tau_det+margin”决定。地图原生存在 MS1（带绿灯、塔状），类别 tower 对 MS1 与中央塔同样成立。
-2. **保存预测 30/30 个 inner_north val 帧 candidate_count=1**（只检出中央塔，未检出 MS1）；这只能说明“该模型在保存帧上没有把 MS1 误报为 tower”，不能证明身份判别：没有任何规则把“这是 MS1”编码进拒绝；MS1 未作为正/负训练样本进入 train（train 仅 6 帧 unverified green_blob confuser，verified 0）。
+2. **保存预测 30/30 个 inner_north val 帧 candidate_count=1**（只检出中央塔，未检出 MS1）；这只能说明“该模型在保存帧上没有把 MS1 误报为 tower”，不能证明身份判别：没有任何规则把“这是 MS1”编码进拒绝；MS1 未作为正/负训练样本进入 train（train 仅 6 帧 unverified green_blob confuser，verified 0；v4.2 的 identity 62 帧属 val_identity，不是 train）。
 3. **final 池 38 个 similar_negative 帧全部 NOT_DETECTED、0 FP**：该池条件下未触发误报；但池内 verified HN1=0，不能作身份负例分母。
 4. **结论**：U1/U2 已被 MS1 证伪；单类输出下任何单检测只能视为“某塔状结构”，identity 必须显式 UNKNOWN，除非有额外 appearance/多候选/先验证据。当前证据不足以下“会误配 MS1”的结论 → identity INCOMPLETE。
 
@@ -169,26 +172,105 @@ joint 分母 = GT 可观测正例且 bbox+reference 标签完整（238）。分�
 4. **appearance gate 未评估即不声明 identity**：当前 NOT_EVALUATED 仍 claim；建议改为“无 appearance 证据 → landmark_id=null/UNKNOWN”，以召回换 false-match 风险下降。
 5. 以上全部 PROPOSED；必须在新数据上预注册验证，不能用本 exploratory 池调参。
 
+### 3.4 消费链判据追溯（PROPOSED，供 lead 冻结 consumer protocol）
+
+依据 V2.2 §7.4（区域拓扑/可视约束/边置信度）、§7.5（地标接力：起始区域假设、目标地标、最大视觉误差、失败回退、不得累积为全场位置）、§7.6（歧义保留多假设、有界搜索、不强制单一结果）、§7.7（arena_context：region_candidates/visible_landmark_ids/landmark_match_confidence/coarse_heading_sector/valid/localization_epoch/timestamp）、§9.1（前视链输出后接规划/Student）、§11.1（Student 输入边界含传感器质量/有效性/数据年龄）。机器可读：CONSUMER_REQUIREMENT_20261104.json；代码 landmark_posteval.consumer_requirements()。
+
+| 判据 | 消费者需要什么 | 可测性（分母/量） | 不能用什么 | 拒绝/失败规则 |
+| --- | --- | --- | --- | --- |
+| 身份 identity | 知道检测对应哪个 landmark/region（visible_landmark_ids、landmark_match_confidence、region_candidates）；用于选择下一可见地标并更新区域假设（§7.5/§7.7）；歧义时保留多假设（§7.6） | frame 级 landmark_id 正确性；precision 分母=claims，recall 分母=正例，false-match 分母=verified 相似结构负例；歧义记 UNKNOWN/多候选 | GT 位置、oracle region、target_world_position、距离、世界方位、未来帧 | false match 比 miss 更危险：仅当 class 证据 + 单候选/接受 margin + appearance gate 才 claim；否则 UNKNOWN |
+| 参考点可用 reference availability | 稳定物理参考点用于 bearing；不可见时没有锚点，必须拒绝/UNKNOWN，不能猜（§7.6/§9.1） | GT 参考不可见正例上的正确 UNAVAILABLE 声明率、false-reference 率；coverage 分母=参考可用正例（漏检/未发射留在分母） | bbox 中心当物理锚点、猜 keypoint、单点深度当距离、GT 位置、世界方位 | 只有观测到才发射；否则显式 UNAVAILABLE+reason；禁止占位坐标 |
+| 水平图像 bearing | coarse_heading_sector / 图像水平角 atan2(x−cx,fx)（§7.7；目标相对视线的图像角，非世界 bearing、非距离） | 绝对误差中位/P90（误差分母=已发射 kpt）+ 通过率（适用分母=参考可用正例）；3px 2D 仅 legacy proxy 单列 | 世界方位（需姿态/地图变换）、距离、GT 位置、姿态推导的目标方位 | 无参考点即无 bearing；invalid 显式 reason；不得输出世界方位/距离 |
+| 新鲜有效 freshness/validity | timestamp、localization_epoch、valid、传感器质量/年龄/同步代；过期/重复/代际不匹配必须拒绝（§7.5/§7.7/§11.1） | 字段存在性、age≤allowed_age_ns、generation 单调、stale/duplicate 拒绝测试、capture_time_source/exposure 声明 | 旧 epoch 消息、GT 位置、0 值伪装有效、复用旧帧/重发续期 | 显式 reason 拒绝；不 0 填充；absence 不是“不存在”的证明 |
+
+PROPOSED 协议要点（status=PROPOSED_NOT_FROZEN，freeze_owner=lead）：
+1. **bearing 为开发验收主量**：图像 bearing 预算 PROPOSED 中位≤3°、P90≤5°（源 task definition §2.2；未冻结）；历史 3px 2D 仅作 legacy 诊断，不得写为 bearing 能力。
+2. **身份 appearance-gated**：单类 tower 输出不得无条件映射中央塔 ID；建议 gate：bbox aspect_ratio≥0.50，且若发射 kpt 则 green_rel_y≥0.18；不满足→UNKNOWN（§3.5 证据）。
+3. **参考点**：只有可见才发射；不可见显式 UNAVAILABLE+reason；coverage/availability 分开计。
+4. **新鲜度**：allowed_age_ns=250ms 为当前仿真 consumer 默认 PROPOSED；真实相机曝光/端到端延迟 UNKNOWN，必须板端实测后冻结。
+5. **评价映射**：presence/identity/reference-availability/localization 四项分离；joint 不是消费者指标；identity precision/recall、localization 分母不得混用（见 §1）。
+6. **适用域**：identity gate 不适用于 bbox 高度 <20px（TINY 9–14px 盲标不可判定）；TINY 不进入认证分母。
+
+### 3.5 MS1 vs 中央塔：可测量特征与单网络充分性（T24）
+
+证据：dev identity 62 帧（7 case，190 accepted 中代表 62）；标注 labels_identity_dev.json（sha 见 §6，agent-proxy、DEVELOPMENT）；冻结单类模型（sha d4ffe49a）在 62 帧上**一次性诊断推理**（frozen 阈值与 raw 0.25 敏感性两档；非旧 final、非训练/调参）；保存的 inner_north 预测（旧 frozen seed1 与 v4 baseline）只读。机器可读：MS1_IDENTITY_ANALYSIS_20261104.json + IDENTITY_APPEARANCE_FEATURES_20261104.json。
+
+**对象分母**：目标对象 44（target_alone 9 + target_near_trunc 9 + both_* 26）；MS1 对象 35（ms1_alone 9 + both_* 26）；其中带参考点（kpt）目标 18、MS1 26；both_mid_similar_scale 9 帧为“同尺度同框”关键对照。
+
+| 可测特征（仅图像） | 目标（n=44） | MS1（n=35） | 可分性/结论 |
+| --- | --- | --- | --- |
+| bbox 纵横比 w/h | 0.632–1.778，中位 1.461 | 0.201–0.438，中位 0.326 | **AUC 1.0**；阈值 0.50 或 0.60 → 0 误拦/0 漏拦（44/35）；同尺度 both_mid 目标 1.56–1.78 vs MS1 0.32–0.38 仍可分 |
+| green_rel_y（绿灯在 bbox 内相对高度） | 0.212–0.396，中位 0.242（n=18） | 0.062–0.122，中位 0.093（n=26） | **AUC 1.0**；阈值 0.18 可分（仅发射 kpt 时可得；目标参考点不可用的帧不能靠此项） |
+| green_rel_x（绿灯水平相对位置） | 0.449–0.779 | 0.009–0.770 | 重叠 → **不可作 gate 线索** |
+| 轮廓对称性（上半 bbox 行左/右展宽） | 中位 0.65，0.17–1.0（n=43） | 中位 0.43，0.0–0.95（n=26） | 重叠、分割噪声大 → 仅辅助，不单独做 gate |
+| top/body 宽度比 | 中位 0.625 | 中位 0.340 | AUC 0.56、被蓝条/纹理打断 → 当前测量不可靠，**不推荐**（与上一阶段“启发式未标定”一致） |
+| 绿光面积 | 11–70px（n=18） | 9–73px（n=26） | 重叠且被距离混淆：log(area)~log(d) 斜率 目标 −2.46（R²0.94）/ MS1 −1.81（R²0.78）；**消费者无距离 → 不可作身份线索** |
+
+**单网络是否足够区分（证据）**：
+- 冻结单类模型在 62 帧上：presence TP27/FP0/FN17/TN9（recall 27/44=0.614），joint 0.4318；ms1_alone 9/9 **NOT_DETECTED 且 0 claim**（frozen 与 raw 阈值均如此）；full_occlusion 9/9 无检测/无 claim；both_mid 9/9 只检出目标（candidate_count=1，未检出 MS1）；both_same_bearing frozen 0/9 检出（raw 4/9）、both_scale frozen 2/8（raw 6/8）→ 行为强烈依赖阈值/视角。
+- frame 级 false identity = 0/9（95% 单侧上限 28.3%）；对象级 0/35（上限 8.2%）——只能说明该 dev 批未观测到误配，**不能证明身份能力**。
+- v4 重训 baseline 在 inner_north 30 帧中 1 帧检出 2 候选（g1_140：0.792/0.411，margin 0.381 > tau_margin 0.1，top1=目标）；说明网络**可以**表征 MS1，抑制依赖 score margin/视角分布，而不是身份推理。
+- **判定：单网络不足以承担身份**（无身份通道 + 行为随阈值/视角变化 + hard-negative 分母仅 9 帧/35 对象）；建议 identity = UNKNOWN 或 appearance-gated 独立后处理。
+
+**appearance gate 建议（PROPOSED_NOT_FROZEN）与代价**：
+- 规则：aspect_ratio >= 0.50；若发射 kpt 还需 green_rel_y >= 0.18；否则 REJECT/UNKNOWN（绝不静默映射中央塔）。适用 bbox 高度 >=20px；<20px identity=UNKNOWN。
+- dev 代价：44 目标 0 误拦、35 MS1 0 漏拦（0/35 上限 8.2%）；误拦代价=可用性损失（identity UNKNOWN，可下一帧恢复，无安全违背）；漏拦代价=错误身份/区域假设（V2.2 守卫“false match 比 miss 更危险”，安全相关，按 5× 权重）。
+- 计算量：aspect 只需 bbox（近零额外成本）；green_rel_y 复用参考点/严格绿光检测；host CPU 纯 Python 特征提取 0.072–0.185 s/帧（320×240，含绿光连通域；缓存绿光可降低）；**RK3576 板端 UNKNOWN（无板卡）**。
+- 局限：62 帧、7 case、单合成资产、agent-proxy 标注、单 session；MS1 验证为 map-native（WORLD_POSE_OR_MAP_DB），MS2 外观 UNKNOWN；阈值需新未触碰数据预注册后冻结，不得用本池调参。
+
 ---
 
-## 4. TINY / 4-10px 盲复标（已完成，比较由 diag 独立计算）
+## 4. TINY / 4-10px：当前样本/方法下不可标注（口径收敛）
 
-- 清单（盲版）：docs/reports/perception/posteval_20261104/TINY_BLIND_REANNOTATION_FRAMES_20261104.json（sha256 fc3508de…）；内部 role key：TINY_BLIND_REANNOTATION_KEY_20261104.json（annot 未读）。22 帧，图像 sha 预校验 22/22。annot 盲标文件：docs/reports/perception/annotation_verify_20261104/labels_tiny_blind.json（sha256 be08ca8b…，v2.1，22 条，QA PASS 22/22）。比较明细：TINY_BLIND_DISAGREEMENT_20261104.json。
-- 样本：12 TINY 正例（bbox max side 9.3-14px；dev 最小 9.3px，4-8px 纯目标在 dev 中不存在 → 该区间 UNKNOWN/外推）+ 6 小绿 cue 正例（green_pixels 3-49，目标 bbox 21-124px）+ 4 absent 对照。抽样池 64/97/64，按 family 轮转确定性选择；只读 development 标签。
-- 盲标结果（22 帧）：present 6 / undecidable 14（63.6%，全部 LOW confidence）/ absent 2；keypoint 6；confusers 10（verified=false）；未读原标注/模型预测/旧 final。
+> **结论限定语**：本节不是断言“TINY 目标永远不可标注”，而是“**在当前 development 样本（9.3–14px、320×240、单合成资产）与当前方法（无采集投影先验的盲复标）下不可标注**”。全域分母、GT 不确定、预测拒绝、适用域分列；22 帧与难例全部保留，未删除。
+
+### 4.1 全域分母（undecidable 不剔除）
+
+- 抽样：22 帧 = 12 TINY 正例 + 6 小绿 cue 正例 + 4 absent 对照；抽样池 64/97/64，按 family 轮转确定性选择，只读 development 标签。
+- 盲标：present 6 / undecidable 14（63.6%，全 LOW） / absent 2；keypoint 6；confusers 10（verified=false）。盲版清单 sha fc3508de…；盲标文件 sha be08ca8b…（v2.1，22 条，QA PASS 22/22）；比较明细 TINY_BLIND_DISAGREEMENT_20261104.json。
+- 严格 presence 分母=22（undecidable 保留）=8/22=**0.364**；仅可判定分母=8 → 8/8=1.000，但覆盖仅 36.4%。
+- 分层：TINY 正例 **12/12 undecidable**（严格一致 0/12）；小绿 cue 6/6 可判定且 presence 一致（HIGH）；对照 4 帧中 2 可判定且均正确、2 undecidable。
 
 | 预注册指标 | 观测 | 分母 | 门限 | 判定 |
 | --- | ---: | ---: | ---: | --- |
 | presence 一致率（严格，undecidable 不剔除） | 8 | 22 | >=0.90 | **FAIL（0.364）** |
-| presence 一致率（仅可判定帧） | 8 | 8 | — | 1.000（但只覆盖 8/22） |
-| reference availability 一致率（可判定帧） | 8 | 8 | >=0.90 | PASS（覆盖仅 36.4%） |
+| presence 一致率（仅可判定帧） | 8 | 8 | — | 1.000（覆盖 36.4%） |
+| reference availability 一致率（可判定帧） | 8 | 8 | >=0.90 | PASS（覆盖 36.4%） |
 | keypoint 欧氏距离 中位 / P90 / max | 0.823 / 2.159 / 2.159 px | 6 | 中位<=2、P90<=4 | **PASS（同源）** |
 | bbox IoU 中位 / P90 | 0.434 / 0.668 | 6 | 中位>=0.50 | **FAIL** |
 | 截断一致率（可判定帧） | 6/8 | 8 | — | 0.750 |
 
-- 分层：**tiny_positive 12/12 全部 undecidable（presence 严格一致 0/12）**；small_green_cue 6/6 可判定且 presence 一致、HIGH confidence（kpt 0.82px 中位、IoU 0.434）；control_absent 4 帧中 2 可判定且均正确、2 undecidable。
-- 解释：9.3-14px TINY 目标在无采集投影先验的盲标下**不可可靠判定 presence/身份**（14/22 不可判定，不能从分母剔除）；原 TINY 标签的 bbox_source=PROJECTION_AID_CALIBRATED 是标签可得的必要条件，属投影助记而非独立视觉标注。小绿 cue 的参考点（green 3-49px，目标较大）可复现（0.82px 同源），但 bbox 仍达不到预注册 0.5 IoU。**TINY annotatability = INCOMPLETE/FAIL（量化下限：presence 严格 0.364、bbox IoU 0.434）**；该结论适用于 9.3-14px dev 标尺，final TINY（bbox 27.8-33.7px）标尺不同，不能直接外推。4-10px 纯目标区间在 development 中不存在 → UNKNOWN。
-- 对改进候选 A 的含义：近/中距目标可盲标（6/6 HIGH），TINY 不可 → 数据侧应补近距大目标、避免依赖 <14px 目标作为独立视觉 GT。
+### 4.2 GT 不确定（TINY GT 不是独立视觉真值）
+
+- 原 TINY 标签 bbox_source=PROJECTION_AID_CALIBRATED（capture 位姿投影先验）；盲标者没有该先验时无法判定 presence/身份 → “可标注性”依赖方法，不是图像固有属性。
+- 参考点：kpt 可复现（0.823px 中位，同源绿光），但这是**同源可复现性**，不是独立物理精度；bbox 定义/粒度不一致（IoU 0.434）。
+- 4–8px 纯目标在 development 中不存在（dev 最小 9.3px）→ 该区间为 **UNKNOWN/外推**，不得写成实测结论。
+
+### 4.3 预测拒绝与评分
+
+- 对 GT 不可判定的 TINY 帧，模型预测既不能记“正确”也不能记“错误”，只能记 UNKNOWN/不可评并单列（本任务未用其给模型打分）。
+- 未来若把 TINY 纳入评价：必须同时报 GT 可判定/不可判定、参考可用/不可用分母；undecidable 不得从分母删除；漏检/UNKNOWN 预测留在适用分母。
+- 难例保留：22 帧清单、盲标文件、原 development 标签均原样保留（sha 见 §6），未删除任何难例。
+
+### 4.4 适用域（可写/不可写）
+
+| 域 | 结论 | 允许用途 |
+| --- | --- | --- |
+| 9.3–14px TINY（当前样本/盲标） | 不可标注（presence 严格 0.364、12/12 undecidable） | 只能写“当前样本/方法下不可标注”；诊断 |
+| 4–8px 纯目标 | UNKNOWN（development 无样本） | 不写结论 |
+| 小绿 cue 3–49px + 目标 21–124px | 参考点可复现 0.823px；bbox IoU 0.434 未达 0.5 | 可写“参考点可复现”，不可写“bbox 独立精度” |
+| final exploratory TINY（bbox 27.8–33.7px，不同标尺） | 不自动适用本节结论 | 仅 exploratory 诊断，不进入认证分母 |
+
+### 4.5 新旧口径对照与用途
+
+| 口径 | 旧数字 | 新口径/用途 | 处理 |
+| --- | --- | --- | --- |
+| TINY 参考覆盖 | final TINY 1/15=0.067 | 保留为 exploratory 诊断；不得作为认证级覆盖 | 旧报告不改，引用时加勘误注（GT 依赖投影先验） |
+| TINY presence | final TINY recall 19/34=0.559 | 保留为 exploratory；TINY 不进入认证分母 | 同上 |
+| TINY 可标注性 | 旧无此口径 | 新：当前样本/方法下不可标注（presence 0.364、IoU 0.434） | 作为后续数据/评价的适用域依据 |
+| 3px / joint / identity | §1 旧口径 | §1 新口径单列（四项分离 + joint 双分支 + bearing） | 旧数字原样保留，不重写 |
+
+对改进候选 A 的含义：近/中距目标可盲标（6/6 HIGH），9–14px TINY 不可 → 数据侧应补近距大目标，避免依赖 <14px 目标作为独立视觉 GT；这与候选 A 已确认的 LARGE 覆盖缺口一致，但候选 A 已因 gate 未过而 STOP，不得据本节重启训练。
 
 ---
 
@@ -212,7 +294,7 @@ joint 分母 = GT 可观测正例且 bbox+reference 标签完整（238）。分�
 | final exploratory 标签（只读） | outputs/perception/final_exploratory_20261104/labels_v1.json（sha 7115ee04…） |
 | dev 标签（只读） | outputs/perception/dev_annotations_20261104/labels_{train,val}.json |
 | 诊断模块 | src/boom_birds/evaluation/landmark_posteval.py |
-| 模块测试 | tests/evaluation/test_landmark_posteval.py（20 passed；先失败后实现） |
+| 模块测试 | tests/evaluation/test_landmark_posteval.py（T13 20 + T24 3 = 23 passed；先失败后实现） |
 | 正式 diagnostics JSON | docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSTICS_20261104.json |
 | MS1 图像测量 JSON | docs/reports/perception/posteval_20261104/MS1_VISUAL_CUES_20261104.json |
 | TINY 盲复标清单/判据 | docs/reports/perception/posteval_20261104/TINY_BLIND_REANNOTATION_FRAMES_20261104.json |
@@ -223,6 +305,12 @@ joint 分母 = GT 可观测正例且 bbox+reference 标签完整（238）。分�
 | 代表性 overlays（11 张，约 0.54MB） | docs/reports/perception/posteval_20261104/overlays/（worst_anchor/wrong_anchor/no_keypoint/presence_miss/correct_refusal/correct） |
 | 可复现脚本 | docs/reports/perception/posteval_20261104/scripts/（inspect_*、prelim_*、make_tiny_plan、measure_ms1） |
 | 交叉验证 | docs/reports/perception/EVAL_DEFINITION_AUDIT_20261104.md/.json（evaltool，独立复算） |
+| Consumer requirement JSON（T24） | docs/reports/perception/posteval_20261104/CONSUMER_REQUIREMENT_20261104.json |
+| MS1/identity 分析 JSON（T24） | docs/reports/perception/posteval_20261104/MS1_IDENTITY_ANALYSIS_20261104.json |
+| identity 图像特征 JSON（T24） | docs/reports/perception/posteval_20261104/IDENTITY_APPEARANCE_FEATURES_20261104.json |
+| identity 诊断推理（dev 62 帧，frozen/raw） | docs/reports/perception/posteval_20261104/identity_probe_frozen/、identity_probe_raw/ |
+| identity development 标签 | outputs/perception/dev_annotations_20261104/labels_identity_dev.json |
+| 旧结果用途登记 JSON（T24） | docs/reports/perception/posteval_20261104/OLD_RESULT_USAGE_REGISTER_20261104.json |
 
 复现命令：
 
@@ -236,24 +324,48 @@ joint 分母 = GT 可观测正例且 bbox+reference 标签完整（238）。分�
       --out docs\reports\perception\posteval_20261104\POSTEVAL_DIAGNOSTICS_20261104.json ^
       --overlays-dir docs\reports\perception\posteval_20261104\overlays
 
-**验证状态（2026-11-04 20:3x）：**
+**验证状态（2026-11-04 22:0x，资源协调期只跑轻量项）：**
 
-- 模块测试：pytest -q tests/evaluation/test_landmark_posteval.py → **20 passed**（先失败后实现）。
+- 模块测试：pytest -q tests/evaluation/test_landmark_posteval.py → **23 passed**（T13 20 + T24 3；T24 项先失败后实现：consumer_requirements/appearance_gate/appearance_gate_cost）。
 - 模块复算：reproduction_check **match=True**（33 字段，tolerance 1e-9），即分解前旧数字被完整复现。
 - 文档审计：python scripts/planning/audit_documents.py → **PASS**。
-- 全仓库 pytest：**1053 passed, 2 failed**；两个失败均在他人并行 WIP 测试（tests/evaluation/test_landmark_dataset.py::test_exposure_registry_v2_downgrades_old_final_to_development、tests/evaluation/test_landmark_train_cli.py::test_shipped_cli_config_is_valid_and_repository_relative），不在本任务写域、与本报告改动无关；**不声称全绿**。
+- 全仓库 pytest：按 lead 资源协调要求**本轮未跑**（train 3-seed 运行期避免 CPU 挤压）；上次（20:3x）为 1053 passed / 2 failed，失败均在他人并行 WIP 测试，不在本任务写域；**不声称全绿**。
+- 推理/图像批量：identity 62 帧的冻结模型诊断推理已在资源协调前完成（62 帧、单次、dev）；本轮未再跑推理/Isaac/ONNX。
 
 ---
 
 ## 7. 限制与待补
 
-1. **TINY 盲复标已回**（§4）：结论为 TINY annotatability INCOMPLETE/FAIL；4-8px 纯目标在 development 中不存在 → UNKNOWN；未与外部队列/人工标注复核。
-2. **MS1 自动轮廓测量为启发式未标定**：aspect 被蓝条/纹理打断、只有灯偏移比与绿面积可用；不能作分类器，只作线索。
-3. **无独立物理精度**：GT 与模型 cue 同源，正确子集 1.95px 不是物理定位精度。
-4. **单次、exploratory、非 sealed**：C1–C8 未闭合；本报告不改变认证结论。
-5. **GT_UNOBSERVABLE/模型 UNKNOWN 分支本池未行使**；遮挡类不可评。
-6. **候选 A/B 尚未验证**：只能 val 预注册 + 新 sealed 数据评价，不得用旧 exploratory 池调参或重跑。
+1. **TINY 结论限定**：当前样本/方法下不可标注（9.3–14px、无投影先验盲标）；4–8px 纯目标 development 无样本 → UNKNOWN；final TINY（27.8–33.7px）标尺不同，不自动适用；未与外部队列/人工复核。
+2. **MS1/identity 特征为 dev 证据**：62 帧、7 case、单合成资产、单 session、agent-proxy 标注；aspect/green_rel_y 在该样本 AUC 1.0，但 threshold 0.50/0.18 仍 PROPOSED，需新未触碰数据预注册验证；轮廓对称性/top-body 宽度比测量不可靠，绿光面积被距离混淆（消费者无距离）。
+3. **单网络身份证据不足**：0/9 frame 级误认、0/35 对象级（95% 上限 28.3%/8.2%）只说明该 dev 批未误配，不证明身份能力；v4 baseline 1/30 帧检出 MS1 为第二候选。
+4. **consumer protocol 未冻结**：bearing 预算（3°/5°）、age 250ms、appearance gate 阈值均 PROPOSED；真实相机曝光/端到端延迟与 RK3576 板端计算量 UNKNOWN。
+5. **无独立物理精度**：GT 与模型 cue 同源；正确子集 1.95px 是同源可复现性，不是物理定位精度。
+6. **单次、exploratory、非 sealed**：C1–C8 未闭合；本报告不改变认证结论；旧 final GT_UNOBSERVABLE=0/模型 UNKNOWN=0 分支未行使（identity dev 的 9 帧 GT_UNOBS 仅作 identity 证据）。
+7. **候选 A/B 已 STOP**：不得据本报告新证据重启训练/加 seed/读新 final；如需继续须新预注册 + 新 untouched holdout + 独立标注（用户决策）。
 
-## 8. 不声明
+## 8. 旧结果用途登记与勘误建议（T24）
+
+原则：旧结果/协议/hash **只增不改**；下表登记允许用途、禁止用途与是否需要“勘误注记”，不修改旧报告/JSON。勘误建议只作为后续引用时的注记或新报告中的对照，不重写历史文件。
+
+| 旧结果 | 原口径 | 允许用途 | 禁止用途 | 勘误建议 |
+| --- | --- | --- | --- | --- |
+| presence P1.000 / R0.916（final exploratory） | 279 帧，TP218/FP0/FN20/TN41 | exploratory 证据、失败分解入口 | 认证/最终能力、跨分布外推 | 引用时注明 exploratory、单次、非 sealed |
+| reference coverage 62/218=0.284 | 参考可用正例分母 | exploratory 诊断 | 作为“定位能力”或“消费者可用率” | 注明分母=参考可用 218，非全部正例 238 |
+| joint 71/238=0.298 | 旧复合口径 | 仅作历史对照 | 当作定位率或消费者指标 | 注明 joint 分子含 9 个 CORRECT_REFUSAL；拆分为 LOCALIZED 62/218 + REFUSAL 9/20 |
+| anchor 正确子集 1.95px / bearing 0.30° | 条件于 62/181 成功发射 | 同源可复现性证据 | 无条件物理精度/认证 | 加注“条件统计 + GT 与模型 cue 同源”；另报全部已发射 3.72px/0.546° |
+| identity P1.000（claims 218） | 单类 tower、池内无 verified 相似结构 | exploratory 诊断 | 身份能力/认证；单类输出映射中央塔 ID | 注明 precision 分母=claims、recall 分母=正例 238；identity 只能 UNKNOWN/appearance-gated |
+| TINY 覆盖 1/15、TINY recall 19/34 | 旧 final exploratory | exploratory 诊断 | 认证分母/“TINY 可评价” | 加注 GT 依赖 PROJECTION_AID_CALIBRATED；当前样本/方法下不可标注（本报告 §4） |
+| 3px 2D 通过率 | 历史 2D 代理 | legacy 诊断 | 作为消费者 bearing 能力 | 注明 3px≈1.074°、87 帧 2D 失败但 bearing 通过；消费者量是 image bearing |
+| GT_UNOBSERVABLE=0 / 模型 UNKNOWN=0（final 池） | 本池未行使分支 | 说明覆盖不足 | 宣称分支已验证 | 加注“规则已实现/测试但本池未行使，INCOMPLETE” |
+| 旧 eval_onnx 数字（joint 4/95 等） | raw/no-NMS ONNX 路径 | 已在上一阶段勘误 | 任何模型证据 | 保留既有勘误：D1 无 NMS/D2 rect-square 混用/D3 未复刻，旧数字无效 |
+| 候选 A/B 改进结果（0.453/0.400 vs 0.379） | matched validation pilot | 负结果/STOP 证据 | 当作新基线或继续调参依据 | 注明 gate 未过、holdout NOT_TRIGGERED；不得据 TINY/MS1 新证据重启 |
+| 旧 exploratory 入 v4.1 train | 原 exploratory final | DEVELOPMENT_TRAIN 证据链 | 再作 final/sealed/独立测试 | 暴露登记 v2 已记；引用时必须声明复用 |
+| 本报告 TINY 可标注性（0.364/0.434） | 22 帧 development 盲标 | 适用域/数据策略依据 | 外推 4–8px 或 final TINY 标尺 | 引用时带“当前样本/方法下”限定语 |
+| 本报告 appearance gate（aspect 0.50 / rel_y 0.18） | 62 帧 dev identity | PROPOSED 依据 | 直接冻结/部署/认证 | 需新未触碰数据预注册验证；不得用本池调参 |
+
+**勘误注记建议（不执行重写，只建议引用方式）**：① 旧 final 三件套（presence/coverage/joint/anchor/identity）引用时必须同时带分母与 exploratory 限定；② TINY 与 3px 老口径引用时必须带“投影先验/legacy proxy”注记；③ identity 不得作为能力引用；④ eval_onnx 旧数字仅保留为错误案例。若 lead 需要，可把这些注记汇总进 CURRENT_STATUS 或单独 ERRATA 文件（本轮未改旧文件）。
+
+## 9. 不声明
 
 不声明旧实验通过、不声明模型效果达标、不声明 identity 能力、不声明认证/sealed final/板端/导航；不修改旧 final 预测/指标/标签/hash；不重跑旧 final；不据本报告调参或提升 Gate。

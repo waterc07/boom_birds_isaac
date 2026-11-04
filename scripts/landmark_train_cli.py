@@ -371,6 +371,48 @@ def verify_protocol(protocol_path, repo_root):
             'ok': not mismatches}
 
 
+def load_run_snapshot_module(repo_root):
+    """Load scripts/landmark_run_snapshot.py without requiring a package layout."""
+    import importlib.util
+    snapshot_path = Path(repo_root) / 'scripts' / 'landmark_run_snapshot.py'
+    if not snapshot_path.is_file():
+        raise FileNotFoundError('run snapshot script not found: %s' % snapshot_path)
+    spec = importlib.util.spec_from_file_location('landmark_run_snapshot_runtime', snapshot_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def run_snapshot_preflight(snapshot_config, repo_root, run_id, snapshot_out, check_log=None,
+                           code_root=None):
+    """Create (or immutably reuse) the run snapshot and record the pre_train check."""
+    try:
+        module = load_run_snapshot_module(code_root or Path(__file__).resolve().parents[1])
+        created = module.create_snapshot(snapshot_config, repo_root, run_id, snapshot_out)
+    except (ValueError, FileNotFoundError) as error:
+        return {'ok': False, 'stage': 'create', 'error': str(error), 'exit_code': EXIT_INVALID_INPUT}
+    if created.get('status') == 'CONFLICT':
+        return {'ok': False, 'stage': 'create', 'conflict': created, 'exit_code': EXIT_OVERWRITE_REFUSED}
+    check = module.record_check(snapshot_out, repo_root, 'pre_train', check_log)
+    return {'ok': bool(check['ok']), 'stage': 'pre_train', 'created': created,
+            'check': check, 'snapshot': str(snapshot_out),
+            'exit_code': EXIT_OK if check['ok'] else EXIT_INVALID_INPUT}
+
+
+def run_snapshot_phase(snapshot_out, repo_root, phase, check_log=None, code_root=None):
+    """Verify the immutable snapshot at a later phase (pre_selection / post_train)."""
+    if not snapshot_out:
+        return {'ok': True, 'stage': phase, 'skipped': True, 'reason': 'no snapshot configured'}
+    try:
+        module = load_run_snapshot_module(code_root or Path(__file__).resolve().parents[1])
+        check = module.record_check(snapshot_out, repo_root, phase, check_log)
+    except (ValueError, FileNotFoundError) as error:
+        return {'ok': False, 'stage': phase, 'error': str(error),
+                'exit_code': EXIT_INVALID_INPUT}
+    return {'ok': bool(check['ok']), 'stage': phase, 'check': check,
+            'exit_code': EXIT_OK if check['ok'] else EXIT_INVALID_INPUT}
+
+
 def build_evidence(config, resolved, seed, run_dir, model, rows, stopper,
                    wall_seconds, peak_allocated, peak_reserved, candidates):
     scored = [item for item in candidates if item.get('summary')]
@@ -457,6 +499,18 @@ def main(argv=None):
                         help='reuse an existing evidence file instead of retraining')
     parser.add_argument('--overwrite', action='store_true',
                         help='allow replacing an existing evidence file')
+    parser.add_argument('--workers', type=int, default=None,
+                        help='dataloader workers (default: train.workers from the config)')
+    parser.add_argument('--cache', default=None,
+                        help='dataset cache mode: ram / disk / false (default: train.cache or false)')
+    parser.add_argument('--run-snapshot-config', default=None,
+                        help='immutable run snapshot config (default: paths.run_snapshot in the CLI config)')
+    parser.add_argument('--snapshot-out', default=None,
+                        help='snapshot JSON path (default: <out>/run_snapshot.json)')
+    parser.add_argument('--snapshot-check-log', default=None,
+                        help='append-only snapshot check log (default: <out>/snapshot_checks.jsonl)')
+    parser.add_argument('--run-id', default=None,
+                        help='run id recorded in the snapshot (default: seed<N>)')
     parser.add_argument('--verify-protocol', default=None,
                         help='protocol/freeze JSON whose recorded hashes must still match')
     args = parser.parse_args(argv)
@@ -538,9 +592,32 @@ def main(argv=None):
         print('hint: run --prepare-dataset with --train-labels/--val-labels first')
         return EXIT_INVALID_INPUT
 
+    snapshot_config = args.run_snapshot_config or resolved.get('run_snapshot')
+    snapshot_out = Path(args.snapshot_out) if args.snapshot_out else out_dir / 'run_snapshot.json'
+    snapshot_log = (Path(args.snapshot_check_log) if args.snapshot_check_log
+                    else out_dir / 'snapshot_checks.jsonl')
+    run_id = args.run_id or ('seed%d' % args.seed)
+    snapshot_state = None
+    if snapshot_config:
+        snapshot_config_path = Path(snapshot_config)
+        if not snapshot_config_path.is_absolute():
+            snapshot_config_path = repo_root / snapshot_config_path
+        if not snapshot_config_path.is_file():
+            print('invalid input: run snapshot config not found: %s' % snapshot_config_path)
+            return EXIT_INVALID_INPUT
+        snapshot_state = run_snapshot_preflight(snapshot_config_path, repo_root, run_id,
+                                                snapshot_out, snapshot_log)
+        if not snapshot_state.get('ok'):
+            print(json.dumps(snapshot_state, indent=2, default=str)[:4000])
+            print('INVALID run: immutable run snapshot check failed before training')
+            return snapshot_state.get('exit_code', EXIT_INVALID_INPUT)
     plan = {'config': str(config_path), 'repo_root': str(repo_root),
             'resolved': resolved, 'train': train, 'seed': args.seed,
-            'evidence_path': str(evidence_path), 'protocol': protocol}
+            'evidence_path': str(evidence_path), 'protocol': protocol,
+            'run_snapshot': {'config': str(snapshot_config) if snapshot_config else None,
+                             'snapshot': str(snapshot_out) if snapshot_config else None,
+                             'check_log': str(snapshot_log) if snapshot_config else None,
+                             'pre_train': snapshot_state}}
     if args.preflight or args.dry_run:
         print(json.dumps(plan, indent=2, default=str)[:6000])
         return EXIT_OK
@@ -574,7 +651,9 @@ def main(argv=None):
     model.train(
         data=resolved['data_yaml'], epochs=train['epochs'], imgsz=train['imgsz'],
         batch=train['batch'], device=train.get('device', 0),
-        workers=train.get('workers', 0), amp=bool(train.get('amp', True)),
+        workers=(args.workers if args.workers is not None else train.get('workers', 0)),
+        cache=(args.cache if args.cache is not None else train.get('cache', False)),
+        amp=bool(train.get('amp', True)),
         project=str(out_dir), name='seed%d' % args.seed, exist_ok=True,
         plots=False, val=True,
         patience=train['epochs'],  # ultralytics internal stopper made inert
@@ -587,6 +666,24 @@ def main(argv=None):
     peak_reserved = round(torch.cuda.max_memory_reserved() / (1024 ** 2), 1)
     save_dir = Path(model.trainer.save_dir)
     rows = read_results_csv(save_dir / 'results.csv')
+    snapshot_checks = [snapshot_state] if snapshot_state else []
+    if snapshot_state:
+        pre_selection = run_snapshot_phase(snapshot_out, repo_root, 'pre_selection', snapshot_log)
+        snapshot_checks.append(pre_selection)
+        if not pre_selection.get('ok'):
+            invalid_evidence = {'schema_version': SCHEMA_VERSION,
+                                'status': 'INVALID_RUN_SNAPSHOT',
+                                'seed': args.seed, 'run_id': run_id,
+                                'reason': 'immutable run snapshot changed before checkpoint selection',
+                                'run_snapshot': {'snapshot': str(snapshot_out),
+                                                 'checks': snapshot_checks},
+                                'candidates': []}
+            out_dir.mkdir(parents=True, exist_ok=True)
+            evidence_path.write_text(json.dumps(invalid_evidence, indent=2, ensure_ascii=False) + '\n',
+                                     encoding='utf-8')
+            print(json.dumps(invalid_evidence, indent=2)[:3000])
+            print('INVALID run: snapshot mismatch before selection; no checkpoint may be selected')
+            return EXIT_INVALID_INPUT
     candidates = []
     for name, path in project_candidates(save_dir, train.get('eval_epochs', [])):
         evaluation = evaluate_candidate(
@@ -600,14 +697,32 @@ def main(argv=None):
     evidence = build_evidence(config, resolved, args.seed, save_dir, model, rows,
                               stopper, wall_seconds, peak_allocated, peak_reserved,
                               candidates)
+    if snapshot_state:
+        post_train = run_snapshot_phase(snapshot_out, repo_root, 'post_train', snapshot_log)
+        snapshot_checks.append(post_train)
+        evidence['run_snapshot'] = {
+            'config': str(snapshot_config),
+            'snapshot': str(snapshot_out),
+            'check_log': str(snapshot_log),
+            'run_id': run_id,
+            'valid': bool(post_train.get('ok')),
+            'checks': snapshot_checks,
+        }
+        if not post_train.get('ok'):
+            evidence['status'] = 'INVALID_RUN_SNAPSHOT'
+            evidence['invalid_reason'] = 'immutable run snapshot changed after training'
     out_dir.mkdir(parents=True, exist_ok=True)
     evidence_path.write_text(json.dumps(evidence, indent=2, ensure_ascii=False) + '\n',
                              encoding='utf-8')
     print(json.dumps({'selected': evidence['selection'],
                       'timing': evidence['timing'],
-                      'early_stop': evidence['early_stop']},
+                      'early_stop': evidence['early_stop'],
+                      'run_snapshot': evidence.get('run_snapshot')},
                      indent=2)[:4000])
     print('wrote', evidence_path)
+    if evidence.get('status') == 'INVALID_RUN_SNAPSHOT':
+        print('INVALID run: snapshot mismatch after training; evidence written but not selectable')
+        return EXIT_INVALID_INPUT
     return EXIT_OK
 
 

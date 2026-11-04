@@ -87,6 +87,26 @@ def parse_args(argv=None):
                         help='run scripts/landmark_export_onnx.py first')
     parser.add_argument('--val-labels', default=str(DEFAULT_VAL_LABELS))
     parser.add_argument('--final-labels', default=str(DEFAULT_FINAL_LABELS))
+    parser.add_argument('--identity-labels',
+                        default=str(REPO_ROOT / 'outputs' / 'perception' /
+                                    'dev_annotations_20261104' /
+                                    'labels_identity_dev.json'))
+    parser.add_argument('--identity-frames', type=int, default=None,
+                        help='number of identity/MS1 frames to include '
+                             '(default: all)')
+    parser.add_argument('--skip-identity', dest='identity', action='store_false',
+                        default=True)
+    parser.add_argument('--tau-bearing-deg', type=float, default=0.01,
+                        help='bearing comparison tolerance in degrees')
+    parser.add_argument('--expected-pt-sha', default=None,
+                        help='override the config export.source_weights_sha256 '
+                             'pin (candidate model runs use their own sha)')
+    parser.add_argument('--candidate-label', default=None,
+                        help='candidate/model label recorded in the evidence '
+                             '(e.g. candidate_A_3seed)')
+    parser.add_argument('--selection-json', default=None,
+                        help='T22 selection/freeze JSON recorded as model '
+                             'provenance (read-only)')
     parser.add_argument('--val-frames', type=int, default=None)
     parser.add_argument('--final-frames', type=int, default=None)
     parser.add_argument('--synthetic-base', type=int, default=None)
@@ -202,6 +222,10 @@ def build_annotation_frames(labels_path, split, repo_root):
             'strata': strata,
             'intrinsics': intrinsics,
             'scenarios': [],
+            'negative_type': annotation.get('negative_type'),
+            'confusers': [item.get('confuser_id')
+                          for item in (annotation.get('confusers') or [])],
+            'group_id': (source.get('group_id')),
         })
     for frame in frames:
         if frame['width'] <= 0 or frame['height'] <= 0:
@@ -431,7 +455,8 @@ def _compact_observation(observation):
     return payload
 
 
-def compare(records, frames_by_id, name_left, name_right, tau_kpt=0.5):
+def compare(records, frames_by_id, name_left, name_right, tau_kpt=0.5,
+            tau_bearing_deg=0.01):
     frames = [frame_id for frame_id in records
               if records[frame_id].get(name_left) is not None
               and records[frame_id].get(name_right) is not None]
@@ -439,6 +464,16 @@ def compare(records, frames_by_id, name_left, name_right, tau_kpt=0.5):
     presence_flips = []
     reference_flips = []
     identity_flips = []
+    identity_claim_flips = []
+    identity_gt_flips = []
+    false_claim_flips = []
+    reject_reason_flips = []
+    invalid_status_flips = []
+    bearing_flips = []
+    bearing_presence_flips = []
+    bearing_deltas = []
+    wrong_claims = {name_left: [], name_right: []}
+    flips_by_scenario = {}
     joint_flips = []
     keypoint_diffs = []
     emitted_keypoint_diffs = []
@@ -448,18 +483,54 @@ def compare(records, frames_by_id, name_left, name_right, tau_kpt=0.5):
         record = records[frame_id]
         left = record[name_left]['observation']
         right = record[name_right]['observation']
-        diff = parity.decision_diff(left, right)
+        diff = parity.decision_diff(left, right,
+                                     tau_bearing_deg=tau_bearing_deg)
+        frame_scenarios = list((frames_by_id.get(frame_id) or {}).get('scenarios')
+                               or ['real'])
         if diff['changed']:
             observation_flips.append({'frame_id': frame_id,
                                       'diff': {key: value for key, value
                                                in diff.items()
                                                if key not in ('left', 'right')}})
+        layer_flips = {
+            'presence': diff['presence_flip'],
+            'reference': diff['reference_flip'],
+            'identity_claim': diff['identity_claim_flip'],
+            'rejection_reason': diff['rejection_reason_flip'],
+            'invalid_status': (parity.rejection_decision(left)['invalid']
+                               != parity.rejection_decision(right)['invalid']),
+            'bearing': diff['bearing_flip'],
+            'bearing_presence': diff['bearing_presence_flip'],
+        }
+        for scenario in frame_scenarios:
+            bucket = flips_by_scenario.setdefault(scenario, {})
+            for layer, flipped in layer_flips.items():
+                if flipped:
+                    bucket[layer] = bucket.get(layer, 0) + 1
         if diff['presence_flip']:
             presence_flips.append(frame_id)
         if diff['reference_flip']:
             reference_flips.append(frame_id)
         if diff['identity_flip']:
             identity_flips.append(frame_id)
+        if diff['identity_claim_flip']:
+            identity_claim_flips.append(frame_id)
+        if diff['rejection_reason_flip']:
+            reject_reason_flips.append(frame_id)
+        if layer_flips['invalid_status']:
+            invalid_status_flips.append(frame_id)
+        if diff['bearing_delta_deg'] is not None:
+            bearing_deltas.append((diff['bearing_delta_deg'], frame_id))
+        if diff['bearing_flip']:
+            bearing_flips.append(frame_id)
+        if diff['bearing_presence_flip']:
+            bearing_presence_flips.append(frame_id)
+        truth = (frames_by_id.get(frame_id) or {}).get('gt') or {}
+        if truth.get('present') is not True:
+            left_claim = parity.identity_decision(left)['claimed']
+            right_claim = parity.identity_decision(right)['claimed']
+            if left_claim != right_claim:
+                false_claim_flips.append(frame_id)
         left_candidates = (left.get('candidates') or []) if left else []
         right_candidates = (right.get('candidates') or []) if right else []
         if left is not None and right is not None \
@@ -494,6 +565,12 @@ def compare(records, frames_by_id, name_left, name_right, tau_kpt=0.5):
                 joint_flips.append({'frame_id': frame_id,
                                     'left': metric_diff['left'],
                                     'right': metric_diff['right']})
+            if left_row.get('identity_correct') != right_row.get('identity_correct'):
+                identity_gt_flips.append(frame_id)
+            for name, row in ((name_left, left_row), (name_right, right_row)):
+                if row.get('identity_claim') is True \
+                        and row.get('identity_correct') is not True:
+                    wrong_claims[name].append(frame_id)
     keypoint_diffs.sort(reverse=True)
     keypoint_values = [value for value, _ in keypoint_diffs]
     emitted_keypoint_diffs.sort(reverse=True)
@@ -513,6 +590,25 @@ def compare(records, frames_by_id, name_left, name_right, tau_kpt=0.5):
         'reference_flip_frame_ids': reference_flips[:50],
         'identity_flips': len(identity_flips),
         'identity_flip_frame_ids': identity_flips[:50],
+        'identity_claim_flips': len(identity_claim_flips),
+        'identity_claim_flip_frame_ids': identity_claim_flips[:50],
+        'identity_gt_flips': len(identity_gt_flips),
+        'identity_gt_flip_frame_ids': identity_gt_flips[:50],
+        'false_claim_flips': len(false_claim_flips),
+        'false_claim_flip_frame_ids': false_claim_flips[:50],
+        'reject_reason_flips': len(reject_reason_flips),
+        'reject_reason_flip_frame_ids': reject_reason_flips[:50],
+        'invalid_status_flips': len(invalid_status_flips),
+        'bearing_flips': len(bearing_flips),
+        'bearing_flip_frame_ids': bearing_flips[:50],
+        'bearing_presence_flips': len(bearing_presence_flips),
+        'bearing_deltas_deg': [{'frame_id': frame_id, 'delta_deg': value}
+                               for value, frame_id in sorted(
+                                   bearing_deltas, reverse=True)[:10]],
+        'bearing_max_delta_deg': (max(value for value, _ in bearing_deltas)
+                                  if bearing_deltas else None),
+        'wrong_claims': {name: len(ids) for name, ids in wrong_claims.items()},
+        'flips_by_scenario': flips_by_scenario,
         'joint_flips': len(joint_flips),
         'joint_flip_details': joint_flips[:50],
         'matched_pairs': matched_pairs_total,
@@ -592,6 +688,106 @@ def torch_raw_outputs(model_pt, tensors, imgsz):
     return outputs
 
 
+DECISION_LAYER_FIELDS = ('presence_flips', 'reference_flips',
+                        'identity_claim_flips', 'identity_gt_flips',
+                        'false_claim_flips', 'reject_reason_flips',
+                        'invalid_status_flips', 'bearing_flips',
+                        'bearing_presence_flips', 'joint_flips')
+
+
+def decision_layers(pairs, pair_names):
+    """Per-layer decision flip matrix for the requested path pairs."""
+    matrix = {}
+    for name in pair_names:
+        pair = pairs.get(name)
+        if pair is None:
+            continue
+        matrix[name] = {field: pair.get(field) for field in DECISION_LAYER_FIELDS}
+        matrix[name]['observation_decision_flips'] = pair.get(
+            'observation_decision_flips')
+        matrix[name]['wrong_claims'] = pair.get('wrong_claims')
+    return matrix
+
+
+def identity_rejection_summary(records, frames_by_id, pairs, pair_names):
+    """Identity / rejection / bearing / MS1 / multi-candidate summary."""
+    import collections
+    ms1_similar = [frame_id for frame_id, frame in frames_by_id.items()
+                   if 'ms1_similar' in (frame.get('scenarios') or [])]
+    ms1_both = [frame_id for frame_id, frame in frames_by_id.items()
+                if 'ms1_both' in (frame.get('scenarios') or [])]
+    multi_candidate = [frame_id for frame_id, frame in frames_by_id.items()
+                       if 'multi_candidate' in (frame.get('scenarios') or [])
+                       or 'multi_candidate_candidate'
+                       in (frame.get('scenarios') or [])]
+    paths = ['pt_square', 'onnx_native_square', 'raw_ort_square']
+    by_path = {}
+    for name in paths:
+        statuses = collections.Counter()
+        claims = 0
+        wrong_claims = 0
+        claims_on_absent = 0
+        for frame_id, record in records.items():
+            payload = record.get(name) or {}
+            observation = payload.get('observation') or {}
+            row = (record.get('metrics') or {}).get(name) or {}
+            statuses[observation.get('status')] += 1
+            if observation.get('identity_claimed'):
+                claims += 1
+                truth = (frames_by_id.get(frame_id) or {}).get('gt') or {}
+                if truth.get('present') is not True:
+                    claims_on_absent += 1
+                if row.get('identity_claimed') is True \
+                        and row.get('identity_correct') is not True:
+                    wrong_claims += 1
+        by_path[name] = {'statuses': dict(statuses), 'claims': claims,
+                         'wrong_claims': wrong_claims,
+                         'claims_on_absent': claims_on_absent}
+    ms1 = {
+        'ms1_similar_frames': len(ms1_similar),
+        'ms1_both_frames': len(ms1_both),
+        'multi_candidate_frames': len(multi_candidate),
+        'ms1_similar_by_path': {},
+        'ms1_both_by_path': {},
+        'multi_candidate_by_path': {},
+    }
+    for name in paths:
+        similar = collections.Counter()
+        both = collections.Counter()
+        multi = collections.Counter()
+        for frame_id in ms1_similar:
+            observation = (records.get(frame_id, {}).get(name) or {}).get(
+                'observation') or {}
+            key = '%s|claim=%s' % (observation.get('status'),
+                                   bool(observation.get('identity_claimed')))
+            similar[key] += 1
+        for frame_id in ms1_both:
+            observation = (records.get(frame_id, {}).get(name) or {}).get(
+                'observation') or {}
+            key = '%s|reason=%s|candidates=%d' % (
+                observation.get('status'),
+                observation.get('reject_reason'),
+                int(observation.get('candidate_count') or 0))
+            both[key] += 1
+        for frame_id in multi_candidate:
+            observation = (records.get(frame_id, {}).get(name) or {}).get(
+                'observation') or {}
+            key = 'candidates=%d|reason=%s' % (
+                int(observation.get('candidate_count') or 0),
+                observation.get('reject_reason'))
+            multi[key] += 1
+        ms1['ms1_similar_by_path'][name] = {
+            'identity_claim_absent_ms1': dict(similar)}
+        ms1['ms1_both_by_path'][name] = {
+            'status_reason_candidate_count': dict(both)}
+        ms1['multi_candidate_by_path'][name] = dict(multi)
+    return {
+        'primary_decision_layers': decision_layers(pairs, pair_names),
+        'by_path': by_path,
+        'ms1_and_multi_candidate': ms1,
+    }
+
+
 def main(argv=None):
     args = parse_args(argv)
     started = time.perf_counter()
@@ -658,10 +854,29 @@ def main(argv=None):
             if not alternate_path.is_file():
                 raise FileNotFoundError('alternate onnx not found: %s'
                                         % alternate_path)
-        expected_pt = str(export_cfg.get('source_weights_sha256') or '')
+        config_pt_pin = str(export_cfg.get('source_weights_sha256') or '')
+        expected_pt = (args.expected_pt_sha or config_pt_pin)
+        pt_pin_check = {
+            'config_expected': config_pt_pin,
+            'actual': pt_sha,
+            'override': args.expected_pt_sha,
+            'enforced': bool(expected_pt),
+        }
         if expected_pt and pt_sha != expected_pt:
-            raise ValueError('pt sha256 %s does not match config expected %s'
-                             % (pt_sha, expected_pt))
+            if args.candidate_label:
+                # candidate-model mode: the T14 config pins the old frozen
+                # model, so a different candidate is expected; record the pin
+                # mismatch instead of aborting (the model identity is carried
+                # by candidate.label + the recorded sha).
+                pt_pin_check.update({'enforced': False,
+                                     'note': 'candidate mode: config pin is for '
+                                             'the old T14 frozen model; this '
+                                             'candidate is recorded by sha'})
+            else:
+                raise ValueError(
+                    'pt sha256 %s does not match expected %s (pass '
+                    '--expected-pt-sha/candidate-label for a new candidate)'
+                    % (pt_sha, expected_pt))
 
         # ---- frames
         val_report = None
@@ -687,9 +902,41 @@ def main(argv=None):
             for frame in selected_final:
                 frame['scenarios'].append('real_final')
             real_frames.extend(selected_final)
+        identity_report = None
+        identity_selected = 0
+        if args.identity and Path(args.identity_labels).is_file():
+            identity_all, identity_report = build_annotation_frames(
+                args.identity_labels, 'val', REPO_ROOT)
+            identity_limit = (args.identity_frames
+                              if args.identity_frames is not None
+                              else len(identity_all))
+            selected_identity = select_stratified(identity_all,
+                                                  identity_limit,
+                                                  seed=args.seed + 3)
+            for frame in selected_identity:
+                gt = frame.get('gt') or {}
+                group = str(frame.get('group_id') or '')
+                confusers = [str(item) for item in (frame.get('confusers') or [])]
+                frame['scenarios'].append('real_identity')
+                if gt.get('present') is not True:
+                    frame['scenarios'].append('target_absent')
+                    if frame.get('negative_type') == 'SIMILAR_STRUCTURE':
+                        frame['scenarios'].append('ms1_similar')
+                if any('MS1' in item for item in confusers):
+                    frame['scenarios'].append('ms1_confuser')
+                    if gt.get('present') is True:
+                        frame['scenarios'].append('ms1_both')
+                        frame['scenarios'].append('multi_candidate_candidate')
+                if 'occlusion' in group:
+                    frame['scenarios'].append('occluded')
+                if 'trunc' in group:
+                    frame['scenarios'].append('edge_truncation')
+            identity_selected = len(selected_identity)
+            real_frames.extend(selected_identity)
         for frame in real_frames:
             if 'real_val' not in frame['scenarios'] and \
-                    'real_final' not in frame['scenarios']:
+                    'real_final' not in frame['scenarios'] and \
+                    'real_identity' not in frame['scenarios']:
                 frame['scenarios'].append('real')
         synthetic_base = select_stratified(real_frames, int(sample_policy.get(
             'synthetic_base_frames', 8)), seed=args.seed + 2)
@@ -794,7 +1041,8 @@ def main(argv=None):
         for left, right in primary + legacy:
             pairs['%s_vs_%s' % (left, right)] = compare(
                 records, frames_by_id, left, right,
-                tau_kpt=thresholds['tau_kpt'])
+                tau_kpt=thresholds['tau_kpt'],
+                tau_bearing_deg=args.tau_bearing_deg)
 
         # ---- torch raw vs onnxruntime raw on the shared canvas
         raw_parity = {'performed': True, 'frames': 0, 'max_abs_diff': None,
@@ -908,6 +1156,26 @@ def main(argv=None):
                 for left, right in primary},
         }
 
+        # ---- identity / rejection / bearing / MS1 layers
+        primary_pair_names_for_layers = [
+            'pt_square_vs_onnx_native_square',
+            'pt_square_vs_raw_ort_square',
+            'onnx_native_square_vs_raw_ort_square',
+        ]
+        identity_layers = identity_rejection_summary(
+            records, frames_by_id, pairs, primary_pair_names_for_layers)
+        candidate_meta = {'label': args.candidate_label}
+        if args.selection_json:
+            selection_path = resolve_repo_path(args.selection_json,
+                                               allow_absolute=True,
+                                               what='selection-json')
+            candidate_meta['selection_json'] = {
+                'path': str(selection_path),
+                'sha256': (parity.sha256_file(selection_path)
+                           if selection_path.is_file() else None),
+                'content': (parity.load_json(selection_path)
+                            if selection_path.is_file() else None),
+            }
         # ---- self-check
         flip_tolerance = int(tolerances.get('decision_flip_count_max', 0))
         keypoint_tolerance = float(tolerances.get('keypoint_max_px', 0.5))
@@ -925,13 +1193,23 @@ def main(argv=None):
                 'keypoint_ok': (pair['keypoint_max_px'] is None
                                 or pair['keypoint_max_px'] <= keypoint_tolerance),
             }
+        layer_checks = {}
+        for pair_name in primary_pair_names:
+            pair = pairs.get(pair_name) or {}
+            layer_checks[pair_name] = {
+                field: (pair.get(field) is not None
+                        and int(pair.get(field)) <= flip_tolerance)
+                for field in DECISION_LAYER_FIELDS
+            }
         self_check = {
             'raw_parity_ok': bool(raw_parity.get('passed')),
             'onnx_equivalence_ok': (None if onnx_equivalence is None
                                     else bool(onnx_equivalence['passed'])),
+            'primary_decision_layers_ok': layer_checks,
             'primary_pairs': checks,
             'passed': bool(raw_parity.get('passed')) and all(
-                all(value.values()) for value in checks.values()) and (
+                all(value.values()) for value in checks.values()) and all(
+                    all(value.values()) for value in layer_checks.values()) and (
                     onnx_equivalence is None
                     or bool(onnx_equivalence['passed'])),
         }
@@ -963,16 +1241,21 @@ def main(argv=None):
                 'pt': {'path': str(pt_path), 'sha256': pt_sha},
                 'onnx': {'path': str(onnx_path), 'sha256': onnx_sha},
                 'freeze_recorded_onnx_sha256': _freeze_onnx_sha(),
+                'pt_sha_pin_check': pt_pin_check,
                 'export_evidence': export_evidence,
             },
             'data': {
                 'val': val_report,
                 'final': final_report,
+                'identity': identity_report,
                 'sample': {
                     'real_frames': len(real_frames),
                     'synthetic_frames': len(synthetic),
                     'evaluated_frames': len(all_frames),
                     'near_threshold_frames': near_threshold['frames'],
+                    'identity_frames': identity_selected,
+                    'identity_document_frames': (identity_report['frames']
+                                                 if identity_report else 0),
                 },
                 'final_pool_policy': 'read-only sample; no metrics run, no '
                                      'label/threshold change, final never rerun',
@@ -991,6 +1274,9 @@ def main(argv=None):
             'onnx_equivalence': onnx_equivalence,
             'device_sensitivity': (pairs.get('pt_square_vs_pt_square_gpu')
                                    if gpu_available else None),
+            'candidate': candidate_meta,
+            'decision_layers': identity_layers['primary_decision_layers'],
+            'identity_and_rejection': identity_layers,
             'pairwise': pairs,
             'scenarios': scenarios,
             'near_threshold': near_threshold,

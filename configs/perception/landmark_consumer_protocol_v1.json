@@ -1,0 +1,126 @@
+{
+  "schema_version": "dsh.landmark_consumer_protocol.v1",
+  "status": "PRE_REGISTERED_2026_11_04_BEFORE_EVALUATION",
+  "decided_by": "lead",
+  "basis": [
+    "V2.2 §7.4/§7.5/§7.7/§9.1: landmark relay consumes landmark identity, reference availability, horizontal image bearing, and observation freshness; it does not consume 2D pixel error or world position from perception",
+    "LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104 (presence/reference/identity/joint)",
+    "post-evaluation diagnosis 2026-11-04: 3px 2D and horizontal bearing diverge (87/181 emitted frames 2D-fail but bearing<=1.074deg)"
+  ],
+  "consumer_contract": {
+    "observation_valid": "accepted observation with valid context/generation; stale/duplicate/generation-mismatch are invalid and counted as rejection",
+    "identity_policy": "a confirmed landmark_id (RMUC2027_CENTRAL_TOWER_PROPOSED) may only be emitted when the appearance gate passes AND exactly one candidate survives score/margin thresholds; otherwise output candidate/UNKNOWN and do not update associated regions; GT position, oracle region, filenames and label files must never be used for inference identity",
+    "reference_policy": "GT reference visible -> keypoint emission; GT reference unavailable (too small/occluded/out of frame) -> correct refusal (no keypoint, UNAVAILABLE)",
+    "bearing_definition": "horizontal image bearing atan2(keypoint_x - cx0, fx); not world bearing, not distance",
+    "freshness": "observation freshness/TTL handled by the input contract; invalid observations are rejection, not success"
+  },
+  "success_definition": {
+    "per_gt_present_frame": "success = presence correct AND identity confirmed-correct AND reference handling correct AND abs(predicted bearing - gt bearing) <= tau_bearing AND observation valid",
+    "per_gt_absent_frame": "success = no confirmed central-tower claim (correct refusal/absence)",
+    "diagnostics_only": [
+      "2D pixel error (median/P90/max)",
+      "bbox IoU",
+      "anchor pixel error"
+    ]
+  },
+  "thresholds": {
+    "tau_bearing_deg": 3,
+    "tau_bearing_status": "PROPOSED",
+    "tau_bearing_rationale": "consumer uses coarse region/landmark orientation; fx=160 gives 1 px = 0.358 deg so 3 deg is about 8.4 px; coarse orientation budget, not a certification limit; not reverse-engineered from seen test results",
+    "tau_det": "frozen on validation by the improvement experiment",
+    "tau_margin": "PROPOSED_ON_VALIDATION",
+    "tau_px_diagnostic": 3,
+    "tau_iou_diagnostic": 0.3,
+    "appearance_gate": "image features only (bbox aspect ratio, green-light relative height/offset, symmetry) with thresholds frozen on validation; UNKNOWN on failure"
+  },
+  "denominators": {
+    "all_positive": "all GT-present frames in the frozen split (including TINY, truncation, reference-unavailable, GT-unobservable)",
+    "observable_positive": "GT-present frames excluding GT_UNOBSERVABLE",
+    "reference_available": "GT-present frames with visible annotated reference point (bearing error denominator)",
+    "negatives": "GT-absent frames plus MS1-only and similar-structure frames for wrong-claim accounting",
+    "unknown_policy": "UNKNOWN/REJECTED/no-keypoint samples stay in their applicable success denominators and are reported separately by status/reason; never removed to improve success",
+    "tiny_policy": "TINY-domain results reported separately (all-domain denominator retained); TINY not reliably annotatable under current sample/method is not a reason to delete those frames"
+  },
+  "metrics_to_report": [
+    "presence precision/recall/FN with all-positive denominator",
+    "identity confirmed claims, correct claims, wrong claims (global, MS1-only, multi-candidate, same-frame, full-occlusion, negatives), identity precision/recall",
+    "reference availability: correct declaration rate (GT-visible emission, GT-unavailable refusal), false-reference rate",
+    "emission rate, rejection rate by reason, UNKNOWN rate",
+    "bearing error median/P90/n on reference-available emitted frames; no-output samples kept in success denominator",
+    "consumer success rate: all-positive, observable-positive, reference-available, plus per-family/scale/truncation/negative-type",
+    "wrong-claim rate = wrong confirmed identity / applicable negative denominator",
+    "2D pixel error and bbox IoU as diagnostics only"
+  ],
+  "stage_gates": {
+    "note": "stage-specific; a later-stage gate must never be applied at an earlier stage (2026-11-04 errata)",
+    "consumer_pilot_gate": {
+      "applies_to": "single-seed <=15 epoch pilot vs matched baseline (same split/budget/preprocess)",
+      "conditions": [
+        "consumer success (all-positive) improves >= +0.05 absolute",
+        "wrong-claim rate not worse than baseline",
+        "bearing median not worse than baseline"
+      ],
+      "on_fail": "candidate rejected; do not extend budget"
+    },
+    "consumer_three_seed_gate": {
+      "applies_to": "winner promoted to 3 seeds <=60 epoch each; report all seeds and worst seed; validation-only selection/threshold freeze",
+      "conditions": [
+        "no separate advance condition: the holdout gate below is evaluated on the val-selected seed after the 3-seed phase"
+      ],
+      "on_fail": "not applicable"
+    },
+    "consumer_holdout_gate": {
+      "applies_to": "val-selected model/thresholds/decoder/eval rules frozen after 3 seeds",
+      "conditions": [
+        "consumer success (all-positive) >= 0.50",
+        "consumer success improvement over matched baseline >= +0.05 absolute",
+        "wrong-claim rate <= 0.05 on the applicable negative/MS1/multi-candidate denominator",
+        "bearing error median <= 3.0 deg and P90 <= 5.0 deg on reference-available emitted frames",
+        "reference declaration correct rate (GT-unavailable refusal) >= 0.50 and false-reference rate <= 0.10",
+        "worst-group consumer success not worse than baseline worst-group by more than 0.05"
+      ],
+      "on_fail": "STOP this version: no new holdout capture/evaluation; keep failure evidence; do not claim the architecture/route is falsified",
+      "on_pass": "freeze and capture a new holdout: >=3 new trajectory families, 200-400 frames, covering close-range, far/TINY, truncation, MS1 confuser alone, same-frame target+MS1 ambiguity, target absent; sampling/coverage frozen before capture; freezing model/thresholds/labels/evaluator then exactly one evaluation; failure stops the version"
+    }
+  },
+  "identity_approaches": {
+    "max_approaches": 2,
+    "approach_1": {
+      "id": "appearance_gate_on_single_class_detector",
+      "description": "single-class tower detector + image-only appearance gate (aspect ratio, green-light relative position/height, symmetry) returning UNKNOWN on failure; no retraining",
+      "status": "EVALUATED_THIS_PACKAGE"
+    },
+    "approach_2": {
+      "id": "two_class_detector_tower_vs_similar_structure",
+      "description": "retrain with a second class for similar structure/MS1",
+      "why_not_run": "new full training would exceed the package budget already allocated to completing the candidate-A 3-seed stage verification; second-class labels not frozen yet",
+      "status": "NOT_RUN_THIS_PACKAGE_DOCUMENTED_AS_OPTION"
+    }
+  },
+  "holdout_rules": {
+    "min_new_families": 3,
+    "frames_range": [
+      200,
+      400
+    ],
+    "coverage": [
+      "close-range 1.5-3 m",
+      "far/small target",
+      "edge truncation",
+      "MS1 confuser alone",
+      "same-frame target+MS1 ambiguity",
+      "target absent"
+    ],
+    "sampling_frozen_before_capture": true,
+    "no_selection_by_prediction_quality": true,
+    "annotation": "frozen spec v2.1+; QA PASS; register who viewed images/purpose/time; same-agent execution is PROCESS-ISOLATED HOLDOUT, not third-party sealed or certification truth",
+    "evaluation": "once only after model/thresholds/decoder/evaluator/labels frozen; no callback/retune/rerun"
+  },
+  "boundaries": [
+    "shadow only; no control, no PPO, no gate promotion",
+    "internal bounded research only; distribution licence decision pending",
+    "no board/RKNN/real camera claim",
+    "old 3px protocol and results kept; this protocol is separate and does not retro-validate old results",
+    "do not delete hard samples or change denominators to improve the number"
+  ]
+}

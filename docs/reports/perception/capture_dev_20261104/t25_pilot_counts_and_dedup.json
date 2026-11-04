@@ -1,0 +1,106 @@
+{
+ "pilot": {
+  "records": 182,
+  "rgb_records": 91,
+  "accepted_rgb": 85,
+  "warmup_invalid_rgb": 6,
+  "per_episode": {
+   "lmf_devid_mutual_overlap_0-follow_only": 44,
+   "lmf_devid_ms1_far_0-follow_only": 41
+  }
+ },
+ "pilot_image_files": 91,
+ "formal_residual": {
+  "records": 74,
+  "rgb_records": 37,
+  "accepted_rgb": 34,
+  "warmup_invalid_rgb": 3,
+  "per_episode": {
+   "lmf_devid_mutual_overlap_0-follow_only": 34
+  }
+ },
+ "formal_image_files": 37,
+ "dedup_pilot_vs_existing": {
+  "debug_all6_sensor": {
+   "images": 864,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static4_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static5_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static6_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static7_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "formal6_sensor": {
+   "images": 864,
+   "overlap_with_t25_pilot": 0
+  },
+  "geo_test_sensor": {
+   "images": 207,
+   "overlap_with_t25_pilot": 0
+  },
+  "gui_evidence2_sensor": {
+   "images": 213,
+   "overlap_with_t25_pilot": 0
+  },
+  "gui_evidence_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_capture_20261104_sensor": {
+   "images": 337,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_hn_capture_20261104_sensor": {
+   "images": 59,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_identity_capture_20261104_sensor": {
+   "images": 190,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_smoke2_20261104_sensor": {
+   "images": 24,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_smoke_hn1b_20261104_sensor": {
+   "images": 30,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_devid_smoke_20261104_sensor": {
+   "images": 31,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_final_candidate_20261104_sensor": {
+   "images": 297,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_final_smoke_20261104_sensor": {
+   "images": 114,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_independence_sensor": {
+   "images": 613,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_pilot_north_sensor": {
+   "images": 193,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_pilot_sensor": {
+   "images": 18,
+   "overlap_with_t25_pilot": 0
+  }
+ },
+ "note": "sha256 exact-duplicate check only; pilot images are diagnostic; formal run has no run.complete"
+}

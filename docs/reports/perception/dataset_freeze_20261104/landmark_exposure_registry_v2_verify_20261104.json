@@ -1,15 +1,15 @@
 {
   "schema_version": "dsh.landmark_exposure_registry_evidence.v1",
   "status": "PASS",
-  "generated_at": "2026-11-04T12:28:52.996877+00:00",
+  "generated_at": "2026-11-04T14:10:28.664876+00:00",
   "registry": {
     "path": "configs/perception/landmark_exposure_registry_v2.json",
-    "sha256": "a367e2a4bf459ac72f351ac407d8798d3db97c1e4736453cef253f650dac68b7"
+    "sha256": "1658a145e68866c16ecce9c7f942b3975601ee5f14c985c48f2a5212664bdf5a"
   },
   "sources": {
-    "dev_v4_2": {
-      "path": "configs/perception/landmark_split_freeze_v4_2.json",
-      "canonical_sha256": "7708cd5817208a3013f6058703a70f67cd9db0c8c0ae1ad4d315cfbfb9e31aee"
+    "dev_v5": {
+      "path": "configs/perception/landmark_split_freeze_v5.json",
+      "canonical_sha256": "7815936c9cf2d7c5f23cf6160bab455bf85259e2afb90596a5ca1d261be3f358"
     }
   },
   "checks": {
@@ -54,10 +54,10 @@
     "images_verified": 0,
     "images_missing": 0,
     "image_sha_mismatches": 0,
-    "events": 12,
+    "events": 14,
     "group_overrides": 357,
     "sources": [
-      "dev_v4_2"
+      "dev_v5"
     ]
   },
   "limits": [

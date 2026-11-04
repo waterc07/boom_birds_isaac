@@ -1,0 +1,31 @@
+stages: ["load contract and cases", "create env", "disable default ground and spawn map", "bind obstacle from scene", "declare kinematic contact inference", "configure map dones", "measure body envelope", "run dynamic paired cases"]
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 1198, in <module>
+    env.sim.reset(soft=False)
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sim/simulation_context.py", line 530, in reset
+    self.render()
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sim/simulation_context.py", line 601, in render
+    raise exception_to_raise
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/asset_base.py", line 317, in _initialize_callback
+    self._initialize_impl()
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/rigid_object/rigid_object.py", line 535, in _initialize_impl
+    self._create_buffers()
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/rigid_object/rigid_object.py", line 551, in _create_buffers
+    self._instantaneous_wrench_composer = WrenchComposer(self)
+                                          ^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/utils/wrench_composer.py", line 41, in __init__
+    if hasattr(self._asset.data, "body_link_pos_w") and hasattr(self._asset.data, "body_link_quat_w"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/rigid_object/rigid_object_data.py", line 468, in body_link_pos_w
+    return self.body_link_pose_w[..., :3]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/rigid_object/rigid_object_data.py", line 246, in body_link_pose_w
+    return self.root_link_pose_w.view(-1, 1, 7)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/assets/rigid_object/rigid_object_data.py", line 136, in root_link_pose_w
+    pose = self._root_physx_view.get_transforms().clone()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/env_isaaclab/lib/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.wx64.r.cp311.u353/omni/physics/tensors/impl/api.py", line 3370, in get_transforms
+    raise Exception("Failed to get rigid body transforms from backend")
+Exception: Failed to get rigid body transforms from backend

@@ -35,6 +35,10 @@ dist/
 /docs/reports/perception/annotation_verify_20261104/pilot/grid/
 /outputs/perception/
 
+# Large diagnostic contact sheets and raw run logs stay outside version control
+/docs/reports/perception/annotation_verify_20261104/pilot/identity_t25/*.png
+/docs/reports/perception/capture_dev_20261104/*.log
+
 # Local editor and operating-system files
 .vscode/settings.json
 .DS_Store

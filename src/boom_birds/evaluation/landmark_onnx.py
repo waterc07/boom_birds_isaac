@@ -441,22 +441,76 @@ def observation_decision(observation):
     }
 
 
-def decision_diff(left, right):
-    """Compare two observation decisions; flags are per decision field."""
+def rejection_decision(observation):
+    """Consumer-facing rejection decision: emitted reason and whether invalid."""
+    observation = observation or {}
+    status = observation.get('status')
+    return {
+        'status': status,
+        'rejected': observation.get('reject_reason') is not None,
+        'reason': observation.get('reject_reason'),
+        'invalid': status in ('UNKNOWN', 'REJECTED'),
+        'reference_unavailable': observation.get('reference_status') == 'UNAVAILABLE',
+    }
+
+
+def bearing_deg(observation):
+    """Image-domain horizontal bearing recorded by the decoder, or None."""
+    observation = observation or {}
+    value = observation.get('image_bearing_deg')
+    if value is None:
+        return None
+    return float(value)
+
+
+def identity_decision(observation):
+    """Identity decision without GT: claim flag and claimed landmark id."""
+    observation = observation or {}
+    return {
+        'claimed': bool(observation.get('identity_claimed')),
+        'landmark_id': observation.get('landmark_id'),
+    }
+
+
+def decision_diff(left, right, tau_bearing_deg=0.01):
+    """Compare two observation decisions; flags are per decision layer.
+
+    Extends the original presence/reference/identity/reject flags with explicit
+    identity-claim, rejection-reason and image-bearing layers (T29): a path pair
+    can agree on presence yet disagree on identity, on the rejection reason, or
+    on the emitted bearing.  tau_bearing_deg is the bearing comparison tolerance
+    (degrees); the default 0.01 deg is far below the consumer tolerance and is
+    meant to detect any non-numerical disagreement.
+    """
     a = observation_decision(left)
     b = observation_decision(right)
     status_flip = a['status'] != b['status']
     reference_flip = a['reference_available'] != b['reference_available']
     identity_flip = a['identity_claimed'] != b['identity_claimed']
     reject_flip = a['reject_reason'] != b['reject_reason']
+    bearing_left = bearing_deg(left)
+    bearing_right = bearing_deg(right)
+    bearing_presence_flip = (bearing_left is None) != (bearing_right is None)
+    bearing_delta = None
+    bearing_flip = False
+    if bearing_left is not None and bearing_right is not None:
+        bearing_delta = abs(bearing_left - bearing_right)
+        bearing_flip = bearing_delta > float(tau_bearing_deg)
     return {
         'status_flip': status_flip,
         'presence_flip': a['detected'] != b['detected'],
         'reference_flip': reference_flip,
         'identity_flip': identity_flip,
+        'identity_claim_flip': identity_flip,
         'reject_flip': reject_flip,
+        'rejection_reason_flip': reject_flip,
+        'bearing_presence_flip': bearing_presence_flip,
+        'bearing_flip': bearing_flip,
+        'bearing_delta_deg': bearing_delta,
+        'bearing_left_deg': bearing_left,
+        'bearing_right_deg': bearing_right,
         'changed': bool(status_flip or reference_flip or identity_flip
-                        or reject_flip),
+                        or reject_flip or bearing_presence_flip or bearing_flip),
         'left': a,
         'right': b,
     }
@@ -471,6 +525,9 @@ def metric_decision(row):
         'joint_ok': row.get('joint_ok'),
         'joint_fail_reason': row.get('joint_fail_reason'),
         'joint_evaluable': row.get('joint_evaluable'),
+        'identity_claim': row.get('identity_claim'),
+        'identity_correct': row.get('identity_correct'),
+        'high_confidence_false_match': row.get('high_confidence_false_match'),
     }
 
 

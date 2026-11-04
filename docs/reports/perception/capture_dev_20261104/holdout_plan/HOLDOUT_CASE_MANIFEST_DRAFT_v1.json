@@ -1,0 +1,971 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "status": "DRAFT_NOT_FROZEN_NOT_RUN",
+  "purpose": "new holdout capture (draft): >=3 brand-new trajectory families, 200-400 accepted RGB target, covering near 1.5-3 m / far small target / edge truncation / MS1 confuser alone / target+MS1 same-frame ambiguity / target absent",
+  "regions": [
+    {
+      "region_id": "W",
+      "x_min": -10.6,
+      "x_max": -8.9,
+      "y_min": -2.3,
+      "y_max": 2.3,
+      "ground_z_min": -0.0587,
+      "ground_z_max": -0.0027
+    },
+    {
+      "region_id": "E",
+      "x_min": 7.9,
+      "x_max": 10.6,
+      "y_min": -1.6,
+      "y_max": 1.6,
+      "ground_z_min": -0.0404,
+      "ground_z_max": 0.1515
+    },
+    {
+      "region_id": "MID",
+      "x_min": -1.0,
+      "x_max": 7.9,
+      "y_min": -5.0,
+      "y_max": 7.0,
+      "ground_z_min": -0.2,
+      "ground_z_max": 0.5,
+      "note": "data-collection observation zone only; NOT a real region in the V2.2 region topology"
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "holdout_sw_inner_corridor",
+      "start_region": "W",
+      "goal_region": "E",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          -9.6,
+          -1.4,
+          0.512
+        ],
+        [
+          -8.6,
+          -4.4,
+          1.0
+        ],
+        [
+          -3.5,
+          -5.2,
+          1.0
+        ],
+        [
+          2.5,
+          -5.2,
+          1.0
+        ],
+        [
+          8.2,
+          -0.8,
+          1.0
+        ]
+      ],
+      "note": "new inner-south-west corridor at y about -5.2 (W->E); not the south perimeter corridor y=-6.2, not the inner-south E-loop y=-3.0; target enters view in the last third and edges near the right border late"
+    },
+    {
+      "route_id": "holdout_nw_inner_corridor",
+      "start_region": "E",
+      "goal_region": "W",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          9.8,
+          1.4,
+          1.0
+        ],
+        [
+          9.6,
+          3.8,
+          1.0
+        ],
+        [
+          4.0,
+          5.0,
+          1.0
+        ],
+        [
+          -3.0,
+          5.0,
+          1.0
+        ],
+        [
+          -8.4,
+          3.6,
+          1.0
+        ],
+        [
+          -9.4,
+          1.2,
+          1.0
+        ]
+      ],
+      "note": "new inner-north corridor at y about +5.0 traversed E->W (backwards while facing +X): new corridor and new approach direction; target visible at start near E then recedes to far range"
+    },
+    {
+      "route_id": "holdout_near_static",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          9.6,
+          0.4,
+          1.1
+        ],
+        [
+          9.4,
+          0.3,
+          1.15
+        ],
+        [
+          9.7,
+          0.5,
+          1.1
+        ]
+      ],
+      "note": "new near static pose: target at about 2.1-2.7 m, predicted bottom/edge truncation; distinct from existing near poses"
+    },
+    {
+      "route_id": "holdout_far_small_target",
+      "start_region": "W",
+      "goal_region": "W",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          -9.2,
+          0.6,
+          1.2
+        ],
+        [
+          -9.05,
+          0.4,
+          1.15
+        ]
+      ],
+      "note": "new far static pose from W: central target about 20 m away (small, few-pixel green light); MS1 also far in the same view; records far/small conditions"
+    },
+    {
+      "route_id": "holdout_ms1_confuser_alone",
+      "start_region": "MID",
+      "goal_region": "MID",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          7.5,
+          3.0,
+          1.1
+        ],
+        [
+          7.2,
+          3.3,
+          1.1
+        ],
+        [
+          7.8,
+          3.2,
+          1.1
+        ],
+        [
+          7.4,
+          2.8,
+          1.1
+        ]
+      ],
+      "note": "new MS1-alone viewpoint from the east/southeast (about 8.5 m): central tower out of FOV; green-lamp visibility recorded (may be not visible from this side)"
+    },
+    {
+      "route_id": "holdout_both_ambiguous",
+      "start_region": "MID",
+      "goal_region": "MID",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          6.0,
+          -3.0,
+          1.2
+        ],
+        [
+          6.3,
+          -2.7,
+          1.2
+        ],
+        [
+          5.8,
+          -2.8,
+          1.15
+        ],
+        [
+          6.05,
+          -3.15,
+          1.2
+        ]
+      ],
+      "note": "new south-east viewpoint where the central target (about 6.3 m) and MS1 (about 7.6 m) appear at similar scale on opposite frame sides; identity ambiguity condition"
+    },
+    {
+      "route_id": "holdout_target_absent",
+      "start_region": "E",
+      "goal_region": "E",
+      "kind": "holdout_family",
+      "corridor_waypoints": [
+        [
+          8.6,
+          1.2,
+          1.05
+        ],
+        [
+          8.5,
+          1.0,
+          1.1
+        ]
+      ],
+      "note": "new target-absent pose: central tower behind the camera; the map-native MS1 far structure may appear without its green lamp; distinct from existing negative poses"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "holdout_sw_inner_corridor_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_sw_inner_corridor",
+      "region_id": "W",
+      "goal_region_id": "E",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        -9.6,
+        -1.4,
+        0.512
+      ],
+      "start_yaw_rad": 0.0,
+      "goal_position_world_m": [
+        8.2,
+        -0.8,
+        1.0
+      ],
+      "waypoints": [
+        [
+          -9.6,
+          -1.4,
+          0.512
+        ],
+        [
+          -8.6,
+          -4.4,
+          1.0
+        ],
+        [
+          -3.5,
+          -5.2,
+          1.0
+        ],
+        [
+          2.5,
+          -5.2,
+          1.0
+        ],
+        [
+          8.2,
+          -0.8,
+          1.0
+        ]
+      ],
+      "timeout_s": 150.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new inner-south-west corridor at y about -5.2 (W->E); not the south perimeter corridor y=-6.2, not the inner-south E-loop y=-3.0; target visible from the west (far small) and grows as the route approaches E"
+    },
+    {
+      "case_id": "holdout_nw_inner_corridor_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_nw_inner_corridor",
+      "region_id": "E",
+      "goal_region_id": "W",
+      "ground_z_m": -0.038,
+      "start_position_world_m": [
+        9.8,
+        1.4,
+        1.0
+      ],
+      "start_yaw_rad": 0.0,
+      "goal_position_world_m": [
+        -9.4,
+        1.2,
+        1.0
+      ],
+      "waypoints": [
+        [
+          9.8,
+          1.4,
+          1.0
+        ],
+        [
+          9.6,
+          3.8,
+          1.0
+        ],
+        [
+          4.0,
+          5.0,
+          1.0
+        ],
+        [
+          -3.0,
+          5.0,
+          1.0
+        ],
+        [
+          -8.4,
+          3.6,
+          1.0
+        ],
+        [
+          -9.4,
+          1.2,
+          1.0
+        ]
+      ],
+      "timeout_s": 150.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new inner-north corridor at y about +5.0 traversed E->W (backwards while facing +X): new corridor and new approach direction; target visible at start near E then recedes to far range"
+    },
+    {
+      "case_id": "holdout_near_static_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_near_static",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        9.6,
+        0.4,
+        1.1
+      ],
+      "start_yaw_rad": -0.1,
+      "goal_position_world_m": [
+        9.7,
+        0.5,
+        1.1
+      ],
+      "waypoints": [
+        [
+          9.6,
+          0.4,
+          1.1
+        ],
+        [
+          9.4,
+          0.3,
+          1.15
+        ],
+        [
+          9.7,
+          0.5,
+          1.1
+        ]
+      ],
+      "timeout_s": 60.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new near static pose: target at about 1.5-2.1 m, predicted bottom/right truncation; distinct from existing near poses"
+    },
+    {
+      "case_id": "holdout_far_small_target_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_far_small_target",
+      "region_id": "W",
+      "goal_region_id": "W",
+      "ground_z_m": -0.04,
+      "start_position_world_m": [
+        -9.2,
+        0.6,
+        1.2
+      ],
+      "start_yaw_rad": 0.05,
+      "goal_position_world_m": [
+        -9.05,
+        0.4,
+        1.15
+      ],
+      "waypoints": [
+        [
+          -9.2,
+          0.6,
+          1.2
+        ],
+        [
+          -9.05,
+          0.4,
+          1.15
+        ]
+      ],
+      "timeout_s": 60.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new far static pose from W: central target about 20 m away (small, few-pixel green light); MS1 also far in the same view; records far/small conditions"
+    },
+    {
+      "case_id": "holdout_ms1_confuser_alone_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_ms1_confuser_alone",
+      "region_id": "MID",
+      "goal_region_id": "MID",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        7.5,
+        3.0,
+        1.1
+      ],
+      "start_yaw_rad": 2.925,
+      "goal_position_world_m": [
+        7.4,
+        2.8,
+        1.1
+      ],
+      "waypoints": [
+        [
+          7.5,
+          3.0,
+          1.1
+        ],
+        [
+          7.2,
+          3.3,
+          1.1
+        ],
+        [
+          7.8,
+          3.2,
+          1.1
+        ],
+        [
+          7.4,
+          2.8,
+          1.1
+        ]
+      ],
+      "timeout_s": 60.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new MS1-alone viewpoint from the north-east (about 4.6-5.0 m): central tower out of FOV; green-lamp visibility recorded (may be limited from this side)"
+    },
+    {
+      "case_id": "holdout_both_ambiguous_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_both_ambiguous",
+      "region_id": "MID",
+      "goal_region_id": "MID",
+      "ground_z_m": 0.22,
+      "start_position_world_m": [
+        6.0,
+        -3.0,
+        1.2
+      ],
+      "start_yaw_rad": 1.24,
+      "goal_position_world_m": [
+        6.05,
+        -3.15,
+        1.2
+      ],
+      "waypoints": [
+        [
+          6.0,
+          -3.0,
+          1.2
+        ],
+        [
+          6.3,
+          -2.7,
+          1.2
+        ],
+        [
+          5.8,
+          -2.8,
+          1.15
+        ],
+        [
+          6.05,
+          -3.15,
+          1.2
+        ]
+      ],
+      "timeout_s": 60.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new south-east viewpoint where the central target (about 6.3 m) and MS1 (about 7.6 m) appear at similar scale on opposite frame sides; target near the right frame edge (edge truncation) and identity ambiguity condition"
+    },
+    {
+      "case_id": "holdout_target_absent_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "holdout_target_absent",
+      "region_id": "E",
+      "goal_region_id": "E",
+      "ground_z_m": -0.02,
+      "start_position_world_m": [
+        8.6,
+        1.2,
+        1.05
+      ],
+      "start_yaw_rad": 3.34,
+      "goal_position_world_m": [
+        8.5,
+        1.0,
+        1.1
+      ],
+      "waypoints": [
+        [
+          8.6,
+          1.2,
+          1.05
+        ],
+        [
+          8.5,
+          1.0,
+          1.1
+        ]
+      ],
+      "timeout_s": 60.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_holdout_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "new target-absent pose: central tower behind the camera; the map-native MS1 far structure may appear without its green lamp; distinct from existing negative poses"
+    }
+  ],
+  "scene_injections": {},
+  "sampling_rule_frozen": {
+    "status": "FROZEN_BEFORE_CAPTURE",
+    "target_total": "200-400 accepted RGB",
+    "rule": "N=1 unless total accepted exceeds 400; if over, apply one fixed deterministic per-family stride: for each family keep frames at sequence order positions 1, 1+k, 1+2k, ... where k = ceil(total_accepted / 400); no detector-score/random selection; the rule and resulting per-family counts must be written into provenance before any model work",
+    "note": "rule frozen at draft time; not applied until the formal capture is complete and counted"
+  },
+  "families": [
+    {
+      "family": "holdout_sw_inner_corridor",
+      "case_id": "holdout_sw_inner_corridor_0",
+      "conditions": [
+        "normal_front",
+        "scale_distance",
+        "far_small_target"
+      ]
+    },
+    {
+      "family": "holdout_nw_inner_corridor",
+      "case_id": "holdout_nw_inner_corridor_0",
+      "conditions": [
+        "normal_front",
+        "scale_distance",
+        "far_small_target",
+        "edge_truncation_transit",
+        "new_approach_direction"
+      ]
+    },
+    {
+      "family": "holdout_near_static",
+      "case_id": "holdout_near_static_0",
+      "conditions": [
+        "near_1.5_3m",
+        "edge_truncation_bottom"
+      ]
+    },
+    {
+      "family": "holdout_far_small_target",
+      "case_id": "holdout_far_small_target_0",
+      "conditions": [
+        "far_small_target"
+      ]
+    },
+    {
+      "family": "holdout_ms1_confuser_alone",
+      "case_id": "holdout_ms1_confuser_alone_0",
+      "conditions": [
+        "ms1_confuser_alone"
+      ]
+    },
+    {
+      "family": "holdout_both_ambiguous",
+      "case_id": "holdout_both_ambiguous_0",
+      "conditions": [
+        "target_ms1_same_frame_ambiguity",
+        "scale_distance",
+        "edge_truncation_right"
+      ]
+    },
+    {
+      "family": "holdout_target_absent",
+      "case_id": "holdout_target_absent_0",
+      "conditions": [
+        "target_absent",
+        "similar_structure_no_green"
+      ]
+    }
+  ],
+  "conditions_matrix": {},
+  "notes": [
+    "DRAFT prepared during a resource-pause window; not run. No injection required for any holdout family unless decided otherwise (MS1 is map-native).",
+    "All families are new relative to the existing exposed families (south corridor A, north corridor, inner-north y about 3.0, inner-south y about -3.0, E-area sweeps/statics, final pool families, identity cases) — overlap check JSON accompanies this draft."
+  ],
+  "predicted_budget": {
+    "per_case": [
+      {
+        "case_id": "holdout_sw_inner_corridor_0",
+        "family": "holdout_sw_inner_corridor",
+        "predicted_frames": 163,
+        "path_length_m": 21.56,
+        "yaw_deg": 0.0,
+        "target_distance_m": [
+          3.42,
+          21.18
+        ],
+        "target_rel_deg": [
+          3.8,
+          29.9
+        ],
+        "ms1_distance_m": [
+          7.11,
+          14.34
+        ],
+        "ms1_rel_deg": [
+          23.2,
+          137.3
+        ],
+        "conditions": [
+          "normal_front",
+          "scale_distance",
+          "far_small_target"
+        ]
+      },
+      {
+        "case_id": "holdout_nw_inner_corridor_0",
+        "family": "holdout_nw_inner_corridor",
+        "predicted_frames": 177,
+        "path_length_m": 23.31,
+        "yaw_deg": 0.0,
+        "target_distance_m": [
+          2.45,
+          20.96
+        ],
+        "target_rel_deg": [
+          -60.8,
+          -3.3
+        ],
+        "ms1_distance_m": [
+          1.58,
+          12.73
+        ],
+        "ms1_rel_deg": [
+          -135.0,
+          176.5
+        ],
+        "conditions": [
+          "normal_front",
+          "scale_distance",
+          "far_small_target",
+          "edge_truncation_transit",
+          "new_approach_direction"
+        ]
+      },
+      {
+        "case_id": "holdout_near_static_0",
+        "family": "holdout_near_static",
+        "predicted_frames": 9,
+        "path_length_m": 0.59,
+        "yaw_deg": -5.7,
+        "target_distance_m": [
+          1.9,
+          2.14
+        ],
+        "target_rel_deg": [
+          -9.9,
+          -2.6
+        ],
+        "ms1_distance_m": [
+          7.41,
+          7.58
+        ],
+        "ms1_rel_deg": [
+          155.7,
+          158.1
+        ],
+        "conditions": [
+          "near_1.5_3m",
+          "edge_truncation_bottom"
+        ]
+      },
+      {
+        "case_id": "holdout_far_small_target_0",
+        "family": "holdout_far_small_target",
+        "predicted_frames": 6,
+        "path_length_m": 0.25,
+        "yaw_deg": 2.9,
+        "target_distance_m": [
+          20.57,
+          20.73
+        ],
+        "target_rel_deg": [
+          -4.6,
+          -4.0
+        ],
+        "ms1_distance_m": [
+          12.59,
+          12.68
+        ],
+        "ms1_rel_deg": [
+          12.7,
+          13.8
+        ],
+        "conditions": [
+          "far_small_target"
+        ]
+      },
+      {
+        "case_id": "holdout_ms1_confuser_alone_0",
+        "family": "holdout_ms1_confuser_alone",
+        "predicted_frames": 17,
+        "path_length_m": 1.6,
+        "yaw_deg": 167.6,
+        "target_distance_m": [
+          4.92,
+          5.44
+        ],
+        "target_rel_deg": [
+          151.6,
+          158.1
+        ],
+        "ms1_distance_m": [
+          4.3,
+          4.9
+        ],
+        "ms1_rel_deg": [
+          -2.8,
+          2.9
+        ],
+        "conditions": [
+          "ms1_confuser_alone"
+        ]
+      },
+      {
+        "case_id": "holdout_both_ambiguous_0",
+        "family": "holdout_both_ambiguous",
+        "predicted_frames": 16,
+        "path_length_m": 1.37,
+        "yaw_deg": 71.0,
+        "target_distance_m": [
+          5.87,
+          6.36
+        ],
+        "target_rel_deg": [
+          -45.0,
+          -41.2
+        ],
+        "ms1_distance_m": [
+          7.38,
+          7.79
+        ],
+        "ms1_rel_deg": [
+          41.3,
+          45.2
+        ],
+        "conditions": [
+          "target_ms1_same_frame_ambiguity",
+          "scale_distance",
+          "edge_truncation_right"
+        ]
+      },
+      {
+        "case_id": "holdout_target_absent_0",
+        "family": "holdout_target_absent",
+        "predicted_frames": 6,
+        "path_length_m": 0.23,
+        "yaw_deg": 191.4,
+        "target_distance_m": [
+          3.17,
+          3.19
+        ],
+        "target_rel_deg": [
+          146.1,
+          150.1
+        ],
+        "ms1_distance_m": [
+          6.29,
+          6.3
+        ],
+        "ms1_rel_deg": [
+          -40.0,
+          -37.9
+        ],
+        "conditions": [
+          "target_absent",
+          "similar_structure_no_green"
+        ]
+      }
+    ],
+    "total_predicted_frames": 394,
+    "status": "PREDICTED_NOT_MEASURED",
+    "note": "waypoint path length at the measured about-0.55 m/s route speed and 4 Hz sampling; actual counts measured after capture; N=1 unless measured total exceeds 400, then the frozen fixed stride applies"
+  }
+}

@@ -1,0 +1,354 @@
+{
+ "lmf_devid_mutual_overlap_0-follow_only_g1_1.png": {
+  "sha256": "ef1e62ce6e9de4290c6f682386d01a3129ea5e9316980f48964e2c7601e98bb8",
+  "green_pixels": 12,
+  "centroid": [
+   170.5,
+   95.5
+  ],
+  "bbox": [
+   169,
+   94,
+   172,
+   97
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_5.png": {
+  "sha256": "819c7c186b8736ef6380160beef32f81e2240b545b525b0956a1a386f4a64325",
+  "green_pixels": 10,
+  "centroid": [
+   170.8,
+   79.5
+  ],
+  "bbox": [
+   170,
+   78,
+   172,
+   81
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_8.png": {
+  "sha256": "717b76dbd6ef10f62deff02e119760aeb6db91a390656df0c066e96023d78560",
+  "green_pixels": 12,
+  "centroid": [
+   171.0,
+   98.5
+  ],
+  "bbox": [
+   170,
+   97,
+   172,
+   100
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_11.png": {
+  "sha256": "109a4dafb19d2c4fb586efb96e57c26154bae467548eeb269b3dae8c9b0319f9",
+  "green_pixels": 16,
+  "centroid": [
+   169.69,
+   102.06
+  ],
+  "bbox": [
+   168,
+   100,
+   171,
+   104
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_15.png": {
+  "sha256": "d8258c37adabf2388dffeff35772702e13c48b408771a22971887a859e7b4838",
+  "green_pixels": 15,
+  "centroid": [
+   151.53,
+   90.87
+  ],
+  "bbox": [
+   150,
+   89,
+   153,
+   93
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_18.png": {
+  "sha256": "848ecd4d1a77039bf400462b18841bf16b572e47349cb484628d0d9095e77729",
+  "green_pixels": 14,
+  "centroid": [
+   140.5,
+   86.5
+  ],
+  "bbox": [
+   139,
+   85,
+   142,
+   88
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_21.png": {
+  "sha256": "10df8bf1bbc3cf0601f776dfdd5ebffbeaa5171bfee887d9c7204e9bb25f8e9b",
+  "green_pixels": 14,
+  "centroid": [
+   143.5,
+   99.5
+  ],
+  "bbox": [
+   142,
+   98,
+   145,
+   101
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_25.png": {
+  "sha256": "58b4a015f903e67ffe3345703736b0c506259ec7f2d6203a73f336c6ed882b5f",
+  "green_pixels": 10,
+  "centroid": [
+   155.0,
+   95.2
+  ],
+  "bbox": [
+   154,
+   94,
+   156,
+   97
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_28.png": {
+  "sha256": "de989d2866392af879317b046428e1df4e2027b8319f4fae9f6401a3a1101af1",
+  "green_pixels": 9,
+  "centroid": [
+   161.89,
+   98.33
+  ],
+  "bbox": [
+   161,
+   97,
+   163,
+   100
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_31.png": {
+  "sha256": "52ed466c902d7d5767733eabc20b88292d8429005c6cac13462d6d2cca0fe187",
+  "green_pixels": 8,
+  "centroid": [
+   167.12,
+   91.88
+  ],
+  "bbox": [
+   166,
+   91,
+   168,
+   93
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_35.png": {
+  "sha256": "51256111d5c982eac56e1557ed65e39ac7d38ba984b84ae4632a859f8153fe1c",
+  "green_pixels": 10,
+  "centroid": [
+   174.8,
+   99.5
+  ],
+  "bbox": [
+   174,
+   98,
+   176,
+   101
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_38.png": {
+  "sha256": "036c35157317ea2a1f9b13ef31b2f431367300767d4a1c3fbfa054e20d4790ab",
+  "green_pixels": 10,
+  "centroid": [
+   180.2,
+   98.5
+  ],
+  "bbox": [
+   179,
+   97,
+   181,
+   100
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_41.png": {
+  "sha256": "5df2b06a5d881700f1bc18a9a70c2202ebac1a2457a73c0fa6cac4e4a7a216d5",
+  "green_pixels": 13,
+  "centroid": [
+   182.38,
+   88.77
+  ],
+  "bbox": [
+   181,
+   87,
+   184,
+   90
+  ]
+ },
+ "lmf_devid_mutual_overlap_0-follow_only_g1_45.png": {
+  "sha256": "a6b7f6655c079e4ccb245147f4ffe349c7b2368faa3eb5dac3b0bc3587ffece0",
+  "green_pixels": 14,
+  "centroid": [
+   185.29,
+   98.5
+  ],
+  "bbox": [
+   184,
+   97,
+   187,
+   100
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_1.png": {
+  "sha256": "9a350cd651e224f5a9a7870f3cc6404b43dbb4953c28bfcc7a857c4626cc3b8d",
+  "green_pixels": 4,
+  "centroid": [
+   187.5,
+   122.5
+  ],
+  "bbox": [
+   187,
+   122,
+   188,
+   123
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_4.png": {
+  "sha256": "637289e2bee1aa3ad5525d114774bf37d579522c7ca361b73cc4e21a180ae771",
+  "green_pixels": 1,
+  "centroid": [
+   187.0,
+   115.0
+  ],
+  "bbox": [
+   187,
+   115,
+   187,
+   115
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_7.png": {
+  "sha256": "9559c5a4bc24c72904344e48af2d9233fe051af7b847e77502bdcb30fbf7587f",
+  "green_pixels": 1,
+  "centroid": [
+   155.0,
+   112.0
+  ],
+  "bbox": [
+   155,
+   112,
+   155,
+   112
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_11.png": {
+  "sha256": "1b98f4ca0a184155369aea5a1d523419b22954d789b328b571216697597b3971",
+  "green_pixels": 0,
+  "centroid": null,
+  "bbox": null
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_14.png": {
+  "sha256": "6e2b658304a6375c5c715fe6b57750606b51ae42ce2c368c5ff9c4b30b43c86e",
+  "green_pixels": 2,
+  "centroid": [
+   149.0,
+   114.5
+  ],
+  "bbox": [
+   149,
+   114,
+   149,
+   115
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_17.png": {
+  "sha256": "0264741e00faac3bb0c2debbac9f368bd290b9a4fdedfab56c56b4f0d94d46a2",
+  "green_pixels": 2,
+  "centroid": [
+   167.0,
+   112.5
+  ],
+  "bbox": [
+   167,
+   112,
+   167,
+   113
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_20.png": {
+  "sha256": "974c6f99f6571a87590ef32100debf799adf6c9f3f4c032a8ab769e25e5621ba",
+  "green_pixels": 2,
+  "centroid": [
+   153.0,
+   113.5
+  ],
+  "bbox": [
+   153,
+   113,
+   153,
+   114
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_23.png": {
+  "sha256": "0d20e358acae6c48035254e39294e0081afa2ce9e71f705f8dfc250c529e8aaf",
+  "green_pixels": 1,
+  "centroid": [
+   183.0,
+   122.0
+  ],
+  "bbox": [
+   183,
+   122,
+   183,
+   122
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_26.png": {
+  "sha256": "fa95a6babe5d3dbdf8cc98f4698b18a039625e1375dc5d5d1d1ca850672fdaa9",
+  "green_pixels": 1,
+  "centroid": [
+   163.0,
+   111.0
+  ],
+  "bbox": [
+   163,
+   111,
+   163,
+   111
+  ]
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_29.png": {
+  "sha256": "1b204be92d4843eb2cf037be0a5fa95ec6442bd64f42aa04a7a3d425fd6d3af5",
+  "green_pixels": 0,
+  "centroid": null,
+  "bbox": null
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_33.png": {
+  "sha256": "bc9a0e8df320f9d50d877f357201d70f1c20093b1bc56a3e8319669de4fa4755",
+  "green_pixels": 0,
+  "centroid": null,
+  "bbox": null
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_36.png": {
+  "sha256": "84b029fa80291c338bccf381a219b82cf9b8087d32ce9ad692ccea7f0d184789",
+  "green_pixels": 0,
+  "centroid": null,
+  "bbox": null
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_39.png": {
+  "sha256": "ac30983ebf823702182ee18d9ff7b9e968a64b0c8129f3f0b3a9bb4b5d65b626",
+  "green_pixels": 0,
+  "centroid": null,
+  "bbox": null
+ },
+ "lmf_devid_ms1_far_0-follow_only_g2_42.png": {
+  "sha256": "21d15812a3b13358afc8ab1f48365796887e0eb26f9e83f13a9229dd94c73775",
+  "green_pixels": 2,
+  "centroid": [
+   190.5,
+   125.0
+  ],
+  "bbox": [
+   190,
+   125,
+   191,
+   125
+  ]
+ }
+}

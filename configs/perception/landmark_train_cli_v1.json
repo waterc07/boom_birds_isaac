@@ -15,7 +15,8 @@
     "model_freeze": "configs/perception/landmark_model_freeze_v1.json",
     "split_freeze": "configs/perception/landmark_split_freeze_v4.json",
     "label_lists": "configs/perception/landmark_dev_label_lists_v1.json",
-    "annotation_spec": "configs/perception/landmark_annotation_spec_v2_1.json"
+    "annotation_spec": "configs/perception/landmark_annotation_spec_v2_1.json",
+    "run_snapshot": "configs/perception/landmark_run_snapshot_v1.json"
   },
   "train": {
     "epochs": 60,
@@ -89,5 +90,15 @@
     "label_lists_sha256": "0c1c75aed2fdddd6de3773180f93dc643192d2c119eeccbbaea39f2bd23d6488",
     "annotation_spec_sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
     "note": "dev v4: train 160 frames / val 163 frames (HN 53/53); no final or holdout read for training or selection"
+  },
+  "run_snapshot_policy": {
+    "config": "configs/perception/landmark_run_snapshot_v1.json",
+    "phases": [
+      "pre_train",
+      "pre_selection",
+      "post_train"
+    ],
+    "on_mismatch": "INVALID run: training CLI exits 2 and the evidence file is marked INVALID_RUN_SNAPSHOT; the snapshot file is never rewritten and checks are appended to <out>/snapshot_checks.jsonl",
+    "create": "the snapshot is created immediately before training and must contain the frozen v4.1 train/val label, spec and protocol hashes"
   }
 }

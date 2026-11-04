@@ -1,0 +1,154 @@
+{
+  "schema_version": "dsh.landmark_model_freeze.v2",
+  "status": "FROZEN_STAGE_VERIFICATION_DONE_AWAITING_HOLDOUT_DECISION",
+  "created_at": "2026-11-04",
+  "scope": "candidate A 3-seed stage verification on dev v4.1 (old 3px protocol); consumer protocol identity channel unresolved",
+  "selection": {
+    "rule": "highest validation joint narrow-primary, tie-break lower FP, then lower seed (preregistered)",
+    "selected": {
+      "seed": 2,
+      "candidate": "eval_last",
+      "weights_path": "outputs/landmark_train/runs/stage_verify_v5/seed2/seed2/weights/last.pt",
+      "weights_sha256": "6b86ef1fd792395fd969d6c34b854076b481c0ca9672cade483650edd36888dd",
+      "val_metrics_path": "outputs/landmark_train/runs/stage_verify_v5/seed2/eval_last/metrics.json",
+      "val_joint_narrow": {
+        "tp": 60,
+        "denominator": 95,
+        "rate": 0.631578947368421
+      }
+    },
+    "other_seeds": [
+      {
+        "seed": 0,
+        "candidate": "eval_last",
+        "val_joint_tp": 49,
+        "val_joint_denominator": 95,
+        "val_joint_rate": 0.515789
+      },
+      {
+        "seed": 1,
+        "candidate": "eval_last",
+        "val_joint_tp": 43,
+        "val_joint_denominator": 95,
+        "val_joint_rate": 0.452632
+      }
+    ],
+    "worst_seed": {
+      "seed": 1,
+      "val_joint_rate": 0.452632
+    }
+  },
+  "validation_metrics_selected": {
+    "presence": {
+      "tp": 78,
+      "fp": 0,
+      "fn": 17,
+      "tn": 39,
+      "precision": 1,
+      "recall": 0.821053
+    },
+    "identity": {
+      "claims": 80,
+      "correct_claims": 80,
+      "precision": 1,
+      "high_confidence_false_matches": 0,
+      "false_match_rate": 0
+    },
+    "reference": {
+      "coverage": 0.560976,
+      "false_reference_rate": 0.037037,
+      "available_denominator": 41,
+      "unavailable_denominator": 54
+    },
+    "joint": {
+      "narrow_tp": 60,
+      "narrow_denominator": 95,
+      "narrow_rate": 0.631579,
+      "fail_reasons": {
+        "IDENTITY": 2,
+        "PRESENCE": 17,
+        "REFERENCE": 16
+      }
+    },
+    "worst_group": {
+      "family": "fam_north",
+      "joint": "28/50=0.56"
+    },
+    "baseline": {
+      "model": "improvement_v4/baseline_seed0 eval_v41_best",
+      "joint_tp": 38,
+      "joint_denominator": 95,
+      "joint_rate": 0.4,
+      "worst_group_joint": "fam_dev_static_low 0/15=0.0",
+      "delta_vs_selected": 0.231579
+    }
+  },
+  "thresholds": {
+    "source": "configs/perception/landmark_model_freeze_v1.json (frozen on validation during the exploratory package; NOT re-tuned on this 3-seed validation to avoid double dipping)",
+    "tau_det": 0.605476,
+    "tau_conf": 0.605476,
+    "tau_margin": 0.1,
+    "tau_margin_status": "PROPOSED_NO_MULTI_CANDIDATE_VAL_FRAMES",
+    "tau_px": 3,
+    "tau_iou": 0.3,
+    "tau_kpt": 0.5,
+    "tau_kpt_status": "PROPOSED_NOT_FROZEN",
+    "tau_bearing_deg": 3,
+    "tau_bearing_status": "PROPOSED_CONSUMER_PROTOCOL",
+    "caveat": "thresholds reused from the prior validation freeze; a fresh threshold sweep on this validation split was not performed"
+  },
+  "old_protocol_holdout_gate": {
+    "rule_source": "configs/perception/landmark_improvement_gate_v1.json#development_to_holdout_gate",
+    "checks": {
+      "val joint >= 0.60": {
+        "value": 0.631579,
+        "pass": true
+      },
+      "improvement over matched baseline >= +0.08": {
+        "value": 0.231579,
+        "pass": true
+      },
+      "identity FMR <= baseline": {
+        "value": 0,
+        "baseline": 0.1795,
+        "pass": true
+      },
+      "reference coverage >= 0.50": {
+        "value": 0.560976,
+        "pass": true
+      },
+      "worst-group joint not worse than baseline by >0.05": {
+        "value": "0.56",
+        "baseline": "0.0",
+        "pass": true
+      }
+    },
+    "verdict": "PASS"
+  },
+  "consumer_protocol_holdout_gate": {
+    "rule_source": "configs/perception/landmark_consumer_protocol_v1.json#stage_gates.consumer_holdout_gate",
+    "checks": {
+      "consumer success (all-positive) >= 0.50 with confirmed identity": {
+        "value": "0 under strict_unknown (identity confirmation channel absent); raw upper bound 0.6-0.76 not a valid gate input",
+        "pass": false
+      },
+      "identity confirmation channel": {
+        "value": "single-class detector + appearance gate NOT transferable to pipeline boxes; two-class detector NOT RUN",
+        "pass": false
+      }
+    },
+    "verdict": "FAIL (identity confirmation channel missing)"
+  },
+  "rknn": {
+    "status": "UNKNOWN_NOT_RUN",
+    "reason": "no RK3576 board; RKNN-Toolkit2 proprietary and not installed"
+  },
+  "holdout": {
+    "status": "NOT_TRIGGERED",
+    "reason": "consumer protocol holdout gate FAIL; old-protocol gate PASS but an old-3px-only holdout would not answer the consumer identity+bearing requirement"
+  },
+  "license": {
+    "route": "main candidate internal bounded research only; distribution decision pending",
+    "note": "not a legal conclusion"
+  }
+}

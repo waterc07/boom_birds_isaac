@@ -1,0 +1,99 @@
+{
+  "schema_version": "dsh.landmark_holdout_freeze.v2",
+  "status": "SPEC_FROZEN_NOT_TRIGGERED",
+  "generated_at": "2026-11-04T13:25:21.245688+00:00",
+  "generated_by": "datafreeze (T28 holdout pre-registration)",
+  "supersedes_placeholder": {
+    "path": "configs/perception/landmark_holdout_freeze_v1.json",
+    "note": "v1 was a NOT_TRIGGERED placeholder created before the T25 identity case work; v2 freezes the full sampling/coverage/annotation/evaluation specification while still NOT_TRIGGERED"
+  },
+  "trigger": {
+    "gate": {
+      "path": "configs/perception/landmark_improvement_gate_v1.json",
+      "sha256": "7c81ae51c003d4a0271fcb8284a6edbedd3267d103cbb923c87d2ab4c0bddd38"
+    },
+    "rule": "only if the winning candidate (3 seeds, selected on validation) meets ALL of:",
+    "conditions": [
+      "val joint narrow-primary >= 0.60",
+      "val joint improvement over matched baseline >= +0.08 absolute",
+      "identity high-confidence false-match rate <= baseline at the frozen validation threshold",
+      "reference coverage >= 0.50",
+      "worst-group joint not worse than baseline worst-group by more than 0.05"
+    ],
+    "current_state": "NOT_TRIGGERED: improvement gate STOP (candidate A/B failed the pre-registered gate on 2026-11-04); no 3-seed winning candidate and no holdout capture",
+    "trigger_owner": "lead"
+  },
+  "specification": {
+    "min_new_families": 3,
+    "frames_range": [
+      200,
+      400
+    ],
+    "family_rule": "each family is an independent physical trajectory/pose composition; no group or frame may be split across train/val/holdout; no reuse of any existing dev/exploratory/identity frame",
+    "required_conditions": [
+      {
+        "condition": "near_range_large_target",
+        "definition": "target 1.5-3.0 m, green light clearly visible, expected LARGE",
+        "min_frames": 40
+      },
+      {
+        "condition": "far_small_target",
+        "definition": "target >=8 m or green light <=3 px; reference may be UNAVAILABLE and must be labelled as such",
+        "min_frames": 40
+      },
+      {
+        "condition": "edge_truncation",
+        "definition": "target touching image edge; four-edge flags from capture geometry + visual check",
+        "min_frames": 30
+      },
+      {
+        "condition": "ms1_confuser_alone",
+        "definition": "map-native green-lamp MS1 alone, central target out of FOV; MS1 verified=WORLD_POSE_OR_MAP_DB",
+        "min_frames": 30
+      },
+      {
+        "condition": "same_frame_ambiguity",
+        "definition": "central target and MS1 both in frame with scale/lateral or same-bearing contrast; ambiguous frames use ambiguous/UNDECIDABLE, never forced positive",
+        "min_frames": 30
+      },
+      {
+        "condition": "target_absent",
+        "definition": "target physically absent or fully out of FOV and no confuser claimed as target",
+        "min_frames": 30
+      }
+    ],
+    "coverage_budget_note": "condition minima sum to 200; freeze the exact family mix and per-condition counts before capture; report actual denominators per condition",
+    "sampling_rule": {
+      "frozen_before_capture": true,
+      "method": "per family: accepted frames sorted by integer sequence; midpoint systematic idx=floor((i+0.5)*n/k); force-include family endpoints and extreme-condition frames using capture-derived distance/truncation/green metadata only",
+      "k": "derived from the frozen total budget before capture; recorded in the holdout manifest",
+      "no_prediction_based_selection": true,
+      "no_post_hoc_resampling": true
+    },
+    "annotation_rule": {
+      "spec": "configs/perception/landmark_annotation_spec_v2_1.json (or later frozen spec only)",
+      "labels_location": "gitignored external outputs; repository keeps manifest + sha256 + statistics",
+      "who_viewed": "register executor, purpose, time and evidence hash for every batch",
+      "qa": "validate_landmark_annotations.py PASS; no merge into train/val files",
+      "independence_boundary": "same-agent execution is PROCESS-ISOLATED HOLDOUT, not third-party sealed; no certification claim from agent labels",
+      "gt_handling": "GT_UNOBSERVABLE and ambiguous frames are reported separately, not counted as positive/negative localization"
+    },
+    "evaluation_rule": {
+      "runs": 1,
+      "precondition": "model/thresholds/decoder/eval rules frozen before the single holdout evaluation",
+      "no_callback": true,
+      "no_retune": true,
+      "no_rerun": true,
+      "failure": "report FAIL/INCOMPLETE with denominators; no reinterpretation as navigation/board/Gate acceptance"
+    }
+  },
+  "captured": false,
+  "captured_run": null,
+  "holdout_hash": null,
+  "state_note": "This file is the frozen specification only. When the lead triggers the holdout, the executor fills captured_run/frames/hashes into a NEW holdout freeze (v3 or later); this v2 file is never rewritten.",
+  "boundaries": [
+    "internal bounded research only; distribution decision pending",
+    "no control/PPO/Gate promotion",
+    "RKNN/board/real camera UNKNOWN"
+  ]
+}

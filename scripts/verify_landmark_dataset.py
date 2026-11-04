@@ -198,6 +198,15 @@ DATASETS = [
      'description': 'T15 identity/confuser development cases: target alone, '
                     'map-native MS1 alone, three both-in-frame compositions, '
                     'near truncation, full occlusion; default VAL'},
+    {'dataset': 'lm_dev_identity_capture_t25_20261104_sensor',
+     'run': 'lm_dev_identity_capture_t25_20261104',
+     'role': 'development_identity_extra',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v5_t25',
+     'description': 'T25 identity development cases: central target / MS1 '
+                    'mutual overlap, and far MS1 (8-12 m). The formal run '
+                    'failed (CUDA OOM) and the pilot poses are unconfirmed, so '
+                    'v5 EXCLUDES this dataset; keep it pending for a later '
+                    'freeze only after capture confirmation'},
 ]
 
 #: dataset episode-id -> group id.  Every episode must be mapped exactly once.
@@ -272,6 +281,10 @@ EPISODE_GROUPS = {
         'lmf_devid_both_same_bearing_0': 'g_devid_both_same_bearing',
         'lmf_devid_target_near_trunc_0': 'g_devid_target_near_trunc',
         'lmf_devid_full_occlusion_0': 'g_devid_full_occlusion',
+    },
+    'lm_dev_identity_capture_t25_20261104_sensor': {
+        'lmf_devid_mutual_overlap_0': 'g_devid_mutual_overlap',
+        'lmf_devid_ms1_far_0': 'g_devid_ms1_far',
     },
 }
 
@@ -504,6 +517,20 @@ GROUP_DEFS = [
      'route': 'target present but fully hidden by synthetic visual wall',
      'notes': 'GT_UNOBSERVABLE candidate; hn2_occluder_v1 synthetic wall '
               '(EXTERNAL_EVIDENCE, not real arena distribution)'},
+    {'group_id': 'g_devid_mutual_overlap', 'family_id': 'devid_mutual_overlap',
+     'dataset': 'lm_dev_identity_capture_t25_20261104_sensor',
+     'split': 'val', 'view_cluster': 'devid_mutual', 'introduced_in': 'v5_t25',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'central target and MS1 overlap in depth/foreground',
+     'notes': 'T25 mutual-occlusion development case; appearance-only '
+              'identity decisions, no GT position used'},
+    {'group_id': 'g_devid_ms1_far', 'family_id': 'devid_ms1_far',
+     'dataset': 'lm_dev_identity_capture_t25_20261104_sensor',
+     'split': 'val', 'view_cluster': None, 'introduced_in': 'v5_t25',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'far MS1 (about 8-12 m), green visibility recorded',
+     'notes': 'T25 far-MS1 development case; TINY/small-target identity '
+              'reporting must record UNKNOWN where green is unreadable'},
 ]
 
 #: Named dev-split profiles.  'v1' keeps the original split; 'conservative'
@@ -534,6 +561,15 @@ PROFILE_OVERRIDES = {
         'g_lm_ind_staticEtest': 'train',
         'g_geo_staticE': 'train',
     },
+    # v5 moves the identity-only/negative groups into TRAIN and keeps the
+    # both-in-frame / occlusion / new hard cases in val_identity.
+    'v5': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+        'g_devid_target_alone': 'train',
+        'g_devid_target_near_trunc': 'train',
+        'g_devid_ms1_alone': 'train',
+    },
 }
 PROFILE_DESCRIPTIONS = {
     'v1': 'val = north corridor family + E static test viewpoint cluster '
@@ -553,6 +589,10 @@ PROFILE_DESCRIPTIONS = {
     'v4_2': 'v4.1 train unchanged; val adds seven T15 identity/confuser '
             'development groups (val_identity subset) while val_main stays '
             'the v4.1 val for threshold/selection comparability',
+    'v5': 'identity split for identity-aware development: target_alone / '
+          'target_near_trunc / ms1_alone move to TRAIN (identity positives/'
+          'negatives), both_* + full_occlusion + T25 mutual-occlusion / '
+          'far-MS1 stay in val_identity; no group crosses split',
 }
 PROFILE_FREEZE_IDS = {
     'v1': 'landmark_split_freeze_v1',
@@ -561,9 +601,11 @@ PROFILE_FREEZE_IDS = {
     'v4': 'landmark_split_freeze_v4',
     'v4_1': 'landmark_split_freeze_v4_1',
     'v4_2': 'landmark_split_freeze_v4_2',
+    'v5': 'landmark_split_freeze_v5',
 }
 #: Profiles are cumulative: v4 includes everything introduced up to v3 and v4.
-PROFILE_ORDER = {'v1': 1, 'conservative': 2, 'v3': 3, 'v4': 4, 'v4_1': 5, 'v4_2': 6}
+PROFILE_ORDER = {'v1': 1, 'conservative': 2, 'v3': 3, 'v4': 4, 'v4_1': 5,
+                 'v4_2': 6, 'v5': 7, 'v5_t25': 8}
 
 
 def profile_includes(profile, introduced_in):
@@ -669,6 +711,10 @@ FAMILY_DEFS = [
      'description': 'identity dev: near truncation'},
     {'family_id': 'devid_full_occlusion', 'introduced_in': 'v4_2',
      'description': 'identity dev: full occlusion (GT_UNOBSERVABLE)'},
+    {'family_id': 'devid_mutual_overlap', 'introduced_in': 'v5_t25',
+     'description': 'identity dev: target/MS1 mutual overlap (T25)'},
+    {'family_id': 'devid_ms1_far', 'introduced_in': 'v5_t25',
+     'description': 'identity dev: far MS1 about 8-12 m (T25)'},
 ]
 
 
@@ -1479,6 +1525,278 @@ def build_freeze(repo_root, profile='v1'):
                 'v4.2: identity/confuser development cases are in val_identity; '
                 'val_main = v4.1 val for threshold comparability; train '
                 'unchanged. Identity data is development, not sealed/final.')
+        elif profile == 'v5':
+            v42_path = root / 'configs/perception/landmark_split_freeze_v4_2.json'
+            supersedes = None
+            delta = {
+                'base_path': 'configs/perception/landmark_split_freeze_v4_2.json',
+                'base_canonical_sha256': None,
+                'new_groups': [],
+                'new_frames': None,
+                'split_changes': [],
+                'frame_total': sum(len(group.get('frames') or [])
+                                   for group in groups),
+                'split_frame_counts': {
+                    split: sum(len(group.get('frames') or [])
+                               for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'split_group_counts': {
+                    split: sum(1 for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'note': 'v5 moves the identity-only/negative groups to TRAIN '
+                        'and keeps both-in-frame / occlusion / new hard cases '
+                        'in val_identity; no group crosses split',
+            }
+            v42_splits = {}
+            if v42_path.is_file():
+                v42_document = load_json(v42_path)
+                supersedes = {
+                    'path': 'configs/perception/landmark_split_freeze_v4_2.json',
+                    'canonical_sha256': freeze_sha256(v42_document),
+                    'reason': 'v5 re-splits the identity development groups '
+                              '(three identity-only/negative groups to train; '
+                              'both-in-frame/occlusion/new hard cases in '
+                              'val_identity) without changing val_main',
+                }
+                delta['base_canonical_sha256'] = freeze_sha256(v42_document)
+                for split in SPLITS:
+                    for group_id in (v42_document.get('splits') or {}).get(
+                            split) or []:
+                        v42_splits[group_id] = split
+                v42_group_ids = {group['group_id']
+                                 for group in v42_document.get('groups') or []}
+                v5_group_ids = {group['group_id'] for group in groups}
+                delta['new_groups'] = sorted(v5_group_ids - v42_group_ids)
+                v42_frame_total = sum(len(group.get('frames') or [])
+                                      for group in
+                                      v42_document.get('groups') or [])
+                delta['new_frames'] = delta['frame_total'] - v42_frame_total
+                for group in groups:
+                    previous = v42_splits.get(group['group_id'])
+                    if previous and previous != group.get('split'):
+                        delta['split_changes'].append({
+                            'group_id': group['group_id'],
+                            'from': previous,
+                            'to': group.get('split'),
+                        })
+            freeze['supersedes'] = supersedes
+            freeze['delta_from_v4_2'] = delta
+            annotation_lists = _annot2_alignment(root, groups)
+            freeze['annotation_frame_lists'] = annotation_lists
+            if annotation_lists['status'] != 'PASS':
+                raise SystemExit(
+                    'annot2 train/val frame lists are not consistent with the '
+                    'v5 split: %d mismatches, %d unresolved'
+                    % (len(annotation_lists['mismatches']),
+                       len(annotation_lists['unresolved_frames'])))
+            validation_entry = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_val_validation163.json')
+            identity_label_files = []
+            identity_dir = (root / 'outputs/perception/'
+                                  'dev_annotations_20261104')
+            for path in sorted(identity_dir.glob('labels_identity*.json')):
+                if 'manifest' in path.name:
+                    continue
+                entry = _file_entry_if_exists(
+                    root, str(path.relative_to(root)).replace('\\', '/'))
+                if entry:
+                    identity_label_files.append(entry)
+            t26_labels_entry = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'identity_t25/labels_v1.json')
+            t26_labels_status = None
+            if t26_labels_entry:
+                t26_doc = load_json(root / t26_labels_entry['path'])
+                t26_labels_status = t26_doc.get('status')
+            per_case_labels = {}
+            for entry in identity_label_files:
+                document = load_json(root / entry['path'])
+                for item in (document.get('annotations')
+                             or document.get('labels') or []):
+                    case = str(item.get('frame_id', '')).split(
+                        '-follow_only')[0]
+                    per_case_labels[case] = per_case_labels.get(case, 0) + 1
+            identity_labels = (identity_label_files[0]
+                               if identity_label_files else None)
+            identity_groups = {}
+            for group in groups:
+                if not str(group.get('dataset')).startswith(
+                        'lm_dev_identity'):
+                    continue
+                identity_groups[group['group_id']] = {
+                    'split': group.get('split'),
+                    'family_id': group.get('family_id'),
+                    'frames': len(group.get('frames') or []),
+                    'accepted': len([frame for frame in
+                                     group.get('frames') or []
+                                     if frame.get('accepted')]),
+                }
+            identity_train_groups = sorted(
+                group_id for group_id, info in identity_groups.items()
+                if info['split'] == 'train')
+            identity_val_groups = sorted(
+                group_id for group_id, info in identity_groups.items()
+                if info['split'] == 'val')
+            train_identity_labels = sum(
+                per_case_labels.get(episode, 0)
+                for group in groups
+                for episode in group.get('episodes') or []
+                if group['group_id'] in identity_train_groups)
+            val_identity_labels = sum(
+                per_case_labels.get(episode, 0)
+                for group in groups
+                for episode in group.get('episodes') or []
+                if group['group_id'] in identity_val_groups)
+            # T25/T26 new cases detection (mutual occlusion / far MS1)
+            cases_entry = _json_if_exists(
+                root, 'configs/scenarios/landmark_dev_identity_cases_v1.json')
+            route_ids = []
+            case_ids = []
+            if cases_entry:
+                route_ids = [str(route.get('route_id'))
+                             for route in cases_entry[0].get('routes') or []]
+                case_ids = [str(case.get('case_id'))
+                            for case in cases_entry[0].get('cases') or []]
+            has_mutual = any('mutual' in name.lower()
+                             for name in route_ids + case_ids)
+            has_far = any('far' in name.lower()
+                          for name in route_ids + case_ids)
+            extra_datasets = sorted(
+                name for name in datasets_doc
+                if 'identity' in str(name).lower() and
+                name != 'lm_dev_identity_capture_20261104_sensor')
+            extra_case_names = [name for name in case_ids
+                                if 'mutual' in name.lower()
+                                or 'far' in name.lower()]
+            t26_labels_present = any(
+                any(case in per_case_labels for case in extra_case_names)
+                for _ in [0])
+            if has_mutual and has_far and extra_datasets and t26_labels_present:
+                extra_status = 'INGESTED_WITH_T26_LABELS'
+            elif has_mutual and has_far and extra_datasets:
+                extra_status = 'INGESTED_LABELS_PENDING_T26'
+            elif (has_mutual or has_far) and not extra_datasets:
+                extra_status = 'EXCLUDED_T25_PENDING_CAPTURE_CONFIRMATION'
+            elif has_mutual or has_far:
+                extra_status = 'CAPTURED_BUT_NOT_INGESTED'
+            else:
+                extra_status = 'PENDING_T25_T26'
+            freeze['identity_extra_cases'] = {
+                'status': extra_status,
+                'mutual_occlusion_case_present': has_mutual,
+                'far_ms1_case_present': has_far,
+                'extra_identity_datasets': extra_datasets,
+                'identity_label_files': identity_label_files,
+                't26_labels_present': t26_labels_present,
+                't26_labels_available_but_not_in_v5': t26_labels_entry,
+                't26_labels_status': t26_labels_status,
+                't26_provisional_diagnostic_only': bool(
+                    t26_labels_status and
+                    'PROVISIONAL' in str(t26_labels_status).upper()),
+                't25_formal_run_status': 'FAILED_CUDA_OOM_NO_RUN_COMPLETE',
+                't26_selection': _file_entry_if_exists(
+                    root, 'outputs/perception/dev_annotations_20261104/'
+                          'identity_t25/selection.json'),
+                't26_qa': _file_entry_if_exists(
+                    root, 'outputs/perception/dev_annotations_20261104/'
+                          'identity_t25/qa_v1.json'),
+                't26_report': _file_entry_if_exists(
+                    root, 'docs/reports/perception/'
+                          'annotation_verify_20261104/'
+                          'T26_IDENTITY_T25_ANNOTATION_20261104.md'),
+                'note': 'T25 mutual-occlusion / far-MS1 capture and T26 '
+                        'annotation are the remaining v5 inputs; if PENDING, '
+                        'v5 is frozen without them and the report marks the '
+                        'gap INCOMPLETE (no fabricated data)',
+            }
+            freeze['identity_split'] = {
+                'dataset_role': 'DEVELOPMENT',
+                'rule': 'whole identity case = one group; group moves only, '
+                        'never split frames of one case; independent '
+                        'trajectory/pose compositions',
+                'train_groups': identity_train_groups,
+                'val_groups': identity_val_groups,
+                'groups_detail': identity_groups,
+                'labels_train_identity_frames': train_identity_labels,
+                'labels_val_identity_frames': val_identity_labels,
+                'labels_file': identity_labels,
+                'note': 'target_alone / target_near_trunc / ms1_alone train as '
+                        'identity positives and MS1 confuser negatives; '
+                        'both-in-frame / full-occlusion / new mutual / far '
+                        'stay in val_identity for stratified reporting',
+            }
+            val_main_groups = []
+            for group in groups:
+                if group.get('split') != 'val':
+                    continue
+                if group['group_id'] in identity_val_groups:
+                    continue
+                val_main_groups.append(group['group_id'])
+            freeze['splits_subset'] = {
+                'train_main': {
+                    'groups': sorted(group['group_id'] for group in groups
+                                     if group.get('split') == 'train'),
+                    'role': 'development training, includes reused exploratory '
+                            'pool and identity train groups',
+                },
+                'val_main': {
+                    'groups': sorted(val_main_groups),
+                    'role': 'validation for threshold freeze / checkpoint '
+                            'selection; same as v4.1/v4.2 val_main',
+                },
+                'val_identity': {
+                    'groups': sorted(identity_val_groups),
+                    'role': 'identity / same-frame ambiguity / occlusion '
+                            'stratified reporting; do not mix into the main '
+                            'joint threshold selection without recording',
+                },
+            }
+            freeze['annotation_label_sources'] = {
+                'train': {
+                    'dev_labelled_frames': 160,
+                    'reused_exploratory_labelled_frames': 279,
+                    'identity_train_labelled_frames': train_identity_labels,
+                    'total_usable': 160 + 279 + train_identity_labels,
+                },
+                'val_main': {
+                    'frames': 163,
+                    'labels': validation_entry,
+                    'note': 'stable validation163 file excludes identity rows',
+                },
+                'val_identity': {
+                    'frames': val_identity_labels,
+                    'labels': identity_labels,
+                    'note': 'independent identity labels; do not merge into '
+                            'labels_val.json',
+                },
+            }
+            freeze['run_snapshot_reference'] = {
+                'path': 'configs/perception/landmark_run_snapshot_v5.json',
+                'status': 'FROZEN_BY_T28_IMMUTABLE',
+                'note': 'train creates/verifies the run snapshot from this '
+                        'manifest at pre_train / pre_selection / post_train; '
+                        'any hash mismatch marks the run INVALID',
+            }
+            freeze['exposure_registry'] = {
+                'path': 'configs/perception/landmark_exposure_registry_v2.json',
+                'status': 'PRODUCED_SEPARATELY_WITH_ITS_OWN_VERIFY_EVIDENCE',
+            }
+            freeze['holdout_reference'] = {
+                'path': 'configs/perception/landmark_holdout_freeze_v2.json',
+                'status': 'SPEC_FROZEN_NOT_TRIGGERED',
+                'note': 'T28 pre-registered the holdout sampling/coverage/'
+                        'annotation/evaluation spec; the improvement gate is '
+                        'STOP so no holdout capture was triggered',
+            }
+            freeze['identity_cases_pending'] = extra_status not in (
+                'INGESTED_WITH_T26_LABELS', 'INGESTED_LABELS_PENDING_T26')
+            freeze['notes'].append(
+                'v5: identity-only/negative groups moved to train; both-in-'
+                'frame/occlusion/new hard cases stay val_identity; val_main '
+                'unchanged. Identity data is DEVELOPMENT, never final/sealed.')
         else:
             v1_path = root / DEFAULT_FREEZE
             supersedes = None
@@ -3160,6 +3478,7 @@ def build_exposure_registry(repo_root):
 V4_PATH = 'configs/perception/landmark_split_freeze_v4.json'
 V4_1_PATH = 'configs/perception/landmark_split_freeze_v4_1.json'
 V4_2_PATH = 'configs/perception/landmark_split_freeze_v4_2.json'
+V5_PATH = 'configs/perception/landmark_split_freeze_v5.json'
 HOLDOUT_PATH = 'configs/perception/landmark_holdout_freeze_v1.json'
 REGISTRY_V2_PATH = 'configs/perception/landmark_exposure_registry_v2.json'
 GATE_PATH = 'configs/perception/landmark_improvement_gate_v1.json'
@@ -3810,12 +4129,163 @@ def build_exposure_registry_v2(repo_root):
         registry['notes'].append(
             'v4.2 revision: identity/confuser development cases are in '
             'val_identity; all data remains exposed development, never final.')
+    v5_entry = _json_if_exists(root, V5_PATH)
+    if v5_entry:
+        v5 = v5_entry[0]
+        old_by_id = {entry['group_id']: entry for entry in registry['groups']}
+        episode_group = {}
+        for group in v5.get('groups') or []:
+            for episode in group.get('episodes') or []:
+                episode_group[episode] = group['group_id']
+        merged_groups = []
+        identity_train_ids = []
+        identity_val_ids = []
+        reuse_ids = []
+        for group in v5.get('groups') or []:
+            group_id = group['group_id']
+            base = dict(old_by_id.get(group_id) or {})
+            dataset = str(group.get('dataset'))
+            is_identity = dataset.startswith('lm_dev_identity')
+            is_reuse = dataset.startswith('lm_final_candidate')
+            base.update({
+                'group_id': group_id,
+                'source': 'dev_v5',
+                'family_id': group.get('family_id'),
+                'dataset': group.get('dataset'),
+                'split': group.get('split'),
+                'status': 'exposed_development',
+                'certification': 'EXPOSED_DEVELOPMENT',
+            })
+            base['exposure_events'] = sorted(set(
+                base.get('exposure_events') or
+                ['ev_dev_detection_history_20261103']))
+            if is_reuse:
+                base['dataset_role'] = 'DEVELOPMENT_TRAIN'
+                base['exposure_events'] = sorted(set(
+                    base['exposure_events'] +
+                    ['ev_exploratory_reused_as_train_20261104']))
+                base['contamination'] = {
+                    'group_level': True,
+                    'reason': 'old exploratory pool reused as development '
+                              'TRAIN; can never be final/sealed again',
+                }
+                reuse_ids.append(group_id)
+            if is_identity:
+                base['exposure_events'] = sorted(set(
+                    base['exposure_events'] +
+                    ['ev_identity_cases_capture_20261104',
+                     'ev_identity_dev_annotation_20261104']))
+                base['contamination'] = {
+                    'group_level': True,
+                    'reason': 'identity/confuser development case; annotated '
+                              'and viewed during development; not sealed',
+                }
+                if group.get('split') == 'train':
+                    base['dataset_role'] = 'DEVELOPMENT_TRAIN'
+                    identity_train_ids.append(group_id)
+                else:
+                    base['dataset_role'] = 'DEVELOPMENT'
+                    identity_val_ids.append(group_id)
+            merged_groups.append(base)
+        registry['groups'] = merged_groups
+        cases_entry = _json_if_exists(
+            root, 'configs/scenarios/landmark_dev_identity_cases_v1.json')
+        t26_labels = _file_entry_if_exists(
+            root, 'outputs/perception/dev_annotations_20261104/'
+                  'identity_t25/labels_v1.json')
+        t26_status = None
+        if t26_labels:
+            t26_status = load_json(root / t26_labels['path']).get('status')
+        t25_report = _file_entry_if_exists(
+            root, 'docs/reports/perception/annotation_verify_20261104/'
+                  'T26_IDENTITY_T25_READINESS_20261104.md')
+        events = [
+            {
+                'event_id': 'ev_t25_identity_capture_failed_20261104',
+                'type': 'exposed_development_attempt',
+                'date': '2026-11-04',
+                'executor': 'capture (visible foreground Isaac GUI)',
+                'purpose': 'T25 mutual-occlusion / far-MS1 identity capture '
+                           '(60-120 accepted)',
+                'frames_touched': 0,
+                'groups': [],
+                'status': 'FAILED_CUDA_OOM_NO_RUN_COMPLETE_NOT_INGESTED',
+                'evidence_path': ('configs/scenarios/'
+                                  'landmark_dev_identity_cases_v1.json'),
+                'evidence_sha256': cases_entry[1]['sha256']
+                if cases_entry else None,
+                'extent': 'formal run failed (CUDA OOM); pilot data and the '
+                          'provisional annotations are excluded from v5; a '
+                          're-capture is required before any later freeze',
+            },
+            {
+                'event_id': 'ev_t26_identity_t25_provisional_20261104',
+                'type': 'annotation_calibration',
+                'date': '2026-11-04',
+                'executor': 'annot (agent proxy)',
+                'purpose': 'provisional annotation of 28 T25 pilot frames '
+                           '(mutual overlap 14 + far MS1 14)',
+                'frames_touched': 28,
+                'groups': ['g_devid_mutual_overlap', 'g_devid_ms1_far'],
+                'status': 'PROVISIONAL_DIAGNOSTIC_ONLY_NOT_GT_NOT_INGESTED',
+                'evidence_path': t26_labels['path'] if t26_labels else None,
+                'evidence_sha256': t26_labels['sha256'] if t26_labels else None,
+                'evidence_extra': [t25_report] if t25_report else [],
+                'extent': 'top-level status %r; must not be used as v5 '
+                          'val_identity GT or consumer denominator' % (t26_status,),
+            },
+        ]
+        for event in events:
+            if event['event_id'] not in {
+                    existing['event_id'] for existing in registry['events']}:
+                registry['events'].append(event)
+        new_overrides = []
+        for override in registry['frame_overrides']:
+            parsed = parse_frame_id(override.get('frame_id')) or {}
+            group_id = episode_group.get(parsed.get('episode_id'))
+            if group_id is None:
+                continue
+            override = dict(override)
+            override['source'] = 'dev_v5'
+            override['group_id'] = group_id
+            new_overrides.append(override)
+        registry['frame_overrides'] = new_overrides
+        registry['freezes']['dev_v5'] = {
+            'path': V5_PATH,
+            'canonical_sha256': freeze_sha256(v5),
+            'groups': len(v5.get('groups') or []),
+            'frames': sum(len(group.get('frames') or [])
+                          for group in v5.get('groups') or []),
+            'identity_train_groups': len(identity_train_ids),
+            'identity_val_groups': len(identity_val_ids),
+            'reused_train_groups': len(reuse_ids),
+        }
+        registry['revision_for_freeze'] = 'v5'
+        registry['summary'].update({
+            'exposed_development_groups': len(merged_groups),
+            'identity_dev_groups': (len(identity_train_ids) +
+                                    len(identity_val_ids)),
+            'identity_train_groups': len(identity_train_ids),
+            'identity_val_groups': len(identity_val_ids),
+            'val_identity_groups': len(identity_val_ids),
+            'identity_cases_pending': False,
+            't25_capture_status': 'FAILED_CUDA_OOM_EXCLUDED_FROM_V5',
+            't26_labels_status': t26_status,
+            't26_ingested_in_v5': False,
+            'annotation_calibration_frames': len(new_overrides),
+        })
+        registry['notes'].append(
+            'v5 revision: identity train/val split frozen; T25 formal capture '
+            'failed and T26 labels are PROVISIONAL_DIAGNOSTIC_ONLY (excluded); '
+            'all data remains exposed development, never final.')
     return registry
 
 
 def verify_exposure_registry_v2_mode(repo_root, output_relative):
     root = Path(repo_root)
-    if (root / V4_2_PATH).is_file():
+    if (root / V5_PATH).is_file():
+        sources = {'dev_v5': V5_PATH}
+    elif (root / V4_2_PATH).is_file():
         sources = {'dev_v4_2': V4_2_PATH}
     elif (root / V4_1_PATH).is_file():
         sources = {'dev_v4_1': V4_1_PATH}

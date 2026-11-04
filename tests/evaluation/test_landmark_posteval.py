@@ -445,3 +445,57 @@ def test_reproduction_check_reports_mismatch():
     check = pe.reproduction_check(summary, old)
     assert check['match'] is False
     assert any('joint.narrow_tp' in m for m in check['mismatches'])
+
+# --- consumer requirement traceability (task-24) --------------------------
+
+def test_consumer_requirements_trace_to_v22_sections():
+    req = pe.consumer_requirements()
+    assert req['status'] == 'PROPOSED_NOT_FROZEN'
+    assert req['schema_version'] == 'dsh.landmark_consumer_requirement.v1'
+    items = req['items']
+    for key in ('identity', 'reference_availability', 'horizontal_image_bearing',
+                'freshness_and_validity'):
+        assert key in items
+        item = items[key]
+        assert item['source_sections'], key
+        assert item['consumer_need'], key
+        assert item['testable_quantity'], key
+        assert item['forbidden_inputs'], key
+        assert item['status'] == 'PROPOSED', key
+    assert 'world_bearing' in items['horizontal_image_bearing']['forbidden_inputs']
+    assert 'distance' in items['reference_availability']['forbidden_inputs']
+    assert 'ground_truth_position' in items['identity']['forbidden_inputs']
+    assert req['protocol']['identity_rule']
+    assert req['protocol']['bearing_budget_deg']['status'] == 'PROPOSED_NOT_FROZEN'
+
+
+def test_appearance_gate_decision_and_unknown():
+    assert pe.appearance_gate(0.70) == 'ACCEPT'
+    assert pe.appearance_gate(0.30) == 'REJECT'
+    assert pe.appearance_gate(None) == 'UNKNOWN'
+    assert pe.appearance_gate(0.50) == 'ACCEPT'
+    assert pe.appearance_gate(0.70, 0.10) == 'REJECT'
+    assert pe.appearance_gate(0.70, 0.18) == 'ACCEPT'
+    assert pe.appearance_gate(0.70, None) == 'ACCEPT'
+    assert pe.appearance_gate(0.70, 0.10, rel_y_min=None) == 'ACCEPT'
+
+
+def test_appearance_gate_cost_counts_false_and_miss_blocks():
+    objects = [
+        {'kind': 'TARGET', 'aspect_ratio': 1.2, 'green_rel_y': 0.25},
+        {'kind': 'TARGET', 'aspect_ratio': 0.8, 'green_rel_y': None},
+        {'kind': 'TARGET', 'aspect_ratio': 0.4, 'green_rel_y': 0.25},
+        {'kind': 'MS1', 'aspect_ratio': 0.3, 'green_rel_y': 0.09},
+        {'kind': 'MS1', 'aspect_ratio': 0.6, 'green_rel_y': None},  # miss block: no kpt, aspect-only
+    ]
+    cost = pe.appearance_gate_cost(objects)
+    assert cost['target_n'] == 3
+    assert cost['target_accept'] == 2
+    assert cost['target_false_block'] == 1
+    assert cost['ms1_n'] == 2
+    assert cost['ms1_reject'] == 1
+    assert cost['ms1_accept_miss_block'] == 1
+    assert cost['zero_miss_upper_bound_95'] is None
+    cost0 = pe.appearance_gate_cost([{'kind': 'MS1', 'aspect_ratio': 0.2}] * 20)
+    assert cost0['ms1_accept_miss_block'] == 0
+    assert cost0['zero_miss_upper_bound_95'] == pytest.approx(1 - 0.05 ** (1 / 20))

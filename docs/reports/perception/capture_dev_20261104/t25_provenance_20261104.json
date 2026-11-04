@@ -1,0 +1,188 @@
+{
+ "schema_version": "dsh.landmark_t25_capture_provenance.v1",
+ "status": "INCOMPLETE_PILOT_DIAGNOSTIC_FORMAL_FAILED",
+ "status_note": "T25 formal capture not delivered: pilot run completed but its machine positions were not acceptable per image review; the formal re-run failed twice at Isaac/CUDA startup/run. No T25 data is valid for v5, validation or GT.",
+ "task": "task-25 identity supplement: mutual overlap MS1/central tower + far-view MS1",
+ "operator": "teammate capture",
+ "generated_at_local": "2026-11-04",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head_commit": "3491cde1832358f75bc15cab9c4ce0ff4d886d8d"
+ },
+ "manifest": {
+  "file": "configs/scenarios/landmark_dev_identity_cases_v1.json",
+  "sha256_before_t25": "e73350802a400cb1836cce14ec0c5cc278f888b6ff5e726b4692e9ac39b7a0c7",
+  "sha256_current": "861cbec170c4cce22e75da5412f749fd116e2efaabbb4e0131def5d3d36a133d",
+  "current_case_count": 9,
+  "change": "append-only: 2 new routes/cases (lmf_devid_mutual_overlap_0, lmf_devid_ms1_far_0) and a MID_W collection-only observation zone; existing T15 case/route/injection definitions were not modified. The two appended cases were then tuned (patrol poses/yaw) after the pilot image review.",
+  "old_t15_copy_preserved": "docs/reports/perception/capture_dev_20261104/identity_cases_v1.json (T15 copy, unchanged)",
+  "current_copy": "docs/reports/perception/capture_dev_20261104/t25_cases_manifest_after_t25.json",
+  "intermediate_sha256_prefixes": {
+   "after_append": "9f266b4b58ee89d6 (16-char prefix recorded in the capture log; full file no longer exists)",
+   "after_tuning": "0cfaac59d385ca54 (16-char prefix recorded in the capture log; full file no longer exists)",
+   "after_yaw_fix_final": "861cbec170c4cce22e75da5412f749fd116e2efaabbb4e0131def5d3d36a133d"
+  }
+ },
+ "runs": [
+  {
+   "name": "pilot",
+   "dir": "outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104",
+   "sensor_dir": "outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104_sensor",
+   "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_dev_identity_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --only-cases lmf_devid_mutual_overlap_0,lmf_devid_ms1_far_0 --code-commit 3491cde1832358f75bc15cab9c4ce0ff4d886d8d --working-tree T25 identity supplement: mutual overlap + far MS1; branch feat/v2.2-simulation-perception; HEAD 3491cde --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104",
+   "started_at": "2026-11-04T21:22:35.489690+08:00",
+   "finished_at": "2026-11-04T21:23:36.748299+08:00",
+   "outcomes": {
+    "follow_only": {
+     "SUCCESS": 2,
+     "COLLISION": 0,
+     "TIMEOUT": 0,
+     "OUT_OF_BOUNDS": 0,
+     "ABORT": 0,
+     "INVALID": 0
+    }
+   },
+   "episodes": 2,
+   "accepted_rgb": 85,
+   "rgb_images_including_warmup": 91,
+   "per_episode": {
+    "lmf_devid_mutual_overlap_0-follow_only": 44,
+    "lmf_devid_ms1_far_0-follow_only": 41
+   },
+   "run_complete": true,
+   "verdict": "DIAGNOSTIC_ONLY: machine positions not acceptable (case A foreground overlap too large and the far central tower was not clearly distinguishable; case B view was dominated by the map-native central highland in the foreground)",
+   "evidence": "t25_pilot_manifest.json / t25_pilot_summary.json / t25_pilot_complete.json / t25_pilot_sensor_summary.json / t25_frame_conditions_pilot.json / t25_episode_conditions_pilot.json / t25_gui_window_pilot.png"
+  },
+  {
+   "name": "formal_attempt1",
+   "dir": "outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104_formal",
+   "result": "FAILED at startup: torch extension import exception (module torch has no attribute version) during AppLauncher/kit startup",
+   "run_complete": false,
+   "evidence": "t25_formal_failure_torch_import_attempt1.txt"
+  },
+  {
+   "name": "formal_attempt2",
+   "dir": "outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104_formal",
+   "result": "FAILED during episode 2: CUDA out of memory in omni.physx.tensors (Unable to allocate 671088640 bytes for mGpuContactPairsDev); first case mutual_overlap SUCCESS; no run.complete",
+   "run_complete": false,
+   "residual_accepted_rgb": 34,
+   "residual_rgb_images": 37,
+   "evidence": "t25_formal_failure_cuda_oom_attempt2.txt / t25_formal_summary_error.txt / t25_gui_window_formal_attempt2.png"
+  }
+ ],
+ "annot_usage": {
+  "frames": 28,
+  "source_run": "pilot run (outputs/sensor_shadow/lm_dev_identity_capture_t25_20261104_sensor)",
+  "annotator_marking": "PROVISIONAL_DIAGNOSTIC_ONLY",
+  "valid_for_v5_or_gt": false,
+  "note": "confirmed to annot/lead: the 28 annotated frames are from the T25 pilot run, not the formal run; they are annotation-pipeline exercise only and must not be merged into v5 or used as val_identity GT"
+ },
+ "dedup_pilot": {
+  "debug_all6_sensor": {
+   "images": 864,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static4_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static5_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static6_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "debug_static7_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "formal6_sensor": {
+   "images": 864,
+   "overlap_with_t25_pilot": 0
+  },
+  "geo_test_sensor": {
+   "images": 207,
+   "overlap_with_t25_pilot": 0
+  },
+  "gui_evidence2_sensor": {
+   "images": 213,
+   "overlap_with_t25_pilot": 0
+  },
+  "gui_evidence_sensor": {
+   "images": 6,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_capture_20261104_sensor": {
+   "images": 337,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_hn_capture_20261104_sensor": {
+   "images": 59,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_identity_capture_20261104_sensor": {
+   "images": 190,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_smoke2_20261104_sensor": {
+   "images": 24,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_dev_smoke_hn1b_20261104_sensor": {
+   "images": 30,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_devid_smoke_20261104_sensor": {
+   "images": 31,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_final_candidate_20261104_sensor": {
+   "images": 297,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_final_smoke_20261104_sensor": {
+   "images": 114,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_independence_sensor": {
+   "images": 613,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_pilot_north_sensor": {
+   "images": 193,
+   "overlap_with_t25_pilot": 0
+  },
+  "lm_pilot_sensor": {
+   "images": 18,
+   "overlap_with_t25_pilot": 0
+  }
+ },
+ "gui_evidence": {
+  "pilot_mid_run_window": "t25_gui_window_pilot.png",
+  "formal_attempt2_window_diagnostic": "t25_gui_window_formal_attempt2.png",
+  "manifest_fields": "pilot manifest gui_mode=true, headless=false",
+  "limitation": "the GUI was visible in both runs; formal attempt2 crashed with CUDA OOM, so no formal completion evidence exists"
+ },
+ "failures": "see runs[].result and the preserved failure logs; no headless fallback was used; do not re-run for v5 (lead decision: T25 not needed)",
+ "artifacts_sha256": {
+  "pilot_manifest": "bc8f630cf5cdaeb383eb8c4e591d45ab064d00d725a1d2258b84897d33d26670",
+  "pilot_complete": "250b2037c40d238194510efe3f4b4caccb671f6541996112ddb004867d654847",
+  "pilot_observations": "f13987d53f1d33be294e96f0b1a0148e4a0ee218170f4225e67b204e43eb141d",
+  "formal_summary_error": "097d74826056828074f1e50f87b7b667d51ad00783b32c4f231af47c1d9bf3e9",
+  "failed_attempt1_error": "cb151ed8f974c5390a1862028e40559741a5249ec97e3695abce10866fbf24c4",
+  "failed_attempt2_error": "097d74826056828074f1e50f87b7b667d51ad00783b32c4f231af47c1d9bf3e9",
+  "cases_manifest_current": "861cbec170c4cce22e75da5412f749fd116e2efaabbb4e0131def5d3d36a133d"
+ },
+ "holdout_draft": {
+  "file": "docs/reports/perception/capture_dev_20261104/holdout_plan/HOLDOUT_CASE_MANIFEST_DRAFT_v1.json",
+  "status": "DRAFT_NOT_FROZEN_NOT_RUN",
+  "trigger": "per lead: holdout NOT_TRIGGERED pending final gate decision; no Isaac run"
+ },
+ "limitations": [
+  "T25 formal data does not exist (no run.complete); the pilot run is diagnostic only and its machine positions are unqualified",
+  "no four-side truncation/green_pixel formal condition table is claimed for T25 because the formal capture is incomplete; pilot-side conditions are preserved as diagnostic only",
+  "image sha dedup was performed only on the pilot pool (0 overlap with 20 existing sensor runs); the formal residual images are diagnostic and not deduped into a pool",
+  "no annotation/training/model/board/navigation/Gate claim; T25 is INCOMPLETE and does not feed v5"
+ ]
+}

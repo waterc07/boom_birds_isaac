@@ -200,7 +200,7 @@
 | src/boom_birds/evaluation/landmark_onnx.py | 纯 numpy/cv2 库：letterbox 几何、NMS、raw 解码、决策比较、配对；供测试与脚本复用 | 6c409587… |
 | configs/perception/landmark_export_v1.json | 导出/对齐策略与容差；仅 repo 相对路径，无本机私有绝对路径 | 50ca3676… |
 | tests/evaluation/test_landmark_onnx.py | 18 条回归（红→绿，含 venv 端到端集成 1 条） | 3dd73fa7… |
-| docs/reports/perception/onnx_parity_20261104.json | 版本化证据 JSON（parity 脚本输出 + artifact_notes） | 4cbcabc0… |
+| docs/reports/perception/onnx_parity_20261104.json | 版本化证据 JSON（T14 输出 + artifact_notes；T29 追加 t29_candidate_A 段后 sha 更新，T14 顶层字段/数字未改） | fd820c1d… |
 
 训练/停止器/阈值冻结/数据准备 CLI 由 teammate “train” 交付（scripts/landmark_train_cli.py、scripts/landmark_freeze_thresholds.py、configs/perception/landmark_train_cli_v1.json）；本任务未重写该文件，只在其 --help 冒烟层验证可执行。两文件写域已通过 team message 协调。
 
@@ -245,7 +245,7 @@ $env:TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD = '1'
 
 ## 9. 交付核对（本次实际结果）
 
-- 版本化证据：本文件 ONNX_PARITY_20261104.md + [onnx_parity_20261104.json](onnx_parity_20261104.json)（sha 4cbcabc0…，79799 bytes；含 artifact_notes）。
+- 版本化证据：本文件 ONNX_PARITY_20261104.md + [onnx_parity_20261104.json](onnx_parity_20261104.json)（sha fd820c1d…，286904 bytes；含 artifact_notes 与 T29 追加段；T14 顶层字段/数字未改，合并前副本 sha 4cbcabc0… 存于 ignored outputs）。
 - ignored 运行产物：outputs/perception/onnx_parity_20261104/{full/parity_detail.json, export/export_evidence.json, gpu_repeatability.json, parity_run.log, pytest_full.log}；版本化 JSON + 版本化脚本/配置即可复现，不依赖 ignored 脚本。
 - 全部关键数字带分母：126 帧总样本 / 72 GT 帧 / 90 关键点配对 / 17 legacy observation 翻转 / 18 legacy joint 翻转 / 7 near-threshold / 8 multi-candidate。
 - 未提升 Gate、未接控制、未跑 PPO、未改 Isaac venv、未 commit/push。
@@ -263,3 +263,89 @@ $env:TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD = '1'
 ## 11. 使用边界
 
 本报告是 host 端导出/解码一致性证据：证明“ONNX 图与 .pt 数值等价、raw 解码与 ultralytics 后处理在统一预处理下等价、旧 4.67 px 差异来自预处理模式且会翻转判定”。它不证明模型效果达标、不证明 RK3576 可部署、不证明真实相机可用、不构成导航/Gate 验收；final/val 的数字边界仍以对应报告为准。
+
+---
+
+## 12. T29 增量：候选 A（3-seed 选定 seed2/last）三路径对齐
+
+> **状态：** COMPLETED_CANDIDATE_A（host 端三轮径一致性/决策层证据；不是效果认证、不是 sealed final、不是板端/导航验收）
+> **来源章节：** T22 stage verification（候选 A 3 seed 选定 seed2/last，val joint 60/95=0.6316）；本文件 §2–§7 的三路径方法；configs/perception/landmark_export_v1.json
+> **证据域：** 隔离 .venv/landmark-train；186 帧（real val 48 + old exploratory final 24 只读 + identity 文档 62 + 合成 52；134 帧有 GT）；CPU primary；无板端/实机
+> **最后核对：** 2026-11-04
+
+### 12.1 候选模型与选中依据
+
+| 项 | 值 |
+| --- | --- |
+| 候选 | candidate_A_3seed（T22 阶段验证，v4.1 train 固定快照，seeds 0/1/2，≤60 epoch，仅 val_main 选模） |
+| 选定模型 | outputs/landmark_train/runs/stage_verify_v5/seed2/seed2/weights/last.pt；sha256 6b86ef1f…；6403273 bytes |
+| 选中依据 | val_main eval_last joint：seed2 **60/95=0.6316**（P1.000/R0.821/ref_cov 0.561/FMR 0.000）；seed0 49/95=0.516；seed1 43/95=0.453；选择规则=val joint 最高→FP 更低→seed 更小 |
+| selection evidence | outputs/landmark_train/runs/stage_verify_v5/seed2/bounded_evidence_seed2.json（sha256 cc102be3…；parity evidence 记录其 sha 与 selected_weights_sha256） |
+| train 运行 | 55 epoch（early stop at 55，best 35），6.356 s/epoch，349.6 s，AMP，batch16，imgsz640 |
+| 限制 | 仅 val_main 选模/阈值；未读 final/holdout；非能力认证 |
+
+### 12.2 导出与验证（真实 CLI，exit 0）
+
+- 命令：scripts/landmark_export_onnx.py --model <candidate>.pt --out outputs/perception/onnx_parity_20261104/t29_candidateA/candidateA_last_opset18.onnx --json-out .../export_evidence.json --overwrite --verify
+- ONNX：sha256 **a15b9af9…**，12549686 bytes，opset 18，graph nodes 272，simplify=true，input [1,3,640,640]。
+- 数值校验：torch(CPU) vs onnxruntime(CPU) 同一画布 raw max |Δ|=?（export 判定 relative=1.478e-6 通过；atol 判据为 relative）；verdict overall=true。
+- 说明：configs/perception/landmark_export_v1.json 的 source_weights_sha256 仍钉 T14 冻结模型（d4ffe49a…）；候选模式通过 --candidate-label 记录 pin 不匹配并改用实际 sha（evidence 的 pt_sha_pin_check.enforced=false，非静默忽略）。
+
+### 12.3 三路径对齐（186 帧，PARITY_PASS）
+
+样本：real val 48 + old exploratory final 24（只读）+ identity 文档 62（全部；ms1_similar 9、ms1_both 26、target_absent 9、occluded 9）+ 合成 52（aspect/edge/multi）；134 帧有 GT；near_threshold 2。运行 223.4 s（CPU，5 路径/帧）。
+
+| 指标 | 值 | 分母/说明 |
+| --- | --- | --- |
+| self_check | **PASS** | raw_parity + onnx_equivalence(null) + 三对 primary 的 0 翻转门 |
+| torch vs onnxruntime raw | max abs **0.020782**；relative **3.247e-5** | 186 帧，通过（≤1e-3 相对） |
+| A pt_square vs B onnx_native_square | observation 翻转 **0/186**；joint 翻转 **0/134**；kpt max **8.22e-5 px** | primary |
+| A vs C raw_ort_square | 翻转 **0/186**；joint **0/134**；kpt max **8.22e-5 px** | primary |
+| B vs C | 翻转 **0/186**；joint **0/134**；kpt **0.0 px** | primary |
+
+### 12.4 决策层矩阵（T29 重点：身份/拒绝/bearing，不止 raw）
+
+三对 primary 的 10 个决策层全部 **0 翻转**（分母 186 帧 / 134 GT）：
+
+| 层 | A vs B | A vs C | B vs C |
+| --- | ---: | ---: | ---: |
+| presence | 0 | 0 | 0 |
+| reference | 0 | 0 | 0 |
+| identity_claim | 0 | 0 | 0 |
+| identity_gt（identity_correct） | 0 | 0 | 0 |
+| false_claim（GT 缺席帧） | 0 | 0 | 0 |
+| reject_reason | 0 | 0 | 0 |
+| invalid_status（UNKNOWN/REJECTED） | 0 | 0 | 0 |
+| bearing | 0 | 0 | 0 |
+| bearing_presence | 0 | 0 | 0 |
+| joint | 0 | 0 | 0 |
+
+- body bearing：primary 对上 max |Δbearing| = **1.59e-5°**（A↔B/A↔C），B↔C=0.0°；远低于 tau_bearing_deg=0.01° 与消费端 3° 口径。
+- identity 统计（每路径相同）：DETECTED 98 / NOT_DETECTED 88；claims 94；wrong_claims（claim 且 identity_correct 非真）**0**；claims_on_absent（GT 缺席帧上仍 claim）**21**。
+  - 关键判读：claims_on_absent=21 说明三路径**一致地**在负例上产生 identity claim——这是模型单候选+分数门的行为，**不是路径差异**；“一致”不等于“身份正确”；因此身份能力仍只能 UNKNOWN/appearance-gated，不能因 0 翻转而宣布 identity 达标。
+- 拒绝层：三路径 reject_reason/invalid_status 完全一致；边缘截断帧 56、keypoint_unavailable 51 帧的拒绝分布逐路径相同（0 翻转）。
+
+### 12.5 MS1、多候选、近阈值
+
+| 场景 | 帧数 | 三路径分布（完全相同） | 判读 |
+| --- | ---: | --- | --- |
+| ms1_similar（目标缺席、MS1 相似结构） | 9 | 每路径均 NOT_DETECTED 且 claim=False | 该模型样本内不误报 MS1；不证明身份判别（MS1 训练负例仍缺） |
+| ms1_both（目标+MS1 同框） | 26 | DETECTED 且 reason=None 6；DETECTED 且 REFERENCE_UNAVAILABLE 6；NOT_DETECTED 14；每帧 candidate_count=1 | 同框场景未产生第二候选差异 |
+| multi_candidate（合成双塔） | 34（含 26 个 ms1_both 打标） | candidates=1 reason=None 7；candidates=1 REFERENCE_UNAVAILABLE 7；candidates=0 17；**candidates=2 且 MULTIPLE_CANDIDATES 3** | 真实出现多候选拒绝的 3 帧在三路径完全一致（拒绝语义不被导出/解码改变） |
+| near_threshold（|top score−tau_det|≤0.05） | 2 | 三对 primary status 翻转 0 | 样本少，不作 population 结论 |
+
+### 12.6 旧 legacy 预处理解释（仍成立）
+
+- legacy 对比（pt_default_rect vs onnx_native_default）：joint 翻转 **17/134**；kpt max **7.860 px**；bearing max |Δ| **1.860°**。
+- 与 T14 结论一致：legacy 差异来自 .pt rect（640×480）与 .onnx square（640×640）预处理模式；统一画布后 primary 0 翻转。候选 A 也未改变这一归因。
+- T14 旧数字（4.67px 关键帧等）不改，见 §4。
+
+### 12.7 结论与边界
+
+- 候选 A（seed2/last）ONNX 导出与 raw 解码在 186 帧上与 .pt/原生 ONNX **10 个决策层全部 0 翻转**；身份 claim/拒绝 reason/bearing 均无路径差异；图/导出/解码一致性 by host-side evidence：**PASS**。
+- 这**不**说明候选 A 效果达标、身份可用、板端可部署或导航可用：identity 仍不可认证（MS1/负例/claim-on-absent 21）；RKNN/板端/真实相机 UNKNOWN；final/holdout 未读。
+- 与 T22 关系：候选 A 3 seed 阶段验证的选模只来自 val_main；本 T29 结果只是“导出/解码不改变判定”，不改 T22 的阶段门结论。
+- 工具扩展：landmark_onnx.py 新增 identity/rejection/bearing 决策层；landmark_onnx_parity.py 新增 identity 文档/MS1/多候选场景、--candidate-label/--selection-json/--tau-bearing-deg/--expected-pt-sha；self_check 增加 10 层 0 翻转门。向后兼容 T14 字段。
+- 验证：tests/evaluation/test_landmark_onnx.py **18 passed**（含 venv 端到端集成）；全仓 pytest **1101 passed**（T29 时点，4:29；T14 时点为 1058，历史保留）；scripts/planning/audit_documents.py PASS。
+- JSON 合并：docs/reports/perception/onnx_parity_20261104.json 追加 t29_candidate_A 段（T14 顶层字段/数字未改；合并前副本 sha 4cbcabc0… 存于 outputs/perception/onnx_parity_20261104/t29_candidateA/t14_evidence_before_candidateA_merge.json；合并后 sha fd820c1d…）。
+- 证据路径：ignored outputs/perception/onnx_parity_20261104/t29_candidateA/{candidateA_last_opset18.onnx, export_evidence.json, parity/evidence.json, parity/parity_detail.json, parity.log}。

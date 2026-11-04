@@ -44,6 +44,16 @@
 - 工程：训练/停止器/阈值/导出/parity/重算脚本已入库并有 CLI+配置；标签漂移首轮 eval 判 INVALID 并记录。
 - 路线建议：停止“单类 pose+3px 2D+单身份”认证级路线；若要继续，收窄为 bearing-primary + 可标注域 + identity=UNKNOWN/appearance-gated，并补近距大目标严格绿光数据与独立标注。
 
+## 地标阶段门勘误、候选 A 三 seed 与消费者协议（2026-11-04 四阶段）
+
+- **阶段门勘误**：上一包把 holdout 门误用于 pilot→3seed；gate 文件 pilot 门为 +0.05/FMR/coverage-0.02，A pilot 满足 → 补完 3 seed。见 [勘误](perception/GATE_STAGE_ERRATA_20261104.md)。
+- **候选 A 3 seed（旧 3px，val_main 163/95）**：seed0 0.516、seed1 0.453、seed2 **0.632（选定）**；baseline 0.400；Δ+0.232；presence P1.0/R0.821、refcov 0.561、identity P1.0/FMR 0。旧协议 holdout 门 **PASS**。见 [阶段验证](perception/training_20261104/STAGE_VERIFICATION_20261104.md) 与 [模型冻结 v2](../../configs/perception/landmark_model_freeze_v2.json)。
+- **消费者协议（身份+水平 bearing+可用性+有效）**：strict_unknown 下 consumer 成功=0（单类 detector 无身份确认通道）；raw claim 上界 0.5–0.76 仅诊断。appearance gate 在 annotated box 可分（aspect AUC 1.0）但 pipeline 预测框不可迁移；two-class detector NOT RUN。消费者 holdout 门 **FAIL** → **holdout NOT_TRIGGERED**。见 [消费者评测](perception/CONSUMER_EVAL_20261104.md) 与 [汇总报告](perception/LANDMARK_ROUND4_GATE_AND_CONSUMER_RESULTS_20261104.md)。
+- **不可变快照**：13 artifacts 在 pre_train/pre_selection/post_train 校验；3 seed 全部 VALID；标签漂移阻断。v5 freeze（train 19 组/1857、val 11 组/921）泄漏审计/外部索引 PASS。
+- **ONNX 三路径（候选 A 选定）**：PARITY_PASS，186 帧/134 metric 帧全部决策层 0 翻转（presence/reference/identity claim/identity gt/false claim/reject reason/bearing/joint）；raw 相对差 1.48e-6；RKNN/板端 UNKNOWN。
+- **身份案例缺口**：T25 补采 INCOMPLETE（CUDA OOM、无 run.complete；pilot 机位不合格），T26 28 帧 PROVISIONAL_DIAGNOSTIC_ONLY 不纳入；holdout v2 预注册 SPEC_FROZEN_NOT_TRIGGERED。
+- **下一包建议**：实现 two-class 身份通道（tower vs similar structure/MS1）并重新预注册 consumer gate；之后按 holdout v2 补采与一次性评价。
+
 ## 当前能力限制
 
 - 几何/绿灯独立测试 presence TP/FP/FN/TN 为 13/0/5/12；18 个正例中有 9 个定位标注，定位子集联合达标 3/9。3/18 表示全部正例中已确认达标的比例，不能把未标注帧一律解释为定位失败。成功检测样本上的低 anchor 误差不代表全部正例的整体精度。

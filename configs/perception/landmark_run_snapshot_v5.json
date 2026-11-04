@@ -1,0 +1,109 @@
+{
+  "schema_version": "dsh.landmark_run_snapshot.v1",
+  "status": "FROZEN",
+  "purpose": "immutable run snapshot for v5 identity-aware bounded landmark experiments: record sha256/size of the frozen split, label sources, annotation spec, protocols and gate before training; verify at pre_train / pre_selection / post_train; any mismatch marks the run INVALID",
+  "split_freeze": {
+    "id": "split_freeze_v5",
+    "path": "configs/perception/landmark_split_freeze_v5.json",
+    "kind": "data_split"
+  },
+  "tracked_artifacts": [
+    {
+      "id": "split_freeze_v5",
+      "path": "configs/perception/landmark_split_freeze_v5.json",
+      "kind": "data_split"
+    },
+    {
+      "id": "dev_train_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
+      "kind": "labels"
+    },
+    {
+      "id": "reuse_train_labels",
+      "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "identity_train_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_identity_dev.json",
+      "kind": "labels"
+    },
+    {
+      "id": "train_merged_labels",
+      "path": "outputs/landmark_train/dataset/labels_train_v5_merged.json",
+      "kind": "labels"
+    },
+    {
+      "id": "val_main_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_val_validation163.json",
+      "kind": "labels"
+    },
+    {
+      "id": "annotation_spec_v2_1",
+      "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+      "kind": "annotation_spec"
+    },
+    {
+      "id": "training_protocol",
+      "path": "configs/perception/landmark_train_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "improvement_protocol",
+      "path": "configs/perception/landmark_improvement_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "improvement_gate",
+      "path": "configs/perception/landmark_improvement_gate_v1.json",
+      "kind": "gate"
+    },
+    {
+      "id": "train_cli_config",
+      "path": "configs/perception/landmark_train_cli_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "model_yaml",
+      "path": "outputs/landmark_train/dataset/landmark_yolov8n-pose-1kpt.yaml",
+      "kind": "model"
+    },
+    {
+      "id": "dataset_build_v5",
+      "path": "outputs/landmark_train/dataset/dev_v5/dataset_build.json",
+      "kind": "dataset"
+    },
+    {
+      "id": "dataset_data_yaml",
+      "path": "outputs/landmark_train/dataset/dev_v5/data.yaml",
+      "kind": "dataset"
+    }
+  ],
+  "checks": {
+    "phases": [
+      "pre_train",
+      "pre_selection",
+      "post_train"
+    ],
+    "rule": "create the snapshot immediately before training; verify at every phase; any sha/size/existence mismatch marks the run INVALID and the training CLI must exit non-zero without writing a selectable model",
+    "immutable": "the snapshot file is never rewritten after creation; verification results are appended to a separate check log"
+  },
+  "label_sources": {
+    "train": "dev 160 frames (labels_train) + reused exploratory 279 frames (labels_v1) + identity train representative frames 27 (labels_identity_dev, groups target_alone/near_trunc/ms1_alone)",
+    "train_merged": "outputs/landmark_train/dataset/labels_train_v5_merged.json is produced by the training prepare step BEFORE --create; it must combine the three train sources with the v5 freeze group rules",
+    "val_main": "163 frames (labels_val_validation163, excludes identity rows)",
+    "val_identity": "35 representative frames (labels_identity_dev, both_*/full_occlusion); identity metrics are reported on val_identity, not mixed into the main joint threshold selection"
+  },
+  "t25_t26_pending": {
+    "status": "EXCLUDED_FROM_V5",
+    "reason": "the T25 formal capture run failed (CUDA OOM) and pilot poses are unconfirmed; T26 labels exist only for those unconfirmed images, so v5 does not include mutual-occlusion / far-MS1 groups or labels; record as INCOMPLETE gap"
+  },
+  "notes": [
+    "only repo-relative paths; no machine-private absolute paths",
+    "labels are never shared as mutable files: training and evaluation read the frozen paths recorded here",
+    "weights and logs stay in ignored outputs/; the snapshot records hashes only",
+    "this manifest is frozen by T28; the v1 manifest belongs to the v4.1 candidate-A runs and is not modified"
+  ],
+  "scope": "bounded internal landmark experiment; shadow only; no PPO/control/board/navigation/Gate claims",
+  "license": "internal bounded research only (user 2026-11-04); external distribution undecided; not a legal conclusion"
+}

@@ -1,0 +1,87 @@
+stages: ["load contract and cases", "create env"]
+
+Traceback (most recent call last):
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\cuda\__init__.py", line 383, in _lazy_init
+    queued_call()
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\cuda\__init__.py", line 249, in _check_capability
+    if torch.version.cuda is not None:  # on ROCm we don't want this check
+       ^^^^^^^^^^^^^
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\__init__.py", line 2688, in __getattr__
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
+AttributeError: module 'torch' has no attribute 'version'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 404, in <module>
+    env = QuadcopterEnv(cfg)
+          ^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab_tasks/isaaclab_tasks/direct/quadcopter/quadcopter_env.py", line 107, in __init__
+    super().__init__(cfg, render_mode, **kwargs)
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/envs/direct_rl_env.py", line 106, in __init__
+    self.sim: SimulationContext = SimulationContext(self.cfg.sim)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:/isaac/isaaclab/source/isaaclab/isaaclab/sim/simulation_context.py", line 241, in __init__
+    self._gravity_tensor = torch.tensor(self.cfg.gravity, dtype=torch.float32, device=self.cfg.device)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\cuda\__init__.py", line 389, in _lazy_init
+    raise DeferredCudaCallError(msg) from e
+torch.cuda.DeferredCudaCallError: CUDA call failed lazily at initialization with error: module 'torch' has no attribute 'version'
+
+CUDA call was originally invoked at:
+
+  File "E:\isaac\proj_boom_birds\scripts\run_dynamic_eval.py", line 115, in <module>
+    app = AppLauncher(args).app
+  File "E:\isaac\IsaacLab\source\isaaclab\isaaclab\app\app_launcher.py", line 131, in __init__
+    self._create_app()
+  File "E:\isaac\IsaacLab\source\isaaclab\isaaclab\app\app_launcher.py", line 823, in _create_app
+    self._app = SimulationApp(self._sim_app_config, experience=self._sim_experience_file)
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\exts\isaacsim.simulation_app\isaacsim\simulation_app\simulation_app.py", line 270, in __init__
+    self._start_app()
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\exts\isaacsim.simulation_app\isaacsim\simulation_app\simulation_app.py", line 534, in _start_app
+    self.app.startup("kit", os.environ["CARB_APP_PATH"], args)
+  File "PythonExtension.cpp::startup()", line 2, in <module>
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\kit\kernel\py\omni\ext\_impl\_internal.py", line 337, in startup_extension
+    _extensions[ext_id].startup()
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\kit\kernel\py\omni\ext\_impl\_internal.py", line 220, in startup
+    module = self._custom_importer(ext_module, self._reload_enabled)
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\kit\kernel\py\omni\ext\_impl\_internal.py", line 196, in _custom_importer
+    return _import_public(ext_module.path, ext_module.name, reload_enabled)
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\kit\kernel\py\omni\ext\_impl\_internal.py", line 103, in _import_public
+    module = import_module(module_name)
+  File "E:\isaac\env_isaaclab\Lib\site-packages\isaacsim\kit\kernel\py\omni\ext\_impl\custom_importer.py", line 85, in import_module
+    return importlib.import_module(name)
+  File "E:\软件\python\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "e:/isaac/env_isaaclab/lib/site-packages/isaacsim/exts/isaacsim.core.cloner/isaacsim/core/cloner/__init__.py", line 16, in <module>
+    from .impl.cloner import *
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "e:/isaac/env_isaaclab/lib/site-packages/isaacsim/exts/isaacsim.core.cloner/isaacsim/core/cloner/impl/cloner.py", line 21, in <module>
+    import torch
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\__init__.py", line 2064, in <module>
+    _C._initExtension(_manager_path())
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\cuda\__init__.py", line 317, in <module>
+    _lazy_call(_check_capability)
+  File "E:\isaac\env_isaaclab\Lib\site-packages\torch\cuda\__init__.py", line 314, in _lazy_call
+    _queued_calls.append((callable, traceback.format_stack()))
+

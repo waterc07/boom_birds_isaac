@@ -65,7 +65,8 @@ __all__ = [
     'strict_green_mask', 'green_components',
     'analyze_frame', 'aggregate', 'bearing_flip_counts',
     'green_anchor_audit', 'tiny_reannotation_plan', 'blind_frame_list',
-    'reproduction_check', 'build_diagnosis', 'main',
+    'reproduction_check', 'build_diagnosis', 'consumer_requirements',
+    'appearance_gate', 'appearance_gate_cost', 'main',
 ]
 
 SCHEMA_VERSION = 'dsh.landmark_posteval.v1'
@@ -1374,3 +1375,289 @@ def main(argv=None):
 
 if __name__ == '__main__':
     raise SystemExit(main())
+
+
+# --- consumer requirement traceability (task T24) -------------------------
+CONSUMER_REQUIREMENT_SCHEMA = 'dsh.landmark_consumer_requirement.v1'
+BEARING_BUDGET_DEG_PROPOSED = {
+    'median': 3.0,
+    'p90': 5.0,
+    'status': 'PROPOSED_NOT_FROZEN',
+    'source': 'LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 2.2 '
+              '(adopted as the working consumer budget; not yet frozen by lead)',
+    'legacy_proxy': 'the historical 3 px 2D rule is about 1.074 deg at fx=160 and '
+                    'is NOT the consumer unit',
+}
+
+
+def consumer_requirements():
+    """PROPOSED consumer-requirement contract traced to V2.2 sections.
+
+    This is the basis the lead may freeze as the landmark consumer protocol.
+    It separates what the downstream consumes from what the perception module
+    may not use: world bearing, range/distance, ground-truth position, oracle
+    region, bbox centre as a physical anchor, and absence as proof.
+    """
+    return {
+        'schema_version': CONSUMER_REQUIREMENT_SCHEMA,
+        'status': 'PROPOSED_NOT_FROZEN',
+        'freeze_owner': 'lead',
+        'source_document': 'docs/design/RMUC2027_UAV_V2_2.md',
+        'principle': 'the consumer needs region/landmark identity, an explicitly '
+                     'available reference point, the horizontal IMAGE bearing and '
+                     'fresh valid observation metadata; it never gets world '
+                     'bearing, range, ground-truth position or an oracle region',
+        'items': {
+            'identity': {
+                'source_sections': ['7.4', '7.5', '7.6', '7.7', '9.1'],
+                'consumer_need': 'which landmark/region the detection is: '
+                                 'visible_landmark_ids, landmark_match_confidence '
+                                 'and region_candidates (7.7); choose the next '
+                                 'visible landmark and update the region '
+                                 'hypothesis (7.5); keep multiple hypotheses when '
+                                 'ambiguous instead of forcing one (7.6)',
+                'testable_quantity': 'frame-level landmark_id correctness; '
+                                     'identity precision (claims denominator), '
+                                     'identity recall (positive denominator) and '
+                                     'high-confidence false-match rate on verified '
+                                     'similar-structure negatives; ambiguous -> '
+                                     'UNKNOWN or multiple hypotheses, never a '
+                                     'forced single identity',
+                'required_observation_fields': ['landmark_id', 'landmark_class',
+                                                'landmark_match_confidence',
+                                                'visibility', 'validity',
+                                                'ambiguity/candidate_count'],
+                'forbidden_inputs': ['ground_truth_position', 'oracle_region',
+                                     'target_world_position', 'distance',
+                                     'world_bearing', 'future_steps'],
+                'failure_policy': 'a false match is worse than a miss: claim '
+                                  'landmark_id only with class evidence + a '
+                                  'single candidate / accepted margin + an '
+                                  'appearance gate; otherwise UNKNOWN',
+                'current_evidence': 'single-class frozen model gave 0/9 false '
+                                    'identity claims on MS1-alone development '
+                                    'frames but has no identity channel; 9/9 is '
+                                    'not a certification denominator (95% upper '
+                                    'bound 28.3%); a retrained v4 baseline '
+                                    'detected MS1 as a second candidate in 1/30 '
+                                    'inner_north frames',
+                'status': 'PROPOSED',
+            },
+            'reference_availability': {
+                'source_sections': ['7.5', '7.6', '7.7', '9.1'],
+                'consumer_need': 'a stable physical reference point for the '
+                                 'bearing; if the reference point is not visible '
+                                 'there is no anchor and the consumer must '
+                                 'reject/UNKNOWN instead of guessing (7.6)',
+                'testable_quantity': 'correct UNAVAILABLE declarations on GT-'
+                                     'unavailable positives; false-reference rate '
+                                     'on GT-unavailable positives; reference '
+                                     'coverage denominator = positives with an '
+                                     'available GT reference point; presence '
+                                     'misses and non-emitted keypoints stay in the '
+                                     'coverage denominator',
+                'required_observation_fields': ['reference_status',
+                                                'reference_unavailable_reason',
+                                                'keypoint/bearing null when '
+                                                'UNAVAILABLE'],
+                'forbidden_inputs': ['bbox_centre_as_anchor', 'guessed_keypoint',
+                                     'distance', 'single_center_depth',
+                                     'ground_truth_position', 'world_bearing'],
+                'failure_policy': 'emit a keypoint only when it is observed; '
+                                  'otherwise explicit UNAVAILABLE with a reason; '
+                                  'never a placeholder coordinate',
+                'current_evidence': 'old final: 20/20 correct UNAVAILABLE '
+                                    'declarations, 0/20 false references; '
+                                    'coverage 62/218=0.284 at tau_px=3.0; '
+                                    '37 no-keypoint emissions = 28 confidence '
+                                    'suppressed + 9 presence misses',
+                'status': 'PROPOSED',
+            },
+            'horizontal_image_bearing': {
+                'source_sections': ['7.7', '9.1', '11.1'],
+                'consumer_need': 'coarse_heading_sector / image bearing for the '
+                                 'region-level next step (7.7); the bearing is an '
+                                 'image angle atan2(x_px - cx_px, fx_px), not a '
+                                 'world bearing and not a range',
+                'testable_quantity': 'absolute error of the image bearing versus '
+                                     'the labelled reference point, reported as '
+                                     'median/P90 on emitted keypoints (error-'
+                                     'distribution denominator) and as a pass '
+                                     'rate over every applicable frame '
+                                     '(availability+misse s denominator); the '
+                                     'historical 3 px 2D rule is reported '
+                                     'separately as a legacy proxy',
+                'required_observation_fields': ['bearing_x_rad/bearing_deg',
+                                                'bearing_definition',
+                                                'intrinsics used', 'validity'],
+                'forbidden_inputs': ['world_bearing', 'attitude_transform_claim',
+                                     'distance', 'ground_truth_position',
+                                     'pose_derived_target_bearing'],
+                'failure_policy': 'no bearing without an available reference '
+                                  'point; no world bearing/distance claim from '
+                                  'this module; invalid -> explicit reason',
+                'current_evidence': 'old final emitted 181 keypoints: image '
+                                    'bearing median 0.546 deg / P90 1.188 deg / '
+                                    'max 2.248 deg; 87/181 fail the legacy 3 px '
+                                    '2D rule but pass the 1.074 deg single-axis '
+                                    'equivalent; bearing<=1.074 deg usable '
+                                    '149/218=0.683, <=3 deg 181/218=0.830',
+                'bearing_budget_deg': dict(BEARING_BUDGET_DEG_PROPOSED),
+                'status': 'PROPOSED',
+            },
+            'freshness_and_validity': {
+                'source_sections': ['7.5', '7.7', '11.1'],
+                'consumer_need': 'timestamp, localization_epoch, valid flag and '
+                                 'sensor age/quality; stale, duplicate, '
+                                 'generation-mismatched or invalid observations '
+                                 'must be rejected, never zero-filled (11.1 '
+                                 'Student inputs include sensor quality, validity '
+                                 'and data age)',
+                'testable_quantity': 'explicit validity/reason fields present; '
+                                     'age <= allowed_age_ns; generation '
+                                     'monotonic; duplicate/stale rejection; '
+                                     'capture_time_source and exposure status '
+                                     'declared',
+                'required_observation_fields': ['timestamp/capture_sim_ns',
+                                                'localization_epoch',
+                                                'sync_generation', 'valid',
+                                                'reject_reason', 'age_ns',
+                                                'capture_time_source',
+                                                'exposure_time_status'],
+                'forbidden_inputs': ['old_epoch_message', 'ground_truth_position',
+                                     'zero_as_valid_placeholder',
+                                     'stale_frame_reuse'],
+                'failure_policy': 'reject with an explicit reason; no zero '
+                                  'substitution; no re-stamping to extend TTL; '
+                                  'absence is not proof the landmark does not '
+                                  'exist',
+                'current_evidence': 'v2 observation/consumer contract and TTL '
+                                    'rejection tests exist; the simulated sensor '
+                                    'capture_time is SIM_UPDATE_SAMPLE_TIME, not a '
+                                    'real exposure time; full camera-to-consumer '
+                                    'latency is UNKNOWN',
+                'status': 'PROPOSED',
+            },
+        },
+        'protocol': {
+            'identity_rule': 'claim landmark_id only if class evidence exists AND '
+                             'the appearance gate passes AND (single candidate or '
+                             'accepted margin); otherwise UNKNOWN with candidate '
+                             'count; a single-class tower output must never be '
+                             'mapped unconditionally to the central tower id',
+            'appearance_gate_proposed': {
+                'aspect_ratio_min': 0.50,
+                'green_rel_y_min': 0.18,
+                'applies_when': 'bbox height >= 20 px; below that identity=UNKNOWN',
+                'status': 'PROPOSED_NOT_FROZEN',
+                'basis': '62 development identity frames, 44 target / 35 MS1 '
+                         'objects: aspect 0.632-1.778 vs 0.201-0.438; green_rel_y '
+                         '0.212-0.396 vs 0.062-0.122 (AUC 1.0 each on this '
+                         'sample)',
+            },
+            'reference_rule': 'reference point/bearing only when visible; '
+                              'otherwise explicit UNAVAILABLE + reason',
+            'bearing_budget_deg': dict(BEARING_BUDGET_DEG_PROPOSED),
+            'bearing_definition': 'atan2(x_px - cx_px, fx_px); image angle only',
+            'legacy_placement_rule': {'tau_px': 3.0,
+                                      'status': 'LEGACY_2D_PROXY_NOT_CONSUMER_UNIT'},
+            'freshness_rule': {'allowed_age_ns': 250000000,
+                               'status': 'PROPOSED; actual camera-to-consumer '
+                                         'latency and exposure are UNKNOWN'},
+            'reject_reasons': ['TARGET_AMBIGUOUS', 'REFERENCE_UNAVAILABLE',
+                               'OCCLUDED', 'TRUNCATED_POLICY',
+                               'MULTIPLE_CANDIDATES', 'INVALID_OBSERVATION',
+                               'STALE', 'DUPLICATE', 'GENERATION_MISMATCH'],
+            'evaluation_mapping': 'presence / identity / reference-availability / '
+                                  'localization are separate; joint is a '
+                                  'composite and is not a consumer metric; the '
+                                  'identity precision denominator is claims, the '
+                                  'recall denominator is positives, the '
+                                  'localization denominator is available-reference '
+                                  'positives',
+            'applicability_domain': [
+                'valid for the current 320x240 synthetic development domain',
+                'identity gate not valid below ~20 px bbox height (TINY 9-14 px '
+                'blind annotation: 12/12 undecidable)',
+                'no certification, no real-arena distribution, no board timing',
+            ],
+        },
+        'evidence': {
+            'posteval_report': 'docs/reports/perception/posteval_20261104/'
+                               'POSTEVAL_DIAGNOSIS_20261104.md',
+            'identity_analysis': 'docs/reports/perception/posteval_20261104/'
+                                 'MS1_IDENTITY_ANALYSIS_20261104.json',
+            'eval_definition_audit': 'docs/reports/perception/'
+                                     'EVAL_DEFINITION_AUDIT_20261104.md',
+            'task_interface': 'configs/perception/'
+                              'landmark_task_interface_proposed_v1.json',
+        },
+        'boundaries': ['internal bounded research only; distribution pending',
+                       'no control/PPO/Gate promotion',
+                       'not a certification or sealed-final claim'],
+    }
+
+
+def appearance_gate(aspect_ratio, green_rel_y=None, *, aspect_min=0.50,
+                    rel_y_min=0.18):
+    """PROPOSED appearance gate for a single tower-class detection.
+
+    Returns 'ACCEPT', 'REJECT' or 'UNKNOWN'.  The gate uses image-geometry
+    observables only: bbox aspect ratio and, when a reference keypoint is
+    emitted, the green lamp vertical position relative to the bbox.  A missing
+    aspect ratio is UNKNOWN (never silently accepted).
+    """
+    if aspect_ratio is None:
+        return 'UNKNOWN'
+    if float(aspect_ratio) < float(aspect_min):
+        return 'REJECT'
+    if (rel_y_min is not None and green_rel_y is not None
+            and float(green_rel_y) < float(rel_y_min)):
+        return 'REJECT'
+    return 'ACCEPT'
+
+
+def appearance_gate_cost(objects, *, aspect_min=0.50, rel_y_min=0.18):
+    """Confusion and asymmetric cost of the PROPOSED appearance gate.
+
+    objects: iterable of dicts with kind in {'TARGET','MS1'} (TARGET = central
+    tower object, MS1 = similar structure), aspect_ratio and optional
+    green_rel_y.  A false block rejects a genuine target (identity becomes
+    UNKNOWN: availability cost); a miss block accepts MS1 (false identity:
+    safety-relevant and weighted 5x in the report).
+    """
+    objects = list(objects)
+    targets = [o for o in objects if o.get('kind') == 'TARGET']
+    ms1s = [o for o in objects if o.get('kind') == 'MS1']
+
+    def decision(obj):
+        return appearance_gate(obj.get('aspect_ratio'), obj.get('green_rel_y'),
+                               aspect_min=aspect_min, rel_y_min=rel_y_min)
+
+    target_accept = sum(1 for o in targets if decision(o) == 'ACCEPT')
+    target_false_block = sum(1 for o in targets if decision(o) == 'REJECT')
+    target_unknown = sum(1 for o in targets if decision(o) == 'UNKNOWN')
+    ms1_accept = sum(1 for o in ms1s if decision(o) == 'ACCEPT')
+    ms1_reject = sum(1 for o in ms1s if decision(o) == 'REJECT')
+    ms1_unknown = sum(1 for o in ms1s if decision(o) == 'UNKNOWN')
+    n_ms1 = len(ms1s)
+    zero_bound = ((1 - 0.05 ** (1.0 / n_ms1))
+                  if (n_ms1 and ms1_accept == 0) else None)
+    return {
+        'rule': 'identity ACCEPT only if aspect_ratio >= %s; if a reference '
+                'keypoint is emitted also require green_rel_y >= %s; otherwise '
+                'UNKNOWN/REJECT' % (aspect_min, rel_y_min),
+        'target_n': len(targets),
+        'target_accept': target_accept,
+        'target_false_block': target_false_block,
+        'target_unknown': target_unknown,
+        'ms1_n': n_ms1,
+        'ms1_reject': ms1_reject,
+        'ms1_accept_miss_block': ms1_accept,
+        'ms1_unknown': ms1_unknown,
+        'false_block_rate': _rate(target_false_block, len(targets)),
+        'miss_block_rate': _rate(ms1_accept, n_ms1),
+        'zero_miss_upper_bound_95': zero_bound,
+        'cost_weight_note': 'miss block (false identity) is safety-relevant and '
+                            'treated as 5x the availability cost of a false block',
+    }
