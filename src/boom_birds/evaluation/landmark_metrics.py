@@ -212,7 +212,12 @@ def evaluate_frame(gt, pred, *, tau_iou, reference_px, tau_px, tau_conf,
         'bbox_iou': None,
         'reference_class': 'GT_UNOBSERVABLE',
         'reference_correct': None,
+        'gt_reference_available': False,
+        'gt_reference_unavailable': False,
+        'keypoint_emitted': keypoint is not None,
         'anchor_error_px': None,
+        'dx_px': None,
+        'dy_px': None,
         'gt_bearing_deg': None,
         'pred_bearing_deg': None,
         'bearing_error_deg': None,
@@ -222,10 +227,15 @@ def evaluate_frame(gt, pred, *, tau_iou, reference_px, tau_px, tau_conf,
         'joint_evaluable': False,
         'joint_ok': None,
         'joint_fail_reason': None,
+        'joint_branch': None,
         'strata': dict(strata or {}),
     }
     if not observable:
         return row
+
+    row['keypoint_emitted'] = keypoint is not None
+    row['gt_reference_available'] = ref_label == 'VISIBLE'
+    row['gt_reference_unavailable'] = ref_label == 'UNAVAILABLE'
 
     # --- presence -------------------------------------------------------
     if unobservable_pred:
@@ -257,9 +267,12 @@ def evaluate_frame(gt, pred, *, tau_iou, reference_px, tau_px, tau_conf,
             raise MetricDefinitionError('VISIBLE gt reference with an emitted '
                                         'keypoint requires reference_px')
         else:
-            anchor_error = math.hypot(float(keypoint[0]) - float(reference_px[0]),
-                                      float(keypoint[1]) - float(reference_px[1]))
+            dx = float(keypoint[0]) - float(reference_px[0])
+            dy = float(keypoint[1]) - float(reference_px[1])
+            anchor_error = math.hypot(dx, dy)
             row['anchor_error_px'] = anchor_error
+            row['dx_px'] = dx
+            row['dy_px'] = dy
             reference_correct = anchor_error <= float(tau_px)
             reference_class = ('PRESENT_AND_AVAILABLE' if reference_correct
                                else 'PRESENT_WRONG_ANCHOR')
@@ -293,6 +306,9 @@ def evaluate_frame(gt, pred, *, tau_iou, reference_px, tau_px, tau_conf,
     # --- joint ----------------------------------------------------------
     joint_evaluable = bool(gt_bbox is not None and ref_label is not None)
     row['joint_evaluable'] = joint_evaluable
+    if joint_evaluable:
+        row['joint_branch'] = ('AVAILABILITY_DECLARATION'
+                               if ref_label == 'UNAVAILABLE' else 'LOCALIZATION')
     if joint_evaluable:
         if presence_class != PRESENCE_TP:
             joint_ok = False

@@ -1,0 +1,1029 @@
+{
+ "rule": "deterministic per-case systematic selection: first 2 + last 2 accepted frames + even stride over the middle, capped at 10 per case (<=72 total); no detector/score based selection",
+ "total_representative_frames": 62,
+ "cases": {
+  "lmf_devid_target_alone_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_3.png",
+    "sequence": 3,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 13,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_4.png",
+    "sequence": 4,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 16,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_5.png",
+    "sequence": 5,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 16,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_9.png",
+    "sequence": 9,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 13,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_13.png",
+    "sequence": 13,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 11,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_17.png",
+    "sequence": 17,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 20,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_21.png",
+    "sequence": 21,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 20,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_25.png",
+    "sequence": 25,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 16,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_alone_0-follow_only_g1_26.png",
+    "sequence": 26,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 15,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   }
+  ],
+  "lmf_devid_ms1_alone_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_3.png",
+    "sequence": 3,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 29,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_4.png",
+    "sequence": 4,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 28,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_5.png",
+    "sequence": 5,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 27,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_10.png",
+    "sequence": 10,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 21,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_15.png",
+    "sequence": 15,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 16,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_20.png",
+    "sequence": 20,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 25,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_25.png",
+    "sequence": 25,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 43,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_29.png",
+    "sequence": 29,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 73,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_ms1_alone_0-follow_only_g2_30.png",
+    "sequence": 30,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 71,
+    "target_fov_status": "IN_FRONT_OUTSIDE_IMAGE",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": null,
+    "injected_wall_fully_occludes_tower_geometric": null
+   }
+  ],
+  "lmf_devid_both_scale_lateral_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_3.png",
+    "sequence": 3,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 5,
+    "ms1_green_pixels_strict": 28,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_4.png",
+    "sequence": 4,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 5,
+    "ms1_green_pixels_strict": 28,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_5.png",
+    "sequence": 5,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 4,
+    "ms1_green_pixels_strict": 26,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_9.png",
+    "sequence": 9,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 4,
+    "ms1_green_pixels_strict": 22,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_13.png",
+    "sequence": 13,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 4,
+    "ms1_green_pixels_strict": 31,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_17.png",
+    "sequence": 17,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 2,
+    "ms1_green_pixels_strict": 37,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_20.png",
+    "sequence": 20,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 4,
+    "ms1_green_pixels_strict": 31,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_21.png",
+    "sequence": 21,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 1,
+    "ms1_green_pixels_strict": 9,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   }
+  ],
+  "lmf_devid_both_mid_similar_scale_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_3.png",
+    "sequence": 3,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 2,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_4.png",
+    "sequence": 4,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 2,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_5.png",
+    "sequence": 5,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 3,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_9.png",
+    "sequence": 9,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_13.png",
+    "sequence": 13,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_17.png",
+    "sequence": 17,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 3,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_21.png",
+    "sequence": 21,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 2,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_24.png",
+    "sequence": 24,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 2,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_mid_similar_scale_0-follow_only_g4_25.png",
+    "sequence": 25,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 2,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   }
+  ],
+  "lmf_devid_both_same_bearing_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_3.png",
+    "sequence": 3,
+    "target_visible_expected": true,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 1,
+    "ms1_green_pixels_strict": 9,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_4.png",
+    "sequence": 4,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 9,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_5.png",
+    "sequence": 5,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 11,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_9.png",
+    "sequence": 9,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 12,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_13.png",
+    "sequence": 13,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 11,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_17.png",
+    "sequence": 17,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 10,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_21.png",
+    "sequence": 21,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 9,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_23.png",
+    "sequence": 23,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 9,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_both_same_bearing_0-follow_only_g5_24.png",
+    "sequence": 24,
+    "target_visible_expected": false,
+    "ms1_visible_expected": true,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 10,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "IN_FOV",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   }
+  ],
+  "lmf_devid_target_near_trunc_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_3.png",
+    "sequence": 3,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 55,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_4.png",
+    "sequence": 4,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 49,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_5.png",
+    "sequence": 5,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 47,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_9.png",
+    "sequence": 9,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 38,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_13.png",
+    "sequence": 13,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 36,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_17.png",
+    "sequence": 17,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 48,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_21.png",
+    "sequence": 21,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 70,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_25.png",
+    "sequence": 25,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 58,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   },
+   {
+    "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_26.png",
+    "sequence": 26,
+    "target_visible_expected": true,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 54,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": true
+    },
+    "injected_wall_fully_occludes_tower_geometric": null
+   }
+  ],
+  "lmf_devid_full_occlusion_0-follow_only": [
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_3.png",
+    "sequence": 3,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_4.png",
+    "sequence": 4,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_5.png",
+    "sequence": 5,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_10.png",
+    "sequence": 10,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_15.png",
+    "sequence": 15,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_20.png",
+    "sequence": 20,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_25.png",
+    "sequence": 25,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_30.png",
+    "sequence": 30,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   },
+   {
+    "frame_id": "lmf_devid_full_occlusion_0-follow_only_g7_31.png",
+    "sequence": 31,
+    "target_visible_expected": false,
+    "ms1_visible_expected": false,
+    "target_green_pixels_strict": 0,
+    "ms1_green_pixels_strict": 0,
+    "target_fov_status": "IN_FOV",
+    "ms1_fov_status": "BEHIND_CAMERA",
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "injected_wall_fully_occludes_tower_geometric": true
+   }
+  ]
+ }
+}

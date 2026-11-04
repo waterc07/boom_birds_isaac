@@ -1,0 +1,844 @@
+{
+  "schema_version": "dsh.landmark_tiny_blind_disagreement.v1",
+  "created_at": "2026-11-04",
+  "inputs": {
+    "blind_labels": "docs/reports/perception/annotation_verify_20261104/labels_tiny_blind.json",
+    "blind_labels_sha256": "be08ca8baa0948d919de921d0f7ffac85bd6379c872e5a546d2a072812fa730a",
+    "blind_frame_list_sha256": "fc3508de23b8d16c593d0e2bad27889de89d3e4ed68a1704e01ba50b37364941",
+    "original_labels": [
+      "labels_train.json",
+      "labels_val.json (current sha 4e8e877e...)"
+    ],
+    "comparison_computed_by": "diag (independent of annot)"
+  },
+  "pre_registered_gates": {
+    "presence_agreement_min": 0.9,
+    "reference_availability_agreement_min": 0.9,
+    "keypoint_median_px_max": 2.0,
+    "keypoint_p90_px_max": 4.0,
+    "bbox_iou_median_min": 0.5
+  },
+  "summary": {
+    "overall": {
+      "frames": 22,
+      "blind_undecidable": 14,
+      "decided": 8,
+      "presence_agree": 8,
+      "reference_availability_agree": 8,
+      "reference_availability_agreement_decided": 1.0,
+      "truncation_agree": 6,
+      "truncation_agreement_decided": 0.75,
+      "presence_agreement_strict": 0.3636,
+      "presence_agreement_decided": 1.0,
+      "bbox_iou": {
+        "n": 6,
+        "median": 0.4341,
+        "p90": 0.6677
+      },
+      "keypoint_px": {
+        "n": 6,
+        "median": 0.8231,
+        "p90": 2.1587,
+        "max": 2.1587
+      }
+    },
+    "control_absent": {
+      "frames": 4,
+      "blind_undecidable": 2,
+      "decided": 2,
+      "presence_agree": 2,
+      "reference_availability_agree": 2,
+      "reference_availability_agreement_decided": 1.0,
+      "truncation_agree": 2,
+      "truncation_agreement_decided": 1.0,
+      "presence_agreement_strict": 0.5,
+      "presence_agreement_decided": 1.0,
+      "bbox_iou": {
+        "n": 0,
+        "median": null,
+        "p90": null
+      },
+      "keypoint_px": {
+        "n": 0,
+        "median": null,
+        "p90": null,
+        "max": null
+      }
+    },
+    "small_green_cue": {
+      "frames": 6,
+      "blind_undecidable": 0,
+      "decided": 6,
+      "presence_agree": 6,
+      "reference_availability_agree": 6,
+      "reference_availability_agreement_decided": 1.0,
+      "truncation_agree": 4,
+      "truncation_agreement_decided": 0.6667,
+      "presence_agreement_strict": 1.0,
+      "presence_agreement_decided": 1.0,
+      "bbox_iou": {
+        "n": 6,
+        "median": 0.4341,
+        "p90": 0.6677
+      },
+      "keypoint_px": {
+        "n": 6,
+        "median": 0.8231,
+        "p90": 2.1587,
+        "max": 2.1587
+      }
+    },
+    "tiny_positive": {
+      "frames": 12,
+      "blind_undecidable": 12,
+      "decided": 0,
+      "presence_agree": 0,
+      "reference_availability_agree": 0,
+      "reference_availability_agreement_decided": null,
+      "truncation_agree": 0,
+      "truncation_agreement_decided": null,
+      "presence_agreement_strict": 0.0,
+      "presence_agreement_decided": null,
+      "bbox_iou": {
+        "n": 0,
+        "median": null,
+        "p90": null
+      },
+      "keypoint_px": {
+        "n": 0,
+        "median": null,
+        "p90": null,
+        "max": null
+      }
+    }
+  },
+  "frames": [
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "role": "tiny_positive",
+      "family": "fam_dev_inner_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 1,
+      "blind_green_pixels": 1,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "far inner_north frame (~20 m): central tower would be about 9 px; cannot distinguish it from the central-field gantry/robots at this resolution; largest strict-",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
+      "role": "tiny_positive",
+      "family": "fam_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 1,
+      "blind_green_pixels": 1,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "dynamic_A_north far frame: target-sized structure below reliable identifiability; green cue not on a tower head | blind: did not read original labels/model pred",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_22.png",
+      "role": "tiny_positive",
+      "family": "fam_south_A",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "dev_south_new frame with no strict green; central gantry/robots visible but a ~10 px central tower cannot be identified with confidence | blind: did not read or",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "sensor_static_0-follow_only_g1_3.png",
+      "role": "tiny_positive",
+      "family": "fam_static_W_start",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 1,
+      "blind_green_pixels": 1,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "sensor_static_0: large gray box/robot dominates; target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "role": "tiny_positive",
+      "family": "fam_dev_inner_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 2,
+      "blind_green_pixels": 2,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "inner_north far frame: target-size structure not separable from gantry | blind: did not read original labels/model predictions/old final results; green_pixels u",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
+      "role": "tiny_positive",
+      "family": "fam_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "dynamic_A_north: no strict green; central structures only, target not identifiable | blind: did not read original labels/model predictions/old final results; gr",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_25.png",
+      "role": "tiny_positive",
+      "family": "fam_south_A",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "dev_south_new early frame: target not identifiable among central structures | blind: did not read original labels/model predictions/old final results; green_pix",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "sensor_static_1-follow_only_g2_3.png",
+      "role": "tiny_positive",
+      "family": "fam_static_W_start",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "sensor_static_1: large gantry box/robot; target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels uses th",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "role": "tiny_positive",
+      "family": "fam_dev_inner_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 3,
+      "blind_green_pixels": 3,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "inner_north: strict green (3 px) is on a green-lit object, not on an identifiable tower head | blind: did not read original labels/model predictions/old final r",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_14.png",
+      "role": "tiny_positive",
+      "family": "fam_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 1,
+      "blind_green_pixels": 1,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "test_north far frame: target not identifiable at this scale | blind: did not read original labels/model predictions/old final results; green_pixels uses the str",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "sensor_reset_0-follow_only_g5_27.png",
+      "role": "tiny_positive",
+      "family": "fam_south_A",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "sensor_reset route view: gantry/robot structures; target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixel",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "role": "tiny_positive",
+      "family": "fam_dev_inner_north",
+      "original_present": true,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 2,
+      "blind_green_pixels": 2,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "inner_north: green cue on thin pillar (confuser), tower not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "role": "small_green_cue",
+      "family": "fam_dev_inner_north",
+      "original_present": true,
+      "blind_present": true,
+      "blind_undecidable": false,
+      "blind_confidence": "HIGH",
+      "original_reference_available": true,
+      "blind_reference_available": true,
+      "bbox_iou": 0.5144706368899923,
+      "keypoint_distance_px": 1.0630145812734755,
+      "original_green_pixels": 10,
+      "blind_green_pixels": 10,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": true,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "target tower clearly identifiable at right edge, head+arms+green light; right side cut by frame edge | blind: did not read original labels/model predictions/old",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": false
+    },
+    {
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "role": "small_green_cue",
+      "family": "fam_dev_inner_south",
+      "original_present": true,
+      "blind_present": true,
+      "blind_undecidable": false,
+      "blind_confidence": "HIGH",
+      "original_reference_available": true,
+      "blind_reference_available": true,
+      "bbox_iou": 0.321173071514408,
+      "keypoint_distance_px": 0.5830951894845285,
+      "original_green_pixels": 7,
+      "blind_green_pixels": 7,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "target tower clearly identifiable centre-left; full tower with base visible | blind: did not read original labels/model predictions/old final results; green_pix",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": true
+    },
+    {
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
+      "role": "small_green_cue",
+      "family": "fam_dev_static_high",
+      "original_present": true,
+      "blind_present": true,
+      "blind_undecidable": false,
+      "blind_confidence": "HIGH",
+      "original_reference_available": true,
+      "blind_reference_available": true,
+      "bbox_iou": 0.6677000981759934,
+      "keypoint_distance_px": 1.3000000000000114,
+      "original_green_pixels": 10,
+      "blind_green_pixels": 10,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "target tower clearly identifiable at static_high view; full tower with base | blind: did not read original labels/model predictions/old final results; green_pix",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": true
+    },
+    {
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+      "role": "small_green_cue",
+      "family": "fam_dev_static_low",
+      "original_present": true,
+      "blind_present": true,
+      "blind_undecidable": false,
+      "blind_confidence": "HIGH",
+      "original_reference_available": true,
+      "blind_reference_available": true,
+      "bbox_iou": 0.6199644588836773,
+      "keypoint_distance_px": 2.1587033144922847,
+      "original_green_pixels": 31,
+      "blind_green_pixels": 31,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": true
+        }
+      },
+      "blind_note": "target tower clearly identifiable close-up left; body/base continue past the bottom frame edge | blind: did not read original labels/model predictions/old final",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": false
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
+      "role": "small_green_cue",
+      "family": "fam_north",
+      "original_present": true,
+      "blind_present": true,
+      "blind_undecidable": false,
+      "blind_confidence": "HIGH",
+      "original_reference_available": true,
+      "blind_reference_available": true,
+      "bbox_iou": 0.17266722408026733,
+      "keypoint_distance_px": 0.28284271247461296,
+      "original_green_pixels": 3,
+      "blind_green_pixels": 3,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "target tower clearly identifiable centre-right; small but complete | blind: did not read original labels/model predictions/old final results; green_pixels uses ",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": true
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_151.png",
+      "role": "small_green_cue",
+      "family": "fam_south_A",
+      "original_present": true,
+      "blind_present": true,
+      "blind_undecidable": false,
+      "blind_confidence": "HIGH",
+      "original_reference_available": true,
+      "blind_reference_available": true,
+      "bbox_iou": 0.3538070175438597,
+      "keypoint_distance_px": 0.5,
+      "original_green_pixels": 4,
+      "blind_green_pixels": 4,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "target tower clearly identifiable left; full tower with base | blind: did not read original labels/model predictions/old final results; green_pixels uses the st",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": true
+    },
+    {
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "role": "control_absent",
+      "family": "fam_dev_static_negative",
+      "original_present": false,
+      "blind_present": false,
+      "blind_undecidable": false,
+      "blind_confidence": "MEDIUM",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "static_negative view: no central-tower head/tapered body+green-light structure visible; confirmed absent | blind: did not read original labels/model predictions",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": true
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
+      "role": "control_absent",
+      "family": "fam_north",
+      "original_present": false,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "dynamic_A_north late frame: near-empty floor/sky, only a very faint unresolved speck; target presence cannot be decided | blind: did not read original labels/mo",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "sensor_reset_0-follow_only_g5_168.png",
+      "role": "control_absent",
+      "family": "fam_south_A",
+      "original_present": false,
+      "blind_present": false,
+      "blind_undecidable": true,
+      "blind_confidence": "LOW",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "sensor_reset late frame: large gray structure could be the tower seen from an unfavourable angle or the gantry; no green light; identity unresolved | blind: did",
+      "presence_agreement": null,
+      "reference_availability_agreement": null,
+      "truncation_agreement": null
+    },
+    {
+      "frame_id": "pilot_east_away-follow_only_g3_3.png",
+      "role": "control_absent",
+      "family": "fam_static_E_dev",
+      "original_present": false,
+      "blind_present": false,
+      "blind_undecidable": false,
+      "blind_confidence": "MEDIUM",
+      "original_reference_available": false,
+      "blind_reference_available": false,
+      "bbox_iou": null,
+      "keypoint_distance_px": null,
+      "original_green_pixels": 0,
+      "blind_green_pixels": 0,
+      "truncation": {
+        "original": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        },
+        "blind": {
+          "left": false,
+          "right": false,
+          "top": false,
+          "bottom": false
+        }
+      },
+      "blind_note": "pilot_east_away target-absent pose: no central tower in view | blind: did not read original labels/model predictions/old final results; green_pixels uses the st",
+      "presence_agreement": true,
+      "reference_availability_agreement": true,
+      "truncation_agreement": true
+    }
+  ],
+  "interpretation": "blind annotator marked 14/22 undecidable; strict presence agreement is computed over all 22 frames, decided-only agreement over the 8 frames the annotator could resolve. The pre-registered annotatability gate uses the strict rate (no silent drop of undecidable frames)."
+}

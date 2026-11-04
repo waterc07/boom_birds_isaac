@@ -1,0 +1,1014 @@
+{
+  "schema_version": "dsh.landmark_dataset_evidence.v1",
+  "status": "PASS",
+  "generated_at": "2026-11-04T12:28:37.672219+00:00",
+  "mode": "build+verify",
+  "split_profile": "v4_2",
+  "freeze": {
+    "path": "configs/perception/landmark_split_freeze_v4_2.json",
+    "file_sha256": "0acbae8766cb183e975b922f72f5be8f98e8e95dce190dc3074255b8f62cc796",
+    "canonical_sha256": "7708cd5817208a3013f6058703a70f67cd9db0c8c0ae1ad4d315cfbfb9e31aee",
+    "schema_version": "dsh.landmark_split_freeze.v1",
+    "grouping_protocol": "dsh.landmark_dataset_grouping.v1",
+    "generated_at": "2026-11-04T12:28:35.895474+00:00",
+    "status": "DEV_SPLIT_ONLY_NO_SEALED_TEST",
+    "pool_kind": null,
+    "freeze_id": "landmark_split_freeze_v4_2"
+  },
+  "checks": {
+    "errors": [],
+    "warnings": [
+      {
+        "code": "EMPTY_CAPTURE",
+        "message": "debug_static3_sensor: declared empty capture has no frames",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 3767eda68250a1ecb0ba6d362bd2cf8f9ce9b1b42c644dc972c7fac20c6650e0 repeats inside group ['g_formal6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 f7f627dfa57cf5f49f79761c0ef78e1e4dbf75c0051443b6313368bee5ece137 repeats inside group ['g_formal6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 71b3748312dce8a537e11bbc892cda98294c5ad5ade9ac2b8dc5e1cd345a41d4 repeats inside group ['g_formal6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 bc9f1e0326946d8e246fe50408d2618aeb0fa3d82534dc35bdc50296d3011ec2 repeats inside group ['g_formal6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 e219421435fbfe7a88d1a4ec4ab294bc23612a0cd54b9d161835b975b829f4c8 repeats inside group ['g_formal6_staticW'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 408cdc00f03419b3054f74c1ab17323c7d7b949cb1b44babec0f3efb8119c3fa repeats inside group ['g_formal6_staticW'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 b63846b9753b13d92a44579988ceb9f563a2e4b8c1255381f2a7cf8ddb7d6592 repeats inside group ['g_lm_pilot_staticE'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 d7ce8216fb1967a55c3da3d25d5ddee1a0720a7d5387431b9a470ce8f4c388bc repeats inside group ['g_lm_pilot_staticE'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 aed50eddb8073dff17a9921cc69d75b489ec7f60299489f1f3fc1ca81472fe39 repeats inside group ['g_lm_pilot_staticE'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 ae1a12d9d688f2a51a979e9acf71c2c613b1e5d1efe06a993ab3f993a239977c repeats inside group ['g_lm_ind_devSouth'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 c985328d525976e1222bca694d957ff6380b40bda73601360cf33979dff9f9a0 repeats inside group ['g_lm_ind_north'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 bed915982d8cef4aa45db5f83695f373e441019b960de05001bbf0df4b383f2a repeats inside group ['g_lm_ind_reverseSouth'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 03349037b59884e0a412982f378715fce724b9fcf09a2a2d41a2a10d64ae8572 repeats inside group ['g_lm_ind_staticEtest'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 de85d106e8258b4343075f5eee44934ca82f8fe3d01d5424646cab57e85b4a8d repeats inside group ['g_lm_ind_staticEtest'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 96761c288948130e0255efb6fd882abe640c0fcbfc68220e9b516c574f11de2b repeats inside group ['g_geo_north'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 1f066b3ac5ede62c96148b7edb1a8c9ce67a9800d6626ed8232899f64a04165b repeats inside group ['g_geo_staticE'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 216d531c10b46ccd743aa15a0869c785598f618482bb54cc98519eb60cf9c799 repeats inside group ['g_geo_staticE'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 2e3f75b2e04b0077efe56497ffd7937204efdbfd38edd817ff62185f05ee8dc4 repeats inside group ['g_geo_staticE'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 7c620e5d4c9a2c3b1f5b46a5c59f627b55a558c34433c040933a089aaf79270a repeats inside group ['g_lm_pilot_north'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 a0fc899be4f318e4791aea0654548e304216bd3b6f14ea7bf1a2196f14d02c15 repeats inside group ['g_debug_all6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 60f60044f1a20a2ec2801fa5504fad555da02095fd00f3dd9dc1ee29eac0c52e repeats inside group ['g_debug_all6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 2e76aec96992db0e60b7c157e9795ccefe4e1c7fd251181f39dd94b8066ccdd1 repeats inside group ['g_debug_all6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 826ebf133c9cd432fce20d9173fb7488f89d21add3ba9cafac43732d7ae3dd48 repeats inside group ['g_debug_all6_southA'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 fcb5ba7e8b182de8413c267acc51582b24ad94749d93b5b8d2d2b1a8bdb1ea69 repeats inside group ['g_debug_all6_staticW'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 77e689edfdfd97282ebc1a9be06acab297cddbdcaf3c4caba25b46cad490a668 repeats inside group ['g_debug_all6_staticW'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 d28485d3718c80a05bbd90dd5a375af6915483beeb5be7550dd051ad37152550 repeats inside group ['g_gui_evidence2_route0'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 fc6908b919583be63e1e891114c01ae10abafebbcf6cd03949c70684f2624562 repeats inside group ['g_gui_evidence_static'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 50307fb53517818fbb3f53760a1671c43303c43ba462672d4d78ec8d99528865 repeats inside group ['g_debug_static4'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 433feb9e9da70a5c6c97f06bef0c99122d8276a07b9dcefcc3246660f7475c36 repeats inside group ['g_debug_static5'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 a0f52032a887e6918f431b66effae03da0efda9173d5a9e58ee97e9179349758 repeats inside group ['g_debug_static6'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 25175ea88c3a0323b5d743e5cea2e74e01c44bd352e3d98d6585556ce205152e repeats inside group ['g_debug_static7'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 cc2e7848cfd46395970e6e9d61707a6b1875f8a1715bc10018a510832e39b409 repeats inside group ['g_lmf_dev_inner_north'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 961c9a58b1f5a2ec3627d8549e255bb1935f6437feb821f3042a936380d3a282 repeats inside group ['g_lmf_dev_inner_south'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 b6fdcd40c77a17bf289944c53e60293fdb026e1bc281c256800ce244c3ec9bb8 repeats inside group ['g_lmf_dev_static_high'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 e8ef8c323836253a5fccb7389b90f94daf972a622595e1bd15399109e5f152ae repeats inside group ['g_lmf_dev_static_low'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 e8dbe8b7c9ae692b273ef69714aff5c1b5ec85396a493fb3a37e07809f14fd0b repeats inside group ['g_lmf_dev_static_negative'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 385a65130288049b6d02fe6ac26ace99c9030a56f6a90fdb740429f51c554cd8 repeats inside group ['g_lmf_dev_hn1_confuser'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 fea3aff372191967700f43bcc96b4dd2b5868f32d4a73b9488433f42ea0e878d repeats inside group ['g_lmf_dev_hn2_occluder'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 cd105433932b9d2dd8cc6d51d503998146c0cb322dc5ba59c2bc126616dbaa15 repeats inside group ['g_reuse_lmf_backoff'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 40e54b7ce49d19224eec124bf0d1abd79e7536f8311e71e746d3268b717958a4 repeats inside group ['g_reuse_lmf_edge'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 f577b5e86c08e31ebc5e2ecd1c55fb8ddbf5eb0ce0f071f00ca164aeffb6c287 repeats inside group ['g_reuse_lmf_near'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 be5bd199588571698622491c5a2dc0649db0d180cc4f97ca978ab3bcfdeb27bf repeats inside group ['g_reuse_lmf_side_negative'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 c2ee77df61df64e1a76c59924beb628f34c18764053f1206baabd51abeeca00c repeats inside group ['g_reuse_lmf_similar_negative'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 d29c50653ebf9238bd71b2a43be5461b5b48767356c00b86677c6ac31bc36128 repeats inside group ['g_reuse_lmf_sweep'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 9e27cb1459ef42e34ac087d9726bf4aa7405054e404d9681a79eb63920f5c503 repeats inside group ['g_devid_both_mid_similar_scale'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 1acfa7ed80888f3848302273baf13021db2fa07e956d39698063a8e98095198c repeats inside group ['g_devid_both_same_bearing'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 b7def4c642112d5f900d7624530601559db5d2d5e350354b1dada7ff45595264 repeats inside group ['g_devid_both_scale_lateral'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 4f51f41ac18e842f29327541a559788d6f81e92273b1091ae9546f31613b8257 repeats inside group ['g_devid_full_occlusion'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 1cd6c10b1bccef364d12af0b8506977f6533a6440ea4ebe77ef4c6e546686e65 repeats inside group ['g_devid_ms1_alone'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 cd7919d735fece91ba2de9fbbd808d3f6175b9dabf981a0b91078ffc6daed399 repeats inside group ['g_devid_target_alone'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "DUPLICATE_SHA_WITHIN_GROUP",
+        "message": "payload sha256 0d2bde9597fe0f9055e21841008197fcfc4ffc93de13970f68d8f6877e8171ff repeats inside group ['g_devid_target_near_trunc'] (3 frames)",
+        "detail": {}
+      },
+      {
+        "code": "VIEW_CLUSTER_SPLIT",
+        "message": "view cluster static_E_new_views has groups in train and val; poses are not byte-identical but share the same physical viewpoint family",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_190.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_195.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_200.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_205.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_210.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_212.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_45.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_87.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_129.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_route_1-follow_only_g4_171.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_190.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_195.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_200.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_205.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_210.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_212.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_45.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_87.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_129.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_0-follow_only_g5_171.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_190.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_195.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_200.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_205.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_210.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_212.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_45.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_87.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_129.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_reset_1-follow_only_g6_171.png claims 'test' but group g_formal6_southA is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_static_0-follow_only_g1_3.png claims 'test' but group g_formal6_staticW is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_static_0-follow_only_g1_4.png claims 'test' but group g_formal6_staticW is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_static_0-follow_only_g1_5.png claims 'test' but group g_formal6_staticW is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_static_1-follow_only_g2_3.png claims 'test' but group g_formal6_staticW is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_static_1-follow_only_g2_4.png claims 'test' but group g_formal6_staticW is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_labels_v1 frame sensor_static_1-follow_only_g2_5.png claims 'test' but group g_formal6_staticW is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_3.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_23.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_43.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_63.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_83.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_103.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_123.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_143.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_163.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_183.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_201.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_202.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_203.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_204.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_205.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_206.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_207.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_208.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_209.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_210.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_211.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_reverse_south-follow_only_g2_212.png claims 'sealed_test' but group g_lm_ind_reverseSouth is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_3.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_23.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_43.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_63.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_83.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_103.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_123.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_143.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_163.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_181.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_182.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_183.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_184.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_185.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_186.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_187.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_188.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_189.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_190.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_191.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_north_0-follow_only_g3_192.png claims 'sealed_test' but group g_lm_ind_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_static_oblique-follow_only_g4_3.png claims 'sealed_test' but group g_lm_ind_staticEtest is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_static_oblique-follow_only_g4_4.png claims 'sealed_test' but group g_lm_ind_staticEtest is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_static_oblique-follow_only_g4_5.png claims 'sealed_test' but group g_lm_ind_staticEtest is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_static_away-follow_only_g5_3.png claims 'sealed_test' but group g_lm_ind_staticEtest is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_static_away-follow_only_g5_4.png claims 'sealed_test' but group g_lm_ind_staticEtest is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label landmark_independent_labels_v1 frame test_static_away-follow_only_g5_5.png claims 'sealed_test' but group g_lm_ind_staticEtest is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_3.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_23.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_43.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_63.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_83.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_103.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_123.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_143.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_163.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_177.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_178.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_179.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_180.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_181.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_182.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_183.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_184.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_185.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_186.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_187.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_north_0-follow_only_g1_188.png claims 'sealed_test' but group g_geo_north is val",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_a-follow_only_g2_3.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_a-follow_only_g2_4.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_a-follow_only_g2_5.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_b-follow_only_g3_3.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_b-follow_only_g3_4.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_b-follow_only_g3_5.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_c-follow_only_g4_3.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_c-follow_only_g4_4.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      },
+      {
+        "code": "LABEL_SPLIT_CLAIM_CONFLICT",
+        "message": "label geometry_test_labels_v2 frame geo_test_static_c-follow_only_g4_5.png claims 'sealed_test' but group g_geo_staticE is train",
+        "detail": {}
+      }
+    ]
+  },
+  "stats": {
+    "datasets": {
+      "formal6_sensor": {
+        "rgb_frames": 864,
+        "accepted_rgb_frames": 846,
+        "empty_capture": false,
+        "observations_sha256": "465fe10c13ff0d442037195a86101f094e305c82587c5b3f179b594cc522e98a"
+      },
+      "lm_pilot_sensor": {
+        "rgb_frames": 18,
+        "accepted_rgb_frames": 9,
+        "empty_capture": false,
+        "observations_sha256": "0c30b46c41fb97ae2fbfe17b653f6c4a263a66c3e33e07903b17c6f8b88092ab"
+      },
+      "lm_independence_sensor": {
+        "rgb_frames": 613,
+        "accepted_rgb_frames": 598,
+        "empty_capture": false,
+        "observations_sha256": "3b5ca70d1b63e6e6f060157e3511dff785c5fe2689766fd5325ed743dc3e0309"
+      },
+      "geo_test_sensor": {
+        "rgb_frames": 207,
+        "accepted_rgb_frames": 195,
+        "empty_capture": false,
+        "observations_sha256": "13abb5de23f99e77d79b989ccee71a3176f04bb8df5373b744af42f977a74b22"
+      },
+      "lm_pilot_north_sensor": {
+        "rgb_frames": 193,
+        "accepted_rgb_frames": 190,
+        "empty_capture": false,
+        "observations_sha256": "2e2bc2228cef3ff650066636a395a680280ceb07fb145014568a6ef74d48b8dd"
+      },
+      "debug_all6_sensor": {
+        "rgb_frames": 864,
+        "accepted_rgb_frames": 846,
+        "empty_capture": false,
+        "observations_sha256": "f6a7f4012322a440393959a2920b3853b65c2ed231a4cf13554339f29fc32e0c"
+      },
+      "gui_evidence2_sensor": {
+        "rgb_frames": 213,
+        "accepted_rgb_frames": 210,
+        "empty_capture": false,
+        "observations_sha256": "e715d1f843590035142dcda09ad4f0354a822446e7e13fbc6c1b5cb7cc671771"
+      },
+      "gui_evidence_sensor": {
+        "rgb_frames": 6,
+        "accepted_rgb_frames": 3,
+        "empty_capture": false,
+        "observations_sha256": "372fe48f9cb48bc18c02111cb40a5d7146f792cf0e32b489ce780d8e81cecc70"
+      },
+      "debug_static4_sensor": {
+        "rgb_frames": 6,
+        "accepted_rgb_frames": 3,
+        "empty_capture": false,
+        "observations_sha256": "a4b9f2fb8d364cd9d66a778360118be8c6cd212bed0073a283c0dd57b3cf83e0"
+      },
+      "debug_static5_sensor": {
+        "rgb_frames": 6,
+        "accepted_rgb_frames": 3,
+        "empty_capture": false,
+        "observations_sha256": "e3748248c43ab2840babd1e0de964517a57eb2b413d53a9827ce649d6b7d03ad"
+      },
+      "debug_static6_sensor": {
+        "rgb_frames": 6,
+        "accepted_rgb_frames": 3,
+        "empty_capture": false,
+        "observations_sha256": "9592c03359abc6d99ef8b11da5560e2f0c5478d397ad3fc42797002c3aa35cf9"
+      },
+      "debug_static7_sensor": {
+        "rgb_frames": 6,
+        "accepted_rgb_frames": 3,
+        "empty_capture": false,
+        "observations_sha256": "54ea36d4422bd1cfc50569385a046338a180c14f5203035371409c8597b26e03"
+      },
+      "debug_static3_sensor": {
+        "rgb_frames": 0,
+        "accepted_rgb_frames": 0,
+        "empty_capture": true,
+        "observations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "lm_dev_capture_20261104_sensor": {
+        "rgb_frames": 337,
+        "accepted_rgb_frames": 322,
+        "empty_capture": false,
+        "observations_sha256": "1b40f3d4a98d92eb0a5e6e1564992ece416041ac5209d2973262e4156abd7631"
+      },
+      "lm_dev_hn_capture_20261104_sensor": {
+        "rgb_frames": 59,
+        "accepted_rgb_frames": 53,
+        "empty_capture": false,
+        "observations_sha256": "589f9b55bfa1a2575cc196783a759be6f1553391a53564a13eb7226b5fe7ad30"
+      },
+      "lm_final_candidate_20261104_sensor": {
+        "rgb_frames": 297,
+        "accepted_rgb_frames": 279,
+        "empty_capture": false,
+        "observations_sha256": "4a7481e4c85a2b508603f2941f159d32402792f9fba4fe3a585b3ec221d07def"
+      },
+      "lm_dev_identity_capture_20261104_sensor": {
+        "rgb_frames": 190,
+        "accepted_rgb_frames": 169,
+        "empty_capture": false,
+        "observations_sha256": "c51d9961a6d34fdfba36d0fab7670edc0d979231f521ed631325b90e4e022734"
+      }
+    },
+    "groups": 39,
+    "families": 26,
+    "frame_total": 3885,
+    "accepted_frame_total": 3732,
+    "split_frame_counts": {
+      "train": 1772,
+      "val": 1006,
+      "test": 0,
+      "excluded": 1107
+    },
+    "split_accepted_frame_counts": {
+      "train": 1697,
+      "val": 964,
+      "test": 0,
+      "excluded": 1071
+    },
+    "split_group_counts": {
+      "train": 16,
+      "val": 14,
+      "test": 0,
+      "excluded": 9
+    },
+    "duplicate_sha_groups": 0,
+    "intra_group_duplicate_sha_groups": 51,
+    "frames_unassigned": 0,
+    "episode_split_conflicts": 0,
+    "consecutive_frame_split_violations": 0,
+    "family_split_leaks": 0,
+    "sealed_groups_in_dev": 0,
+    "label_frame_total": 156,
+    "label_split_claim_counts": {
+      "train": 11,
+      "test": 36,
+      "development": 30,
+      "sealed_test": 79
+    },
+    "label_split_claim_conflicts": 115,
+    "view_cluster_split_warnings": 1,
+    "images_verified": 3885,
+    "images_missing": 0,
+    "image_sha_mismatches": 0
+  },
+  "limits": [
+    "grouping/hash QA only; not a model, board or navigation result",
+    "raw outputs are gitignored; the freeze records their hashes"
+  ]
+}

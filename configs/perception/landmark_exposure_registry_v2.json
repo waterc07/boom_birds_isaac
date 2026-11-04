@@ -1,0 +1,3645 @@
+{
+  "schema_version": "dsh.landmark_exposure_registry.v1",
+  "protocol": "landmark_exposure_group_level_v1",
+  "registry_version": "v2",
+  "generated_at": "2026-11-04T12:28:52.941317+00:00",
+  "generated_by": "scripts/verify_landmark_dataset.py --build-exposure-registry-v2",
+  "status": "EXPOSURE_AUDIT_V2_ALL_DATA_DEVELOPMENT",
+  "supersedes": {
+    "path": "configs/perception/landmark_exposure_registry_v1.json",
+    "sha256": "643d27c56a11a5baedcadaa741a1104893923500994601ccbe7a12ea34c52640",
+    "reason": "v2 reclassifies the old final/exploratory pool as exposed development, adds the one-shot eval and post-eval diagnosis viewing events, and refreshes the dev label-list evidence hash after HN completion"
+  },
+  "policy": {
+    "statuses": [
+      "exposed_development",
+      "annotation_calibration",
+      "exploratory_eval_candidate",
+      "untouched",
+      "excluded_debug",
+      "empty_capture"
+    ],
+    "group_level_rule": "if any frame of a group was viewed, selected or annotated, the whole group is exposed",
+    "sealed_rule": "no sealed/final claim is allowed; the old final pool is development data",
+    "viewing_registration": "every viewing/annotation/evaluation event records executor, purpose, date and evidence file hash",
+    "project_decision": "user 2026-11-04 authorised the main candidate for bounded internal research only; distribution remains a separate decision"
+  },
+  "freezes": {
+    "dev_v4": {
+      "path": "configs/perception/landmark_split_freeze_v4.json",
+      "canonical_sha256": "afa5caa45f76d4be70245b27be59bf05945574380be4c22fc2102e6f3ef442a4",
+      "groups": 26,
+      "frames": 3398
+    },
+    "old_exploratory": {
+      "path": "configs/perception/landmark_final_pool_seal_v1.json",
+      "canonical_sha256": "cedbbc7e1cd455f022d5f7c5f7f7925f046d9eebeb2581ca789ee25f7ce81007",
+      "groups": 6,
+      "frames": 297,
+      "status": "EXPOSED_DEVELOPMENT_DOWNGRADED_NOT_FINAL"
+    },
+    "dev_v4_1": {
+      "path": "configs/perception/landmark_split_freeze_v4_1.json",
+      "canonical_sha256": "36840e7f87379b710ce20a17ee2ed54df6761b8c42ae54a6a693c12f5da5cee0",
+      "groups": 32,
+      "frames": 3695,
+      "reused_train_groups": 6,
+      "reused_train_frames": 297,
+      "reused_train_accepted_frames": 279
+    },
+    "dev_v4_2": {
+      "path": "configs/perception/landmark_split_freeze_v4_2.json",
+      "canonical_sha256": "7708cd5817208a3013f6058703a70f67cd9db0c8c0ae1ad4d315cfbfb9e31aee",
+      "groups": 39,
+      "frames": 3885,
+      "identity_groups": 7,
+      "identity_frames": 190,
+      "identity_accepted_frames": 169,
+      "reused_train_groups": 6
+    }
+  },
+  "events": [
+    {
+      "event_id": "ev_dev_detection_history_20261103",
+      "type": "exposed_development",
+      "date": "2026-11-03",
+      "executor": "agent (template / geometry / independent landmark dev)",
+      "purpose": "development, diagnostics, template/geometry evaluation",
+      "frames_touched": 3398,
+      "groups": [
+        "g_debug_all6_southA",
+        "g_debug_all6_staticW",
+        "g_debug_static3_empty",
+        "g_debug_static4",
+        "g_debug_static5",
+        "g_debug_static6",
+        "g_debug_static7",
+        "g_formal6_southA",
+        "g_formal6_staticW",
+        "g_geo_north",
+        "g_geo_staticE",
+        "g_gui_evidence2_route0",
+        "g_gui_evidence_static",
+        "g_lm_ind_devSouth",
+        "g_lm_ind_north",
+        "g_lm_ind_reverseSouth",
+        "g_lm_ind_staticEtest",
+        "g_lm_pilot_north",
+        "g_lm_pilot_staticE",
+        "g_lmf_dev_hn1_confuser",
+        "g_lmf_dev_hn2_occluder",
+        "g_lmf_dev_inner_north",
+        "g_lmf_dev_inner_south",
+        "g_lmf_dev_static_high",
+        "g_lmf_dev_static_low",
+        "g_lmf_dev_static_negative"
+      ],
+      "evidence_path": "configs/perception/landmark_freeze_v4.json",
+      "evidence_sha256": "e812a64e07d57f5e6a77319f7a028c66e2cdd6cf4f6defb25be108540042b641",
+      "evidence_extra": [
+        {
+          "path": "configs/perception/independent_freeze_v3.json",
+          "sha256": "6493f653df1fc4066211c146789fb0c3052270fd53401076e18a3fd2bf252978"
+        },
+        {
+          "path": "configs/perception/geometry_test_freeze_v2.json",
+          "sha256": "b5897274746fcc07a3e5d14d84d8f7022f131af3fa04aa1b290a35e8e3c3f0e5"
+        }
+      ]
+    },
+    {
+      "event_id": "ev_dev_annotation_selection_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot2 + annot (agent proxy)",
+      "purpose": "dev train/val label production, incl. HN val completion",
+      "frames_touched": 323,
+      "groups": [
+        "g_formal6_southA",
+        "g_formal6_staticW",
+        "g_geo_north",
+        "g_geo_staticE",
+        "g_lm_ind_devSouth",
+        "g_lm_ind_north",
+        "g_lm_ind_reverseSouth",
+        "g_lm_ind_staticEtest",
+        "g_lm_pilot_north",
+        "g_lm_pilot_staticE",
+        "g_lmf_dev_hn1_confuser_0",
+        "g_lmf_dev_hn2_occluder_0",
+        "g_lmf_dev_inner_north_0",
+        "g_lmf_dev_inner_south_0",
+        "g_lmf_dev_static_high_0",
+        "g_lmf_dev_static_low_0",
+        "g_lmf_dev_static_negative_0"
+      ],
+      "evidence_path": "configs/perception/landmark_dev_label_lists_v1.json",
+      "evidence_sha256": "2dceb5fca84b2e77220460b27537c6bfa99386530b985ba5fe2d7ac93e7794ca",
+      "evidence_extra": [
+        {
+          "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
+          "sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df"
+        },
+        {
+          "path": "outputs/perception/dev_annotations_20261104/labels_val.json",
+          "sha256": "8c2155979b517626299fd85c61759b73ceb1bfc369be839d4453caa3b3ed33ac"
+        },
+        {
+          "path": "outputs/perception/dev_annotations_20261104/labels_hn_val.json",
+          "sha256": "87ba533de8feef0cf4399650d477c071b66aa4586b74e07af10d7ccc3c1189af"
+        }
+      ],
+      "hn_status": "HN val 53/53 accepted fully labelled (27 HN1 + 26 HN2)"
+    },
+    {
+      "event_id": "ev_t9_dev_capture_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "capture (visible foreground Isaac GUI)",
+      "purpose": "dev new trajectories, HN1 confuser, HN2 occluder",
+      "frames_touched": 396,
+      "groups": [
+        "g_lmf_dev_hn1_confuser",
+        "g_lmf_dev_hn2_occluder",
+        "g_lmf_dev_inner_north",
+        "g_lmf_dev_inner_south",
+        "g_lmf_dev_static_high",
+        "g_lmf_dev_static_low",
+        "g_lmf_dev_static_negative"
+      ],
+      "evidence_path": "outputs/sensor_shadow/lm_dev_capture_20261104/manifest.json",
+      "evidence_sha256": "21cb56f1a21b344fcea2e9a080ca8a969f7190fda96505996d6b3f9bac967641",
+      "evidence_extra": [
+        {
+          "path": "outputs/sensor_shadow/lm_dev_hn_capture_20261104/manifest.json",
+          "sha256": "4e9935c6103a66434e62a6f465594e6d7f8b301b0078293bdb284090704c6d0a"
+        }
+      ]
+    },
+    {
+      "event_id": "ev_map_native_ms1_identity_conflict_20261104",
+      "type": "identity_conflict_evidence",
+      "date": "2026-11-04",
+      "executor": "capture + datafreeze review",
+      "purpose": "identity uniqueness audit",
+      "frames_touched": 0,
+      "groups": [
+        "g_lmf_dev_inner_north",
+        "g_lmf_dev_static_negative"
+      ],
+      "evidence_path": "docs/reports/perception/capture_dev_20261104/map_native_structures.json",
+      "evidence_sha256": "cb0deffa787050b1b13694a406ed62e4a10f14ddc4c80e063a3cc681628678b4",
+      "extent": "map-native green-lamp pillar MS1 at about (3.0,4.0) falsifies U1/U2; different evidence class from synthetic HN1"
+    },
+    {
+      "event_id": "ev_final_pilot_annotation_34_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot (agent proxy)",
+      "purpose": "annotation-spec pilot before bulk labels",
+      "frames_touched": 34,
+      "groups": [
+        "g_lmf_backoff",
+        "g_lmf_edge",
+        "g_lmf_near",
+        "g_lmf_side_negative",
+        "g_lmf_similar_negative",
+        "g_lmf_sweep"
+      ],
+      "evidence_path": "docs/reports/perception/annotation_verify_20261104/pilot/labels_manifest.json",
+      "evidence_sha256": "e31ac902526e6eb582a61ae5102279473c5207a4067f4da91b3496b351dbf5a5"
+    },
+    {
+      "event_id": "ev_final_exploratory_labels_279_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "annot (agent proxy, spec v2.1)",
+      "purpose": "full exploratory labels; pool downgraded to development",
+      "frames_touched": 279,
+      "groups": [
+        "g_lmf_backoff",
+        "g_lmf_edge",
+        "g_lmf_near",
+        "g_lmf_side_negative",
+        "g_lmf_similar_negative",
+        "g_lmf_sweep"
+      ],
+      "evidence_path": "outputs/perception/final_exploratory_20261104/labels_manifest.json",
+      "evidence_sha256": "8f06e1560265e8d82b669f6308280ec5fd182ebf0e93efb39bfcfae7540dc7ae",
+      "dataset_role": "DEVELOPMENT_EXPLORATORY",
+      "label_file": {
+        "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+        "sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504",
+        "gitignored": true,
+        "in_git": false
+      }
+    },
+    {
+      "event_id": "ev_exploratory_one_shot_eval_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "train (isolated venv)",
+      "purpose": "validation-only threshold freeze then exactly one exploratory evaluation on the 279-frame pool",
+      "frames_touched": 279,
+      "groups": [
+        "g_lmf_backoff",
+        "g_lmf_edge",
+        "g_lmf_near",
+        "g_lmf_side_negative",
+        "g_lmf_similar_negative",
+        "g_lmf_sweep"
+      ],
+      "evidence_path": "configs/perception/landmark_final_eval_protocol_v1.json",
+      "evidence_sha256": "34d09d72ac93aaa24c49860158d47e219fddaef72caddd1942ce2a968c1dd19b",
+      "evidence_extra": [
+        {
+          "path": "configs/perception/landmark_model_freeze_v1.json",
+          "sha256": "16618b7caebf850c190974a47915dc1893dd092009984e4e70716eebeaa11cba"
+        }
+      ],
+      "note": "no callback, no rerun, no retune; old exploratory metrics are traceability evidence, not a sealed final result"
+    },
+    {
+      "event_id": "ev_posteval_diag_view_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "diag",
+      "purpose": "post-evaluation diagnosis: read saved predictions, labels and images; reference-failure decomposition; MS1 audit; TINY annotatability",
+      "frames_touched": 279,
+      "groups": [
+        "g_lmf_backoff",
+        "g_lmf_edge",
+        "g_lmf_near",
+        "g_lmf_side_negative",
+        "g_lmf_similar_negative",
+        "g_lmf_sweep"
+      ],
+      "evidence_path": "outputs/perception/final_exploratory_eval_20261104/predictions.jsonl",
+      "evidence_sha256": "8cdfe558b455fb2e25c4de7a3f4852690554ae3e4254b6a472cdb9f26f991716",
+      "evidence_extra": [
+        {
+          "path": "docs/reports/perception/posteval_20261104/MS1_VISUAL_CUES_20261104.json",
+          "sha256": "52f1fc6334bf7cf1d8485eb5f6a367a7661d71c852cd8c4867d1c4f53a7d7a13"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSIS_20261104.md",
+          "sha256": "523cc9fd41c229c0fdea46cdf83bc8942fce0ab094766fb605ac3676be2ea3db"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSTICS_20261104.json",
+          "sha256": "58c60ee2e14789d2be2d2824e7cd61b0619dfec672848ffd22e1f605c63cf74e"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/TINY_BLIND_DISAGREEMENT_20261104.json",
+          "sha256": "9049547fe86554e62eba283ede93571d15fa02b89a211e5af5a81985dc22b5c0"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/TINY_BLIND_REANNOTATION_FRAMES_20261104.json",
+          "sha256": "fc3508de23b8d16c593d0e2bad27889de89d3e4ed68a1704e01ba50b37364941"
+        },
+        {
+          "path": "docs/reports/perception/posteval_20261104/TINY_BLIND_REANNOTATION_KEY_20261104.json",
+          "sha256": "16b6806972530310d9554873fd4b85b86870ee0ff23dfe4c14d59ffe00d9277b"
+        }
+      ],
+      "note": "viewing the old exploratory predictions/images is registered here; it cannot be used for sealed-final claims. The diagnosis report is pending; the evidence file is the saved prediction/evaluation output that the diagnosis scripts read."
+    },
+    {
+      "event_id": "ev_dev_hn_tiny_annotation_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot (agent proxy)",
+      "purpose": "complete HN val labels (29 remaining) and TINY blind relabel for label-quality analysis",
+      "frames_touched": 29,
+      "groups": [
+        "g_lmf_dev_hn1_confuser",
+        "g_lmf_dev_hn2_occluder"
+      ],
+      "evidence_path": "docs/reports/perception/annotation_verify_20261104/HN_REMAINING_ANNOTATION_20261104.md",
+      "evidence_sha256": "08b823bba776879549ede439b909f1e52664640ee7995aa2c56cf480a9d87085",
+      "note": "HN val now 53/53 labelled; TINY relabel evidence is recorded if present, otherwise remains pending"
+    },
+    {
+      "event_id": "ev_identity_cases_capture_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "capture (visible foreground Isaac GUI)",
+      "purpose": "identity/confuser/same-frame/occlusion development cases, default split val",
+      "frames_touched": 0,
+      "groups": [],
+      "evidence_path": "configs/scenarios/landmark_dev_identity_cases_v1.json",
+      "evidence_sha256": "e73350802a400cb1836cce14ec0c5cc278f888b6ff5e726b4692e9ac39b7a0c7",
+      "ingest_status": "INGESTED_V4_2",
+      "note": "the T15 identity cases are captured/being captured; they are not part of v4 unless present before the freeze, so this event records the capture manifest only"
+    },
+    {
+      "event_id": "ev_exploratory_reused_as_train_20261104",
+      "type": "exposed_development",
+      "date": "2026-11-04",
+      "executor": "datafreeze + train (candidate A data decision)",
+      "purpose": "reuse the downgraded exploratory pool as development TRAIN data to add LARGE(near)/TINY(far) scale coverage",
+      "frames_touched": 279,
+      "groups": [
+        "g_reuse_lmf_backoff",
+        "g_reuse_lmf_edge",
+        "g_reuse_lmf_near",
+        "g_reuse_lmf_side_negative",
+        "g_reuse_lmf_similar_negative",
+        "g_reuse_lmf_sweep"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "evidence_path": "configs/perception/landmark_split_freeze_v4_1.json",
+      "evidence_sha256": "531565a25d77d4d1bf3cc3292c55fc9ee4dda23a36280e0ce63ecd01f67f8923",
+      "evidence_extra": [
+        {
+          "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+          "sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504"
+        }
+      ],
+      "declaration": "after this reuse the frames are training data and can never serve as a final/sealed or independent test set; old exploratory metrics are traceability-only"
+    },
+    {
+      "event_id": "ev_identity_dev_annotation_20261104",
+      "type": "annotation_calibration",
+      "date": "2026-11-04",
+      "executor": "annot2 (agent proxy)",
+      "purpose": "annotate 62 representative identity/confuser development frames (target alone / MS1 alone / both in frame / near truncation / full occlusion)",
+      "frames_touched": 62,
+      "groups": [
+        "g_devid_both_mid_similar_scale",
+        "g_devid_both_same_bearing",
+        "g_devid_both_scale_lateral",
+        "g_devid_full_occlusion",
+        "g_devid_ms1_alone",
+        "g_devid_target_alone",
+        "g_devid_target_near_trunc"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "evidence_path": "outputs/perception/dev_annotations_20261104/labels_identity_dev.json",
+      "evidence_sha256": "79fd17459538aaeabf89ebe10c170eaf8f1277cfc05399300362667c0a4204b2",
+      "evidence_extra": [
+        {
+          "path": "docs/reports/perception/annotation_verify_20261104/IDENTITY_DEV_ANNOTATION_20261104.md",
+          "sha256": "9cfa52bf29e0b234c9b3a62bafc6901197de12e625a7d560d7147a22d619f05b"
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "g_formal6_southA",
+      "source": "dev_v4_2",
+      "family_id": "fam_south_A",
+      "dataset": "formal6_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_formal6_staticW",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "formal6_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_pilot_staticE",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_E_dev",
+      "dataset": "lm_pilot_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_devSouth",
+      "source": "dev_v4_2",
+      "family_id": "fam_south_A",
+      "dataset": "lm_independence_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_reverseSouth",
+      "source": "dev_v4_2",
+      "family_id": "fam_south_A",
+      "dataset": "lm_independence_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_north",
+      "source": "dev_v4_2",
+      "family_id": "fam_north",
+      "dataset": "lm_independence_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_ind_staticEtest",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_E_test",
+      "dataset": "lm_independence_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_geo_north",
+      "source": "dev_v4_2",
+      "family_id": "fam_north",
+      "dataset": "geo_test_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_geo_staticE",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_E_test",
+      "dataset": "geo_test_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lm_pilot_north",
+      "source": "dev_v4_2",
+      "family_id": "fam_north",
+      "dataset": "lm_pilot_north_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_all6_staticW",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_all6_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_all6_southA",
+      "source": "dev_v4_2",
+      "family_id": "fam_south_A",
+      "dataset": "debug_all6_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_gui_evidence2_route0",
+      "source": "dev_v4_2",
+      "family_id": "fam_south_A",
+      "dataset": "gui_evidence2_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_gui_evidence_static",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "gui_evidence_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static4",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static4_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static5",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static5_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static6",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static6_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static7",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_W_start",
+      "dataset": "debug_static7_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_debug_static3_empty",
+      "source": "dev_v4_2",
+      "family_id": "fam_debug_empty",
+      "dataset": "debug_static3_sensor",
+      "split": "excluded",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_inner_south",
+      "source": "dev_v4_2",
+      "family_id": "fam_inner_south",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_static_high",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_high_far",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_static_negative",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_negative_E",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_inner_north",
+      "source": "dev_v4_2",
+      "family_id": "fam_inner_north",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_static_low",
+      "source": "dev_v4_2",
+      "family_id": "fam_static_low_oblique",
+      "dataset": "lm_dev_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "source": "dev_v4_2",
+      "family_id": "fam_HN1_confuser",
+      "dataset": "lm_dev_hn_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "source": "dev_v4_2",
+      "family_id": "fam_HN2_occluder",
+      "dataset": "lm_dev_hn_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "exposure_events": [
+        "ev_dev_annotation_selection_20261104",
+        "ev_dev_detection_history_20261103",
+        "ev_t9_dev_capture_20261104"
+      ],
+      "certification": "EXPOSED_DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "development / annotation / capture exposure"
+      }
+    },
+    {
+      "group_id": "g_reuse_lmf_sweep",
+      "source": "dev_v4_2",
+      "family_id": "lmf_sweep",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_exploratory_reused_as_train_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "contamination": {
+        "group_level": true,
+        "reason": "old exploratory pool reused as development TRAIN; can never be final/sealed again"
+      }
+    },
+    {
+      "group_id": "g_reuse_lmf_backoff",
+      "source": "dev_v4_2",
+      "family_id": "lmf_backoff",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_exploratory_reused_as_train_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "contamination": {
+        "group_level": true,
+        "reason": "old exploratory pool reused as development TRAIN; can never be final/sealed again"
+      }
+    },
+    {
+      "group_id": "g_reuse_lmf_near",
+      "source": "dev_v4_2",
+      "family_id": "lmf_near",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_exploratory_reused_as_train_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "contamination": {
+        "group_level": true,
+        "reason": "old exploratory pool reused as development TRAIN; can never be final/sealed again"
+      }
+    },
+    {
+      "group_id": "g_reuse_lmf_edge",
+      "source": "dev_v4_2",
+      "family_id": "lmf_edge",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_exploratory_reused_as_train_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "contamination": {
+        "group_level": true,
+        "reason": "old exploratory pool reused as development TRAIN; can never be final/sealed again"
+      }
+    },
+    {
+      "group_id": "g_reuse_lmf_similar_negative",
+      "source": "dev_v4_2",
+      "family_id": "lmf_similar_negative",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_exploratory_reused_as_train_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "contamination": {
+        "group_level": true,
+        "reason": "old exploratory pool reused as development TRAIN; can never be final/sealed again"
+      }
+    },
+    {
+      "group_id": "g_reuse_lmf_side_negative",
+      "source": "dev_v4_2",
+      "family_id": "lmf_side_negative",
+      "dataset": "lm_final_candidate_20261104_sensor",
+      "split": "train",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_exploratory_reused_as_train_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT_TRAIN",
+      "contamination": {
+        "group_level": true,
+        "reason": "old exploratory pool reused as development TRAIN; can never be final/sealed again"
+      }
+    },
+    {
+      "group_id": "g_devid_target_alone",
+      "source": "dev_v4_2",
+      "family_id": "devid_target_alone",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    },
+    {
+      "group_id": "g_devid_ms1_alone",
+      "source": "dev_v4_2",
+      "family_id": "devid_ms1_alone",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    },
+    {
+      "group_id": "g_devid_both_scale_lateral",
+      "source": "dev_v4_2",
+      "family_id": "devid_both_scale_lateral",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    },
+    {
+      "group_id": "g_devid_both_mid_similar_scale",
+      "source": "dev_v4_2",
+      "family_id": "devid_both_mid_similar_scale",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    },
+    {
+      "group_id": "g_devid_both_same_bearing",
+      "source": "dev_v4_2",
+      "family_id": "devid_both_same_bearing",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    },
+    {
+      "group_id": "g_devid_target_near_trunc",
+      "source": "dev_v4_2",
+      "family_id": "devid_target_near_trunc",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    },
+    {
+      "group_id": "g_devid_full_occlusion",
+      "source": "dev_v4_2",
+      "family_id": "devid_full_occlusion",
+      "dataset": "lm_dev_identity_capture_20261104_sensor",
+      "split": "val",
+      "status": "exposed_development",
+      "certification": "EXPOSED_DEVELOPMENT",
+      "exposure_events": [
+        "ev_dev_detection_history_20261103",
+        "ev_identity_cases_capture_20261104",
+        "ev_identity_dev_annotation_20261104"
+      ],
+      "dataset_role": "DEVELOPMENT",
+      "contamination": {
+        "group_level": true,
+        "reason": "identity/confuser development case; annotated and viewed during development; not sealed"
+      }
+    }
+  ],
+  "frame_overrides": [
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_37.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_51.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_79.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_93.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_sweep",
+      "frame_id": "lmf_sweep_0-follow_only_g1_107.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_34.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_47.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_60.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_backoff",
+      "frame_id": "lmf_backoff_0-follow_only_g2_67.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_near",
+      "frame_id": "lmf_near_0-follow_only_g3_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_edge",
+      "frame_id": "lmf_edge_0-follow_only_g4_29.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_31.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_similar_negative",
+      "frame_id": "lmf_similar_negative_0-follow_only_g5_37.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_side_negative",
+      "frame_id": "lmf_side_negative_0-follow_only_g6_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_side_negative",
+      "frame_id": "lmf_side_negative_0-follow_only_g6_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_reuse_lmf_side_negative",
+      "frame_id": "lmf_side_negative_0-follow_only_g6_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_final_pilot_annotation_34_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_114.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_168.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_175.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_178.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_180.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_203.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_205.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_208.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_210.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_29.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_33.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_35.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_38.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_40.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_42.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_47.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_52.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_61.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_63.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_0-follow_only_g5_67.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_147.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_173.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_185.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_190.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_193.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_195.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_198.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_200.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_56.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_58.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_reset_1-follow_only_g6_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_gui_evidence2_route0",
+      "frame_id": "sensor_route_0-follow_only_g3_171.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_87.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_89.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_southA",
+      "frame_id": "sensor_route_1-follow_only_g4_90.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_static7",
+      "frame_id": "sensor_static_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_debug_all6_staticW",
+      "frame_id": "sensor_static_1-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_staticE",
+      "frame_id": "geo_test_static_a-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_staticE",
+      "frame_id": "geo_test_static_b-follow_only_g3_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_staticE",
+      "frame_id": "geo_test_static_c-follow_only_g4_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_137.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_141.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_151.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_156.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_158.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_161.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_163.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_166.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_168.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_170.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_173.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_176.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_178.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_181.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_191.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_193.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_194.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_28.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_31.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_38.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_49.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_51.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_54.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_57.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_60.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_62.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_67.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_70.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_devSouth",
+      "frame_id": "dev_south_new-follow_only_g1_96.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_113.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_144.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_147.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_157.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_166.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_168.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_171.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_174.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_177.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_180.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_185.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_194.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_196.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_199.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_201.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_203.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_207.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_208.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_210.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_211.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_36.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_58.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_62.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_reverseSouth",
+      "frame_id": "test_reverse_south-follow_only_g2_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_staticEtest",
+      "frame_id": "test_static_away-follow_only_g5_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_staticEtest",
+      "frame_id": "test_static_oblique-follow_only_g4_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_staticE",
+      "frame_id": "pilot_east_away-follow_only_g3_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_staticE",
+      "frame_id": "pilot_east_center-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_staticE",
+      "frame_id": "pilot_east_left-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_101.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_103.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_15.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_43.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_80.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_82.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_84.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_95.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_97.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_south",
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_99.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_15.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_21.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_high",
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_11.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_17.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_negative",
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_102.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_123.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_138.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_143.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_146.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_153.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_160.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_165.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_174.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_180.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_187.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_49.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_53.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_56.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_68.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_71.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_74.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_77.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_geo_north",
+      "frame_id": "geo_test_north_0-follow_only_g1_99.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_126.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_141.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_160.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_162.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_170.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_174.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_179.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_191.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_192.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_54.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_57.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_60.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_78.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_ind_north",
+      "frame_id": "test_north_0-follow_only_g3_80.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_102.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_141.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_161.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_165.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_170.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_177.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_186.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_188.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_191.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_192.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_52.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_55.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_59.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_77.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lm_pilot_north",
+      "frame_id": "dynamic_A_north_0-follow_only_g1_79.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_11.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_15.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_17.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_21.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_26.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_28.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn1_confuser",
+      "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_29.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_9.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_15.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_17.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_21.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_24.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_26.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_hn2_occluder",
+      "frame_id": "lmf_dev_hn2_occluder_0-follow_only_g2_28.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_105.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_120.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_140.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_143.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_147.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_151.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_154.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_156.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_27.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_37.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_40.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_43.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_46.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_49.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_52.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_55.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_58.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_61.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_65.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_69.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_82.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_85.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_88.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_91.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_inner_north",
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_94.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_10.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_13.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_16.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_18.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_19.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_20.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_3.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_4.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_5.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_6.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_7.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    },
+    {
+      "source": "dev_v4_2",
+      "group_id": "g_lmf_dev_static_low",
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_8.png",
+      "status": "annotation_calibration",
+      "event_id": "ev_dev_annotation_selection_20261104"
+    }
+  ],
+  "summary": {
+    "exposed_development_groups": 39,
+    "exploratory_eval_candidate_groups": 0,
+    "untouched_groups": 0,
+    "annotation_calibration_frames": 357,
+    "old_final_groups_downgraded": 6,
+    "hn_val_frames": 163,
+    "hn_val_complete": true,
+    "tiny_relabel": "SEE_POSTEVAL",
+    "identity_cases_pending": false,
+    "reused_exploratory_train_groups": 6,
+    "reused_exploratory_frames": 297,
+    "reused_exploratory_accepted_frames": 279,
+    "identity_dev_groups": 7,
+    "identity_dev_frames": 190,
+    "identity_dev_accepted_frames": 169,
+    "identity_annotation_frames": 62,
+    "val_main_groups": 7,
+    "val_identity_groups": 7
+  },
+  "identity_certification": {
+    "U1_at_most_one_tower_like_instance": "FALSIFIED",
+    "U2_central_tower_is_only_green_light_tower": "FALSIFIED",
+    "evidence": "map-native green-lamp pillar MS1 at about (3.0,4.0) is visible from inner_north; not the central tower",
+    "final_pool_verified_HN1_frames": 0,
+    "identity_status": "INCOMPLETE"
+  },
+  "certification": {
+    "can_claim_sealed": false,
+    "untouched_final_groups": 0,
+    "conclusion": "INCOMPLETE",
+    "reasons": [
+      "the old final/exploratory pool was fully annotated and evaluated once; it is now development data and cannot be called final/sealed",
+      "the old 34-frame pilot cannot simply be removed: all 6 families were represented",
+      "identity uniqueness U1/U2 is falsified by map-native MS1",
+      "no third-party independent sealing exists; only process isolation + hash commitment is claimed"
+    ]
+  },
+  "notes": [
+    "PASS means the exposure record is consistent with the freezes; it does not prove nobody looked at the data.",
+    "The old seal file keeps its original bytes/history; this registry is the authoritative exposure state and downgrades it.",
+    "v4.1 revision: the old exploratory pool is development TRAIN data; it is no longer final/sealed/independent.",
+    "v4.2 revision: identity/confuser development cases are in val_identity; all data remains exposed development, never final."
+  ],
+  "revision_for_freeze": "v4_2"
+}

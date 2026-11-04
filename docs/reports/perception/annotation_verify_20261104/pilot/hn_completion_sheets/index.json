@@ -1,0 +1,39 @@
+{
+ "hn_completion_00.png": [
+  "lmf_dev_hn1_confuser_0-follow_only_g1_3.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_5.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_7.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_9.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_11.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_13.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_15.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_17.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_19.png"
+ ],
+ "hn_completion_01.png": [
+  "lmf_dev_hn1_confuser_0-follow_only_g1_21.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_23.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_25.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_27.png",
+  "lmf_dev_hn1_confuser_0-follow_only_g1_29.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_3.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_5.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_7.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_9.png"
+ ],
+ "hn_completion_02.png": [
+  "lmf_dev_hn2_occluder_0-follow_only_g2_10.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_12.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_14.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_15.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_17.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_19.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_21.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_22.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_24.png"
+ ],
+ "hn_completion_03.png": [
+  "lmf_dev_hn2_occluder_0-follow_only_g2_26.png",
+  "lmf_dev_hn2_occluder_0-follow_only_g2_28.png"
+ ]
+}

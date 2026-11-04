@@ -1,0 +1,103 @@
+{
+ "new_pool_frames": 169,
+ "new_pool_unique_sha": 169,
+ "within_pool_duplicates": {},
+ "existing_runs": {
+  "debug_all6_sensor": {
+   "images": 864,
+   "overlap": 0,
+   "examples": []
+  },
+  "debug_static4_sensor": {
+   "images": 6,
+   "overlap": 0,
+   "examples": []
+  },
+  "debug_static5_sensor": {
+   "images": 6,
+   "overlap": 0,
+   "examples": []
+  },
+  "debug_static6_sensor": {
+   "images": 6,
+   "overlap": 0,
+   "examples": []
+  },
+  "debug_static7_sensor": {
+   "images": 6,
+   "overlap": 0,
+   "examples": []
+  },
+  "formal6_sensor": {
+   "images": 864,
+   "overlap": 0,
+   "examples": []
+  },
+  "geo_test_sensor": {
+   "images": 207,
+   "overlap": 0,
+   "examples": []
+  },
+  "gui_evidence2_sensor": {
+   "images": 213,
+   "overlap": 0,
+   "examples": []
+  },
+  "gui_evidence_sensor": {
+   "images": 6,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_dev_capture_20261104_sensor": {
+   "images": 337,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_dev_hn_capture_20261104_sensor": {
+   "images": 59,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_dev_smoke2_20261104_sensor": {
+   "images": 24,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_dev_smoke_hn1b_20261104_sensor": {
+   "images": 30,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_devid_smoke_20261104_sensor": {
+   "images": 31,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_final_candidate_20261104_sensor": {
+   "images": 297,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_final_smoke_20261104_sensor": {
+   "images": 114,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_independence_sensor": {
+   "images": 613,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_pilot_north_sensor": {
+   "images": 193,
+   "overlap": 0,
+   "examples": []
+  },
+  "lm_pilot_sensor": {
+   "images": 18,
+   "overlap": 0,
+   "examples": []
+  }
+ },
+ "note": "sha256 exact-duplicate check only; perceptual similarity is not measured"
+}

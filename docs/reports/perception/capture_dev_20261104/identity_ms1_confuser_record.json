@@ -1,0 +1,32 @@
+{
+ "schema_version": "dsh.landmark_map_native_structure_ms1.v1",
+ "structure_id": "MAP_NATIVE_GREEN_LAMP_PILLAR_MS1",
+ "class": "map-native (NOT injected)",
+ "injected": false,
+ "world_position_estimate_m": {
+  "x": 3.0,
+  "y": 4.0,
+  "structure_top_z": 1.78,
+  "green_lamp_z_estimate": 1.71,
+  "uncertainty_m": 0.1
+ },
+ "verification": {
+  "source": "WORLD_POSE_OR_MAP_DB",
+  "evidence": [
+   "GUI map probe raycast 0.5 m grid: vertical down-ray at (3.0,4.0) hits a structure top at z=1.78 m; collision prim /World/Terrain/Collisions/collision_019; upward clearance 6 m",
+   "multi-frame green-lamp pixel + camera pose projection is consistent with (3.0,4.0,~1.71) within a few pixels (identity_batch frames)",
+   "same structure seen from the east in the 2026-11-04 dev capture static_negative frames (no green lamp visible from that side)"
+  ],
+  "verification_scope": "CAPTURE_GEOMETRY_AND_MAP_PROBE_ONLY_NOT_HUMAN_REVIEW"
+ },
+ "appearance": "slender grey rectangular/tapered pillar about 0.5 m wide (image estimate, exact dimensions UNKNOWN), flat top module, blue accent strips, green lamp on a side face near the top; structure height about 1.83 m above local ground",
+ "green_lamp_visibility_this_batch": {
+  "lmf_devid_ms1_alone_0": "28/28 frames, strict green pixels 14-73; viewpoint west-southwest of MS1",
+  "lmf_devid_both_scale_lateral_0": "19/19 frames, strict green pixels (ms1-attributed) >0; viewpoint west-southwest",
+  "lmf_devid_both_mid_similar_scale_0": "1/23 frames; viewpoint south/southeast -> green lamp mostly NOT visible from this side",
+  "lmf_devid_both_same_bearing_0": "22/22 frames; viewpoint west-northwest -> green lamp visible",
+  "conclusion": "green lamp is orientation-dependent; visible from western viewpoints (SW/NW) in this batch, not from the south/southeast viewpoint; exact lamp facing is UNKNOWN"
+ },
+ "difference_from_central_tower": "central tower at about (11.52,-0.01) is a wide tapered tower with a 1.7 m top light rack, green roof light at z about 1.25-1.3, R mark and white stepped pedestal; MS1 is a slender flat-topped pillar with a side green lamp, no top light rack and no R mark",
+ "note": "map asset is NOT modified by this capture; MS1 is not a synthetic injection. Must not be mixed with injected confusers/occluders."
+}

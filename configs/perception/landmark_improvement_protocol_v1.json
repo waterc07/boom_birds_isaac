@@ -1,0 +1,347 @@
+{
+  "schema_version": "dsh.landmark_improvement_protocol.v1",
+  "status": "CLOSED_STOP_GATE_NOT_MET",
+  "created_at": "2026-11-04",
+  "scope": "bounded internal landmark improvement experiment: at most 2 diagnostic-driven candidates, same data and same budget as the recorded baseline; shadow only; no PPO; no control; no board/navigation/Gate acceptance",
+  "reason_for_experiment": "the 2026-11-04 bounded run reached val joint narrow-primary 0.579 (55/95) with seed1/last; the dominant val failures were presence (20) and reference coverage (21/41), identity precision 0.890 at the not-yet-frozen threshold. Improvement must be justified by the post-eval root-cause diagnosis, not by capacity or threshold tweaks.",
+  "inputs": {
+    "diagnosis": {
+      "required": true,
+      "path": "docs/reports/perception/posteval_20261104/ROOT_CAUSE_20261104.md",
+      "sha256": "TBD_PENDING_DIAG",
+      "rule": "every candidate must cite a specific diagnosed root cause (reference/identity/expression/loss/data); no candidate without a diagnosis reference",
+      "status": "DRAFT_DIAGNOSIS_AVAILABLE_PRELIMINARY",
+      "pre_diag_evidence": {
+        "status": "READ_ONLY_EVIDENCE_PENDING_DIAG_CONFIRMATION",
+        "lead_read_only_probe_old_exploratory_final": {
+          "source": "lead message 2026-11-04 (read-only cross-check, not authored by this teammate)",
+          "gt_positives": 238,
+          "miss": 20,
+          "no_keypoint": 37,
+          "emitted_keypoint": 181,
+          "emitted_2d_over_3px_but_bearing_le_3deg": "119/181",
+          "signed_dy_median_px": 1.22,
+          "bearing_median_deg": 0.55,
+          "no_keypoint_concentration": "backoff 25/37",
+          "interpretation": "the low old joint was driven mainly by reference coverage (no keypoint / far targets) and by the strict 3 px 2D criterion, not by horizontal bearing accuracy"
+        },
+        "c1_self_check": {
+          "source": "outputs/landmark_train/scripts/analyze_improvement_rootcauses.py -> outputs/landmark_train/dataset/improvement_rootcause_evidence.json",
+          "train_positives_with_bbox": 105,
+          "train_reference_visible": 56,
+          "train_v0_placeholder": 49,
+          "v0_share": 0.4666666666666667,
+          "ultralytics_8_2_0_pose_loss_behaviour": "kpt_mask = gt_kpt[...,2] != 0 (v=0 frames are excluded from keypoint regression but supervised to visibility 0 by the keypoint-objectness BCE); source .venv/landmark-train/Lib/site-packages/ultralytics/utils/loss.py:581-585",
+          "validation_emission_to_own_bbox_centre": {
+            "reference_visible_median_px": 41.9,
+            "reference_unavailable_median_px": 33.8
+          },
+          "placeholder_collapse_hypothesis": "NOT SUPPORTED by this check (emissions on reference-unavailable frames are not bbox-centre); the v=0 composition still matters as visibility/coverage supervision, to be confirmed by diag"
+        },
+        "c2_self_check": {
+          "source": "same script, outputs/landmark_train/dataset/improvement_rootcause_evidence.json",
+          "ultralytics_validation_letterbox_rect_true": {
+            "height": 512,
+            "width": 672,
+            "note": "batch-shaped validation letterbox used by the checkpoint-selection mAP/fitness path"
+          },
+          "evaluation_letterbox": {
+            "height": 640,
+            "width": 640,
+            "scale": 2.0,
+            "pad_y": 80.0
+          },
+          "keypoint_normalised_shift": {
+            "rect_true": [
+              0.7504466772079468,
+              0.51171875
+            ],
+            "rect_false": [
+              0.7629690170288086,
+              0.5093749761581421
+            ],
+            "approx_640space_px": 8.0
+          },
+          "implication": "checkpoint selection / patience fitness ran on a different letterbox shape than the frozen evaluation path; aligning them is a preprocessing candidate with measured displacement, pending diag confirmation"
+        }
+      },
+      "report": {
+        "path": "docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSIS_20261104.md",
+        "sha256": "e2757d1f87748d7c0c48bf8e6cf34d8bde6f0c30d47cee162e2d4c1f660928fd",
+        "status": "DRAFT",
+        "candidate_mapping_section": "section 5 (improvement candidate root-cause mapping)"
+      }
+    },
+    "dev_freeze_v4": {
+      "required": true,
+      "path": "configs/perception/landmark_split_freeze_v4.json",
+      "sha256": "591a8b113caa2864fe04f9f7f463904a77b177f75785afda90bc9e18aee8afef",
+      "labels_train": "outputs/perception/dev_annotations_20261104/labels_train.json",
+      "labels_val": "outputs/perception/dev_annotations_20261104/labels_val.json",
+      "labels_holdout": "NOT_TRIGGERED_AT_PREP",
+      "note": "dev v4 with the full HN set plus identity/confuser cases; frozen by datafreeze (task-17). Until frozen this protocol stays PREP and no training may start.",
+      "canonical_sha256": "afa5caa45f76d4be70245b27be59bf05945574380be4c22fc2102e6f3ef442a4",
+      "labels_train_sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df",
+      "labels_val_sha256": "8c2155979b517626299fd85c61759b73ceb1bfc369be839d4453caa3b3ed33ac",
+      "label_lists_sha256": "0c1c75aed2fdddd6de3773180f93dc643192d2c119eeccbbaea39f2bd23d6488",
+      "annotation_spec_sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+      "val_composition": {
+        "frames": 163,
+        "present": 121,
+        "absent": 39,
+        "undecidable": 3,
+        "gt_unobservable": 29,
+        "hn1_similar_structure": 27,
+        "hn2_gt_unobservable": 26,
+        "reference_available": 41,
+        "reference_unavailable": 80
+      },
+      "dataset": {
+        "dir": "outputs/landmark_train/dataset/dev_v4",
+        "train_images": 157,
+        "train_labels": "105 positive + 52 empty; 3 excluded",
+        "val_images": 134,
+        "val_labels": "95 positive + 39 empty; 29 excluded",
+        "prereg_check": "outputs/landmark_train/dataset/preregistration_v4_consistency.json",
+        "verdict": "PASS"
+      }
+    },
+    "improvement_gate": {
+      "path": "configs/perception/landmark_improvement_gate_v1.json",
+      "authored_by": "lead",
+      "rule": "lead-authored continue/stop gate; this protocol does not redefine gate values and must be re-read against the gate sha above before any training",
+      "sha256": "7c81ae51c003d4a0271fcb8284a6edbedd3267d103cbb923c87d2ab4c0bddd38"
+    },
+    "baseline_recipe": {
+      "config": "configs/perception/landmark_train_cli_v1.json",
+      "protocol": "configs/perception/landmark_train_protocol_v1.json",
+      "model_freeze": "configs/perception/landmark_model_freeze_v1.json",
+      "frozen_weights_sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1",
+      "reference_val_metrics_20261104": {
+        "joint_narrow": "55/95 = 0.579",
+        "presence": "TP75/FP10/FN20/TN15, precision 0.882, recall 0.789",
+        "reference_coverage": "21/41 = 0.512",
+        "identity_precision": "0.890",
+        "threshold_context": "pre-freeze placeholder tau_conf=0.25"
+      },
+      "rule": "baseline must be re-evaluated on the frozen v4 dev split with the same metrics script; the 2026-11-04 numbers are context only and are not the comparison denominator when the data or metric version changes"
+    },
+    "dev_freeze_v4_1": {
+      "freeze": "configs/perception/landmark_split_freeze_v4_1.json",
+      "freeze_file_sha256": "531565a25d77d4d1bf3cc3292c55fc9ee4dda23a36280e0ce63ecd01f67f8923",
+      "freeze_canonical_sha256": "36840e7f87379b710ce20a17ee2ed54df6761b8c42ae54a6a693c12f5da5cee0",
+      "train": "dev train 160 frames + reuse (old exploratory, development) 279 frames = 439; merged doc outputs/landmark_train/dataset/labels_train_v4_1_merged.json sha c936da6bfb126cb668825e3091117dc752311c9207fcc66b32691c608e61f187; leak check reuse_in_val=0",
+      "val": "labels_val.json sha 6ade12bd... (231 frames = 163 VALIDATION + 68 DEVELOPMENT identity cases); gate evaluation uses only the 163 VALIDATION subset: outputs/landmark_train/dataset/labels_val_v4_163_validation_only.json sha d8d6a602b3e668ef0b5704538bf2738798999ffb62f81efe8706f992926b5ed6; the 68 identity DEVELOPMENT frames are pending a later freeze and are not used for tuning or gating",
+      "dataset": "outputs/landmark_train/dataset/dev_v4_1 (train 436 images: 343 positive + 93 empty; val 134 images: 95 positive + 39 empty)"
+    },
+    "dev_freeze_v4_2": {
+      "freeze": "configs/perception/landmark_split_freeze_v4_2.json",
+      "canonical_sha256": "7708cd5817208a3013f6058703a70f67cd9db0c8c0ae1ad4d315cfbfb9e31aee",
+      "val_main": "163 frames = same as v4.1 validation basis",
+      "val_identity": "62 frames labels_identity_dev.json sha 79fd1745...; identity-stratified reporting only, not used for gating in this stopped route",
+      "holdout": "configs/perception/landmark_holdout_freeze_v1.json status NOT_TRIGGERED"
+    }
+  },
+  "candidates": {
+    "max": 2,
+    "slots": [
+      {
+        "candidate_id": "A_REUSE_DEVELOPMENT_SCALE_COVERAGE",
+        "status": "CONFIRMED_BY_DIAG_SECTION5",
+        "change_class": "DATA",
+        "diagnosis_ref": "docs/reports/perception/posteval_20261104/POSTEVAL_DIAGNOSIS_20261104.md section 2.5/5 sha e2757d1f...: dev train LARGE targets = 0 while the old exploratory pool has LARGE/near frames (final LARGE coverage 7/27=0.259, worst family lmf_near 3/23=0.130, anchor 4.2-7.6px, kpt confidence ~1.0)",
+        "summary": "add the old exploratory pool (279 labelled frames, now registered as exposed development train data by v4.1 freeze g_reuse_* groups) to TRAIN only; val unchanged (163 validation frames). Same model, same recipe, same epochs as the matched baseline.",
+        "implementation_ref": [
+          "outputs/landmark_train/scripts/build_v4_1_train_labels.py",
+          "scripts/landmark_train_cli.py --prepare-dataset"
+        ],
+        "expected_effect": "raise reference coverage/joint on LARGE near targets and TINY far targets (training distribution gap), without touching the network or thresholds",
+        "pilot_budget": {
+          "seeds": [
+            0
+          ],
+          "epochs_max": 15
+        },
+        "matched_baseline": "original recipe, same 15-epoch pilot budget, on the v4 train subset (no reuse frames), evaluated on the same 163-frame validation subset"
+      },
+      {
+        "candidate_id": "B_REFERENCE_AVAILABILITY_DECISION",
+        "status": "CONFIRMED_BY_DIAG_SECTION5_OPERATIONAL",
+        "change_class": "IDENTITY_REJECTION",
+        "diagnosis_ref": "docs/.../POSTEVAL_DIAGNOSIS_20261104.md section 2.6/5 sha e2757d1f...: tau_kpt=0.5 is PROPOSED_NOT_FROZEN and suppresses 28 usable-reference frames (kpt confidence 0.2408-0.4954, median 0.3975) while the 9 truly unavailable frames are <=0.2787",
+        "summary": "calibrate the keypoint-usability decision (tau_kpt) on the 163-frame validation subset using the saved baseline predictions, choosing the smallest tau_kpt whose reference coverage improves without increasing the false-reference rate; no retraining, no network change, a single prespecified usability criterion replaces the never-frozen 0.5 default",
+        "implementation_ref": [
+          "scripts/landmark_freeze_thresholds.py (tau_kpt calibration extension)",
+          "scripts/evaluate_landmark_yolo.py --tau-kpt"
+        ],
+        "expected_effect": "recover suppressed usable-reference emissions, raising reference coverage/joint; identity false-match must not worsen",
+        "pilot_budget": {
+          "seeds": [],
+          "epochs_max": 0,
+          "note": "offline validation calibration on the baseline checkpoint; consumes no training budget"
+        },
+        "matched_baseline": "same baseline checkpoint and same 163-frame validation subset with tau_kpt=0.5"
+      }
+    ],
+    "slot_schema": {
+      "candidate_id": "string",
+      "root_cause_ref": "diag report section + sha256",
+      "change_class": [
+        "DATA",
+        "PREPROCESSING",
+        "KEYPOINT_EXPRESSION",
+        "LOSS",
+        "IDENTITY_REJECTION"
+      ],
+      "summary": "one paragraph",
+      "implementation_ref": [
+        "repository-relative paths only"
+      ],
+      "allowed_scope": "data/annotation use, preprocessing, keypoint target/loss expression, identity rejection policy",
+      "forbidden": [
+        "increasing network size/capacity without a diagnosed capacity bottleneck",
+        "segmentation or new heads without a diagnosed representation gap",
+        "stacking decision thresholds or tuning tau on validation beyond the frozen freeze procedure",
+        "changing the evaluation metric or denominators to improve the number",
+        "using the old exploratory final pool for tuning"
+      ],
+      "expected_effect": "which diagnosed failure mode it should move and why"
+    }
+  },
+  "budget": {
+    "unit": "complete training run (train start -> final epoch, one seed, one recipe)",
+    "pilot": {
+      "runs_per_candidate": 1,
+      "epochs_max": 15,
+      "seeds": [
+        0
+      ],
+      "warmup_epochs": 15,
+      "note": "15 epochs sits inside the preregistered warmup; the pilot is a footprint/trend probe, not a model-selection result; pilot metrics are logged only"
+    },
+    "promotion_gate": {
+      "authority": "lead instruction 2026-11-04 + configs/perception/landmark_improvement_gate_v1.json (sha 7c81ae51...); the stricter +0.08 / joint>=0.60 rule governs advancement to the full budget",
+      "rule": "advance at most one candidate to the full budget only if ALL hold:",
+      "conditions": [
+        "validation joint narrow-primary improves by at least +0.08 absolute versus the matched v4 pilot baseline",
+        "identity high-confidence false-match rate does not worsen versus the baseline",
+        "validation joint narrow-primary >= 0.60"
+      ],
+      "otherwise": "STOP the route version: report the negative result with root-cause evidence; no full training",
+      "registered_delta": "gate file pilot_advance_gate lists +0.05; the lead 2026-11-04 clarification requires +0.08 and joint>=0.60 for the same step, recorded here as a stricter pre-registered rule"
+    },
+    "full": {
+      "runs_max": 3,
+      "epochs_max": 60,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "note": "all three seeds are reported including the worst; selection is validation-only"
+    },
+    "total_new_full_trainings_max": 4,
+    "accounting": "lead 2026-11-04 final counting rule: pilot runs are NOT counted as complete training runs; complete trainings (up to 60 epochs each) total <= 4 = v4 baseline rerun (1) + winning candidate up to 3 full seeds. Therefore at most 2 candidate pilots, then either the winner's 3 seeds or STOP after the baseline + no winner. Pilots are trend probes only.",
+    "stop_rule": {
+      "implementer": "scripts/landmark_train_cli.py::PatienceStopper",
+      "rule": "warmup 15 epochs never stop; patience 20 counted from the first evaluation after warmup",
+      "evidence_for_rule": "2026-11-04 v1 bounded run was stopped at epoch 24 by ultralytics' internal patience counting from a warmup epoch (protocol violation, run discarded)",
+      "warmup_note": "a 15-epoch pilot sits entirely inside warmup: its val numbers are a trend probe, not a selection result"
+    },
+    "selection_and_thresholds": {
+      "selection": "highest validation joint narrow-primary, tie-break lower validation FP, then lower seed (scripts/landmark_train_cli.py)",
+      "thresholds": "frozen on validation only with scripts/landmark_freeze_thresholds.py after seed/checkpoint selection; never tuned on holdout/final"
+    },
+    "baseline": {
+      "runs": 1,
+      "seed": 0,
+      "epochs_max": 60,
+      "recipe": "original architecture/recipe re-trained on the frozen v4 train split (same preprocessing, same metrics)",
+      "counts_as": "one complete training run of the <= 4 cap",
+      "why": "the v4 split and metric definitions differ from the 2026-11-04 dev v3 context; comparisons must use a re-evaluated matched baseline"
+    },
+    "used": {
+      "complete_trainings": 1,
+      "pilots": 2,
+      "winner_full_seeds": 0
+    }
+  },
+  "holdout": {
+    "authority": "configs/perception/landmark_improvement_gate_v1.json#development_to_holdout_gate (sha 7c81ae51...)",
+    "available": "TBD_PENDING_V4",
+    "dev_to_holdout_conditions": [
+      "val joint narrow-primary >= 0.60",
+      "val joint improvement over matched baseline >= +0.08 absolute",
+      "identity high-confidence false-match rate <= baseline at the frozen validation threshold",
+      "reference coverage >= 0.50",
+      "worst-group joint not worse than baseline worst-group by more than 0.05"
+    ],
+    "on_fail": "STOP this route version: no new holdout capture and no new test; deliver failure diagnosis, root-cause evidence and a route recommendation instead",
+    "on_pass": "freeze improvement protocol/artifacts, then capture a new holdout per the gate rules (>=3 new trajectory families, 200-400 frames, required conditions, sampling frozen before capture)",
+    "evaluation": "exactly one holdout evaluation after model/thresholds/decoder/eval rules are frozen; no callback, no retune, no rerun",
+    "limitation": "a single holdout read is a bounded check, not a certification; sample-size limitations must be reported with denominators"
+  },
+  "reporting": {
+    "report": "docs/reports/perception/training_20261104/IMPROVEMENT_20261104.md",
+    "metrics_json": "docs/reports/perception/training_20261104/improvement_metrics_20261104.json",
+    "required_fields": [
+      "per candidate and baseline: identical metric definitions with numerators/denominators",
+      "worst seed of the full budget, not only the best",
+      "failure counts by category (presence/reference/identity/joint)",
+      "reference coverage and false-reference rate",
+      "pixel and bearing error (median/P90/max) on the evaluable subset",
+      "stratified table (family/group/visibility/scale/truncation/negative_type)",
+      "UNKNOWN/REJECTED counts and GT_UNOBSERVABLE handling",
+      "holdout triggered yes/no with reason",
+      "2D-error vs bearing cross-tab (emitted keypoints: 2D > tau_px while horizontal bearing <= 3 deg) via outputs/landmark_train/scripts/analyze_reference_errors.py; new evaltool metric口径 T20 may supersede and must be cited by version"
+    ],
+    "non_claims": [
+      "not certification-level model effect",
+      "not board/RKNN, navigation or Gate evidence",
+      "proxy annotations (AGENT_PROXY+SELF_CHECKED) and synthetic HN remain limitations"
+    ]
+  },
+  "compliance": {
+    "license": "AGPL-3.0 obligations unresolved; internal bounded research/evaluation authorised by the user 2026-11-04; distribution is a separate decision; not a legal conclusion; no automatic model switch",
+    "isolation": "training dependencies only in .venv/landmark-train; Isaac venv untouched; no Isaac run is needed by this protocol",
+    "git": "no commit/push by the executing teammate unless instructed; weights/logs stay in ignored outputs/",
+    "final_pool": "the old exploratory final pool is never used for tuning or protocol decisions"
+  },
+  "update_log": [
+    {
+      "date": "2026-11-04",
+      "change": "prep skeleton created: budget/promotion/stop/holdout/reporting rules fixed; candidate slots pending the post-eval root-cause diagnosis and the dev v4 freeze"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "aligned promotion/holdout conditions with the lead-authored gate configs/perception/landmark_improvement_gate_v1.json (sha 7c81ae51...); added complete-training counting rule; candidate slots still pending the post-eval root-cause diagnosis and dev v4 freeze"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "lead final budget accounting applied (pilots not counted; <=4 complete trainings = baseline 1 + winner <=3 seeds); promotion gate tightened to +0.08 abs / joint>=0.60 / identity not worse; two candidate slots proposed against the reference-failure direction, status PROPOSED_PENDING_DIAG_CONFIRMATION"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "dev v4 hashes frozen into the protocol; v4 dataset built and verified (PASS); pre-diag read-only evidence recorded (lead old-final probe; v=0 share 46.7%; rect=True selection letterbox 672x512 vs eval 640x640); C1 reframed to reference visibility/coverage supervision and C2 to letterbox/selection parity; both remain PROPOSED_PENDING_DIAG_CONFIRMATION"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "diag DRAFT report cited (sha e2757d1f...) and candidates replaced per its section 5: C1/C2 dropped (SUSPECT/REJECTED), new A_DATA (reuse development frames -> train) and B_DECISION (tau_kpt calibration) registered; v4.1 freeze and 163-frame validation-only evaluation basis recorded; 68 identity DEVELOPMENT frames excluded from gating until a later freeze"
+    },
+    {
+      "date": "2026-11-04",
+      "change": "experiment executed and CLOSED with STOP: candidate A pilot joint 0.4526 (delta +0.0737, below +0.08 and <0.60), candidate B calibration no gain; v4.2 identity val recorded but unused; holdout NOT_TRIGGERED; report + metrics JSON delivered"
+    }
+  ],
+  "outcome": {
+    "decided_at": "2026-11-04",
+    "decision": "STOP",
+    "reason": "both pre-registered candidates failed the development gate: candidate A joint 43/95=0.4526 (delta +0.0737 < +0.08, joint < 0.60); candidate B tau_kpt calibration did not improve joint (best 0.400 = default) and increased false_reference rate; no full-budget seeds were run",
+    "complete_trainings_used": 1,
+    "complete_trainings_cap": 4,
+    "pilots": 2,
+    "holdout": "NOT_TRIGGERED",
+    "report": "docs/reports/perception/training_20261104/IMPROVEMENT_20261104.md",
+    "metrics": "docs/reports/perception/training_20261104/improvement_metrics_20261104.json"
+  }
+}

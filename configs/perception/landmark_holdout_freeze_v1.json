@@ -1,0 +1,76 @@
+{
+  "schema_version": "dsh.landmark_holdout_freeze.v1",
+  "status": "NOT_TRIGGERED",
+  "decided_at": "2026-11-04T12:15:43.507275+00:00",
+  "generated_by": "scripts/verify_landmark_dataset.py --build-holdout",
+  "gate": {
+    "path": "configs/perception/landmark_improvement_gate_v1.json",
+    "sha256": "7c81ae51c003d4a0271fcb8284a6edbedd3267d103cbb923c87d2ab4c0bddd38",
+    "development_to_holdout_rule": {
+      "rule": "only if the winning candidate (3 seeds, selected on validation) meets ALL of:",
+      "conditions": [
+        "val joint narrow-primary >= 0.60",
+        "val joint improvement over matched baseline >= +0.08 absolute",
+        "identity high-confidence false-match rate <= baseline at the frozen validation threshold",
+        "reference coverage >= 0.50",
+        "worst-group joint not worse than baseline worst-group by more than 0.05"
+      ],
+      "on_fail": "STOP this route version: no new holdout capture, no new test; deliver failure diagnosis, root-cause evidence and a route recommendation instead",
+      "on_pass": "freeze improvement protocol/artifacts and capture a new holdout (>=3 new trajectory families, 200-400 frames, covering small target, close-range truncation, target absent, real map confuser, same-frame ambiguity); coverage/sampling rules frozen before capture; labels by a process-isolated annotator; final candidate/thresholds/decoder/eval rules frozen, then exactly one holdout evaluation"
+    },
+    "holdout_rules": {
+      "min_new_families": 3,
+      "frames_range": [
+        200,
+        400
+      ],
+      "conditions_required": [
+        "small target",
+        "close-range truncation",
+        "target absent",
+        "real map confuser",
+        "same-frame ambiguity"
+      ],
+      "sampling_frozen_before_capture": true,
+      "no_selection_by_prediction_quality": true,
+      "annotation": "same frozen spec v2.1+, QA PASS; register who viewed images, purpose and time; same-agent execution is called PROCESS-ISOLATED HOLDOUT, not third-party sealed or certification truth",
+      "evaluation": "once only after model/thresholds/decoder/eval rules frozen; no callback, no retune, no rerun",
+      "on_failure": "stop this version of the experiment; report failure"
+    }
+  },
+  "evaluation": null,
+  "triggered": false,
+  "reason": [
+    "the development-to-holdout gate has not been evaluated: no winning-candidate 3-seed results are recorded in the improvement protocol/report yet (T18 runs after this freeze)",
+    "no holdout data has been captured or sampled"
+  ],
+  "captured": false,
+  "frozen_sampling_rules": {
+    "frozen_before_capture": true,
+    "min_new_families": 3,
+    "frames_range": [
+      200,
+      400
+    ],
+    "required_conditions": [
+      "small target",
+      "close-range truncation",
+      "target absent",
+      "real map confuser",
+      "same-frame ambiguity"
+    ],
+    "sampling_rule": "per family, accepted frames sorted by sequence; fixed midpoint systematic sampling to the frozen budget; endpoints and extreme-condition frames forced in; no prediction-quality selection",
+    "no_selection_by_prediction_quality": true,
+    "annotation": "spec v2.1+; register who viewed images, purpose and time; same-agent execution is called process-isolated holdout, not third-party sealed",
+    "evaluation": "exactly once after model/thresholds/decoder/eval rules are frozen; no callback, no rerun, no retune"
+  },
+  "not_frozen_until_triggered": true,
+  "notes": [
+    "This file is a placeholder because the development gate has not passed; no holdout data exists yet.",
+    "It pre-registers the sampling/coverage rules so that a later triggered freeze cannot tune them after seeing the data."
+  ],
+  "boundaries": [
+    "internal bounded research only; distribution decision pending",
+    "no control/PPO/Gate promotion"
+  ]
+}

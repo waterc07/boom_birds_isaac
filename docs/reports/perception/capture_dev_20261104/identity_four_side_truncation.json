@@ -1,0 +1,353 @@
+{
+ "method": "geometric projection of the 8-point tower model through the recorded camera pose/intrinsics; per-edge flags; visual confirmation via 3x crops for representative frames",
+ "image_geometry": "320x240, fx=fy=160, cx=160, cy=120",
+ "per_case_counts": {
+  "lmf_devid_target_alone_0-follow_only": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0,
+   "frames": 24
+  },
+  "lmf_devid_ms1_alone_0-follow_only": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0,
+   "frames": 28
+  },
+  "lmf_devid_both_scale_lateral_0-follow_only": {
+   "left": 0,
+   "right": 18,
+   "top": 0,
+   "bottom": 0,
+   "frames": 19
+  },
+  "lmf_devid_both_mid_similar_scale_0-follow_only": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0,
+   "frames": 23
+  },
+  "lmf_devid_both_same_bearing_0-follow_only": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0,
+   "frames": 22
+  },
+  "lmf_devid_target_near_trunc_0-follow_only": {
+   "left": 0,
+   "right": 24,
+   "top": 1,
+   "bottom": 24,
+   "frames": 24
+  },
+  "lmf_devid_full_occlusion_0-follow_only": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0,
+   "frames": 29
+  }
+ },
+ "frame_lists": {
+  "lmf_devid_target_near_trunc_0-follow_only": {
+   "right": [
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_3.png",
+     "sequence": 3
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_4.png",
+     "sequence": 4
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_5.png",
+     "sequence": 5
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_6.png",
+     "sequence": 6
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_7.png",
+     "sequence": 7
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_8.png",
+     "sequence": 8
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_9.png",
+     "sequence": 9
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_10.png",
+     "sequence": 10
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_11.png",
+     "sequence": 11
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_12.png",
+     "sequence": 12
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_13.png",
+     "sequence": 13
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_14.png",
+     "sequence": 14
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_15.png",
+     "sequence": 15
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_16.png",
+     "sequence": 16
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_17.png",
+     "sequence": 17
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_18.png",
+     "sequence": 18
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_19.png",
+     "sequence": 19
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_20.png",
+     "sequence": 20
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_21.png",
+     "sequence": 21
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_22.png",
+     "sequence": 22
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_23.png",
+     "sequence": 23
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_24.png",
+     "sequence": 24
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_25.png",
+     "sequence": 25
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_26.png",
+     "sequence": 26
+    }
+   ],
+   "bottom": [
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_3.png",
+     "sequence": 3
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_4.png",
+     "sequence": 4
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_5.png",
+     "sequence": 5
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_6.png",
+     "sequence": 6
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_7.png",
+     "sequence": 7
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_8.png",
+     "sequence": 8
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_9.png",
+     "sequence": 9
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_10.png",
+     "sequence": 10
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_11.png",
+     "sequence": 11
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_12.png",
+     "sequence": 12
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_13.png",
+     "sequence": 13
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_14.png",
+     "sequence": 14
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_15.png",
+     "sequence": 15
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_16.png",
+     "sequence": 16
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_17.png",
+     "sequence": 17
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_18.png",
+     "sequence": 18
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_19.png",
+     "sequence": 19
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_20.png",
+     "sequence": 20
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_21.png",
+     "sequence": 21
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_22.png",
+     "sequence": 22
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_23.png",
+     "sequence": 23
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_24.png",
+     "sequence": 24
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_25.png",
+     "sequence": 25
+    },
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_26.png",
+     "sequence": 26
+    }
+   ],
+   "top": [
+    {
+     "frame_id": "lmf_devid_target_near_trunc_0-follow_only_g6_20.png",
+     "sequence": 20
+    }
+   ]
+  },
+  "lmf_devid_both_scale_lateral_0-follow_only": {
+   "right": [
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_3.png",
+     "sequence": 3
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_4.png",
+     "sequence": 4
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_5.png",
+     "sequence": 5
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_6.png",
+     "sequence": 6
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_7.png",
+     "sequence": 7
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_8.png",
+     "sequence": 8
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_10.png",
+     "sequence": 10
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_11.png",
+     "sequence": 11
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_12.png",
+     "sequence": 12
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_13.png",
+     "sequence": 13
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_14.png",
+     "sequence": 14
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_15.png",
+     "sequence": 15
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_16.png",
+     "sequence": 16
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_17.png",
+     "sequence": 17
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_18.png",
+     "sequence": 18
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_19.png",
+     "sequence": 19
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_20.png",
+     "sequence": 20
+    },
+    {
+     "frame_id": "lmf_devid_both_scale_lateral_0-follow_only_g3_21.png",
+     "sequence": 21
+    }
+   ]
+  }
+ },
+ "visual_confirmation": [
+  {
+   "crop": "identity_truncation_crops/lmf_devid_target_near_trunc_0-follow_only_g6_12_right_x3.png",
+   "observed": "near target (about 1.7 m): tower body/top-bar continues past the right image border; right edge clipped -> right truncation confirmed"
+  },
+  {
+   "crop": "identity_truncation_crops/lmf_devid_target_near_trunc_0-follow_only_g6_20_bottom_x3.png",
+   "observed": "near target: tower base/pedestal continues below the bottom image border -> bottom truncation confirmed"
+  },
+  {
+   "crop": "identity_truncation_crops/lmf_devid_both_scale_lateral_0-follow_only_g3_12_right_x3.png",
+   "observed": "both composition 1: far target near the right image border (body clipped at right edge) -> right truncation confirmed"
+  }
+ ],
+ "top_edge": "only 1 frame in lmf_devid_target_near_trunc_0 has a predicted top-edge crossing (minor); treat as UNKNOWN/minor and verify during annotation",
+ "note": "these are capture-side geometric predictions + representative visual checks, not annotation truth; annotator wins on conflicts (spec v2.1)"
+}

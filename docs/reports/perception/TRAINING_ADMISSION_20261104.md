@@ -235,3 +235,16 @@
 - **认证状态**：C1 INCOMPLETE（分发未决）、C2 INCOMPLETE（单代理）、C3 INCOMPLETE（无未触碰 sealed final）、C4 INCOMPLETE（负例分母 41）、C5 UNKNOWN（无板卡）、C6 INCOMPLETE（合成域）、C7 INCOMPLETE（单次）、C8 INCOMPLETE。
 - 详细数字、命令、hash 与限制见 [LANDMARK_EXPLORATORY_RESULTS_20261104.md](LANDMARK_EXPLORATORY_RESULTS_20261104.md) 与 [training 报告](training_20261104/TRAINING_20261104.md)。
 
+---
+
+## 13. 2026-11-04 三阶段更新（失败诊断、工程修复、有界改进实验：STOP）
+
+- **只增不改**：旧 final/模型/协议/预测/hash 保留；本轮做 post-evaluation 诊断，不重跑旧 final，不用旧 final 调参。
+- **评价定义审计**：presence / identity / reference-availability / localization 四项分开；joint 拆 LOCALIZED 62/218 + CORRECT_REFUSAL 9/20 + FAIL_PRESENCE 20 + FAIL_REFERENCE 147；UNKNOWN/漏检/错误身份留在分母；GT 不可观测不评定位但单列其错误声明。旧 3px 口径保留，新 bearing 口径单列（87 帧 2D>3px 但 bearing≤1.074°）。
+- **根因**：reference 2D 定位精度为主瓶颈（119 错误锚点/218，88/119 纵向主导；28 置信度抑制；9 漏检）；TINY（9–14px）盲标 presence 0.364、TINY 正例 12/12 undecidable → 不可标注；dev train LARGE=0 → 分布缺口；C1 v=0 监督 SUSPECT、C2 预处理 REJECTED。
+- **identity**：MS1 证伪 U1/U2，单类输出无身份通道；identity 只能 UNKNOWN/appearance-gated，认证 INCOMPLETE。
+- **ONNX 三路径**：共享预处理后 0 决策翻转（126 帧）；旧 4.67px 差异=legacy letterbox 模式不同（17/18 翻转），不是导出错误。
+- **有界改进**：候选 A（数据复用）pilot joint 0.453 vs matched baseline 0.379（Δ+0.074<+0.08，且<0.60）；候选 B（tau_kpt 标定）无改善且 false_reference 变差 → **gate FAIL → STOP**；不推进 3 seed；**holdout NOT_TRIGGERED**（未采集/未评价）。
+- **路线建议**：停止“单类 pose+3px 2D+单类别身份”认证级路线；若要继续，收窄为 **bearing-primary + 可标注域 + identity=UNKNOWN/appearance-gated**，并补近距大目标严格绿光数据与 ≥2 人独立标注。
+- 详细证据：[LANDMARK_DIAGNOSIS_AND_IMPROVEMENT_RESULTS_20261104.md](LANDMARK_DIAGNOSIS_AND_IMPROVEMENT_RESULTS_20261104.md)、[post-eval 诊断](posteval_20261104/POSTEVAL_DIAGNOSIS_20261104.md)、[评价定义审计](EVAL_DEFINITION_AUDIT_20261104.md)、[IMPROVEMENT](training_20261104/IMPROVEMENT_20261104.md)、[ONNX parity](onnx_parity_20261104.json)。
+

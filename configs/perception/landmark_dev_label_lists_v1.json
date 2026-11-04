@@ -1,7 +1,7 @@
 {
  "schema_version": "dsh.landmark_dev_label_lists.v1",
- "status": "DRAFT_FOR_DATAFREEZE_VAL_HN_MINIMAL_MERGED",
- "note": "explicit dev train/val frame lists with group attribution, negative types and label hashes; produced by scripts/landmark_dedup_sampling.py + outputs/perception/dev_annotations_20261104/tools/*; labels themselves stay in gitignored outputs; HN1/HN2 second dev batch is not yet included in val",
+ "status": "DEV_VAL_HN_COMPLETE_IDENTITY_DEV_INDEPENDENT_PENDING_V4_2",
+ "note": "explicit dev train/val frame lists with group attribution, negative types and label hashes; produced by scripts/landmark_dedup_sampling.py + outputs/perception/dev_annotations_20261104/tools/*; labels themselves stay in gitignored outputs; HN1/HN2 second dev batch is not yet included in val | 2026-11-04 annot: HN val extended from 24 to all 53 accepted HN frames (labels_hn_val/labels_val updated; old bytes preserved); pending dev freeze v4. | identity/confuser development batch appended to val on 2026-11-04 (dataset_role=DEVELOPMENT; appearance-based identity decisions; synthetic injections marked SYNTHETIC_INJECTED; agent proxy annotation) | identity/confuser development batch appended to val on 2026-11-04 (dataset_role=DEVELOPMENT; appearance-based identity decisions; synthetic injections marked SYNTHETIC_INJECTED; agent proxy annotation) | identity/confuser development batch appended to val on 2026-11-04 (dataset_role=DEVELOPMENT; appearance-based identity decisions; synthetic injections marked SYNTHETIC_INJECTED; agent proxy annotation) | identity/confuser development batch appended to val on 2026-11-04 (dataset_role=DEVELOPMENT; appearance-based identity decisions; synthetic injections marked SYNTHETIC_INJECTED; agent proxy annotation) | identity/confuser development batch appended to val on 2026-11-04 (dataset_role=DEVELOPMENT; appearance-based identity decisions; synthetic injections marked SYNTHETIC_INJECTED; agent proxy annotation)",
  "generated_at_local": "2026-11-04T19:26:48+0800",
  "repo": {
   "branch": "feat/v2.2-simulation-perception",
@@ -88,12 +88,12 @@
    "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
    "sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df",
    "gitignored": true,
-   "schema_version": "dsh.tower_annotation.v2_1",
    "counts": {
     "frames": 160,
     "present": 105,
     "absent": 52,
     "undecidable": 3,
+    "ambiguous": 0,
     "gt_unobservable": 0,
     "reference_available": 56,
     "reference_unavailable": 49,
@@ -110,6 +110,9 @@
      "TARGET_ABSENT": 52,
      "SIMILAR_STRUCTURE": 0,
      "OTHER_LANDMARK": 0
+    },
+    "dataset_role": {
+     "TRAIN": 160
     },
     "by_group": {
      "g_lm_ind_devSouth": {
@@ -187,17 +190,17 @@
   },
   "val": {
    "path": "outputs/perception/dev_annotations_20261104/labels_val.json",
-   "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d",
+   "sha256": "4e8e877e09a8dd1c559556b87c5ae52751bce9dbf325c0238327dc8fe670f29f",
    "gitignored": true,
-   "schema_version": "dsh.tower_annotation.v2_1",
    "counts": {
-    "frames": 134,
-    "present": 106,
-    "absent": 25,
+    "frames": 163,
+    "present": 121,
+    "absent": 39,
     "undecidable": 3,
-    "gt_unobservable": 11,
+    "ambiguous": 0,
+    "gt_unobservable": 26,
     "reference_available": 41,
-    "reference_unavailable": 65,
+    "reference_unavailable": 80,
     "truncated": 17,
     "edge_counts": {
      "left": 0,
@@ -205,12 +208,15 @@
      "top": 0,
      "bottom": 7
     },
-    "confusers": 43,
-    "confusers_verified": 13,
+    "confusers": 57,
+    "confusers_verified": 27,
     "negative_type": {
      "TARGET_ABSENT": 12,
-     "SIMILAR_STRUCTURE": 13,
+     "SIMILAR_STRUCTURE": 27,
      "OTHER_LANDMARK": 0
+    },
+    "dataset_role": {
+     "VALIDATION": 163
     },
     "by_group": {
      "g_lm_pilot_north": {
@@ -249,15 +255,15 @@
       "keypoints": 6
      },
      "g_lmf_dev_hn1_confuser_0": {
-      "frames": 13,
+      "frames": 27,
       "present": 0,
-      "absent": 13,
+      "absent": 27,
       "undecidable": 0,
       "keypoints": 0
      },
      "g_lmf_dev_hn2_occluder_0": {
-      "frames": 11,
-      "present": 11,
+      "frames": 26,
+      "present": 26,
       "absent": 0,
       "undecidable": 0,
       "keypoints": 0
@@ -535,7 +541,7 @@
    ]
   },
   "val": {
-   "total_frames": 134,
+   "total_frames": 163,
    "groups": [
     {
      "group_id": "g_geo_north",
@@ -640,44 +646,73 @@
      "family_id": "fam_dev_hn1_confuser",
      "split": "val",
      "frames": [
-      "lmf_dev_hn1_confuser_0-follow_only_g1_10.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_14.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_16.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_18.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_20.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_22.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_24.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_26.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_28.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_3.png",
       "lmf_dev_hn1_confuser_0-follow_only_g1_4.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_5.png",
       "lmf_dev_hn1_confuser_0-follow_only_g1_6.png",
-      "lmf_dev_hn1_confuser_0-follow_only_g1_8.png"
+      "lmf_dev_hn1_confuser_0-follow_only_g1_7.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_8.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_9.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_10.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_11.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_13.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_14.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_15.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_16.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_17.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_18.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_19.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_20.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_21.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_22.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_23.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_24.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_25.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_26.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_27.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_28.png",
+      "lmf_dev_hn1_confuser_0-follow_only_g1_29.png"
      ],
      "negative_types": {
       "SIMILAR_STRUCTURE": 13
      },
-     "frame_count": 13
+     "frame_count": 27
     },
     {
      "group_id": "g_lmf_dev_hn2_occluder_0",
      "family_id": "fam_dev_hn2_occluder",
      "split": "val",
      "frames": [
-      "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_3.png",
       "lmf_dev_hn2_occluder_0-follow_only_g2_4.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_5.png",
       "lmf_dev_hn2_occluder_0-follow_only_g2_6.png",
-      "lmf_dev_hn2_occluder_0-follow_only_g2_8.png"
+      "lmf_dev_hn2_occluder_0-follow_only_g2_7.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_8.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_9.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_10.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_11.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_12.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_13.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_14.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_15.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_16.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_17.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_18.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_19.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_20.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_21.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_22.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_23.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_24.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_25.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_26.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_27.png",
+      "lmf_dev_hn2_occluder_0-follow_only_g2_28.png"
      ],
      "negative_types": {},
-     "frame_count": 11
+     "frame_count": 26
     },
     {
      "group_id": "g_lmf_dev_inner_north_0",
@@ -746,28 +781,40 @@
   }
  },
  "hn_second_batch": {
-  "status": "MINIMAL_VAL_MERGED",
-  "selection": {
-   "path": "outputs/perception/dev_annotations_20261104/selection_hn.json",
-   "sha256": "17627ea4a45cd18ad3b3d2656755b0b194c39d49dbeae37237a5196fbc4609d6",
-   "rule_id": "hn_midpoint_systematic_v1",
-   "counts": {
-    "hn1_injected_confuser_negatives": 13,
-    "hn2_full_occlusion_gt_unobservable": 11,
-    "total": 24
-   }
-  },
+  "status": "HN_VAL_COMPLETE_53",
   "label_file": {
    "path": "outputs/perception/dev_annotations_20261104/labels_hn_val.json",
-   "sha256": "3dff20b6d99249a0cf71b7703eddea08ff223c8e2ff3d0466acfefc6ce283dc2",
+   "sha256": "87ba533de8feef0cf4399650d477c071b66aa4586b74e07af10d7ccc3c1189af",
    "gitignored": true
   },
-  "requirement": "HN frames are appended to VAL only; HN1 = TARGET_ABSENT + verified synthetic confuser (construction record, EXTERNAL_EVIDENCE); HN2 = present=true + occluded=true + visibility=OCCLUDED + no bbox = GT_UNOBSERVABLE, not a negative sample",
-  "remaining": "the remaining HN frames are not annotated yet (59 published RGB records / 53 gate.accepted in the second batch; 24 annotated, 29 remaining)",
-  "source": "outputs/sensor_shadow/lm_dev_hn_capture_20261104{,_sensor}",
-  "construction_record": {
-   "path": "configs/scenarios/landmark_dev_cases_v2.json",
-   "sha256": "10b55544e4d6565dd1520e699f7c51aaded8bc6fc305f452d3000c566f2db1bc"
+  "label_sha256": "3dff20b6d99249a0cf71b7703eddea08ff223c8e2ff3d0466acfefc6ce283dc2",
+  "frames": {
+   "hn1_injected_confuser_negatives": 13,
+   "hn2_full_occlusion_gt_unobservable": 11,
+   "total": 24
+  },
+  "selection_rule": "hn_midpoint_systematic_v1 (13 HN1 + 11 HN2, accepted frames, midpoint systematic)",
+  "note": "HN1 uses negative_type=SIMILAR_STRUCTURE with one verified synthetic confuser (construction record, EXTERNAL_EVIDENCE; not arena-native); HN2 frames are present=true + occluded=true + visibility=OCCLUDED + no bbox = GT_UNOBSERVABLE, not negatives. Remaining accepted HN frames not annotated yet.",
+  "counts": {
+   "hn1_injected_confuser_negatives": 27,
+   "hn2_full_occlusion_gt_unobservable": 26,
+   "total": 53
+  },
+  "remaining": "none (all 53 gate.accepted HN frames annotated)",
+  "provenance": {
+   "original_24": {
+    "by": "annot2",
+    "selection": "selection_hn.json (hn_midpoint_systematic_v1)",
+    "frames": 24
+   },
+   "completion_29": {
+    "by": "annot",
+    "reason": "complete all 53 gate.accepted HN frames for dev val",
+    "frames": 29,
+    "hn1": 14,
+    "hn2": 15,
+    "method": "HN1 confuser bbox projected from the capture construction prims (validated at IoU 1.000 against the 24 existing HN1 boxes) + native contact-sheet visual QA; HN2 fixed OCCLUDED/GT_UNOBSERVABLE"
+   }
   }
  },
  "boundary": [
@@ -828,5 +875,57 @@
    "keypoints": 41,
    "present_hint": 98
   }
+ },
+ "identity_dev_batch": {
+  "status": "INDEPENDENT_FILE_PENDING_FREEZE_V4_2_MERGE",
+  "dataset_role": "DEVELOPMENT",
+  "selection": {
+   "path": "outputs/perception/dev_annotations_20261104/identity/selection_identity.json",
+   "sha256": "944872c8a0929bb11f8ccf7e3cc64d17d9752e068821744b6fed4362669aa6af",
+   "rule_id": "capture_representative_systematic_v1",
+   "roster_source": "docs/reports/perception/capture_dev_20261104/identity_representative_frames.json",
+   "roster_sha256": "c59f88e7062b2886fc6c77e165adc3a485b6c52e107c7d671a9053930433c80f"
+  },
+  "label_file": {
+   "path": "outputs/perception/dev_annotations_20261104/labels_identity_dev.json",
+   "sha256": "79fd17459538aaeabf89ebe10c170eaf8f1277cfc05399300362667c0a4204b2",
+   "gitignored": true
+  },
+  "counts": {
+   "frames": 62,
+   "present": 53,
+   "absent": 9,
+   "undecidable": 0,
+   "ambiguous": 0,
+   "gt_unobservable": 9,
+   "keypoints": 18,
+   "confusers": 35,
+   "candidates": 0,
+   "truncated": 16,
+   "truncation_edges": {
+    "left": 0,
+    "right": 16,
+    "top": 0,
+    "bottom": 9
+   }
+  },
+  "cases": {
+   "path": "configs/scenarios/landmark_dev_identity_cases_v1.json",
+   "sha256": "e73350802a400cb1836cce14ec0c5cc278f888b6ff5e726b4692e9ac39b7a0c7"
+  },
+  "conditions": {
+   "path": "docs/reports/perception/capture_dev_20261104/identity_frame_conditions.json",
+   "sha256": "d8cc9d37a085079ee81384f5d79c7088bbfdf8046a2f9492aff12383e5292d69"
+  },
+  "annotation_spec": {
+   "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+   "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac"
+  },
+  "qa": {
+   "path": "outputs/perception/dev_annotations_20261104/identity/qa_identity.json",
+   "sha256": "4a8e0e574428d2adfd7665a49272d8def7f52580a61659c577e59ac3c83eea49"
+  },
+  "rules": "capture fixed representative rule (first2+last2+even stride, <=10 per case, 62 frames); identity decisions from appearance only (central tower: symmetric top light rack + wide tapered body + R mark + white stepped pedestal; MS1: slender column, asymmetric flat top, side green lamp, blue strips); geometry candidates only as bbox drafts; four-edge truncation from capture tower geometry + visual check",
+  "boundary": "identity decisions from appearance only; geometry candidates used only as bbox drafts; four-edge flags from capture tower geometry with visual check; MS1 confusers verified via map probe (WORLD_POSE_OR_MAP_DB); the only synthetic injection in this batch is hn2_occluder_v1 (EXTERNAL_EVIDENCE + SYNTHETIC_INJECTED, not real-arena distribution); agent proxy annotation, not human independent review; DEVELOPMENT, not sealed; merge into val is deferred to datafreeze v4.2"
  }
 }

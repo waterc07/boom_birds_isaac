@@ -1,0 +1,124 @@
+{
+ "schema_version": "dsh.landmark_injected_occluder_identity.v1",
+ "injection_id": "hn2_occluder_v1",
+ "reused_from": "2026-11-04 dev HN2 capture (same synthetic wall definition)",
+ "injected": true,
+ "map_native": false,
+ "purpose": "full-occlusion identity case: synthetic visual-only wall between the E-area camera and the central tower (reused from the 2026-11-04 HN2 capture; target present but completely invisible)",
+ "prim_paths": {
+  "hn2_occluder_v1": [
+   "/World/DevInjection_hn2_occluder_v1_part00"
+  ]
+ },
+ "case_mapping": {
+  "lmf_devid_target_alone_0": null,
+  "lmf_devid_ms1_alone_0": null,
+  "lmf_devid_both_scale_lateral_0": null,
+  "lmf_devid_both_mid_similar_scale_0": null,
+  "lmf_devid_both_same_bearing_0": null,
+  "lmf_devid_target_near_trunc_0": null,
+  "lmf_devid_full_occlusion_0": "hn2_occluder_v1"
+ },
+ "parts": [
+  {
+   "name": "wall",
+   "kind": "cuboid",
+   "size_m": [
+    0.4,
+    2.4,
+    1.9
+   ],
+   "translation_center_m": [
+    10.6,
+    0,
+    0.95
+   ],
+   "diffuse_color": [
+    0.62,
+    0.62,
+    0.64
+   ],
+   "emissive_color": [
+    0,
+    0,
+    0
+   ],
+   "roughness": 0.7
+  }
+ ],
+ "placement_method": "spawned as USDGeom cuboid at /World/DevInjection_hn2_occluder_v1_part00, active only during the associated case episode; material PreviewSurfaceCfg (diffuse only); no rigid body / no collision",
+ "synthetic_intervention": true,
+ "not_arena_asset": true,
+ "visual_only_no_collision": true,
+ "distribution_disclaimer": "synthetic occluder constructed for capture only; it is NOT part of the RMUC2027 arena asset and does NOT represent real-arena distribution",
+ "camera_tower_occluder_relationship": {
+  "tower_reference_world_m": [
+   11.52,
+   -0.01,
+   1.25
+  ],
+  "camera_patrol_box_m": {
+   "x": [
+    8.3,
+    9
+   ],
+   "y": [
+    -0.8,
+    0.3
+   ],
+   "z": [
+    1,
+    1.1
+   ]
+  },
+  "occluder_center_world_m": [
+   10.6,
+   0,
+   0.95
+  ],
+  "occluder_size_m": [
+   0.4,
+   2.4,
+   1.9
+  ],
+  "geometry_check": "for the patrol box the line of sight from camera to every sampled tower point (light, top-bar ends/top, body/pedestal corners, z 0.03-1.62) crosses x=10.4..10.8 inside |y|<=1.2 and 0<=z<=1.9; wall top 1.9 m keeps the tower top below the over-wall sight line"
+ },
+ "frames": {
+  "case": "lmf_devid_full_occlusion_0-follow_only",
+  "accepted_rgb": 29,
+  "wall_fully_occludes_tower_geometric_frames": 29,
+  "frame_ids": [
+   "lmf_devid_full_occlusion_0-follow_only_g7_3.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_4.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_5.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_6.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_7.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_8.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_9.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_10.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_11.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_12.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_13.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_14.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_15.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_16.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_17.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_18.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_19.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_20.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_21.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_22.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_23.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_24.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_25.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_26.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_27.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_28.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_29.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_30.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_31.png"
+  ],
+  "label_guidance": "present=true, visibility=OCCLUDED, occluded=true, bbox=null, keypoint=null, reference_status=UNAVAILABLE, reference_unavailable_reason=REFERENCE_OCCLUDED; metrics: GT_UNOBSERVABLE (not a normal negative)"
+ },
+ "epistemic_note": "the image alone cannot prove the target exists behind the wall; present=true comes from the recorded scene configuration"
+}

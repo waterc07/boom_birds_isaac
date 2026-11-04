@@ -1,0 +1,196 @@
+{
+  "schema_version": "dsh.landmark_tiny_blind_frames.v1",
+  "created_at": "2026-11-04",
+  "blind": true,
+  "criteria": {
+    "blind": true,
+    "selection_source": "development labels only (labels_train.json + labels_val.json); the old final exploratory predictions/metrics are never used to choose frames",
+    "annotation_spec": "configs/perception/landmark_annotation_spec_v2_1.json (sha 010255d9..., FROZEN_FOR_DATA)",
+    "bbox_convention": "spec v2.1 tower box: head/light-rack + tan body + attached stepped base, clipped at every true image edge; independent visual judgement only, no capture projection prior, no original label",
+    "reference_rule": "strict green cue ONLY: g>=90, g-r>=25, g-b>=25, largest 4-connected component; keypoint non-null ONLY when green_pixels>=3 AND the green roof-light is visually confirmed at the annotated position; otherwise keypoint=null + reference_status=UNAVAILABLE + reason (REFERENCE_TOO_SMALL / REFERENCE_OCCLUDED / REFERENCE_NOT_PRESENT)",
+    "green_pixels_recording": "integer pixel count of the strict-green largest 4-connected component (same rule above), recorded even when below 3",
+    "color_cue_provenance": "record geometry.reference_source=COLOR_CUE_ASSISTED and annotator.independent_of_detector_cue=false; the reference point and the detector cue are the SAME operational cue, so agreement with existing anchors is same-source reproducibility, not independent physical accuracy",
+    "undecidable_policy": "presence cannot be decided -> undecidable=true, no bbox/keypoint, no negative_type; never guess",
+    "ambiguous_policy": "multiple equally plausible target candidates -> ambiguous=true + candidates[]; never emit a guessed keypoint",
+    "truncation_policy": "record left/right/top/bottom with truncation_source=ANNOTATOR_VISUAL; target.truncated = any(edge)",
+    "confuser_policy": "record visible non-target green structures in confusers[] with verified=false unless verified by a non-image source; unverified confusers under TARGET_ABSENT only",
+    "disagreement_metrics": [
+      "presence agreement",
+      "reference-availability agreement",
+      "bbox IoU",
+      "keypoint Euclidean px",
+      "image bearing deg",
+      "truncation-edge agreement"
+    ],
+    "pre_registered_pass_criteria": {
+      "presence_agreement_min": 0.9,
+      "reference_availability_agreement_min": 0.9,
+      "keypoint_median_px_max": 2.0,
+      "keypoint_p90_px_max": 4.0,
+      "bbox_iou_median_min": 0.5
+    },
+    "size_note": "development target max-side floor is about 9.3 px; a pure 4-8 px target range is absent from development data, so any sub-9.3 px annotatability conclusion stays UNKNOWN/extrapolated",
+    "independence": "blind: the frame list below carries no original coordinates and no model output; do not open labels_train/labels_val, freeze files or prediction files while labelling"
+  },
+  "selection_rule": "round-robin across families (sorted), each family ordered by (target max side, frame_id); controls ordered by frame_id",
+  "sampling": {
+    "total": 22,
+    "note": "stratified development sample; per-frame strata withheld to preserve blindness"
+  },
+  "frames": [
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "image_sha256": "85b3eae2bbf7acfd62f133f94d3d36ae25317ae451e47ef59c8f1c2115a58a0c",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
+      "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_23.png",
+      "image_sha256": "127a0e46a2f9c9114b86d0e9ca5766a644e30fee34ac7075119c13e36aaeaa22",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_22.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_22.png",
+      "image_sha256": "b36b93317d2e91f92081610290f37d1091ef520de6bd6c308a4d03592971a4d9",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "sensor_static_0-follow_only_g1_3.png",
+      "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_static_0-follow_only_g1_3.png",
+      "image_sha256": "9aa26e94c796226f5b711fbaf371186ea1939c1132ae67b52c40b2f515922809",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "image_sha256": "dee20c44113201081af138eddcb3239b5e652bb7ce8b85a92562ca8320c6ce47",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
+      "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_14.png",
+      "image_sha256": "7a0d9802c510c343588feab138607609301693afd66accf881111f51b86460bb",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_25.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_25.png",
+      "image_sha256": "474bdbfd5dc58871c60fdc35a5e9b1e4e482705edc3326b837577d4952c22b6c",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "sensor_static_1-follow_only_g2_3.png",
+      "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_static_1-follow_only_g2_3.png",
+      "image_sha256": "b3b1cc15274ccdae974f848c69491098545001dee044d58d1ef92bf46161d676",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "image_sha256": "dfb48df9c897c67c5f9a3e40de576e2e143d890db75c4a8fc3555f8f46aafdaa",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_14.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_14.png",
+      "image_sha256": "ade124fb84bb86d7d73a8bb963b0941bb3b357f533ca488567a998daa6f812ef",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "sensor_reset_0-follow_only_g5_27.png",
+      "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_reset_0-follow_only_g5_27.png",
+      "image_sha256": "9188f665eb6310482f9633895a03ea222b6d436af5b11fc362344050ba473036",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "image_sha256": "b3aae0f2298ed09397780c99f61a50b54f6196631dca9ed396439a7f58e11b78",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "image_sha256": "22aea5c4dd9900987ea35b54b3df10df30159b0105f67b9a2bf86f59ee8bc314",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "image_sha256": "f5c5dc5418553ddf8480bdc39463d969c1b0ce6f0308d2f941157227ea356509",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_static_high_0-follow_only_g3_3.png",
+      "image_sha256": "c3ded17ba0cbb2986780c4761dda373eec92fed2f65a5820b9d441c1306b3cbc",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_static_low_0-follow_only_g4_22.png",
+      "image_sha256": "b9ddb5ed012cbe6131e2ab004b0b1df901e47e1f6d5a83de5cd2e9be06a1b62b",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
+      "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_116.png",
+      "image_sha256": "38fe483ca4d7972386a57f1275488b5ea0ba147d33e2e37327a8432b34c0db6c",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_151.png",
+      "image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_151.png",
+      "image_sha256": "994996385c417e9d4afe54665f2d5a32b7d578ea0620eed40b84d94883c7c0d6",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "image_sha256": "df7c6713adc171cec5211d850762c7d72fccf90571af51a2706da70b1e01e114",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
+      "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_153.png",
+      "image_sha256": "df924bde5c5b579a3df9c88bca4e355d931335ef1adf0e5265a46e98312c8940",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "sensor_reset_0-follow_only_g5_168.png",
+      "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_reset_0-follow_only_g5_168.png",
+      "image_sha256": "4764c05a706104b2bee86e82eaba8120b337c3ba393d2effcf111e713ef7692d",
+      "image_width": 320,
+      "image_height": 240
+    },
+    {
+      "frame_id": "pilot_east_away-follow_only_g3_3.png",
+      "image": "outputs/sensor_shadow/lm_pilot_sensor/images/pilot_east_away-follow_only_g3_3.png",
+      "image_sha256": "c22bbac3aeab5415e7e137806fc3ade9cf0c2a29c0314f126d56aaffdb51f3df",
+      "image_width": 320,
+      "image_height": 240
+    }
+  ]
+}

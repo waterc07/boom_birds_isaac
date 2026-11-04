@@ -1,0 +1,21 @@
+{
+ "window": "2026-11-04 identity/confuser development capture (visible foreground GUI only)",
+ "smoke": {
+  "dir": "outputs/sensor_shadow/lm_devid_smoke_20261104",
+  "case": "lmf_devid_ms1_alone_0",
+  "result": "PASS",
+  "accepted_rgb": 28,
+  "completion_marker": true
+ },
+ "full_run": {
+  "dir": "outputs/sensor_shadow/lm_dev_identity_capture_20261104",
+  "result": "PASS 7/7 SUCCESS",
+  "accepted_rgb": 169,
+  "completion_marker": true,
+  "summary_error_file": false
+ },
+ "failures": [],
+ "retries": [],
+ "headless": "never used; runner rejects --headless and sensor shadow requires a visible GUI",
+ "note": "no failed injection/API attempts in this batch (injection support already validated in the 2026-11-04 dev batch; only the wall injection was reused here)"
+}

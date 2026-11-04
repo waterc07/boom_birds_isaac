@@ -344,6 +344,41 @@ def test_unknown_on_positive_lowers_identity_recall_without_a_claim():
     assert summary['identity']['precision'] is None
 
 
+
+# --- additive per-frame definition fields (audit support) -------------------
+
+def test_row_records_keypoint_emission_and_joint_branch():
+    localization = run(present_gt(), detected(), reference_px=(142.0, 71.0))
+    assert localization['keypoint_emitted'] is True
+    assert localization['gt_reference_available'] is True
+    assert localization['joint_branch'] == 'LOCALIZATION'
+    availability = run(present_gt(reference='UNAVAILABLE'),
+                       detected(keypoint_px=None))
+    assert availability['keypoint_emitted'] is False
+    assert availability['gt_reference_unavailable'] is True
+    assert availability['joint_branch'] == 'AVAILABILITY_DECLARATION'
+    missed = run(present_gt(), no_detection(), reference_px=(142.0, 71.0))
+    assert missed['keypoint_emitted'] is False
+    assert missed['joint_branch'] == 'LOCALIZATION'
+    assert missed['joint_ok'] is False
+
+
+def test_row_records_pixel_error_components():
+    row = run(present_gt(), detected(keypoint_px=(145.0, 76.0)),
+              reference_px=(142.0, 71.0))
+    assert row['dx_px'] == pytest.approx(3.0)
+    assert row['dy_px'] == pytest.approx(5.0)
+    assert row['anchor_error_px'] == pytest.approx(math.hypot(3.0, 5.0))
+
+
+def test_unobservable_rows_do_not_carry_joint_branch():
+    gt = present_gt(bbox_xywh=None, reference='UNAVAILABLE',
+                    visibility='OCCLUDED', occluded=True)
+    row = run(gt, no_detection())
+    assert row['presence_class'] == 'GT_UNOBSERVABLE'
+    assert row['joint_branch'] is None
+    assert row['keypoint_emitted'] is False
+
 # --- stratified reporting ---------------------------------------------------
 
 def test_stratified_summary_reports_worst_condition_with_denominators():

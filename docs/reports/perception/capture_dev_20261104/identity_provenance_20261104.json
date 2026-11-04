@@ -1,0 +1,498 @@
+{
+ "schema_version": "dsh.landmark_identity_capture_provenance.v1",
+ "status": "COLLECTION_PASS_DATA_ONLY",
+ "status_note": "visible-foreground-GUI synthetic data collection and capture-side image/geometry checks only; no annotation/training/model/board/navigation/Gate claim",
+ "task": "task-15 development identity/confuser cases (target alone / map-native MS1 alone / both in frame 3 compositions / target near truncation / full occlusion)",
+ "operator": "teammate capture",
+ "generated_at_local": "2026-11-04",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head_commit": "0c27525b312ddce022d4a2a28345f1074cf9d0c5",
+  "worktree_note": "two unrelated untracked files from other workstreams were present; this task wrote only the new identity case config, the new evidence files under docs/reports/perception/capture_dev_20261104 and ignored outputs/sensor_shadow/*; scripts/run_dynamic_eval.py was NOT modified in this task"
+ },
+ "runtime": {
+  "gui_mode": true,
+  "headless": false,
+  "renderer": "DirectX / D3D12 (--/app/vulkan=false)",
+  "isaac_sim": "5.1.0",
+  "gpu": "NVIDIA GeForce RTX 5080 16GB",
+  "gpu_driver": "581.80",
+  "python": "3.11.9 (E:/isaac/env_isaaclab/Scripts/python.exe)"
+ },
+ "pipeline": {
+  "entry": "scripts/run_dynamic_eval.py",
+  "mode": "follow_only / v2 / reference_origin_v2 / measured_hard_reset",
+  "sensor_config": "configs/sensors/sensor_shadow_v1.json",
+  "sensor_config_sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55",
+  "sensor_config_semantics_unchanged": true,
+  "sample_period_steps": 5,
+  "measured_accepted_rgb_rate_hz": 4.0
+ },
+ "runs": [
+  {
+   "name": "smoke",
+   "dir": "outputs/sensor_shadow/lm_devid_smoke_20261104",
+   "sensor_dir": "outputs/sensor_shadow/lm_devid_smoke_20261104_sensor",
+   "case": "lmf_devid_ms1_alone_0",
+   "outcomes": {
+    "follow_only": {
+     "SUCCESS": 1,
+     "COLLISION": 0,
+     "TIMEOUT": 0,
+     "OUT_OF_BOUNDS": 0,
+     "ABORT": 0,
+     "INVALID": 0
+    }
+   },
+   "accepted_rgb": 28,
+   "run_complete": true,
+   "evidence": "identity_smoke_manifest.json / identity_smoke_summary.json / identity_smoke_complete.json"
+  },
+  {
+   "name": "full",
+   "dir": "outputs/sensor_shadow/lm_dev_identity_capture_20261104",
+   "sensor_dir": "outputs/sensor_shadow/lm_dev_identity_capture_20261104_sensor",
+   "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_dev_identity_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_dev_identity_capture_20261104_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --code-commit 0c27525b312ddce022d4a2a28345f1074cf9d0c5 --working-tree landmark identity/confuser development capture (7 cases); branch feat/v2.2-simulation-perception; HEAD 0c27525 --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_dev_identity_capture_20261104",
+   "started_at": "2026-11-04T20:13:34.304696+08:00",
+   "finished_at": "2026-11-04T20:15:13.193185+08:00",
+   "episodes": 7,
+   "outcomes": {
+    "follow_only": {
+     "SUCCESS": 7,
+     "COLLISION": 0,
+     "TIMEOUT": 0,
+     "OUT_OF_BOUNDS": 0,
+     "ABORT": 0,
+     "INVALID": 0
+    }
+   },
+   "accepted_rgb": 169,
+   "run_complete": true,
+   "summary_error_file": false
+  }
+ ],
+ "cases": {
+  "file": "configs/scenarios/landmark_dev_identity_cases_v1.json",
+  "sha256": "e73350802a400cb1836cce14ec0c5cc278f888b6ff5e726b4692e9ac39b7a0c7",
+  "case_count": 7,
+  "case_ids": [
+   "lmf_devid_target_alone_0",
+   "lmf_devid_ms1_alone_0",
+   "lmf_devid_both_scale_lateral_0",
+   "lmf_devid_both_mid_similar_scale_0",
+   "lmf_devid_both_same_bearing_0",
+   "lmf_devid_target_near_trunc_0",
+   "lmf_devid_full_occlusion_0"
+  ],
+  "region_note": "MID is a data-collection observation zone used only for case validation; it is NOT a real region in the V2.2 region topology",
+  "families": [
+   {
+    "case_id": "lmf_devid_target_alone_0",
+    "condition": "target_alone",
+    "accepted_rgb": 24,
+    "sequence_range": [
+     3,
+     26
+    ],
+    "target_distance_m_range": [
+     2.43,
+     3.01
+    ],
+    "ms1_distance_m_range": [
+     6.99,
+     7.48
+    ],
+    "target_green_frames": 24,
+    "ms1_green_frames": 0,
+    "both_in_fov_frames": 0,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "injected_wall_occluded_frames": 0
+   },
+   {
+    "case_id": "lmf_devid_ms1_alone_0",
+    "condition": "map_native_confuser_alone",
+    "accepted_rgb": 28,
+    "sequence_range": [
+     3,
+     30
+    ],
+    "target_distance_m_range": [
+     9.4,
+     10.19
+    ],
+    "ms1_distance_m_range": [
+     1.36,
+     1.81
+    ],
+    "target_green_frames": 0,
+    "ms1_green_frames": 28,
+    "both_in_fov_frames": 0,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "injected_wall_occluded_frames": 0
+   },
+   {
+    "case_id": "lmf_devid_both_scale_lateral_0",
+    "condition": "both_in_frame_scale_lateral",
+    "accepted_rgb": 19,
+    "sequence_range": [
+     3,
+     21
+    ],
+    "target_distance_m_range": [
+     9.43,
+     9.9
+    ],
+    "ms1_distance_m_range": [
+     1.64,
+     2.08
+    ],
+    "target_green_frames": 19,
+    "ms1_green_frames": 19,
+    "both_in_fov_frames": 19,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 18,
+     "top": 0,
+     "bottom": 0
+    },
+    "injected_wall_occluded_frames": 0
+   },
+   {
+    "case_id": "lmf_devid_both_mid_similar_scale_0",
+    "condition": "both_in_frame_similar_scale",
+    "accepted_rgb": 23,
+    "sequence_range": [
+     3,
+     25
+    ],
+    "target_distance_m_range": [
+     9.42,
+     10.15
+    ],
+    "ms1_distance_m_range": [
+     6.11,
+     6.82
+    ],
+    "target_green_frames": 17,
+    "ms1_green_frames": 1,
+    "both_in_fov_frames": 23,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "injected_wall_occluded_frames": 0
+   },
+   {
+    "case_id": "lmf_devid_both_same_bearing_0",
+    "condition": "both_in_frame_same_bearing_stack",
+    "accepted_rgb": 22,
+    "sequence_range": [
+     3,
+     24
+    ],
+    "target_distance_m_range": [
+     12.07,
+     12.63
+    ],
+    "ms1_distance_m_range": [
+     2.77,
+     3.29
+    ],
+    "target_green_frames": 3,
+    "ms1_green_frames": 22,
+    "both_in_fov_frames": 22,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "injected_wall_occluded_frames": 0
+   },
+   {
+    "case_id": "lmf_devid_target_near_trunc_0",
+    "condition": "target_near_truncation",
+    "accepted_rgb": 24,
+    "sequence_range": [
+     3,
+     26
+    ],
+    "target_distance_m_range": [
+     1.55,
+     1.85
+    ],
+    "ms1_distance_m_range": [
+     8.18,
+     8.53
+    ],
+    "target_green_frames": 24,
+    "ms1_green_frames": 0,
+    "both_in_fov_frames": 0,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 24,
+     "top": 1,
+     "bottom": 24
+    },
+    "injected_wall_occluded_frames": 0
+   },
+   {
+    "case_id": "lmf_devid_full_occlusion_0",
+    "condition": "full_occlusion",
+    "accepted_rgb": 29,
+    "sequence_range": [
+     3,
+     31
+    ],
+    "target_distance_m_range": [
+     2.47,
+     3.09
+    ],
+    "ms1_distance_m_range": [
+     6.82,
+     7.6
+    ],
+    "target_green_frames": 0,
+    "ms1_green_frames": 0,
+    "both_in_fov_frames": 0,
+    "four_side_truncation_counts": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "injected_wall_occluded_frames": 29
+   }
+  ]
+ },
+ "totals": {
+  "accepted_rgb": 169,
+  "budget_120_180": true,
+  "sampling": "N=1: all accepted RGB frames retained; no detector-based or random selection",
+  "raw_rgb_records_including_warmup": 190,
+  "warmup_invalid_rgb": 21,
+  "per_case": {
+   "lmf_devid_target_alone_0-follow_only": 24,
+   "lmf_devid_ms1_alone_0-follow_only": 28,
+   "lmf_devid_both_scale_lateral_0-follow_only": 19,
+   "lmf_devid_both_mid_similar_scale_0-follow_only": 23,
+   "lmf_devid_both_same_bearing_0-follow_only": 22,
+   "lmf_devid_target_near_trunc_0-follow_only": 24,
+   "lmf_devid_full_occlusion_0-follow_only": 29
+  },
+  "representative_frames_for_annot2": 62
+ },
+ "identity_case_matrix": {
+  "status": "DEVELOPMENT_IDENTITY_CASES_NOT_SEALED",
+  "map_native_confuser_ms1": {
+   "structure_id": "MAP_NATIVE_GREEN_LAMP_PILLAR_MS1",
+   "world_position_estimate_m": [
+    3,
+    4
+   ],
+   "structure_top_z_m": 1.78,
+   "green_lamp_z_estimate_m": 1.71,
+   "note": "map-native (non-injected) structure from the RMUC2027 asset; NOT modified by this capture; distinct from the central tower"
+  },
+  "cases": {
+   "lmf_devid_target_alone_0": {
+    "condition": "target_alone",
+    "expected": "target present, no confuser in frame"
+   },
+   "lmf_devid_ms1_alone_0": {
+    "condition": "map_native_confuser_alone",
+    "expected": "MS1 visible with green lamp; central target out of FOV"
+   },
+   "lmf_devid_both_scale_lateral_0": {
+    "condition": "both_in_frame_scale_lateral",
+    "expected": "MS1 near/large left + target far/small right"
+   },
+   "lmf_devid_both_mid_similar_scale_0": {
+    "condition": "both_in_frame_similar_scale",
+    "expected": "MS1 left + target right, similar apparent scale, both mid-frame"
+   },
+   "lmf_devid_both_same_bearing_0": {
+    "condition": "both_in_frame_same_bearing_stack",
+    "expected": "near MS1 and far target nearly same bearing; MS1 green visibility to be confirmed"
+   },
+   "lmf_devid_target_near_trunc_0": {
+    "condition": "target_near_truncation",
+    "expected": "target 1.6-2.0 m with right/bottom edge truncation"
+   },
+   "lmf_devid_full_occlusion_0": {
+    "condition": "full_occlusion",
+    "expected": "target present but completely invisible; GT_UNOBSERVABLE candidate"
+   }
+  },
+  "split_note": "development identity cases; do not treat as sealed final; annotator may assign train/val under group rules (each case = one physical pose group); full occlusion frames are GT_UNOBSERVABLE, not negatives"
+ },
+ "four_side_truncation_and_green_metadata": {
+  "frame_table": "identity_frame_conditions.json (169 frames)",
+  "episode_summary": "identity_episode_conditions.json",
+  "confirmation": "identity_four_side_truncation.json + identity_truncation_crops/",
+  "green_cue_rules": [
+   "strict v2.1: g>=90, g-r>=25, g-b>=25, largest 4-connected component",
+   "legacy capture rule: G>100, G>1.25R, G>1.15B (recorded for continuity)"
+  ],
+  "green_attribution": "target green / map-native MS1 green / un-attributed green are separated by proximity to the predicted light positions",
+  "four_side_counts": {
+   "left": 0,
+   "right": 42,
+   "top": 1,
+   "bottom": 24
+  },
+  "not_applicable_rule": "frames with the target outside FOV/behind camera get null truncation flags (no false claims)"
+ },
+ "map_native_ms1": {
+  "file": "identity_ms1_confuser_record.json",
+  "injected": false,
+  "map_asset_modified": false,
+  "world_position_estimate_m": {
+   "x": 3.0,
+   "y": 4.0,
+   "structure_top_z": 1.78,
+   "green_lamp_z_estimate": 1.71,
+   "uncertainty_m": 0.1
+  },
+  "verification_source": "WORLD_POSE_OR_MAP_DB",
+  "verification_scope": "CAPTURE_GEOMETRY_AND_MAP_PROBE_ONLY_NOT_HUMAN_REVIEW",
+  "green_visibility_note": "orientation-dependent: visible from western viewpoints (SW/NW) in this batch; mostly not visible from the south/southeast viewpoint; exact facing UNKNOWN"
+ },
+ "injected_occluder": {
+  "file": "identity_injection_record.json",
+  "injection_id": "hn2_occluder_v1",
+  "reused_from": "2026-11-04 dev HN2 capture",
+  "prim_paths": {
+   "hn2_occluder_v1": [
+    "/World/DevInjection_hn2_occluder_v1_part00"
+   ]
+  },
+  "synthetic_intervention": true,
+  "not_arena_asset": true,
+  "distribution_disclaimer": "synthetic occluder constructed for capture only; it is NOT part of the RMUC2027 arena asset and does NOT represent real-arena distribution",
+  "wall_fully_occludes_tower_frames": 29,
+  "total_frames": 29,
+  "label_guidance": "present=true, visibility=OCCLUDED, occluded=true, bbox=null, keypoint=null, reference_status=UNAVAILABLE, reference_unavailable_reason=REFERENCE_OCCLUDED; metrics: GT_UNOBSERVABLE (not a normal negative)"
+ },
+ "dedup": {
+  "within_pool_duplicate_image_sha": 0,
+  "overlap_with_existing_runs": {
+   "debug_all6_sensor": 0,
+   "debug_static4_sensor": 0,
+   "debug_static5_sensor": 0,
+   "debug_static6_sensor": 0,
+   "debug_static7_sensor": 0,
+   "formal6_sensor": 0,
+   "geo_test_sensor": 0,
+   "gui_evidence2_sensor": 0,
+   "gui_evidence_sensor": 0,
+   "lm_dev_capture_20261104_sensor": 0,
+   "lm_dev_hn_capture_20261104_sensor": 0,
+   "lm_dev_smoke2_20261104_sensor": 0,
+   "lm_dev_smoke_hn1b_20261104_sensor": 0,
+   "lm_devid_smoke_20261104_sensor": 0,
+   "lm_final_candidate_20261104_sensor": 0,
+   "lm_final_smoke_20261104_sensor": 0,
+   "lm_independence_sensor": 0,
+   "lm_pilot_north_sensor": 0,
+   "lm_pilot_sensor": 0
+  },
+  "existing_runs_checked": 19,
+  "no_identical_waypoint_sequence": true,
+  "nearest_existing_start": {
+   "lmf_devid_target_alone_0": {
+    "run": "lm_pilot",
+    "case_id": "pilot_east_away",
+    "distance_m": 0.361,
+    "yaw_difference_rad": 3.142
+   },
+   "lmf_devid_ms1_alone_0": {
+    "run": "dev_v2",
+    "case_id": "lmf_dev_static_high_0",
+    "distance_m": 6.061,
+    "yaw_difference_rad": 0.97
+   },
+   "lmf_devid_both_scale_lateral_0": {
+    "run": "dev_v2",
+    "case_id": "lmf_dev_static_high_0",
+    "distance_m": 6.181,
+    "yaw_difference_rad": 0.386
+   },
+   "lmf_devid_both_mid_similar_scale_0": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_a",
+    "distance_m": 6.249,
+    "yaw_difference_rad": 0.74
+   },
+   "lmf_devid_both_same_bearing_0": {
+    "run": "dev_v2",
+    "case_id": "lmf_dev_static_high_0",
+    "distance_m": 9.028,
+    "yaw_difference_rad": 0.63
+   },
+   "lmf_devid_target_near_trunc_0": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_near_0",
+    "distance_m": 0.335,
+    "yaw_difference_rad": 0.85
+   },
+   "lmf_devid_full_occlusion_0": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_sweep_0",
+    "distance_m": 0.5,
+    "yaw_difference_rad": 0.1
+   }
+  }
+ },
+ "gui_evidence": {
+  "mid_run_window_screenshot": "identity_gui_window.png",
+  "desktop_evidence": "identity_desktop_1280x720.png",
+  "manifest_gui_fields": "identity_manifest.json: gui_mode=true, gui_evidence.headless=false",
+  "smoke_gui": "smoke GUI evidenced by identity_smoke_manifest.json (gui_mode=true/headless=false) and gui log; the desktop capture during the smoke run missed the window (timing) and is not used as GUI evidence",
+  "limitation": "full run has a valid mid-run desktop capture of the Isaac Sim window; smoke has manifest+log only"
+ },
+ "split_and_usage": {
+  "file": "identity_split_and_usage.json",
+  "dataset_role": "DEVELOPMENT",
+  "sealed": false,
+  "group_rule": "one case = one group; assign whole cases to train or val; never split a case",
+  "full_occlusion": "GT_UNOBSERVABLE, not a negative"
+ },
+ "artifacts_sha256": {
+  "cases_file": "e73350802a400cb1836cce14ec0c5cc278f888b6ff5e726b4692e9ac39b7a0c7",
+  "run_manifest": "d371eff864cde4d7755e541a22de8d126d8cf09d0735c532abd915384e1de8e6",
+  "run_summary": "43def3430d1d5e70d55f2c499814d5995086d48acda5c5d189be74ee88fc3573",
+  "sensor_summary": "f1618edcb89aa2f377f11e8972c474a3196ca44de9d12796bc90eb5c08a6fa86",
+  "observations_jsonl": "c51d9961a6d34fdfba36d0fab7670edc0d979231f521ed631325b90e4e022734",
+  "frame_conditions": "d8cc9d37a085079ee81384f5d79c7088bbfdf8046a2f9492aff12383e5292d69",
+  "runner_script_current": "ea2b42893311f85e22d6368637ceee5da8aa10892779e139494d1d69b71b0906"
+ },
+ "raw_data_boundary": "raw 320x240 PNGs and observations.jsonl/steps.jsonl stay in ignored outputs/sensor_shadow/*; the evidence directory keeps small copies, condition tables, references and hashes",
+ "failures": "none in this batch (smoke PASS, full run PASS, no retries; see identity_failures_and_retries.json)",
+ "limitations": [
+  "synthetic asset + SIM_RENDER_RGB pinhole camera (PROPOSED); not OV9782 hardware and not real-arena lighting/distribution",
+  "MS1 is map-native; its final verified-confuser decision belongs to annot2/lead",
+  "the reused synthetic wall is visual-only and does not represent real-arena occluders; full-occlusion GT is scene-derived, not image-observable",
+  "capture-side truncation is geometric prediction + representative visual checks, not annotation truth; top edge has only 1 candidate frame",
+  "annotations/training/model/board/navigation/Gate are NOT RUN; no perception capability claimed"
+ ],
+ "repo_test_result": {
+  "command": "E:/isaac/env_isaaclab/Scripts/python.exe -m pytest -q (repo root)",
+  "collection_issue": "tests/evaluation/test_landmark_posteval.py fails to import boom_birds.evaluation.landmark_posteval (parallel in-progress workstream)",
+  "result_ignoring_in_progress_file": "1032 passed, 2 failed, 77.67 s",
+  "failures_scope": "both failures belong to parallel workstreams (test_landmark_dataset exposure-registry test; test_landmark_train_cli shipped-config test)",
+  "t1_relation": "this task only added configs/scenarios/landmark_dev_identity_cases_v1.json and docs/reports/perception/capture_dev_20261104 identity evidence; no src/ or tests/ change"
+ }
+}

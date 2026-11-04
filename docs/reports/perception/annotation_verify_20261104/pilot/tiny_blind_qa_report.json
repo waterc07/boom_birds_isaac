@@ -1,0 +1,102 @@
+{
+  "schema_version": "dsh.annotation_qa.v1",
+  "document_schema_version": "dsh.tower_annotation.v2_1",
+  "annotations": "docs\\reports\\perception\\annotation_verify_20261104\\labels_tiny_blind.json",
+  "annotations_sha256": "be08ca8baa0948d919de921d0f7ffac85bd6379c872e5a546d2a072812fa730a",
+  "root": ".",
+  "count": 22,
+  "errors": [],
+  "warnings": [],
+  "overlays": [
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
+      "overlay_sha256": "cbaa68c340b3e2e1dcc2316bd04f70739bc8d5f3e2d7a65b57b3ca4d870f842f"
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
+      "overlay_sha256": "ac58f3862e8aa90dbb12b4b1f398ac213f7683bd2ad881b439ee9eedc682fb26"
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_22.png",
+      "overlay_sha256": "0d6f04503c9f0283c8497ad590c277d975b25984935800d606925de2e70f35c8"
+    },
+    {
+      "frame_id": "sensor_static_0-follow_only_g1_3.png",
+      "overlay_sha256": "a9d4f542d29e6e8b3c2320e10c4b7db1cb9867bc5233d7f840923b89cd49b924"
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
+      "overlay_sha256": "7dfd94f6c074199e2d6a8120594648b8e23b2d990fa598b5809599457482181a"
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
+      "overlay_sha256": "c15027e2f971e0c22e8aafb25fb8592cc2183556d4f25a777315e3cf7fbbe75f"
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_25.png",
+      "overlay_sha256": "d6fe049bbda801cec2bb8ef141fc1e2ad689dd54c92b5e4427783fce0d8ade78"
+    },
+    {
+      "frame_id": "sensor_static_1-follow_only_g2_3.png",
+      "overlay_sha256": "5d21f0346f3171d3c4337cae66af9faa443c842ca11b0458bd48fda2ebbc734d"
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
+      "overlay_sha256": "58b908fd004ee292f891175509b74388b6725effb33dc0f1dddc98ac38e38e77"
+    },
+    {
+      "frame_id": "test_north_0-follow_only_g3_14.png",
+      "overlay_sha256": "5a58787ca856e30d28612ef7a498093b4e15cbd7ce52ef5008cbc5634980e649"
+    },
+    {
+      "frame_id": "sensor_reset_0-follow_only_g5_27.png",
+      "overlay_sha256": "4599a0d295584b47fc998b2288b7c11929c3c4e8234af698ba5841fd0e507115"
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
+      "overlay_sha256": "d91f4e8e5098832b5deb8cd01969c28b3136389fc906b7893c0871772cba4278"
+    },
+    {
+      "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+      "overlay_sha256": "13d892a5cf8a8fe51360eca264d57a7a92aa1f82be431fbefe8df17779f1050e"
+    },
+    {
+      "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
+      "overlay_sha256": "fc23a353f2da13005142ade45b45ab81e24495e4d8b3e028ed980769129bc9be"
+    },
+    {
+      "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
+      "overlay_sha256": "979c0dd3c5e4cdb9b4daa6ca8f5056effcf8385c78c8b51458765981b96a6060"
+    },
+    {
+      "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+      "overlay_sha256": "63bdbb2e5d48cf5859c2936ecb7e206e12a017117af991c4e3decc7b2e069d34"
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
+      "overlay_sha256": "fafcbeb57a50c9003cef63859a3c26613848f5f57d975f4e6b3b5096ae1d3130"
+    },
+    {
+      "frame_id": "dev_south_new-follow_only_g1_151.png",
+      "overlay_sha256": "5b35e41dfdce9585d63321e999cb02a7b3d5a1b8ed7f086ff1fc1307c5795e10"
+    },
+    {
+      "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
+      "overlay_sha256": "e75502a354361c1ddb7b9f788d6ec329beb12ff9c34c0bb3675bc9c11ab99eb0"
+    },
+    {
+      "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
+      "overlay_sha256": "6c0bcec0d016e539236d20fca9da1cd779ad2c10ee31dfa54d1929e091dfe6fe"
+    },
+    {
+      "frame_id": "sensor_reset_0-follow_only_g5_168.png",
+      "overlay_sha256": "444784a7d70b32d722fb47cdadfba6df96b7af5c99103456f59291138b94dde2"
+    },
+    {
+      "frame_id": "pilot_east_away-follow_only_g3_3.png",
+      "overlay_sha256": "ae8d83c6a3bc2855c6ad315130a726e9edda9cd639ff4e84718577ec44b9e234"
+    }
+  ],
+  "status": "PASS",
+  "limits": "schema v1/v2 data QA only (coordinates, enums, combination rules); agent proxy annotations are not expert or human independent review; not a sealed test"
+}

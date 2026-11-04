@@ -1,0 +1,2756 @@
+{
+  "schema_version": "dsh.landmark_onnx_parity.v1",
+  "status": "PARITY_PASS",
+  "generated_at": "2026-11-04T20:35:16+0800",
+  "generated_by": "scripts/landmark_onnx_parity.py",
+  "scope": "host-side three-path parity; not a final evaluation, not an accuracy/board/navigation claim",
+  "runtime": {
+    "python": "3.11.9",
+    "packages": {
+      "torch": "2.7.0+cu128",
+      "ultralytics": "8.2.0",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "1.26.4"
+    },
+    "seconds": 145.22
+  },
+  "config": {
+    "path": "E:\\isaac\\proj_boom_birds\\configs\\perception\\landmark_export_v1.json",
+    "sha256": "eb974fb47edae55f9ff157963bd3ce9e7d1d2f0e30581298f88dc30fb15242d3"
+  },
+  "thresholds": {
+    "path": "E:\\isaac\\proj_boom_birds\\configs\\perception\\landmark_model_freeze_v1.json",
+    "sha256": "16618b7caebf850c190974a47915dc1893dd092009984e4e70716eebeaa11cba",
+    "values": {
+      "tau_det": 0.605476,
+      "tau_conf": 0.605476,
+      "tau_px": 3.0,
+      "tau_iou": 0.3,
+      "tau_kpt": 0.5,
+      "tau_margin": 0.1,
+      "conf_nms": 0.01,
+      "iou_nms": 0.7,
+      "imgsz": 640
+    }
+  },
+  "nms": {
+    "conf_thres": 0.01,
+    "iou_thres": 0.7,
+    "max_det": 300
+  },
+  "models": {
+    "pt": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\bounded_v2\\seed1\\bounded_1\\weights\\last.pt",
+      "sha256": "d4ffe49a417533e3030f7b9471106ca88e3a43607c551695833109e02f0b4ff1"
+    },
+    "onnx": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\onnx_trained_seed1\\last_opset18.onnx",
+      "sha256": "4ee4071da9eb92ee6182181058302503a10c6801efc28c63ba41e025c3e3b61c"
+    },
+    "freeze_recorded_onnx_sha256": "4ee4071da9eb92ee6182181058302503a10c6801efc28c63ba41e025c3e3b61c",
+    "export_evidence": null
+  },
+  "data": {
+    "val": {
+      "labels_path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\dev_annotations_20261104\\labels_val.json",
+      "labels_sha256": "4e8e877e09a8dd1c559556b87c5ae52751bce9dbf325c0238327dc8fe670f29f",
+      "split": "val",
+      "frames": 163,
+      "missing_images": 0
+    },
+    "final": {
+      "labels_path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\final_exploratory_20261104\\labels_v1.json",
+      "labels_sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504",
+      "split": "test",
+      "frames": 279,
+      "missing_images": 0
+    },
+    "sample": {
+      "real_frames": 72,
+      "synthetic_frames": 54,
+      "evaluated_frames": 126,
+      "near_threshold_frames": 7
+    },
+    "final_pool_policy": "read-only sample; no metrics run, no label/threshold change, final never rerun"
+  },
+  "paths": {
+    "pt_square": "ultralytics .pt predict on the shared 640x640 canvas, decode model->source",
+    "onnx_native_square": "ultralytics .onnx predict on the same canvas",
+    "raw_ort_square": "onnxruntime + numpy NMS (iou 0.7, max_det 300) + eval-tool decode",
+    "pt_default_rect": "legacy .pt default preprocessing (auto/rect letterbox)",
+    "onnx_native_default": "legacy .onnx default preprocessing (square letterbox)"
+  },
+  "raw_numeric_parity": {
+    "performed": true,
+    "frames": 126,
+    "max_abs_diff": 0.0699920654296875,
+    "shape_match": true,
+    "mean_abs_diff": 0.0002159151276650973,
+    "max_abs_diff_relative_to_input_px": 0.00010936260223388672,
+    "relative_atol": 0.001,
+    "all_finite": true,
+    "atol_absolute_note": 0.001,
+    "per_channel_max_abs_diff": {
+      "box_cxcywh": [
+        0.0118255615234375,
+        0.01104736328125,
+        0.0275726318359375,
+        0.0699920654296875
+      ],
+      "class_score": 3.0219554901123047e-05,
+      "keypoint_xy_conf": [
+        0.004150390625,
+        0.0084228515625,
+        0.00015810132026672363
+      ]
+    },
+    "note": "the 2026-11-04 smoke-checkpoint claim was a 1.22e-4 absolute max on an untrained graph; on the trained checkpoint the absolute max is dominated by the coordinate channels (~1e-4 relative to 640), which is why the pass criterion is relative.  The decision-level effect is measured by the three-path comparisons.",
+    "passed": true
+  },
+  "onnx_equivalence": {
+    "primary": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\onnx_trained_seed1\\last_opset18.onnx",
+      "sha256": "4ee4071da9eb92ee6182181058302503a10c6801efc28c63ba41e025c3e3b61c"
+    },
+    "alternate": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\onnx_parity_20261104\\exports\\last_opset18_v1.onnx",
+      "sha256": "65fb75ae69314fdf165fcb49651f7036c59213f50c474a8bab9af62fa10f92ef"
+    },
+    "frames_compared": 126,
+    "raw_max_abs_diff": 0.0,
+    "atol": 0.001,
+    "passed": true
+  },
+  "device_sensitivity": {
+    "left": "pt_square",
+    "right": "pt_square_gpu",
+    "frames": 126,
+    "metric_frames": 72,
+    "observation_decision_flips": 0,
+    "observation_flip_frame_ids": [],
+    "observation_flip_details": [],
+    "presence_flips": 0,
+    "presence_flip_frame_ids": [],
+    "reference_flips": 0,
+    "reference_flip_frame_ids": [],
+    "identity_flips": 0,
+    "identity_flip_frame_ids": [],
+    "joint_flips": 0,
+    "joint_flip_details": [],
+    "matched_pairs": 93,
+    "keypoint_pairs": 90,
+    "keypoint_max_px": 0.0,
+    "keypoint_median_px": 0.0,
+    "keypoint_worst_frames": [
+      {
+        "frame_id": "multi_s07",
+        "keypoint_px": 0.0
+      },
+      {
+        "frame_id": "multi_s07",
+        "keypoint_px": 0.0
+      },
+      {
+        "frame_id": "multi_s06",
+        "keypoint_px": 0.0
+      },
+      {
+        "frame_id": "multi_s06",
+        "keypoint_px": 0.0
+      },
+      {
+        "frame_id": "multi_s05",
+        "keypoint_px": 0.0
+      }
+    ],
+    "emitted_keypoint_pairs": 85,
+    "emitted_keypoint_max_px": 0.0,
+    "emitted_keypoint_median_px": 0.0
+  },
+  "pairwise": {
+    "pt_square_vs_onnx_native_square": {
+      "left": "pt_square",
+      "right": "onnx_native_square",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 0,
+      "observation_flip_frame_ids": [],
+      "observation_flip_details": [],
+      "presence_flips": 0,
+      "presence_flip_frame_ids": [],
+      "reference_flips": 0,
+      "reference_flip_frame_ids": [],
+      "identity_flips": 0,
+      "identity_flip_frame_ids": [],
+      "joint_flips": 0,
+      "joint_flip_details": [],
+      "matched_pairs": 93,
+      "keypoint_pairs": 90,
+      "keypoint_max_px": 0.0001400570659689775,
+      "keypoint_median_px": 3.145679951185349e-05,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_192.png",
+          "keypoint_px": 0.0001400570659689775
+        },
+        {
+          "frame_id": "lmf_edge_0-follow_only_g4_27.png",
+          "keypoint_px": 9.650505554713072e-05
+        },
+        {
+          "frame_id": "multi_s03",
+          "keypoint_px": 9.28155903670993e-05
+        },
+        {
+          "frame_id": "aspect_s02_320x180",
+          "keypoint_px": 9.28155903670993e-05
+        },
+        {
+          "frame_id": "multi_s03",
+          "keypoint_px": 9.1552734375e-05
+        }
+      ],
+      "emitted_keypoint_pairs": 85,
+      "emitted_keypoint_max_px": 0.0001400570659689775,
+      "emitted_keypoint_median_px": 3.145679951185349e-05
+    },
+    "pt_square_vs_raw_ort_square": {
+      "left": "pt_square",
+      "right": "raw_ort_square",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 0,
+      "observation_flip_frame_ids": [],
+      "observation_flip_details": [],
+      "presence_flips": 0,
+      "presence_flip_frame_ids": [],
+      "reference_flips": 0,
+      "reference_flip_frame_ids": [],
+      "identity_flips": 0,
+      "identity_flip_frame_ids": [],
+      "joint_flips": 0,
+      "joint_flip_details": [],
+      "matched_pairs": 93,
+      "keypoint_pairs": 90,
+      "keypoint_max_px": 0.0001400570659689775,
+      "keypoint_median_px": 3.145679951185349e-05,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_192.png",
+          "keypoint_px": 0.0001400570659689775
+        },
+        {
+          "frame_id": "lmf_edge_0-follow_only_g4_27.png",
+          "keypoint_px": 9.650505554713072e-05
+        },
+        {
+          "frame_id": "multi_s03",
+          "keypoint_px": 9.28155903670993e-05
+        },
+        {
+          "frame_id": "aspect_s02_320x180",
+          "keypoint_px": 9.28155903670993e-05
+        },
+        {
+          "frame_id": "multi_s03",
+          "keypoint_px": 9.1552734375e-05
+        }
+      ],
+      "emitted_keypoint_pairs": 85,
+      "emitted_keypoint_max_px": 0.0001400570659689775,
+      "emitted_keypoint_median_px": 3.145679951185349e-05
+    },
+    "onnx_native_square_vs_raw_ort_square": {
+      "left": "onnx_native_square",
+      "right": "raw_ort_square",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 0,
+      "observation_flip_frame_ids": [],
+      "observation_flip_details": [],
+      "presence_flips": 0,
+      "presence_flip_frame_ids": [],
+      "reference_flips": 0,
+      "reference_flip_frame_ids": [],
+      "identity_flips": 0,
+      "identity_flip_frame_ids": [],
+      "joint_flips": 0,
+      "joint_flip_details": [],
+      "matched_pairs": 93,
+      "keypoint_pairs": 90,
+      "keypoint_max_px": 0.0,
+      "keypoint_median_px": 0.0,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "multi_s07",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s07",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s06",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s06",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s05",
+          "keypoint_px": 0.0
+        }
+      ],
+      "emitted_keypoint_pairs": 85,
+      "emitted_keypoint_max_px": 0.0,
+      "emitted_keypoint_median_px": 0.0
+    },
+    "pt_square_vs_pt_square_gpu": {
+      "left": "pt_square",
+      "right": "pt_square_gpu",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 0,
+      "observation_flip_frame_ids": [],
+      "observation_flip_details": [],
+      "presence_flips": 0,
+      "presence_flip_frame_ids": [],
+      "reference_flips": 0,
+      "reference_flip_frame_ids": [],
+      "identity_flips": 0,
+      "identity_flip_frame_ids": [],
+      "joint_flips": 0,
+      "joint_flip_details": [],
+      "matched_pairs": 93,
+      "keypoint_pairs": 90,
+      "keypoint_max_px": 0.0,
+      "keypoint_median_px": 0.0,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "multi_s07",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s07",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s06",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s06",
+          "keypoint_px": 0.0
+        },
+        {
+          "frame_id": "multi_s05",
+          "keypoint_px": 0.0
+        }
+      ],
+      "emitted_keypoint_pairs": 85,
+      "emitted_keypoint_max_px": 0.0,
+      "emitted_keypoint_median_px": 0.0
+    },
+    "pt_default_rect_vs_onnx_native_default": {
+      "left": "pt_default_rect",
+      "right": "onnx_native_default",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 17,
+      "observation_flip_frame_ids": [
+        "geo_test_north_0-follow_only_g1_135.png",
+        "lmf_dev_static_low_0-follow_only_g4_12.png",
+        "dynamic_A_north_0-follow_only_g1_183.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "lmf_backoff_0-follow_only_g2_51.png",
+        "aspect_s00_240x180",
+        "aspect_s00_180x240",
+        "aspect_s03_320x120",
+        "aspect_s04_320x180",
+        "aspect_s04_240x180",
+        "aspect_s04_180x240",
+        "aspect_s04_320x120",
+        "aspect_s06_180x240",
+        "aspect_s07_320x180",
+        "aspect_s07_240x180",
+        "aspect_s07_180x240",
+        "aspect_s07_320x120"
+      ],
+      "observation_flip_details": [
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": true,
+            "identity_flip": false,
+            "reject_flip": false,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": true,
+            "identity_flip": true,
+            "reject_flip": false,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_51.png",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": false,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s00_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": true,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s00_180x240",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": true,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s03_320x120",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": true,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_320x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_180x240",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_320x120",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": true,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s06_180x240",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": false,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_320x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_180x240",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_320x120",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        }
+      ],
+      "presence_flips": 5,
+      "presence_flip_frame_ids": [
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "lmf_backoff_0-follow_only_g2_51.png",
+        "aspect_s03_320x120",
+        "aspect_s04_320x120",
+        "aspect_s06_180x240"
+      ],
+      "reference_flips": 6,
+      "reference_flip_frame_ids": [
+        "geo_test_north_0-follow_only_g1_135.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "aspect_s00_240x180",
+        "aspect_s00_180x240",
+        "aspect_s03_320x120",
+        "aspect_s04_320x120"
+      ],
+      "identity_flips": 5,
+      "identity_flip_frame_ids": [
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "lmf_backoff_0-follow_only_g2_51.png",
+        "aspect_s03_320x120",
+        "aspect_s04_320x120",
+        "aspect_s06_180x240"
+      ],
+      "joint_flips": 18,
+      "joint_flip_details": [
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "UNAVAILABLE_DECLARED",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "UNAVAILABLE_EMITTED_KEYPOINT",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_186.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_151.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_16.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_156.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_4.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_10.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_sweep_0-follow_only_g1_10.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_4.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_11.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_11.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_51.png",
+          "left": {
+            "presence_class": "FN",
+            "reference_class": "UNAVAILABLE_DECLARED",
+            "joint_ok": false,
+            "joint_fail_reason": "PRESENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "UNAVAILABLE_DECLARED",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_12.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        }
+      ],
+      "matched_pairs": 91,
+      "keypoint_pairs": 86,
+      "keypoint_max_px": 8.168307347822145,
+      "keypoint_median_px": 1.4519173525299445,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_12.png",
+          "keypoint_px": 8.168307347822145
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
+          "keypoint_px": 6.890526634067711
+        },
+        {
+          "frame_id": "aspect_s03_320x180",
+          "keypoint_px": 6.841070604765722
+        },
+        {
+          "frame_id": "aspect_s03_240x180",
+          "keypoint_px": 6.2487408330584575
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_11.png",
+          "keypoint_px": 5.7881596451380535
+        }
+      ],
+      "emitted_keypoint_pairs": 81,
+      "emitted_keypoint_max_px": 8.168307347822145,
+      "emitted_keypoint_median_px": 1.660403908198018
+    },
+    "pt_square_vs_pt_default_rect": {
+      "left": "pt_square",
+      "right": "pt_default_rect",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 21,
+      "observation_flip_frame_ids": [
+        "geo_test_north_0-follow_only_g1_135.png",
+        "lmf_dev_static_low_0-follow_only_g4_12.png",
+        "lmf_dev_inner_north_0-follow_only_g1_143.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "geo_test_north_0-follow_only_g1_177.png",
+        "lmf_backoff_0-follow_only_g2_51.png",
+        "aspect_s00_240x180",
+        "aspect_s00_180x240",
+        "aspect_s03_320x120",
+        "aspect_s04_320x180",
+        "aspect_s04_240x180",
+        "aspect_s04_180x240",
+        "aspect_s04_320x120",
+        "edge_right_s05",
+        "edge_bottom_s05",
+        "aspect_s06_240x180",
+        "aspect_s06_180x240",
+        "aspect_s07_320x180",
+        "aspect_s07_240x180",
+        "aspect_s07_180x240",
+        "aspect_s07_320x120"
+      ],
+      "observation_flip_details": [
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": true,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_143.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": true,
+            "identity_flip": true,
+            "reject_flip": false,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_51.png",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": false,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s00_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": true,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s00_180x240",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": true,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s03_320x120",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": true,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_320x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_180x240",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s04_320x120",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": true,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "edge_right_s05",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "edge_bottom_s05",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s06_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s06_180x240",
+          "diff": {
+            "status_flip": true,
+            "presence_flip": true,
+            "reference_flip": false,
+            "identity_flip": true,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_320x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_180x240",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s07_320x120",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        }
+      ],
+      "presence_flips": 5,
+      "presence_flip_frame_ids": [
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "lmf_backoff_0-follow_only_g2_51.png",
+        "aspect_s03_320x120",
+        "aspect_s04_320x120",
+        "aspect_s06_180x240"
+      ],
+      "reference_flips": 6,
+      "reference_flip_frame_ids": [
+        "geo_test_north_0-follow_only_g1_135.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "aspect_s00_240x180",
+        "aspect_s00_180x240",
+        "aspect_s03_320x120",
+        "aspect_s04_320x120"
+      ],
+      "identity_flips": 5,
+      "identity_flip_frame_ids": [
+        "lmf_dev_hn1_confuser_0-follow_only_g1_12.png",
+        "lmf_backoff_0-follow_only_g2_51.png",
+        "aspect_s03_320x120",
+        "aspect_s04_320x120",
+        "aspect_s06_180x240"
+      ],
+      "joint_flips": 18,
+      "joint_flip_details": [
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "UNAVAILABLE_EMITTED_KEYPOINT",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "UNAVAILABLE_DECLARED",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_12.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_186.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_151.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_16.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_156.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_4.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_10.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_sweep_0-follow_only_g1_10.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_4.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_11.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_11.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_51.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "UNAVAILABLE_DECLARED",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "FN",
+            "reference_class": "UNAVAILABLE_DECLARED",
+            "joint_ok": false,
+            "joint_fail_reason": "PRESENCE",
+            "joint_evaluable": true
+          }
+        },
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_12.png",
+          "left": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_AND_AVAILABLE",
+            "joint_ok": true,
+            "joint_fail_reason": null,
+            "joint_evaluable": true
+          },
+          "right": {
+            "presence_class": "TP",
+            "reference_class": "PRESENT_WRONG_ANCHOR",
+            "joint_ok": false,
+            "joint_fail_reason": "REFERENCE",
+            "joint_evaluable": true
+          }
+        }
+      ],
+      "matched_pairs": 91,
+      "keypoint_pairs": 86,
+      "keypoint_max_px": 8.168327542515904,
+      "keypoint_median_px": 1.45194290598943,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "lmf_near_0-follow_only_g3_12.png",
+          "keypoint_px": 8.168327542515904
+        },
+        {
+          "frame_id": "lmf_dev_static_low_0-follow_only_g4_14.png",
+          "keypoint_px": 6.890492528658049
+        },
+        {
+          "frame_id": "aspect_s03_320x180",
+          "keypoint_px": 6.841009637852566
+        },
+        {
+          "frame_id": "aspect_s03_240x180",
+          "keypoint_px": 6.248786381033804
+        },
+        {
+          "frame_id": "lmf_backoff_0-follow_only_g2_11.png",
+          "keypoint_px": 5.788148193678636
+        }
+      ],
+      "emitted_keypoint_pairs": 81,
+      "emitted_keypoint_max_px": 8.168327542515904,
+      "emitted_keypoint_median_px": 1.660403908198018
+    },
+    "onnx_native_square_vs_onnx_native_default": {
+      "left": "onnx_native_square",
+      "right": "onnx_native_default",
+      "frames": 126,
+      "metric_frames": 72,
+      "observation_decision_flips": 7,
+      "observation_flip_frame_ids": [
+        "geo_test_north_0-follow_only_g1_135.png",
+        "lmf_dev_inner_north_0-follow_only_g1_143.png",
+        "dynamic_A_north_0-follow_only_g1_183.png",
+        "geo_test_north_0-follow_only_g1_177.png",
+        "edge_right_s05",
+        "edge_bottom_s05",
+        "aspect_s06_240x180"
+      ],
+      "observation_flip_details": [
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_135.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "lmf_dev_inner_north_0-follow_only_g1_143.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "dynamic_A_north_0-follow_only_g1_183.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "geo_test_north_0-follow_only_g1_177.png",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "edge_right_s05",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "edge_bottom_s05",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        },
+        {
+          "frame_id": "aspect_s06_240x180",
+          "diff": {
+            "status_flip": false,
+            "presence_flip": false,
+            "reference_flip": false,
+            "identity_flip": false,
+            "reject_flip": true,
+            "changed": true
+          }
+        }
+      ],
+      "presence_flips": 0,
+      "presence_flip_frame_ids": [],
+      "reference_flips": 0,
+      "reference_flip_frame_ids": [],
+      "identity_flips": 0,
+      "identity_flip_frame_ids": [],
+      "joint_flips": 0,
+      "joint_flip_details": [],
+      "matched_pairs": 93,
+      "keypoint_pairs": 90,
+      "keypoint_max_px": 9.584308262940302e-06,
+      "keypoint_median_px": 0.0,
+      "keypoint_worst_frames": [
+        {
+          "frame_id": "edge_right_s02",
+          "keypoint_px": 9.584308262940302e-06
+        },
+        {
+          "frame_id": "edge_bottom_s02",
+          "keypoint_px": 9.584308262940302e-06
+        },
+        {
+          "frame_id": "aspect_s02_240x180",
+          "keypoint_px": 8.529922399520072e-06
+        },
+        {
+          "frame_id": "edge_right_s00",
+          "keypoint_px": 7.62939453125e-06
+        },
+        {
+          "frame_id": "edge_bottom_s00",
+          "keypoint_px": 7.62939453125e-06
+        }
+      ],
+      "emitted_keypoint_pairs": 85,
+      "emitted_keypoint_max_px": 9.584308262940302e-06,
+      "emitted_keypoint_median_px": 0.0
+    }
+  },
+  "scenarios": {
+    "real_val": {
+      "frames": 48,
+      "paths": {
+        "raw_ort_square": {
+          "NOT_DETECTED": 21,
+          "DETECTED": 27
+        },
+        "pt_square": {
+          "NOT_DETECTED": 21,
+          "DETECTED": 27
+        },
+        "onnx_native_square": {
+          "NOT_DETECTED": 21,
+          "DETECTED": 27
+        },
+        "pt_default_rect": {
+          "NOT_DETECTED": 22,
+          "DETECTED": 26
+        },
+        "onnx_native_default": {
+          "NOT_DETECTED": 21,
+          "DETECTED": 27
+        },
+        "pt_square_gpu": {
+          "NOT_DETECTED": 21,
+          "DETECTED": 27
+        }
+      },
+      "joint_flips": {},
+      "joint_ok_paths": {
+        "raw_ort_square": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "pt_square": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "onnx_native_square": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "pt_default_rect": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "onnx_native_default": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "pt_square_gpu": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    "edge_truncation": {
+      "frames": 33,
+      "paths": {
+        "raw_ort_square": {
+          "DETECTED": 29,
+          "NOT_DETECTED": 4
+        },
+        "pt_square": {
+          "DETECTED": 29,
+          "NOT_DETECTED": 4
+        },
+        "onnx_native_square": {
+          "DETECTED": 29,
+          "NOT_DETECTED": 4
+        },
+        "pt_default_rect": {
+          "DETECTED": 29,
+          "NOT_DETECTED": 4
+        },
+        "onnx_native_default": {
+          "DETECTED": 29,
+          "NOT_DETECTED": 4
+        },
+        "pt_square_gpu": {
+          "DETECTED": 29,
+          "NOT_DETECTED": 4
+        }
+      },
+      "joint_flips": {},
+      "joint_ok_paths": {
+        "raw_ort_square": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "pt_square": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "onnx_native_square": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "pt_default_rect": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "onnx_native_default": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "pt_square_gpu": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "keypoint_unavailable": {
+      "frames": 16,
+      "paths": {
+        "raw_ort_square": {
+          "NOT_DETECTED": 12,
+          "DETECTED": 4
+        },
+        "pt_square": {
+          "NOT_DETECTED": 12,
+          "DETECTED": 4
+        },
+        "onnx_native_square": {
+          "NOT_DETECTED": 12,
+          "DETECTED": 4
+        },
+        "pt_default_rect": {
+          "NOT_DETECTED": 13,
+          "DETECTED": 3
+        },
+        "onnx_native_default": {
+          "NOT_DETECTED": 12,
+          "DETECTED": 4
+        },
+        "pt_square_gpu": {
+          "NOT_DETECTED": 12,
+          "DETECTED": 4
+        }
+      },
+      "joint_flips": {},
+      "joint_ok_paths": {
+        "raw_ort_square": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "pt_square": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "onnx_native_square": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "pt_default_rect": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "onnx_native_default": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "pt_square_gpu": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ]
+      }
+    },
+    "real_final": {
+      "frames": 24,
+      "paths": {
+        "raw_ort_square": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 6
+        },
+        "pt_square": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 6
+        },
+        "onnx_native_square": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 6
+        },
+        "pt_default_rect": {
+          "DETECTED": 17,
+          "NOT_DETECTED": 7
+        },
+        "onnx_native_default": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 6
+        },
+        "pt_square_gpu": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 6
+        }
+      },
+      "joint_flips": {},
+      "joint_ok_paths": {
+        "raw_ort_square": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pt_square": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "onnx_native_square": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pt_default_rect": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "onnx_native_default": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pt_square_gpu": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "near_threshold": {
+      "frames": 7,
+      "paths": {
+        "raw_ort_square": {
+          "DETECTED": 3,
+          "NOT_DETECTED": 4
+        },
+        "pt_square": {
+          "DETECTED": 3,
+          "NOT_DETECTED": 4
+        },
+        "onnx_native_square": {
+          "DETECTED": 3,
+          "NOT_DETECTED": 4
+        },
+        "pt_default_rect": {
+          "NOT_DETECTED": 4,
+          "DETECTED": 3
+        },
+        "onnx_native_default": {
+          "DETECTED": 3,
+          "NOT_DETECTED": 4
+        },
+        "pt_square_gpu": {
+          "DETECTED": 3,
+          "NOT_DETECTED": 4
+        }
+      },
+      "joint_flips": {},
+      "joint_ok_paths": {
+        "raw_ort_square": [
+          1
+        ],
+        "pt_square": [
+          1
+        ],
+        "onnx_native_square": [
+          1
+        ],
+        "pt_default_rect": [
+          0
+        ],
+        "onnx_native_default": [
+          1
+        ],
+        "pt_square_gpu": [
+          1
+        ]
+      }
+    },
+    "aspect": {
+      "frames": 39,
+      "paths": {
+        "raw_ort_square": {
+          "NOT_DETECTED": 9,
+          "DETECTED": 30
+        },
+        "pt_square": {
+          "NOT_DETECTED": 9,
+          "DETECTED": 30
+        },
+        "onnx_native_square": {
+          "NOT_DETECTED": 9,
+          "DETECTED": 30
+        },
+        "pt_default_rect": {
+          "NOT_DETECTED": 6,
+          "DETECTED": 33
+        },
+        "onnx_native_default": {
+          "NOT_DETECTED": 9,
+          "DETECTED": 30
+        },
+        "pt_square_gpu": {
+          "NOT_DETECTED": 9,
+          "DETECTED": 30
+        }
+      },
+      "joint_flips": {}
+    },
+    "synthetic": {
+      "frames": 22,
+      "paths": {
+        "raw_ort_square": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 4
+        },
+        "pt_square": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 4
+        },
+        "onnx_native_square": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 4
+        },
+        "pt_default_rect": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 4
+        },
+        "onnx_native_default": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 4
+        },
+        "pt_square_gpu": {
+          "DETECTED": 18,
+          "NOT_DETECTED": 4
+        }
+      },
+      "joint_flips": {}
+    },
+    "multi_candidate": {
+      "frames": 8,
+      "paths": {
+        "raw_ort_square": {
+          "NOT_DETECTED": 2,
+          "DETECTED": 6
+        },
+        "pt_square": {
+          "NOT_DETECTED": 2,
+          "DETECTED": 6
+        },
+        "onnx_native_square": {
+          "NOT_DETECTED": 2,
+          "DETECTED": 6
+        },
+        "pt_default_rect": {
+          "NOT_DETECTED": 2,
+          "DETECTED": 6
+        },
+        "onnx_native_default": {
+          "NOT_DETECTED": 2,
+          "DETECTED": 6
+        },
+        "pt_square_gpu": {
+          "NOT_DETECTED": 2,
+          "DETECTED": 6
+        }
+      },
+      "joint_flips": {}
+    }
+  },
+  "near_threshold": {
+    "window": 0.05,
+    "frames": 7,
+    "pair_status_flips": {
+      "pt_square_vs_onnx_native_square": 0,
+      "pt_square_vs_raw_ort_square": 0,
+      "onnx_native_square_vs_raw_ort_square": 0,
+      "pt_square_vs_pt_square_gpu": 0
+    }
+  },
+  "self_check": {
+    "raw_parity_ok": true,
+    "onnx_equivalence_ok": true,
+    "primary_pairs": {
+      "pt_square_vs_onnx_native_square": {
+        "decision_flips_ok": true,
+        "keypoint_ok": true
+      },
+      "pt_square_vs_raw_ort_square": {
+        "decision_flips_ok": true,
+        "keypoint_ok": true
+      },
+      "onnx_native_square_vs_raw_ort_square": {
+        "decision_flips_ok": true,
+        "keypoint_ok": true
+      }
+    },
+    "passed": true
+  },
+  "conclusion": {
+    "primary_parity": "PASS",
+    "legacy_4_67px_explanation": {
+      "device_sensitivity_keypoint_max_px": 0.0,
+      "device_sensitivity_joint_flips": 0,
+      "legacy_keypoint_max_px": 8.168307347822145,
+      "legacy_observation_flips": 17,
+      "legacy_joint_flips": 18,
+      "primary_keypoint_max_px": 0.0001400570659689775,
+      "primary_observation_flips": 0,
+      "reading": "legacy .pt and .onnx ultralytics predictors build different letterboxes (auto/rect vs square); the shared-canvas paths remove that difference, so a large legacy keypoint delta is a preprocessing-mode artefact, not a graph/export error"
+    },
+    "decision_flip_answer": {
+      "primary_joint_flips": [
+        0,
+        0,
+        0
+      ],
+      "primary_observation_flips": [
+        0,
+        0,
+        0
+      ],
+      "legacy_joint_flips": 18,
+      "legacy_observation_flips": 17,
+      "reading": "with one shared preprocessing mode the three paths must agree on every decision; the legacy mismatch is the only place where the old 4.67 px class of difference can flip a pass/fail decision, and the flip count is reported above"
+    }
+  },
+  "limitations": [
+    "synthetic aspect/edge/multi-candidate variants have no GT, so their comparison is observation-level only",
+    "near-threshold selection uses the raw ORT top score on the sampled frames, not a population estimate",
+    "the exploratory final pool was sampled read-only after its single one-shot evaluation; no new final metrics were produced",
+    "RKNN/board, real camera, accuracy certification remain out of scope (UNKNOWN)"
+  ],
+  "artifact_notes": {
+    "written_by": "report assembly step (2026-11-04); the numeric fields above are the unmodified output of scripts/landmark_onnx_parity.py",
+    "onnx_artifact_provenance": {
+      "canonical_frozen_onnx": {
+        "path": "outputs/landmark_train/runs/onnx_trained_seed1/last_opset18.onnx",
+        "sha256": "4ee4071da9eb92ee6182181058302503a10c6801efc28c63ba41e025c3e3b61c",
+        "freeze_record": "configs/perception/landmark_model_freeze_v1.json#onnx"
+      },
+      "fresh_export": {
+        "path": "outputs/perception/onnx_parity_20261104/export/last_opset18_v1.onnx",
+        "sha256": "adb65b7c10e8e6cb573c1d840e740478e281f3f206783eaec6dae53f136fd855",
+        "deterministic_across_two_runs": true,
+        "note": "a second fresh export produced the same sha 65fb75ae...; raw outputs are bit-identical (0.0) to the frozen artifact, so the sha difference is serialization/metadata only"
+      },
+      "other_onnx_files_found": {
+        "outputs/landmark_train/runs/bounded_v2/seed1/bounded_1/weights/last.onnx": "adb65b7c10e8e6cb573c1d840e740478e281f3f206783eaec6dae53f136fd855",
+        "outputs/landmark_train/runs/onnx_check/best_opset18.onnx": "b35f571f234354ec7a6773e08b3f516579f64a5d262d912a5dba74a1c036c1f5 (smoke checkpoint, not the trained model)",
+        "outputs/landmark_train/runs/smoke_gpu/train/weights/best.onnx": "b35f571f... (same smoke export)"
+      },
+      "lead_reported_sha_ca28a5c9": "no current file matches ca28a5c9...; the freeze records 4ee4071d...; the final_eval_protocol_v1.json text also says ca28a5c9... and must be corrected by its owner",
+      "export_evidence": {
+        "path": "outputs/perception/onnx_parity_20261104/export/export_evidence.json",
+        "verdict": {
+          "opset_expected": true,
+          "numeric_pass": true,
+          "overall": true
+        },
+        "opset": {
+          "ai.onnx": 18
+        },
+        "graph_nodes": 272,
+        "numeric_check": {
+          "performed": true,
+          "shape_match": true,
+          "torch_shape": [
+            1,
+            8,
+            8400
+          ],
+          "onnx_shape": [
+            1,
+            8,
+            8400
+          ],
+          "max_abs_diff": 0.003692626953125,
+          "mean_abs_diff": 1.6264939404209144e-05,
+          "all_finite": true,
+          "preprocess": {
+            "source_width": 320,
+            "source_height": 240,
+            "model_width": 640,
+            "model_height": 640,
+            "auto": false,
+            "stride": 32,
+            "scale": 2.0,
+            "resized_width": 640,
+            "resized_height": 480,
+            "pad_left": 0,
+            "pad_top": 80,
+            "pad_right": 0,
+            "pad_bottom": 80,
+            "canvas_width": 640,
+            "canvas_height": 640,
+            "rounding_error_px": 0.0
+          },
+          "relative_atol": 0.001,
+          "max_abs_diff_relative_to_input_px": 5.769729614257812e-06,
+          "passed": true
+        }
+      }
+    },
+    "labels_val_erratum": {
+      "impact": "the validation label file changed several times around the training/final run; the parity sample is a read-only path comparison and re-derives no threshold or metric, so no frozen metric is claimed by this report",
+      "timeline": [
+        {
+          "stage": "T11 freeze / TRAINING_20261104.md",
+          "file": "labels_val.json",
+          "sha256": "c3944e081d09d8a1d8398a0fb01a854580b116d004d8dcf14dacfa7f9493520d",
+          "frames": 134,
+          "note": "historical frozen bytes; must not be rewritten"
+        },
+        {
+          "stage": "annot T16 HN53 merge",
+          "file": "labels_val.json",
+          "sha256": "8c2155979b517626299fd85c61759b73ceb1bfc369be839d4453caa3b3ed33ac",
+          "frames": 163,
+          "note": "this is the sha seen by the parity run"
+        },
+        {
+          "stage": "T19 identity batch transient",
+          "file": "labels_val.json",
+          "sha256": "6ade12bd",
+          "frames": 231,
+          "note": "transient (68 identity DEVELOPMENT frames included); superseded"
+        },
+        {
+          "stage": "annot2 stabilisation (current bytes)",
+          "file": "labels_val.json",
+          "sha256": "4e8e877e09a8dd1c559556b87c5ae52751bce9dbf325c0238327dc8fe670f29f",
+          "frames": 163,
+          "note": "current labels_val.json bytes"
+        },
+        {
+          "stage": "stable evaluation baseline (lead/train confirmed)",
+          "file": "outputs/perception/dev_annotations_20261104/labels_val_validation163.json",
+          "sha256": "a9bfda8fc39b7f895521b0aafc459648c79a96ad123a82d0e0949c334705d144",
+          "frames": 163,
+          "note": "stable 163-frame validation file used for fixed train/eval reads; recorded as the new baseline"
+        }
+      ],
+      "reading": "the freeze v1 record (c3944e08, 134 frames) stays as historical evidence and is NOT rewritten; the parity run used the 163-frame file at its then-current sha 8c215597; the stable new baseline is labels_val_validation163.json a9bfda8f (163 frames). No threshold or metric is re-derived here."
+    },
+    "old_eval_onnx_artifact_analysis": {
+      "paths": [
+        "outputs/landmark_train/runs/onnx_trained_seed1/eval_pt/metrics.json",
+        "outputs/landmark_train/runs/onnx_trained_seed1/eval_onnx/metrics.json"
+      ],
+      "eval_pt_joint": "55/95=0.579 (frozen .pt path)",
+      "eval_onnx_joint": "4/95=0.042",
+      "eval_onnx_model_sha256": "83925f46ec7a5184398230773c6e09ac9c4abd7eb0a3b140b06d4f04df3e86d4",
+      "eval_onnx_model_file_present": false,
+      "eval_onnx_reject_reasons": {
+        "REFERENCE_UNAVAILABLE": 4,
+        "null": 39,
+        "MULTIPLE_CANDIDATES": 77,
+        "MISSING_IMAGE": 14
+      },
+      "joint_frame_flips_pt_vs_old_onnx": 51,
+      "joint_frames_compared": 95,
+      "reading": "the old raw-ORT path had no NMS: 77/134 frames were rejected as MULTIPLE_CANDIDATES, 69/95 positive joint decisions failed at IDENTITY, and the joint rate collapsed to 0.042. That artefact is a decoder defect, not a graph/export error, and its ONNX file (83925f46) is not present now, so the old eval_onnx metrics must not be used as model evidence."
+    },
+    "device_tie_provenance": {
+      "observed_once": "an earlier uncontrolled run (pt auto-GPU vs onnx CPU) showed one frame with 4.24 px keypoint difference and one joint flip; score margin between the two competing anchors was 2.7e-5",
+      "repeatability_check": "outputs/perception/onnx_parity_20261104/gpu_repeatability.json: 3 CPU + 5 GPU .pt runs + 3 CPU onnx runs on that frame are identical (0.0 px); not reproduced on demand",
+      "mitigation": "the primary paths force device=cpu (--device-pt cpu) so the three paths share one device; a separate pt_square_gpu path is kept for visibility and showed 0 flips in this run",
+      "residual_unknown": "GPU-vs-CPU near-tie anchor selection is not proven bit-stable across processes; treated as an environment risk, not a graph property"
+    },
+    "defect_regression_trace": {
+      "D1_no_nms_before_decode": "tests/evaluation/test_landmark_onnx.py::test_raw_decode_claims_identity_after_nms (red first: module ImportError, then pass)",
+      "D2_rect_vs_square_preprocessing": "test_letterbox_rect_mode_differs_from_square + the legacy comparison in this JSON reproduces 4.67 px on dynamic_A_north_..._183",
+      "D3_pose_predictor_box_rounding": "test_pose_predictor_box_rounding_is_mirrored (clip+round before truncation) - the earlier raw path lacked this and produced TRUNCATED decision flips",
+      "red_state": "first run of the test file (before the module existed) failed with ImportError: cannot import name landmark_onnx; recorded in the task transcript"
+    },
+    "deliverables": {
+      "report": {
+        "path": "docs/reports/perception/ONNX_PARITY_20261104.md",
+        "note": "human report; it cites this JSON sha, so the JSON does not record the report hash"
+      },
+      "evidence_json": {
+        "path": "docs/reports/perception/onnx_parity_20261104.json",
+        "bytes_before_this_note": 76702
+      },
+      "export_script": {
+        "path": "scripts/landmark_export_onnx.py",
+        "sha256": "d6632b3211c047b0e22080b3436025eb7b38f443dca71a433663d3d8d7f1b089"
+      },
+      "parity_script": {
+        "path": "scripts/landmark_onnx_parity.py",
+        "sha256": "34f320ec6b7b27bc910834ea91ef105cc56ec32177a31e255f733d583d3d88de"
+      },
+      "library": {
+        "path": "src/boom_birds/evaluation/landmark_onnx.py",
+        "sha256": "6c40958702c6e80334d74d483112514277b94b0e6c094ccff8680b97921de22e"
+      },
+      "config": {
+        "path": "configs/perception/landmark_export_v1.json",
+        "sha256": "50ca367682360bc35a986e5ca838c621248f3f82f62e82a59f58167e39fdc1b1"
+      },
+      "tests": {
+        "path": "tests/evaluation/test_landmark_onnx.py",
+        "sha256": "3dd73fa7fa15f446617f6313465d003b0812bff19e404df2f28abf61457696a9",
+        "count": 18,
+        "result": "18 passed in 25.6 s (Isaac venv; includes one venv end-to-end integration test)"
+      },
+      "full_repo_pytest": "1058 passed in 104.5 s (Isaac venv; after teammate train fixed its CLI config test)",
+      "audit_documents": "PASS"
+    }
+  }
+}

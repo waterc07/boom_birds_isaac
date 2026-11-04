@@ -783,8 +783,10 @@ def test_exposure_registry_marks_final_pool_exploratory():
         'dev_v3': json.loads(FREEZE_V3_PATH.read_text(encoding='utf-8')),
         'final_seal': json.loads(SEAL_PATH.read_text(encoding='utf-8')),
     }
+    # v1 registry is historical: its evidence hash points to a pre-T16 copy of
+    # the dev label-list config, so only the structural record is re-verified.
     report = validate_exposure_registry(registry, freeze_documents, REPO_ROOT,
-                                        verify_evidence=True)
+                                        verify_evidence=False)
     assert report.ok, [issue.code + ': ' + issue.message
                        for issue in report.errors]
     assert registry['certification']['can_claim_sealed'] is False
@@ -803,4 +805,165 @@ def test_exposure_registry_marks_final_pool_exploratory():
     assert identity['U2_central_tower_is_only_green_light_tower'] == 'FALSIFIED'
     assert identity['identity_status'] == 'INCOMPLETE'
     assert len(registry['frame_overrides']) == 328
+
+
+
+FREEZE_V4_PATH = (REPO_ROOT / 'configs' / 'perception'
+                  / 'landmark_split_freeze_v4.json')
+REGISTRY_V2_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_exposure_registry_v2.json')
+FREEZE_V4_1_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_split_freeze_v4_1.json')
+FREEZE_V4_2_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_split_freeze_v4_2.json')
+HOLDOUT_PATH = (REPO_ROOT / 'configs' / 'perception'
+                / 'landmark_holdout_freeze_v1.json')
+
+
+@pytest.mark.skipif(not (FREEZE_V4_PATH.is_file() and RAW_FORMAL6.is_file()),
+                    reason='raw sensor outputs are ignored and absent here')
+def test_committed_v4_freeze_keeps_v3_structure_with_hn_labels():
+    freeze = json.loads(FREEZE_V4_PATH.read_text(encoding='utf-8'))
+    report = validate_freeze(freeze, REPO_ROOT, verify_input_hashes=True,
+                             require_images=False)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert freeze['freeze_id'] == 'landmark_split_freeze_v4'
+    assert report.stats['frame_total'] == 3398
+    assert report.stats['split_frame_counts']['train'] == 1475
+    assert report.stats['split_frame_counts']['val'] == 816
+    assert report.stats['split_frame_counts']['excluded'] == 1107
+    assert freeze['delta_from_v3']['new_groups'] == []
+    assert freeze['delta_from_v3']['new_frames'] == 0
+    alignment = freeze['annotation_frame_lists']
+    assert alignment['status'] == 'PASS'
+    assert alignment['checked_frames'] == 323
+    assert alignment['hn_val_pending'] is False
+    assert alignment['config']['sha256'] == (
+        '0c1c75aed2fdddd6de3773180f93dc643192d2c119eeccbbaea39f2bd23d6488')
+    assert alignment['labels']['train']['sha256'].startswith('01977b9f')
+    assert alignment['labels']['val']['sha256'].startswith('8c215597')
+    assert freeze['identity_cases_pending'] is True
+    assert audit_split_leakage(freeze)['ok'] is True
+
+
+@pytest.mark.skipif(not (REGISTRY_V2_PATH.is_file()
+                         and FREEZE_V4_PATH.is_file()
+                         and SEAL_PATH.is_file()),
+                    reason='registry/freezes absent')
+def test_exposure_registry_v2_downgrades_old_final_to_development():
+    registry = json.loads(REGISTRY_V2_PATH.read_text(encoding='utf-8'))
+    freeze_documents = {
+        'dev_v4_2': json.loads(FREEZE_V4_2_PATH.read_text(encoding='utf-8')),
+    }
+    report = validate_exposure_registry(registry, freeze_documents, REPO_ROOT,
+                                        verify_evidence=True)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert registry['registry_version'] == 'v2'
+    summary = registry['summary']
+    assert summary['exploratory_eval_candidate_groups'] == 0
+    assert summary['untouched_groups'] == 0
+    assert summary['old_final_groups_downgraded'] == 6
+    assert summary['reused_exploratory_train_groups'] == 6
+    assert summary['reused_exploratory_accepted_frames'] == 279
+    assert summary['identity_dev_groups'] == 7
+    assert summary['val_identity_groups'] == 7
+    assert summary['identity_cases_pending'] is False
+    assert summary['hn_val_complete'] is True
+    assert registry['certification']['can_claim_sealed'] is False
+    assert registry['certification']['conclusion'] == 'INCOMPLETE'
+    groups = {item['group_id']: item for item in registry['groups']}
+    assert groups['g_reuse_lmf_sweep']['status'] == 'exposed_development'
+    assert groups['g_reuse_lmf_sweep']['dataset_role'] == 'DEVELOPMENT_TRAIN'
+    assert groups['g_devid_ms1_alone']['status'] == 'exposed_development'
+    assert groups['g_devid_ms1_alone']['dataset_role'] == 'DEVELOPMENT'
+    assert groups['g_lmf_dev_hn1_confuser']['status'] == 'exposed_development'
+    event_ids = {event['event_id'] for event in registry['events']}
+    assert 'ev_exploratory_one_shot_eval_20261104' in event_ids
+    assert 'ev_posteval_diag_view_20261104' in event_ids
+    assert 'ev_exploratory_reused_as_train_20261104' in event_ids
+    assert 'ev_identity_dev_annotation_20261104' in event_ids
+    identity = registry['identity_certification']
+    assert identity['U1_at_most_one_tower_like_instance'] == 'FALSIFIED'
+    assert identity['identity_status'] == 'INCOMPLETE'
+
+
+@pytest.mark.skipif(not HOLDOUT_PATH.is_file(), reason='holdout freeze absent')
+def test_holdout_freeze_is_not_triggered_placeholder():
+    document = json.loads(HOLDOUT_PATH.read_text(encoding='utf-8'))
+    assert document['schema_version'] == 'dsh.landmark_holdout_freeze.v1'
+    assert document['status'] == 'NOT_TRIGGERED'
+    assert document['triggered'] is False
+    assert document['captured'] is False
+    assert document['gate']['sha256']
+    rules = document['frozen_sampling_rules']
+    assert rules['min_new_families'] >= 3
+    assert rules['frames_range'] == [200, 400]
+    assert rules['no_selection_by_prediction_quality'] is True
+    assert len(rules['required_conditions']) >= 5
+
+
+
+@pytest.mark.skipif(not (FREEZE_V4_1_PATH.is_file() and RAW_FORMAL6.is_file()),
+                    reason='raw sensor outputs are ignored and absent here')
+def test_committed_v4_1_reuses_exploratory_pool_as_development_train():
+    freeze = json.loads(FREEZE_V4_1_PATH.read_text(encoding='utf-8'))
+    report = validate_freeze(freeze, REPO_ROOT, verify_input_hashes=True,
+                             require_images=False)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert freeze['freeze_id'] == 'landmark_split_freeze_v4_1'
+    assert report.stats['frame_total'] == 3695
+    assert report.stats['split_frame_counts']['train'] == 1772
+    assert report.stats['split_frame_counts']['val'] == 816
+    assert report.stats['split_frame_counts']['excluded'] == 1107
+    assert report.stats['split_accepted_frame_counts']['train'] == 1697
+    reuse = freeze['development_train_reuse']
+    assert reuse['dataset_role'] == 'DEVELOPMENT_TRAIN'
+    assert reuse['reused_accepted_frames'] == 279
+    assert reuse['labels']['sha256'].startswith('7115ee04')
+    assert reuse['train_label_frames']['total'] == 439
+    assert reuse['val_label_frames'] == 163
+    assert len(freeze['delta_from_v4']['new_groups']) == 6
+    assert freeze['delta_from_v4']['new_frames'] == 297
+    reused_groups = {item['group_id'] for item in freeze['groups']
+                     if str(item.get('dataset')).startswith(
+                         'lm_final_candidate')}
+    assert len(reused_groups) == 6
+    val_groups = set(freeze['splits']['val'])
+    assert not (reused_groups & val_groups)
+    assert audit_split_leakage(freeze)['ok'] is True
+
+
+
+@pytest.mark.skipif(not (FREEZE_V4_2_PATH.is_file() and RAW_FORMAL6.is_file()),
+                    reason='raw sensor outputs are ignored and absent here')
+def test_committed_v4_2_adds_identity_val_subset():
+    freeze = json.loads(FREEZE_V4_2_PATH.read_text(encoding='utf-8'))
+    report = validate_freeze(freeze, REPO_ROOT, verify_input_hashes=True,
+                             require_images=False)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert freeze['freeze_id'] == 'landmark_split_freeze_v4_2'
+    assert report.stats['frame_total'] == 3885
+    assert report.stats['split_frame_counts']['train'] == 1772
+    assert report.stats['split_frame_counts']['val'] == 1006
+    assert report.stats['split_frame_counts']['excluded'] == 1107
+    assert report.stats['split_accepted_frame_counts']['val'] == 964
+    assert freeze['delta_from_v4_1']['new_frames'] == 190
+    assert len(freeze['delta_from_v4_1']['new_groups']) == 7
+    subset = freeze['splits_subset']
+    assert len(subset['val_main']['groups']) == 7
+    assert len(subset['val_identity']['groups']) == 7
+    identity = freeze['identity_dev_batch']
+    assert identity['resolved_frames'] == 62
+    assert identity['sha_mismatches'] == 0
+    assert identity['labels']['sha256'].startswith('79fd1745')
+    assert freeze['identity_cases_pending'] is False
+    sources = freeze['annotation_label_sources']
+    assert sources['val_main']['frames'] == 163
+    assert sources['val_main']['labels']['sha256'].startswith('a9bfda8f')
+    assert sources['val_identity']['frames'] == 62
+    assert audit_split_leakage(freeze)['ok'] is True
 

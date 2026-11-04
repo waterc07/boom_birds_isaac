@@ -1,0 +1,40 @@
+{
+ "note": "first / middle / last accepted frame per case for quick visual review",
+ "picks": {
+  "lmf_devid_target_alone_0-follow_only": [
+   "lmf_devid_target_alone_0-follow_only_g1_3.png",
+   "lmf_devid_target_alone_0-follow_only_g1_15.png",
+   "lmf_devid_target_alone_0-follow_only_g1_26.png"
+  ],
+  "lmf_devid_ms1_alone_0-follow_only": [
+   "lmf_devid_ms1_alone_0-follow_only_g2_3.png",
+   "lmf_devid_ms1_alone_0-follow_only_g2_17.png",
+   "lmf_devid_ms1_alone_0-follow_only_g2_30.png"
+  ],
+  "lmf_devid_both_scale_lateral_0-follow_only": [
+   "lmf_devid_both_scale_lateral_0-follow_only_g3_3.png",
+   "lmf_devid_both_scale_lateral_0-follow_only_g3_12.png",
+   "lmf_devid_both_scale_lateral_0-follow_only_g3_21.png"
+  ],
+  "lmf_devid_both_mid_similar_scale_0-follow_only": [
+   "lmf_devid_both_mid_similar_scale_0-follow_only_g4_3.png",
+   "lmf_devid_both_mid_similar_scale_0-follow_only_g4_14.png",
+   "lmf_devid_both_mid_similar_scale_0-follow_only_g4_25.png"
+  ],
+  "lmf_devid_both_same_bearing_0-follow_only": [
+   "lmf_devid_both_same_bearing_0-follow_only_g5_3.png",
+   "lmf_devid_both_same_bearing_0-follow_only_g5_14.png",
+   "lmf_devid_both_same_bearing_0-follow_only_g5_24.png"
+  ],
+  "lmf_devid_target_near_trunc_0-follow_only": [
+   "lmf_devid_target_near_trunc_0-follow_only_g6_3.png",
+   "lmf_devid_target_near_trunc_0-follow_only_g6_15.png",
+   "lmf_devid_target_near_trunc_0-follow_only_g6_26.png"
+  ],
+  "lmf_devid_full_occlusion_0-follow_only": [
+   "lmf_devid_full_occlusion_0-follow_only_g7_3.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_17.png",
+   "lmf_devid_full_occlusion_0-follow_only_g7_31.png"
+  ]
+ }
+}

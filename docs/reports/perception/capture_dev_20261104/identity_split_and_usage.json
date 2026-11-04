@@ -1,0 +1,43 @@
+{
+ "schema_version": "dsh.landmark_identity_dev_plan.v1",
+ "status": "DEVELOPMENT_IDENTITY_CONFUSER_CASES_NOT_SEALED",
+ "cases": {
+  "lmf_devid_target_alone_0": {
+   "condition": "target_alone",
+   "expected": "target present, no confuser in frame"
+  },
+  "lmf_devid_ms1_alone_0": {
+   "condition": "map_native_confuser_alone",
+   "expected": "MS1 visible with green lamp; central target out of FOV"
+  },
+  "lmf_devid_both_scale_lateral_0": {
+   "condition": "both_in_frame_scale_lateral",
+   "expected": "MS1 near/large left + target far/small right"
+  },
+  "lmf_devid_both_mid_similar_scale_0": {
+   "condition": "both_in_frame_similar_scale",
+   "expected": "MS1 left + target right, similar apparent scale, both mid-frame"
+  },
+  "lmf_devid_both_same_bearing_0": {
+   "condition": "both_in_frame_same_bearing_stack",
+   "expected": "near MS1 and far target nearly same bearing; MS1 green visibility to be confirmed"
+  },
+  "lmf_devid_target_near_trunc_0": {
+   "condition": "target_near_truncation",
+   "expected": "target 1.6-2.0 m with right/bottom edge truncation"
+  },
+  "lmf_devid_full_occlusion_0": {
+   "condition": "full_occlusion",
+   "expected": "target present but completely invisible; GT_UNOBSERVABLE candidate"
+  }
+ },
+ "group_rule": "one physical pose/trajectory composition per group; each case is one group; do not random-split frames inside a case",
+ "suggested_usage": {
+  "dataset_role": "DEVELOPMENT",
+  "annot2": "label at most 72 representative frames (identity_representative_frames.json, 62 frames selected by fixed systematic rule); identity cases provide target-alone positives, map-native confuser positives(hard negatives) and both-in-frame compositions",
+  "train_val": "assign whole cases/groups to train or val; never split one case across train/val",
+  "full_occlusion": "lmf_devid_full_occlusion_0 frames are GT_UNOBSERVABLE (scene-derived), not negatives"
+ },
+ "not_sealed": true,
+ "no_model_or_gate_claim": true
+}

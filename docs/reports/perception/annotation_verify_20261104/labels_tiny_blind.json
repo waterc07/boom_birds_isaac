@@ -1,0 +1,1785 @@
+{
+ "schema_version": "dsh.tower_annotation.v2_1",
+ "status": "TINY_BLIND_REANNOTATION_AGENT_PROXY_22_FRAMES",
+ "annotation_spec": {
+  "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+  "sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+  "status": "FROZEN_FOR_DATA"
+ },
+ "blind_protocol": {
+  "frame_list": "docs/reports/perception/posteval_20261104/TINY_BLIND_REANNOTATION_FRAMES_20261104.json",
+  "frame_list_sha256": "fc3508de23b8d16c593d0e2bad27889de89d3e4ed68a1704e01ba50b37364941",
+  "blind": true,
+  "did_not_read": [
+   "original annotations",
+   "model predictions",
+   "old final exploratory results"
+  ]
+ },
+ "note": "Blind development re-annotation for TINY/4-10px annotatability analysis; labels are agent proxy, not human; no original-label coordinates were viewed.",
+ "annotations": [
+  {
+   "frame_id": "lmf_dev_inner_north_0-follow_only_g1_3.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_3.png",
+   "image_sha256": "85b3eae2bbf7acfd62f133f94d3d36ae25317ae451e47ef59c8f1c2115a58a0c",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 13,
+    "sequence": 3
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 1,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_top_pillar",
+     "description": "thin gray pillar with a 1 px strict-green top; consistent with a map-native green lamp/pillar confuser, not the central tower",
+     "bbox_xywh": [
+      116,
+      92,
+      10,
+      43
+     ],
+     "green_cue": {
+      "x": 122.0,
+      "y": 103.0
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "far inner_north frame (~20 m): central tower would be about 9 px; cannot distinguish it from the central-field gantry/robots at this resolution; largest strict-green component is on a thin pillar, not on a tower head | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dynamic_A_north_0-follow_only_g1_23.png",
+   "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_23.png",
+   "image_sha256": "127a0e46a2f9c9114b86d0e9ca5766a644e30fee34ac7075119c13e36aaeaa22",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_pilot_north_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 123,
+    "sequence": 23
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 1,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_top_pillar",
+     "description": "small structure with a 1 px strict-green top; identity unverified, not the central tower head",
+     "bbox_xywh": [
+      146,
+      105,
+      11,
+      25
+     ],
+     "green_cue": {
+      "x": 152.0,
+      "y": 113.0
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "dynamic_A_north far frame: target-sized structure below reliable identifiability; green cue not on a tower head | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dev_south_new-follow_only_g1_22.png",
+   "image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_22.png",
+   "image_sha256": "b36b93317d2e91f92081610290f37d1091ef520de6bd6c308a4d03592971a4d9",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_independence_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 122,
+    "sequence": 22
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "dev_south_new frame with no strict green; central gantry/robots visible but a ~10 px central tower cannot be identified with confidence | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "sensor_static_0-follow_only_g1_3.png",
+   "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_static_0-follow_only_g1_3.png",
+   "image_sha256": "9aa26e94c796226f5b711fbaf371186ea1939c1132ae67b52c40b2f515922809",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "formal6_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 13,
+    "sequence": 3
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 1,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_top_pillar",
+     "description": "thin pillar with a 1 px green top; not a tower head",
+     "bbox_xywh": [
+      113,
+      96,
+      10,
+      40
+     ],
+     "green_cue": {
+      "x": 118.0,
+      "y": 105.0
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "sensor_static_0: large gray box/robot dominates; target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_inner_north_0-follow_only_g1_4.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_4.png",
+   "image_sha256": "dee20c44113201081af138eddcb3239b5e652bb7ce8b85a92562ca8320c6ce47",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 14,
+    "sequence": 4
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 2,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_top_pillar",
+     "description": "thin pillar with 2 px green top; identity unverified",
+     "bbox_xywh": [
+      117,
+      84,
+      11,
+      40
+     ],
+     "green_cue": {
+      "x": 123.5,
+      "y": 95.0
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "inner_north far frame: target-size structure not separable from gantry | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dynamic_A_north_0-follow_only_g1_14.png",
+   "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_14.png",
+   "image_sha256": "7a0d9802c510c343588feab138607609301693afd66accf881111f51b86460bb",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_pilot_north_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 114,
+    "sequence": 14
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "dynamic_A_north: no strict green; central structures only, target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dev_south_new-follow_only_g1_25.png",
+   "image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_25.png",
+   "image_sha256": "474bdbfd5dc58871c60fdc35a5e9b1e4e482705edc3326b837577d4952c22b6c",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_independence_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 125,
+    "sequence": 25
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "dev_south_new early frame: target not identifiable among central structures | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "sensor_static_1-follow_only_g2_3.png",
+   "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_static_1-follow_only_g2_3.png",
+   "image_sha256": "b3b1cc15274ccdae974f848c69491098545001dee044d58d1ef92bf46161d676",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "formal6_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 23,
+    "sequence": 3
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "sensor_static_1: large gantry box/robot; target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_inner_north_0-follow_only_g1_8.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_8.png",
+   "image_sha256": "dfb48df9c897c67c5f9a3e40de576e2e143d890db75c4a8fc3555f8f46aafdaa",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 18,
+    "sequence": 8
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 3,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_lit_object",
+     "description": "small green-lit object next to the gantry/robot; not a central-tower head (no tapered body/head evidence)",
+     "bbox_xywh": [
+      178,
+      108,
+      12,
+      14
+     ],
+     "green_cue": {
+      "x": 183.33,
+      "y": 114.33
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "inner_north: strict green (3 px) is on a green-lit object, not on an identifiable tower head | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "test_north_0-follow_only_g3_14.png",
+   "image": "outputs/sensor_shadow/lm_independence_sensor/images/test_north_0-follow_only_g3_14.png",
+   "image_sha256": "ade124fb84bb86d7d73a8bb963b0941bb3b357f533ca488567a998daa6f812ef",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_independence_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 314,
+    "sequence": 14
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 1,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_top_pillar",
+     "description": "small structure with 1 px green top; identity unverified",
+     "bbox_xywh": [
+      185,
+      110,
+      11,
+      20
+     ],
+     "green_cue": {
+      "x": 190.0,
+      "y": 118.0
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "test_north far frame: target not identifiable at this scale | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "sensor_reset_0-follow_only_g5_27.png",
+   "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_reset_0-follow_only_g5_27.png",
+   "image_sha256": "9188f665eb6310482f9633895a03ea222b6d436af5b11fc362344050ba473036",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "formal6_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 527,
+    "sequence": 27
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "sensor_reset route view: gantry/robot structures; target not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_inner_north_0-follow_only_g1_17.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_17.png",
+   "image_sha256": "b3aae0f2298ed09397780c99f61a50b54f6196631dca9ed396439a7f58e11b78",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 117,
+    "sequence": 17
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 2,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "green_top_pillar",
+     "description": "thin gray pillar with 2 px green top; map-native lamp/pillar confuser candidate, not a tower",
+     "bbox_xywh": [
+      135,
+      92,
+      12,
+      30
+     ],
+     "green_cue": {
+      "x": 141.0,
+      "y": 97.5
+     },
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "inner_north: green cue on thin pillar (confuser), tower not identifiable | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_inner_north_0-follow_only_g1_135.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_north_0-follow_only_g1_135.png",
+   "image_sha256": "22aea5c4dd9900987ea35b54b3df10df30159b0105f67b9a2bf86f59ee8bc314",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 1135,
+    "sequence": 135
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "PARTIAL",
+    "truncated": true,
+    "truncated_edges": {
+     "left": false,
+     "right": true,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {
+     "right": "ANNOTATOR_VISUAL"
+    },
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     258,
+     104,
+     62,
+     78
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 286.5,
+     "y": 109.0,
+     "visible": true
+    },
+    "green_pixels": 10,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence HIGH; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "HIGH",
+   "notes": "target tower clearly identifiable at right edge, head+arms+green light; right side cut by frame edge | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_inner_south_0-follow_only_g2_76.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_inner_south_0-follow_only_g2_76.png",
+   "image_sha256": "f5c5dc5418553ddf8480bdc39463d969c1b0ce6f0308d2f941157227ea356509",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 276,
+    "sequence": 76
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     72,
+     108,
+     64,
+     58
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 86.0,
+     "y": 113.5,
+     "visible": true
+    },
+    "green_pixels": 7,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence HIGH; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "HIGH",
+   "notes": "target tower clearly identifiable centre-left; full tower with base visible | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_static_high_0-follow_only_g3_3.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_static_high_0-follow_only_g3_3.png",
+   "image_sha256": "c3ded17ba0cbb2986780c4761dda373eec92fed2f65a5820b9d441c1306b3cbc",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 33,
+    "sequence": 3
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     175,
+     132,
+     90,
+     56
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 215.5,
+     "y": 140.5,
+     "visible": true
+    },
+    "green_pixels": 10,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence HIGH; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "HIGH",
+   "notes": "target tower clearly identifiable at static_high view; full tower with base | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_static_low_0-follow_only_g4_22.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_static_low_0-follow_only_g4_22.png",
+   "image_sha256": "b9ddb5ed012cbe6131e2ab004b0b1df901e47e1f6d5a83de5cd2e9be06a1b62b",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 422,
+    "sequence": 22
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "PARTIAL",
+    "truncated": true,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": true
+    },
+    "truncation_source": {
+     "bottom": "ANNOTATOR_VISUAL"
+    },
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     63,
+     108,
+     90,
+     132
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 88.5,
+     "y": 122.0,
+     "visible": true
+    },
+    "green_pixels": 31,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence HIGH; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "HIGH",
+   "notes": "target tower clearly identifiable close-up left; body/base continue past the bottom frame edge | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dynamic_A_north_0-follow_only_g1_116.png",
+   "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_116.png",
+   "image_sha256": "38fe483ca4d7972386a57f1275488b5ea0ba147d33e2e37327a8432b34c0db6c",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_pilot_north_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 1116,
+    "sequence": 116
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     246,
+     110,
+     46,
+     52
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 264.5,
+     "y": 115.5,
+     "visible": true
+    },
+    "green_pixels": 3,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence HIGH; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "HIGH",
+   "notes": "target tower clearly identifiable centre-right; small but complete | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dev_south_new-follow_only_g1_151.png",
+   "image": "outputs/sensor_shadow/lm_independence_sensor/images/dev_south_new-follow_only_g1_151.png",
+   "image_sha256": "994996385c417e9d4afe54665f2d5a32b7d578ea0620eed40b84d94883c7c0d6",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_independence_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 1151,
+    "sequence": 151
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": true,
+    "undecidable": false,
+    "visibility": "FULL",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": [
+     26,
+     109,
+     50,
+     57
+    ],
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": {
+     "name": "green_roof_light_center",
+     "x": 48.5,
+     "y": 114.0,
+     "visible": true
+    },
+    "green_pixels": 4,
+    "reference_status": "MANUAL_APPROX",
+    "reference_unavailable_reason": null,
+    "reference_source": "COLOR_CUE_ASSISTED"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence HIGH; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "HIGH",
+   "notes": "target tower clearly identifiable left; full tower with base | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "lmf_dev_static_negative_0-follow_only_g5_10.png",
+   "image": "outputs/sensor_shadow/lm_dev_capture_20261104_sensor/images/lmf_dev_static_negative_0-follow_only_g5_10.png",
+   "image_sha256": "df7c6713adc171cec5211d850762c7d72fccf90571af51a2706da70b1e01e114",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_dev_capture_20261104_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 510,
+    "sequence": 10
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": false,
+    "visibility": "ABSENT",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "gray_pillar",
+     "description": "dark gray tapered pillar without tower head/arms; not the target; identity unverified",
+     "bbox_xywh": [
+      52,
+      124,
+      30,
+      44
+     ],
+     "green_cue": null,
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": "TARGET_ABSENT",
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence MEDIUM; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "MEDIUM",
+   "notes": "static_negative view: no central-tower head/tapered body+green-light structure visible; confirmed absent | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "dynamic_A_north_0-follow_only_g1_153.png",
+   "image": "outputs/sensor_shadow/lm_pilot_north_sensor/images/dynamic_A_north_0-follow_only_g1_153.png",
+   "image_sha256": "df924bde5c5b579a3df9c88bca4e355d931335ef1adf0e5265a46e98312c8940",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_pilot_north_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 1153,
+    "sequence": 153
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "dynamic_A_north late frame: near-empty floor/sky, only a very faint unresolved speck; target presence cannot be decided | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "sensor_reset_0-follow_only_g5_168.png",
+   "image": "outputs/sensor_shadow/formal6_sensor/images/sensor_reset_0-follow_only_g5_168.png",
+   "image_sha256": "4764c05a706104b2bee86e82eaba8120b337c3ba393d2effcf111e713ef7692d",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "formal6_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 5168,
+    "sequence": 168
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": true,
+    "visibility": "UNKNOWN",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": "IDENTITY_UNRESOLVED"
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "gray_gantry",
+     "description": "large gray gantry/platform structure right of centre; not a verified tower head",
+     "bbox_xywh": [
+      200,
+      68,
+      72,
+      140
+     ],
+     "green_cue": null,
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": null,
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence LOW; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "LOW",
+   "notes": "sensor_reset late frame: large gray structure could be the tower seen from an unfavourable angle or the gantry; no green light; identity unresolved | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  },
+  {
+   "frame_id": "pilot_east_away-follow_only_g3_3.png",
+   "image": "outputs/sensor_shadow/lm_pilot_sensor/images/pilot_east_away-follow_only_g3_3.png",
+   "image_sha256": "c22bbac3aeab5415e7e137806fc3ade9cf0c2a29c0314f126d56aaffdb51f3df",
+   "image_width": 320,
+   "image_height": 240,
+   "source": {
+    "run": "lm_pilot_sensor",
+    "family": "tiny_blind_sample",
+    "group_id": "g_tiny_blind",
+    "split": "development",
+    "origin_split_in_freeze": "development_blind_sample",
+    "generation": 33,
+    "sequence": 3
+   },
+   "dataset_role": "DEVELOPMENT",
+   "target": {
+    "landmark_id": "RMUC2027_CENTRAL_TOWER_PROPOSED",
+    "class": "tower",
+    "present": false,
+    "undecidable": false,
+    "visibility": "ABSENT",
+    "truncated": false,
+    "truncated_edges": {
+     "left": false,
+     "right": false,
+     "top": false,
+     "bottom": false
+    },
+    "truncation_source": {},
+    "truncation_conflicts": [],
+    "occluded": false,
+    "ambiguous": false,
+    "ambiguous_reason": null,
+    "undecidable_reason": null
+   },
+   "geometry": {
+    "bbox_xywh": null,
+    "bbox_source": "ANNOTATOR_VISUAL",
+    "keypoint": null,
+    "green_pixels": 0,
+    "reference_status": "NOT_APPLICABLE",
+    "reference_unavailable_reason": null,
+    "reference_source": "NOT_APPLICABLE"
+   },
+   "confusers": [
+    {
+     "confuser_id": "gray_pillar",
+     "description": "map-native gray pillar with red band; not the target",
+     "bbox_xywh": [
+      136,
+      105,
+      14,
+      38
+     ],
+     "green_cue": null,
+     "verified": false,
+     "verification_source": null,
+     "verification_note": "visual only; identity unverified; not the verified target",
+     "source": "ANNOTATOR"
+    }
+   ],
+   "candidates": [],
+   "negative_type": "TARGET_ABSENT",
+   "annotator": {
+    "annotator_type": "AGENT_PROXY",
+    "annotator_id": "annot (DSH teammate, DeepSeek agent)",
+    "annotation_mode": "FRAME_BY_FRAME_VISUAL",
+    "independent_of_model_dev": true,
+    "independent_of_detector_cue": false,
+    "review_status": "SELF_CHECKED",
+    "note": "T16-B blind re-annotation; subjective confidence MEDIUM; agent proxy, not human independent review"
+   },
+   "pixel_basis": {
+    "image_width": 320,
+    "image_height": 240,
+    "fx_px": 160,
+    "cx_px": 160,
+    "cy_px": 120,
+    "projection_model": "PINHOLE",
+    "bearing_formula": "atan2(x - cx_px, fx_px)"
+   },
+   "confidence": "MEDIUM",
+   "notes": "pilot_east_away target-absent pose: no central tower in view | blind: did not read original labels/model predictions/old final results; green_pixels uses the strict cue (g>=90,g-r>=25,g-b>=25, largest 4-connected); reference_source=COLOR_CUE_ASSISTED and independent_of_detector_cue=false (same green cue as the detector)."
+  }
+ ]
+}

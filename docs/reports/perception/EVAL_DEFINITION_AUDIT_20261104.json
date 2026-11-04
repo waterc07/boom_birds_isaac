@@ -1,0 +1,661 @@
+{
+  "schema_version": "dsh.landmark_eval_definition_audit.v1",
+  "status": "IMPLEMENTED_AND_READ_ONLY_RECOMPUTED",
+  "generated_for_task": "task-20",
+  "evidence_domain": "unit tests + SQL-free recompute from saved predictions/labels; no model inference, no training, no Isaac",
+  "final_exploratory_read_once": true,
+  "old_final_outputs_preserved": true,
+  "definitions": {
+    "presence": "GT-observable positives/negatives; UNKNOWN/REJECTED predictions are misses inside the recall denominator; GT_UNOBSERVABLE frames are excluded from the fourfold and reported separately.",
+    "identity": "claims / GT-observable positives / GT-observable negatives are three denominators; landmark_id is identity evidence and a single-class tower output must not be mapped to an identity without the uniqueness assumptions.",
+    "reference_availability": "N_avail (GT reference point visible) and N_unavail (GT reference point annotated unavailable) are separate denominators; a correct UNAVAILABLE declaration is success on N_unavail and is not a localization result.",
+    "localization": "Only GT-visible-reference positives.  The pass-rate denominator is every applicable frame (missed detections and non-emitted keypoints stay misses); the error-distribution denominator is only the frames that emitted a keypoint.  2D pixel error (historical 3 px) and horizontal image-bearing error are reported separately.",
+    "joint": "Two explicit branches: localization branch (GT reference visible: presence TP + identity correct + emitted keypoint within tau_px) and availability branch (GT reference unavailable: presence TP + identity correct + correct UNAVAILABLE declaration).  The availability branch is joint-ok but never enters the localization error denominator.",
+    "placement": "Downstream consumption uses the image bearing (an image angle, not a world bearing).  The 3 px 2D rule is the historical metric and is reported as a legacy proxy only."
+  },
+  "consumer_requirement": {
+    "quantity": "IMAGE_BEARING_DEG",
+    "unit": "degree",
+    "formula": "atan2(x_px - cx_px, fx_px)",
+    "historical_pixel_tolerance_px": 3.0,
+    "historical_status": "LEGACY_2D_PROXY_NOT_CONSUMER_UNIT",
+    "history_note": "the 3 px 2D rule is a legacy annotation-noise proxy (blind re-annotation keypoint difference max 2.236 px); it is not the consumer unit and must not be reported as a bearing capability",
+    "bearing_budget_deg": {
+      "median": 3.0,
+      "p90": 5.0,
+      "status": "PROPOSED_NOT_FROZEN",
+      "source": "LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 2.2"
+    },
+    "caveat": "image bearing is an image angle, not a world bearing and not a distance; a 3 px threshold is about 1.074 deg at fx=160 px"
+  },
+  "final": {
+    "inputs": {
+      "predictions": "outputs\\perception\\final_exploratory_eval_20261104\\predictions.jsonl",
+      "predictions_sha256": "8cdfe558b455fb2e25c4de7a3f4852690554ae3e4254b6a472cdb9f26f991716",
+      "labels": "outputs\\perception\\final_exploratory_20261104\\labels_v1.json",
+      "labels_sha256": "7115ee04cd2db33381047e6952541ee2bb5214df994a35df8f55ec24d7d79504",
+      "labels_schema_version": "dsh.tower_annotation.v2_1",
+      "split": "test",
+      "frames": 279,
+      "predictions_without_label": []
+    },
+    "thresholds": {
+      "tau_iou": 0.3,
+      "tau_px": 3.0,
+      "tau_conf": 0.605476,
+      "px_tolerance_historical": 3.0,
+      "fx_px": 160.0
+    },
+    "presence": {
+      "tp": 218,
+      "fp": 0,
+      "fn": 20,
+      "tn": 41,
+      "precision": 1.0,
+      "recall": 0.9159663865546218,
+      "denominators": {
+        "positives": 238,
+        "negatives": 41,
+        "gt_unobservable": 0
+      },
+      "fn_by_reference_status": {
+        "REFERENCE_AVAILABLE": 9,
+        "REFERENCE_UNAVAILABLE": 11
+      },
+      "fn_unavailable_reasons": {
+        "REFERENCE_TOO_SMALL": 11
+      },
+      "fn_by_pred_status": {
+        "NOT_DETECTED": 20
+      },
+      "unknown_rejected": {
+        "total": 0,
+        "on_positive": 0,
+        "on_negative": 0,
+        "on_gt_unobservable": 0,
+        "by_status": {},
+        "by_reason": {}
+      }
+    },
+    "identity": {
+      "claims": 218,
+      "correct_claims": 218,
+      "wrong_identity_claims": 0,
+      "claims_on_negatives": 0,
+      "claims_on_gt_unobservable": 0,
+      "precision": 1.0,
+      "recall": 0.9159663865546218,
+      "high_confidence_false_matches": 0,
+      "false_match_rate": 0.0,
+      "evaluable": true,
+      "denominators": {
+        "claims": 218,
+        "positives": 238,
+        "negatives": 41
+      }
+    },
+    "reference_availability": {
+      "denominators": {
+        "available": 218,
+        "unavailable": 20
+      },
+      "declared_unavailable_correct": 20,
+      "false_reference_emissions": 0,
+      "available_emitted": 181,
+      "available_not_emitted": 37,
+      "not_labelled": 0,
+      "coverage": 0.28440366972477066,
+      "declaration_rate": 1.0,
+      "false_reference_rate": 0.0
+    },
+    "localization": {
+      "denominators": {
+        "applicable": 218,
+        "emitted": 181
+      },
+      "not_emitted": 37,
+      "within_tolerance": 62,
+      "within_tolerance_rate": 0.28440366972477066,
+      "pixel_error_px": {
+        "count": 181,
+        "median_px": 3.724076144656293,
+        "p90_px": 5.956878421226959,
+        "max_px": 8.441527970054077
+      },
+      "horizontal_error_px": {
+        "count": 181,
+        "median_px": 1.6677368164062614,
+        "p90_px": 3.7358825683593864,
+        "max_px": 6.5267486572265625
+      },
+      "vertical_error_px": {
+        "count": 181,
+        "median_px": 2.8369766235351506,
+        "p90_px": 5.278373718261719,
+        "max_px": 8.162557983398443
+      },
+      "bearing_error_deg": {
+        "count": 181,
+        "median_deg": 0.54620033177469,
+        "p90_deg": 1.1875887558760567,
+        "max_deg": 2.2484899295450553
+      },
+      "bearing_budget_deg": {
+        "median": 3.0,
+        "p90": 5.0,
+        "status": "PROPOSED_NOT_FROZEN",
+        "source": "LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 2.2"
+      },
+      "note": "within_tolerance uses the historical 3 px 2D rule; the pass-rate denominator includes non-emitted keypoints, the error-distribution denominator is the emitted subset"
+    },
+    "joint": {
+      "narrow_denominator": 238,
+      "narrow_tp": 71,
+      "narrow_rate": 0.29831932773109243,
+      "all_positive_lower_bound": 0.29831932773109243,
+      "coverage": 1.0,
+      "branches": {
+        "localization": {
+          "evaluable": 218,
+          "ok": 62,
+          "enters_localization_error": true
+        },
+        "availability": {
+          "evaluable": 20,
+          "ok": 9,
+          "enters_localization_error": false
+        }
+      },
+      "fail_reasons": {
+        "PRESENCE": 20,
+        "REFERENCE_LOCALIZATION": 147
+      },
+      "note": "the availability branch counts as joint-ok when the model correctly declares UNAVAILABLE; it is reported separately and never enters the localization error denominator"
+    },
+    "gt_unobservable": {
+      "frames": 0,
+      "by_reason": {},
+      "identity_claims": 0,
+      "keypoint_emissions": 0,
+      "detected": 0,
+      "excluded_from_denominators": true,
+      "note": "GT-unobservable frames are not scored for localization or identity; their claims/emissions are counted here so they cannot disappear"
+    },
+    "denominator_loss_audit": {
+      "frames": {
+        "total": 279,
+        "accounted": 279
+      },
+      "accounting_ok": true,
+      "presence_class_counts": {
+        "FN": 20,
+        "TN": 41,
+        "TP": 218
+      },
+      "prediction_unknown_rejected": {
+        "total": 0,
+        "on_positive": 0,
+        "on_negative": 0,
+        "on_gt_unobservable": 0,
+        "by_status": {},
+        "by_reason": {},
+        "where_counted": "on_positive -> presence FN / recall; on_negative -> negative denominator (not TN); on_gt_unobservable -> GT_UNOBSERVABLE bucket"
+      },
+      "missed_detections": {
+        "total": 20,
+        "where_counted": "presence FN + localization applicable miss"
+      },
+      "wrong_identity_claims": {
+        "total": 0,
+        "where_counted": "identity claims denominator + GT-observable positives recall denominator"
+      },
+      "claims_on_negatives": 0,
+      "claims_on_gt_unobservable": 0
+    },
+    "placement": {
+      "px_tolerance": 3.0,
+      "bearing_tolerance_deg": 1.0741699983726205,
+      "denominators": {
+        "applicable": 218,
+        "emitted": 181,
+        "not_emitted": 37
+      },
+      "verdict_flips": {
+        "both_ok": 62,
+        "px_ok_bearing_fail": 0,
+        "px_fail_bearing_ok": 87,
+        "both_fail": 32
+      },
+      "pixel_error_px": {
+        "count": 181,
+        "median_px": 3.724076144656293,
+        "p90_px": 5.956878421226959,
+        "max_px": 8.441527970054077
+      },
+      "horizontal_error_px": {
+        "count": 181,
+        "median_px": 1.6677368164062614,
+        "p90_px": 3.7358825683593864,
+        "max_px": 6.5267486572265625
+      },
+      "vertical_error_px": {
+        "count": 181,
+        "median_px": 2.8369766235351506,
+        "p90_px": 5.278373718261719,
+        "max_px": 8.162557983398443
+      },
+      "bearing_error_deg": {
+        "count": 181,
+        "median_deg": 0.54620033177469,
+        "p90_deg": 1.1875887558760567,
+        "max_deg": 2.2484899295450553
+      }
+    },
+    "consumer_requirement": {
+      "quantity": "IMAGE_BEARING_DEG",
+      "unit": "degree",
+      "formula": "atan2(x_px - cx_px, fx_px)",
+      "historical_pixel_tolerance_px": 3.0,
+      "historical_status": "LEGACY_2D_PROXY_NOT_CONSUMER_UNIT",
+      "history_note": "the 3 px 2D rule is a legacy annotation-noise proxy (blind re-annotation keypoint difference max 2.236 px); it is not the consumer unit and must not be reported as a bearing capability",
+      "bearing_budget_deg": {
+        "median": 3.0,
+        "p90": 5.0,
+        "status": "PROPOSED_NOT_FROZEN",
+        "source": "LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 2.2"
+      },
+      "caveat": "image bearing is an image angle, not a world bearing and not a distance; a 3 px threshold is about 1.074 deg at fx=160 px"
+    }
+  },
+  "final_derived": {
+    "final_bearing_equivalent_pass": {
+      "count": 149,
+      "emitted_denominator": 181,
+      "applicable_denominator": 218,
+      "rate_of_emitted": 0.8232044198895028,
+      "rate_of_applicable": 0.6834862385321101,
+      "note": "per-frame single-axis equivalent rule (3 px in x = 1.074 deg at fx=160); not a capability gate and not the PROPOSED aggregate bearing budget"
+    },
+    "final_3px_2d_pass": {
+      "count": 62,
+      "applicable_denominator": 218,
+      "rate": 0.28440366972477066
+    },
+    "final_joint_decomposition": {
+      "localization_branch_ok": 62,
+      "localization_branch_evaluable": 218,
+      "availability_branch_ok": 9,
+      "availability_branch_evaluable": 20,
+      "joint_tp": 71,
+      "joint_denominator": 238
+    },
+    "final_reference_localization_failures": {
+      "reference_localization_fail": 147,
+      "wrong_anchor_emissions_gt3px": 119,
+      "detected_but_no_keypoint": 28,
+      "check": "119 + 28 = 147; 62 ok + 147 fail = 209 detected available-ref positives; plus 9 missed detections = 218 available-reference positives"
+    }
+  },
+  "val_dataset_scope_cross_check": {
+    "inputs": {
+      "predictions": "outputs\\landmark_train\\runs\\bounded_v2\\seed1\\eval_last\\predictions.jsonl",
+      "predictions_sha256": "a0df2a535f45892d7919a50b39f67f265a6df740c0895e6a5262ef329084c45a",
+      "labels": "outputs\\perception\\dev_annotations_20261104\\labels_val.json",
+      "labels_sha256": "8c2155979b517626299fd85c61759b73ceb1bfc369be839d4453caa3b3ed33ac",
+      "labels_schema_version": "dsh.tower_annotation.v2_1",
+      "split": "val",
+      "frames": 163,
+      "dropped_without_prediction": [
+        "lmf_dev_hn1_confuser_0-follow_only_g1_3.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_5.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_7.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_9.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_11.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_13.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_15.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_17.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_19.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_21.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_23.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_25.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_27.png",
+        "lmf_dev_hn1_confuser_0-follow_only_g1_29.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_3.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_5.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_7.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_9.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_10.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_12.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_14.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_15.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_17.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_19.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_21.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_22.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_24.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_26.png",
+        "lmf_dev_hn2_occluder_0-follow_only_g2_28.png"
+      ],
+      "predictions_without_label": []
+    },
+    "thresholds": {
+      "tau_iou": 0.3,
+      "tau_px": 3.0,
+      "tau_conf": 0.605476,
+      "px_tolerance_historical": 3.0,
+      "fx_px": 160.0
+    },
+    "presence": {
+      "tp": 75,
+      "fp": 10,
+      "fn": 20,
+      "tn": 15,
+      "precision": 0.8823529411764706,
+      "recall": 0.7894736842105263,
+      "denominators": {
+        "positives": 95,
+        "negatives": 25,
+        "gt_unobservable": 14
+      },
+      "fn_by_reference_status": {
+        "REFERENCE_AVAILABLE": 1,
+        "REFERENCE_UNAVAILABLE": 19
+      },
+      "fn_unavailable_reasons": {
+        "REFERENCE_TOO_SMALL": 19
+      },
+      "fn_by_pred_status": {
+        "DETECTED": 6,
+        "NOT_DETECTED": 14
+      },
+      "unknown_rejected": {
+        "total": 14,
+        "on_positive": 0,
+        "on_negative": 0,
+        "on_gt_unobservable": 14,
+        "by_status": {
+          "UNKNOWN": 14
+        },
+        "by_reason": {
+          "MISSING_IMAGE": 14
+        }
+      }
+    },
+    "identity": {
+      "claims": 91,
+      "correct_claims": 81,
+      "wrong_identity_claims": 10,
+      "claims_on_negatives": 10,
+      "claims_on_gt_unobservable": 0,
+      "precision": 0.8901098901098901,
+      "recall": 0.8526315789473684,
+      "high_confidence_false_matches": 3,
+      "false_match_rate": 0.12,
+      "evaluable": true,
+      "denominators": {
+        "claims": 91,
+        "positives": 95,
+        "negatives": 25
+      }
+    },
+    "reference_availability": {
+      "denominators": {
+        "available": 41,
+        "unavailable": 54
+      },
+      "declared_unavailable_correct": 52,
+      "false_reference_emissions": 2,
+      "available_emitted": 37,
+      "available_not_emitted": 4,
+      "not_labelled": 0,
+      "coverage": 0.5121951219512195,
+      "declaration_rate": 0.9629629629629629,
+      "false_reference_rate": 0.037037037037037035
+    },
+    "localization": {
+      "denominators": {
+        "applicable": 41,
+        "emitted": 37
+      },
+      "not_emitted": 4,
+      "within_tolerance": 21,
+      "within_tolerance_rate": 0.5121951219512195,
+      "pixel_error_px": {
+        "count": 37,
+        "median_px": 2.7304670766903243,
+        "p90_px": 5.587046006063605,
+        "max_px": 9.400771432390146
+      },
+      "horizontal_error_px": {
+        "count": 37,
+        "median_px": 1.8654571533203068,
+        "p90_px": 5.1997833251953125,
+        "max_px": 6.941036987304699
+      },
+      "vertical_error_px": {
+        "count": 37,
+        "median_px": 1.6321182250976562,
+        "p90_px": 3.149121093749997,
+        "max_px": 9.397735595703125
+      },
+      "bearing_error_deg": {
+        "count": 37,
+        "median_deg": 0.5272130370357822,
+        "p90_deg": 1.4759480158351543,
+        "max_deg": 2.4244711020400205
+      },
+      "bearing_budget_deg": {
+        "median": 3.0,
+        "p90": 5.0,
+        "status": "PROPOSED_NOT_FROZEN",
+        "source": "LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 2.2"
+      },
+      "note": "within_tolerance uses the historical 3 px 2D rule; the pass-rate denominator includes non-emitted keypoints, the error-distribution denominator is the emitted subset"
+    },
+    "joint": {
+      "narrow_denominator": 95,
+      "narrow_tp": 55,
+      "narrow_rate": 0.5789473684210527,
+      "all_positive_lower_bound": 0.5789473684210527,
+      "coverage": 1.0,
+      "branches": {
+        "localization": {
+          "evaluable": 41,
+          "ok": 21,
+          "enters_localization_error": true
+        },
+        "availability": {
+          "evaluable": 54,
+          "ok": 34,
+          "enters_localization_error": false
+        }
+      },
+      "fail_reasons": {
+        "PRESENCE": 20,
+        "REFERENCE_AVAILABILITY": 1,
+        "REFERENCE_LOCALIZATION": 19
+      },
+      "note": "the availability branch counts as joint-ok when the model correctly declares UNAVAILABLE; it is reported separately and never enters the localization error denominator"
+    },
+    "gt_unobservable": {
+      "frames": 14,
+      "by_reason": {
+        "FULL_OCCLUSION": 11,
+        "UNDECIDABLE": 3
+      },
+      "identity_claims": 0,
+      "keypoint_emissions": 0,
+      "detected": 0,
+      "excluded_from_denominators": true,
+      "note": "GT-unobservable frames are not scored for localization or identity; their claims/emissions are counted here so they cannot disappear"
+    },
+    "denominator_loss_audit": {
+      "frames": {
+        "total": 134,
+        "accounted": 134
+      },
+      "accounting_ok": true,
+      "presence_class_counts": {
+        "FN": 20,
+        "FP": 10,
+        "GT_UNOBSERVABLE": 14,
+        "TN": 15,
+        "TP": 75
+      },
+      "prediction_unknown_rejected": {
+        "total": 14,
+        "on_positive": 0,
+        "on_negative": 0,
+        "on_gt_unobservable": 14,
+        "by_status": {
+          "UNKNOWN": 14
+        },
+        "by_reason": {
+          "MISSING_IMAGE": 14
+        },
+        "where_counted": "on_positive -> presence FN / recall; on_negative -> negative denominator (not TN); on_gt_unobservable -> GT_UNOBSERVABLE bucket"
+      },
+      "missed_detections": {
+        "total": 14,
+        "where_counted": "presence FN + localization applicable miss"
+      },
+      "wrong_identity_claims": {
+        "total": 10,
+        "where_counted": "identity claims denominator + GT-observable positives recall denominator"
+      },
+      "claims_on_negatives": 10,
+      "claims_on_gt_unobservable": 0
+    },
+    "placement": {
+      "px_tolerance": 3.0,
+      "bearing_tolerance_deg": 1.0741699983726205,
+      "denominators": {
+        "applicable": 41,
+        "emitted": 37,
+        "not_emitted": 4
+      },
+      "verdict_flips": {
+        "both_ok": 21,
+        "px_ok_bearing_fail": 0,
+        "px_fail_bearing_ok": 8,
+        "both_fail": 8
+      },
+      "pixel_error_px": {
+        "count": 37,
+        "median_px": 2.7304670766903243,
+        "p90_px": 5.587046006063605,
+        "max_px": 9.400771432390146
+      },
+      "horizontal_error_px": {
+        "count": 37,
+        "median_px": 1.8654571533203068,
+        "p90_px": 5.1997833251953125,
+        "max_px": 6.941036987304699
+      },
+      "vertical_error_px": {
+        "count": 37,
+        "median_px": 1.6321182250976562,
+        "p90_px": 3.149121093749997,
+        "max_px": 9.397735595703125
+      },
+      "bearing_error_deg": {
+        "count": 37,
+        "median_deg": 0.5272130370357822,
+        "p90_deg": 1.4759480158351543,
+        "max_deg": 2.4244711020400205
+      }
+    },
+    "consumer_requirement": {
+      "quantity": "IMAGE_BEARING_DEG",
+      "unit": "degree",
+      "formula": "atan2(x_px - cx_px, fx_px)",
+      "historical_pixel_tolerance_px": 3.0,
+      "historical_status": "LEGACY_2D_PROXY_NOT_CONSUMER_UNIT",
+      "history_note": "the 3 px 2D rule is a legacy annotation-noise proxy (blind re-annotation keypoint difference max 2.236 px); it is not the consumer unit and must not be reported as a bearing capability",
+      "bearing_budget_deg": {
+        "median": 3.0,
+        "p90": 5.0,
+        "status": "PROPOSED_NOT_FROZEN",
+        "source": "LANDMARK_TASK_AND_EXPERIMENT_DEFINITION_20261104.md section 2.2"
+      },
+      "caveat": "image bearing is an image angle, not a world bearing and not a distance; a 3 px threshold is about 1.074 deg at fx=160 px"
+    }
+  },
+  "old_vs_new": {
+    "final": {
+      "old_metrics_presence": {
+        "tp": 218,
+        "fp": 0,
+        "fn": 20,
+        "tn": 41
+      },
+      "old_metrics_reference_coverage": 0.28440366972477066,
+      "old_metrics_joint": {
+        "narrow_denominator": 238,
+        "narrow_tp": 71,
+        "narrow_rate": 0.29831932773109243,
+        "all_positive_lower_bound": 0.29831932773109243,
+        "coverage": 1.0,
+        "fail_reasons": {
+          "PRESENCE": 20,
+          "REFERENCE": 147
+        }
+      },
+      "new_values_same_denominator": {
+        "reference_availability_declaration_correct": "20/20",
+        "false_reference_rate": "0/20",
+        "localization_within_3px": "62/218",
+        "joint_localization_branch_ok": "62/218",
+        "joint_availability_branch_ok": "9/20"
+      },
+      "note": "old saved numbers are unchanged and remain the historical 3 px record; the audit only adds the denominator/branch decomposition"
+    },
+    "val_dataset_scope_reproduction": {
+      "old_metrics": {
+        "presence_tp": 75,
+        "presence_fp": 10,
+        "presence_fn": 20,
+        "presence_tn": 15,
+        "joint_tp": 55,
+        "joint_denominator": 95,
+        "gt_unobservable": 14
+      },
+      "recomputed": {
+        "presence_tp": 75,
+        "presence_fp": 10,
+        "presence_fn": 20,
+        "presence_tn": 15,
+        "joint_tp": 55,
+        "joint_denominator": 95,
+        "gt_unobservable": 14
+      },
+      "scope_note": "current labels_val.json has 163 annotations while the saved val predictions cover 134 dataset frames; 29 frames without a saved prediction are dropped (recorded in inputs.dropped_without_prediction) to reproduce the original scope"
+    }
+  },
+  "reproduction_checks": {
+    "final_saved_metrics_reproduced_presence": true,
+    "final_saved_metrics_reproduced_joint": true,
+    "val_saved_metrics_reproduced_in_dataset_scope": true,
+    "accounting_ok_final": true,
+    "accounting_ok_val": true
+  },
+  "tests": {
+    "command": "E:\\isaac\\env_isaaclab\\Scripts\\python.exe -m pytest -q tests/evaluation/test_landmark_metrics.py tests/evaluation/test_landmark_eval_definitions.py",
+    "result": "45 passed",
+    "full_suite_note": "full pytest in the working tree is currently not green because of concurrently in-progress teammate files (tests/evaluation/test_landmark_posteval.py collection error; test_landmark_onnx.py and test_landmark_dataset.py failures); neither is in this task write scope"
+  },
+  "code_entries": {
+    "module": "src/boom_birds/evaluation/landmark_eval_definitions.py",
+    "metrics_additive_fields": "src/boom_birds/evaluation/landmark_metrics.py",
+    "cli": "scripts/recompute_landmark_metrics.py",
+    "report": "docs/reports/perception/EVAL_DEFINITION_AUDIT_20261104.md"
+  },
+  "limitations": [
+    "single exploratory pool; no verified HN1/similar-structure frame in the final pool",
+    "GT_UNOBSERVABLE branch has 0 frames in the final pool (exercised only in val cross-check)",
+    "agent-proxy annotations with colour-cue-assisted reference points, not human independent",
+    "3 px is a historical 2D proxy; the equivalent single-axis angle is 1.074 deg at fx=160 and is not a capability gate; the bearing budget is PROPOSED_NOT_FROZEN",
+    "image bearing is an image angle, not a world bearing and not a distance",
+    "no repetition, no board, no real camera; no Gate conclusion"
+  ]
+}

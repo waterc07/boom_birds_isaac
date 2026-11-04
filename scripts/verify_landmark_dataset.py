@@ -184,6 +184,20 @@ DATASETS = [
      'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v3',
      'description': 'T9 dev batch2: HN1 synthetic green-light confuser and '
                     'HN2 synthetic visual-only wall full occlusion'},
+    {'dataset': 'lm_final_candidate_20261104_sensor',
+     'run': 'lm_final_candidate_20261104',
+     'role': 'development_train_reused_exploratory',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v4_1',
+     'description': 'old final/exploratory pool (279 accepted labels, '
+                    'sha 7115ee04...) reused as development TRAIN data for '
+                    'the scale-coverage candidate; it is no longer final'},
+    {'dataset': 'lm_dev_identity_capture_20261104_sensor',
+     'run': 'lm_dev_identity_capture_20261104',
+     'role': 'development_identity_dev',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v4_2',
+     'description': 'T15 identity/confuser development cases: target alone, '
+                    'map-native MS1 alone, three both-in-frame compositions, '
+                    'near truncation, full occlusion; default VAL'},
 ]
 
 #: dataset episode-id -> group id.  Every episode must be mapped exactly once.
@@ -240,6 +254,24 @@ EPISODE_GROUPS = {
     'lm_dev_hn_capture_20261104_sensor': {
         'lmf_dev_hn1_confuser_0': 'g_lmf_dev_hn1_confuser',
         'lmf_dev_hn2_occluder_0': 'g_lmf_dev_hn2_occluder',
+    },
+    'lm_final_candidate_20261104_sensor': {
+        'lmf_sweep_0': 'g_reuse_lmf_sweep',
+        'lmf_backoff_0': 'g_reuse_lmf_backoff',
+        'lmf_near_0': 'g_reuse_lmf_near',
+        'lmf_edge_0': 'g_reuse_lmf_edge',
+        'lmf_similar_negative_0': 'g_reuse_lmf_similar_negative',
+        'lmf_side_negative_0': 'g_reuse_lmf_side_negative',
+    },
+    'lm_dev_identity_capture_20261104_sensor': {
+        'lmf_devid_target_alone_0': 'g_devid_target_alone',
+        'lmf_devid_ms1_alone_0': 'g_devid_ms1_alone',
+        'lmf_devid_both_scale_lateral_0': 'g_devid_both_scale_lateral',
+        'lmf_devid_both_mid_similar_scale_0':
+            'g_devid_both_mid_similar_scale',
+        'lmf_devid_both_same_bearing_0': 'g_devid_both_same_bearing',
+        'lmf_devid_target_near_trunc_0': 'g_devid_target_near_trunc',
+        'lmf_devid_full_occlusion_0': 'g_devid_full_occlusion',
     },
 }
 
@@ -381,6 +413,97 @@ GROUP_DEFS = [
      'notes': 'HN2 full occlusion via synthetic visual-only wall injection '
               'hn2_occluder_v1; geometric metadata recorded in the case '
               'manifest'},
+    # --- old exploratory pool reused as DEVELOPMENT TRAIN in v4.1 ---
+    {'group_id': 'g_reuse_lmf_sweep', 'family_id': 'lmf_sweep',
+     'dataset': 'lm_final_candidate_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v4_1',
+     'dataset_role': 'DEVELOPMENT_TRAIN',
+     'route': 'old exploratory lateral sweep (E-area serpentine)',
+     'notes': 'reused from the downgraded exploratory pool to add scale '
+              'coverage (LARGE near / TINY far) for candidate A; exposure '
+              'event registered; never final/sealed again'},
+    {'group_id': 'g_reuse_lmf_backoff', 'family_id': 'lmf_backoff',
+     'dataset': 'lm_final_candidate_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v4_1',
+     'dataset_role': 'DEVELOPMENT_TRAIN',
+     'route': 'old exploratory scale/backoff route',
+     'notes': 'reused development train scale coverage'},
+    {'group_id': 'g_reuse_lmf_near', 'family_id': 'lmf_near',
+     'dataset': 'lm_final_candidate_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v4_1',
+     'dataset_role': 'DEVELOPMENT_TRAIN',
+     'route': 'old exploratory near/close-range patrol',
+     'notes': 'reused development train LARGE(near) coverage'},
+    {'group_id': 'g_reuse_lmf_edge', 'family_id': 'lmf_edge',
+     'dataset': 'lm_final_candidate_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v4_1',
+     'dataset_role': 'DEVELOPMENT_TRAIN',
+     'route': 'old exploratory edge/truncation patrol',
+     'notes': 'reused development train edge/truncation coverage'},
+    {'group_id': 'g_reuse_lmf_similar_negative',
+     'family_id': 'lmf_similar_negative',
+     'dataset': 'lm_final_candidate_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v4_1',
+     'dataset_role': 'DEVELOPMENT_TRAIN',
+     'route': 'old exploratory target-absent negative route',
+     'notes': 'reused development train; target-absent frames remain '
+              'development negatives'},
+    {'group_id': 'g_reuse_lmf_side_negative', 'family_id': 'lmf_side_negative',
+     'dataset': 'lm_final_candidate_20261104_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v4_1',
+     'dataset_role': 'DEVELOPMENT_TRAIN',
+     'route': 'old exploratory static target-out-of-view negative',
+     'notes': 'reused development train negative'},
+    # --- T15 identity/confuser development cases (v4.2, val) ---
+    {'group_id': 'g_devid_target_alone', 'family_id': 'devid_target_alone',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'E-area pose: central target alone, MS1 behind camera',
+     'notes': 'identity dev case; val_identity subset'},
+    {'group_id': 'g_devid_ms1_alone', 'family_id': 'devid_ms1_alone',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'MID pose southwest of MS1; green lamp visible, target out of FOV',
+     'notes': 'map-native MS1 confuser-only negative (SIMILAR_STRUCTURE)'},
+    {'group_id': 'g_devid_both_scale_lateral',
+     'family_id': 'devid_both_scale_lateral',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': 'devid_both_in_frame', 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'both in frame: MS1 near/large left + target far/small right',
+     'notes': 'same-frame ambiguity composition 1'},
+    {'group_id': 'g_devid_both_mid_similar_scale',
+     'family_id': 'devid_both_mid_similar_scale',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': 'devid_both_in_frame', 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'both in frame: MS1 left ~6.6 m + target right ~9.8 m, similar '
+              'apparent scale',
+     'notes': 'same-frame ambiguity composition 2'},
+    {'group_id': 'g_devid_both_same_bearing',
+     'family_id': 'devid_both_same_bearing',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': 'devid_both_in_frame', 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'both in frame: near MS1 and far target nearly same bearing',
+     'notes': 'same-frame ambiguity composition 3; MS1 green visibility '
+              'depends on side'},
+    {'group_id': 'g_devid_target_near_trunc',
+     'family_id': 'devid_target_near_trunc',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'target 1.6-2.0 m with right/bottom edge truncation',
+     'notes': 'near truncation identity dev case'},
+    {'group_id': 'g_devid_full_occlusion', 'family_id': 'devid_full_occlusion',
+     'dataset': 'lm_dev_identity_capture_20261104_sensor', 'split': 'val',
+     'view_cluster': None, 'introduced_in': 'v4_2',
+     'dataset_role': 'DEVELOPMENT',
+     'route': 'target present but fully hidden by synthetic visual wall',
+     'notes': 'GT_UNOBSERVABLE candidate; hn2_occluder_v1 synthetic wall '
+              '(EXTERNAL_EVIDENCE, not real arena distribution)'},
 ]
 
 #: Named dev-split profiles.  'v1' keeps the original split; 'conservative'
@@ -399,6 +522,18 @@ PROFILE_OVERRIDES = {
         'g_lm_ind_staticEtest': 'train',
         'g_geo_staticE': 'train',
     },
+    'v4': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+    },
+    'v4_1': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+    },
+    'v4_2': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+    },
 }
 PROFILE_DESCRIPTIONS = {
     'v1': 'val = north corridor family + E static test viewpoint cluster '
@@ -409,12 +544,32 @@ PROFILE_DESCRIPTIONS = {
     'v3': 'v2 conservative split plus T9 dev new families; val covers the '
           'north corridor, inner-north corridor, a new low static view and '
           'the HN1 confuser / HN2 occluder hard negatives',
+    'v4': 'v3 split plus the completed HN val labels; identity/confuser '
+          'cases are appended only if present before the freeze, otherwise '
+          'marked identity_cases_pending and deferred to v4.1',
+    'v4_1': 'v4 split plus the old exploratory 279-frame pool reused as '
+            'DEVELOPMENT TRAIN for scale coverage (candidate A); val is '
+            'unchanged. Reused data can never be final/sealed again',
+    'v4_2': 'v4.1 train unchanged; val adds seven T15 identity/confuser '
+            'development groups (val_identity subset) while val_main stays '
+            'the v4.1 val for threshold/selection comparability',
 }
 PROFILE_FREEZE_IDS = {
     'v1': 'landmark_split_freeze_v1',
     'conservative': 'landmark_split_freeze_v2',
     'v3': 'landmark_split_freeze_v3',
+    'v4': 'landmark_split_freeze_v4',
+    'v4_1': 'landmark_split_freeze_v4_1',
+    'v4_2': 'landmark_split_freeze_v4_2',
 }
+#: Profiles are cumulative: v4 includes everything introduced up to v3 and v4.
+PROFILE_ORDER = {'v1': 1, 'conservative': 2, 'v3': 3, 'v4': 4, 'v4_1': 5, 'v4_2': 6}
+
+
+def profile_includes(profile, introduced_in):
+    if not introduced_in:
+        return True
+    return PROFILE_ORDER.get(introduced_in, 99) <= PROFILE_ORDER.get(profile, 0)
 #: Why the conservative profile moves the whole E static cluster into train.
 #: Poses come from the frozen case files (configs/scenarios/*.json); the
 #: deltas are simple Euclidean/yaw differences, not model or image evidence.
@@ -488,6 +643,32 @@ FAMILY_DEFS = [
      'description': 'T9 HN1 synthetic green-light confuser hard negative'},
     {'family_id': 'fam_HN2_occluder', 'introduced_in': 'v3',
      'description': 'T9 HN2 synthetic visual-only wall full occlusion'},
+    {'family_id': 'lmf_sweep', 'introduced_in': 'v4_1',
+     'description': 'reused exploratory lateral sweep (old pool)'},
+    {'family_id': 'lmf_backoff', 'introduced_in': 'v4_1',
+     'description': 'reused exploratory scale/backoff (old pool)'},
+    {'family_id': 'lmf_near', 'introduced_in': 'v4_1',
+     'description': 'reused exploratory near patrol (old pool)'},
+    {'family_id': 'lmf_edge', 'introduced_in': 'v4_1',
+     'description': 'reused exploratory edge/truncation (old pool)'},
+    {'family_id': 'lmf_similar_negative', 'introduced_in': 'v4_1',
+     'description': 'reused exploratory target-absent negative (old pool)'},
+    {'family_id': 'lmf_side_negative', 'introduced_in': 'v4_1',
+     'description': 'reused exploratory target-out-of-view negative (old pool)'},
+    {'family_id': 'devid_target_alone', 'introduced_in': 'v4_2',
+     'description': 'identity dev: target alone'},
+    {'family_id': 'devid_ms1_alone', 'introduced_in': 'v4_2',
+     'description': 'identity dev: map-native MS1 confuser alone'},
+    {'family_id': 'devid_both_scale_lateral', 'introduced_in': 'v4_2',
+     'description': 'identity dev: both in frame, scale+lateral contrast'},
+    {'family_id': 'devid_both_mid_similar_scale', 'introduced_in': 'v4_2',
+     'description': 'identity dev: both in frame, similar apparent scale'},
+    {'family_id': 'devid_both_same_bearing', 'introduced_in': 'v4_2',
+     'description': 'identity dev: both in frame, same bearing stack'},
+    {'family_id': 'devid_target_near_trunc', 'introduced_in': 'v4_2',
+     'description': 'identity dev: near truncation'},
+    {'family_id': 'devid_full_occlusion', 'introduced_in': 'v4_2',
+     'description': 'identity dev: full occlusion (GT_UNOBSERVABLE)'},
 ]
 
 
@@ -521,7 +702,7 @@ def build_datasets(repo_root, profile='v1'):
     datasets_doc = {}
     loaded_frames = {}
     for spec in DATASETS:
-        if spec.get('introduced_in') and spec['introduced_in'] != profile:
+        if not profile_includes(profile, spec.get('introduced_in')):
             continue
         name = spec['dataset']
         dataset_root = 'outputs/sensor_shadow/' + name
@@ -591,8 +772,7 @@ def build_groups(repo_root, datasets_doc, loaded_frames, profile='v1'):
     overrides = PROFILE_OVERRIDES.get(profile, {})
     group_by_id = {}
     for definition in GROUP_DEFS:
-        if (definition.get('introduced_in')
-                and definition['introduced_in'] != profile):
+        if not profile_includes(profile, definition.get('introduced_in')):
             continue
         group = dict(definition)
         group['session'] = group['dataset']
@@ -622,8 +802,7 @@ def build_groups(repo_root, datasets_doc, loaded_frames, profile='v1'):
                 group['episodes'].append(frame.episode_id)
     groups = []
     for definition in GROUP_DEFS:
-        if (definition.get('introduced_in')
-                and definition['introduced_in'] != profile):
+        if not profile_includes(profile, definition.get('introduced_in')):
             continue
         group = group_by_id[definition['group_id']]
         group['frames'].sort(key=lambda item: (
@@ -692,8 +871,7 @@ def build_freeze(repo_root, profile='v1'):
             group['group_id'])
     families = []
     for definition in FAMILY_DEFS:
-        if (definition.get('introduced_in')
-                and definition['introduced_in'] != profile):
+        if not profile_includes(profile, definition.get('introduced_in')):
             continue
         family = dict(definition)
         family['groups'] = family_groups.get(definition['family_id'], [])
@@ -903,6 +1081,404 @@ def build_freeze(repo_root, profile='v1'):
                 'v3 adds T9 dev new families: val covers the north corridor, '
                 'inner-north corridor, a new low static view and the HN1 '
                 'confuser / HN2 occluder hard negatives.')
+        elif profile == 'v4':
+            v3_path = root / 'configs/perception/landmark_split_freeze_v3.json'
+            supersedes = None
+            delta = {
+                'base_path': 'configs/perception/landmark_split_freeze_v3.json',
+                'base_canonical_sha256': None,
+                'new_groups': [],
+                'new_frames': None,
+                'frame_total': sum(len(group.get('frames') or [])
+                                   for group in groups),
+                'split_frame_counts': {
+                    split: sum(len(group.get('frames') or [])
+                               for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'split_group_counts': {
+                    split: sum(1 for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'note': 'v4 keeps the v3 group structure and adds the '
+                        'completed HN val labels / annotation list update; '
+                        'identity cases are appended only if present before '
+                        'the freeze, otherwise identity_cases_pending',
+            }
+            if v3_path.is_file():
+                v3_document = load_json(v3_path)
+                supersedes = {
+                    'path': 'configs/perception/landmark_split_freeze_v3.json',
+                    'canonical_sha256': freeze_sha256(v3_document),
+                    'reason': 'v4 completes the HN val labels on the v3 '
+                              'groups and freezes the updated annotation '
+                              'lists; v3 remains the structural base',
+                }
+                delta['base_canonical_sha256'] = freeze_sha256(v3_document)
+                v3_group_ids = {group['group_id']
+                                for group in v3_document.get('groups') or []}
+                v4_group_ids = {group['group_id'] for group in groups}
+                delta['new_groups'] = sorted(v4_group_ids - v3_group_ids)
+                v3_frame_total = sum(len(group.get('frames') or [])
+                                     for group in
+                                     v3_document.get('groups') or [])
+                delta['new_frames'] = delta['frame_total'] - v3_frame_total
+            freeze['supersedes'] = supersedes
+            freeze['delta_from_v3'] = delta
+            annotation_lists = _annot2_alignment(
+                root, groups, ignore_prefixes=('lmf_devid_',))
+            freeze['annotation_frame_lists'] = annotation_lists
+            if annotation_lists['status'] != 'PASS':
+                raise SystemExit(
+                    'annot2 train/val frame lists are not consistent with the '
+                    'v4 split: %d mismatches, %d unresolved'
+                    % (len(annotation_lists['mismatches']),
+                       len(annotation_lists['unresolved_frames'])))
+            delta['annotation_frame_lists'] = {
+                'config': annotation_lists.get('config'),
+                'label_shas': {split: (entry or {}).get('sha256')
+                               for split, entry in
+                               (annotation_lists.get('labels') or {}).items()},
+                'checked_frames': annotation_lists.get('checked_frames'),
+                'hn_val_pending': annotation_lists.get('hn_val_pending'),
+            }
+            identity_datasets = sorted(
+                name for name in datasets_doc
+                if 'devid' in name.lower() or 'identity' in name.lower())
+            freeze['identity_cases_pending'] = not identity_datasets
+            freeze['identity_cases'] = {
+                'datasets': identity_datasets,
+                'planned_split': 'val',
+                'note': 'identity/confuser/same-frame/occlusion cases are '
+                        'difficult evaluation cases and default to val; if the '
+                        'T15 capture or T19 labels are not present before this '
+                        'freeze they are deferred to v4.1',
+            }
+            freeze['holdout_reference'] = {
+                'path': 'configs/perception/landmark_holdout_freeze_v1.json',
+                'status': 'NOT_TRIGGERED_UNLESS_IMPROVEMENT_GATE_PASSES',
+                'note': 'the development-to-holdout gate is evaluated only '
+                        'after the bounded improvement candidates in T18; '
+                        'this freeze writes a NOT_TRIGGERED placeholder',
+            }
+            freeze['exposure_registry'] = {
+                'path': 'configs/perception/landmark_exposure_registry_v2.json',
+                'status': 'PRODUCED_SEPARATELY_WITH_ITS_OWN_VERIFY_EVIDENCE',
+            }
+            freeze['notes'].append(
+                'v4: HN val labels completed; identity cases pending unless '
+                'present; old exploratory pool is development data, not final.')
+        elif profile == 'v4_1':
+            v4_path = root / 'configs/perception/landmark_split_freeze_v4.json'
+            supersedes = None
+            delta = {
+                'base_path': 'configs/perception/landmark_split_freeze_v4.json',
+                'base_canonical_sha256': None,
+                'new_groups': [],
+                'new_frames': None,
+                'frame_total': sum(len(group.get('frames') or [])
+                                   for group in groups),
+                'split_frame_counts': {
+                    split: sum(len(group.get('frames') or [])
+                               for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'split_group_counts': {
+                    split: sum(1 for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'note': 'v4.1 adds the old exploratory 279-frame pool (297 RGB, '
+                        '6 groups) to TRAIN for scale coverage; val is '
+                        'unchanged at 163 labelled frames',
+            }
+            if v4_path.is_file():
+                v4_document = load_json(v4_path)
+                supersedes = {
+                    'path': 'configs/perception/landmark_split_freeze_v4.json',
+                    'canonical_sha256': freeze_sha256(v4_document),
+                    'reason': 'v4.1 reuses the downgraded exploratory pool as '
+                              'development TRAIN data; val unchanged; reused '
+                              'data is no longer independent/final',
+                }
+                delta['base_canonical_sha256'] = freeze_sha256(v4_document)
+                v4_group_ids = {group['group_id']
+                                for group in v4_document.get('groups') or []}
+                v41_group_ids = {group['group_id'] for group in groups}
+                delta['new_groups'] = sorted(v41_group_ids - v4_group_ids)
+                v4_frame_total = sum(len(group.get('frames') or [])
+                                     for group in v4_document.get('groups') or [])
+                delta['new_frames'] = delta['frame_total'] - v4_frame_total
+            freeze['supersedes'] = supersedes
+            freeze['delta_from_v4'] = delta
+            annotation_lists = _annot2_alignment(
+                root, groups, ignore_prefixes=('lmf_devid_',))
+            freeze['annotation_frame_lists'] = annotation_lists
+            if annotation_lists['status'] != 'PASS':
+                raise SystemExit(
+                    'annot2 train/val frame lists are not consistent with the '
+                    'v4.1 split: %d mismatches, %d unresolved'
+                    % (len(annotation_lists['mismatches']),
+                       len(annotation_lists['unresolved_frames'])))
+            exploratory_labels = _file_entry_if_exists(
+                root, 'outputs/perception/final_exploratory_20261104/'
+                      'labels_v1.json')
+            exploratory_manifest = _file_entry_if_exists(
+                root, 'outputs/perception/final_exploratory_20261104/'
+                      'labels_manifest.json')
+            seal_entry = _json_if_exists(root, SEAL_PATH)
+            reuse_groups = [group for group in groups
+                            if str(group.get('dataset')).startswith(
+                                'lm_final_candidate')]
+            freeze['development_train_reuse'] = {
+                'dataset_role': 'DEVELOPMENT_TRAIN',
+                'source_pool': SEAL_PATH,
+                'source_file_sha256': (seal_entry[1]['sha256']
+                                       if seal_entry else None),
+                'source_freeze_sha256': (freeze_sha256(seal_entry[0])
+                                         if seal_entry else None),
+                'labels': exploratory_labels,
+                'manifest': exploratory_manifest,
+                'reused_groups': sorted(group['group_id'] for group in reuse_groups),
+                'reused_rgb_frames': sum(len(group.get('frames') or [])
+                                         for group in reuse_groups),
+                'reused_accepted_frames': sum(
+                    len([frame for frame in group.get('frames') or []
+                         if frame.get('accepted')])
+                    for group in reuse_groups),
+                'train_label_frames': {
+                    'dev_v4_labelled': 160,
+                    'reused_exploratory_labelled': 279,
+                    'total': 439,
+                },
+                'val_label_frames': 163,
+                'exposure_event': 'ev_exploratory_reused_as_train_20261104',
+                'declaration': 'these frames were exploratory/final-like '
+                               'before; after being used as TRAIN data they '
+                               'can never be a final/sealed or independent '
+                               'test pool again. Old exploratory metrics stay '
+                               'traceability-only and cannot be reused as a '
+                               'fair final result for training that saw them.',
+            }
+            freeze['identity_cases_pending'] = True
+            freeze['identity_cases_pending_frames'] = len(
+                annotation_lists.get('pending_frames') or [])
+            freeze['exposure_registry'] = {
+                'path': 'configs/perception/landmark_exposure_registry_v2.json',
+                'status': 'PRODUCED_SEPARATELY_WITH_ITS_OWN_VERIFY_EVIDENCE',
+            }
+            freeze['holdout_reference'] = {
+                'path': 'configs/perception/landmark_holdout_freeze_v1.json',
+                'status': 'NOT_TRIGGERED_UNLESS_IMPROVEMENT_GATE_PASSES',
+            }
+            freeze['notes'].append(
+                'v4.1: old exploratory 279 frames are DEVELOPMENT TRAIN data; '
+                'they are no longer final/sealed/independent. Candidate A must '
+                'be compared to a baseline trained with the same v4.1 split.')
+        elif profile == 'v4_2':
+            v41_path = root / 'configs/perception/landmark_split_freeze_v4_1.json'
+            supersedes = None
+            delta = {
+                'base_path': 'configs/perception/landmark_split_freeze_v4_1.json',
+                'base_canonical_sha256': None,
+                'new_groups': [],
+                'new_frames': None,
+                'frame_total': sum(len(group.get('frames') or [])
+                                   for group in groups),
+                'split_frame_counts': {
+                    split: sum(len(group.get('frames') or [])
+                               for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'split_group_counts': {
+                    split: sum(1 for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'note': 'v4.2 keeps v4.1 train unchanged and adds seven T15 '
+                        'identity/confuser development groups to val as the '
+                        'val_identity subset; val_main stays the v4.1 val',
+            }
+            if v41_path.is_file():
+                v41_document = load_json(v41_path)
+                supersedes = {
+                    'path': 'configs/perception/landmark_split_freeze_v4_1.json',
+                    'canonical_sha256': freeze_sha256(v41_document),
+                    'reason': 'v4.2 adds identity/confuser development cases '
+                              'to val; train unchanged; val_main remains the '
+                              'v4.1 val for threshold/selection comparability',
+                }
+                delta['base_canonical_sha256'] = freeze_sha256(v41_document)
+                v41_group_ids = {group['group_id']
+                                 for group in v41_document.get('groups') or []}
+                v42_group_ids = {group['group_id'] for group in groups}
+                delta['new_groups'] = sorted(v42_group_ids - v41_group_ids)
+                v41_frame_total = sum(len(group.get('frames') or [])
+                                      for group in
+                                      v41_document.get('groups') or [])
+                delta['new_frames'] = delta['frame_total'] - v41_frame_total
+            freeze['supersedes'] = supersedes
+            freeze['delta_from_v4_1'] = delta
+            annotation_lists = _annot2_alignment(root, groups)
+            freeze['annotation_frame_lists'] = annotation_lists
+            if annotation_lists['status'] != 'PASS':
+                raise SystemExit(
+                    'annot2 train/val frame lists are not consistent with the '
+                    'v4.2 split: %d mismatches, %d unresolved'
+                    % (len(annotation_lists['mismatches']),
+                       len(annotation_lists['unresolved_frames'])))
+            lists_entry = _json_if_exists(
+                root, 'configs/perception/landmark_dev_label_lists_v1.json')
+            lists_doc = lists_entry[0] if lists_entry else {}
+            identity_batch = lists_doc.get('identity_dev_batch') or {}
+            identity_labels = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_identity_dev.json')
+            identity_selection = _json_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'identity/selection_identity.json')
+            identity_labels_doc = _json_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_identity_dev.json')
+            identity_check = {'frames': 0, 'resolved': 0,
+                              'sha_mismatches': 0,
+                              'unresolved': [],
+                              'groups_hit': []}
+            identity_frame_ids = []
+            identity_annotations = []
+            if identity_labels_doc:
+                identity_annotations = (
+                    identity_labels_doc[0].get('annotations')
+                    or identity_labels_doc[0].get('labels') or [])
+                identity_frame_ids = [item.get('frame_id')
+                                      for item in identity_annotations]
+            v42_episode_group = {}
+            for group in groups:
+                for episode in group.get('episodes') or []:
+                    v42_episode_group[episode] = group['group_id']
+            v42_group_ids = {group['group_id'] for group in groups}
+            for frame_id in identity_frame_ids:
+                identity_check['frames'] += 1
+                parsed = parse_frame_id(frame_id) or {}
+                group_id = v42_episode_group.get(parsed.get('episode_id'))
+                if group_id in v42_group_ids:
+                    identity_check['resolved'] += 1
+                    if group_id not in identity_check['groups_hit']:
+                        identity_check['groups_hit'].append(group_id)
+                    expected = None
+                    for group in groups:
+                        if group['group_id'] != group_id:
+                            continue
+                        for frame in group.get('frames') or []:
+                            if frame.get('frame_id') == frame_id:
+                                expected = frame.get('sha256')
+                                break
+                    for item in identity_annotations:
+                        if item.get('frame_id') != frame_id:
+                            continue
+                        if (item.get('image_sha256') and expected and
+                                item['image_sha256'] != expected):
+                            identity_check['sha_mismatches'] += 1
+                        break
+                else:
+                    identity_check['unresolved'].append(frame_id)
+            identity_check['status'] = (
+                'PASS' if (not identity_check['unresolved']
+                           and not identity_check['sha_mismatches'])
+                else 'FAIL')
+            if identity_check['status'] != 'PASS':
+                raise SystemExit('identity labels not resolvable to v4.2 groups: '
+                                 + str(identity_check['unresolved'][:5]))
+            identity_report = _file_entry_if_exists(
+                root, 'docs/reports/perception/annotation_verify_20261104/'
+                      'IDENTITY_DEV_ANNOTATION_20261104.md')
+            validation_entry = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_val_validation163.json')
+            freeze['identity_dev_batch'] = {
+                'dataset_role': 'DEVELOPMENT',
+                'capture_run': 'outputs/sensor_shadow/'
+                               'lm_dev_identity_capture_20261104',
+                'dataset': 'lm_dev_identity_capture_20261104_sensor',
+                'cases_config': identity_batch.get('cases'),
+                'conditions': identity_batch.get('conditions'),
+                'annotation_spec': identity_batch.get('annotation_spec'),
+                'labels': identity_labels,
+                'selection': identity_selection[1] if identity_selection else None,
+                'qa': identity_batch.get('qa'),
+                'report': identity_report,
+                'lists_config': (lists_entry[1] if lists_entry else None),
+                'counts': identity_batch.get('counts'),
+                'resolved_frames': identity_check['resolved'],
+                'sha_mismatches': identity_check['sha_mismatches'],
+                'groups': sorted(identity_check['groups_hit']),
+                'boundary': identity_batch.get('boundary'),
+                'note': 'T15/T19 identity/confuser development batch; all '
+                        'groups are in val_identity; MS1 is map-native, the '
+                        'only synthetic injection is hn2_occluder_v1, full '
+                        'occlusion frames are GT_UNOBSERVABLE',
+            }
+            val_main_groups = []
+            val_identity_groups = []
+            for group in groups:
+                if group.get('split') != 'val':
+                    continue
+                if str(group.get('dataset')).startswith(
+                        'lm_dev_identity_capture'):
+                    val_identity_groups.append(group['group_id'])
+                else:
+                    val_main_groups.append(group['group_id'])
+            freeze['splits_subset'] = {
+                'val_main': {
+                    'groups': sorted(val_main_groups),
+                    'role': 'validation for threshold freeze / checkpoint '
+                            'selection; same as v4.1 val',
+                },
+                'val_identity': {
+                    'groups': sorted(val_identity_groups),
+                    'role': 'identity / same-frame ambiguity / occlusion '
+                            'stratified reporting only; do not mix into the '
+                            'main joint threshold selection without recording',
+                },
+                'train_main': {
+                    'groups': sorted(group['group_id'] for group in groups
+                                     if group.get('split') == 'train'),
+                    'role': 'development training (includes reused '
+                            'exploratory pool)',
+                },
+            }
+            freeze['annotation_label_sources'] = {
+                'train': {
+                    'dev_labelled_frames': 160,
+                    'reused_exploratory_labelled_frames': 279,
+                    'total_usable': 439,
+                },
+                'val_main': {
+                    'frames': 163,
+                    'labels': validation_entry,
+                    'lists_config': (lists_entry[1] if lists_entry else None),
+                    'note': 'stable validation163 file excludes the identity '
+                            'rows; use this file for fixed train reads',
+                },
+                'val_identity': {
+                    'frames': identity_check['frames'],
+                    'resolved_frames': identity_check['resolved'],
+                    'labels': identity_labels,
+                    'note': 'independent file; do not merge into '
+                            'labels_val.json',
+                },
+            }
+            freeze['identity_cases_pending'] = False
+            freeze['exposure_registry'] = {
+                'path': 'configs/perception/landmark_exposure_registry_v2.json',
+                'status': 'PRODUCED_SEPARATELY_WITH_ITS_OWN_VERIFY_EVIDENCE',
+            }
+            freeze['holdout_reference'] = {
+                'path': 'configs/perception/landmark_holdout_freeze_v1.json',
+                'status': 'NOT_TRIGGERED_UNLESS_IMPROVEMENT_GATE_PASSES',
+            }
+            freeze['notes'].append(
+                'v4.2: identity/confuser development cases are in val_identity; '
+                'val_main = v4.1 val for threshold comparability; train '
+                'unchanged. Identity data is development, not sealed/final.')
         else:
             v1_path = root / DEFAULT_FREEZE
             supersedes = None
@@ -933,7 +1509,7 @@ def build_freeze(repo_root, profile='v1'):
     return freeze
 
 
-def _annot2_alignment(repo_root, groups):
+def _annot2_alignment(repo_root, groups, ignore_prefixes=()):
     """Check the annot2 dev train/val label lists against the v3 groups.
 
     The authoritative source is configs/perception/landmark_dev_label_lists_v1
@@ -973,6 +1549,7 @@ def _annot2_alignment(repo_root, groups):
         'source_lists': [],
         'checked_frames': 0,
         'unresolved_frames': [],
+        'pending_frames': [],
         'mismatches': [],
         'hn_val_pending': True,
         'status': 'PASS',
@@ -1010,11 +1587,19 @@ def _annot2_alignment(repo_root, groups):
                     group_id, entry = _resolve_group(declared_group_id,
                                                      frame_id)
                     if entry is None:
-                        result['unresolved_frames'].append({
-                            'frame_id': frame_id,
-                            'group_id': declared_group_id,
-                            'reason': 'FRAME_OR_GROUP_NOT_IN_V3',
-                        })
+                        if any(str(frame_id).startswith(prefix)
+                               for prefix in ignore_prefixes):
+                            result['pending_frames'].append({
+                                'frame_id': frame_id,
+                                'group_id': declared_group_id,
+                                'reason': 'DEFERRED_TO_NEXT_VERSION',
+                            })
+                        else:
+                            result['unresolved_frames'].append({
+                                'frame_id': frame_id,
+                                'group_id': declared_group_id,
+                                'reason': 'FRAME_OR_GROUP_NOT_IN_V3',
+                            })
                         continue
                     result['checked_frames'] += 1
                     if entry['split'] != split:
@@ -1063,11 +1648,19 @@ def _annot2_alignment(repo_root, groups):
                 candidates = [candidate for candidate, info
                               in group_info.items()
                               if frame_id in info['frames']]
-                result['unresolved_frames'].append({
-                    'frame_id': frame_id,
-                    'cluster_id': cluster,
-                    'candidate_groups': candidates,
-                })
+                if any(str(frame_id).startswith(prefix)
+                       for prefix in ignore_prefixes):
+                    result['pending_frames'].append({
+                        'frame_id': frame_id,
+                        'cluster_id': cluster,
+                        'reason': 'DEFERRED_TO_NEXT_VERSION',
+                    })
+                else:
+                    result['unresolved_frames'].append({
+                        'frame_id': frame_id,
+                        'cluster_id': cluster,
+                        'candidate_groups': candidates,
+                    })
                 continue
             group_id = resolved_group_id
             result['checked_frames'] += 1
@@ -2164,6 +2757,14 @@ V3_PATH = 'configs/perception/landmark_split_freeze_v3.json'
 SEAL_PATH = 'configs/perception/landmark_final_pool_seal_v1.json'
 
 
+def _file_entry_if_exists(root, relative):
+    path = Path(root) / relative
+    if not path.is_file():
+        return None
+    return {'path': relative.replace('\\', '/'),
+            'sha256': sha256_file(path)}
+
+
 def _json_if_exists(root, relative):
     path = Path(root) / relative
     if not path.is_file():
@@ -2556,6 +3157,759 @@ def build_exposure_registry(repo_root):
     return registry
 
 
+V4_PATH = 'configs/perception/landmark_split_freeze_v4.json'
+V4_1_PATH = 'configs/perception/landmark_split_freeze_v4_1.json'
+V4_2_PATH = 'configs/perception/landmark_split_freeze_v4_2.json'
+HOLDOUT_PATH = 'configs/perception/landmark_holdout_freeze_v1.json'
+REGISTRY_V2_PATH = 'configs/perception/landmark_exposure_registry_v2.json'
+GATE_PATH = 'configs/perception/landmark_improvement_gate_v1.json'
+FINAL_EVAL_PROTOCOL = 'configs/perception/landmark_final_eval_protocol_v1.json'
+MODEL_FREEZE = 'configs/perception/landmark_model_freeze_v1.json'
+HN_REPORT = ('docs/reports/perception/annotation_verify_20261104/'
+             'HN_REMAINING_ANNOTATION_20261104.md')
+POSTEVAL_DIR = 'docs/reports/perception/posteval_20261104'
+
+
+def build_exposure_registry_v2(repo_root):
+    """Register every data pool as development/exposed and downgrade old final."""
+    root = Path(repo_root)
+    v4 = load_json(root / V4_PATH)
+    old_pool = load_json(root / SEAL_PATH)
+    v1_entry = _json_if_exists(root, REGISTRY_PATH)
+    dev_groups = {group['group_id']: group for group in v4.get('groups') or []}
+    old_groups = {group['group_id']: group
+                  for group in old_pool.get('groups') or []}
+    events = []
+    # 1) pre-T9 development use
+    history_evidence = []
+    for relative in ('configs/perception/landmark_freeze_v4.json',
+                     'configs/perception/independent_freeze_v3.json',
+                     'configs/perception/geometry_test_freeze_v2.json'):
+        entry = _json_if_exists(root, relative)
+        if entry:
+            history_evidence.append(entry[1])
+    events.append({
+        'event_id': 'ev_dev_detection_history_20261103',
+        'type': 'exposed_development',
+        'date': '2026-11-03',
+        'executor': 'agent (template / geometry / independent landmark dev)',
+        'purpose': 'development, diagnostics, template/geometry evaluation',
+        'frames_touched': sum(len(group.get('frames') or [])
+                              for group in dev_groups.values()),
+        'groups': sorted(dev_groups),
+        'evidence_path': history_evidence[0]['path'] if history_evidence else None,
+        'evidence_sha256': history_evidence[0]['sha256']
+        if history_evidence else None,
+        'evidence_extra': history_evidence[1:],
+    })
+    # 2) dev annotation selection / HN completion (authoritative label lists)
+    annotated_dev_frames = []
+    lists_entry = _json_if_exists(
+        root, 'configs/perception/landmark_dev_label_lists_v1.json')
+    lists_doc = lists_entry[0] if lists_entry else {}
+    for split in ('train', 'val'):
+        split_doc = (lists_doc.get('splits') or {}).get(split) or {}
+        for group in split_doc.get('groups') or []:
+            for frame_id in group.get('frames') or []:
+                annotated_dev_frames.append({
+                    'frame_id': frame_id,
+                    'group_id': group.get('group_id'),
+                    'split': split,
+                })
+    dev_annotation_event = {
+        'event_id': 'ev_dev_annotation_selection_20261104',
+        'type': 'annotation_calibration',
+        'date': '2026-11-04',
+        'executor': 'annot2 + annot (agent proxy)',
+        'purpose': 'dev train/val label production, incl. HN val completion',
+        'frames_touched': len(annotated_dev_frames),
+        'groups': sorted({entry.get('group_id') for entry in
+                          annotated_dev_frames if entry.get('group_id')}),
+        'evidence_path': ('configs/perception/landmark_dev_label_lists_v1.json'
+                          if lists_entry else None),
+        'evidence_sha256': lists_entry[1]['sha256'] if lists_entry else None,
+        'evidence_extra': [
+            {'path': 'outputs/perception/dev_annotations_20261104/'
+                     'labels_train.json',
+             'sha256': '01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df'},
+            {'path': 'outputs/perception/dev_annotations_20261104/'
+                     'labels_val.json',
+             'sha256': '8c2155979b517626299fd85c61759b73ceb1bfc369be839d4453caa3b3ed33ac'},
+            {'path': 'outputs/perception/dev_annotations_20261104/'
+                     'labels_hn_val.json',
+             'sha256': '87ba533de8feef0cf4399650d477c071b66aa4586b74e07af10d7ccc3c1189af'},
+        ],
+        'hn_status': 'HN val 53/53 accepted fully labelled (27 HN1 + 26 HN2)',
+    }
+    events.append(dev_annotation_event)
+    # 3) T9 dev capture
+    t9_manifests = []
+    for dataset_name in sorted(v4.get('datasets') or {}):
+        if not str(dataset_name).startswith(('lm_dev_capture',
+                                            'lm_dev_hn_capture')):
+            continue
+        run_dir = ((v4['datasets'][dataset_name].get('run') or '')
+                   .rstrip('/'))
+        if not run_dir:
+            continue
+        entry = _json_if_exists(root, run_dir + '/manifest.json')
+        if entry:
+            t9_manifests.append(entry[1])
+    events.append({
+        'event_id': 'ev_t9_dev_capture_20261104',
+        'type': 'exposed_development',
+        'date': '2026-11-04',
+        'executor': 'capture (visible foreground Isaac GUI)',
+        'purpose': 'dev new trajectories, HN1 confuser, HN2 occluder',
+        'frames_touched': sum(len(group.get('frames') or [])
+                              for group in dev_groups.values()
+                              if str(group.get('dataset')).startswith(
+                                  ('lm_dev_capture', 'lm_dev_hn_capture'))),
+        'groups': sorted(group_id for group_id, group in dev_groups.items()
+                         if str(group.get('dataset')).startswith(
+                             ('lm_dev_capture', 'lm_dev_hn_capture'))),
+        'evidence_path': t9_manifests[0]['path'] if t9_manifests else None,
+        'evidence_sha256': t9_manifests[0]['sha256']
+        if t9_manifests else None,
+        'evidence_extra': t9_manifests[1:],
+    })
+    # 4) map-native MS1 identity conflict
+    native_entry = _json_if_exists(
+        root, 'docs/reports/perception/capture_dev_20261104/'
+              'map_native_structures.json')
+    events.append({
+        'event_id': 'ev_map_native_ms1_identity_conflict_20261104',
+        'type': 'identity_conflict_evidence',
+        'date': '2026-11-04',
+        'executor': 'capture + datafreeze review',
+        'purpose': 'identity uniqueness audit',
+        'frames_touched': 0,
+        'groups': ['g_lmf_dev_inner_north', 'g_lmf_dev_static_negative'],
+        'evidence_path': ('docs/reports/perception/capture_dev_20261104/'
+                          'map_native_structures.json')
+        if native_entry else None,
+        'evidence_sha256': native_entry[1]['sha256'] if native_entry else None,
+        'extent': 'map-native green-lamp pillar MS1 at about (3.0,4.0) '
+                  'falsifies U1/U2; different evidence class from synthetic HN1',
+    })
+    # 5) final 34-frame pilot + full 279 exploratory labels (old "final" pool)
+    pilot_entry = _json_if_exists(root, PILOT_SELECTION)
+    pilot_frames = pilot_entry[0].get('frames') or [] if pilot_entry else []
+    pilot_manifest = _json_if_exists(root, PILOT_LABELS_MANIFEST)
+    exploratory_entry = _json_if_exists(root, EXPLORATORY_LABELS_MANIFEST)
+    exploratory_manifest = exploratory_entry[0] if exploratory_entry else {}
+    events.append({
+        'event_id': 'ev_final_pilot_annotation_34_20261104',
+        'type': 'annotation_calibration',
+        'date': '2026-11-04',
+        'executor': 'annot (agent proxy)',
+        'purpose': 'annotation-spec pilot before bulk labels',
+        'frames_touched': len(pilot_frames),
+        'groups': sorted({frame.get('group_id') for frame in pilot_frames
+                          if frame.get('group_id')}),
+        'evidence_path': PILOT_LABELS_MANIFEST if pilot_manifest else None,
+        'evidence_sha256': pilot_manifest[1]['sha256'] if pilot_manifest else None,
+    })
+    events.append({
+        'event_id': 'ev_final_exploratory_labels_279_20261104',
+        'type': 'exposed_development',
+        'date': '2026-11-04',
+        'executor': 'annot (agent proxy, spec v2.1)',
+        'purpose': 'full exploratory labels; pool downgraded to development',
+        'frames_touched': (exploratory_manifest.get('counts') or {}).get('frames', 0),
+        'groups': sorted(old_groups),
+        'evidence_path': EXPLORATORY_LABELS_MANIFEST
+        if exploratory_entry else None,
+        'evidence_sha256': exploratory_entry[1]['sha256']
+        if exploratory_entry else None,
+        'dataset_role': exploratory_manifest.get('dataset_role'),
+        'label_file': exploratory_manifest.get('label_file'),
+    })
+    # 6) one-shot exploratory evaluation and post-eval diagnosis (who viewed)
+    eval_protocol = _json_if_exists(root, FINAL_EVAL_PROTOCOL)
+    model_freeze = _json_if_exists(root, MODEL_FREEZE)
+    events.append({
+        'event_id': 'ev_exploratory_one_shot_eval_20261104',
+        'type': 'exposed_development',
+        'date': '2026-11-04',
+        'executor': 'train (isolated venv)',
+        'purpose': 'validation-only threshold freeze then exactly one '
+                   'exploratory evaluation on the 279-frame pool',
+        'frames_touched': (exploratory_manifest.get('counts') or {}).get('frames', 0),
+        'groups': sorted(old_groups),
+        'evidence_path': FINAL_EVAL_PROTOCOL if eval_protocol else None,
+        'evidence_sha256': eval_protocol[1]['sha256'] if eval_protocol else None,
+        'evidence_extra': [model_freeze[1]] if model_freeze else [],
+        'note': 'no callback, no rerun, no retune; old exploratory metrics are '
+                'traceability evidence, not a sealed final result',
+    })
+    posteval_files = []
+    if (root / POSTEVAL_DIR).is_dir():
+        for path in sorted((root / POSTEVAL_DIR).glob('*')):
+            if path.is_file():
+                posteval_files.append({
+                    'path': str(path.relative_to(root)).replace('\\', '/'),
+                    'sha256': sha256_file(path),
+                })
+    eval_outputs = None
+    for relative in ('outputs/perception/final_exploratory_eval_20261104/'
+                     'predictions.jsonl',
+                     'outputs/perception/final_exploratory_eval_20261104/'
+                     'metrics.json'):
+        entry = _file_entry_if_exists(root, relative)
+        if entry:
+            eval_outputs = entry
+            break
+    if eval_outputs:
+        events.append({
+            'event_id': 'ev_posteval_diag_view_20261104',
+            'type': 'exposed_development',
+            'date': '2026-11-04',
+            'executor': 'diag',
+            'purpose': 'post-evaluation diagnosis: read saved predictions, '
+                       'labels and images; reference-failure decomposition; '
+                       'MS1 audit; TINY annotatability',
+            'frames_touched': (exploratory_manifest.get('counts') or {}).get('frames', 0),
+            'groups': sorted(old_groups),
+            'evidence_path': eval_outputs['path'],
+            'evidence_sha256': eval_outputs['sha256'],
+            'evidence_extra': posteval_files,
+            'note': 'viewing the old exploratory predictions/images is '
+                    'registered here; it cannot be used for sealed-final '
+                    'claims. The diagnosis report is pending; the evidence '
+                    'file is the saved prediction/evaluation output that the '
+                    'diagnosis scripts read.',
+        })
+    # 7) HN completion / TINY relabel (T16) and identity (T15/T19 pending)
+    hn_entry = _file_entry_if_exists(root, HN_REPORT)
+    events.append({
+        'event_id': 'ev_dev_hn_tiny_annotation_20261104',
+        'type': 'annotation_calibration',
+        'date': '2026-11-04',
+        'executor': 'annot (agent proxy)',
+        'purpose': 'complete HN val labels (29 remaining) and TINY blind '
+                   'relabel for label-quality analysis',
+        'frames_touched': 29,
+        'groups': ['g_lmf_dev_hn1_confuser', 'g_lmf_dev_hn2_occluder'],
+        'evidence_path': HN_REPORT if hn_entry else None,
+        'evidence_sha256': hn_entry['sha256'] if hn_entry else None,
+        'note': 'HN val now 53/53 labelled; TINY relabel evidence is recorded '
+                'if present, otherwise remains pending',
+    })
+    identity_manifest = _json_if_exists(
+        root, 'configs/scenarios/landmark_dev_identity_cases_v1.json')
+    identity_datasets = sorted(name for name in v4.get('datasets') or {}
+                               if 'devid' in str(name).lower())
+    if identity_manifest or identity_datasets:
+        events.append({
+            'event_id': 'ev_identity_cases_capture_20261104',
+            'type': 'exposed_development',
+            'date': '2026-11-04',
+            'executor': 'capture (visible foreground Isaac GUI)',
+            'purpose': 'identity/confuser/same-frame/occlusion development '
+                       'cases, default split val',
+            'frames_touched': sum(
+                len(dev_groups[group_id].get('frames') or [])
+                for group_id in dev_groups
+                if str(dev_groups[group_id].get('dataset')).startswith(
+                    ('lm_devid',))),
+            'groups': sorted(group_id for group_id in dev_groups
+                             if str(dev_groups[group_id].get('dataset'))
+                             .startswith(('lm_devid',))),
+            'evidence_path': 'configs/scenarios/'
+                             'landmark_dev_identity_cases_v1.json'
+            if identity_manifest else None,
+            'evidence_sha256': identity_manifest[1]['sha256']
+            if identity_manifest else None,
+            'ingest_status': 'PENDING_V4_1'
+            if not identity_datasets else 'INGESTED',
+            'note': 'the T15 identity cases are captured/being captured; they '
+                    'are not part of v4 unless present before the freeze, so '
+                    'this event records the capture manifest only',
+        })
+    # groups: everything is development/exposed in v2
+    groups_doc = []
+    for source, collection in (('dev_v4', dev_groups),
+                               ('old_exploratory', old_groups)):
+        for group_id, group in sorted(collection.items()):
+            is_old = source == 'old_exploratory'
+            groups_doc.append({
+                'group_id': group_id,
+                'source': source,
+                'family_id': group.get('family_id'),
+                'dataset': group.get('dataset'),
+                'split': group.get('split'),
+                'status': 'exposed_development',
+                'exposure_events': (
+                    ['ev_final_pilot_annotation_34_20261104',
+                     'ev_final_exploratory_labels_279_20261104',
+                     'ev_exploratory_one_shot_eval_20261104',
+                     'ev_posteval_diag_view_20261104'] if is_old else
+                    ['ev_dev_detection_history_20261103',
+                     'ev_dev_annotation_selection_20261104',
+                     'ev_t9_dev_capture_20261104']),
+                'certification': 'EXPOSED_DEVELOPMENT',
+                'contamination': {
+                    'group_level': True,
+                    'reason': ('old final/exploratory pool: 34-frame pilot '
+                               'viewed every family and the full 279-frame '
+                               'exploratory labels + one-shot eval + '
+                               'post-eval diagnosis used the images; cannot '
+                               'be called final/sealed'
+                               if is_old else
+                               'development / annotation / capture exposure'),
+                },
+            })
+    frame_overrides = []
+    for frame in pilot_frames:
+        frame_overrides.append({
+            'source': 'old_exploratory',
+            'group_id': frame.get('group_id'),
+            'frame_id': frame.get('frame_id'),
+            'status': 'annotation_calibration',
+            'event_id': 'ev_final_pilot_annotation_34_20261104',
+        })
+    dev_episode_groups = {}
+    for group_id, group in dev_groups.items():
+        for episode in group.get('episodes') or []:
+            dev_episode_groups[episode] = group_id
+    for entry in annotated_dev_frames:
+        frame_id = entry.get('frame_id')
+        group_id = entry.get('group_id')
+        if group_id not in dev_groups:
+            parsed = parse_frame_id(frame_id) or {}
+            group_id = dev_episode_groups.get(parsed.get('episode_id'))
+        if not group_id or group_id not in dev_groups:
+            continue
+        frame_overrides.append({
+            'source': 'dev_v4',
+            'group_id': group_id,
+            'frame_id': frame_id,
+            'status': 'annotation_calibration',
+            'event_id': 'ev_dev_annotation_selection_20261104',
+        })
+    registry = {
+        'schema_version': EXPOSURE_SCHEMA,
+        'protocol': EXPOSURE_PROTOCOL,
+        'registry_version': 'v2',
+        'generated_at': datetime.datetime.now(
+            datetime.timezone.utc).isoformat(),
+        'generated_by': 'scripts/verify_landmark_dataset.py '
+                        '--build-exposure-registry-v2',
+        'status': 'EXPOSURE_AUDIT_V2_ALL_DATA_DEVELOPMENT',
+        'supersedes': {
+            'path': REGISTRY_PATH,
+            'sha256': v1_entry[1]['sha256'] if v1_entry else None,
+            'reason': 'v2 reclassifies the old final/exploratory pool as '
+                      'exposed development, adds the one-shot eval and '
+                      'post-eval diagnosis viewing events, and refreshes the '
+                      'dev label-list evidence hash after HN completion',
+        },
+        'policy': {
+            'statuses': list(EXPOSURE_STATUSES),
+            'group_level_rule': 'if any frame of a group was viewed, selected '
+                                'or annotated, the whole group is exposed',
+            'sealed_rule': 'no sealed/final claim is allowed; the old final '
+                           'pool is development data',
+            'viewing_registration': 'every viewing/annotation/evaluation '
+                                    'event records executor, purpose, date '
+                                    'and evidence file hash',
+            'project_decision': 'user 2026-11-04 authorised the main candidate '
+                                'for bounded internal research only; '
+                                'distribution remains a separate decision',
+        },
+        'freezes': {
+            'dev_v4': {
+                'path': V4_PATH,
+                'canonical_sha256': freeze_sha256(v4),
+                'groups': len(dev_groups),
+                'frames': sum(len(group.get('frames') or [])
+                              for group in dev_groups.values()),
+            },
+            'old_exploratory': {
+                'path': SEAL_PATH,
+                'canonical_sha256': freeze_sha256(old_pool),
+                'groups': len(old_groups),
+                'frames': sum(len(group.get('frames') or [])
+                              for group in old_groups.values()),
+                'status': 'EXPOSED_DEVELOPMENT_DOWNGRADED_NOT_FINAL',
+            },
+        },
+        'events': events,
+        'groups': groups_doc,
+        'frame_overrides': frame_overrides,
+        'summary': {
+            'exposed_development_groups': len(groups_doc),
+            'exploratory_eval_candidate_groups': 0,
+            'untouched_groups': 0,
+            'annotation_calibration_frames': len(frame_overrides),
+            'old_final_groups_downgraded': len(old_groups),
+            'hn_val_frames': 163,
+            'hn_val_complete': True,
+            'tiny_relabel': 'PENDING' if not (root / POSTEVAL_DIR).is_dir()
+                            else 'SEE_POSTEVAL',
+            'identity_cases_pending': not bool(identity_datasets),
+        },
+        'identity_certification': {
+            'U1_at_most_one_tower_like_instance': 'FALSIFIED',
+            'U2_central_tower_is_only_green_light_tower': 'FALSIFIED',
+            'evidence': 'map-native green-lamp pillar MS1 at about (3.0,4.0) '
+                        'is visible from inner_north; not the central tower',
+            'final_pool_verified_HN1_frames': 0,
+            'identity_status': 'INCOMPLETE',
+        },
+        'certification': {
+            'can_claim_sealed': False,
+            'untouched_final_groups': 0,
+            'conclusion': 'INCOMPLETE',
+            'reasons': [
+                'the old final/exploratory pool was fully annotated and '
+                'evaluated once; it is now development data and cannot be '
+                'called final/sealed',
+                'the old 34-frame pilot cannot simply be removed: all 6 '
+                'families were represented',
+                'identity uniqueness U1/U2 is falsified by map-native MS1',
+                'no third-party independent sealing exists; only process '
+                'isolation + hash commitment is claimed',
+            ],
+        },
+        'notes': [
+            'PASS means the exposure record is consistent with the freezes; '
+            'it does not prove nobody looked at the data.',
+            'The old seal file keeps its original bytes/history; this registry '
+            'is the authoritative exposure state and downgrades it.',
+        ],
+    }
+    v41_entry = _json_if_exists(root, V4_1_PATH)
+    if v41_entry:
+        v41 = v41_entry[0]
+        old_by_id = {entry['group_id']: entry for entry in groups_doc}
+        episode_group = {}
+        for group in v41.get('groups') or []:
+            for episode in group.get('episodes') or []:
+                episode_group[episode] = group['group_id']
+        merged_groups = []
+        reuse_ids = []
+        reuse_frames = 0
+        reuse_accepted = 0
+        for group in v41.get('groups') or []:
+            group_id = group['group_id']
+            base = dict(old_by_id.get(group_id) or {})
+            is_reuse = str(group.get('dataset')).startswith(
+                'lm_final_candidate')
+            base.update({
+                'group_id': group_id,
+                'source': 'dev_v4_1',
+                'family_id': group.get('family_id'),
+                'dataset': group.get('dataset'),
+                'split': group.get('split'),
+                'status': 'exposed_development',
+                'certification': 'EXPOSED_DEVELOPMENT',
+            })
+            base['exposure_events'] = sorted(set(
+                base.get('exposure_events') or
+                ['ev_dev_detection_history_20261103']))
+            if is_reuse:
+                base['dataset_role'] = 'DEVELOPMENT_TRAIN'
+                base['exposure_events'] = sorted(set(
+                    base['exposure_events'] + [
+                        'ev_exploratory_reused_as_train_20261104']))
+                base['contamination'] = {
+                    'group_level': True,
+                    'reason': 'old exploratory pool reused as development '
+                              'TRAIN for scale coverage; it can never be '
+                              'final/sealed/independent again',
+                }
+                reuse_ids.append(group_id)
+                reuse_frames += len(group.get('frames') or [])
+                reuse_accepted += len([frame for frame in
+                                       group.get('frames') or []
+                                       if frame.get('accepted')])
+            merged_groups.append(base)
+        registry['groups'] = merged_groups
+        labels_entry = _file_entry_if_exists(
+            root, 'outputs/perception/final_exploratory_20261104/'
+                  'labels_v1.json')
+        reuse_event = {
+            'event_id': 'ev_exploratory_reused_as_train_20261104',
+            'type': 'exposed_development',
+            'date': '2026-11-04',
+            'executor': 'datafreeze + train (candidate A data decision)',
+            'purpose': 'reuse the downgraded exploratory pool as development '
+                       'TRAIN data to add LARGE(near)/TINY(far) scale coverage',
+            'frames_touched': reuse_accepted,
+            'groups': sorted(reuse_ids),
+            'dataset_role': 'DEVELOPMENT_TRAIN',
+            'evidence_path': V4_1_PATH,
+            'evidence_sha256': v41_entry[1]['sha256'],
+            'evidence_extra': [labels_entry] if labels_entry else [],
+            'declaration': 'after this reuse the frames are training data and '
+                           'can never serve as a final/sealed or independent '
+                           'test set; old exploratory metrics are '
+                           'traceability-only',
+        }
+        if 'ev_exploratory_reused_as_train_20261104' not in {
+                event['event_id'] for event in registry['events']}:
+            registry['events'].append(reuse_event)
+        v41_group_ids = {group['group_id'] for group in v41.get('groups') or []}
+        new_overrides = []
+        for override in registry['frame_overrides']:
+            parsed = parse_frame_id(override.get('frame_id')) or {}
+            group_id = episode_group.get(parsed.get('episode_id'))
+            if group_id is None or group_id not in v41_group_ids:
+                continue
+            override = dict(override)
+            override['source'] = 'dev_v4_1'
+            override['group_id'] = group_id
+            new_overrides.append(override)
+        registry['frame_overrides'] = new_overrides
+        registry['freezes']['dev_v4_1'] = {
+            'path': V4_1_PATH,
+            'canonical_sha256': freeze_sha256(v41),
+            'groups': len(v41.get('groups') or []),
+            'frames': sum(len(group.get('frames') or [])
+                          for group in v41.get('groups') or []),
+            'reused_train_groups': len(reuse_ids),
+            'reused_train_frames': reuse_frames,
+            'reused_train_accepted_frames': reuse_accepted,
+        }
+        registry['revision_for_freeze'] = 'v4_1'
+        registry['summary'].update({
+            'exposed_development_groups': len(merged_groups),
+            'reused_exploratory_train_groups': len(reuse_ids),
+            'reused_exploratory_frames': reuse_frames,
+            'reused_exploratory_accepted_frames': reuse_accepted,
+            'annotation_calibration_frames': len(new_overrides),
+        })
+        registry['notes'].append(
+            'v4.1 revision: the old exploratory pool is development TRAIN '
+            'data; it is no longer final/sealed/independent.')
+    v42_entry = _json_if_exists(root, V4_2_PATH)
+    if v42_entry:
+        v42 = v42_entry[0]
+        old_by_id = {entry['group_id']: entry for entry in registry['groups']}
+        episode_group = {}
+        for group in v42.get('groups') or []:
+            for episode in group.get('episodes') or []:
+                episode_group[episode] = group['group_id']
+        merged_groups = []
+        identity_ids = []
+        identity_frames = 0
+        identity_accepted = 0
+        reuse_ids = []
+        for group in v42.get('groups') or []:
+            group_id = group['group_id']
+            base = dict(old_by_id.get(group_id) or {})
+            dataset = str(group.get('dataset'))
+            is_identity = dataset.startswith('lm_dev_identity')
+            is_reuse = dataset.startswith('lm_final_candidate')
+            base.update({
+                'group_id': group_id,
+                'source': 'dev_v4_2',
+                'family_id': group.get('family_id'),
+                'dataset': group.get('dataset'),
+                'split': group.get('split'),
+                'status': 'exposed_development',
+                'certification': 'EXPOSED_DEVELOPMENT',
+            })
+            base['exposure_events'] = sorted(set(
+                base.get('exposure_events') or
+                ['ev_dev_detection_history_20261103']))
+            if is_reuse:
+                base['dataset_role'] = 'DEVELOPMENT_TRAIN'
+                base['exposure_events'] = sorted(set(
+                    base['exposure_events'] +
+                    ['ev_exploratory_reused_as_train_20261104']))
+                base['contamination'] = {
+                    'group_level': True,
+                    'reason': 'old exploratory pool reused as development '
+                              'TRAIN; can never be final/sealed again',
+                }
+                reuse_ids.append(group_id)
+            if is_identity:
+                base['dataset_role'] = 'DEVELOPMENT'
+                base['exposure_events'] = sorted(set(
+                    base['exposure_events'] +
+                    ['ev_identity_cases_capture_20261104',
+                     'ev_identity_dev_annotation_20261104']))
+                base['contamination'] = {
+                    'group_level': True,
+                    'reason': 'identity/confuser development case; annotated '
+                              'and viewed during development; not sealed',
+                }
+                identity_ids.append(group_id)
+                identity_frames += len(group.get('frames') or [])
+                identity_accepted += len([frame for frame in
+                                          group.get('frames') or []
+                                          if frame.get('accepted')])
+            merged_groups.append(base)
+        registry['groups'] = merged_groups
+        identity_labels = _file_entry_if_exists(
+            root, 'outputs/perception/dev_annotations_20261104/'
+                  'labels_identity_dev.json')
+        identity_report = _file_entry_if_exists(
+            root, 'docs/reports/perception/annotation_verify_20261104/'
+                  'IDENTITY_DEV_ANNOTATION_20261104.md')
+        annotation_event = {
+            'event_id': 'ev_identity_dev_annotation_20261104',
+            'type': 'annotation_calibration',
+            'date': '2026-11-04',
+            'executor': 'annot2 (agent proxy)',
+            'purpose': 'annotate 62 representative identity/confuser '
+                       'development frames (target alone / MS1 alone / both '
+                       'in frame / near truncation / full occlusion)',
+            'frames_touched': 62,
+            'groups': sorted(identity_ids),
+            'dataset_role': 'DEVELOPMENT',
+            'evidence_path': identity_labels['path']
+            if identity_labels else None,
+            'evidence_sha256': identity_labels['sha256']
+            if identity_labels else None,
+            'evidence_extra': [identity_report] if identity_report else [],
+        }
+        if annotation_event['event_id'] not in {
+                event['event_id'] for event in registry['events']}:
+            registry['events'].append(annotation_event)
+        for event in registry['events']:
+            if event.get('event_id') == 'ev_identity_cases_capture_20261104':
+                event['ingest_status'] = 'INGESTED_V4_2'
+        new_overrides = []
+        for override in registry['frame_overrides']:
+            parsed = parse_frame_id(override.get('frame_id')) or {}
+            group_id = episode_group.get(parsed.get('episode_id'))
+            if group_id is None:
+                continue
+            override = dict(override)
+            override['source'] = 'dev_v4_2'
+            override['group_id'] = group_id
+            new_overrides.append(override)
+        registry['frame_overrides'] = new_overrides
+        registry['freezes']['dev_v4_2'] = {
+            'path': V4_2_PATH,
+            'canonical_sha256': freeze_sha256(v42),
+            'groups': len(v42.get('groups') or []),
+            'frames': sum(len(group.get('frames') or [])
+                          for group in v42.get('groups') or []),
+            'identity_groups': len(identity_ids),
+            'identity_frames': identity_frames,
+            'identity_accepted_frames': identity_accepted,
+            'reused_train_groups': len(reuse_ids),
+        }
+        registry['revision_for_freeze'] = 'v4_2'
+        registry['summary'].update({
+            'exposed_development_groups': len(merged_groups),
+            'identity_dev_groups': len(identity_ids),
+            'identity_dev_frames': identity_frames,
+            'identity_dev_accepted_frames': identity_accepted,
+            'identity_annotation_frames': 62,
+            'val_main_groups': 7,
+            'val_identity_groups': len(identity_ids),
+            'identity_cases_pending': False,
+            'annotation_calibration_frames': len(new_overrides),
+        })
+        registry['notes'].append(
+            'v4.2 revision: identity/confuser development cases are in '
+            'val_identity; all data remains exposed development, never final.')
+    return registry
+
+
+def verify_exposure_registry_v2_mode(repo_root, output_relative):
+    root = Path(repo_root)
+    if (root / V4_2_PATH).is_file():
+        sources = {'dev_v4_2': V4_2_PATH}
+    elif (root / V4_1_PATH).is_file():
+        sources = {'dev_v4_1': V4_1_PATH}
+    else:
+        sources = {'dev_v4': V4_PATH, 'old_exploratory': SEAL_PATH}
+    return verify_exposure_registry_mode(
+        repo_root, REGISTRY_V2_PATH, sources=sources,
+        output_relative=output_relative)
+
+
+def build_holdout_freeze(repo_root):
+    """Conditional holdout freeze: NOT_TRIGGERED until the improvement gate passes."""
+    root = Path(repo_root)
+    gate_entry = _json_if_exists(root, GATE_PATH)
+    gate = gate_entry[0] if gate_entry else {}
+    protocol_entry = _json_if_exists(
+        root, 'configs/perception/landmark_improvement_protocol_v1.json')
+    report_entry = _file_entry_if_exists(
+        root, 'docs/reports/perception/training_20261104/'
+              'IMPROVEMENT_20261104.md')
+    evaluation = None
+    triggered = False
+    if protocol_entry:
+        protocol = protocol_entry[0]
+        evaluation = (protocol.get('development_to_holdout_gate')
+                      or protocol.get('gate_evaluation'))
+        if evaluation:
+            triggered = bool(evaluation.get('pass') or
+                             evaluation.get('triggered'))
+    reasons = []
+    if not triggered:
+        if evaluation is None:
+            reasons.append(
+                'the development-to-holdout gate has not been evaluated: no '
+                'winning-candidate 3-seed results are recorded in the '
+                'improvement protocol/report yet (T18 runs after this freeze)')
+        else:
+            reasons.append(
+                'the development-to-holdout gate evaluated as not passed in '
+                'the recorded improvement evidence')
+        reasons.append('no holdout data has been captured or sampled')
+    gate_rules = ((gate.get('holdout_rules') or {})
+                  if isinstance(gate, dict) else {})
+    document = {
+        'schema_version': 'dsh.landmark_holdout_freeze.v1',
+        'status': 'TRIGGERED' if triggered else 'NOT_TRIGGERED',
+        'decided_at': datetime.datetime.now(
+            datetime.timezone.utc).isoformat(),
+        'generated_by': 'scripts/verify_landmark_dataset.py --build-holdout',
+        'gate': {
+            'path': GATE_PATH if gate_entry else None,
+            'sha256': gate_entry[1]['sha256'] if gate_entry else None,
+            'development_to_holdout_rule': gate.get(
+                'development_to_holdout_gate') if isinstance(gate, dict) else None,
+            'holdout_rules': gate_rules,
+        },
+        'evaluation': evaluation,
+        'triggered': triggered,
+        'reason': reasons,
+        'captured': False,
+        'frozen_sampling_rules': {
+            'frozen_before_capture': True,
+            'min_new_families': gate_rules.get('min_new_families', 3),
+            'frames_range': gate_rules.get('frames_range', [200, 400]),
+            'required_conditions': gate_rules.get(
+                'conditions_required',
+                ['small target', 'close-range truncation', 'target absent',
+                 'real map confuser', 'same-frame ambiguity']),
+            'sampling_rule': 'per family, accepted frames sorted by sequence; '
+                             'fixed midpoint systematic sampling to the frozen '
+                             'budget; endpoints and extreme-condition frames '
+                             'forced in; no prediction-quality selection',
+            'no_selection_by_prediction_quality': True,
+            'annotation': 'spec v2.1+; register who viewed images, purpose '
+                          'and time; same-agent execution is called '
+                          'process-isolated holdout, not third-party sealed',
+            'evaluation': 'exactly once after model/thresholds/decoder/eval '
+                          'rules are frozen; no callback, no rerun, no retune',
+        },
+        'not_frozen_until_triggered': True,
+        'notes': [
+            'This file is a placeholder because the development gate has not '
+            'passed; no holdout data exists yet.',
+            'It pre-registers the sampling/coverage rules so that a later '
+            'triggered freeze cannot tune them after seeing the data.',
+        ],
+        'boundaries': [
+            'internal bounded research only; distribution decision pending',
+            'no control/PPO/Gate promotion',
+        ],
+    }
+    return document
+
+
 def verify_exposure_registry_mode(repo_root, registry_relative,
                                   sources=None, output_relative=REGISTRY_OUTPUT):
     from boom_birds.evaluation.landmark_dataset import (
@@ -2662,12 +4016,34 @@ def main(argv=None):
     parser.add_argument('--index-output', default=T12_INDEX_OUTPUT)
     parser.add_argument('--build-exposure-registry', action='store_true',
                         help='T12: build the exposure registry then verify it')
+    parser.add_argument('--build-exposure-registry-v2', action='store_true',
+                        help='T17: build registry v2 then verify it')
+    parser.add_argument('--build-holdout', action='store_true',
+                        help='T17: write the conditional holdout freeze')
+    parser.add_argument('--holdout', default=HOLDOUT_PATH)
+    parser.add_argument('--registry-v2-output',
+                        default=('docs/reports/perception/'
+                                 'dataset_freeze_20261104/'
+                                 'landmark_exposure_registry_v2_verify_20261104.json'))
     parser.add_argument('--verify-exposure-registry', action='store_true',
                         help='T12: verify the exposure registry')
     parser.add_argument('--registry', default=REGISTRY_PATH)
     parser.add_argument('--registry-output', default=REGISTRY_OUTPUT)
     args = parser.parse_args(argv)
     repo_root = args.repo_root.resolve()
+    if args.build_holdout:
+        document = build_holdout_freeze(repo_root)
+        write_json(repo_root / args.holdout, document)
+        print(json.dumps({'status': document['status'],
+                          'path': args.holdout,
+                          'triggered': document['triggered'],
+                          'reasons': document['reason']}, ensure_ascii=False))
+        return 0
+    if args.build_exposure_registry_v2:
+        registry = build_exposure_registry_v2(repo_root)
+        write_json(repo_root / REGISTRY_V2_PATH, registry)
+        return verify_exposure_registry_v2_mode(
+            repo_root, args.registry_v2_output)
     if args.build_exposure_registry:
         registry = build_exposure_registry(repo_root)
         write_json(repo_root / args.registry, registry)
@@ -2689,10 +4065,16 @@ def main(argv=None):
         index_freezes = [item.strip() for item in
                          (args.index_freezes or default_dev).split(',')
                          if item.strip()]
-        selected_seal = args.audit_seal or (
-            default_seal if (repo_root / default_seal).is_file() else None)
-        selected_index_seal = args.index_seal or (
-            default_seal if (repo_root / default_seal).is_file() else None)
+        if args.audit_seal and args.audit_seal.lower() == 'none':
+            selected_seal = None
+        else:
+            selected_seal = args.audit_seal or (
+                default_seal if (repo_root / default_seal).is_file() else None)
+        if args.index_seal and args.index_seal.lower() == 'none':
+            selected_index_seal = None
+        else:
+            selected_index_seal = args.index_seal or (
+                default_seal if (repo_root / default_seal).is_file() else None)
         if args.audit_near_duplicates:
             result = run_near_duplicate_audit(
                 repo_root, audit_freezes, selected_seal)

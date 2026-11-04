@@ -1,0 +1,74 @@
+{
+  "schema_version": "dsh.landmark_improvement_gate.v1",
+  "status": "PRE_REGISTERED_BEFORE_IMPROVEMENT_RESULTS",
+  "decided_at": "2026-11-04",
+  "decided_by": "lead",
+  "purpose": "pre-register the bounded improvement experiment, the development-to-holdout continuation gate, and the stop rules before any candidate result is seen",
+  "baseline_definition": {
+    "description": "original architecture/recipe (yolov8n-pose 1-keypoint, same preprocessing) re-trained on the frozen v4 train/val with the same budget as candidates; old exploratory final and old one-shot metrics are kept for traceability but are NOT the comparison baseline for improvement (they stay exploratory evidence)",
+    "comparison_metric": "validation joint narrow-primary (GT-observable positives with complete labels; prediction UNKNOWN/REJECTED count as misses)",
+    "secondary_metrics": [
+      "presence precision/recall",
+      "identity precision and high-confidence false-match rate",
+      "reference coverage",
+      "anchor px and horizontal bearing error",
+      "worst-group joint"
+    ]
+  },
+  "candidates": {
+    "max_candidates": 2,
+    "requirements": [
+      "each candidate must map to a confirmed root cause from the post-evaluation diagnosis",
+      "priority order: data/labels, preprocessing, keypoint expression/loss, identity rejection",
+      "forbidden: unjustified larger networks, segmentation, threshold stacking"
+    ],
+    "budget": {
+      "pilot_seeds": 1,
+      "pilot_epochs_max": 15,
+      "full_seeds_max": 3,
+      "full_epochs_max": 60,
+      "new_full_trainings_total_max": 4
+    }
+  },
+  "pilot_advance_gate": {
+    "rule": "a candidate advances to the 3-seed phase only if, at matched pilot budget, validation joint improves by >= 0.05 absolute over the matched baseline AND identity high-confidence false-match rate is not worse AND reference coverage is not lower than baseline by more than 0.02",
+    "otherwise": "candidate rejected; keep evidence; do not tune it further"
+  },
+  "development_to_holdout_gate": {
+    "rule": "only if the winning candidate (3 seeds, selected on validation) meets ALL of:",
+    "conditions": [
+      "val joint narrow-primary >= 0.60",
+      "val joint improvement over matched baseline >= +0.08 absolute",
+      "identity high-confidence false-match rate <= baseline at the frozen validation threshold",
+      "reference coverage >= 0.50",
+      "worst-group joint not worse than baseline worst-group by more than 0.05"
+    ],
+    "on_fail": "STOP this route version: no new holdout capture, no new test; deliver failure diagnosis, root-cause evidence and a route recommendation instead",
+    "on_pass": "freeze improvement protocol/artifacts and capture a new holdout (>=3 new trajectory families, 200-400 frames, covering small target, close-range truncation, target absent, real map confuser, same-frame ambiguity); coverage/sampling rules frozen before capture; labels by a process-isolated annotator; final candidate/thresholds/decoder/eval rules frozen, then exactly one holdout evaluation"
+  },
+  "holdout_rules": {
+    "min_new_families": 3,
+    "frames_range": [
+      200,
+      400
+    ],
+    "conditions_required": [
+      "small target",
+      "close-range truncation",
+      "target absent",
+      "real map confuser",
+      "same-frame ambiguity"
+    ],
+    "sampling_frozen_before_capture": true,
+    "no_selection_by_prediction_quality": true,
+    "annotation": "same frozen spec v2.1+, QA PASS; register who viewed images, purpose and time; same-agent execution is called PROCESS-ISOLATED HOLDOUT, not third-party sealed or certification truth",
+    "evaluation": "once only after model/thresholds/decoder/eval rules frozen; no callback, no retune, no rerun",
+    "on_failure": "stop this version of the experiment; report failure"
+  },
+  "boundaries": [
+    "internal bounded research only; distribution decision pending",
+    "no control, no PPO, no gate promotion",
+    "weights/ONNX/logs stay ignored; repository keeps configs, sources, hashes and readable conclusions",
+    "RKNN/board/real camera remain UNKNOWN unless separately evidenced"
+  ]
+}

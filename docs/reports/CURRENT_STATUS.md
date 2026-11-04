@@ -33,6 +33,17 @@
 - 工程发现：YOLO 标签坐标域 bug（模型画布归一化误写 txt）已用 loader 复现并修复，旧 30 epoch 运行判 INVALID；ONNX opset18 主机数值一致；RKNN/板端 UNKNOWN/NOT RUN。
 - 认证缺口：许可分发、独立人工标注、未触碰 sealed final、false-match 分母、RK3576 板卡、真实相机/场地、重复性——C1–C8 多数 INCOMPLETE/UNKNOWN。
 
+## 地标失败诊断与有界改进实验（2026-11-04 三阶段）
+
+- 结论：**STOP**（预注册 gate 未过）；旧 exploratory 结果保留、不重跑；旧 3px 口径保留，新 bearing/四项分离口径单列。详见 [诊断与改进结果](perception/LANDMARK_DIAGNOSIS_AND_IMPROVEMENT_RESULTS_20261104.md)。
+- 诊断：[post-eval 报告](perception/posteval_20261104/POSTEVAL_DIAGNOSIS_20261104.md)：reference 失败 = 119 错误锚点（88/119 纵向为主）+ 28 kpt 抑制 + 9 漏检；主瓶颈是 2D 定位精度，不是横向 bearing（87 帧 2D>3px 但 bearing≤1.074°）；TINY 9–14px 盲标 presence 0.364、正例 12/12 undecidable；MS1 证伪 U1/U2。
+- 评价定义：[EVAL_DEFINITION_AUDIT](perception/EVAL_DEFINITION_AUDIT_20261104.md)：四项分离、joint 双分支（LOCALIZED 62/218 + CORRECT_REFUSAL 9/20 + FAIL_PRESENCE 20 + FAIL_REFERENCE 147）；预测 UNKNOWN/漏检/错误身份不消失；GT 不可观测单列。
+- ONNX：三路径共享预处理 0 决策翻转（126 帧）；旧 4.67px 差异=legacy letterbox 模式不同（17 observation/18 joint 翻转），不是导出错误；RKNN/板端 UNKNOWN。
+- 改进实验：[IMPROVEMENT](perception/training_20261104/IMPROVEMENT_20261104.md)：候选 A（近距/远景复用帧入 train）pilot joint 0.453 vs baseline 0.379（Δ+0.074<+0.08、joint<0.60）；候选 B（tau_kpt 标定）无改善且 false_reference 变差 → **FAIL/STOP**；完整训练用 1/4，不触发 holdout（[holdout freeze](../../configs/perception/landmark_holdout_freeze_v1.json) NOT_TRIGGERED）。
+- 数据：dev v4/v4.1/v4.2（HN 53/53、identity 7 组 62 帧标注、旧 exploratory 登记 DEVELOPMENT_TRAIN）；[暴露登记 v2](../../configs/perception/landmark_exposure_registry_v2.json)：39 组全部 exposed_development、0 untouched；泄漏审计 0。
+- 工程：训练/停止器/阈值/导出/parity/重算脚本已入库并有 CLI+配置；标签漂移首轮 eval 判 INVALID 并记录。
+- 路线建议：停止“单类 pose+3px 2D+单身份”认证级路线；若要继续，收窄为 bearing-primary + 可标注域 + identity=UNKNOWN/appearance-gated，并补近距大目标严格绿光数据与独立标注。
+
 ## 当前能力限制
 
 - 几何/绿灯独立测试 presence TP/FP/FN/TN 为 13/0/5/12；18 个正例中有 9 个定位标注，定位子集联合达标 3/9。3/18 表示全部正例中已确认达标的比例，不能把未标注帧一律解释为定位失败。成功检测样本上的低 anchor 误差不代表全部正例的整体精度。

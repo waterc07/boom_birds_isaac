@@ -1,0 +1,93 @@
+{
+  "schema_version": "dsh.landmark_train_cli.v1",
+  "status": "ACTIVE",
+  "scope": "bounded landmark supervised experiment (one class tower + one green roof-light keypoint); shadow only; no PPO; no control; no board/navigation/Gate acceptance",
+  "repo_relative_only": true,
+  "paths": {
+    "dataset_dir": "outputs/landmark_train/dataset/dev_v4",
+    "data_yaml": "outputs/landmark_train/dataset/dev_v4/data.yaml",
+    "val_labels": "outputs/perception/dev_annotations_20261104/labels_val.json",
+    "train_labels": "outputs/perception/dev_annotations_20261104/labels_train.json",
+    "model_yaml": "outputs/landmark_train/dataset/landmark_yolov8n-pose-1kpt.yaml",
+    "pretrained": "yolov8n-pose.pt",
+    "evidence_root": "outputs/landmark_train/runs",
+    "protocol": "configs/perception/landmark_train_protocol_v1.json",
+    "model_freeze": "configs/perception/landmark_model_freeze_v1.json",
+    "split_freeze": "configs/perception/landmark_split_freeze_v4.json",
+    "label_lists": "configs/perception/landmark_dev_label_lists_v1.json",
+    "annotation_spec": "configs/perception/landmark_annotation_spec_v2_1.json"
+  },
+  "train": {
+    "epochs": 60,
+    "batch": 16,
+    "imgsz": 640,
+    "amp": true,
+    "device": 0,
+    "workers": 0,
+    "warmup_epochs": 15,
+    "patience": 20,
+    "save_period": 20,
+    "eval_epochs": [
+      20,
+      40
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "deterministic": true
+  },
+  "stop_rule": {
+    "implementer": "scripts/landmark_train_cli.py::PatienceStopper",
+    "rule": "patience counted from the first evaluation AFTER warmup_epochs; warmup epochs never stop the run and never set the best-so-far baseline",
+    "reason": "ultralytics' internal EarlyStopping compares against the all-time best epoch, so a lucky warmup epoch stopped a run at epoch 24 on 2026-11-04 (protocol violation, run discarded)",
+    "internal_ultralytics_patience": "made inert (set to epochs) and replaced by the callback above"
+  },
+  "selection_rule": "highest validation joint narrow-primary (scripts/evaluate_landmark_yolo.py metrics.json), tie-break lower validation FP, then lower seed; thresholds frozen separately on the same validation split",
+  "dataset_build": {
+    "entry": "scripts/landmark_train_cli.py --prepare-dataset --train-labels <labels_train.json> --val-labels <labels_val.json> --dataset-dir <ignored outputs dir>",
+    "label_converter": "src/boom_birds/evaluation/landmark_yolo.py::convert_annotation_document (source-image normalised YOLO txt)",
+    "rules": [
+      "present + reference visible -> bbox + (kx,ky,v=1)",
+      "present + reference unavailable -> bbox + bbox-centre placeholder v=0",
+      "confirmed absent -> explicit empty label",
+      "ambiguous/undecidable/GT_UNOBSERVABLE -> frame excluded entirely, never a background sample"
+    ]
+  },
+  "environment": {
+    "isolated_venv": ".venv/landmark-train",
+    "venv_python": ".venv/landmark-train/Scripts/python.exe",
+    "note": "install ML dependencies only in the isolated venv; never modify the Isaac venv (E:\\isaac\\env_isaaclab)",
+    "known_pins": "torch==2.7.0+cu128, ultralytics==8.2.0, onnx==1.22.0, onnxruntime, onnxsim==0.8.1, numpy==1.26.4 (ultralytics 8.2.0 uses np.trapz, removed in numpy 2.4), opencv-python==4.10.0.84, pandas==2.2.3, ml-dtypes==0.5.4",
+    "gpu_smoke_evidence": "docs/reports/perception/training_20261104/ENV_20261104.md"
+  },
+  "artifact_policy": {
+    "weights_and_logs": "ignored outputs/ only; never commit weights or full logs",
+    "evidence_json": "one bounded_evidence_seed<N>.json per seed under the evidence root",
+    "overwrite_policy": "existing evidence is never overwritten unless --overwrite is explicit; --skip-existing reuses it"
+  },
+  "license": {
+    "status": "AGPL-3.0 obligations unresolved; user authorised INTERNAL bounded research/evaluation on 2026-11-04; external distribution is a separate decision; not a legal conclusion; no automatic model switch"
+  },
+  "not_in_scope": [
+    "PPO",
+    "control/setpoints",
+    "board/student acceptance",
+    "real camera",
+    "SITL/HIL",
+    "navigation",
+    "Gate promotion",
+    "final-pool tuning"
+  ],
+  "dev_split": {
+    "freeze": "configs/perception/landmark_split_freeze_v4.json",
+    "freeze_file_sha256": "591a8b113caa2864fe04f9f7f463904a77b177f75785afda90bc9e18aee8afef",
+    "freeze_canonical_sha256": "afa5caa45f76d4be70245b27be59bf05945574380be4c22fc2102e6f3ef442a4",
+    "labels_train_sha256": "01977b9fea97c58bcdda2c6c301763ac52113bcc411a23094924b917ec08d2df",
+    "labels_val_sha256": "8c2155979b517626299fd85c61759b73ceb1bfc369be839d4453caa3b3ed33ac",
+    "label_lists_sha256": "0c1c75aed2fdddd6de3773180f93dc643192d2c119eeccbbaea39f2bd23d6488",
+    "annotation_spec_sha256": "010255d931936457ded48db9b3691b69a31d6015f1f84fbbc6a659f10f766eac",
+    "note": "dev v4: train 160 frames / val 163 frames (HN 53/53); no final or holdout read for training or selection"
+  }
+}
