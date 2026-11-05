@@ -1,0 +1,110 @@
+{
+  "schema_version": "dsh.two_class_eval_t37_crossref.v1",
+  "created_at": "2026-11-05",
+  "status": "DIAGNOSTIC_ONLY_NOT_GATE",
+  "purpose": "T37 three-path ONNX/raw-ORT parity reused evaltool two-class consumer evaluator (evaluate_saved) without code changes; this addendum records the verified consumer-level parity evidence for cross-reference.",
+  "frozen_record_note": "This addendum is additive. It does NOT modify the frozen R1/R2 report (TWO_CLASS_EVAL_20261105.md sha e219916a…) or R2 record JSON (TWO_CLASS_EVAL_R2_20261105.json sha 26c9944d…); R1/R2 gate records and their shas are unchanged.",
+  "evaluator": {
+    "module": "src/boom_birds/evaluation/landmark_two_class_eval.py",
+    "sha256": "183b6d22f4438488ffcb1f947aed370bff82c58fdbf17adc02eae5d8c5257789",
+    "entry": "evaluate_saved/evaluate_rows (identity_policy=confirmed_only)"
+  },
+  "parity_inputs": {
+    "labels_sampled": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\onnx_parity_20261105\\t37_two_class\\parity\\consumer\\labels_sampled.json",
+      "sha256": "b490cc4374d725a15fd85dcc77a2f049ed9a18987d7a948ead58ee211da17dd3",
+      "frames": 225
+    },
+    "predictions": {
+      "pt_square": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\onnx_parity_20261105\\t37_two_class\\parity\\consumer\\predictions_pt_square.jsonl",
+        "sha256": "f800d3742fe9a70066f390cbde03c54478ffcca703b889be3cdbb59f2618e9e2"
+      },
+      "onnx_native_square": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\onnx_parity_20261105\\t37_two_class\\parity\\consumer\\predictions_onnx_native_square.jsonl",
+        "sha256": "70caa9d14386786112a19dcddaf0151d8a3158e1cce803fcc82e2b0ddba71d43"
+      },
+      "raw_ort_square": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\onnx_parity_20261105\\t37_two_class\\parity\\consumer\\predictions_raw_ort_square.jsonl",
+        "sha256": "3f99da94677866dfb78f262fb690cab385bfed652788101ce28999ee56332a1f"
+      }
+    },
+    "model_pt": {
+      "path": "outputs/landmark_train/runs/two_class_pilot_v7b/seed0/train_seed0/weights/last.pt",
+      "sha256": "64ac38229adc658b96213b2a19a3ff84b39839c8d234a09233cc17df9cbeabdc"
+    },
+    "onnx": {
+      "path": "outputs/perception/onnx_parity_20261105/t37_two_class/exports/two_class_pilot_v7b_last_opset18.onnx",
+      "sha256": "8bc01a403794ffe49236780f10d8f653223947c32735a676a90334649c13565a",
+      "opset": 18
+    },
+    "parity_evidence": {
+      "path": "E:\\isaac\\proj_boom_birds\\outputs\\perception\\onnx_parity_20261105\\t37_two_class\\parity\\evidence.json",
+      "sha256": "bd080e81fb9315b4e996fca611212bea1c29324d4aed3fb93bbd6a987788198d"
+    },
+    "onnx_parity_report": {
+      "path": "docs/reports/perception/ONNX_PARITY_20261104.md",
+      "sha256": "1c21ae3002e3414ff65f2b61471331cd9e586070237bd2c7bef6af6591ae9c4a"
+    }
+  },
+  "consumer_row_fields_checked": [
+    "success",
+    "tower_claim",
+    "raw_claim",
+    "tower_claim_correct",
+    "wrong_claim",
+    "class1_mapped_violation",
+    "reference_correct",
+    "false_reference",
+    "bearing_ok",
+    "keypoint_emitted",
+    "class1_keypoint_emitted",
+    "improper_claim"
+  ],
+  "flips": {
+    "pt_square_vs_onnx_native_square": {
+      "rows": 225,
+      "field_flips": 0
+    },
+    "pt_square_vs_raw_ort_square": {
+      "rows": 225,
+      "field_flips": 0
+    },
+    "onnx_native_square_vs_raw_ort_square": {
+      "rows": 225,
+      "field_flips": 0
+    },
+    "note": "recomputed by evaltool directly from the T37 consumer predictions + labels_sampled; per-field flip counts all zero"
+  },
+  "consumer_diagnostics": {
+    "all_positive_success": {
+      "success": 49,
+      "denominator": 174,
+      "rate": 0.28160919540229884
+    },
+    "identity": {
+      "claims": 116,
+      "correct": 116,
+      "wrong": 0,
+      "precision": 1.0,
+      "false_match_rate": 0.0
+    },
+    "ms1_only_wrong_tower_claims": {
+      "wrong": 0,
+      "frames": 9
+    },
+    "consumer_same_frame_claim_condition": {
+      "tower_selected": 59,
+      "denominator": 73,
+      "rate": 0.8082191780821918
+    },
+    "gate_note": "consumer same-frame 0.808 is claim-condition accuracy only; the pilot gate same-frame remains official detector-side double match (R2 last 0.319/0.500 <0.60 -> FAIL). This addendum does not alter that verdict."
+  },
+  "context": {
+    "legacy_default_rect_vs_native_default": {
+      "decision_flips": 90,
+      "note": "default-rect preprocessing vs native default diverges; square shared canvas is required for parity (from parity evidence legacy_pairs)"
+    },
+    "class1_policy": "class1 keypoint never emitted; no bearing for class1"
+  }
+}
