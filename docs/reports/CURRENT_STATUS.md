@@ -1,6 +1,14 @@
-# 当前进度与接手续查（2026-11-04）
+# 当前进度与接手续查（2026-11-05）
 
 本页汇总仓库内已交付能力与证据边界。设计正文仍为 [V2.2 架构](../design/RMUC2027_UAV_V2_2.md)，本页不修改其合同或放行任何 Gate。正文中的开工时实现状态、早期计划和历史交接应按日期阅读，不能代替当前源码和后续修订。
+
+## 当前结论与下一步（2026-11-05）
+
+地标单类有界训练、阶段门勘误及 two-class 身份通道实验已完成归档。旧 3px 协议候选 A 三 seed 的 holdout 门通过，但消费者协议身份通道未通过；随后 two-class R1/R2 两次 pilot 均未通过 pilot→3seed 门，two-class 本版 STOP，未进入三 seed 完整训练，未触发新 holdout。R2 pilot ONNX 三路径对齐仅为诊断性工程证据（NOT_SELECTED_VALIDATED_PILOT_ONLY / DIAGNOSTIC_ONLY_NOT_GATE），不是效果、身份或板端验收。
+
+当前工作包已封闭。如继续 two-class，须另立工作包，重新预注册 same-frame 联合监督、reference availability guard、负例/不可观测 claim 约束及新预算与不可变快照；不自动追加训练。内部有界研究授权有效，对外分发另行决策。感知保持 shadow；PX4 Sender、板端 Student、项目 PPO、真实相机及各 BB22 Gate 均未完成验收。
+
+最新依据：[two-class 结果](perception/LANDMARK_TWO_CLASS_RESULTS_20261105.md)、[交接](HANDOFF_20261105_TWO_CLASS.md)。下方日期化实验记录保留其当时状态，不能替代本节当前结论。
 
 ## 已实现与证据入口
 
@@ -58,17 +66,14 @@
 
 - 几何/绿灯独立测试 presence TP/FP/FN/TN 为 13/0/5/12；18 个正例中有 9 个定位标注，定位子集联合达标 3/9。3/18 表示全部正例中已确认达标的比例，不能把未标注帧一律解释为定位失败。成功检测样本上的低 anchor 误差不代表全部正例的整体精度。
 - 旧 route/reset 数据属于同轨迹重复采集；旧 presence TP 未验证目标框，bbox 中心方位不能直接当作绿灯参考点方位。旧指标仅按对应勘误使用。
-- 地标学习：现有 dev 数据 val 仅北走廊 1 条 family，静态视点每 pose 仅 3 accepted 帧；final 池只有试点标注、HN1（带绿灯相似结构）与 HN2（完全遮挡）覆盖不足；单代理标注不是独立人工审查；只凭 hash 不构成 sealed。
+- 地标学习早期限制（历史，已由后续 v3–v6.2 数据冻结更新）：当时 dev 数据 val 仅北走廊 1 条 family，静态视点每 pose 仅 3 accepted 帧；final 池只有试点标注、HN1（带绿灯相似结构）与 HN2（完全遮挡）覆盖不足；单代理标注不是独立人工审查；只凭 hash 不构成 sealed。
 - 原生 contact event/impulse、负接触覆盖、多环境 reset/训练及完整实机外廓未验证。旧 CONTACT_INFERRED 的两个历史案例仍不具备确认物理真值的证据。
 - 官方 Vulkan GUI、USD 克隆的 100 步短例有历史 PASS 记录，见 [核验摘要](official_gui_smoke/vulkan_current_verification.json)；并不证明默认 Fabric 路径、地图长时稳定性或驱动根因。后续地图正式实验使用 D3D12 的原证据保持原边界。
 - 项目 PPO、真实感知设备、PX4 Sender、板端 Student、SITL/HIL 与实机均未完成本项目验收；旧官方 PPO 兼容短例不能替代项目训练。规则、BOM、准确固件/参数来源仍为 UNKNOWN/RULE-CHECK，不提升任何 BB22 Gate。
 
 ## 下一项
 
-1. 用户决策许可路线（AGPL/商业/备选）与标注独立性安排；在此之前**不得**启动训练。
-2. 先出 spec v2.1（P1 四边截断元数据、P2 参考点可用像素判据、P3 TARGET_ABSENT+未验证 confuser 状态），再生产 final 池完整语义标签（当前 34/279）+ 独立标注/仲裁，补 HN1/HN2 覆盖，冻结阈值推导与最终预注册。
-3. 隔离环境 8.2.0×torch 2.7 兼容性 smoke、自定义 1-keypoint ONNX 导出（需用户授权安装），再做有界训练；不得跳过准入项。
-4. 实物输入针对具体迁移目标收集，不笼统阻塞离线软件准备；感知仍保持 shadow，不接控制、不提升 Gate。
+当前工作包已封闭。如继续 two-class，须另立工作包，重新预注册 same-frame 联合监督、reference availability guard、负例/不可观测 claim 约束及新预算与不可变快照；不自动追加训练。内部有界研究授权有效，对外分发另行决策。感知保持 shadow；PX4 Sender、板端 Student、项目 PPO、真实相机及各 BB22 Gate 均未完成验收。
 
 ## 运行与历史复现
 

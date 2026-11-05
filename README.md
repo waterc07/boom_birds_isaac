@@ -2,7 +2,7 @@
 
 微型四旋翼自主系统研究工作区，当前路线 **V2.2.0（2026-10-31 验收修订）**，基于用户指定的 DSH V2.1.0。见 [完整架构](docs/design/RMUC2027_UAV_V2_2.md)与 [验收修改报告](docs/reports/ROUTE_V2_2_REVIEW_20261031.md)。采用 RK3576、非 VIO 区域/地标接力、局部 RL、独立碰撞恢复与触点通信；板端可行性验证先于大规模训练。
 
-**当前进度（2026-11-04）：** 软件合同、仿真评价、地图路线、动态监督及单环境接触默认迁移已交付；RGB/渲染深度仅作 shadow。自然塔模板与几何/绿灯方法的独立测试未达到感知要求，停止继续调启发式，不进入区域/地标关联控制。真实感知、PX4 Sender、板端 Student 和项目训练未完成验收，未提升任何 Gate。详细证据、历史勘误和下一项见 [当前状态索引](docs/reports/CURRENT_STATUS.md)。
+**当前进度（2026-11-05）：** 地标单类有界训练、阶段门勘误及 two-class 身份通道实验已完成归档。旧 3px 协议候选 A 三 seed 的 holdout 门通过，但消费者协议身份通道未通过；随后 two-class R1/R2 两次 pilot 均未通过 pilot→3seed 门，two-class 本版 STOP，未进入三 seed 完整训练，未触发新 holdout。R2 pilot ONNX 三路径对齐仅为诊断性工程证据（NOT_SELECTED_VALIDATED_PILOT_ONLY / DIAGNOSTIC_ONLY_NOT_GATE），不是效果、身份或板端验收。 感知保持 shadow，不进入控制，不提升 Gate。详细证据、历史勘误和下一项见 [当前状态索引](docs/reports/CURRENT_STATUS.md)。
 
 ## 历史说明（2026-10-11；已被新路线取代）
 

@@ -2,11 +2,13 @@
 
 > **当前路线：V2.2.0，2026-10-31 验收修订**，基于用户指定的 DSH V2.1.0。当前唯一设计正文为 [RMUC2027 完整架构](docs/design/RMUC2027_UAV_V2_2.md)，优先于本文件下方的 v1.2 历史内容和旧设计。见 [验收报告](docs/reports/ROUTE_V2_2_REVIEW_20261031.md)、[原始快照](docs/references/route_v2_1_20261030.md)及 [来源 hash](docs/references/route_review_provenance.json)。
 
-## 当前实施状态（2026-11-04）
+## 当前实施状态（2026-11-05）
 
-已实现范围、当前失败结论及证据优先级见 [当前状态索引](docs/reports/CURRENT_STATUS.md)。单环境接触新模式已成为动态评价默认；RGB/深度采集及自然地标消费者保持 shadow。模板和几何/绿灯方法已停止作为主候选，感知与导航未达标。下一项是消费者需求、轻量模型、标注和部署可行性评审；尚未选定实例分割，也未启动正式训练。
+地标单类有界训练、阶段门勘误及 two-class 身份通道实验已完成归档。旧 3px 协议候选 A 三 seed 的 holdout 门通过，但消费者协议身份通道未通过；随后 two-class R1/R2 两次 pilot 均未通过 pilot→3seed 门，two-class 本版 STOP，未进入三 seed 完整训练，未触发新 holdout。R2 pilot ONNX 三路径对齐仅为诊断性工程证据（NOT_SELECTED_VALIDATED_PILOT_ONLY / DIAGNOSTIC_ONLY_NOT_GATE），不是效果、身份或板端验收。
 
-项目 PPO、真实感知、PX4 Sender、板端 Student、SITL/HIL/实机验收与全部 BB22 Gate 保持未通过。软件/仿真准备可按依赖推进，硬件输入针对具体物理验证收集。
+当前工作包已封闭。如继续 two-class，须另立工作包，重新预注册 same-frame 联合监督、reference availability guard、负例/不可观测 claim 约束及新预算与不可变快照；不自动追加训练。内部有界研究授权有效，对外分发另行决策。感知保持 shadow；PX4 Sender、板端 Student、项目 PPO、真实相机及各 BB22 Gate 均未完成验收。
+
+详细结果、限制与最新交接见 [当前状态索引](docs/reports/CURRENT_STATUS.md)。
 
 ## 新路线与早期实施记录（2026-10-31）
 

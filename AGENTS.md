@@ -11,7 +11,13 @@
 
 当前采用用户指定 DSH V2.1.0 经验收修订的 V2.2.0，唯一当前设计正文为 `docs/design/RMUC2027_UAV_V2_2.md`，验收及差距见 `docs/reports/ROUTE_V2_2_REVIEW_20261031.md`。它优先于旧 v1.2 总纲、`docs/design/01–09` 及旧实施计划；旧文件只保留历史证据与可复用方法。按新工作包补具体计划，不自动继续旧 Task 4–6。
 
-## 当前状态与延续入口（2026-11-04）
+## 当前状态与延续入口（2026-11-05）
+
+先查 `docs/reports/CURRENT_STATUS.md` 和 `docs/reports/HANDOFF_20261105_TWO_CLASS.md`。地标单类有界训练、阶段门勘误及 two-class 身份通道实验已完成归档。旧 3px 协议候选 A 三 seed 的 holdout 门通过，但消费者协议身份通道未通过；随后 two-class R1/R2 两次 pilot 均未通过 pilot→3seed 门，two-class 本版 STOP，未进入三 seed 完整训练，未触发新 holdout。R2 pilot ONNX 三路径对齐仅为诊断性工程证据（NOT_SELECTED_VALIDATED_PILOT_ONLY / DIAGNOSTIC_ONLY_NOT_GATE），不是效果、身份或板端验收。
+
+当前工作包已封闭。如继续 two-class，须另立工作包，重新预注册 same-frame 联合监督、reference availability guard、负例/不可观测 claim 约束及新预算与不可变快照；不自动追加训练。内部有界研究授权有效，对外分发另行决策。感知保持 shadow；PX4 Sender、板端 Student、项目 PPO、真实相机及各 BB22 Gate 均未完成验收。
+
+## 历史状态与延续入口（2026-11-04）
 
 先查 [当前状态索引](docs/reports/CURRENT_STATUS.md) 和最新工作包交接，再使用下方历史记录。单环境动态评价已默认使用 `reference_origin_v2` / `measured_hard_reset`；传感器和地标感知仅 shadow。模板与几何/绿灯候选已按独立测试停止，不进入关联/控制。2026-11-04 已完成地标训练前闭环与数据准备（任务/实验定义、dev 划分冻结、6 族 279 帧 final 池 GUI 采集与封存、盲复标与 spec v2、许可与导出证据），训练准入判定 **INCOMPLETE**、训练启动 **BLOCKED**（许可需用户决策，final 标签未生产）；不自动开始训练、不自动切换备选模型。同日二阶段在用户**仅内部有界研究**授权下完成探索实验：dev v3 冻结与泄漏审计、spec v2.1 全程标注、隔离 venv + 3 seed×60 epoch 有界训练、仅 val 冻结阈值、final 改为 exploratory 且只评一次；结果为 presence P1.000/R0.916、joint 0.298、效果门未达，**能力认证 INCOMPLETE**，不提升 Gate。同日三阶段完成 post-evaluation 诊断、评价定义四项分离与 bearing 口径、ONNX 三路径 0 决策翻转、脚本入库、HN/identity/TINY 数据补齐与两个诊断驱动候选的有界对比；两候选未过预注册 gate（A Δ+0.074<+0.08、joint 0.453<0.60；B 无改善），**STOP** 且 holdout NOT_TRIGGERED；主瓶颈为 reference 2D 定位、TINY 不可标注、单类无身份通道，路线建议见 LANDMARK_DIAGNOSIS_AND_IMPROVEMENT_RESULTS_20261104.md。2026-11-04 四阶段：补齐阶段门勘误（pilot 门 +0.05 曾被 holdout 门误用）后完成候选 A 3 seed（seed2 joint 0.632，旧协议 holdout 门 PASS），但消费者协议因单类 detector 无身份确认通道（appearance gate 不可迁移、two-class NOT RUN）holdout 门 FAIL → holdout NOT_TRIGGERED；已建立不可变运行快照、v5 冻结与 consumer 双口径评测，下一包需 two-class 身份通道。真实 PX4 Sender、板端 Student、项目 PPO 和各 Gate 均未完成验收。
 
