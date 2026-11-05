@@ -1,0 +1,79 @@
+{
+ "files": [
+  {
+   "path": "T30_TWO_CLASS_CAPTURE_20261105.md",
+   "sha256": "dff053c450951a9b5021cb3cc0d204314273439a06d9d25b19c4b71f12f6c326",
+   "bytes": 12086
+  },
+  {
+   "path": "t30_cases_manifest.json",
+   "sha256": "14617bcab878bfe7eae1586ab5e6dfd1c46057ee9efac626bbf9a47f4d057db7",
+   "bytes": 26503
+  },
+  {
+   "path": "t30_complete.json",
+   "sha256": "26eae5d76696488ff7aa629b524fdc25b7185fcb5a920346b277bc7ddf0f111d",
+   "bytes": 194
+  },
+  {
+   "path": "t30_dedup_vs_existing.json",
+   "sha256": "d0214678cfe93f9828d256f78620753ddb19cdb78f73ca6355e1a02f8e455dbe",
+   "bytes": 944
+  },
+  {
+   "path": "t30_episode_conditions_raw.json",
+   "sha256": "48cf7d15e8d35a3b97da59ed97d5bc0cda900e9f8ff33cd3694922b9b8a01425",
+   "bytes": 4012
+  },
+  {
+   "path": "t30_frame_conditions.json",
+   "sha256": "d2fbfb50beead5a03bfb84e37b77425f661964b0594375346d5f5f59e4c4b8f3",
+   "bytes": 692965
+  },
+  {
+   "path": "t30_gui.log",
+   "sha256": "8671b8b2394530948280d6cc16dfc804b7782e41c39449e3797402092a9ff61c",
+   "bytes": 11602
+  },
+  {
+   "path": "t30_gui_window.png",
+   "sha256": "06cd1c5ae1b39513dab74749a9ea5d7d150e8e4f465e78e3eb299b51b0fec02e",
+   "bytes": 331720
+  },
+  {
+   "path": "t30_manifest.json",
+   "sha256": "6d339aa1d4ba2ac803c57892cb748b1c11b60a8b020edcd6ba7fa0d524c4c321",
+   "bytes": 26731
+  },
+  {
+   "path": "t30_overlap_vs_existing_families.json",
+   "sha256": "2b5a1bea6292ef417eb759dd10473cb7e28bd3497799dddf3d5c00a4a6bfc78b",
+   "bytes": 2327
+  },
+  {
+   "path": "t30_pool_episode_summary.json",
+   "sha256": "8f0efa5b04966f3857275818d1507c4b1961f5dd5fbea28d88606f2e0238ac16",
+   "bytes": 3465
+  },
+  {
+   "path": "t30_pool_selection.json",
+   "sha256": "d5f2066af7900928bdddec7471ec2ff35deb9d65f7ece40c0595a07ec0ae3a06",
+   "bytes": 21874
+  },
+  {
+   "path": "t30_provenance_20261105.json",
+   "sha256": "0cea8f4588c744498f970f62c145692ef4b10ac7dcde5e3be89339874c5f4f58",
+   "bytes": 14756
+  },
+  {
+   "path": "t30_sensor_summary.json",
+   "sha256": "16904645a48e0540831e6709c2f1049948088ec3342e8caa05f1d496eec6c69f",
+   "bytes": 67012
+  },
+  {
+   "path": "t30_summary.json",
+   "sha256": "0d7f696c807c91f223d41fc4d9256a72ac2b3a5916450d6372c310f4cc389dc3",
+   "bytes": 118981
+  }
+ ]
+}

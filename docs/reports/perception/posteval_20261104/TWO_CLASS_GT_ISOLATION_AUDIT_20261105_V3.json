@@ -1,0 +1,141 @@
+{
+  "schema_version": "dsh.landmark_two_class_gt_isolation_audit.v3",
+  "created_at": "2026-11-05",
+  "supersedes": [
+    {
+      "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105.json",
+      "sha256": "a5267429a7efff80231f533a924f9a03c17c20b80b48d2e1c15fa4af21836b92",
+      "status": "V1 pre-fix decision record"
+    },
+    {
+      "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105_V2.json",
+      "sha256": "17aa02e5d4c1ba6a3cd73778519819d0f75ae6f222fa73fec6dbc738e40f5346",
+      "status": "V2 PASS at module db8ca0e8; superseded by the B2 canonical-flags module change"
+    }
+  ],
+  "status": "PASS_REAUDIT_B1_B2_FIXED",
+  "scope": "re-audit after evaltool fixed B1 (canonical union binding, P2 v4 evidence) and B2 (canonical frozen-doc flags in the truth loader); static GT-isolation audit + independent tests + canonical-count verification; no model inference by this audit except reading the frozen P2 evidence",
+  "audited_at_head": "47d1063",
+  "audited_shas": {
+    "src/boom_birds/evaluation/landmark_two_class_eval.py": "1fdb66eb9ca5bd9e0e015452c511f6481c28196247116f4e3d0df117c7779ff7",
+    "scripts/evaluate_landmark_two_class.py": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e",
+    "tests/evaluation/test_landmark_two_class_eval.py": "6020b00fee03819be33d3fbf3329c0eccd1cc74cf093b1be13e7dc076012cea3",
+    "docs/reports/perception/TWO_CLASS_EVAL_20261105.md": "ee408eb61a1d2196b0a3634737067318910184fd0cca06aaf272846e2a3ffa70",
+    "p2_evidence_v4": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/run_last_union_a188fca7_v4/poison_smoke_evidence_v3.json",
+      "sha256": "e3853c99c49e9f62987d0e20fc7917fccb104218af38f798d9fa89781e9e49a7"
+    },
+    "canonical_union": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/labels_union_eval_frozen.json",
+      "sha256": "a188fca7d11ea2bad7cc8325a6dc5baf1d7e643b77d9469543050def69b62768",
+      "status": "FROZEN_P2_UNION",
+      "created_by": "datafreeze (T36)"
+    },
+    "handoff": "cc59fcc9d81fe0e9f18f61ce036553b07a480f2dac0c32208cf7d585aae9371c",
+    "model": "508a0430b2e4eac9c18d48520359eaaff1b5258c7a6e7844c95570a7cecfb07c",
+    "harness_v4": "58985ae0d329c2aa39f109f11365a07e451a9bc0d4a46e250fa5f0b4a411bf31",
+    "pilot_current_summary": "da869af3fc213b3c32420ecd745d4f04989aaf973e0573a05e9e99c199d6faa5"
+  },
+  "findings_closed": {
+    "R1_gt_coupling": "PASS (decode_detections only frame_id; infer_observations only frame_id+image; poison/rename/static-guard tests)",
+    "B1_union_binding": "PASS (evidence v4 binds canonical union a188fca7, provenance_note explains pre-run 7bb785fa replacement; per_frame 225, differing_frames=[], 144 distinct real observation shas; labels/model/code/harness shas all match)",
+    "B2_canonical_flags": "PASS (truth loader now consumes tower_observable/gt_unobservable/negative/ms1_only/same_frame when present; independent run: union counts 139/38/39/73/9, identity 44/9/26/9, val_main 95/47/39/29, 0 mismatch vs frozen doc flags; identity wrong-claim denominator = negatives ∪ ms1_only (union 48, identity 9); code lines :259-282 and :843-846)"
+  },
+  "checks": [
+    {
+      "id": "G1",
+      "requirement": "model called with image only",
+      "evidence": "infer_observations model.predict source=image; P2 v4 evidence executed_command + inputs",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G2",
+      "requirement": "decoder receives no GT geometry/class/position",
+      "evidence": "decode_detections(detections, frame_id, protocol) :454; raises on dict :462-464",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G3",
+      "requirement": "deployment consumer path only payload+detector",
+      "evidence": "landmark_consumer.py:123-128; landmark_detector.py detect signature",
+      "verdict": "PASS (unchanged)"
+    },
+    {
+      "id": "G4",
+      "requirement": "identity claims predicted-only",
+      "evidence": "decode class0-only claim, class1 never mapped, conflict/margin; evaluate_frame consumes truth only for scoring",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G5",
+      "requirement": "no oracle/GT/file-name in inference decisions",
+      "evidence": "static guard test :615; rename/poison tests",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G6",
+      "requirement": "GT row not accepted by decode API",
+      "evidence": "decode guard :454/:462-464; infer_observations only frame_id + image path",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G7",
+      "requirement": "evaluation image resolution pairing documented",
+      "evidence": "CLI _resolve_image uses truth image/frame_id; deployment uses payload.ref",
+      "verdict": "PASS_WITH_DOCUMENTATION"
+    },
+    {
+      "id": "G8",
+      "requirement": "labels only after inference for scoring",
+      "evidence": "CLI loads labels then infer_observations then evaluate_rows",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G9",
+      "requirement": "class1 only map-native MS1",
+      "evidence": "_route_confuser map-native non-synthetic -> class1; others -> other_structures; OTHER_STRUCTURE claims",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G10",
+      "requirement": "other structures single-listed",
+      "evidence": "gt_other_boxes; other_structure_hits; wrong_category OTHER_STRUCTURE; summary other_structures",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G11",
+      "requirement": "regression tests",
+      "evidence": "independent rerun: full file 23 passed (1.19s); -k poison/rename/source_are/class1_gt/frozen 7 passed, 16 deselected (0.35s); frozen tests sha 6020b00f",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G12",
+      "requirement": "canonical denominator consistency (B2)",
+      "evidence": "loader counts == frozen doc flags for union/identity/val_main; wrong-claim denominator negatives∪ms1_only; consistency test added (:491)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G13",
+      "requirement": "canonical union binding (B1)",
+      "evidence": "P2 v4 evidence labels_sha256 == a188fca7; provenance_note; source eval docs d6c6a252/7471c408; handoff cc59fcc9",
+      "verdict": "PASS"
+    }
+  ],
+  "pilot_evidence_supersession_note": {
+    "severity": "IMPORTANT_FOR_GATE_NARRATIVE",
+    "finding": "evaltool's own pilot_v61_current evidence file states the old pilot_v61 metrics are invalid because the prediction files were rewritten at 12:19:54; the current summary (sha da869af3) differs materially from the numbers previously used for the pilot gate review (identity last: class0 43/44=0.977, MS1 10/35=0.286, wrong claims 0/9, same-frame 26/26=1.0, ref coverage 0.944/false-ref 2/26; identity best: class0 38/44=0.864, MS1 7/35=0.200, same-frame 20/26=0.769, wrong claims 0/9, ref 1.0/false-ref 1/26; val_main last: class0 78/95=0.821, class1 20/47=0.426, same-frame 37/47=0.787, identity claims 76/76 precision 1.0).",
+    "implication": "the pilot gate hard failure remains MS1 recall (delta 0.286/0.200 < 0.50), but the previously cited same_frame 0.385 and 2/9 MS1-only wrong claims are not reproducible on the current predictions; gate conditions other than MS1 recall should be re-adjudicated on the current predictions with the canonical eval documents before any R2 decision.",
+    "recommendation": "R2/gate decision should use current predictions + canonical eval docs (val_main d6c6a252 + identity 7471c408) + canonical flags; do not mix old pilot numbers. The near-range MS1 data gap remains the dominant cause per the earlier review."
+  },
+  "residual_notes": [
+    "P2 poison evidence is frozen-doc/flag-based and PASS; it is not a gate result",
+    "the pilot current summary was produced with legacy pilot truth documents (val_main truth a4334576, identity truth 833c4b85), not the canonical eval docs; the gate run must use canonical eval docs and canonical flags",
+    "if module/CLI/tests change again, a V4 audit is required (new shas)",
+    "pilot numbers are evaluation artifacts; no training/inference was performed by this audit"
+  ],
+  "boundaries": [
+    "static re-audit + targeted tests + canonical count verification; no training/inference",
+    "does not re-adjudicate the gate; flags the pilot evidence supersession",
+    "old evidence V1/V2 and old pilot metrics remain on disk, unchanged"
+  ]
+}

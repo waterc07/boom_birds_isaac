@@ -1,0 +1,205 @@
+{
+  "schema_version": "dsh.landmark_run_snapshot.v1",
+  "status": "FROZEN",
+  "purpose": "immutable run snapshot for two-class v6 bounded landmark experiments: record sha256/size of the frozen split, labels, two-class policy, spec, protocols, base weights and dataset artifacts before training; verify at pre_train / pre_selection / post_train; any mismatch marks the run INVALID",
+  "tracked_artifacts": [
+    {
+      "id": "split_freeze_v6_2",
+      "path": "configs/perception/landmark_split_freeze_v6_2.json",
+      "kind": "data_split"
+    },
+    {
+      "id": "two_class_protocol",
+      "path": "configs/perception/landmark_two_class_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "two_class_label_spec",
+      "path": "configs/perception/landmark_two_class_label_spec_v1.json",
+      "kind": "annotation_spec"
+    },
+    {
+      "id": "annotation_spec_v2_1",
+      "path": "configs/perception/landmark_annotation_spec_v2_1.json",
+      "kind": "annotation_spec"
+    },
+    {
+      "id": "dev_train_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_train.json",
+      "kind": "labels"
+    },
+    {
+      "id": "reuse_train_labels",
+      "path": "outputs/perception/final_exploratory_20261104/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "two_class_shard_a_labels",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/shard_a/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "two_class_shard_b_labels",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/shard_b/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "v41_ms1_addendum_annot",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/v41_ms1_addendum/labels_addendum.json",
+      "kind": "labels"
+    },
+    {
+      "id": "v41_ms1_addendum_annot2",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/v41_ms1_addendum/labels_v41_ms1_addendum.json",
+      "kind": "labels"
+    },
+    {
+      "id": "v41_ms1_risk_exclusion",
+      "path": "docs/reports/perception/dataset_freeze_20261104/two_class_v41_ms1_risk_20261105.json",
+      "kind": "labels_policy"
+    },
+    {
+      "id": "train_merged_labels",
+      "path": "outputs/landmark_train/dataset/labels_train_v6_merged.json",
+      "kind": "labels"
+    },
+    {
+      "id": "val_main_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_val_validation163.json",
+      "kind": "labels"
+    },
+    {
+      "id": "val_main_ms1_addendum",
+      "path": "outputs/perception/dev_annotations_20261104/labels_val_main_ms1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "identity_labels",
+      "path": "outputs/perception/dev_annotations_20261104/labels_identity_dev.json",
+      "kind": "labels"
+    },
+    {
+      "id": "training_protocol",
+      "path": "configs/perception/landmark_train_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "consumer_protocol",
+      "path": "configs/perception/landmark_consumer_protocol_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "train_cli_config",
+      "path": "configs/perception/landmark_train_cli_v1.json",
+      "kind": "protocol"
+    },
+    {
+      "id": "base_weights",
+      "path": "outputs/landmark_train/runs/stage_verify_v5/seed2/seed2/weights/last.pt",
+      "kind": "base_weights"
+    },
+    {
+      "id": "model_yaml",
+      "path": "outputs/landmark_train/dataset/landmark_yolov8n-pose-2class-1kpt.yaml",
+      "kind": "model"
+    },
+    {
+      "id": "dataset_build_v6",
+      "path": "outputs/landmark_train/dataset/dev_v6/dataset_build.json",
+      "kind": "dataset"
+    },
+    {
+      "id": "dataset_data_yaml",
+      "path": "outputs/landmark_train/dataset/dev_v6/data.yaml",
+      "kind": "dataset"
+    },
+    {
+      "id": "eval_val_main_two_class",
+      "path": "outputs/perception/two_class_eval_20261105/eval_val_main_163_two_class.json",
+      "kind": "eval_labels"
+    },
+    {
+      "id": "eval_identity_two_class",
+      "path": "outputs/perception/two_class_eval_20261105/eval_identity_62_two_class.json",
+      "kind": "eval_labels"
+    },
+    {
+      "id": "eval_handoff",
+      "path": "docs/reports/perception/dataset_freeze_20261104/two_class_eval_handoff_v1_20261105.json",
+      "kind": "eval_manifest"
+    },
+    {
+      "id": "t38_shard_a_labels",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/near_ms1/shard_a/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "t38_shard_b_labels",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/near_ms1/shard_b/labels_v1.json",
+      "kind": "labels"
+    },
+    {
+      "id": "t38_shard_a_selection",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/near_ms1/shard_a/selection.json",
+      "kind": "labels_selection"
+    },
+    {
+      "id": "t38_shard_b_selection",
+      "path": "outputs/perception/dev_annotations_20261105/two_class/near_ms1/shard_b/selection_b.json",
+      "kind": "labels_selection"
+    },
+    {
+      "id": "t38_pool_selection",
+      "path": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_pool_selection.json",
+      "kind": "dataset"
+    },
+    {
+      "id": "t38_frame_conditions",
+      "path": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_frame_conditions.json",
+      "kind": "dataset"
+    },
+    {
+      "id": "t38_provenance",
+      "path": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_provenance_20261105.json",
+      "kind": "dataset"
+    },
+    {
+      "id": "r2_selection_rule",
+      "path": "outputs/landmark_train/runs/r2_selection_rule.json",
+      "kind": "selection_rule"
+    },
+    {
+      "id": "eval_p2_union",
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/labels_union_eval_frozen.json",
+      "kind": "eval_labels"
+    }
+  ],
+  "checks": {
+    "phases": [
+      "pre_train",
+      "pre_selection",
+      "post_train"
+    ],
+    "rule": "create the snapshot immediately before training; verify at every phase; any sha/size/existence mismatch marks the run INVALID and the training CLI must exit non-zero without writing a selectable model",
+    "immutable": "the snapshot file is never rewritten after creation; verification results are appended to a separate check log"
+  },
+  "label_sources": {
+    "tower_train": "dev 160 frames (labels_train) + reused exploratory 279 frames (labels_v1)",
+    "two_class_train": "T30 pool 373 frames labelled by T31/T32 shards (A 181 + B 192); class0 232 instances, class1 123 instances, same-frame 39 frames",
+    "v41_ms1_exclusion": "plan A: 69 v4.1 actual training inputs with projected MS1 >=8px are EXCLUDED from the two-class training pass (367 kept); they stay tower data in the freeze but must not be two-class samples until a class1 addendum exists (v6.1 pending)",
+    "train_merged": "outputs/landmark_train/dataset/labels_train_v6_merged.json is produced by the training prepare step BEFORE --create and must implement the v6 two-class policies (class1 keypoint v=0, class1 never maps to tower, exclusion list applied)",
+    "val_main": "163 frames (labels_val_validation163) + MS1 addendum 47 visible instances (labels_val_main_ms1)",
+    "val_identity": "62 identity frames across 7 T19 groups (labels_identity_dev; both classes)",
+    "v41_ms1_addendum": "v6.1 B-lite: 60 of the 69 projected-MS1 v4.1 frames get class1 addendum (annot 38 same-frame + annot2 22); the 9 uncovered frames are excluded from the two-class pass (427/436 kept); class1 total 192 instances / same-frame 77",
+    "eval_p2": "frozen eval labels: val_main 163 + identity 62; five coverage categories all >0; eval frames disjoint from train",
+    "v62_near_ms1": "T38 final near-MS1: 102 pool frames (A 52 + B 50), class1 only; discarded pilot excluded",
+    "r2": "R2 selection rule tracked; train_merged=labels_train_v6_2_merged.json; dataset=dev_v7"
+  },
+  "notes": [
+    "only repo-relative paths",
+    "weights/logs stay in ignored outputs; snapshot records hashes only",
+    "frozen by T40 (v6.2); R2 selection rule and T38 final pool/conditions tracked; v6/v6.1 snapshot v7 are history"
+  ],
+  "scope": "bounded internal two-class landmark experiment; shadow only; no PPO/control/board/navigation/Gate claims",
+  "license": "internal bounded research only (user 2025-11-04 authorisation); external distribution undecided; not a legal conclusion"
+}

@@ -1,0 +1,192 @@
+{
+  "schema_version": "dsh.landmark_two_class_semantics_review.v1",
+  "created_at": "2026-11-05",
+  "status": "PRE_DATA_REVIEW / PROPOSED_FINDINGS",
+  "scope": "review of the pre-registered two-class protocol/label spec, the T31 annotation schema, the installed pose loss mask, the inference GT boundary, the v4.1 unlabeled-MS1 risk and the two-class evaluation denominators; T30 capture is still in progress and no v6 two-class labels exist yet",
+  "inputs": {
+    "protocol": {
+      "path": "configs/perception/landmark_two_class_protocol_v1.json",
+      "sha256": "b37014618de3dbbbedf5d2093ba051f17c0c271210f4b63937878dae278acd8e"
+    },
+    "label_spec": {
+      "path": "configs/perception/landmark_two_class_label_spec_v1.json",
+      "sha256": "8e544efca0e8feb22ab193479a52d4f0131f6556a1144a41f559f65a0f7c7f57"
+    },
+    "t31_annotation_prep": {
+      "path": "docs/reports/perception/annotation_verify_20261104/T31_TWO_CLASS_ANNOTATION_PREP_20261105.md",
+      "sha256": "33c09af5e4fb99a2ecf604195a21881ce31a862f42811ec39e3ee64785da48d6"
+    },
+    "mask_audit": {
+      "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_LOSS_MASK_AUDIT_20261105.json",
+      "sha256": "8a943be96f4bda6c99c598576c2d6fec77177fcb89b6f8ccc195b2551cad8689",
+      "verdict": "PASS"
+    },
+    "v41_risk": {
+      "path": "docs/reports/perception/posteval_20261104/V41_UNLABELED_MS1_RISK_20261105.json",
+      "sha256": "232097daf592bf4cb4d11ca79daec2d9ed48d655d01ed5799ba1ab1d418cdcc0"
+    },
+    "v41_actual_inputs": "docs/reports/perception/posteval_20261104/V41_MS1_RISK_ACTUAL_INPUTS_20261105.json",
+    "gt_isolation": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105.json",
+    "two_class_eval_baseline": {
+      "path": "docs/reports/perception/TWO_CLASS_EVAL_20261105.md",
+      "note": "evaltool's same-caliber single-class baseline; two-class model numbers PENDING"
+    }
+  },
+  "positives_already_satisfied": [
+    "protocol explicitly forbids mapping class1 to the central-tower landmark_id and states class1 is NOT an open-set catch-all",
+    "protocol/spec define class1 keypoint as unavailable (v=0) and forbid bbox-centre substitution",
+    "same-frame rule: every visible/decidable instance of both classes must be labelled; MS1 must not be left as background",
+    "label spec requires QA with fail-loud for instance counts, same-frame counts, v distribution and keypoint mask",
+    "T31 schema makes the coordinate domains explicit (bbox source-pixel XYXY, keypoint normalized [0,1]) and aligns GT_UNOBSERVABLE with the protocol (present+FULL occlusion+no class0 instance)",
+    "loss mask audit PASS: class1 v=0 contributes exactly 0 to the keypoint coordinate loss, class0 v=1 is supervised, visibility is supervised to 0 for class1",
+    "GT isolation audit: model.predict is image-only and decoder uses predicted class/score/bbox/keypoint only; one API coupling finding remains (R1)"
+  ],
+  "findings": [
+    {
+      "id": "S1",
+      "severity": "HIGH",
+      "area": "class1 semantic scope",
+      "finding": "the frozen label spec defines class1 as the verified map-native MS1, but the T31 schema allows verified_source=EXTERNAL_EVIDENCE (synthetic injection) for class1. A synthetic HN1 confuser and the map-native MS1 would then share one class, diluting 'verified MS1' into 'any similar structure' — the protocol explicitly says class1 is not an open-set/catch-all class.",
+      "required_resolution": "restrict class1 to map-native MS1 only (verified_source=WORLD_POSE_OR_MAP_DB + map-DB record); put synthetic HN1 and any other similar structure into other_structures[]/confusers and evaluate them as a separate false-claim stratum. If the team wants one merged 'similar structure' class, version the label spec (v1.1) and state the semantic change before labelling.",
+      "default_conservative": "class1=map-native MS1 only; synthetic injections are never class1"
+    },
+    {
+      "id": "S2",
+      "severity": "HIGH",
+      "area": "other/unknown structures",
+      "finding": "neither the label spec nor the T31 schema defines how to record visible unverified green/tower-like structures (MS2 symmetric candidate, unknown green lamps, robots/gantry, synthetic confusers). Leaving them unlabelled makes them background for training and invisible in the class1 denominator, but the two-class model may still emit them as class0/class1, which must count as a false identity claim.",
+      "required_resolution": "add an explicit other_structures[] (or confusers[]) record with verified=false per visible unverified structure; never assign class1; add an evaluation stratum 'unverified/other structure frames' whose tower claims are counted as false claims and reported separately (not part of the MS1 denominator).",
+      "default_conservative": "record, do not train as class1; evaluate false claims separately"
+    },
+    {
+      "id": "S3",
+      "severity": "HIGH",
+      "area": "same-frame completeness verification",
+      "finding": "the same-frame completeness rule is machine-checkable only if labels are cross-checked against an independent visibility source; a label-only QA cannot prove that no MS1 instance was missed. The v4.1 projection method in this review shows a cheap, reproducible check.",
+      "required_resolution": "add a projection/pose completeness gate to the v6 label QA: for every frame, project the central tower and MS1 from the recorded SW camera pose; if projected MS1 height >= 8 px then require a class1 instance OR gt_uncertainty=INSTANCE_UNRESOLVED (reason recorded); likewise for the tower; otherwise the label batch FAILs. Reuse scripts/v41_ms1_risk.py (calibrated to 0.04 px median).",
+      "default_conservative": "label gate FAIL on any unmatched projected instance"
+    },
+    {
+      "id": "S4",
+      "severity": "MEDIUM",
+      "area": "class1 decidability/min-size",
+      "finding": "no minimum visible size or occlusion rule for class1. Far MS1 (projected height <8 px) may be present but not decidable; guessing a bbox would inject noise and violate the 'decidable instance' rule.",
+      "required_resolution": "define decidable class1 as projected bbox height >= 8 px (conservative: >= 10 px) without full occlusion; below that record gt_uncertainty=INSTANCE_UNRESOLVED with reason and no instance. Apply the same rule consistently to class0 and keep TINY in all-domain/reported separately.",
+      "default_conservative": "8 px height; no instance below that"
+    },
+    {
+      "id": "S5",
+      "severity": "MEDIUM",
+      "area": "enum freeze",
+      "finding": "identity_ambiguity (NONE|UNCERTAIN|AMBIGUOUS) and gt_uncertainty (NONE|FULLY_OCCLUDED|REFERENCE_UNRESOLVED|INSTANCE_UNRESOLVED) are proposed in T31 but are not part of the frozen label spec v1; handling rules for these states in training/evaluation are not pre-registered in the spec.",
+      "required_resolution": "freeze the enums and their handling as a versioned addendum (spec v1.1 or protocol addendum) BEFORE labelling: ambiguous/uncertain frames excluded from class training or reported separately; GT_UNCERTAIN not scored as localization; improper tower claims on them listed separately.",
+      "default_conservative": "freeze as v1.1 addendum with explicit handling"
+    },
+    {
+      "id": "S6",
+      "severity": "MEDIUM",
+      "area": "class1 placeholder coordinates",
+      "finding": "class1 keypoint must never be a real reference, but YOLO pose labels still carry x,y per keypoint. The builder must write 0,0,v=0 (never bbox centre); the loader/dataloader preserves v and the loss masks v=0, so a bbox-centre placeholder would not change the loss but would be a latent trap for any downstream reader.",
+      "required_resolution": "label builder writes keypoint_x=keypoint_y=0.0 and v=0 for class1; QA asserts class1 keypoint values are exactly 0 (or null at the annotation layer) and never equal the bbox centre; round-trip test through the ultralytics loader.",
+      "default_conservative": "0,0,v=0"
+    },
+    {
+      "id": "S7",
+      "severity": "MEDIUM",
+      "area": "v value validation",
+      "finding": "ultralytics 8.2.0 verify_image_label preserves the written v and only enforces coords in [0,1] and non-negative values; v=2 (or any non-zero) is treated as visible by the loss mask (demonstrated in the mask audit). A typo v=2 on class1 would silently reintroduce keypoint supervision.",
+      "required_resolution": "label builder and QA must fail loud unless v in {0,1}; add a test feeding v=2 and expecting rejection.",
+      "default_conservative": "reject v not in {0,1}"
+    },
+    {
+      "id": "S8",
+      "severity": "MEDIUM",
+      "area": "class1 verification provenance",
+      "finding": "the spec lists verified_source as an instance field but does not require it for class1. Without a required world/map verification source, class1 could be assigned by appearance alone.",
+      "required_resolution": "require verified_source=WORLD_POSE_OR_MAP_DB for class1 and a cross-link to the map-DB record (map_native_structures.json); class1 instances lacking it FAIL QA.",
+      "default_conservative": "FAIL without map-DB verification"
+    },
+    {
+      "id": "S9",
+      "severity": "LOW",
+      "area": "cross-class overlap",
+      "finding": "T31 QA checks duplicate same-class boxes but not class0/class1 overlap. One object labelled as both classes would corrupt both the class and identity confusion matrix.",
+      "required_resolution": "add QA rule: class0 vs class1 bbox IoU must be below a small threshold (e.g., 0.3) unless an explicit ambiguity record exists.",
+      "default_conservative": "overlap <0.3"
+    },
+    {
+      "id": "S10",
+      "severity": "LOW",
+      "area": "partial occlusion / truncation",
+      "finding": "the protocol requires partially occluded decidable instances to be labelled with the visible part + occluded flag; the T31 truncation QA requires true edges to touch the image border, which is the right rule for truncation but must not be applied to occlusion clipping.",
+      "required_resolution": "separate truncation (image-edge) from occlusion (object clipping); record both fields; QA must not require touch-edge for occluded boxes.",
+      "default_conservative": "separate flags"
+    },
+    {
+      "id": "S11",
+      "severity": "LOW",
+      "area": "GT_UNOBSERVABLE representation",
+      "finding": "T31 representation (tower_present=true + occlusion=FULL + no class0 instance) matches the protocol and the previous GT_UNOBSERVABLE convention; the loader must write an empty training label (not a negative) and the evaluator must single-list it.",
+      "required_resolution": "add a loader/evaluator test for the FULL-occlusion frame: empty YOLO label, GT_UNOBSERVABLE bucket, no negative denominator.",
+      "default_conservative": "empty label + separate bucket"
+    },
+    {
+      "id": "S12",
+      "severity": "INFO",
+      "area": "coordinate domains",
+      "finding": "T31 fixes bbox=source-pixel XYXY and keypoint=normalized [0,1]; the YOLO txt requires source-normalized bbox and keypoint. Mixing domains was the root cause of the 2026-11-04 label bug.",
+      "required_resolution": "loader converts bbox /W,/H and writes the normalized keypoint directly; add a round-trip test (labels -> txt -> ultralytics loader -> pixel coords) with <=0.001 px error and an explicit coordinate_space field.",
+      "default_conservative": "keep the two domains explicit and tested"
+    }
+  ],
+  "evaluation_denominators_and_certification_boundary": {
+    "tower_class": "val_main observable tower positives 95 (protocol) + val_main negatives; two-class confusion matrix per class; val_main MS1 additional labels are still PENDING (T32)",
+    "identity": {
+      "precision_denominator": "class0 claims (tower claims, after conflict/margin rejection)",
+      "recall_denominator": "44 observable tower instances in the 62-frame development identity pool",
+      "false_match_denominator": "negatives incl. 9 MS1-only frames + other negatives; MS1 false tower claims reported on the 9-frame and 35-object denominators separately",
+      "same_frame_selection_denominator": 26,
+      "gt_unobservable": "9 frames kept in all-domain, single-listed; improper claims counted, not scored as negative",
+      "gt_uncertain": "0 in the current identity pool; must be single-listed when present"
+    },
+    "reference": {
+      "n_avail": "18 tower-reference-available frames in the identity pool; val_main 41 available / 122 unavailable (v4 163-frame label document)",
+      "coverage": "correct keypoint / N_avail",
+      "declaration": "correct UNAVAILABLE / N_unavail; false-reference / N_unavail",
+      "class1_keypoint_emissions": "must be 0 and reported separately"
+    },
+    "consumer": {
+      "all_positive": 121,
+      "observable_positive": "excludes GT_UNOBSERVABLE/GT_UNCERTAIN but keeps UNKNOWN/REJECTED/no-output",
+      "reference_available": "subset with GT reference available",
+      "negatives": "no tower claim success",
+      "policy": "UNKNOWN/REJECTED stay in the applicable success denominator; no deletion of hard frames; TINY kept in all-domain and reported separately"
+    },
+    "certification_boundary": [
+      "two-class solves only 'central tower vs verified map-native MS1' inside the current bounded asset domain; it is NOT open-set identity recognition",
+      "class1 must never be mapped to the central-tower landmark_id; class conflict/multiple candidates/low confidence/unavailable reference must be explicit UNKNOWN/REJECTED",
+      "no certification from development data: a passing development gate only allows a new untouched holdout (v3) capture; the holdout is process-isolated same-agent data, not third-party sealed truth",
+      "no board/RKNN/real-camera/real-arena claim; latency and thermal behaviour remain UNKNOWN",
+      "T25/T26 provisional diagnostic frames are excluded from every denominator; old packages/models/protocols stay closed and unchanged",
+      "single-class v2 baseline class1 recall=0 is structural (no class1 channel) and is a reference point, not a performance regression",
+      "automatic identity restoration is not claimed: two-class identity precision must pass its own gate, and class0 claims remain conditional on score/conflict/appearance/reference rules"
+    ]
+  },
+  "acceptance_checklist_before_labelling_or_training": [
+    "lead ruling on S1/S2 class1 scope + other structures",
+    "freeze S5 enums/handling as spec v1.1 or protocol addendum",
+    "S3 projection-based same-frame completeness gate wired into the v6 QA and run on the v6 labels",
+    "S4 minimum/maximum decidability rule and S8 verified_source requirement in the QA",
+    "S6/S7/S12 builder/loader round-trip tests (0,0,v=0; v in {0,1}; coordinate domains)",
+    "S9/S10/S11 QA rules added",
+    "GT isolation finding R1 refactored/tested before P2 smoke sign-off",
+    "v4.1 risk decision: exclude the affected frames or annotate class1 (pre-registered before training)",
+    "denominators above frozen in the evaluation protocol and used unchanged by the two-class model run"
+  ],
+  "boundaries": [
+    "pre-data documentary/code review; T30 capture in progress, no v6 labels exist yet",
+    "no training/inference/Isaac run in this review",
+    "development-only evidence; not certification",
+    "old results/protocols/hashes unchanged"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "dsh.landmark_two_class_gt_isolation_audit.v1",
+  "created_at": "2026-11-05",
+  "status": "PASS_WITH_ONE_API_COUPLING_FINDING",
+  "scope": "static audit of the inference/evaluation paths at HEAD 47d1063 (uncommitted two-class files) for GT/label/position/oracle/file-name leakage into identity-bearing inference; no dynamic inference was run by this audit",
+  "audited_at_head": "47d1063",
+  "audited_shas": {
+    "scripts/evaluate_landmark_yolo.py": "6b89df7b010a58cb185c192b00a58d245b829582d3cf2a91509d6a71fb2b52d6",
+    "scripts/evaluate_landmark_two_class.py": "85b26d0c3dd96c679e955dcd75af814cf3006b422a2f5baa1c5cd274554df615",
+    "src/boom_birds/evaluation/landmark_two_class_eval.py": "8ba54cfb163ee147068c64c92ca3655e583e6d01aa7ba478bb5ab08e052426be",
+    "src/boom_birds/evaluation/landmark_consumer.py": "bb6c6723adf62bed80accd98c444660537ff52217931ff8773f4ad19673c1a0f",
+    "src/boom_birds/evaluation/landmark_detector.py": "356d1f0341c0e831376451a5c47dcdeb5311e4352a0931c63cb7e99f8c1e523d",
+    "src/boom_birds/evaluation/landmark_yolo.py": "1611c8f47203806b3b232795b85846fdc689a452d1c5010b97a2d6e43cc2a630",
+    "concurrent_edit_caveat": "the two-class eval module/CLI are being edited by parallel tasks; line numbers are for the shas above and must be re-checked at the P2 freeze"
+  },
+  "checks": [
+    {
+      "id": "G1",
+      "requirement": "the model is called with the image only",
+      "evidence": "scripts/evaluate_landmark_yolo.py:151-152 model.predict(source=str(frame['image_path']), imgsz=..., conf=0.01); scripts/evaluate_landmark_two_class.py:136-138 model.predict(source=str(image_path), imgsz=..., conf=..., device=...)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G2",
+      "requirement": "the decoder receives no GT geometry/class/position",
+      "evidence": "landmark_yolo.decode_ultralytics_result args = results[0], image dims, intrinsics, thresholds, frame_id, image (evaluate_landmark_yolo.py:153-158); decode_candidates consumes candidates+dims+intrinsics+thresholds only",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G3",
+      "requirement": "the consumer/deployment path uses only the v2 observation payload and detector prior",
+      "evidence": "landmark_consumer.py:123-128 image_path = payload.ref; detector.detect(image_path, intrinsics); landmark_detector.py:3-5 docstring and 42-43 detect signature",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G4",
+      "requirement": "identity claims come from predicted class/score/bbox/keypoint only",
+      "evidence": "landmark_two_class_eval.decode_detections: class0-only claim, class1 never maps to the tower id, conflict/margin rejection; no GT fields read inside decode except frame_id",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G5",
+      "requirement": "no oracle region / GT position / file-name parsing in inference decisions",
+      "evidence": "decode functions never parse file names and do not read oracle/position fields; the image string is stored only",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G6",
+      "requirement": "GT row is not passed into the inference decode API",
+      "evidence": "scripts/evaluate_landmark_two_class.py:140-141 decode_detections(detections, truth_row, ...); src/.../landmark_two_class_eval.py:396 signature includes truth_row, and the only use inside decode is truth_row.get('frame_id') at :438",
+      "verdict": "RISK_API_COUPLING"
+    },
+    {
+      "id": "G7",
+      "requirement": "evaluation image resolution / pairing does not feed GT values to the model",
+      "evidence": "scripts/evaluate_landmark_two_class.py:60-64 _resolve_image(images_dir, truth_row) uses truth_row image/frame_id to locate the file; the model then receives only the path. This is evaluation pairing, not an inference input; the deployment path uses payload.ref (G3).",
+      "verdict": "PASS_WITH_DOCUMENTATION"
+    },
+    {
+      "id": "G8",
+      "requirement": "labels are used only after inference for scoring",
+      "evidence": "evaluate_landmark_yolo.py loads the label document before inference only for image resolution/frame ids; evaluate_frame/GT matching runs after predictions. No GT value is passed into predict/decode. This is documented as an evaluation-plane property, not a deployment property.",
+      "verdict": "PASS_WITH_DOCUMENTATION"
+    }
+  ],
+  "finding": {
+    "id": "R1",
+    "severity": "MEDIUM (architectural coupling; currently no value leak)",
+    "description": "the two-class inference decoder API takes the full truth_row. Current code reads only frame_id, so no GT value leaks today, but the signature makes a future GT leak easy and makes a 'no GT input' claim harder to prove by construction.",
+    "required_resolution": "refactor decode_detections to take frame_id (str) instead of truth_row, and keep truth_row in evaluate_frame only; do this before P2 smoke sign-off",
+    "required_test": "GT-poison invariance: mutate every GT geometry/class/keypoint field in the truth rows, keep frame ids, run the same inference/decode path and assert observations are byte-identical (only scoring rows may change); a second test renames image files/tower-vs-ms1 tokens and asserts identical observations"
+  },
+  "required_p2_tests": [
+    "GT-poison invariance for --model and --predictions paths (mutate labels; observations identical)",
+    "image file-name independence (rename with misleading class tokens; observations identical)",
+    "decode API signature contains no truth_row/annotation/gt parameter (static test or AST check)",
+    "class1 never emits landmark_id and never emits a keypoint reference, even if the predicted class1 keypoint confidence is high",
+    "class conflict (class0 and class1 IoU >= tau_conflict) -> UNKNOWN/REJECTED, not a tower claim",
+    "static guard: no 'oracle', 'ground_truth', 'target_world', 'position' access inside the inference/decode functions",
+    "single-class baseline adapter cannot set class1 or a class1 keypoint"
+  ],
+  "boundaries": [
+    "static code audit only; no dynamic inference was run in this audit",
+    "the two-class model does not exist yet (P1/P3 pending)",
+    "not a certification of the deployment path"
+  ]
+}

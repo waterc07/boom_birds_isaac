@@ -1,0 +1,421 @@
+{
+  "schema_version": "boom_birds.manifest.v1",
+  "evaluation_version": "boom_birds.latency_eval.v1",
+  "code_commit": "47d1063b94dc779e87e1f6be7d6210b489a85395",
+  "working_tree": "T38 near-MS1 two-class supplement (2 new families); branch feat/v2.2-simulation-perception; HEAD 47d1063",
+  "gui_mode": true,
+  "renderer": "DirectX (--/app/vulkan=false)",
+  "gpu_driver": "NVIDIA 581.80 (RTX 5080, nvidia-smi)",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "terrain_sha256": "f5f55c6633d6f138c434664e73903fe96859a98b99f9fab63690e58d38694baa",
+  "preview_sha256": "b2c150084df45722ae666b1b3c6ced91ce075b898eeedcaf17906ce9ec6015f8",
+  "map_config_sha256": "e6f7bc777986e82059181b198aee8d4ed73cf6a50e8491988b124616d0de0e15",
+  "cases_sha256": "eabe2169aed9063c0bbaffeae24089127c6f02b23f62b16e31f39ac9707b5998",
+  "methods": [
+    "follow_only"
+  ],
+  "started_at": "2026-11-05T12:26:41.977606+08:00",
+  "latency_plan": {
+    "role": "regression",
+    "segment_id": "",
+    "config_id": "",
+    "cases_file": "configs/scenarios/landmark_two_class_near_ms1_cases_v1.json",
+    "cases_sha256": "eabe2169aed9063c0bbaffeae24089127c6f02b23f62b16e31f39ac9707b5998",
+    "case_ids": [
+      "lmf_t38_f1_ms1_near_sw_0",
+      "lmf_t38_f2_ms1_near_se_0"
+    ],
+    "methods": [
+      "follow_only"
+    ],
+    "execution_path": "v2",
+    "obs_delay_s": 0.0,
+    "action_delay_s": 0.0,
+    "ttl_ms": 150,
+    "max_age_ms": 150,
+    "allowed_observation_age_ms": 250,
+    "stop_distance_m": 1.1,
+    "post_abort_observe_s": 0.0,
+    "clock_offset_ms": 0.0,
+    "clock_drift_ppm": 0.0,
+    "clock_uncertainty_ms": 0.0,
+    "sync_fail_step": -1,
+    "obs_mapping_fail_step": -1,
+    "transport_stall_step": -1,
+    "transport_stall_delay_s": 0.15
+  },
+  "boundary_plan": null,
+  "vehicle_config": {
+    "file": "configs/vehicles/sim_reference.yaml",
+    "sha256": "6d1c23a2c09e79f65ee864ec78618807d5ebddcb463155ee10bfa59067dbe731"
+  },
+  "expected_file": "",
+  "expected_sha256": "dc88f5905a13f17aea1c82a35a21465ce30642ef2e1f1b6676983c45c85303aa",
+  "brake_model_file": "",
+  "brake_model_sha256": "c6a5eeb185896ac0af886ba00aa26205c6f893d2cd30be70b5ea96556770341a",
+  "clearance_algorithm": {
+    "id": "supervisor_predicted_path_clearance",
+    "version": "2.0.0",
+    "schema_version": "boom_birds.clearance.v2"
+  },
+  "stop_requirement_schema_version": "boom_birds.stop_requirement.v1",
+  "envelope_policy": {
+    "version": "reference_origin_v2",
+    "robot_radius_rule": "norm(abs(center_offset)+half_extents)",
+    "robot_attitude_scope": "any_rigid_rotation_about_reference_origin",
+    "obstacle_radius_rule": "norm(obstacle_size/2)",
+    "limitation": "sphere/AABB approximation; not a triangle-mesh sweep"
+  },
+  "contact_sensor": {
+    "valid": true,
+    "mode": "filtered_force_after_physics_hard_reset",
+    "force_sensor_available": true,
+    "source": "isaaclab_contact_sensor_filtered",
+    "reason": "single-env reset/handshake; negative readings remain UNKNOWN",
+    "inference_rule": {
+      "sphere_overlap_m_gt": 0.02,
+      "radii": "robot half-diagonal + obstacle max(size)/2"
+    },
+    "prim_paths": [
+      "/World/envs/env_0/Robot/body"
+    ],
+    "filter": [
+      "/World/envs/env_0/Obstacle"
+    ],
+    "num_sensors": 1,
+    "errors": [],
+    "negative_coverage": "unverified"
+  },
+  "sensor_shadow": {
+    "enabled": true,
+    "mode": "SHADOW_ONLY_NOT_IN_CONTROL",
+    "control_source": "ORACLE_STATE",
+    "config": "configs/sensors/sensor_shadow_v1.json",
+    "config_sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55",
+    "summary": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor/summary.json"
+  },
+  "scene_injections": {
+    "enabled": false,
+    "synthetic_intervention": true,
+    "visual_only_no_collision": true,
+    "disclaimer": "synthetic confuser/occluder prims added for hard-negative coverage only; NOT an arena asset and NOT a real-arena distribution claim",
+    "definitions": {},
+    "prim_paths": {},
+    "case_mapping": {}
+  },
+  "obstacle_time_clamp": false,
+  "clock_plan": {
+    "camera_clock_id": "camera_sim",
+    "offset_ms": 0.0,
+    "drift_ppm": 0.0,
+    "uncertainty_ms": 0.0
+  },
+  "freeze": {
+    "path": "",
+    "sha256": "",
+    "schema_version": "",
+    "frozen_at": "",
+    "code_commit": ""
+  },
+  "body_envelope": {
+    "schema_version": "boom_birds.body_envelope.v2",
+    "units": "m",
+    "frame": "robot_reference_frame",
+    "aabb": {
+      "half_extents_m": [
+        0.05000000074505806,
+        0.05000000074505806,
+        0.014999999664723873
+      ],
+      "center_offset_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "lengths_m": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.029999999329447746
+      ],
+      "reference_origin": "robot_root_prim_origin",
+      "frame": "robot_reference_frame",
+      "units": "m"
+    },
+    "sphere_about_origin": {
+      "radius_m": 0.07228416243516507,
+      "center_offset_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "center_kind": "robot_reference_origin",
+      "aabb_center_offset_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rule": "sphere_about_reference_origin_max_aabb_corner",
+      "rule_definition": "max over the eight AABB corners of ||corner||_2 = || |center_offset_m| + half_extents_m ||_2 about the robot reference origin",
+      "attitude_scope": "any_rigid_rotation_about_reference_origin",
+      "units": "m",
+      "proof_notes": [
+        "the farthest point of an axis-aligned box from the origin is the corner whose coordinate signs match the box center offset, so the max corner distance is || |center_offset_m| + half_extents_m ||_2",
+        "a rigid rotation about the reference origin preserves every corner distance to the origin, so the sphere centered at the origin contains the box for any such rotation",
+        "the sphere center is the robot reference origin, not the AABB center; the half diagonal about the AABB center is not an around-origin radius when the center offset is non-zero"
+      ]
+    },
+    "sphere_about_aabb_center": {
+      "radius_m": 0.07228416243516507,
+      "center_offset_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "center_kind": "aabb_center",
+      "aabb_center_offset_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rule": "sphere_about_aabb_center_half_diagonal",
+      "rule_definition": "radius_m = || half_extents_m ||_2 with the sphere centered at the AABB center",
+      "attitude_scope": "rigid_rotation_about_aabb_center_only",
+      "units": "m",
+      "proof_notes": [
+        "the distance from the AABB center to any corner is the half diagonal, and rotation about the center preserves it"
+      ],
+      "limitations": [
+        "valid only with the sphere centered at the AABB center; not an around-origin radius",
+        "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof"
+      ]
+    },
+    "production": {
+      "envelope_field": "sphere_about_origin",
+      "radius_m": 0.07228416243516507,
+      "center_kind": "robot_reference_origin",
+      "rule": "sphere_about_reference_origin_max_aabb_corner",
+      "attitude_scope": "any_rigid_rotation_about_reference_origin"
+    },
+    "coverage": {
+      "source": "collision_geometry",
+      "prim_paths": [
+        "/World/envs/env_0/Robot/body/body_collision/geometry"
+      ],
+      "collision_prim_paths": [
+        "/World/envs/env_0/Robot/body/body_collision/geometry"
+      ],
+      "visual_prim_paths": [],
+      "sub_bodies": [
+        "body"
+      ],
+      "attitude_scope": "any_rigid_rotation_about_reference_origin",
+      "joint_state_scope": "fixed_joint_state_at_measurement",
+      "limitations": [
+        "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof",
+        "AABB is measured at one fixed joint state; rotor spin, flex and other joint states are not swept"
+      ]
+    },
+    "attitude_scope": "any_rigid_rotation_about_reference_origin",
+    "joint_state_scope": "fixed_joint_state_at_measurement",
+    "limitations": [
+      "AABB/sphere bound is not an all-attitude triangle-mesh sweep proof",
+      "AABB is measured at one fixed joint state; rotor spin, flex and other joint states are not swept"
+    ],
+    "measurement": {
+      "source": "usd_collision_mesh_points_or_all_purpose_bound",
+      "frame": "robot_reference_frame",
+      "robot_root_prim": "/World/envs/env_0/Robot",
+      "limitation": "authored transforms and fixed joint state; not a swept mesh"
+    },
+    "previous_rule_comparison": {
+      "previous_rule": "box_conservative_sphere_radius",
+      "previous_rule_center_kind": "aabb_center",
+      "previous_radius_m": 0.07228416243516507,
+      "previous_round_reported_radius_m": 0.0679658866409402,
+      "corrected_rule": "sphere_about_reference_origin_max_aabb_corner",
+      "corrected_center_kind": "robot_reference_origin",
+      "corrected_radius_m": 0.07228416243516507,
+      "underestimate_m": 0.0,
+      "underestimate_formula": "|| |center_offset_m| + half_extents_m ||_2 - || half_extents_m ||_2",
+      "equal_within_tolerance": true,
+      "tolerance_m": 1e-12,
+      "previous_rule_exact_when": "center_offset_m == (0, 0, 0): the AABB center coincides with the robot reference origin",
+      "previous_rule_underestimates_when": "any center_offset_m component is non-zero: the AABB center is offset from the robot reference origin",
+      "note": "the previous 0.067966 m half-diagonal radius is an around-origin radius only for a centered AABB; otherwise it underestimates by underestimate_m"
+    },
+    "half_extents_m": [
+      0.05000000074505806,
+      0.05000000074505806,
+      0.014999999664723873
+    ],
+    "measured_prim": "/World/envs/env_0/Robot",
+    "source": "usd_collision_geometry_reference_frame"
+  },
+  "geometry_policy": "reference_origin_v2",
+  "contact_mode": "measured_hard_reset",
+  "effective_config": {
+    "geometry_policy": "reference_origin_v2",
+    "contact_mode": "measured_hard_reset",
+    "argument_sources": {
+      "geometry_policy": "explicit",
+      "contact_mode": "explicit"
+    }
+  },
+  "single_env_only": true,
+  "contact_initializations": [
+    {
+      "case_id": "lmf_t38_f1_ms1_near_sw_0",
+      "method": "follow_only",
+      "physics_generation": 1,
+      "handshake": {
+        "ok": true,
+        "physics_generation": 1,
+        "max_steps": 20,
+        "zero_tolerance_n": 1e-06,
+        "samples": [
+          {
+            "schema_version": "boom_birds.dynamic_contact_sample.v1",
+            "physics_generation": 1,
+            "physics_step": 5,
+            "contact_readout": {
+              "reads": [
+                {
+                  "sample": {
+                    "net_vectors_n": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    ],
+                    "filtered_by_target_n": {
+                      "/World/envs/env_0/Obstacle": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    }
+                  },
+                  "error": null
+                }
+              ]
+            },
+            "measure": {
+              "read_ok": true,
+              "max_net_force_n": 0.0,
+              "max_filtered_force_n": 0.0,
+              "measured_force_n": 0.0
+            },
+            "error": null,
+            "body_names": [
+              "body"
+            ],
+            "filter_count": 1,
+            "negative_contact_verdict": "UNKNOWN",
+            "source": "last_physics_step_contact_force_not_native_event"
+          }
+        ]
+      },
+      "robot_start_world_m": [
+        1.904,
+        2.904,
+        1.0
+      ],
+      "obstacle_handshake_world_m": [
+        0.0,
+        0.0,
+        50.0
+      ]
+    },
+    {
+      "case_id": "lmf_t38_f2_ms1_near_se_0",
+      "method": "follow_only",
+      "physics_generation": 2,
+      "handshake": {
+        "ok": true,
+        "physics_generation": 2,
+        "max_steps": 20,
+        "zero_tolerance_n": 1e-06,
+        "samples": [
+          {
+            "schema_version": "boom_birds.dynamic_contact_sample.v1",
+            "physics_generation": 2,
+            "physics_step": 1390,
+            "contact_readout": {
+              "reads": [
+                {
+                  "sample": {
+                    "net_vectors_n": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    ],
+                    "filtered_by_target_n": {
+                      "/World/envs/env_0/Obstacle": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    }
+                  },
+                  "error": null
+                }
+              ]
+            },
+            "measure": {
+              "read_ok": true,
+              "max_net_force_n": 0.0,
+              "max_filtered_force_n": 0.0,
+              "measured_force_n": 0.0
+            },
+            "error": null,
+            "body_names": [
+              "body"
+            ],
+            "filter_count": 1,
+            "negative_contact_verdict": "UNKNOWN",
+            "source": "last_physics_step_contact_force_not_native_event"
+          }
+        ]
+      },
+      "robot_start_world_m": [
+        4.061,
+        2.939,
+        1.0
+      ],
+      "obstacle_handshake_world_m": [
+        0.0,
+        0.0,
+        50.0
+      ]
+    }
+  ],
+  "gui_evidence": {
+    "gui_mode": true,
+    "renderer": "DirectX (--/app/vulkan=false)",
+    "headless": false,
+    "window_required": true,
+    "screenshots": true,
+    "gpu_driver": "NVIDIA 581.80 (RTX 5080, nvidia-smi)"
+  },
+  "episode_ids": [
+    "lmf_t38_f1_ms1_near_sw_0-follow_only",
+    "lmf_t38_f2_ms1_near_se_0-follow_only"
+  ],
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_two_class_near_ms1_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --code-commit 47d1063b94dc779e87e1f6be7d6210b489a85395 --working-tree T38 near-MS1 two-class supplement (2 new families); branch feat/v2.2-simulation-perception; HEAD 47d1063 --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_two_class_near_ms1_20261105",
+  "completion": {
+    "schema_version": "boom_birds.dynamic_eval_complete.v1",
+    "status": "PASS",
+    "completed": true,
+    "summary_error_file": false,
+    "finished_at": "2026-11-05T12:27:43.373997+08:00"
+  },
+  "outputs_sha256": {
+    "summary.json": "32b2876d3e6b426f17674c2632b84591938d4bf6fa6d3c064268afa5c5375301",
+    "episodes.jsonl": "65424957e64a4d1979ba98bf1db076437ed71302ed45a6d12999662a5f148425",
+    "steps.jsonl": "79690a253aacfdef2b5ecdab1e1d96f8895b23f9f10eb88077c8987148d60e7c",
+    "run.complete.json": "05db34dfd3dd57bc3283d21dd54fcfe64609d184c07cdb7ddf427cf8f7d60012"
+  }
+}

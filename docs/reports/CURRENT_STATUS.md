@@ -52,7 +52,7 @@
 - **不可变快照**：13 artifacts 在 pre_train/pre_selection/post_train 校验；3 seed 全部 VALID；标签漂移阻断。v5 freeze（train 19 组/1857、val 11 组/921）泄漏审计/外部索引 PASS。
 - **ONNX 三路径（候选 A 选定）**：PARITY_PASS，186 帧/134 metric 帧全部决策层 0 翻转（presence/reference/identity claim/identity gt/false claim/reject reason/bearing/joint）；raw 相对差 1.48e-6；RKNN/板端 UNKNOWN。
 - **身份案例缺口**：T25 补采 INCOMPLETE（CUDA OOM、无 run.complete；pilot 机位不合格），T26 28 帧 PROVISIONAL_DIAGNOSTIC_ONLY 不纳入；holdout v2 预注册 SPEC_FROZEN_NOT_TRIGGERED。
-- **下一包建议**：实现 two-class 身份通道（tower vs similar structure/MS1）并重新预注册 consumer gate；之后按 holdout v2 补采与一次性评价。
+- **下一包建议（2026-11-04 记录，已于 2026-11-05 启动）**：实现 two-class 身份通道（tower vs similar structure/MS1）并重新预注册 consumer gate；之后按 holdout v2 补采与一次性评价。
 
 ## 当前能力限制
 
@@ -76,3 +76,25 @@
 - 当前单环境动态评价默认：`--geometry-policy reference_origin_v2 --contact-mode measured_hard_reset`。显式历史模式：`--geometry-policy legacy --contact-mode legacy_inference`。不能混用，不能将旧冻结直接套到新默认。
 - 旧冻结、失败、pilot、无效标签轮次和历史验证文件保留原路径及字节，不因入库而变成当前正式验收证据。原始大图、逐步日志、权重、地图资产及本机配置继续留在忽略目录或外部存储。
 - 冻结匹配原源码/配置与当时工作树；当前 HEAD 前进并不使历史冻结适用于新源码。复现时按对应报告选择源码，不重写历史 commit/hash。
+
+## 当前状态（2026-11-05 更新；two-class 工作包进行中）
+
+- **当前任务**：two-class 身份通道 + 消费者验证（新预注册 [two-class protocol](../../configs/perception/landmark_two_class_protocol_v1.json)、[标签规范](../../configs/perception/landmark_two_class_label_spec_v1.json)、新预算、新快照 manifest v7）；旧包 47d1063 保持封闭。
+- **已过时描述更正（历史保留）**：
+  - “训练启动 BLOCKED（A1 许可需用户决策）”只适用于 2026-11-04 训练前闭环包；自 2026-11-04 起已在用户“仅内部有界研究”授权下实际完成多轮训练与评测，当前训练不再 BLOCKED。
+  - “停止单类 pose+3px 2D+单身份认证路线”仍是单类路线的结论；two-class 是新的、独立预注册的工作包，不等于该路线重启或认证恢复。
+- **当前限制/边界**：two-class 只解决“塔 vs 已验证相似结构 MS1”的限定域辨识，**不是开放集身份识别**；class1 永不映射中央塔 ID；UNKNOWN/REJECTED 必须显式。身份误匹配、bearing 覆盖、消费者成功率仍以实测定论；RKNN/板端/真实相机保持 UNKNOWN；认证级结论仍需独立人工标注与新 holdout。
+- **下一项**：two-class 数据冻结 → 工程 smoke/pilot → 3 seed → consumer development→holdout 门判定；门通过才触发 holdout v3（≥3 新族/200–400 帧/覆盖 MS1 单独、塔单独、同框、尺度、截断遮挡、缺席）。
+- **历史记录**：2026-11-04 及以前各节按日期阅读，不因本更新而改写。
+
+## Two-class 身份通道与消费者验证（2026-11-05 工作包；STOP）
+
+- 结论：**两套预注册配方 pilot 均未过 pilot→3seed 门 → 停止本版 two-class 实验**；不进入 3 seed，不触发新 holdout（landmark_holdout_freeze_v3 保持 SPEC_FROZEN_NOT_TRIGGERED）。详见 [two-class 结果报告](perception/LANDMARK_TWO_CLASS_RESULTS_20261105.md)。
+- 预注册：[two-class protocol](../../configs/perception/landmark_two_class_protocol_v1.json)（class0 中央塔 / class1 map-native MS1；class1 永不映射塔、kpt v=0 mask；工程 smoke / pilot→3seed / consumer holdout 三级门；预算 2 配方×15ep pilot + 最多 4 次完整训练；R2 amendment 与 r2_joint 选模规则先于 R2 冻结）、[标签规范](../../configs/perception/landmark_two_class_label_spec_v1.json)。
+- 数据：T30 373（class0 232/class1 123/同框 39）+ v4.1 addendum 60 + T38 近距 MS1 102（class1 102，h 184–227px）；val_main 163（MS1 47）+ identity 62（MS1 35/同框 26/MS1-only 9/GT_UNOBS 9）；v6.1/v6.2 冻结（class1 285、泄漏审计 0）、snapshot v7/v7b（34 artifacts 全 VALID）。
+- R1（v6.1，15ep）：MS1 recall identity 0.286 <0.50 → pilot gate FAIL（近距 MS1 OOD；class1 head 重初始化+15ep+warmup）。
+- R2（v6.2+近距 MS1，15ep）：MS1 recall 修复到 0.571、tower 0.853，但官方 same-frame 0.319/0.500 <0.60 → pilot gate FAIL；且 identity false-ref 0.077→0.500、consumer all 0.698→0.434、val negative claims 2/39、GT_UNOBS improper 2 → 回退项进一步阻止 promotion。
+- 预算：2 次 pilot（≤15ep），**0 次完整训练**；未 3-seed、未 holdout。
+- 可保留正面证据：近距 MS1 数据方向有效（MS1 recall 0.286→0.571）；但 same-frame 消歧与 reference availability/负例/不可观测 claim 是本版失败点。
+- 下一版若继续 two-class 需新预注册（same-frame 监督、参考通道 guard、negatives/GT_UNOBS claim、class1 不干扰 kpt 分支），不是本 R2 的延续；当前可交付基线仍是单类 + identity 显式 UNKNOWN + bearing-primary 诊断。
+- 旧包 47d1063 封闭、旧模型/协议/hash 不改；`CURRENT_STATUS`/`AGENTS` 中历史“训练 BLOCKED/下一项”表述已在本包开头按日期更正（历史保留）。

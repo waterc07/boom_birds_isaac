@@ -1,0 +1,48 @@
+{
+ "v41_addendum_00.png": [
+  "dev_south_new-follow_only_g1_20.png",
+  "dev_south_new-follow_only_g1_22.png",
+  "dev_south_new-follow_only_g1_25.png",
+  "dev_south_new-follow_only_g1_28.png",
+  "dev_south_new-follow_only_g1_3.png",
+  "dev_south_new-follow_only_g1_31.png",
+  "dev_south_new-follow_only_g1_38.png",
+  "dev_south_new-follow_only_g1_49.png",
+  "dev_south_new-follow_only_g1_5.png",
+  "dev_south_new-follow_only_g1_51.png",
+  "dev_south_new-follow_only_g1_54.png",
+  "dev_south_new-follow_only_g1_57.png"
+ ],
+ "v41_addendum_01.png": [
+  "dev_south_new-follow_only_g1_60.png",
+  "dev_south_new-follow_only_g1_62.png",
+  "dev_south_new-follow_only_g1_65.png",
+  "dev_south_new-follow_only_g1_67.png",
+  "dev_south_new-follow_only_g1_70.png",
+  "dev_south_new-follow_only_g1_9.png",
+  "sensor_reset_0-follow_only_g5_24.png",
+  "sensor_reset_0-follow_only_g5_27.png",
+  "sensor_reset_0-follow_only_g5_29.png",
+  "sensor_reset_0-follow_only_g5_33.png",
+  "sensor_reset_0-follow_only_g5_35.png",
+  "sensor_reset_0-follow_only_g5_38.png"
+ ],
+ "v41_addendum_02.png": [
+  "sensor_reset_0-follow_only_g5_40.png",
+  "sensor_reset_0-follow_only_g5_42.png",
+  "sensor_reset_0-follow_only_g5_47.png",
+  "sensor_reset_0-follow_only_g5_52.png",
+  "sensor_reset_0-follow_only_g5_6.png",
+  "sensor_reset_0-follow_only_g5_61.png",
+  "sensor_reset_0-follow_only_g5_63.png",
+  "sensor_reset_0-follow_only_g5_67.png",
+  "sensor_reset_1-follow_only_g6_56.png",
+  "sensor_reset_1-follow_only_g6_58.png",
+  "sensor_reset_1-follow_only_g6_7.png",
+  "sensor_route_1-follow_only_g4_8.png"
+ ],
+ "v41_addendum_03.png": [
+  "sensor_static_0-follow_only_g1_3.png",
+  "sensor_static_1-follow_only_g2_3.png"
+ ]
+}

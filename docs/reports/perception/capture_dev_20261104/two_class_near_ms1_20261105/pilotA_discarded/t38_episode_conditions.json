@@ -1,0 +1,46 @@
+{
+ "lmf_t38_f1_ms1_near_sw_0-follow_only": {
+  "frames": 55,
+  "ms1_in_fov": 55,
+  "ms1_green_frames": 55,
+  "tower_in_fov": 0,
+  "bbox_height_min": 180.0,
+  "bbox_height_max": 213.5,
+  "bbox_width_min": 41.4,
+  "bbox_width_max": 64.0,
+  "dist_min": 1.56,
+  "dist_max": 1.77,
+  "trunc_left": 0,
+  "trunc_right": 0,
+  "trunc_top": 0,
+  "trunc_bottom": 3,
+  "green_min": 22,
+  "green_max": 40,
+  "seq_range": [
+   3,
+   57
+  ]
+ },
+ "lmf_t38_f2_ms1_near_se_0-follow_only": {
+  "frames": 53,
+  "ms1_in_fov": 53,
+  "ms1_green_frames": 0,
+  "tower_in_fov": 0,
+  "bbox_height_min": 181.0,
+  "bbox_height_max": 230.6,
+  "bbox_width_min": 43.2,
+  "bbox_width_max": 73.4,
+  "dist_min": 1.54,
+  "dist_max": 1.75,
+  "trunc_left": 0,
+  "trunc_right": 0,
+  "trunc_top": 0,
+  "trunc_bottom": 7,
+  "green_min": 0,
+  "green_max": 0,
+  "seq_range": [
+   3,
+   55
+  ]
+ }
+}

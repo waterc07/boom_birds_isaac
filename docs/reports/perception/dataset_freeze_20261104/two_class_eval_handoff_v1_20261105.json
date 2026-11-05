@@ -1,0 +1,53 @@
+{
+  "schema_version": "dsh.landmark_two_class_eval_handoff.v1",
+  "status": "FROZEN_FOR_P2_SMOKE",
+  "created_at": "2026-11-05T04:25:12.854055+00:00",
+  "eval_set_rule": "P2 eval set = union of val_main 163 + identity 62; class1 GT only verified map-native MS1 (WORLD_POSE_OR_MAP_DB); synthetic HN1/other structures excluded from class1",
+  "sets": {
+    "val_main": {
+      "path": "outputs/perception/two_class_eval_20261105/eval_val_main_163_two_class.json",
+      "sha256": "d6c6a25249c1c8fd2bf334ae7f9e399e9f69b7ebe0534c79e98fb2fefd934436",
+      "frames": 163,
+      "counts": {
+        "tower_present_observable": 95,
+        "gt_unobservable": 29,
+        "negatives": 39,
+        "same_frame": 47,
+        "ms1_only": 0
+      }
+    },
+    "identity": {
+      "path": "outputs/perception/two_class_eval_20261105/eval_identity_62_two_class.json",
+      "sha256": "7471c408e84c0774425ad852e2c4ab99b14ea1968210f09fbd6b9ff8035d8b17",
+      "frames": 62,
+      "counts": {
+        "tower_present_observable": 44,
+        "gt_unobservable": 9,
+        "negatives": 0,
+        "same_frame": 26,
+        "ms1_only": 9
+      }
+    }
+  },
+  "combined": {
+    "frames": 225,
+    "counts": {
+      "tower_present_observable": 139,
+      "gt_unobservable": 38,
+      "negatives": 39,
+      "same_frame": 73,
+      "ms1_only": 9
+    }
+  },
+  "train_overlap": {
+    "train_frames": 2288,
+    "eval_frames": 225,
+    "overlap_frames": 0,
+    "status": "PASS"
+  },
+  "notes": [
+    "coverage flags; gt_unobservable includes OCCLUDED and UNKNOWN/undecidable; negatives = ABSENT only",
+    "class1 keypoint null/v=0; class0 keypoint normalized [0,1]",
+    "eval docs ignored; shas frozen in v6.1 and snapshot v7"
+  ]
+}

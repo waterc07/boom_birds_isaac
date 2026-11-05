@@ -55,6 +55,16 @@ NUM_CLASSES = 1
 KEYPOINT_COUNT = 1
 CHANNELS = 4 + NUM_CLASSES + 3 * KEYPOINT_COUNT
 
+# --- two-class identity channel (2026-11-05 work package) -------------------
+# class 0 = central tower (one green roof-light keypoint), class 1 = verified
+# map-native similar structure MS1 (no same-semantic keypoint; class 1 must
+# never be mapped to the central-tower landmark id).
+TWO_CLASS_TABLE = {0: 'central_tower', 1: 'similar_structure_ms1'}
+CENTRAL_TOWER_CLASS_ID = 0
+MS1_CLASS_ID = 1
+TWO_CLASS_NUM_CLASSES = 2
+TWO_CLASS_CHANNELS = 4 + TWO_CLASS_NUM_CLASSES + 3 * KEYPOINT_COUNT
+
 
 class OnnxParityError(ValueError):
     """Raised when an ONNX parity input or geometry is invalid."""
@@ -273,7 +283,7 @@ def _iou_xyxy_one(box, boxes):
 
 
 def nms_rows(rows, conf_thres, iou_thres, max_det=300, num_classes=NUM_CLASSES,
-             keypoint_count=KEYPOINT_COUNT):
+             keypoint_count=KEYPOINT_COUNT, class_aware=True, max_wh=7680):
     """Greedy NMS over raw pose rows (cx, cy, w, h, scores..., kpts...).
 
     Matches ultralytics: strict score > conf_thres, best-class only, class
@@ -292,18 +302,30 @@ def nms_rows(rows, conf_thres, iou_thres, max_det=300, num_classes=NUM_CLASSES,
         raise OnnxParityError('iou_thres must be within [0, 1]')
     if int(max_det) <= 0:
         raise OnnxParityError('max_det must be positive')
-    scores = array[:, 4:4 + int(num_classes)].max(axis=1)
+    class_scores = array[:, 4:4 + int(num_classes)]
+    if int(num_classes) == 1:
+        best_classes = np.zeros(len(array), dtype=np.int64)
+        scores = class_scores[:, 0]
+    else:
+        best_classes = np.argmax(class_scores, axis=1)
+        scores = class_scores[np.arange(len(array)), best_classes]
     keep_mask = scores > float(conf_thres)
     if not keep_mask.any():
         return np.zeros((0, channels), dtype=np.float32)
     candidates = array[keep_mask]
     candidate_scores = scores[keep_mask]
+    candidate_classes = best_classes[keep_mask]
     boxes_cxcywh = candidates[:, :4]
     boxes = np.empty_like(boxes_cxcywh)
     boxes[:, 0] = boxes_cxcywh[:, 0] - boxes_cxcywh[:, 2] / 2.0
     boxes[:, 1] = boxes_cxcywh[:, 1] - boxes_cxcywh[:, 3] / 2.0
     boxes[:, 2] = boxes_cxcywh[:, 0] + boxes_cxcywh[:, 2] / 2.0
     boxes[:, 3] = boxes_cxcywh[:, 1] + boxes_cxcywh[:, 3] / 2.0
+    if class_aware:
+        # ultralytics offsets boxes by class*max_wh before torchvision NMS:
+        # overlapping boxes of DIFFERENT classes must both be kept.
+        boxes = boxes + (candidate_classes[:, None].astype(np.float32)
+                         * float(max_wh))
     order = np.argsort(-candidate_scores, kind='stable')
     kept = []
     while order.size and len(kept) < int(max_det):
@@ -408,6 +430,323 @@ def channels_of_rows(rows):
     """Channel count of a pose row matrix; 0 for an empty array."""
     array = np.asarray(rows)
     return int(array.shape[1]) if array.ndim == 2 else 0
+
+
+def _iou_xywh_one(a, b):
+    ax1, ay1, aw, ah = [float(v) for v in a]
+    bx1, by1, bw, bh = [float(v) for v in b]
+    ax2, ay2 = ax1 + aw, ay1 + ah
+    bx2, by2 = bx1 + bw, by1 + bh
+    inter = max(0.0, min(ax2, bx2) - max(ax1, bx1)) * \
+        max(0.0, min(ay2, by2) - max(ay1, by1))
+    union = aw * ah + bw * bh - inter
+    return inter / union if union > 0 else 0.0
+
+
+def normalize_class_table(class_table=None):
+    """Return {int class_id: name}; default is the frozen two-class table."""
+    table = class_table or TWO_CLASS_TABLE
+    normalized = {}
+    for key, value in table.items():
+        class_id = int(key)
+        if class_id < 0:
+            raise OnnxParityError('class ids must be >= 0')
+        normalized[class_id] = str(value)
+    if CENTRAL_TOWER_CLASS_ID not in normalized:
+        raise OnnxParityError('class table must contain class 0 (central tower)')
+    return dict(sorted(normalized.items()))
+
+
+def _detection_row(rows, index, spec, *, class_table, thresholds,
+                   clip_to_source=True, round_boxes=True):
+    row = rows[index]
+    num_classes = len(class_table)
+    cx, cy, bw, bh = [float(v) for v in row[:4]]
+    class_scores = row[4:4 + num_classes]
+    class_id = int(np.argmax(class_scores)) if len(class_scores) else 0
+    score = float(class_scores[class_id]) if len(class_scores) else 0.0
+    x1 = cx - bw / 2.0
+    y1 = cy - bh / 2.0
+    x2 = cx + bw / 2.0
+    y2 = cy + bh / 2.0
+    if round_boxes:
+        x1 = float(np.clip(x1, 0.0, spec.model_width))
+        y1 = float(np.clip(y1, 0.0, spec.model_height))
+        x2 = float(np.clip(x2, 0.0, spec.model_width))
+        y2 = float(np.clip(y2, 0.0, spec.model_height))
+        x1, y1, x2, y2 = (float(np.round(x1)), float(np.round(y1)),
+                          float(np.round(x2)), float(np.round(y2)))
+    bbox = spec.bbox_from_model([x1, y1, x2 - x1, y2 - y1])
+    if clip_to_source:
+        bbox = clip_bbox_xywh(bbox, spec.source_width, spec.source_height)
+    tail = np.asarray(row[4 + num_classes:], dtype=np.float32)
+    keypoint = None
+    keypoint_confidence = None
+    # class 1 (MS1) has no same-semantic reference point: raw keypoint columns
+    # are ignored even if the network emits something there (never a bearing).
+    if class_id == CENTRAL_TOWER_CLASS_ID and tail.size >= 3:
+        keypoint = [float(v) for v in spec.point_from_model(
+            (float(tail[0]), float(tail[1])))]
+        keypoint_confidence = float(tail[2])
+    return {
+        'class_id': class_id,
+        'class_name': class_table[class_id],
+        'score': score,
+        'bbox_xywh': [float(v) for v in bbox],
+        'keypoint_px': keypoint,
+        'keypoint_confidence': keypoint_confidence,
+        'truncated_edges': _truncated_edges_xywh(bbox, spec.source_width,
+                                                 spec.source_height),
+    }
+
+
+def _truncated_edges_xywh(bbox_xywh, width, height):
+    x, y, w, h = [float(v) for v in bbox_xywh]
+    epsilon = 1e-6
+    edges = []
+    if x <= epsilon:
+        edges.append('left')
+    if y <= epsilon:
+        edges.append('top')
+    if x + w >= float(width) - epsilon:
+        edges.append('right')
+    if y + h >= float(height) - epsilon:
+        edges.append('bottom')
+    return sorted(edges)
+
+
+def build_two_class_observation(detections, *, thresholds, intrinsics=None,
+                                frame_id=None, image=None,
+                                class_table=None, landmark_id=None):
+    """Compose the two-class observation record from source-pixel detections.
+
+    Decision rules (protocol landmark_two_class_protocol_v1.json):
+    * class 0 (central tower) may claim the landmark id only when there is one
+      tower target, no same-object class conflict with class 1, and no
+      multi-target ambiguity;
+    * class 1 (MS1) NEVER maps to the central-tower landmark id;
+    * only class 0 can emit a keypoint/bearing; class 1 has no same-semantic
+      reference point;
+    * low confidence / class conflict / multi-target ambiguity / unavailable
+      reference -> explicit reject reason.
+    """
+    from boom_birds.evaluation import landmark_yolo as yolo
+    table = normalize_class_table(class_table)
+    tau_det = float(thresholds.get('tau_det', 0.5))
+    tau_margin = float(thresholds.get('tau_margin', 0.1))
+    tau_kpt = float(thresholds.get('tau_kpt', 0.5))
+    usable = [item for item in detections
+              if float(item.get('score') or 0.0) >= tau_det]
+    towers = sorted([item for item in usable
+                     if item['class_id'] == CENTRAL_TOWER_CLASS_ID],
+                    key=lambda item: item['score'], reverse=True)
+    ms1 = sorted([item for item in usable
+                  if item['class_id'] == MS1_CLASS_ID],
+                 key=lambda item: item['score'], reverse=True)
+    conflict = False
+    if towers and ms1:
+        conflict = any(_iou_xywh_one(towers[0]['bbox_xywh'],
+                                     item['bbox_xywh']) >= 0.5
+                       for item in ms1)
+    reject_reasons = []
+    identity_claimed = False
+    selected = None
+    if towers:
+        selected = towers[0]
+        if len(towers) >= 2:
+            margin = towers[0]['score'] - towers[1]['score']
+            if margin < tau_margin:
+                reject_reasons.append('MULTIPLE_CANDIDATES')
+        if conflict:
+            reject_reasons.append('CLASS_CONFLICT')
+        if 'MULTIPLE_CANDIDATES' not in reject_reasons \
+                and 'CLASS_CONFLICT' not in reject_reasons:
+            identity_claimed = True
+    reference_status = 'UNAVAILABLE'
+    keypoint_px = None
+    keypoint_confidence = None
+    bearing = None
+    if selected is not None:
+        keypoint_confidence = selected.get('keypoint_confidence')
+        candidate_kpt = selected.get('keypoint_px')
+        if candidate_kpt is not None and keypoint_confidence is not None \
+                and float(keypoint_confidence) >= tau_kpt:
+            reference_status = 'VISIBLE'
+            keypoint_px = [float(candidate_kpt[0]), float(candidate_kpt[1])]
+            if intrinsics and intrinsics.get('fx_px') is not None \
+                    and intrinsics.get('cx_px') is not None:
+                bearing = yolo.image_bearing_deg(
+                    keypoint_px[0], fx_px=float(intrinsics['fx_px']),
+                    cx_px=float(intrinsics['cx_px']))
+        else:
+            reject_reasons.append('REFERENCE_UNAVAILABLE')
+    status = 'DETECTED' if (towers or ms1) else 'NOT_DETECTED'
+    if selected is None and ms1:
+        # MS1-only frame: class 1 is a detected structure but never a tower
+        # claim; there is no reference point by definition.
+        reject_reasons.append('NO_CENTRAL_TOWER')
+    return {
+        'schema_version': 'dsh.landmark_onnx.two_class_observation.v1',
+        'frame_id': frame_id,
+        'image': image,
+        'status': status,
+        'class_table': {str(key): value for key, value in table.items()},
+        'detections': usable,
+        'tower_count': len(towers),
+        'ms1_count': len(ms1),
+        'tower_present': bool(towers),
+        'ms1_present': bool(ms1),
+        'tower_claim': identity_claimed,
+        'landmark_id': (landmark_id if identity_claimed else None),
+        'ms1_maps_tower': False,
+        'reference_status': reference_status,
+        'keypoint_px': keypoint_px,
+        'keypoint_confidence': keypoint_confidence,
+        'image_bearing_deg': bearing,
+        'class_conflict': conflict,
+        'selected_class_id': (selected['class_id'] if selected else None),
+        'selected_bbox_xywh': (selected['bbox_xywh'] if selected else None),
+        'score': (selected['score'] if selected else None),
+        'reject_reason': (reject_reasons[0] if reject_reasons else None),
+        'reject_reasons': reject_reasons,
+        'valid': not any(reason in ('MULTIPLE_CANDIDATES', 'CLASS_CONFLICT')
+                         for reason in reject_reasons),
+        'thresholds': {key: float(value) for key, value in thresholds.items()
+                       if isinstance(value, (int, float))},
+    }
+
+
+def decode_two_class_rows(rows, spec, *, image_width, image_height, thresholds,
+                          class_table=None, intrinsics=None, frame_id=None,
+                          image=None, landmark_id=None, clip_to_source=True,
+                          round_boxes=True):
+    """Decode raw two-class pose rows (cx,cy,w,h,scores0..1,kpt...) to source."""
+    table = normalize_class_table(class_table)
+    if not isinstance(spec, LetterboxSpec):
+        raise OnnxParityError('spec must be a LetterboxSpec')
+    array = np.asarray(rows, dtype=np.float32)
+    channels = 4 + len(table) + 3 * KEYPOINT_COUNT
+    if array.size:
+        if array.ndim != 2 or array.shape[1] != channels:
+            raise OnnxParityError(
+                'two-class rows must be (N, %d); got %r'
+                % (channels, array.shape))
+        detections = [_detection_row(array, index, spec,
+                                     class_table=table,
+                                     thresholds=thresholds,
+                                     clip_to_source=clip_to_source,
+                                     round_boxes=round_boxes)
+                      for index in range(len(array))]
+    else:
+        detections = []
+    return build_two_class_observation(
+        detections, thresholds=thresholds, intrinsics=intrinsics,
+        frame_id=frame_id, image=image, class_table=table,
+        landmark_id=landmark_id)
+
+
+def decode_ultralytics_two_class_result(result, *, spec=None, coordinates='model',
+                                       image_width=None, image_height=None,
+                                       thresholds=None, class_table=None,
+                                       intrinsics=None, frame_id=None,
+                                       image=None, landmark_id=None):
+    """Adapt an ultralytics multi-class pose result to the two-class record."""
+    table = normalize_class_table(class_table)
+    boxes = result.boxes if result is not None else None
+    keypoints = result.keypoints if result is not None else None
+    xyxy = boxes.xyxy.cpu().numpy() if boxes is not None and len(boxes) else []
+    conf = boxes.conf.cpu().numpy() if boxes is not None and len(boxes) else []
+    classes = boxes.cls.cpu().numpy() if boxes is not None and len(boxes) else []
+    kpt_xy = (keypoints.xy.cpu().numpy()
+              if keypoints is not None and len(keypoints) else [])
+    kpt_conf = (keypoints.conf.cpu().numpy()
+                if keypoints is not None and len(keypoints) else [])
+    if spec is None and coordinates == 'model':
+        raise OnnxParityError("coordinates='model' requires a LetterboxSpec")
+    detections = []
+    for index, box in enumerate(xyxy):
+        x1, y1, x2, y2 = [float(v) for v in box[:4]]
+        bbox = [x1, y1, x2 - x1, y2 - y1]
+        if coordinates == 'model':
+            bbox = spec.bbox_from_model(bbox)
+        bbox = clip_bbox_xywh(bbox, image_width, image_height)
+        class_id = int(classes[index]) if index < len(classes) else 0
+        item = {
+            'class_id': class_id,
+            'class_name': table.get(class_id, str(class_id)),
+            'score': float(conf[index]) if index < len(conf) else 0.0,
+            'bbox_xywh': bbox,
+            'keypoint_px': None,
+            'keypoint_confidence': None,
+            'truncated_edges': _truncated_edges_xywh(bbox, image_width,
+                                                     image_height),
+        }
+        if class_id == CENTRAL_TOWER_CLASS_ID and index < len(kpt_xy):
+            points = kpt_xy[index]
+            if len(points):
+                point = [float(points[0][0]), float(points[0][1])]
+                if coordinates == 'model':
+                    point = list(spec.point_from_model(point))
+                item['keypoint_px'] = point
+                if len(kpt_conf) > index and len(kpt_conf[index]):
+                    item['keypoint_confidence'] = float(kpt_conf[index][0])
+        detections.append(item)
+    return build_two_class_observation(
+        detections, thresholds=thresholds, intrinsics=intrinsics,
+        frame_id=frame_id, image=image, class_table=table,
+        landmark_id=landmark_id)
+
+
+def two_class_decision(observation):
+    """Path-consistency decision tuple of a two-class observation."""
+    observation = observation or {}
+    return {
+        'status': observation.get('status'),
+        'tower_present': bool(observation.get('tower_present')),
+        'ms1_present': bool(observation.get('ms1_present')),
+        'tower_count': int(observation.get('tower_count') or 0),
+        'ms1_count': int(observation.get('ms1_count') or 0),
+        'tower_claim': bool(observation.get('tower_claim')),
+        'ms1_maps_tower': bool(observation.get('ms1_maps_tower')),
+        'reference_available': (observation.get('reference_status') == 'VISIBLE'
+                                and observation.get('keypoint_px') is not None),
+        'bearing_available': observation.get('image_bearing_deg') is not None,
+        'bearing_deg': observation.get('image_bearing_deg'),
+        'class_conflict': bool(observation.get('class_conflict')),
+        'reject_reason': observation.get('reject_reason'),
+    }
+
+
+def two_class_decision_diff(left, right, tau_bearing_deg=0.01):
+    """Compare two two-class observations layer by layer (path parity)."""
+    a = two_class_decision(left)
+    b = two_class_decision(right)
+    bearing_left = a['bearing_deg']
+    bearing_right = b['bearing_deg']
+    bearing_delta = None
+    bearing_flip = False
+    if bearing_left is not None and bearing_right is not None:
+        bearing_delta = abs(float(bearing_left) - float(bearing_right))
+        bearing_flip = bearing_delta > float(tau_bearing_deg)
+    flags = {
+        'status_flip': a['status'] != b['status'],
+        'tower_present_flip': a['tower_present'] != b['tower_present'],
+        'ms1_present_flip': a['ms1_present'] != b['ms1_present'],
+        'tower_count_flip': a['tower_count'] != b['tower_count'],
+        'ms1_count_flip': a['ms1_count'] != b['ms1_count'],
+        'tower_claim_flip': a['tower_claim'] != b['tower_claim'],
+        'ms1_maps_tower_flip': a['ms1_maps_tower'] != b['ms1_maps_tower'],
+        'reference_flip': a['reference_available'] != b['reference_available'],
+        'bearing_presence_flip': a['bearing_available'] != b['bearing_available'],
+        'bearing_flip': bearing_flip,
+        'class_conflict_flip': a['class_conflict'] != b['class_conflict'],
+        'reject_reason_flip': a['reject_reason'] != b['reject_reason'],
+    }
+    flags['changed'] = any(flags.values())
+    flags['bearing_delta_deg'] = bearing_delta
+    flags['left'] = a
+    flags['right'] = b
+    return flags
 
 
 def candidate_from_observation(observation):

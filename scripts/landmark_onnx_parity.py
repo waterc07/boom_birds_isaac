@@ -75,6 +75,13 @@ def parse_args(argv=None):
                     'onnxruntime decoding end-to-end on the same canvas, with '
                     'the same NMS, thresholds and coordinate domain.')
     parser.add_argument('--config', default=str(DEFAULT_CONFIG))
+    parser.add_argument('--two-class-config', default=str(
+        REPO_ROOT / 'configs' / 'perception' /
+        'landmark_export_two_class_v1.json'))
+    parser.add_argument('--two-class', dest='two_class', action='store_true',
+                        default=False,
+                        help='two-class identity-channel parity mode '
+                             '(central_tower vs similar_structure_ms1)')
     parser.add_argument('--freeze', default=str(DEFAULT_FREEZE))
     parser.add_argument('--pt', default=None, help='.pt checkpoint override')
     parser.add_argument('--onnx', default=None,
@@ -104,6 +111,18 @@ def parse_args(argv=None):
     parser.add_argument('--candidate-label', default=None,
                         help='candidate/model label recorded in the evidence '
                              '(e.g. candidate_A_3seed)')
+    parser.add_argument('--two-class-labels', default=None,
+                        help='frozen two-class annotation document (label spec v1) '
+                             'used ONLY as GT for the consumer-success parity; '
+                             'required to run the consumer comparison')
+    parser.add_argument('--consumer-protocol', default=None,
+                        help='two-class consumer protocol JSON (default: the '
+                             'repo two-class protocol)')
+    parser.add_argument('--consumer-identity-policy', default='confirmed_only',
+                        choices=['confirmed_only', 'raw_claim_upper_bound',
+                                 'strict_unknown'])
+    parser.add_argument('--skip-consumer', dest='consumer', action='store_false',
+                        default=True)
     parser.add_argument('--selection-json', default=None,
                         help='T22 selection/freeze JSON recorded as model '
                              'provenance (read-only)')
@@ -196,19 +215,99 @@ def _find_image(repo_root, annotation):
     return None
 
 
+def _two_class_truth_from_annotation(annotation):
+    """GT/strata/scenario tags from a two-class label-spec v1 annotation."""
+    instances = [item for item in (annotation.get('instances') or [])
+                 if isinstance(item, dict)]
+    class0 = [item for item in instances if int(item.get('class', 0)) == 0]
+    class1 = [item for item in instances if int(item.get('class', 1)) == 1]
+    tower_present = bool(annotation.get('tower_present', bool(class0)))
+    ms1_present = bool(annotation.get('ms1_present', bool(class1)))
+    tower_bbox = None
+    tower_keypoint = None
+    truncated = False
+    for item in class0:
+        bbox = item.get('bbox_xywh')
+        if bbox is None and item.get('bbox_xyxy') is not None:
+            x1, y1, x2, y2 = [float(v) for v in item['bbox_xyxy']]
+            bbox = [x1, y1, x2 - x1, y2 - y1]
+        if bbox is not None and tower_bbox is None:
+            tower_bbox = [float(v) for v in bbox]
+        keypoint = item.get('keypoint_px')
+        visible = item.get('v', item.get('visible'))
+        if keypoint is not None and (visible is None or int(visible) == 1)                 and item.get('reference_available') is not False:
+            tower_keypoint = [float(keypoint[0]), float(keypoint[1])]
+        if item.get('truncated_edges'):
+            truncated = True
+    occluded = bool(annotation.get('occluded'))
+    uncertain = bool(annotation.get('identity_ambiguity')
+                     or annotation.get('gt_uncertainty'))
+    gt_unobservable = bool(tower_present and tower_bbox is None)
+    gt = {
+        'frame_id': annotation.get('frame_id'),
+        'present': bool(tower_present),
+        'landmark_id': None,
+        'bbox_xywh': tower_bbox,
+        'reference': ('VISIBLE' if tower_keypoint is not None
+                      else ('UNAVAILABLE' if tower_present else None)),
+        'visibility': None,
+        'truncated': truncated,
+        'occluded': occluded,
+        'ambiguous': uncertain,
+        'undecidable': gt_unobservable,
+        'negative_type': ('SIMILAR_STRUCTURE'
+                          if ms1_present and not tower_present else None),
+    }
+    strata = {
+        'family': str(annotation.get('family')
+                      or (annotation.get('source') or {}).get('family')
+                      or 'TWO_CLASS'),
+        'group_id': str(annotation.get('group_id')
+                        or (annotation.get('source') or {}).get('group_id')
+                        or 'TWO_CLASS'),
+        'visibility': 'FULL',
+        'scale': str(annotation.get('scale') or 'UNKNOWN'),
+        'truncation': 'TRUNCATED' if truncated else 'NOT_TRUNCATED',
+        'negative_type': gt['negative_type'] or 'NONE',
+    }
+    tags = ['real_two_class']
+    if ms1_present and not tower_present:
+        tags += ['ms1_similar', 'target_absent']
+    if tower_present and ms1_present:
+        tags += ['ms1_both', 'multi_candidate_candidate']
+    if tower_present and tower_keypoint is None:
+        tags.append('keypoint_unavailable')
+    if truncated:
+        tags.append('edge_truncation')
+    if occluded:
+        tags.append('occluded')
+    meta = {'tower_present': tower_present, 'ms1_present': ms1_present,
+            'tower_instances': len(class0), 'ms1_instances': len(class1),
+            'same_frame': bool(tower_present and ms1_present),
+            'ms1_only': bool(ms1_present and not tower_present),
+            'gt_uncertain': uncertain}
+    return gt, (tower_keypoint if tower_keypoint is not None else None),         strata, tags, meta
+
+
 def build_annotation_frames(labels_path, split, repo_root):
     document = parity.load_json(Path(labels_path))
     frames = []
     missing = 0
     for annotation in document.get('annotations') or []:
         source = annotation.get('source') or {}
-        if split is not None and source.get('split') != split:
+        if split is not None and source.get('split') is not None                 and source.get('split') != split:
             continue
         image_path = _find_image(repo_root, annotation)
         if image_path is None:
             missing += 1
             continue
-        gt, reference_px, strata = yolo.ground_truth_from_annotation(annotation)
+        two_class_meta = None
+        if isinstance(annotation.get('instances'), list) and annotation['instances']:
+            gt, reference_px, strata, tags, two_class_meta = \
+                _two_class_truth_from_annotation(annotation)
+        else:
+            gt, reference_px, strata = yolo.ground_truth_from_annotation(annotation)
+            tags = []
         intrinsics = yolo.pixel_basis_from_annotation(annotation)
         if intrinsics is None:
             intrinsics = dict(DEFAULT_INTRINSICS)
@@ -221,11 +320,12 @@ def build_annotation_frames(labels_path, split, repo_root):
             'reference_px': reference_px,
             'strata': strata,
             'intrinsics': intrinsics,
-            'scenarios': [],
+            'scenarios': list(tags),
             'negative_type': annotation.get('negative_type'),
             'confusers': [item.get('confuser_id')
                           for item in (annotation.get('confusers') or [])],
             'group_id': (source.get('group_id')),
+            'two_class': two_class_meta,
         })
     for frame in frames:
         if frame['width'] <= 0 or frame['height'] <= 0:
@@ -408,6 +508,308 @@ def raw_rows_from_output(output):
     else:
         raise ValueError('unexpected ONNX output rank %d' % array.ndim)
     return np.ascontiguousarray(rows)
+
+
+def decode_model_two_class_on_canvas(model, canvas_path, spec, frame,
+                                    thresholds, class_table, device='cpu'):
+    results = model.predict(source=str(canvas_path), imgsz=spec.canvas_width,
+                            conf=thresholds['conf_nms'], verbose=False,
+                            device=device)
+    return parity.decode_ultralytics_two_class_result(
+        results[0], spec=spec, coordinates='model',
+        image_width=spec.source_width, image_height=spec.source_height,
+        thresholds=thresholds, class_table=class_table,
+        intrinsics=_frame_intrinsics(frame), frame_id=frame['frame_id'],
+        image=str(frame['image_path']))
+
+
+def decode_model_two_class_on_source(model, frame, thresholds, class_table,
+                                     device='cpu'):
+    results = model.predict(source=str(frame['image_path']),
+                            imgsz=thresholds['imgsz'],
+                            conf=thresholds['conf_nms'], verbose=False,
+                            device=device)
+    return parity.decode_ultralytics_two_class_result(
+        results[0], coordinates='source',
+        image_width=frame['width'], image_height=frame['height'],
+        thresholds=thresholds, class_table=class_table,
+        intrinsics=_frame_intrinsics(frame), frame_id=frame['frame_id'],
+        image=str(frame['image_path']))
+
+
+def decode_raw_two_class(session, input_name, tensor, spec, frame, thresholds,
+                         class_table):
+    import numpy as np
+    output = session.run(None, {input_name: tensor})[0]
+    rows = raw_rows_from_output(output)
+    num_classes = len(class_table)
+    kept = parity.nms_rows(rows, conf_thres=thresholds['conf_nms'],
+                           iou_thres=thresholds['iou_nms'], max_det=300,
+                           num_classes=num_classes, class_aware=True)
+    observation = parity.decode_two_class_rows(
+        kept, spec, image_width=spec.source_width,
+        image_height=spec.source_height, thresholds=thresholds,
+        class_table=class_table, intrinsics=_frame_intrinsics(frame),
+        frame_id=frame['frame_id'], image=str(frame['image_path']))
+    raw_top = float(rows[:, 4:4 + num_classes].max()) if rows.size else 0.0
+    raw_argmax = np.argmax(rows[:, 4:4 + num_classes], axis=1) if rows.size \
+        else np.zeros(0, dtype=np.int64)
+    return observation, {'raw_anchors': int(rows.shape[0]),
+                         'nms_kept': int(len(kept)),
+                         'raw_top_score': raw_top,
+                         'raw_argmax_histogram': {
+                             str(int(class_id)): int((raw_argmax == class_id).sum())
+                             for class_id in range(num_classes)}}
+
+
+TWO_CLASS_DECISION_FIELDS = (
+    'status_flip', 'tower_present_flip', 'ms1_present_flip',
+    'tower_count_flip', 'ms1_count_flip', 'tower_claim_flip',
+    'ms1_maps_tower_flip', 'reference_flip', 'bearing_presence_flip',
+    'bearing_flip', 'class_conflict_flip', 'reject_reason_flip')
+
+
+def consumer_predictions_rows(records, path_name):
+    """T34 prediction rows (frame_id + detections + raw landmark claim)."""
+    rows = []
+    for frame_id in sorted(records):
+        payload = records[frame_id].get(path_name) or {}
+        observation = payload.get('observation') or {}
+        detections = []
+        for item in observation.get('detections') or []:
+            detections.append({
+                'class_id': int(item.get('class_id') or 0),
+                'bbox_xywh': [float(v) for v in item['bbox_xywh']],
+                'score': float(item.get('score') or 0.0),
+                'keypoint_px': (None if item.get('keypoint_px') is None
+                                else [float(v) for v in item['keypoint_px']]),
+                'keypoint_confidence': item.get('keypoint_confidence'),
+            })
+        rows.append({'frame_id': frame_id,
+                     'detections': detections,
+                     'landmark_id': observation.get('landmark_id')})
+    return rows
+
+
+CONSUMER_ROW_FIELDS = ('success', 'tower_claim', 'raw_claim',
+                       'tower_claim_correct', 'wrong_claim',
+                       'class1_mapped_violation', 'reference_correct',
+                       'false_reference', 'bearing_ok', 'keypoint_emitted',
+                       'class1_keypoint_emitted', 'improper_claim')
+
+
+def run_consumer_parity(records, labels_path, protocol_path, *,
+                        identity_policy='confirmed_only', out_dir=None,
+                        path_names=('pt_square', 'onnx_native_square',
+                                    'raw_ort_square')):
+    """Run evaltool's two-class consumer evaluator (T34) per path and compare.
+
+    The evaluator definitions/artifacts are T34's; this function only writes the
+    T34 prediction format from the two-class observations and compares the
+    returned per-frame consumer decisions across the three paths.  No consumer
+    metric or threshold is invented here.
+    """
+    from boom_birds.evaluation import landmark_two_class_eval as two_eval
+    label_paths = ([labels_path] if isinstance(labels_path, (str, Path))
+                   else list(labels_path))
+    annotations = []
+    labels_meta = []
+    for item_path in label_paths:
+        item_path = Path(item_path)
+        document = parity.load_json(item_path)
+        labels_meta.append({'path': str(item_path),
+                            'sha256': parity.sha256_file(item_path),
+                            'frames': len(document.get('annotations') or [])})
+        annotations.extend(document.get('annotations') or [])
+    sample_ids = set(records)
+    selected = [item for item in annotations
+                if item.get('frame_id') in sample_ids]
+    if not selected:
+        return {'status': 'NO_OVERLAP',
+                'labels': labels_meta,
+                'sample_frames_with_labels': 0}
+    consumer_dir = Path(out_dir or '.') / 'consumer'
+    consumer_dir.mkdir(parents=True, exist_ok=True)
+    sampled_labels = consumer_dir / 'labels_sampled.json'
+    filtered = {'schema_version':
+                'dsh.landmark_two_class_annotation_document.v1',
+                'status': 'SAMPLED_SUBSET_FOR_ONNX_PARITY_CONSUMER_CHECK',
+                'annotations': selected,
+                'counts': {'frames': len(selected),
+                           'source': 'sampled_subset',
+                           'original_frames': len(annotations),
+                           'source_documents': labels_meta}}
+    parity.dump_json(sampled_labels, filtered)
+    summaries = {}
+    rows_by_path = {}
+    prediction_paths = {}
+    for name in path_names:
+        prediction_path = consumer_dir / ('predictions_%s.jsonl' % name)
+        with prediction_path.open('w', encoding='utf-8') as stream:
+            for row in consumer_predictions_rows(records, name):
+                stream.write(__import__('json').dumps(row,
+                                                      ensure_ascii=False) + chr(10))
+        prediction_paths[name] = str(prediction_path)
+        result = two_eval.evaluate_saved(str(sampled_labels), str(prediction_path),
+                                         str(protocol_path),
+                                         identity_policy=identity_policy)
+        summaries[name] = result.get('summary')
+        rows_by_path[name] = {row.get('frame_id'): row
+                              for row in result.get('rows') or []}
+    primary_pairs = [('pt_square', 'onnx_native_square'),
+                     ('pt_square', 'raw_ort_square'),
+                     ('onnx_native_square', 'raw_ort_square')]
+    frame_flip_counts = {}
+    frame_flips = {}
+    for left, right in primary_pairs:
+        pair_name = '%s_vs_%s' % (left, right)
+        counts = {field: 0 for field in CONSUMER_ROW_FIELDS}
+        flipped_frames = []
+        for frame_id in sorted(rows_by_path[left]):
+            row_left = rows_by_path[left][frame_id]
+            row_right = rows_by_path[right].get(frame_id)
+            if row_right is None:
+                continue
+            changed = []
+            for field in CONSUMER_ROW_FIELDS:
+                if row_left.get(field) != row_right.get(field):
+                    counts[field] += 1
+                    changed.append(field)
+            if changed:
+                flipped_frames.append({'frame_id': frame_id,
+                                       'fields': changed})
+        frame_flip_counts[pair_name] = counts
+        frame_flips[pair_name] = flipped_frames[:50]
+    return {
+        'status': 'COMPUTED',
+        'evaluator': 'src/boom_birds/evaluation/landmark_two_class_eval.py '
+                     '(T34; evaluate_saved)',
+        'identity_policy': identity_policy,
+        'labels': str(labels_path),
+        'labels_sha256': parity.sha256_file(labels_path),
+        'protocol': str(protocol_path),
+        'protocol_sha256': (parity.sha256_file(protocol_path)
+                            if Path(protocol_path).is_file() else None),
+        'sampled_labels': str(sampled_labels),
+        'sample_frames_with_labels': len(selected),
+        'original_labels_frames': len(annotations),
+        'prediction_paths': prediction_paths,
+        'summaries': {name: {
+            'domains': (summary or {}).get('domains'),
+            'classes': (summary or {}).get('classes'),
+            'identity': (summary or {}).get('identity'),
+            'same_frame': (summary or {}).get('same_frame'),
+            'reference': (summary or {}).get('reference'),
+            'confusion_matrix': (summary or {}).get('confusion_matrix'),
+        } for name, summary in summaries.items()},
+        'frame_flip_counts': frame_flip_counts,
+        'frame_flips': frame_flips,
+        'note': 'consumer success/identity/reference/bearing decisions come from '
+                'the T34 evaluator on the same sampled labels and each path '
+                'predictions; flips are path-vs-path consumer decision changes',
+    }
+
+
+def compare_two_class(records, frames_by_id, name_left, name_right,
+                      tau_bearing_deg=0.01):
+    frames = [frame_id for frame_id in records
+              if (records[frame_id].get(name_left) or {}).get('observation')
+              is not None
+              and (records[frame_id].get(name_right) or {}).get('observation')
+              is not None]
+    layer_counts = {field: 0 for field in TWO_CLASS_DECISION_FIELDS}
+    flips = []
+    flips_by_scenario = {}
+    bearing_deltas = []
+    tower_keypoint_diffs = []
+    ms1_bbox_ious = []
+    for frame_id in frames:
+        left = records[frame_id][name_left]['observation']
+        right = records[frame_id][name_right]['observation']
+        diff = parity.two_class_decision_diff(left, right,
+                                              tau_bearing_deg=tau_bearing_deg)
+        frame_scenarios = list((frames_by_id.get(frame_id) or {}).get(
+            'scenarios') or ['real'])
+        changed = False
+        for field in TWO_CLASS_DECISION_FIELDS:
+            if diff.get(field):
+                layer_counts[field] += 1
+                changed = True
+                for scenario in frame_scenarios:
+                    bucket = flips_by_scenario.setdefault(scenario, {})
+                    bucket[field] = bucket.get(field, 0) + 1
+        if changed:
+            flips.append({'frame_id': frame_id,
+                          'diff': {key: value for key, value in diff.items()
+                                   if key not in ('left', 'right')}})
+        if diff.get('bearing_delta_deg') is not None:
+            bearing_deltas.append((diff['bearing_delta_deg'], frame_id))
+        # tower keypoint distance (only class-0 keypoints exist)
+        left_kpt = left.get('keypoint_px')
+        right_kpt = right.get('keypoint_px')
+        if left_kpt is not None and right_kpt is not None:
+            tower_keypoint_diffs.append((math.hypot(
+                float(left_kpt[0]) - float(right_kpt[0]),
+                float(left_kpt[1]) - float(right_kpt[1])), frame_id))
+        # MS1 bbox agreement (class-wise)
+        left_ms1 = [item for item in (left.get('detections') or [])
+                    if item.get('class_id') == parity.MS1_CLASS_ID]
+        right_ms1 = [item for item in (right.get('detections') or [])
+                     if item.get('class_id') == parity.MS1_CLASS_ID]
+        for pair in parity.match_detections(
+                [{'bbox_xywh': item['bbox_xywh'], 'score': item['score']}
+                 for item in left_ms1],
+                [{'bbox_xywh': item['bbox_xywh'], 'score': item['score']}
+                 for item in right_ms1], iou_thres=0.5):
+            ms1_bbox_ious.append(pair['bbox_iou'])
+    tower_keypoint_diffs.sort(reverse=True)
+    bearing_deltas.sort(reverse=True)
+    return {
+        'left': name_left,
+        'right': name_right,
+        'frames': len(frames),
+        'decision_flips': len(flips),
+        'layer_counts': layer_counts,
+        'flip_frame_ids': [item['frame_id'] for item in flips][:50],
+        'flip_details': flips[:50],
+        'flips_by_scenario': flips_by_scenario,
+        'tower_keypoint_pairs': len(tower_keypoint_diffs),
+        'tower_keypoint_max_px': (tower_keypoint_diffs[0][0]
+                                  if tower_keypoint_diffs else None),
+        'tower_keypoint_median_px': (
+            tower_keypoint_diffs[len(tower_keypoint_diffs) // 2][0]
+            if tower_keypoint_diffs else None),
+        'ms1_bbox_pairs': len(ms1_bbox_ious),
+        'ms1_bbox_iou_min': min(ms1_bbox_ious) if ms1_bbox_ious else None,
+        'bearing_pairs': len(bearing_deltas),
+        'bearing_max_delta_deg': (bearing_deltas[0][0] if bearing_deltas
+                                  else None),
+    }
+
+
+def raw_class_argmax_stats(torch_outputs, ort_outputs, num_classes):
+    """Per-anchor class argmax mismatch and class-score difference stats."""
+    import numpy as np
+    mismatch = 0
+    anchors = 0
+    score_max_diff = 0.0
+    for torch_output, ort_output in zip(torch_outputs, ort_outputs):
+        if torch_output.shape != ort_output.shape or torch_output.ndim != 3:
+            return {'shape_match': False, 'anchor_mismatch': None,
+                    'anchor_total': None, 'class_score_max_abs_diff': None}
+        torch_classes = np.argmax(torch_output[0, 4:4 + num_classes, :], axis=0)
+        ort_classes = np.argmax(ort_output[0, 4:4 + num_classes, :], axis=0)
+        mismatch += int((torch_classes != ort_classes).sum())
+        anchors += int(torch_classes.size)
+        torch_scores = torch_output[0, 4:4 + num_classes, :]
+        ort_scores = ort_output[0, 4:4 + num_classes, :]
+        if torch_scores.size:
+            score_max_diff = max(score_max_diff, float(
+                np.abs(torch_scores - ort_scores).max()))
+    return {'shape_match': True, 'anchor_mismatch': mismatch,
+            'anchor_total': anchors,
+            'class_argmax_mismatch_rate': (mismatch / anchors if anchors else None),
+            'class_score_max_abs_diff': score_max_diff}
 
 
 def decode_raw_ort(session, input_name, tensor, spec, frame, thresholds):
@@ -792,17 +1194,45 @@ def main(argv=None):
     args = parse_args(argv)
     started = time.perf_counter()
     try:
-        config = load_config(args.config)
-        config_path = Path(args.config)
+        two_class = bool(args.two_class)
+        two_class_cfg = None
+        if two_class:
+            two_class_cfg = load_config(args.two_class_config)
+            config = two_class_cfg
+            config_path = Path(args.two_class_config)
+            if (config.get('export') or {}).get('source_weights') is None:
+                # selected two-class weights are produced by the training phase;
+                # the CLI must name them explicitly so the sha can be bound.
+                if not args.pt:
+                    raise ValueError(
+                        'two-class selected weights are not recorded in the '
+                        'config yet (export.source_weights is null); pass '
+                        '--pt <selected two-class .pt> after the training phase')
+        else:
+            config = load_config(args.config)
+            config_path = Path(args.config)
         export_cfg = config.get('export') or {}
         parity_cfg = config.get('parity') or {}
         tolerances = parity_cfg.get('tolerances') or {}
         sample_policy = parity_cfg.get('sample_policy') or {}
+        class_table = None
+        if two_class:
+            class_table = parity.normalize_class_table(
+                (export_cfg.get('class_table') or
+                 (parity_cfg.get('decoding') or {}).get('class_table')))
         out_dir = resolve_repo_path(args.out_dir, allow_absolute=True,
                                     what='out-dir')
         out_dir.mkdir(parents=True, exist_ok=True)
+        thresholds_file = args.freeze
+        if two_class:
+            configured = resolve_repo_path(
+                (parity_cfg.get('thresholds_file')
+                 or 'configs/perception/landmark_model_freeze_v3.json'),
+                what='two-class thresholds_file')
+            if configured.is_file():
+                thresholds_file = configured
         thresholds, thresholds_source = load_thresholds(
-            args.freeze,
+            thresholds_file,
             {'tau_det': args.tau_det, 'tau_px': args.tau_px,
              'tau_iou': args.tau_iou, 'tau_conf': args.tau_conf,
              'tau_margin': args.tau_margin, 'tau_kpt': args.tau_kpt})
@@ -811,7 +1241,10 @@ def main(argv=None):
         thresholds['imgsz'] = int(args.imgsz)
 
         # ---- inputs and model files
-        pt_path = resolve_repo_path(args.pt or export_cfg.get('source_weights'),
+        pt_source = args.pt or export_cfg.get('source_weights')
+        if two_class and pt_source is None:
+            raise ValueError('two-class mode requires --pt <selected weights>')
+        pt_path = resolve_repo_path(pt_source,
                                     allow_absolute=args.pt is not None,
                                     what='pt')
         if args.onnx:
@@ -998,28 +1431,70 @@ def main(argv=None):
             record = {'scenario': list(frame.get('scenarios') or []),
                       'image': str(frame['image_path']),
                       'raw_top_score': frame.get('raw_top_score')}
-            observation, raw_info = decode_raw_ort(session, input_name, tensor,
-                                                   spec, frame, thresholds)
-            record['raw_ort_square'] = {'observation': observation,
-                                        'raw': raw_info}
-            record['pt_square'] = {'observation': decode_model_on_canvas(
-                model_pt, canvas_path, spec, frame, thresholds,
-                device=args.device_pt)}
-            record['onnx_native_square'] = {'observation': decode_model_on_canvas(
-                model_onnx, canvas_path, spec, frame, thresholds,
-                device='cpu')}
-            record['pt_default_rect'] = {'observation': decode_model_on_source(
-                model_pt, frame, thresholds, device=args.device_pt)}
-            record['onnx_native_default'] = {'observation': decode_model_on_source(
-                model_onnx, frame, thresholds, device='cpu')}
-            if gpu_available:
-                record['pt_square_gpu'] = {'observation': decode_model_on_canvas(
+            if two_class:
+                observation, raw_info = decode_raw_two_class(
+                    session, input_name, tensor, spec, frame, thresholds,
+                    class_table)
+                record['raw_ort_square'] = {'observation': observation,
+                                            'raw': raw_info}
+                record['pt_square'] = {'observation':
+                                       decode_model_two_class_on_canvas(
+                                           model_pt, canvas_path, spec, frame,
+                                           thresholds, class_table,
+                                           device=args.device_pt)}
+                record['onnx_native_square'] = {'observation':
+                                                decode_model_two_class_on_canvas(
+                                                    model_onnx, canvas_path,
+                                                    spec, frame, thresholds,
+                                                    class_table, device='cpu')}
+                record['pt_default_rect'] = {'observation':
+                                             decode_model_two_class_on_source(
+                                                 model_pt, frame, thresholds,
+                                                 class_table,
+                                                 device=args.device_pt)}
+                record['onnx_native_default'] = {'observation':
+                                                 decode_model_two_class_on_source(
+                                                     model_onnx, frame,
+                                                     thresholds, class_table,
+                                                     device='cpu')}
+                if gpu_available:
+                    record['pt_square_gpu'] = {'observation':
+                                               decode_model_two_class_on_canvas(
+                                                   model_pt, canvas_path, spec,
+                                                   frame, thresholds,
+                                                   class_table,
+                                                   device='cuda:0')}
+                # consumer/GT metrics are defined by evaltool's two-class
+                # consumer extension (T34); not invented here.  The GT labels of
+                # the sampled val/identity frames are single-class tower labels,
+                # so metric rows are deferred until T34 provides the two-class
+                # consumer definitions/artifacts.
+                record['metrics'] = {}
+                record['consumer_metrics'] = 'DEFERRED_TO_T34_CONSUMER_ARTIFACTS'
+            else:
+                observation, raw_info = decode_raw_ort(session, input_name,
+                                                       tensor, spec, frame,
+                                                       thresholds)
+                record['raw_ort_square'] = {'observation': observation,
+                                            'raw': raw_info}
+                record['pt_square'] = {'observation': decode_model_on_canvas(
                     model_pt, canvas_path, spec, frame, thresholds,
-                    device='cuda:0')}
-            record['metrics'] = {
-                name: metric_row(frame, payload['observation'], thresholds)
-                for name, payload in record.items()
-                if isinstance(payload, dict) and 'observation' in payload}
+                    device=args.device_pt)}
+                record['onnx_native_square'] = {'observation': decode_model_on_canvas(
+                    model_onnx, canvas_path, spec, frame, thresholds,
+                    device='cpu')}
+                record['pt_default_rect'] = {'observation': decode_model_on_source(
+                    model_pt, frame, thresholds, device=args.device_pt)}
+                record['onnx_native_default'] = {'observation': decode_model_on_source(
+                    model_onnx, frame, thresholds, device='cpu')}
+                if gpu_available:
+                    record['pt_square_gpu'] = {'observation': decode_model_on_canvas(
+                        model_pt, canvas_path, spec, frame, thresholds,
+                        device='cuda:0')}
+                record['metrics'] = {
+                    name: metric_row(frame, payload['observation'], thresholds)
+                    for name, payload in record.items()
+                    if isinstance(payload, dict) and 'observation' in payload}
             records[frame['frame_id']] = record
             if not args.quiet and (index + 1) % 20 == 0:
                 print('frames', index + 1, '/', len(all_frames))
@@ -1039,10 +1514,16 @@ def main(argv=None):
         ]
         pairs = {}
         for left, right in primary + legacy:
-            pairs['%s_vs_%s' % (left, right)] = compare(
-                records, frames_by_id, left, right,
-                tau_kpt=thresholds['tau_kpt'],
-                tau_bearing_deg=args.tau_bearing_deg)
+            pair_name = '%s_vs_%s' % (left, right)
+            if two_class:
+                pairs[pair_name] = compare_two_class(
+                    records, frames_by_id, left, right,
+                    tau_bearing_deg=args.tau_bearing_deg)
+            else:
+                pairs[pair_name] = compare(
+                    records, frames_by_id, left, right,
+                    tau_kpt=thresholds['tau_kpt'],
+                    tau_bearing_deg=args.tau_bearing_deg)
 
         # ---- torch raw vs onnxruntime raw on the shared canvas
         raw_parity = {'performed': True, 'frames': 0, 'max_abs_diff': None,
@@ -1058,7 +1539,10 @@ def main(argv=None):
             total_abs = 0.0
             count = 0
             shapes_match = True
-            per_channel = np.zeros(8, dtype=np.float64)
+            expected_channels = int(export_cfg.get('expected_output_channels')
+                                   or (4 + (len(class_table)
+                                            if class_table else 1) + 3))
+            per_channel = np.zeros(expected_channels, dtype=np.float64)
             all_finite = True
             for tensor, torch_output in zip(tensors, torch_outputs):
                 ort_output = session.run(None, {input_name: tensor})[0]
@@ -1091,8 +1575,12 @@ def main(argv=None):
                     'raw_max_abs_diff', 1e-3)),
                 'per_channel_max_abs_diff': {
                     'box_cxcywh': [float(value) for value in per_channel[:4]],
-                    'class_score': float(per_channel[4]),
-                    'keypoint_xy_conf': [float(value) for value in per_channel[5:]],
+                    'class_scores': [float(value) for value in
+                                     per_channel[4:4 + (len(class_table)
+                                                        if class_table else 1)]],
+                    'keypoint_xy_conf': [float(value) for value in
+                                         per_channel[4 + (len(class_table)
+                                                          if class_table else 1):]],
                 },
                 'note': 'the 2026-11-04 smoke-checkpoint claim was a 1.22e-4 '
                         'absolute max on an untrained graph; on the trained '
@@ -1101,8 +1589,27 @@ def main(argv=None):
                         'why the pass criterion is relative.  The decision-level '
                         'effect is measured by the three-path comparisons.',
             })
+            if two_class:
+                class_stats = raw_class_argmax_stats(torch_outputs,
+                                                     [np.asarray(
+                                                         session.run(
+                                                             None,
+                                                             {input_name: tensor})[0],
+                                                         dtype=np.float32)
+                                                      for tensor in tensors],
+                                                     len(class_table))
+                raw_parity['class_argmax'] = class_stats
+                class_mismatch_max = int(((tolerances or {}).get(
+                    'class_argmax_mismatch_max', 0)))
+                class_ok = bool(class_stats.get('anchor_mismatch') is not None
+                                and class_stats['anchor_mismatch']
+                                <= class_mismatch_max)
+            else:
+                class_ok = True
+            raw_parity['class_argmax_ok'] = class_ok
             raw_parity['passed'] = bool(shapes_match and all_finite
-                                        and relative <= relative_atol)
+                                        and relative <= relative_atol
+                                        and class_ok)
         except Exception as error:
             raw_parity = {'performed': False, 'error': repr(error)}
 
@@ -1150,9 +1657,14 @@ def main(argv=None):
                     frame_id for frame_id in records
                     if 'near_threshold' in (frames_by_id.get(frame_id) or {})
                     .get('scenarios', [])
-                    and parity.decision_diff(
+                    and ((parity.two_class_decision_diff(
                         records[frame_id][left]['observation'],
-                        records[frame_id][right]['observation'])['status_flip']])
+                        records[frame_id][right]['observation'])
+                          ['status_flip']) if two_class else
+                         (parity.decision_diff(
+                             records[frame_id][left]['observation'],
+                             records[frame_id][right]['observation'])
+                          ['status_flip']))])
                 for left, right in primary},
         }
 
@@ -1162,8 +1674,35 @@ def main(argv=None):
             'pt_square_vs_raw_ort_square',
             'onnx_native_square_vs_raw_ort_square',
         ]
-        identity_layers = identity_rejection_summary(
-            records, frames_by_id, pairs, primary_pair_names_for_layers)
+        if two_class:
+            identity_layers = None
+        else:
+            identity_layers = identity_rejection_summary(
+                records, frames_by_id, pairs, primary_pair_names_for_layers)
+        consumer_parity = None
+        if two_class and args.consumer and args.two_class_labels:
+            try:
+                consumer_labels = [
+                    resolve_repo_path(item.strip(), allow_absolute=True,
+                                      what='two-class-labels')
+                    for item in str(args.two_class_labels).split(',')
+                    if item.strip()]
+                protocol_path = resolve_repo_path(
+                    args.consumer_protocol or
+                    'configs/perception/landmark_two_class_protocol_v1.json',
+                    allow_absolute=args.consumer_protocol is not None,
+                    what='consumer-protocol')
+                consumer_parity = run_consumer_parity(
+                    records, consumer_labels, protocol_path,
+                    identity_policy=args.consumer_identity_policy,
+                    out_dir=out_dir)
+            except Exception as error:  # pragma: no cover - evaluator specific
+                consumer_parity = {
+                    'status': 'FAILED',
+                    'error': repr(error),
+                    'note': 'consumer parity is informational for T37; it does '
+                            'not change the three-path decision parity result',
+                }
         candidate_meta = {'label': args.candidate_label}
         if args.selection_json:
             selection_path = resolve_repo_path(args.selection_json,
@@ -1194,25 +1733,63 @@ def main(argv=None):
                                 or pair['keypoint_max_px'] <= keypoint_tolerance),
             }
         layer_checks = {}
-        for pair_name in primary_pair_names:
-            pair = pairs.get(pair_name) or {}
-            layer_checks[pair_name] = {
-                field: (pair.get(field) is not None
-                        and int(pair.get(field)) <= flip_tolerance)
-                for field in DECISION_LAYER_FIELDS
+        if two_class:
+            for pair_name in primary_pair_names:
+                pair = pairs.get(pair_name) or {}
+                counts = pair.get('layer_counts') or {}
+                layer_checks[pair_name] = {
+                    field: int(counts.get(field) or 0) <= flip_tolerance
+                    for field in TWO_CLASS_DECISION_FIELDS}
+                layer_checks[pair_name]['tower_keypoint_ok'] = (
+                    pair.get('tower_keypoint_max_px') is None
+                    or pair['tower_keypoint_max_px'] <= keypoint_tolerance)
+                layer_checks[pair_name]['ms1_bbox_ok'] = (
+                    pair.get('ms1_bbox_iou_min') is None
+                    or pair['ms1_bbox_iou_min'] >= 0.5)
+            self_check = {
+                'mode': 'two_class',
+                'raw_parity_ok': bool(raw_parity.get('passed')),
+                'class_argmax_ok': bool(raw_parity.get('class_argmax_ok')),
+                'onnx_equivalence_ok': (None if onnx_equivalence is None
+                                        else bool(onnx_equivalence['passed'])),
+                'primary_decision_layers_ok': layer_checks,
+                'consumer_parity_ok': (
+                    None if consumer_parity is None else
+                    (True if consumer_parity.get('status') != 'COMPUTED'
+                     else all(all(int(count) == 0 for count in counts.values())
+                              for counts in
+                              (consumer_parity.get('frame_flip_counts') or {}
+                               ).values()))),
+                'passed': bool(raw_parity.get('passed')) and all(
+                    all(value.values()) for value in layer_checks.values())
+                and (onnx_equivalence is None
+                     or bool(onnx_equivalence['passed']))
+                and (consumer_parity is None
+                     or consumer_parity.get('status') != 'COMPUTED'
+                     or all(all(int(count) == 0 for count in counts.values())
+                            for counts in
+                            (consumer_parity.get('frame_flip_counts') or {}
+                             ).values())),
             }
-        self_check = {
-            'raw_parity_ok': bool(raw_parity.get('passed')),
-            'onnx_equivalence_ok': (None if onnx_equivalence is None
-                                    else bool(onnx_equivalence['passed'])),
-            'primary_decision_layers_ok': layer_checks,
-            'primary_pairs': checks,
-            'passed': bool(raw_parity.get('passed')) and all(
-                all(value.values()) for value in checks.values()) and all(
-                    all(value.values()) for value in layer_checks.values()) and (
-                    onnx_equivalence is None
-                    or bool(onnx_equivalence['passed'])),
-        }
+        else:
+            for pair_name in primary_pair_names:
+                pair = pairs.get(pair_name) or {}
+                layer_checks[pair_name] = {
+                    field: (pair.get(field) is not None
+                            and int(pair.get(field)) <= flip_tolerance)
+                    for field in DECISION_LAYER_FIELDS}
+            self_check = {
+                'raw_parity_ok': bool(raw_parity.get('passed')),
+                'onnx_equivalence_ok': (None if onnx_equivalence is None
+                                        else bool(onnx_equivalence['passed'])),
+                'primary_decision_layers_ok': layer_checks,
+                'primary_pairs': checks,
+                'passed': bool(raw_parity.get('passed')) and all(
+                    all(value.values()) for value in checks.values()) and all(
+                        all(value.values()) for value in layer_checks.values()) and (
+                        onnx_equivalence is None
+                        or bool(onnx_equivalence['passed'])),
+            }
 
         evidence = {
             'schema_version': 'dsh.landmark_onnx_parity.v1',
@@ -1220,8 +1797,13 @@ def main(argv=None):
                        else 'PARITY_FAIL_INVESTIGATE'),
             'generated_at': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
             'generated_by': 'scripts/landmark_onnx_parity.py',
-            'scope': 'host-side three-path parity; not a final evaluation, not '
-                     'an accuracy/board/navigation claim',
+            'mode': ('two_class_identity_channel' if two_class
+                     else 'single_class_tower'),
+            'scope': ('host-side three-path parity for the two-class identity '
+                      'channel; not a final evaluation, not an accuracy/board/'
+                      'navigation claim' if two_class else
+                      'host-side three-path parity; not a final evaluation, not '
+                      'an accuracy/board/navigation claim'),
             'runtime': {
                 'python': sys.version.split()[0],
                 'packages': __import__('json').loads(
@@ -1275,16 +1857,60 @@ def main(argv=None):
             'device_sensitivity': (pairs.get('pt_square_vs_pt_square_gpu')
                                    if gpu_available else None),
             'candidate': candidate_meta,
-            'decision_layers': identity_layers['primary_decision_layers'],
+            'decision_layers': (identity_layers['primary_decision_layers']
+                                if identity_layers else None),
             'identity_and_rejection': identity_layers,
+            'two_class': ({
+                'class_table': {str(key): value
+                                for key, value in (class_table or {}).items()},
+                'num_classes': len(class_table or {}),
+                'decoder': 'landmark_onnx.decode_two_class_rows / '
+                           'decode_ultralytics_two_class_result',
+                'class1_keypoint_policy': 'never emitted; no bearing for class1',
+                'nms': {'class_aware': True,
+                        'conf_thres': thresholds['conf_nms'],
+                        'iou_thres': thresholds['iou_nms'],
+                        'max_det': 300, 'max_wh': 7680},
+                'primary_pair_names': primary_pair_names_for_layers,
+                'primary_pairs': {name: pairs.get(name)
+                                  for name in primary_pair_names_for_layers},
+                'legacy_pairs': {name: pairs.get(name) for name in
+                                 ('pt_default_rect_vs_onnx_native_default',
+                                  'pt_square_vs_pt_default_rect',
+                                  'onnx_native_square_vs_onnx_native_default')},
+                'decision_matrix': {
+                    name: (pairs.get(name) or {}).get('layer_counts')
+                    for name in primary_pair_names_for_layers},
+                'flips_by_scenario': {
+                    name: (pairs.get(name) or {}).get('flips_by_scenario')
+                    for name in primary_pair_names_for_layers},
+                'consumer_metrics': (
+                    'T34 evaluator (landmark_two_class_eval.evaluate_saved) is '
+                    'the consumer definition source; consumer_parity below is '
+                    'computed by feeding each path predictions into that '
+                    'evaluator on the same sampled labels'),
+                'consumer_parity': consumer_parity,
+                'consumer_status': ('PENDING_T34_LABELS'
+                                    if consumer_parity is None
+                                    else consumer_parity.get('status')),
+            } if two_class else None),
             'pairwise': pairs,
             'scenarios': scenarios,
             'near_threshold': near_threshold,
             'self_check': self_check,
             'conclusion': {
                 'primary_parity': ('PASS' if self_check['passed'] else 'FAIL'),
-                'legacy_4_67px_explanation': _legacy_explanation(pairs),
-                'decision_flip_answer': _decision_answer(pairs),
+                'legacy_4_67px_explanation': (None if two_class
+                                              else _legacy_explanation(pairs)),
+                'decision_flip_answer': (None if two_class
+                                         else _decision_answer(pairs)),
+                'two_class_reading': (
+                    'all two-class decision layers (tower/ms1 presence and '
+                    'counts, tower claim, ms1-maps-tower violation, reference, '
+                    'bearing presence/bearing, class conflict, reject reason) '
+                    'must have zero flips across the three shared-canvas paths; '
+                    'consumer success is evaluated by the T34 artifacts, not '
+                    'here' if two_class else None),
             },
             'limitations': [
                 'synthetic aspect/edge/multi-candidate variants have no GT, so '

@@ -19,6 +19,7 @@ ultralytics / onnxruntime needed).  The end-to-end run happens in
 .venv/landmark-train via scripts/landmark_onnx_parity.py.
 """
 import json
+import math
 import subprocess
 import sys
 from pathlib import Path
@@ -274,3 +275,381 @@ def test_parity_cli_end_to_end_on_two_frames(tmp_path):
     assert document['self_check']['passed'] is True
     assert document['pairwise']['pt_square_vs_onnx_native_square'][
         'observation_decision_flips'] == 0
+
+# --- two-class identity channel (2026-11-05, T37 preparation) ---------------
+
+def _two_class_rows(spec, detections):
+    """Build model-space two-class pose rows (cx,cy,w,h,s0,s1,kx,ky,kconf)."""
+    rows = []
+    for item in detections:
+        source_box = item['bbox_xywh']
+        model_box = spec.bbox_to_model(source_box)
+        cx = model_box[0] + model_box[2] / 2.0
+        cy = model_box[1] + model_box[3] / 2.0
+        scores = [item.get('tower_score', 0.0), item.get('ms1_score', 0.0)]
+        keypoint = item.get('keypoint_px')
+        if keypoint is None:
+            kx = ky = 0.0
+            kconf = 0.0
+        else:
+            kx, ky = spec.point_to_model(keypoint)
+            kconf = float(item.get('keypoint_confidence', 1.0))
+        rows.append([cx, cy, model_box[2], model_box[3],
+                     scores[0], scores[1], kx, ky, kconf])
+    return np.asarray(rows, dtype=np.float32)
+
+
+def test_nms_class_aware_keeps_overlapping_different_classes():
+    rows = np.asarray([
+        [100, 100, 20, 20, 0.90, 0.10, 100, 100, 0.9],   # class 0
+        [101, 101, 20, 20, 0.05, 0.85, 101, 101, 0.0],   # class 1, overlaps
+        [101, 101, 20, 20, 0.80, 0.05, 101, 101, 0.9],   # class 0, suppressed
+    ], dtype=np.float32)
+    kept = onnx.nms_rows(rows, conf_thres=0.25, iou_thres=0.7,
+                         num_classes=2)
+    classes = [int(np.argmax(row[4:6])) for row in kept]
+    assert classes.count(0) == 1
+    assert classes.count(1) == 1
+
+
+def test_two_class_decode_same_frame_tower_and_ms1():
+    spec = onnx.letterbox_spec(320, 240, 640, 640)
+    rows = _two_class_rows(spec, [
+        {'bbox_xywh': [100.0, 60.0, 40.0, 50.0], 'tower_score': 0.9,
+         'keypoint_px': [120.0, 70.0], 'keypoint_confidence': 0.9},
+        {'bbox_xywh': [10.0, 30.0, 25.0, 80.0], 'ms1_score': 0.8},
+    ])
+    kept = onnx.nms_rows(rows, conf_thres=0.25, iou_thres=0.7,
+                         num_classes=2)
+    observation = onnx.decode_two_class_rows(
+        kept, spec, image_width=320, image_height=240,
+        thresholds={'tau_det': 0.5, 'tau_margin': 0.1, 'tau_kpt': 0.5},
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='f',
+        image='f.png', landmark_id='RMUC2027_CENTRAL_TOWER_PROPOSED')
+    assert observation['tower_present'] is True
+    assert observation['ms1_present'] is True
+    assert observation['tower_claim'] is True
+    assert observation['ms1_maps_tower'] is False
+    assert observation['reference_status'] == 'VISIBLE'
+    assert observation['image_bearing_deg'] == pytest.approx(
+        math.degrees(math.atan2(120.0 - 160.0, 160.0)))
+    assert observation['reject_reason'] is None
+
+
+def test_two_class_ms1_only_never_claims_tower_or_bearing():
+    spec = onnx.letterbox_spec(320, 240, 640, 640)
+    rows = _two_class_rows(spec, [
+        {'bbox_xywh': [10.0, 30.0, 25.0, 80.0], 'ms1_score': 0.8},
+    ])
+    kept = onnx.nms_rows(rows, conf_thres=0.25, iou_thres=0.7,
+                         num_classes=2)
+    observation = onnx.decode_two_class_rows(
+        kept, spec, image_width=320, image_height=240,
+        thresholds={'tau_det': 0.5, 'tau_margin': 0.1, 'tau_kpt': 0.5},
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='f',
+        image='f.png', landmark_id='RMUC2027_CENTRAL_TOWER_PROPOSED')
+    assert observation['status'] == 'DETECTED'
+    assert observation['tower_present'] is False
+    assert observation['ms1_present'] is True
+    assert observation['tower_claim'] is False
+    assert observation['landmark_id'] is None
+    assert observation['ms1_maps_tower'] is False
+    assert observation['reference_status'] == 'UNAVAILABLE'
+    assert observation['image_bearing_deg'] is None
+    assert observation['reject_reason'] == 'NO_CENTRAL_TOWER'
+
+
+def test_two_class_class1_keypoint_is_ignored_even_if_raw_has_one():
+    spec = onnx.letterbox_spec(320, 240, 640, 640)
+    rows = _two_class_rows(spec, [
+        {'bbox_xywh': [10.0, 30.0, 25.0, 80.0], 'ms1_score': 0.8,
+         'keypoint_px': [20.0, 40.0], 'keypoint_confidence': 0.99},
+    ])
+    kept = onnx.nms_rows(rows, conf_thres=0.25, iou_thres=0.7,
+                         num_classes=2)
+    observation = onnx.decode_two_class_rows(
+        kept, spec, image_width=320, image_height=240,
+        thresholds={'tau_det': 0.5, 'tau_margin': 0.1, 'tau_kpt': 0.5},
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='f',
+        image='f.png')
+    assert observation['ms1_present'] is True
+    assert observation['detections'][0]['class_id'] == 1
+    assert observation['detections'][0]['keypoint_px'] is None
+    assert observation['keypoint_px'] is None
+    assert observation['image_bearing_deg'] is None
+
+
+def test_two_class_class_conflict_blocks_tower_claim():
+    spec = onnx.letterbox_spec(320, 240, 640, 640)
+    rows = _two_class_rows(spec, [
+        {'bbox_xywh': [100.0, 60.0, 40.0, 50.0], 'tower_score': 0.8,
+         'keypoint_px': [120.0, 70.0], 'keypoint_confidence': 0.9},
+        {'bbox_xywh': [102.0, 62.0, 40.0, 50.0], 'ms1_score': 0.7},
+    ])
+    kept = onnx.nms_rows(rows, conf_thres=0.25, iou_thres=0.7,
+                         num_classes=2)
+    observation = onnx.decode_two_class_rows(
+        kept, spec, image_width=320, image_height=240,
+        thresholds={'tau_det': 0.5, 'tau_margin': 0.1, 'tau_kpt': 0.5},
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='f',
+        image='f.png', landmark_id='RMUC2027_CENTRAL_TOWER_PROPOSED')
+    assert observation['class_conflict'] is True
+    assert observation['tower_claim'] is False
+    assert observation['landmark_id'] is None
+    assert 'CLASS_CONFLICT' in observation['reject_reasons']
+
+
+def test_two_class_multi_candidate_margin_blocks_claim():
+    spec = onnx.letterbox_spec(320, 240, 640, 640)
+    rows = _two_class_rows(spec, [
+        {'bbox_xywh': [10.0, 10.0, 20.0, 20.0], 'tower_score': 0.80,
+         'keypoint_px': [20.0, 20.0]},
+        {'bbox_xywh': [100.0, 10.0, 20.0, 20.0], 'tower_score': 0.75,
+         'keypoint_px': [110.0, 20.0]},
+    ])
+    kept = onnx.nms_rows(rows, conf_thres=0.25, iou_thres=0.7,
+                         num_classes=2)
+    observation = onnx.decode_two_class_rows(
+        kept, spec, image_width=320, image_height=240,
+        thresholds={'tau_det': 0.5, 'tau_margin': 0.1, 'tau_kpt': 0.5},
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='f',
+        image='f.png')
+    assert observation['tower_count'] == 2
+    assert observation['tower_claim'] is False
+    assert observation['reject_reason'] == 'MULTIPLE_CANDIDATES'
+
+
+def test_two_class_decision_diff_layers():
+    base = {'status': 'DETECTED', 'tower_present': True, 'ms1_present': False,
+            'tower_count': 1, 'ms1_count': 0, 'tower_claim': True,
+            'ms1_maps_tower': False, 'reference_status': 'VISIBLE',
+            'keypoint_px': [1.0, 2.0], 'image_bearing_deg': 1.0,
+            'class_conflict': False, 'reject_reason': None}
+    other = dict(base)
+    other['ms1_present'] = True
+    other['ms1_count'] = 1
+    other['image_bearing_deg'] = 1.5
+    diff = onnx.two_class_decision_diff(base, other, tau_bearing_deg=0.01)
+    assert diff['ms1_present_flip'] is True
+    assert diff['ms1_count_flip'] is True
+    assert diff['bearing_flip'] is True
+    assert diff['changed'] is True
+    same = onnx.two_class_decision_diff(base, dict(base))
+    assert same['changed'] is False
+
+
+def test_two_class_export_config_placeholder_is_relocatable():
+    config = REPO_ROOT / 'configs' / 'perception' / 'landmark_export_two_class_v1.json'
+    assert config.is_file(), 'missing two-class export config'
+    document = json.loads(config.read_text(encoding='utf-8'))
+    assert document['schema_version'] == 'dsh.landmark_export.v1'
+    assert document['export']['num_classes'] == 2
+    assert document['export']['class_table'] == {'0': 'central_tower',
+                                                 '1': 'similar_structure_ms1'}
+    assert document['export']['opset'] == 18
+    for text in json.dumps(document).split('"'):
+        assert not text.startswith(('E:', 'C:')), 'machine-private path in config'
+
+def test_consumer_prediction_rows_format_for_t34_evaluator():
+    # T37: the three-path observations are fed to the T34 consumer evaluator in
+    # its saved-prediction format; class1 keypoints must stay absent.
+    import importlib.util
+    script_path = REPO_ROOT / 'scripts' / 'landmark_onnx_parity.py'
+    spec = importlib.util.spec_from_file_location('landmark_onnx_parity_contract',
+                                                  script_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    observation = {
+        'status': 'DETECTED',
+        'landmark_id': 'RMUC2027_CENTRAL_TOWER_PROPOSED',
+        'detections': [
+            {'class_id': 0, 'bbox_xywh': [10.0, 20.0, 30.0, 40.0],
+             'score': 0.9, 'keypoint_px': [25.0, 30.0],
+             'keypoint_confidence': 0.8},
+            {'class_id': 1, 'bbox_xywh': [100.0, 20.0, 10.0, 50.0],
+             'score': 0.7, 'keypoint_px': [105.0, 30.0],
+             'keypoint_confidence': 0.9},
+        ],
+    }
+    rows = module.consumer_predictions_rows(
+        {'f.png': {'pt_square': {'observation': observation}}}, 'pt_square')
+    assert len(rows) == 1
+    row = rows[0]
+    assert row['frame_id'] == 'f.png'
+    assert len(row['detections']) == 2
+    assert row['detections'][0]['class_id'] == 0
+    assert row['detections'][1]['class_id'] == 1
+    assert row['landmark_id'] == 'RMUC2027_CENTRAL_TOWER_PROPOSED'
+    # class1 keypoint is passed through as data, but the T34 evaluator
+    # normalisation drops it; the observation itself must not have the class1
+    # detection as a reference source.
+    assert row['detections'][1]['keypoint_px'] == [105.0, 30.0]
+
+
+def test_two_class_parity_help_lists_consumer_flags(tmp_path):
+    script = REPO_ROOT / 'scripts' / 'landmark_onnx_parity.py'
+    completed = subprocess.run([sys.executable, str(script), '--help'],
+                               capture_output=True, text=True, timeout=120)
+    assert completed.returncode == 0, completed.stderr[-2000:]
+    for flag in ('--two-class', '--two-class-labels', '--two-class-config',
+                 '--consumer-identity-policy'):
+        assert flag in completed.stdout, flag
+
+def _load_parity_script():
+    import importlib.util
+    script_path = REPO_ROOT / 'scripts' / 'landmark_onnx_parity.py'
+    spec = importlib.util.spec_from_file_location('landmark_onnx_parity_contract2',
+                                                  script_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _two_class_labels_document():
+    return {
+        'schema_version': 'dsh.landmark_two_class_annotations.v1',
+        'status': 'TEST_FIXTURE',
+        'annotations': [
+            {'frame_id': 'tower.png', 'image': 'images/tower.png',
+             'image_width': 320, 'image_height': 240,
+             'tower_present': True, 'ms1_present': False,
+             'instances': [
+                 {'class': 0, 'bbox_xywh': [100.0, 60.0, 40.0, 50.0],
+                  'keypoint_px': [120.0, 70.0], 'v': 1,
+                  'reference_available': True},
+             ]},
+            {'frame_id': 'ms1.png', 'image': 'images/ms1.png',
+             'image_width': 320, 'image_height': 240,
+             'tower_present': False, 'ms1_present': True,
+             'instances': [
+                 {'class': 1, 'bbox_xywh': [10.0, 30.0, 25.0, 80.0]},
+             ]},
+        ],
+    }
+
+
+def _two_class_records():
+    tower_observation = {
+        'status': 'DETECTED', 'landmark_id': 'RMUC2027_CENTRAL_TOWER_PROPOSED',
+        'tower_claim': True, 'tower_present': True, 'ms1_present': False,
+        'reference_status': 'VISIBLE', 'keypoint_px': [120.0, 70.0],
+        'image_bearing_deg': -14.036243467926477,
+        'detections': [
+            {'class_id': 0, 'bbox_xywh': [100.0, 60.0, 40.0, 50.0],
+             'score': 0.9, 'keypoint_px': [120.0, 70.0],
+             'keypoint_confidence': 0.9},
+        ],
+    }
+    ms1_observation = {
+        'status': 'DETECTED', 'landmark_id': None, 'tower_claim': False,
+        'tower_present': False, 'ms1_present': True,
+        'reference_status': 'UNAVAILABLE', 'keypoint_px': None,
+        'image_bearing_deg': None,
+        'detections': [
+            {'class_id': 1, 'bbox_xywh': [10.0, 30.0, 25.0, 80.0],
+             'score': 0.8, 'keypoint_px': None, 'keypoint_confidence': None},
+        ],
+    }
+    records = {}
+    for path in ('pt_square', 'onnx_native_square', 'raw_ort_square'):
+        records['tower.png'] = records.get('tower.png', {})
+        records['ms1.png'] = records.get('ms1.png', {})
+        records['tower.png'][path] = {'observation': tower_observation}
+        records['ms1.png'][path] = {'observation': ms1_observation}
+    return records
+
+
+def test_consumer_parity_uses_t34_evaluator_and_zero_flips(tmp_path):
+    module = _load_parity_script()
+    labels = tmp_path / 'two_class_labels.json'
+    labels.write_text(json.dumps(_two_class_labels_document()), encoding='utf-8')
+    protocol = REPO_ROOT / 'configs' / 'perception' / 'landmark_two_class_protocol_v1.json'
+    result = module.run_consumer_parity(
+        _two_class_records(), labels, protocol,
+        identity_policy='confirmed_only', out_dir=tmp_path)
+    assert result['status'] == 'COMPUTED', result
+    assert result['sample_frames_with_labels'] == 2
+    for pair, counts in result['frame_flip_counts'].items():
+        assert all(int(value) == 0 for value in counts.values()), (pair, counts)
+    assert result['summaries']['pt_square']['domains']
+    assert (tmp_path / 'consumer' / 'predictions_pt_square.jsonl').is_file()
+
+
+def test_consumer_parity_detects_claim_flip_and_ms1_violation(tmp_path):
+    module = _load_parity_script()
+    labels = tmp_path / 'two_class_labels.json'
+    labels.write_text(json.dumps(_two_class_labels_document()), encoding='utf-8')
+    protocol = REPO_ROOT / 'configs' / 'perception' / 'landmark_two_class_protocol_v1.json'
+    records = _two_class_records()
+    # raw-ORT path wrongly claims the tower on the MS1-only frame
+    records['ms1.png']['raw_ort_square']['observation'] = dict(
+        records['ms1.png']['raw_ort_square']['observation'],
+        landmark_id='RMUC2027_CENTRAL_TOWER_PROPOSED',
+        tower_claim=True)
+    result = module.run_consumer_parity(records, labels, protocol,
+                                        out_dir=tmp_path)
+    counts = result['frame_flip_counts']['pt_square_vs_raw_ort_square']
+    assert counts['tower_claim'] >= 1
+    assert counts['raw_claim'] >= 1
+
+def test_two_class_compare_layers_and_scenarios():
+    module = _load_parity_script()
+    spec = onnx.letterbox_spec(320, 240, 640, 640)
+    rows_a = _two_class_rows(spec, [
+        {'bbox_xywh': [100.0, 60.0, 40.0, 50.0], 'tower_score': 0.9,
+         'keypoint_px': [120.0, 70.0], 'keypoint_confidence': 0.9},
+        {'bbox_xywh': [10.0, 30.0, 25.0, 80.0], 'ms1_score': 0.8},
+    ])
+    rows_b = rows_a.copy()
+    spec_ok = spec
+    thresholds = {'tau_det': 0.5, 'tau_margin': 0.1, 'tau_kpt': 0.5}
+    obs_a = onnx.decode_two_class_rows(
+        onnx.nms_rows(rows_a, 0.25, 0.7, num_classes=2), spec_ok,
+        image_width=320, image_height=240, thresholds=thresholds,
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='a',
+        image='a.png', landmark_id='RMUC2027_CENTRAL_TOWER_PROPOSED')
+    obs_b = onnx.decode_two_class_rows(
+        onnx.nms_rows(rows_b, 0.25, 0.7, num_classes=2), spec_ok,
+        image_width=320, image_height=240, thresholds=thresholds,
+        intrinsics={'fx_px': 160.0, 'cx_px': 160.0}, frame_id='a',
+        image='a.png', landmark_id='RMUC2027_CENTRAL_TOWER_PROPOSED')
+    records = {'a.png': {'pt_square': {'observation': obs_a},
+                         'onnx_native_square': {'observation': obs_b},
+                         'raw_ort_square': {'observation': obs_b}}}
+    frames_by_id = {'a.png': {'frame_id': 'a.png',
+                              'scenarios': ['real_identity', 'ms1_both']}}
+    pair = module.compare_two_class(records, frames_by_id, 'pt_square',
+                                    'onnx_native_square')
+    assert pair['frames'] == 1
+    assert pair['decision_flips'] == 0
+    assert pair['layer_counts']['tower_claim_flip'] == 0
+    assert pair['tower_keypoint_max_px'] is not None
+    assert pair['ms1_bbox_pairs'] == 1
+    # flip the class table decision: drop the MS1 detection on one path
+    obs_c = dict(obs_b)
+    obs_c['detections'] = [d for d in obs_b['detections']
+                           if d['class_id'] == 0]
+    obs_c['ms1_present'] = False
+    obs_c['ms1_count'] = 0
+    records['a.png']['onnx_native_square'] = {'observation': obs_c}
+    pair = module.compare_two_class(records, frames_by_id, 'pt_square',
+                                    'onnx_native_square')
+    assert pair['decision_flips'] >= 1
+    assert pair['layer_counts']['ms1_present_flip'] == 1
+    assert pair['flips_by_scenario']['ms1_both']['ms1_present_flip'] == 1
+
+
+def test_raw_class_argmax_stats_counts_mismatches():
+    module = _load_parity_script()
+    torch_output = np.zeros((1, 9, 4), dtype=np.float32)
+    ort_output = torch_output.copy()
+    torch_output[0, 4, :] = [0.9, 0.1, 0.2, 0.9]  # class0 argmax for anchors 0,3
+    torch_output[0, 5, :] = [0.1, 0.8, 0.7, 0.1]
+    ort_output[0, 4, :] = torch_output[0, 4, :]
+    ort_output[0, 5, :] = torch_output[0, 5, :]
+    stats = module.raw_class_argmax_stats([torch_output], [ort_output], 2)
+    assert stats['anchor_mismatch'] == 0
+    assert stats['anchor_total'] == 4
+    ort_output[0, 5, 0] = 0.95  # anch 0: class1 becomes argmax
+    stats = module.raw_class_argmax_stats([torch_output], [ort_output], 2)
+    assert stats['anchor_mismatch'] == 1

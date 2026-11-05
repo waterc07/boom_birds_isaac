@@ -1,0 +1,161 @@
+{
+  "schema_version": "dsh.landmark_two_class_p2_handoff_status.v1",
+  "created_at": "2026-11-05",
+  "status": "P2_V4B_ACCEPTED_CANONICAL_R1_FINAL_B4_ACTION_ITEM",
+  "frozen_code": {
+    "module": "db8ca0e8e08c24832acbb0e6f255ddf70811acae856cf04d61cdc2f81c9265c6",
+    "cli": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e",
+    "tests": "febb847dcde774bc411c3af055b217fe3ce8148be0b40fe3ef0dcd2fdc38c61e",
+    "report": "36c25aff46ca9726538e87c463e00a10f29a015bee185df2092beefdd72ff0e1",
+    "v2_audit_record": "17aa02e5d4c1ba6a3cd73778519819d0f75ae6f222fa73fec6dbc738e40f5346",
+    "semantics_review_report": "777f0c0801e4c081307d0976fb917a77b9e3d67de78f0894442be274d40e1820",
+    "note": "code shas unchanged since the V2 re-audit; V2 verdict (R1 PASS / G1-G11 PASS / 21 passed) remains valid"
+  },
+  "dry_run_verification": {
+    "status": "VERIFIED_AS_HARNESS_SANITY_NOT_P2_EVIDENCE",
+    "why_not_p2": "model_num_classes=1 (frozen single-class seed2 6b86ef1f...), so the class1 two-class path is not exercised; P2 needs the frozen two-class model (nc=2) on the frozen v6 labels",
+    "evidence": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_poison_smoke/dry_run_seed2_singleclass/poison_smoke_evidence.json",
+      "sha256": "b2439a136f8b5c4666ab801abdb4b445543e5987d83777aa4461999f9b8c1713"
+    },
+    "harness": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_poison_smoke/run_poison_smoke.py",
+      "sha256": "1f68529665179f9c166e48636d2d23b00927a0af0b0f7294ed809883c094fe18",
+      "ignored_outputs": true,
+      "uses": "tc.infer_observations (two-class inference wrapper) with num_classes detection; forces DRY_RUN status prefix when num_classes==1"
+    },
+    "runtime_checks": {
+      "frames": 12,
+      "differing_frames": [],
+      "per_frame_observations_identical": true,
+      "canonical_json": "json.dumps(sort_keys=True, separators=(\",\", \":\")) sha256",
+      "environment": {
+        "python": "3.11.9",
+        "torch": "2.7.0+cu128",
+        "ultralytics": "8.2.0",
+        "model_num_classes": 1
+      },
+      "inputs": {
+        "labels_sha256": "833c4b856b470108a2d23fdc4b9966d6389070b13a368040be371b7b0bc820e3",
+        "poisoned_labels_sha256": "281fcd09656ccf258aee6c54596b2c364d60c9b9cb4bbd6cebd35461e9271d11",
+        "model_sha256": "6b86ef1fd792395fd969d6c34b854076b481c0ca9672cade483650edd36888dd"
+      }
+    },
+    "independent_audit_rerun": {
+      "tests": "pytest -q tests/evaluation/test_landmark_two_class_eval.py -k 'poison or rename or source_are or class1_gt' -> 4 passed, 17 deselected (0.28s) on the frozen tests sha; full file previously 21 passed"
+    }
+  },
+  "p2_executor_v2": {
+    "purpose": "official P2 poison executor; v1 harness is preserved unchanged as the harness-sanity record",
+    "harness": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_poison_smoke/run_poison_smoke_v2.py",
+      "sha256": "eb7cafe3d08c6cb072073661abdfbde6e9d710a2c163277f18e5a155e8e02c4c",
+      "ignored_outputs": true
+    },
+    "evidence_v2_dry_run": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_poison_smoke/dry_run_v2_seed2_singleclass/poison_smoke_evidence_v2.json",
+      "sha256": "3509108065992d02a1695a8bf64ac468a0986fd3ef02bf243f24b1dd4f96b86d",
+      "schema_version": "dsh.two_class_p2_poison_smoke.v2"
+    },
+    "pass_gate": "status=PASS only if environment.model_num_classes==2 AND differing_frames==[] AND coverage_ok==true; nc!=2 -> DRY_RUN_SINGLE_CLASS_MODEL_PASS; missing required coverage -> FAIL_COVERAGE_MISSING_CATEGORIES; any differing frame -> FAIL",
+    "required_coverage": ["tower_present", "ms1_only", "same_frame", "gt_unobservable", "negatives"],
+    "dry_run_verification_by_diag": {
+      "frames": 22,
+      "coverage": {"tower_present": 13, "ms1_present": 13, "ms1_only": 9, "same_frame": 4, "gt_unobservable": 0, "negatives": 9, "class0_instances": 13, "class1_instances": 13},
+      "coverage_ok": false,
+      "differing_frames": [],
+      "status": "DRY_RUN_SINGLE_CLASS_MODEL_PASS",
+      "verified": true,
+      "note": "gate correctly refuses PASS when num_classes!=2 and when gt_unobservable coverage is 0; the empty differing_frames confirms the harness/hash plumbing works"
+    },
+    "v1_preserved": true
+  },
+  "p2_acceptance_checklist_for_real_evidence": [
+    "model is the frozen two-class model with num_classes==2 (record .pt sha; if ONNX, record onnx sha+opset)",
+    "labels are the frozen v6 two-class label document (record sha + frame count + class0/class1/same-frame/GT_UNOBS denominators)",
+    "labels are disjoint from training; the evaluated frame set includes MS1-only frames, tower-only frames, same-frame tower+MS1 frames, GT_UNOBSERVABLE and negatives",
+    "poison harness scrambles all numeric GT fields (bbox/class/keypoint/v/reference_available/tower_present/ms1_present/uncertainty/occluded) but keeps frame_id and image pairing",
+    "two runs (real vs poisoned) produce observations that are identical per frame under the declared canonical JSON sha; differing_frames == [] and the status is PASS (no DRY_RUN prefix)",
+    "evidence JSON records environment, command, module/CLI/tests shas, labels/model/poisoned-label shas, frames denominator and the per-frame sha table",
+    "21-test file and 4 targeted tests are rerun on the frozen code shas and reported",
+    "if CLI/module changes for pilot compatibility, the new shas are sent before the audit and the V2 checklist is rerun"
+  ],
+  "p2_evidence_v4_accepted": {
+    "status": "ACCEPTED_PASS_AFTER_V3_REAUDIT",
+    "evidence": {"path": "outputs/perception/two_class_eval_20261105/p2_smoke/run_last_union_a188fca7_v4/poison_smoke_evidence_v3.json", "sha256": "e3853c99c49e9f62987d0e20fc7917fccb104218af38f798d9fa89781e9e49a7", "schema_version": "dsh.two_class_p2_poison_smoke.v4"},
+    "labels_canonical_union": {"path": "outputs/perception/two_class_eval_20261105/p2_smoke/labels_union_eval_frozen.json", "sha256": "a188fca7d11ea2bad7cc8325a6dc5baf1d7e643b77d9469543050def69b62768", "status": "FROZEN_P2_UNION", "created_by": "datafreeze (T36)"},
+    "handoff": "cc59fcc9d81fe0e9f18f61ce036553b07a480f2dac0c32208cf7d585aae9371c",
+    "model": "508a0430b2e4eac9c18d48520359eaaff1b5258c7a6e7844c95570a7cecfb07c",
+    "harness_v4": "58985ae0d329c2aa39f109f11365a07e451a9bc0d4a46e250fa5f0b4a411bf31",
+    "runtime_checks": {"frames": 225, "differing_frames": [], "per_frame_observations_identical": true, "distinct_real_observation_shas": 144, "coverage": {"tower_present_observable": 139, "gt_unobservable": 38, "negatives": 39, "same_frame": 73, "ms1_only": 9}, "coverage_ok": true, "model_num_classes": 2},
+    "independent_audit": "V3 GT isolation audit PASS; tests 23 passed + 7 targeted passed on module 1fdb66eb / tests 6020b00f"
+  },
+  "b1_b2_closure": {
+    "B1_union_binding": "CLOSED (evidence v4 binds canonical datafreeze T36 union a188fca7; old pre-run 7bb785fa kept only as history; provenance_note documents the replacement)",
+    "B2_canonical_flags": "CLOSED (truth loader consumes explicit frozen-doc flags; independent loader counts: union 139/38/39/73/9, identity 44/9/26/9, val_main 95/47/39/29, 0 mismatch; identity wrong-claim denominator = negatives ∪ ms1_only = 48 union / 9 identity)",
+    "current_frozen_code": {"module": "1fdb66eb9ca5bd9e0e015452c511f6481c28196247116f4e3d0df117c7779ff7", "cli": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e", "tests": "6020b00fee03819be33d3fbf3329c0eccd1cc74cf093b1be13e7dc076012cea3", "report": "ee408eb61a1d2196b0a3634737067318910184fd0cca06aaf272846e2a3ffa70"},
+    "v3_audit_record": {"path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105_V3.json", "sha256": "6686019c20043940edd220b288bce92494ea01636a6dd6d388e18dfb552b120a", "verdict": "PASS_REAUDIT_B1_B2_FIXED"},
+    "cli_unchanged": true
+  },
+  "pilot_evidence_supersession": {
+    "severity": "IMPORTANT_FOR_GATE_NARRATIVE",
+    "source": "outputs/perception/two_class_eval_20261105/pilot_v61_current/pilot_v61_current_evidence_shas.json (note: old pilot_v61 metrics invalid because the prediction files were rewritten at 12:19:54; current summary sha da869af3...)",
+    "current_identity_last_confirmed": {"class0_recall": 0.977, "ms1_recall": 0.286, "identity_wrong_claims": 0, "same_frame": "26/26=1.000", "reference_coverage": 0.944, "false_reference": "2/26"},
+    "current_identity_best_confirmed": {"class0_recall": 0.864, "ms1_recall": 0.200, "identity_wrong_claims": 0, "same_frame": "20/26=0.769", "reference_coverage": 1.000, "false_reference": "1/26"},
+    "current_val_main_last_confirmed": {"class0_recall": 0.821, "class1_recall": 0.426, "same_frame": "37/47=0.787", "identity_precision": 1.0},
+    "implication": "the pilot gate hard failure remains MS1 recall (<0.50) but the previously cited same_frame 0.385 and 2/9 MS1-only wrong claims are not reproducible on the current predictions; gate conditions other than MS1 recall should be re-adjudicated on current predictions + canonical eval documents before any R2 decision.",
+    "note": "the pilot current summary was produced on legacy pilot truth documents, not the canonical eval docs; the gate run must use canonical eval docs (val_main d6c6a252 + identity 7471c408) and canonical flags."
+  },
+  "p2_evidence_v4b_accepted": {
+    "status": "ACCEPTED_PASS_AFTER_V4_REAUDIT",
+    "evidence": {"path": "outputs/perception/two_class_eval_20261105/p2_smoke/run_last_union_a188fca7_v4b/poison_smoke_evidence_v3.json", "sha256": "5a77d689624d7c79883d450493e1382da092616a956bef8d28db304bba2d52fb", "schema_version": "dsh.two_class_p2_poison_smoke.v4"},
+    "labels_canonical_union": "a188fca7d11ea2bad7cc8325a6dc5baf1d7e643b77d9469543050def69b62768",
+    "handoff": "cc59fcc9d81fe0e9f18f61ce036553b07a480f2dac0c32208cf7d585aae9371c",
+    "model": "508a0430b2e4eac9c18d48520359eaaff1b5258c7a6e7844c95570a7cecfb07c",
+    "harness_v4": "58985ae0d329c2aa39f109f11365a07e451a9bc0d4a46e250fa5f0b4a411bf31",
+    "runtime_checks": {"frames": 225, "differing_frames": [], "per_frame_observations_identical": true, "distinct_real_observation_shas": 144, "coverage": {"tower_present_observable": 139, "gt_unobservable": 38, "negatives": 39, "same_frame": 73, "ms1_only": 9}, "coverage_ok": true, "model_num_classes": 2},
+    "v4_audit_record": {"path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105_V4.json", "sha256": "1c40a8e07274656bf76d6416782eaf4304e862fa5cc5ad560c0f0ccedcccbb5a", "verdict": "PASS_REAUDIT_B3_FIXED_WITH_B4_PREDICTION_FILE_ACTION_ITEM"}
+  },
+  "p2_smoke_additional_models": [
+    {
+      "purpose": "optional archival evidence: GT-isolation smoke on the R2 last model; the R2 pilot gate FAILED, so this is NOT gate evidence, only a second-model check of the same frozen P2 pipeline",
+      "model": {"path": "outputs/landmark_train/runs/two_class_pilot_v7b/seed0/train_seed0/weights/last.pt", "sha256": "64ac38229adc658b96213b2a19a3ff84b39839c8d234a09233cc17df9cbeabdc", "model_num_classes": 2},
+      "evidence": {"path": "outputs/perception/two_class_eval_20261105/p2_smoke/run_r2_last_union_a188fca7_v4/poison_smoke_evidence_v3.json", "sha256": "c40db8e4cf66b5002bc9a97d6c7a7c995af0d45556e7414276a1415aa068bebf", "status": "PASS"},
+      "labels_canonical_union": "a188fca7d11ea2bad7cc8325a6dc5baf1d7e643b77d9469543050def69b62768",
+      "runtime_checks": {"frames": 225, "differing_frames": [], "per_frame_observations_identical": true, "distinct_real_observation_shas": 148, "coverage": {"tower_present_observable": 139, "gt_unobservable": 38, "negatives": 39, "same_frame": 73, "ms1_only": 9}, "coverage_ok": true},
+      "code_shas_match_v4_audit": {"module": "183b6d22f4438488ffcb1f947aed370bff82c58fdbf17adc02eae5d8c5257789", "cli": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e", "tests": "a101eb4398733edb3a714f6539e483e186adda1900327f0c73c86f259b9c3e26", "harness": "58985ae0d329c2aa39f109f11365a07e451a9bc0d4a46e250fa5f0b4a411bf31"},
+      "audit_note": "code unchanged since the V4 audit; no V2/V3 rerun required. GT isolation is model-independent, and this confirms the same frozen pipeline on a second two-class model. Not archived as gate evidence."
+    }
+  ],
+  "b3_keypoint_normalization_closure": {
+    "status": "CLOSED",
+    "fix": "canonical doc keypoint_x/keypoint_y in [0,1] are restored to pixels via width/height when width/height>2 (legacy keypoint_px branch unchanged); new normalized test added",
+    "independent_check": "canonical R1 bearing reproduced: val_last n33 0.8224/1.9006; id_last n17 1.1939/4.1778; id_best n18 1.8925/3.4761"
+  },
+  "canonical_r1_final": {
+    "source": {"summary": "outputs/perception/two_class_eval_20261105/pilot_v61_canonical/pilot_v61_canonical_summary.json", "summary_sha256": "6de15568dca6ceec7d586f3e1d7ec9bc957509da0506d41e53771ddd3670aac9", "evidence": "f1f65e2baaf25a8babdcdfbb96a5e8e5f48a062d82b0e338c5212e22ed6280eb", "report": "355a3b00daffd5342d1f41dcb0c4ba968a231f09c370ca2751ca76e5dfb6aee3"},
+    "val_main_last": {"tower_recall": 0.8211, "ms1_recall": 0.4255, "claims": 76, "wrong": 0, "same_frame": "37/47=0.787", "ref": "33/41=0.805 false_ref 3/54", "bearing": "n33 0.8224/1.9006", "all_positive": 0.595, "negatives": "39/39", "gt_unobs": 29},
+    "val_main_best": {"tower_recall": 0.7684, "ms1_recall": 0.2979, "claims": 73, "wrong": 0, "same_frame": "32/47=0.681", "bearing": "n35 0.751/1.911", "all_positive": 0.579},
+    "identity_last": {"tower_recall": 0.9773, "ms1_recall": 0.2857, "claims": 43, "wrong": 0, "same_frame": "26/26=1.000", "ref": "17/18=0.944 false_ref 2/26", "bearing": "n17 1.1939/4.1778", "all_positive": 0.698, "gt_unobs": 9},
+    "identity_best": {"tower_recall": 0.8636, "ms1_recall": 0.2000, "claims": 38, "wrong": 0, "same_frame": "20/26=0.769", "bearing": "n18 1.8925/3.4761", "all_positive": 0.6604},
+    "gate_reading": "only MS1 recall fails (0.286/0.200 < 0.50; val_main 0.426/0.298 <0.50); tower recall, wrong claims 0/0, same-frame, identity precision 1.0, consumer, bearing median, tower regression all pass on canonical numbers. Legacy pilot numbers (same_frame 0.385 / 2/9 wrong) are invalid.",
+    "reproduction": "independent evaluate_rows on canonical eval docs + observation JSONL reproduced the exact canonical metrics"
+  },
+  "b4_action_item": {
+    "id": "B4",
+    "status": "OPEN_ACTION_ITEM_NOT_BLOCKING_P2_OR_CANONICAL_R1",
+    "finding": "raw pilot predictions.jsonl store keypoint_px=[0,0] as a sentinel for non-emitted keypoints (val_last 94/130, id_last 36/59, val_best 62/112, id_best 27/48 detections), but the prediction-file normalizer treats any non-None keypoint as emitted/reference_available; --predictions reproduction therefore gives wrong reference/bearing (independent run: val_last ref coverage 0.829/false_ref 0.815 vs canonical 0.805/0.0556; bearing n34 vs n33). Canonical R1 uses observation JSONL (keypoint=None when suppressed) and is unaffected.",
+    "required_fix": "writer emits keypoint_px=null + reference_available=false (preferred) or normalizer handles the sentinel explicitly; add a test that the prediction-file path reproduces the observation-file canonical numbers; document canonical evidence uses observation JSONL.",
+    "if_fixed": "send new module/CLI sha and a final V5 audit is required"
+  },
+  "pending_inputs": {
+    "v6_two_class_labels": "PENDING (datafreeze/T32)",
+    "frozen_two_class_model": "PENDING (train P3)",
+    "onnx": "PENDING/OPTIONAL"
+  },
+  "boundaries": [
+    "dry-run is harness sanity only, not P2 evidence",
+    "no code changed by this status note",
+    "old audit records unchanged"
+  ]
+}

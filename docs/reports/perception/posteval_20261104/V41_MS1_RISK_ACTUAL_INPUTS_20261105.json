@@ -1,0 +1,126 @@
+{
+  "schema_version": "dsh.landmark_v41_unlabeled_ms1_risk_actual_inputs.v1",
+  "created_at": "2026-11-05",
+  "status": "REVIEW_ESTIMATE_PRE_DATA",
+  "scope": "addendum to V41_UNLABELED_MS1_RISK_20261105.json: restrict the risk to the ACTUAL v4.1 training inputs (image<->label 1:1), not the pool frame count; read-only projection, no images/inference",
+  "inputs": {
+    "v41_merged_labels": {
+      "path": "outputs/landmark_train/dataset/labels_train_v4_1_merged.json",
+      "sha256": "c936da6bfb126cb668825e3091117dc752311c9207fcc66b32691c608e61f187"
+    },
+    "v41_dataset_build": {
+      "path": "outputs/landmark_train/dataset/dev_v4_1/dataset_build.json",
+      "train_label_files": 436,
+      "train_frames": 439,
+      "excluded": 3
+    },
+    "risk_json": {
+      "path": "docs/reports/perception/posteval_20261104/V41_UNLABELED_MS1_RISK_20261105.json",
+      "sha256": "232097daf592bf4cb4d11ca79daec2d9ed48d655d01ed5799ba1ab1d418cdcc0"
+    },
+    "train_sidecar": "outputs/landmark_train/dataset/dev_v4_1/sidecars/train_sidecar.jsonl (439 rows, 436 included_in_training)"
+  },
+  "method": {
+    "camera_pose": "sensor observation extrinsics (position_world_m, quat_w_world)",
+    "projection": "u=cx-fx*y_cam/x_cam, v=cy-fy*z_cam/x_cam (FLU camera axes)",
+    "calibration_vs_capture_tower_projection": {
+      "n": 327,
+      "median_px": 0.0405,
+      "max_px": 0.0683
+    },
+    "ms1_points": {
+      "lamp": [
+        3,
+        4,
+        1.71
+      ],
+      "top": [
+        3,
+        4,
+        1.78
+      ],
+      "base": [
+        3,
+        4,
+        0
+      ]
+    },
+    "visible_thresholds_px": {
+      "decidable": 8,
+      "clearly_visible": 20
+    },
+    "no_occlusion_test": true,
+    "estimate_is": "upper bound of projected visibility (occlusion would reduce)"
+  },
+  "actual_inputs_denominator": {
+    "included_frames": 436
+  },
+  "actual_inputs_risk": {
+    "ms1_projected_visible_8px": 69,
+    "ratio_8px": 0.1583,
+    "ms1_projected_visible_20px": 65,
+    "ratio_20px": 0.1491,
+    "apparent_height_px_range": [
+      19.49,
+      79.89
+    ],
+    "split_by_single_class_label": {
+      "positive_label_but_ms1_unlabeled_same_frame": 38,
+      "empty_negative_but_ms1_visible": 31,
+      "unknown_label_status": 0
+    },
+    "split_by_family": {
+      "fam_south_A": 41,
+      "lmf_similar_negative": 15,
+      "fam_dev_static_negative": 8,
+      "fam_static_E_test": 2,
+      "fam_static_W_start": 2,
+      "fam_static_E_dev": 1
+    }
+  },
+  "pool_denominator_for_reference": {
+    "accepted_frames": 1697,
+    "ms1_visible_8px": 443,
+    "ratio_8px": 0.261,
+    "ms1_visible_20px": 432,
+    "ratio_20px": 0.2546
+  },
+  "consequences_if_v41_labels_reused_as_is": [
+    "31 empty-negative frames (7.1% of actual inputs) would train class1 as pure background on MS1 views",
+    "38 positive frames (8.7% of actual inputs) would omit the MS1 instance while the tower bbox is supervised: the exact same-frame disambiguation case the pilot gate needs is taught as 'MS1 absent'",
+    "combined: 69/436 = 15.8% of actual v4.1 training inputs carry an unlabelled visible MS1; class1 recall and same-frame selection are the most exposed metrics",
+    "the 15.8% is a projected-visibility upper bound; occlusion/annotation conventions could reduce or increase it"
+  ],
+  "mitigation_options": [
+    {
+      "option": "A. pre-register exclusion of affected frames",
+      "rule": "exclude v4.1 frames with projected MS1 height >= 8 px (or 20 px) from the two-class train pass; report the excluded fraction before training",
+      "cost": "lose 69/436 = 15.8% (or 65/436 = 14.9% at 20 px) of v4.1 inputs",
+      "benefit": "no contradictory class1 supervision; stays inside the pre-registered budget"
+    },
+    {
+      "option": "B. annotate class1 in affected frames",
+      "rule": "add the missing class1 instances (same-frame completeness) for the 69 frames; keeps the same-frame views",
+      "cost": "69 frames of class1 annotation (plus QA); highest value is the 38 same-frame frames",
+      "benefit": "turns the risk into supervision for the exact gate case"
+    },
+    {
+      "option": "C. ignore/loss mask",
+      "rule": "try to ignore the MS1 region",
+      "cost": "ultralytics 8.2.0 pose loss has no per-region ignore; code change with new risk",
+      "benefit": "none recommended"
+    }
+  ],
+  "recommendation": "pre-register option A or B before any two-class training; do not silently reuse single-class v4.1 labels with visible MS1. If budget allows, B on the 38 same-frame frames is the most gate-relevant; A remains the conservative fallback. Re-run this projection check on the v6 label document and fail the label gate if any affected frame lacks class1 or an explicit exclusion.",
+  "limitations": [
+    "projection only, no occlusion/terrain/dynamic-object test",
+    "MS1 width approximated by axis",
+    "v6 two-class labels do not exist yet (T30 capture in progress)",
+    "risk applies only if v4.1 single-class labels are reused; a full two-class v6 annotation of v4.1 would remove it"
+  ],
+  "boundaries": [
+    "internal bounded research only",
+    "no training/inference/Isaac run",
+    "old models/protocols unchanged"
+  ]
+}

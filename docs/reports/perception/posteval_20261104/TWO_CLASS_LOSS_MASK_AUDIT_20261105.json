@@ -1,0 +1,63 @@
+{
+  "schema_version": "dsh.landmark_two_class_loss_mask_audit.v1",
+  "created_at": "2026-11-05",
+  "source": {
+    "ultralytics_version": "8.2.0",
+    "loss_py": "E:\\isaac\\proj_boom_birds\\.venv\\landmark-train\\Lib\\site-packages\\ultralytics\\utils\\loss.py",
+    "loss_py_sha256": "7a35e73c4200ccd128373d948d6d3f7dc75e52cf47cbe8cfcd4ac9dc58882301",
+    "kpt_mask_line": 581,
+    "keypoint_loss_line": 582,
+    "kobj_line": 585,
+    "normalization_line": 142
+  },
+  "semantics": {
+    "location_loss": "masked by (gt_kpt[...,2] != 0); class1 v=0 contributes exactly 0 to the keypoint coordinate loss",
+    "visibility_loss": "kobj = BCE(pred_vis, mask.float()); class1 v=0 is supervised toward visibility 0 (intended, not a coordinate leak)",
+    "class_agnostic": "the mask has no class branch; two-class semantics live entirely in the labels",
+    "v_encoding": "ndim=3 pose labels keep the written v; only v=2 or other non-zero values would count as visible; the label builder must enforce v in {0,1} (never v=2)",
+    "placeholder": "v=0 rows still contain normalized xy in the txt; label builder must write 0,0 for class1 (never bbox centre) and no code may treat the v=0 xy as a reference point"
+  },
+  "experiment": {
+    "instances": [
+      "row0 = class0 v=1",
+      "row1 = class1 v=0"
+    ],
+    "base_loss": 0.5,
+    "class1_xy_perturbed_loss": 0.5,
+    "class0_xy_perturbed_loss": 0.47803154587745667,
+    "class1_v2_loss": 0.9990347623825073,
+    "class1_v2_perturbed_loss": 1.0,
+    "kobj_loss_v0": 0.7911538481712341,
+    "kobj_loss_v2": 0.3411538898944855,
+    "kpt_mask": [
+      [
+        true
+      ],
+      [
+        false
+      ]
+    ]
+  },
+  "checks": {
+    "class1_v0_xy_perturbation_changes_location_loss": false,
+    "class0_xy_perturbation_changes_location_loss": true,
+    "class1_v0_excluded_from_location_loss": true,
+    "class1_v0_visibility_target_is_zero": true,
+    "class1_v2_is_treated_as_visible": true,
+    "class0_v1_is_treated_as_visible": true
+  },
+  "verdict": "PASS",
+  "required_builder_checks_for_two_class": [
+    "label builder writes nc=2, kpt_shape [1,3]",
+    "class1 keypoint xy written as 0,0 and v=0 (never bbox centre)",
+    "class0 keypoint v=1 only when the green roof light is visible/locatable; v=0 otherwise",
+    "v is in {0,1} for every instance; reject v=2 or other non-zero values in QA",
+    "same-frame completeness QA: every visible/decidable MS1 instance labelled; MS1 never left as background",
+    "class1 bbox present for every class1 instance (bbox loss still supervised; only the keypoint coordinate loss is masked)",
+    "keypoint-mask regression test on the real v6 dataset: pick one class1 v=0 row and one class0 v=1 row, recompute the mask/loss contribution"
+  ],
+  "limitations": [
+    "CPU tiny-tensor check of the installed loss, not a training run",
+    "no real two-class labels exist yet (P1); the real-dataset mask test must run in P2 engineering smoke"
+  ]
+}

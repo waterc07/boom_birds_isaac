@@ -1,0 +1,218 @@
+{
+ "lmf_t30_f1_tower_near_alone_0-follow_only": {
+  "frames": 50,
+  "target_in_fov": 50,
+  "target_green_frames": 50,
+  "ms1_in_fov": 0,
+  "ms1_green_frames": 0,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 0,
+   "right": 15,
+   "top": 0,
+   "bottom": 11
+  },
+  "target_dist_m": [
+   1.73,
+   2.56
+  ],
+  "ms1_dist_m": [
+   7.12,
+   8.12
+  ],
+  "seq_range": [
+   3,
+   68
+  ]
+ },
+ "lmf_t30_f2_tower_mid_alone_0-follow_only": {
+  "frames": 48,
+  "target_in_fov": 48,
+  "target_green_frames": 48,
+  "ms1_in_fov": 0,
+  "ms1_green_frames": 0,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0
+  },
+  "target_dist_m": [
+   4.54,
+   5.14
+  ],
+  "ms1_dist_m": [
+   4.82,
+   5.7
+  ],
+  "seq_range": [
+   3,
+   65
+  ]
+ },
+ "lmf_t30_f3_tower_far_alone_0-follow_only": {
+  "frames": 47,
+  "target_in_fov": 47,
+  "target_green_frames": 15,
+  "ms1_in_fov": 0,
+  "ms1_green_frames": 0,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0
+  },
+  "target_dist_m": [
+   10.14,
+   10.89
+  ],
+  "ms1_dist_m": [
+   5.13,
+   6.11
+  ],
+  "seq_range": [
+   3,
+   64
+  ]
+ },
+ "lmf_t30_f4_tower_edge_trunc_0-follow_only": {
+  "frames": 48,
+  "target_in_fov": 37,
+  "target_green_frames": 40,
+  "ms1_in_fov": 0,
+  "ms1_green_frames": 0,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 37,
+   "right": 0,
+   "top": 0,
+   "bottom": 3
+  },
+  "target_dist_m": [
+   2.37,
+   2.98
+  ],
+  "ms1_dist_m": [
+   7.75,
+   8.55
+  ],
+  "seq_range": [
+   3,
+   65
+  ]
+ },
+ "lmf_t30_f5_ms1_near_alone_0-follow_only": {
+  "frames": 45,
+  "target_in_fov": 0,
+  "target_green_frames": 0,
+  "ms1_in_fov": 45,
+  "ms1_green_frames": 0,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0
+  },
+  "target_dist_m": [
+   8.93,
+   9.6
+  ],
+  "ms1_dist_m": [
+   2.88,
+   3.39
+  ],
+  "seq_range": [
+   3,
+   61
+  ]
+ },
+ "lmf_t30_f6_ms1_far_trunc_0-follow_only": {
+  "frames": 50,
+  "target_in_fov": 0,
+  "target_green_frames": 0,
+  "ms1_in_fov": 31,
+  "ms1_green_frames": 25,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0
+  },
+  "target_dist_m": [
+   17.22,
+   17.86
+  ],
+  "ms1_dist_m": [
+   9.06,
+   9.81
+  ],
+  "seq_range": [
+   3,
+   68
+  ]
+ },
+ "lmf_t30_f7_both_near_far_0-follow_only": {
+  "frames": 39,
+  "target_in_fov": 39,
+  "target_green_frames": 1,
+  "ms1_in_fov": 39,
+  "ms1_green_frames": 39,
+  "both_in_fov": 39,
+  "overlap_ge_0.05": 39,
+  "target_trunc": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0
+  },
+  "target_dist_m": [
+   13.41,
+   16.15
+  ],
+  "ms1_dist_m": [
+   4.05,
+   6.77
+  ],
+  "seq_range": [
+   3,
+   53
+  ]
+ },
+ "lmf_t30_f8_target_absent_neg_0-follow_only": {
+  "frames": 46,
+  "target_in_fov": 0,
+  "target_green_frames": 0,
+  "ms1_in_fov": 0,
+  "ms1_green_frames": 0,
+  "both_in_fov": 0,
+  "overlap_ge_0.05": 0,
+  "target_trunc": {
+   "left": 0,
+   "right": 0,
+   "top": 0,
+   "bottom": 0
+  },
+  "target_dist_m": [
+   4.81,
+   5.41
+  ],
+  "ms1_dist_m": [
+   8.78,
+   9.39
+  ],
+  "seq_range": [
+   3,
+   63
+  ]
+ }
+}

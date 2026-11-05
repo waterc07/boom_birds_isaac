@@ -1,0 +1,64 @@
+{
+ "copied": [
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/manifest.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_manifest.json",
+   "sha256": "e6e0c7a8a4aa9169a1589279fe8df139bef356059472719189ae35a199d126c4",
+   "bytes": 15628
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/summary.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_summary.json",
+   "sha256": "32b2876d3e6b426f17674c2632b84591938d4bf6fa6d3c064268afa5c5375301",
+   "bytes": 29164
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/run.complete.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_complete.json",
+   "sha256": "05db34dfd3dd57bc3283d21dd54fcfe64609d184c07cdb7ddf427cf8f7d60012",
+   "bytes": 194
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/gui.log",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_gui.log",
+   "sha256": "cfbba10f018dd6c4ee801de9601721c398624f5bb867ef4a9e2ddc38c80b8a03",
+   "bytes": 10688
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor/summary.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_sensor_summary.json",
+   "sha256": "a1a784c5afee1df8c8dc453dc52da756666aa2515e813c0939a4d459024d5ba5",
+   "bytes": 15878
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/_evidence/t38_frame_conditions.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_frame_conditions.json",
+   "sha256": "2fdd8ea0c408eada5db1c5011647b738bb5b302488a91493b85bb820db187b54",
+   "bytes": 137784
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/_evidence/t38_episode_conditions.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_episode_conditions.json",
+   "sha256": "2ec9b574a157d43e1bcdffc4a7610e3519c2ec4817c8fd4dd21bc1b54bf32585",
+   "bytes": 898
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/_evidence/t38_pool_selection.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_pool_selection.json",
+   "sha256": "48304e1a979cfb1ae03cfb19ba5674e9100c02a4d72f8dd00ad3940654f0df9d",
+   "bytes": 6025
+  },
+  {
+   "source": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/_evidence/t38_dedup_vs_existing.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_dedup_vs_existing.json",
+   "sha256": "7ada7a4a5e81d68ef6cb9fc4ed09b799060e086d7819b47d1ff62ed38fc8667f",
+   "bytes": 988
+  },
+  {
+   "source": "configs/scenarios/landmark_two_class_near_ms1_cases_v1.json",
+   "target": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/t38_cases_manifest.json",
+   "sha256": "eabe2169aed9063c0bbaffeae24089127c6f02b23f62b16e31f39ac9707b5998",
+   "bytes": 8723
+  }
+ ]
+}

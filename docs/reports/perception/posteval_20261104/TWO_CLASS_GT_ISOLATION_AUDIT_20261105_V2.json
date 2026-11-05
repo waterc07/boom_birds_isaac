@@ -1,0 +1,100 @@
+{
+  "schema_version": "dsh.landmark_two_class_gt_isolation_audit.v2",
+  "created_at": "2026-11-05",
+  "supersedes": {
+    "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105.json",
+    "sha256": "a5267429a7efff80231f533a924f9a03c17c20b80b48d2e1c15fa4af21836b92",
+    "status": "V1 documented the pre-fix API coupling (R1) and remains as the decision record"
+  },
+  "status": "PASS_REAUDIT_R1_FIXED",
+  "scope": "static re-audit after evaltool fixed R1 (decode no longer accepts the truth row) and added GT-poison/rename/static-guard tests; inference not run by this audit; independent targeted tests executed (21 passed)",
+  "audited_at_head": "47d1063",
+  "audited_shas": {
+    "src/boom_birds/evaluation/landmark_two_class_eval.py": "db8ca0e8e08c24832acbb0e6f255ddf70811acae856cf04d61cdc2f81c9265c6",
+    "scripts/evaluate_landmark_two_class.py": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e",
+    "tests/evaluation/test_landmark_two_class_eval.py": "febb847dcde774bc411c3af055b217fe3ce8148be0b40fe3ef0dcd2fdc38c61e",
+    "docs/reports/perception/TWO_CLASS_EVAL_20261105.md": "36c25aff46ca9726538e87c463e00a10f29a015bee185df2092beefdd72ff0e1",
+    "report_sha_at_audit": "ddbfc5885fceceb6e9f268e9ba28920d97c08db512ab69a8bc534ea7b8037bd6",
+    "report_update_note": "evaltool updated only the report content after the re-audit (added the V2 re-audit note and the two residual notes); module/CLI/tests shas are unchanged, so the audit verdict remains valid; report sha above is the current value",
+    "validation_command": "E:\\isaac\\env_isaaclab\\Scripts\\python.exe -m pytest -q tests/evaluation/test_landmark_two_class_eval.py -> 21 passed in 1.52s (audit rerun)"
+  },
+  "checks": [
+    {
+      "id": "G1",
+      "requirement": "the model is called with the image only",
+      "evidence": "landmark_two_class_eval.infer_observations:1075-1076 model.predict(source=str(image_path), ...); CLI routes through infer_observations:98; single-class eval script unchanged image-only predict",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G2",
+      "requirement": "decoder receives no GT geometry/class/position",
+      "evidence": "decode_detections(detections, frame_id, protocol) at :425; isinstance(frame_id, dict) -> TwoClassEvalError at :433-435; docstring states structural GT isolation",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G3",
+      "requirement": "consumer/deployment path uses only the v2 observation payload + detector prior",
+      "evidence": "landmark_consumer.py:123-128 payload.ref + detector.detect(image,intrinsics); landmark_detector.py docstring/detect signature",
+      "verdict": "PASS (unchanged from V1)"
+    },
+    {
+      "id": "G4",
+      "requirement": "identity claims come from predicted class/score/bbox/keypoint only",
+      "evidence": "decode_detections class0-only claim, class1 never maps to tower id, conflict/margin reject; evaluate_frame consumes truth for scoring only",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G5",
+      "requirement": "no oracle region / GT position / file-name parsing in inference decisions",
+      "evidence": "static guard test :528-533 blocks gt_tower/gt_ms1/gt_other/ground_truth/oracle/target_world in decode/adapter/infer source; rename test :475-484",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G6",
+      "requirement": "GT row is not passed into the inference decode API (R1 from V1)",
+      "evidence": "R1 FIXED: decode_detections only takes frame_id and raises on a dict; infer_observations:1067-1078 touches truth_row only for frame_id + image resolution; truth_row remains only in evaluate_frame",
+      "verdict": "PASS (was RISK_API_COUPLING in V1)"
+    },
+    {
+      "id": "G7",
+      "requirement": "evaluation image resolution / pairing does not feed GT values to the model",
+      "evidence": "CLI _resolve_image:60-64 uses truth image/frame_id to locate the file, then infer_observations passes only the path to the model; deployment uses payload.ref",
+      "verdict": "PASS_WITH_DOCUMENTATION"
+    },
+    {
+      "id": "G8",
+      "requirement": "labels are used only after inference for scoring",
+      "evidence": "CLI loads labels, runs infer_observations, then evaluate_rows; inference function never reads GT class/box/keypoint/position",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G9",
+      "requirement": "class1 semantic scope: only verified map-native MS1",
+      "evidence": "_route_confuser:289-301 routes only map_native and not synthetic confusers to class1; everything else goes to other_boxes; synthetic keyword detection included",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G10",
+      "requirement": "unverified/other structures are single-listed, not class1 recall, and tower claims on them count as OTHER_STRUCTURE",
+      "evidence": "evaluate_frame:590-651 gt_other_boxes; other_structure_hits; wrong_category OTHER_STRUCTURE; summary other_structures :864-866",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G11",
+      "requirement": "regression tests for GT isolation exist and pass",
+      "evidence": "test_decode_rejects_ground_truth_argument_and_is_rename_independent :475-484; test_gt_poison_does_not_change_inference_observations :487-516 (clean_obs == poisoned_obs); static guard :528-533; audit rerun 21 passed",
+      "verdict": "PASS"
+    }
+  ],
+  "residual_notes": [
+    "the evaluation image resolver still reads truth_row.image/frame_id to locate files; this is evaluation pairing, not inference input, and is documented (deployment uses payload.ref)",
+    "the re-audit is static + targeted tests; a frozen-model dynamic poison run on the real v6 labels remains a P2 smoke item (the poison test uses a stub Model, which is sufficient for the API-level claim)",
+    "decode_detections no longer accepts a truth dict, so a future GT leak requires an explicit API change — the structural property is now test-enforced",
+    "class1 scope now matches the T35 S1 recommendation (map-native MS1 only); S2 other structures are single-listed as OTHER_STRUCTURE"
+  ],
+  "boundaries": [
+    "static re-audit + targeted unit tests; no model inference/training/Isaac",
+    "development-only evidence; not certification",
+    "old audit V1 and old results unchanged"
+  ]
+}

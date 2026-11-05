@@ -1,0 +1,389 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "purpose": "T38 near MS1 (1.3-2.2 m) supplement for the two-class identity channel: 2 new families, MS1 alone near, central tower out of FOV",
+  "families": [
+    {
+      "family": "f1_ms1_near_sw",
+      "case_id": "lmf_t38_f1_ms1_near_sw_0",
+      "conditions": [
+        "ms1_only",
+        "near_1.3_2.2m",
+        "southwest_view",
+        "tower_out_of_fov",
+        "green_lamp_visibility_recorded"
+      ],
+      "predicted_frames": 57,
+      "predicted_path_m": 4.33
+    },
+    {
+      "family": "f2_ms1_near_se",
+      "case_id": "lmf_t38_f2_ms1_near_se_0",
+      "conditions": [
+        "ms1_only",
+        "near_1.3_2.2m",
+        "southeast_view",
+        "tower_out_of_fov",
+        "green_lamp_visibility_recorded"
+      ],
+      "predicted_frames": 56,
+      "predicted_path_m": 4.17
+    }
+  ],
+  "regions": [
+    {
+      "region_id": "CAP_FIELD",
+      "x_min": -10.6,
+      "x_max": 10.6,
+      "y_min": -7.0,
+      "y_max": 7.0,
+      "ground_z_min": -0.3,
+      "ground_z_max": 3.0,
+      "note": "data-collection observation zone used only for capture-case validation; NOT a real region in the V2.2 region topology"
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "t38_f1_ms1_near_sw",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_near_ms1_family",
+      "corridor_waypoints": [
+        [
+          1.904,
+          2.904,
+          1.0
+        ],
+        [
+          1.55,
+          3.045,
+          1.0
+        ],
+        [
+          2.116,
+          2.763,
+          1.0
+        ],
+        [
+          1.798,
+          2.656,
+          1.0
+        ],
+        [
+          1.656,
+          3.081,
+          1.0
+        ],
+        [
+          1.975,
+          2.55,
+          1.0
+        ],
+        [
+          1.833,
+          2.975,
+          1.0
+        ],
+        [
+          2.045,
+          2.55,
+          1.0
+        ],
+        [
+          1.763,
+          3.116,
+          1.0
+        ],
+        [
+          1.692,
+          2.763,
+          1.0
+        ]
+      ],
+      "note": "MS1 alone near (about 1.44-1.79 m) from a south-west viewpoint; central tower about 60 deg outside the FOV; green-lamp visibility recorded"
+    },
+    {
+      "route_id": "t38_f2_ms1_near_se",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_near_ms1_family",
+      "corridor_waypoints": [
+        [
+          4.061,
+          2.939,
+          1.0
+        ],
+        [
+          3.955,
+          2.621,
+          1.0
+        ],
+        [
+          4.245,
+          3.151,
+          1.0
+        ],
+        [
+          4.273,
+          2.798,
+          1.0
+        ],
+        [
+          3.891,
+          2.656,
+          1.0
+        ],
+        [
+          4.442,
+          3.01,
+          1.0
+        ],
+        [
+          4.018,
+          2.869,
+          1.0
+        ],
+        [
+          4.4,
+          3.024,
+          1.0
+        ],
+        [
+          3.877,
+          2.812,
+          1.0
+        ],
+        [
+          4.259,
+          2.741,
+          1.0
+        ]
+      ],
+      "note": "MS1 alone near (about 1.44-1.80 m) from a south-east viewpoint; central tower about 165 deg outside the FOV; green-lamp visibility recorded"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "lmf_t38_f1_ms1_near_sw_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t38_f1_ms1_near_sw",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": 0.15,
+      "start_position_world_m": [
+        1.904,
+        2.904,
+        1.0
+      ],
+      "start_yaw_rad": 0.7853981633974483,
+      "goal_position_world_m": [
+        1.692,
+        2.763,
+        1.0
+      ],
+      "waypoints": [
+        [
+          1.904,
+          2.904,
+          1.0
+        ],
+        [
+          1.55,
+          3.045,
+          1.0
+        ],
+        [
+          2.116,
+          2.763,
+          1.0
+        ],
+        [
+          1.798,
+          2.656,
+          1.0
+        ],
+        [
+          1.656,
+          3.081,
+          1.0
+        ],
+        [
+          1.975,
+          2.55,
+          1.0
+        ],
+        [
+          1.833,
+          2.975,
+          1.0
+        ],
+        [
+          2.045,
+          2.55,
+          1.0
+        ],
+        [
+          1.763,
+          3.116,
+          1.0
+        ],
+        [
+          1.692,
+          2.763,
+          1.0
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t38_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "MS1 alone near (about 1.44-1.79 m) from a south-west viewpoint; central tower about 60 deg outside the FOV; green-lamp visibility recorded; two-class near-MS1 training family; no injection"
+    },
+    {
+      "case_id": "lmf_t38_f2_ms1_near_se_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t38_f2_ms1_near_se",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": 0.15,
+      "start_position_world_m": [
+        4.061,
+        2.939,
+        1.0
+      ],
+      "start_yaw_rad": 2.522000769131806,
+      "goal_position_world_m": [
+        4.259,
+        2.741,
+        1.0
+      ],
+      "waypoints": [
+        [
+          4.061,
+          2.939,
+          1.0
+        ],
+        [
+          3.955,
+          2.621,
+          1.0
+        ],
+        [
+          4.245,
+          3.151,
+          1.0
+        ],
+        [
+          4.273,
+          2.798,
+          1.0
+        ],
+        [
+          3.891,
+          2.656,
+          1.0
+        ],
+        [
+          4.442,
+          3.01,
+          1.0
+        ],
+        [
+          4.018,
+          2.869,
+          1.0
+        ],
+        [
+          4.4,
+          3.024,
+          1.0
+        ],
+        [
+          3.877,
+          2.812,
+          1.0
+        ],
+        [
+          4.259,
+          2.741,
+          1.0
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t38_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "MS1 alone near (about 1.44-1.80 m) from a south-east viewpoint; central tower about 165 deg outside the FOV; green-lamp visibility recorded; two-class near-MS1 training family; no injection"
+    }
+  ],
+  "scene_injections": {},
+  "sampling_rule": {
+    "status": "FROZEN_BEFORE_CAPTURE",
+    "rule": "N=1; keep all accepted RGB frames unless the measured total exceeds 120, then one fixed per-case stride k=ceil(total/120) applied in sequence order; no detector-score or random selection"
+  },
+  "conditions_matrix": {
+    "f1_ms1_near_sw": [
+      "ms1_only",
+      "near_1.3_2.2m",
+      "southwest_view",
+      "tower_out_of_fov",
+      "green_lamp_visibility_recorded"
+    ],
+    "f2_ms1_near_se": [
+      "ms1_only",
+      "near_1.3_2.2m",
+      "southeast_view",
+      "tower_out_of_fov",
+      "green_lamp_visibility_recorded"
+    ]
+  },
+  "notes": [
+    "New independent near-MS1 families distinct from the T19 identity 7 cases, T25 2 cases, T30 8 two-class families and the holdout draft (overlap check accompanies this config).",
+    "MS1 is map-native; no synthetic injection; map asset unchanged; CAP_FIELD is a collection-only observation zone, not a real region topology node.",
+    "Target MS1 bbox height 140-220 px is achieved by keeping the horizontal distance at about 1.4-1.9 m (horizontal extent used for the estimate 1.83 m, fy=160)."
+  ]
+}

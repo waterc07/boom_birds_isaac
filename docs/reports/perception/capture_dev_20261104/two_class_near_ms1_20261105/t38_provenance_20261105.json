@@ -1,0 +1,242 @@
+{
+ "schema_version": "dsh.landmark_t38_capture_provenance.v1",
+ "status": "CAPTURE_PASS_DATA_ONLY_FINAL",
+ "task": "task-38 near-MS1 supplement (R2 fix): 2 new two-class MS1-alone near families (1.3-2.2 m, target bbox height 140-220 px)",
+ "operator": "teammate capture",
+ "generated_at_local": "2026-11-05",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head_commit": "47d1063b94dc779e87e1f6be7d6210b489a85395"
+ },
+ "case_config": {
+  "file": "configs/scenarios/landmark_two_class_near_ms1_cases_v1.json",
+  "sha256": "5c34ab2edf1092ed193b658f192d43169a44bfb7615773aa16a51f39621e31f3",
+  "schema": "boom_birds.map_cases.v2",
+  "case_count": 2,
+  "loader": "PASS",
+  "regions": "CAP_FIELD is a collection-only observation zone, not a real V2.2 region topology node"
+ },
+ "runtime": {
+  "gui_mode": true,
+  "headless": false,
+  "renderer": "DirectX/D3D12 (--/app/vulkan=false)",
+  "isaac_sim": "5.1.0",
+  "gpu": "NVIDIA RTX 5080 16GB",
+  "gpu_driver": "581.80",
+  "sensor_config": "configs/sensors/sensor_shadow_v1.json",
+  "sensor_config_sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55"
+ },
+ "run": {
+  "dir": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105",
+  "sensor_dir": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor",
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_two_class_near_ms1_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --code-commit 47d1063b94dc779e87e1f6be7d6210b489a85395 --working-tree T38 formal near-MS1 two-class supplement (N view + SE view); branch feat/v2.2-simulation-perception; HEAD 47d1063 --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_two_class_near_ms1_20261105",
+  "started_at": "2026-11-05T12:29:44.333542+08:00",
+  "finished_at": "2026-11-05T12:30:41.673532+08:00",
+  "outcomes": {
+   "follow_only": {
+    "SUCCESS": 2,
+    "COLLISION": 0,
+    "TIMEOUT": 0,
+    "OUT_OF_BOUNDS": 0,
+    "ABORT": 0,
+    "INVALID": 0
+   }
+  },
+  "run_complete": true,
+  "summary_error_file": false,
+  "raw_accepted_rgb": 102
+ },
+ "pool": {
+  "dir": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_pool/images",
+  "size": 102,
+  "rule": "N=1: measured 108 accepted <= 120, all frames kept",
+  "fits_budget_90_120": true,
+  "per_case": {
+   "lmf_t38_f1_ms1_near_north_0-follow_only": {
+    "frames": 49,
+    "ms1_in_fov": 49,
+    "ms1_green_frames": 4,
+    "tower_in_fov": 0,
+    "bbox_height_px": [
+     169.1,
+     224.2
+    ],
+    "bbox_width_px": [
+     47.6,
+     73.4
+    ],
+    "ms1_distance_m": [
+     1.56,
+     1.89
+    ],
+    "trunc_bottom_frames": 5,
+    "trunc_left": 0,
+    "trunc_right": 0,
+    "trunc_top": 0
+   },
+   "lmf_t38_f2_ms1_near_se_0-follow_only": {
+    "frames": 53,
+    "ms1_in_fov": 53,
+    "ms1_green_frames": 0,
+    "tower_in_fov": 0,
+    "bbox_height_px": [
+     181.1,
+     230.7
+    ],
+    "bbox_width_px": [
+     43.1,
+     73.7
+    ],
+    "ms1_distance_m": [
+     1.54,
+     1.75
+    ],
+    "trunc_bottom_frames": 6,
+    "trunc_left": 0,
+    "trunc_right": 0,
+    "trunc_top": 0
+   }
+  },
+  "frame_stats": {
+   "lmf_t38_f1_ms1_near_north_0-follow_only": {
+    "frames": 49,
+    "not_truncated": 44,
+    "height_not_trunc": [
+     169.1,
+     207.9
+    ],
+    "height_all": [
+     169.1,
+     224.2
+    ],
+    "green_visible_frames": 4,
+    "green_px_range": [
+     0,
+     9
+    ]
+   },
+   "lmf_t38_f2_ms1_near_se_0-follow_only": {
+    "frames": 53,
+    "not_truncated": 47,
+    "height_not_trunc": [
+     181.1,
+     221.4
+    ],
+    "height_all": [
+     181.1,
+     230.7
+    ],
+    "green_visible_frames": 0,
+    "green_px_range": [
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "ms1_bbox_target": {
+  "target_height_px": [
+   140,
+   220
+  ],
+  "final_measured": {
+   "f1_north_not_truncated": [
+    169.1,
+    207.9
+   ],
+   "f1_north_all": [
+    169.1,
+    224.2
+   ],
+   "f2_se_not_truncated": [
+    181.1,
+    221.4
+   ],
+   "f2_se_all": [
+    181.1,
+    230.7
+   ]
+  },
+  "note": "capture-side corner projection; bottom-truncated frames (f1 5, f2 6) project below the image and therefore exceed 220 px while the visible bbox is smaller. Not-truncated frames are within/near the 140-220 target; annotation bbox is the truth."
+ },
+ "map_native_ms1": {
+  "injected": false,
+  "map_asset_modified": false,
+  "world_position_estimate_m": {
+   "x": 3.0,
+   "y": 4.0,
+   "top_z": 1.78
+  },
+  "class1_rule": "MS1 is class1 and must never map to the central-tower landmark_id; class1 keypoint always v=0",
+  "green_visibility": {
+   "f1_north": "green lamp only 4/49 frames (0-13 px) from the due-north viewpoint (mostly not visible)",
+   "f2_se": "green lamp 0/53 frames from the south-east viewpoint",
+   "note": "class1 keypoint is unavailable by spec (v=0); lamp visibility recorded, not required for class1 supervision"
+  }
+ },
+ "injection_used": false,
+ "dedup": {
+  "pool_size": 102,
+  "unique_sha": 102,
+  "within_pool_duplicates": 0,
+  "existing_runs_checked": 24,
+  "overlaps": {
+   "debug_all6_sensor": 0,
+   "debug_static4_sensor": 0,
+   "debug_static5_sensor": 0,
+   "debug_static6_sensor": 0,
+   "debug_static7_sensor": 0,
+   "formal6_sensor": 0,
+   "geo_test_sensor": 0,
+   "gui_evidence2_sensor": 0,
+   "gui_evidence_sensor": 0,
+   "lm_dev_capture_20261104_sensor": 0,
+   "lm_dev_hn_capture_20261104_sensor": 0,
+   "lm_dev_identity_capture_20261104_sensor": 0,
+   "lm_dev_identity_capture_t25_20261104_formal_sensor": 0,
+   "lm_dev_identity_capture_t25_20261104_sensor": 0,
+   "lm_dev_smoke2_20261104_sensor": 0,
+   "lm_dev_smoke_hn1b_20261104_sensor": 0,
+   "lm_devid_smoke_20261104_sensor": 0,
+   "lm_final_candidate_20261104_sensor": 0,
+   "lm_final_smoke_20261104_sensor": 0,
+   "lm_independence_sensor": 0,
+   "lm_pilot_north_sensor": 0,
+   "lm_pilot_sensor": 0,
+   "lm_two_class_near_ms1_20261105_pilotA_discarded_sensor": 0,
+   "lm_two_class_train_20261105_sensor": 0
+  },
+  "zero_overlap": true
+ },
+ "gui_evidence": {
+  "window_screenshot": "t38_gui_window.png",
+  "desktop_full": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/_evidence/desktop_t38_run.png",
+  "manifest_fields": "t38_manifest.json: gui_mode=true, headless=false"
+ },
+ "overlap_vs_existing_families": "t38_overlap_vs_existing_families.json",
+ "failures": "none in this batch (2/2 SUCCESS, run.complete PASS, no retries)",
+ "limitations": [
+  "synthetic asset + SIM_RENDER_RGB pinhole camera (PROPOSED); not OV9782/real arena",
+  "R2 diagnostic OOD target: MS1 near 1.3-2.2 m; this capture supplies near-distance training data only, no training/model/consumer result is claimed",
+  "f2 SE view has no green lamp visible (class1 keypoint is unavailable by spec, so this does not remove supervision for class1 bbox)",
+  "bbox height is a capture-side corner projection, not annotation truth; truncated frames overestimate the visible bbox height",
+  "new data only: labels pending annot2 under the frozen two-class label spec v1"
+ ],
+ "artifacts_sha256": {
+  "case_config": "5c34ab2edf1092ed193b658f192d43169a44bfb7615773aa16a51f39621e31f3",
+  "run_manifest": "057c7f7d66c929c51b10d13ec15e02ca78b82f1c46e8d3326086c0c746af2e32",
+  "run_complete": "e2105e1d2d3fec0bed9260bbbbed273f7b3db577227c3a69488ff03096b7dc6a",
+  "sensor_observations": "2c094f00abdc1ff87ebc607d6a61a88b7517d6a55bae2f5930926ef05c2e0f8c",
+  "frame_conditions": "a172676378e3ec19915a3bd3d9eafd900d53a5bdc5803eff093d70d006fbb449",
+  "pool_selection": "9aa86768a8f5b35f9b6a274b9685aba61010c01ec1d2041ebcdc370044c3315a"
+ },
+ "final_vs_discarded": {
+  "final_run": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105 (+ _sensor)",
+  "final_pool": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_pool/images (102 frames)",
+  "discarded_pilot": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_pilotA_discarded (+ _sensor/_pool) - NOT formal data",
+  "discarded_reason": "pilot f1 used a south-west view whose start pose was only 0.44 m from the T19 identity lmf_devid_ms1_alone_0 start; the formal f1 was moved to a due-north viewpoint (new family). The pilot pool (108 frames, f1_sw 55 + f2_se 53) and its evidence copies are archived under pilotA_discarded/ and must not be used.",
+  "discarded_pool_frames": 108,
+  "discarded_evidence_dir": "docs/reports/perception/capture_dev_20261104/two_class_near_ms1_20261105/pilotA_discarded/",
+  "discarded_purpose": "any annotations produced on the pilot (e.g. annot2 53 frames) are void and must be re-done on the final pool"
+ }
+}

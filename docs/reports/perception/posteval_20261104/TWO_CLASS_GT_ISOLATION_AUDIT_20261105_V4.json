@@ -1,0 +1,224 @@
+{
+  "schema_version": "dsh.landmark_two_class_gt_isolation_audit.v4",
+  "created_at": "2026-11-05",
+  "supersedes": [
+    {
+      "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105.json",
+      "sha256": "a5267429a7efff80231f533a924f9a03c17c20b80b48d2e1c15fa4af21836b92",
+      "status": "V1 pre-fix record"
+    },
+    {
+      "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105_V2.json",
+      "sha256": "17aa02e5d4c1ba6a3cd73778519819d0f75ae6f222fa73fec6dbc738e40f5346",
+      "status": "V2 at module db8ca0e8"
+    },
+    {
+      "path": "docs/reports/perception/posteval_20261104/TWO_CLASS_GT_ISOLATION_AUDIT_20261105_V3.json",
+      "sha256": "6686019c20043940edd220b288bce92494ea01636a6dd6d388e18dfb552b120a",
+      "status": "V3 at module 1fdb66eb (B1/B2 closed); superseded by the B3 keypoint-normalization module change"
+    }
+  ],
+  "status": "PASS_REAUDIT_B3_FIXED_WITH_B4_PREDICTION_FILE_ACTION_ITEM",
+  "scope": "final re-audit for module 183b6d22 (B3 canonical keypoint_x/y normalization) + P2 v4b evidence + canonical R1 final record; independent check: 24 tests + targeted, GT isolation static checks, canonical-count verification, R1 metrics reproduced from observation files",
+  "audited_at_head": "47d1063",
+  "audited_shas": {
+    "module": "183b6d22f4438488ffcb1f947aed370bff82c58fdbf17adc02eae5d8c5257789",
+    "cli": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e",
+    "tests": "a101eb4398733edb3a714f6539e483e186adda1900327f0c73c86f259b9c3e26",
+    "report": "355a3b00daffd5342d1f41dcb0c4ba968a231f09c370ca2751ca76e5dfb6aee3",
+    "p2_evidence_v4b": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/run_last_union_a188fca7_v4b/poison_smoke_evidence_v3.json",
+      "sha256": "5a77d689624d7c79883d450493e1382da092616a956bef8d28db304bba2d52fb"
+    },
+    "canonical_union": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/labels_union_eval_frozen.json",
+      "sha256": "a188fca7d11ea2bad7cc8325a6dc5baf1d7e643b77d9469543050def69b62768",
+      "status": "FROZEN_P2_UNION",
+      "created_by": "datafreeze (T36)"
+    },
+    "handoff": "cc59fcc9d81fe0e9f18f61ce036553b07a480f2dac0c32208cf7d585aae9371c",
+    "model_last": "508a0430b2e4eac9c18d48520359eaaff1b5258c7a6e7844c95570a7cecfb07c",
+    "model_best": "6877e37be03d111fe1e459cde2bb7fc4677b8e4e470df0e2803805a9ec232c27",
+    "harness_v4": "58985ae0d329c2aa39f109f11365a07e451a9bc0d4a46e250fa5f0b4a411bf31",
+    "pilot_canonical_summary": "6de15568dca6ceec7d586f3e1d7ec9bc957509da0506d41e53771ddd3670aac9",
+    "pilot_canonical_evidence": "f1f65e2baaf25a8babdcdfbb96a5e8e5f48a062d82b0e338c5212e22ed6280eb",
+    "canonical_eval_docs": {
+      "val_main": "d6c6a25249c1c8fd2bf334ae7f9e399e9f69b7ebe0534c79e98fb2fefd934436",
+      "identity": "7471c408e84c0774425ad852e2c4ab99b14ea1968210f09fbd6b9ff8035d8b17"
+    }
+  },
+  "checks": [
+    {
+      "id": "G1",
+      "requirement": "model called with image only",
+      "evidence": "infer_observations model.predict source=image; v4b evidence executed command",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G2",
+      "requirement": "decode receives no GT geometry/class/position",
+      "evidence": "decode_detections(detections, frame_id, protocol); raises on dict",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G3",
+      "requirement": "consumer/deployment path payload+detector only",
+      "evidence": "landmark_consumer/landmark_detector unchanged",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G4",
+      "requirement": "identity claims predicted-only",
+      "evidence": "class0-only claim, class1 never mapped, conflict/margin",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G5",
+      "requirement": "no oracle/GT/file-name in inference",
+      "evidence": "static guard test (incl. normalized)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G6",
+      "requirement": "GT row not accepted by decode API",
+      "evidence": "decode guard",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G7",
+      "requirement": "eval image pairing documented",
+      "evidence": "CLI _resolve_image (truth image/frame_id) vs deployment payload.ref",
+      "verdict": "PASS_WITH_DOCUMENTATION"
+    },
+    {
+      "id": "G8",
+      "requirement": "labels only after inference",
+      "evidence": "CLI load labels -> infer_observations -> evaluate_rows",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G9",
+      "requirement": "class1 only map-native MS1",
+      "evidence": "_route_confuser; synthetic/other -> other_structures",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G10",
+      "requirement": "other structures single-listed",
+      "evidence": "other_structure_hits/OTHER_STRUCTURE",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G11",
+      "requirement": "regression tests at frozen shas",
+      "evidence": "independent rerun: full file 24 passed (1.34s); -k poison/rename/source_are/class1_gt/frozen/normalized 8 passed, 16 deselected (0.34s)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G12",
+      "requirement": "canonical flags/denominators",
+      "evidence": "loader counts == doc flags (union 139/38/39/73/9; identity 44/9/26/9; val_main 95/47/39/29, 0 mismatch); identity wrong-claim denominator negatives∪ms1_only",
+      "verdict": "PASS (B2 closed)"
+    },
+    {
+      "id": "G13",
+      "requirement": "P2 v4b binds canonical union",
+      "evidence": "evidence labels_sha256 == a188fca7; 225 frames; differing_frames=[]; coverage 139/38/39/73/9; code shas match",
+      "verdict": "PASS (B1 closed)"
+    },
+    {
+      "id": "G14",
+      "requirement": "B3 canonical keypoint_x/y normalization",
+      "evidence": "_instance_keypoint: keypoint_normalized -> *width/height; keypoint_px legacy unchanged; keypoint_x/y in [0,1] with width/height>2 -> *width/height; new normalized test; canonical R1 bearing reproduced (val_last n33 0.8224/1.9006; id_last n17 1.1939/4.1778; id_best n18 1.8925/3.4761)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G15",
+      "requirement": "canonical R1 record reproducible",
+      "evidence": "independent evaluate_rows on canonical eval docs + observation JSONL reproduced exact canonical metrics: val_last 78/95, 20/47, claims 76 wrong 0, same 37/47=0.787, ref 33/41=0.805 false_ref 3/54, bearing n33 0.8224/1.9006, all-positive 72/121=0.595, negatives 39/39, GT_UNOBS 29; id_last 43/44, 10/35, claims 43 wrong 0, same 26/26=1.0, ref 17/18=0.944 false_ref 2/26, bearing n17 1.1939/4.1778, all-positive 37/53=0.698, GT_UNOBS 9",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G16",
+      "requirement": "prediction-file path must reproduce reference/bearing",
+      "evidence": "B4 ACTION ITEM: raw pilot predictions.jsonl store keypoint_px=[0,0] as a sentinel for non-emitted keypoints (val_last 94/130, id_last 36/59, val_best 62/112, id_best 27/48 detections) but _normalise_detection treats any non-None keypoint as emitted/reference_available; independent --predictions-style evaluation gave ref coverage 0.829/false_ref 0.815 (val_last) vs canonical 0.805/0.0556, and bearing count 34 vs 33. Canonical R1 record itself uses observation JSONL (keypoint=None when suppressed) and is unaffected.",
+      "verdict": "ACTION_ITEM (not a P2/canonical-record blocker; blocks prediction-file reproducibility and any consumer reading predictions)"
+    }
+  ],
+  "b4_action_item": {
+    "id": "B4",
+    "severity": "HIGH for reproducibility/consumer; LOW for the canonical observation-based record",
+    "description": "saved predictions use [0,0] keypoint sentinel without an explicit emitted/available flag; the prediction-file normalization path counts it as an emitted reference, so --predictions reproduction (and any consumer of predictions) gets wrong reference coverage/false-reference/bearing.",
+    "required_fix": "either the prediction writer emits keypoint_px=null + reference_available=false (preferred), or the normalizer treats the [0,0]/non-emitted sentinel explicitly and records an emitted flag; add a test that the prediction-file path reproduces the observation-file canonical numbers (val_last ref 33/41 false_ref 3/54 bearing n33 0.8224/1.9006), and document that canonical evidence uses observation JSONL.",
+    "blocking": false
+  },
+  "pilot_canonical_record": {
+    "val_main_last": {
+      "tower_recall": 0.8211,
+      "ms1_recall": 0.4255,
+      "claims": 76,
+      "wrong": 0,
+      "same_frame": 0.7872,
+      "same_den": 47,
+      "ref_coverage": 0.8049,
+      "false_ref": "3/54",
+      "bearing_n": 33,
+      "bearing_median": 0.8224,
+      "bearing_p90": 1.9006,
+      "all_positive": 0.595,
+      "negatives": "39/39",
+      "gt_unobs": 29
+    },
+    "val_main_best": {
+      "tower_recall": 0.7684,
+      "ms1_recall": 0.2979,
+      "claims": 73,
+      "wrong": 0,
+      "same_frame": 0.6809,
+      "same_den": 47,
+      "bearing_n": 35,
+      "bearing_median": 0.751,
+      "bearing_p90": 1.911,
+      "all_positive": 0.579
+    },
+    "identity_last": {
+      "tower_recall": 0.9773,
+      "ms1_recall": 0.2857,
+      "claims": 43,
+      "wrong": 0,
+      "same_frame": 1,
+      "same_den": 26,
+      "ref_coverage": 0.9444,
+      "false_ref": "2/26",
+      "bearing_n": 17,
+      "bearing_median": 1.1939,
+      "bearing_p90": 4.1778,
+      "all_positive": 0.6981,
+      "gt_unobs": 9
+    },
+    "identity_best": {
+      "tower_recall": 0.8636,
+      "ms1_recall": 0.2,
+      "claims": 38,
+      "wrong": 0,
+      "same_frame": 0.7692,
+      "same_den": 26,
+      "bearing_n": 18,
+      "bearing_median": 1.8925,
+      "bearing_p90": 3.4761,
+      "all_positive": 0.6604
+    },
+    "gate_reading": "pilot_to_three_seed gate: only MS1 recall fails (last 0.286 / best 0.200 < 0.50; val_main 0.426/0.298 also <0.50); tower recall, MS1-only wrong claims (0/0), same-frame (>=0.60), identity precision (1.0), consumer (>=0.30), bearing median (<=3 deg), tower-regression (<=0.08) pass on the canonical numbers. Old same_frame 0.385 / 2/9 wrong claims are invalid (legacy pilot metrics)."
+  },
+  "residual_notes": [
+    "P2 v4b pass is accepted; it is not a gate result",
+    "the pilot canonical record supersedes all legacy pilot_v61/pilot_v61_current numbers; gate decisions must use the canonical record",
+    "B4 is the only open action item; if the writer/normalizer is changed, a new module/CLI sha and a final V5 audit are required",
+    "no training/inference was run by this audit; the canonical reproduction used saved observation JSONL"
+  ],
+  "boundaries": [
+    "static GT-isolation audit + targeted tests + canonical reproduction; no training/inference",
+    "does not re-adjudicate the gate; provides the canonical reading",
+    "old records V1-V3 remain on disk, unchanged"
+  ]
+}

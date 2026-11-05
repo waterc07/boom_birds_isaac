@@ -1,0 +1,584 @@
+{
+ "schema_version": "dsh.landmark_t30_capture_provenance.v1",
+ "status": "CAPTURE_PASS_DATA_ONLY",
+ "task": "task-30 two-class training batch capture (8 new families, central tower vs map-native MS1)",
+ "operator": "teammate capture",
+ "generated_at_local": "2026-11-05",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head_commit": "47d1063b94dc779e87e1f6be7d6210b489a85395"
+ },
+ "case_config": {
+  "file": "configs/scenarios/landmark_two_class_train_cases_v1.json",
+  "sha256": "14617bcab878bfe7eae1586ab5e6dfd1c46057ee9efac626bbf9a47f4d057db7",
+  "schema": "boom_birds.map_cases.v2",
+  "case_count": 8,
+  "loader": "PASS",
+  "regions": "CAP_FIELD is a collection-only observation zone, not a real V2.2 region topology node"
+ },
+ "runtime": {
+  "gui_mode": true,
+  "headless": false,
+  "renderer": "DirectX/D3D12 (--/app/vulkan=false)",
+  "isaac_sim": "5.1.0",
+  "gpu": "NVIDIA RTX 5080 16GB",
+  "gpu_driver": "581.80",
+  "sensor_config": "configs/sensors/sensor_shadow_v1.json",
+  "sensor_config_sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55"
+ },
+ "run": {
+  "dir": "outputs/sensor_shadow/lm_two_class_train_20261105",
+  "sensor_dir": "outputs/sensor_shadow/lm_two_class_train_20261105_sensor",
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_two_class_train_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_two_class_train_20261105_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --code-commit 47d1063b94dc779e87e1f6be7d6210b489a85395 --working-tree T30 two-class training capture (8 new families); branch feat/v2.2-simulation-perception; HEAD 47d1063 --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_two_class_train_20261105",
+  "started_at": "2026-11-05T00:21:40.605250+08:00",
+  "finished_at": "2026-11-05T00:25:50.439270+08:00",
+  "outcomes": {
+   "follow_only": {
+    "SUCCESS": 8,
+    "COLLISION": 0,
+    "TIMEOUT": 0,
+    "OUT_OF_BOUNDS": 0,
+    "ABORT": 0,
+    "INVALID": 0
+   }
+  },
+  "episodes": 8,
+  "run_complete": true,
+  "summary_error_file": false,
+  "raw_accepted_rgb": 492,
+  "raw_rgb_images_note": "measured raw accepted 492 + warmup 24 = 516 RGB images",
+  "raw_rgb_images": 516,
+  "raw_warmup_invalid_rgb": 24
+ },
+ "pool": {
+  "dir": "outputs/sensor_shadow/lm_two_class_train_20261105_pool/images",
+  "size": 373,
+  "rule": "deterministic 3-of-4 per case in sequence order (keep indices where i%4 != 3); applied because measured accepted 492 exceeded the 420 upper bound; no detector-score/random selection",
+  "raw_accepted": 492,
+  "per_case": {
+   "lmf_t30_f1_tower_near_alone_0-follow_only": 50,
+   "lmf_t30_f2_tower_mid_alone_0-follow_only": 48,
+   "lmf_t30_f3_tower_far_alone_0-follow_only": 47,
+   "lmf_t30_f4_tower_edge_trunc_0-follow_only": 48,
+   "lmf_t30_f5_ms1_near_alone_0-follow_only": 45,
+   "lmf_t30_f6_ms1_far_trunc_0-follow_only": 50,
+   "lmf_t30_f7_both_near_far_0-follow_only": 39,
+   "lmf_t30_f8_target_absent_neg_0-follow_only": 46
+  },
+  "condition_summary": {
+   "lmf_t30_f1_tower_near_alone_0-follow_only": {
+    "frames": 50,
+    "target_in_fov": 50,
+    "target_green_frames": 50,
+    "ms1_in_fov": 0,
+    "ms1_green_frames": 0,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 0,
+     "right": 15,
+     "top": 0,
+     "bottom": 11
+    },
+    "target_dist_m": [
+     1.73,
+     2.56
+    ],
+    "ms1_dist_m": [
+     7.12,
+     8.12
+    ],
+    "seq_range": [
+     3,
+     68
+    ]
+   },
+   "lmf_t30_f2_tower_mid_alone_0-follow_only": {
+    "frames": 48,
+    "target_in_fov": 48,
+    "target_green_frames": 48,
+    "ms1_in_fov": 0,
+    "ms1_green_frames": 0,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "target_dist_m": [
+     4.54,
+     5.14
+    ],
+    "ms1_dist_m": [
+     4.82,
+     5.7
+    ],
+    "seq_range": [
+     3,
+     65
+    ]
+   },
+   "lmf_t30_f3_tower_far_alone_0-follow_only": {
+    "frames": 47,
+    "target_in_fov": 47,
+    "target_green_frames": 15,
+    "ms1_in_fov": 0,
+    "ms1_green_frames": 0,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "target_dist_m": [
+     10.14,
+     10.89
+    ],
+    "ms1_dist_m": [
+     5.13,
+     6.11
+    ],
+    "seq_range": [
+     3,
+     64
+    ]
+   },
+   "lmf_t30_f4_tower_edge_trunc_0-follow_only": {
+    "frames": 48,
+    "target_in_fov": 37,
+    "target_green_frames": 40,
+    "ms1_in_fov": 0,
+    "ms1_green_frames": 0,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 37,
+     "right": 0,
+     "top": 0,
+     "bottom": 3
+    },
+    "target_dist_m": [
+     2.37,
+     2.98
+    ],
+    "ms1_dist_m": [
+     7.75,
+     8.55
+    ],
+    "seq_range": [
+     3,
+     65
+    ]
+   },
+   "lmf_t30_f5_ms1_near_alone_0-follow_only": {
+    "frames": 45,
+    "target_in_fov": 0,
+    "target_green_frames": 0,
+    "ms1_in_fov": 45,
+    "ms1_green_frames": 0,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "target_dist_m": [
+     8.93,
+     9.6
+    ],
+    "ms1_dist_m": [
+     2.88,
+     3.39
+    ],
+    "seq_range": [
+     3,
+     61
+    ]
+   },
+   "lmf_t30_f6_ms1_far_trunc_0-follow_only": {
+    "frames": 50,
+    "target_in_fov": 0,
+    "target_green_frames": 0,
+    "ms1_in_fov": 31,
+    "ms1_green_frames": 25,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "target_dist_m": [
+     17.22,
+     17.86
+    ],
+    "ms1_dist_m": [
+     9.06,
+     9.81
+    ],
+    "seq_range": [
+     3,
+     68
+    ]
+   },
+   "lmf_t30_f7_both_near_far_0-follow_only": {
+    "frames": 39,
+    "target_in_fov": 39,
+    "target_green_frames": 1,
+    "ms1_in_fov": 39,
+    "ms1_green_frames": 39,
+    "both_in_fov": 39,
+    "overlap_ge_0.05": 39,
+    "target_trunc": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "target_dist_m": [
+     13.41,
+     16.15
+    ],
+    "ms1_dist_m": [
+     4.05,
+     6.77
+    ],
+    "seq_range": [
+     3,
+     53
+    ]
+   },
+   "lmf_t30_f8_target_absent_neg_0-follow_only": {
+    "frames": 46,
+    "target_in_fov": 0,
+    "target_green_frames": 0,
+    "ms1_in_fov": 0,
+    "ms1_green_frames": 0,
+    "both_in_fov": 0,
+    "overlap_ge_0.05": 0,
+    "target_trunc": {
+     "left": 0,
+     "right": 0,
+     "top": 0,
+     "bottom": 0
+    },
+    "target_dist_m": [
+     4.81,
+     5.41
+    ],
+    "ms1_dist_m": [
+     8.78,
+     9.39
+    ],
+    "seq_range": [
+     3,
+     63
+    ]
+   }
+  },
+  "selection_file": "t30_pool_selection.json",
+  "fits_budget_300_420": true
+ },
+ "family_conditions": {
+  "lmf_t30_f1_tower_near_alone_0-follow_only": {
+   "cases": "lmf_t30_f1_tower_near_alone_0-follow_only",
+   "frames": 50,
+   "target_in_fov": 50,
+   "target_green_frames": 50,
+   "ms1_in_fov": 0,
+   "ms1_green_frames": 0,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 0,
+    "right": 15,
+    "top": 0,
+    "bottom": 11
+   },
+   "target_dist_m": [
+    1.73,
+    2.56
+   ],
+   "ms1_dist_m": [
+    7.12,
+    8.12
+   ],
+   "seq_range": [
+    3,
+    68
+   ]
+  },
+  "lmf_t30_f2_tower_mid_alone_0-follow_only": {
+   "cases": "lmf_t30_f2_tower_mid_alone_0-follow_only",
+   "frames": 48,
+   "target_in_fov": 48,
+   "target_green_frames": 48,
+   "ms1_in_fov": 0,
+   "ms1_green_frames": 0,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+   },
+   "target_dist_m": [
+    4.54,
+    5.14
+   ],
+   "ms1_dist_m": [
+    4.82,
+    5.7
+   ],
+   "seq_range": [
+    3,
+    65
+   ]
+  },
+  "lmf_t30_f3_tower_far_alone_0-follow_only": {
+   "cases": "lmf_t30_f3_tower_far_alone_0-follow_only",
+   "frames": 47,
+   "target_in_fov": 47,
+   "target_green_frames": 15,
+   "ms1_in_fov": 0,
+   "ms1_green_frames": 0,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+   },
+   "target_dist_m": [
+    10.14,
+    10.89
+   ],
+   "ms1_dist_m": [
+    5.13,
+    6.11
+   ],
+   "seq_range": [
+    3,
+    64
+   ]
+  },
+  "lmf_t30_f4_tower_edge_trunc_0-follow_only": {
+   "cases": "lmf_t30_f4_tower_edge_trunc_0-follow_only",
+   "frames": 48,
+   "target_in_fov": 37,
+   "target_green_frames": 40,
+   "ms1_in_fov": 0,
+   "ms1_green_frames": 0,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 37,
+    "right": 0,
+    "top": 0,
+    "bottom": 3
+   },
+   "target_dist_m": [
+    2.37,
+    2.98
+   ],
+   "ms1_dist_m": [
+    7.75,
+    8.55
+   ],
+   "seq_range": [
+    3,
+    65
+   ]
+  },
+  "lmf_t30_f5_ms1_near_alone_0-follow_only": {
+   "cases": "lmf_t30_f5_ms1_near_alone_0-follow_only",
+   "frames": 45,
+   "target_in_fov": 0,
+   "target_green_frames": 0,
+   "ms1_in_fov": 45,
+   "ms1_green_frames": 0,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+   },
+   "target_dist_m": [
+    8.93,
+    9.6
+   ],
+   "ms1_dist_m": [
+    2.88,
+    3.39
+   ],
+   "seq_range": [
+    3,
+    61
+   ]
+  },
+  "lmf_t30_f6_ms1_far_trunc_0-follow_only": {
+   "cases": "lmf_t30_f6_ms1_far_trunc_0-follow_only",
+   "frames": 50,
+   "target_in_fov": 0,
+   "target_green_frames": 0,
+   "ms1_in_fov": 31,
+   "ms1_green_frames": 25,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+   },
+   "target_dist_m": [
+    17.22,
+    17.86
+   ],
+   "ms1_dist_m": [
+    9.06,
+    9.81
+   ],
+   "seq_range": [
+    3,
+    68
+   ]
+  },
+  "lmf_t30_f7_both_near_far_0-follow_only": {
+   "cases": "lmf_t30_f7_both_near_far_0-follow_only",
+   "frames": 39,
+   "target_in_fov": 39,
+   "target_green_frames": 1,
+   "ms1_in_fov": 39,
+   "ms1_green_frames": 39,
+   "both_in_fov": 39,
+   "overlap_ge_0.05": 39,
+   "target_trunc": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+   },
+   "target_dist_m": [
+    13.41,
+    16.15
+   ],
+   "ms1_dist_m": [
+    4.05,
+    6.77
+   ],
+   "seq_range": [
+    3,
+    53
+   ]
+  },
+  "lmf_t30_f8_target_absent_neg_0-follow_only": {
+   "cases": "lmf_t30_f8_target_absent_neg_0-follow_only",
+   "frames": 46,
+   "target_in_fov": 0,
+   "target_green_frames": 0,
+   "ms1_in_fov": 0,
+   "ms1_green_frames": 0,
+   "both_in_fov": 0,
+   "overlap_ge_0.05": 0,
+   "target_trunc": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+   },
+   "target_dist_m": [
+    4.81,
+    5.41
+   ],
+   "ms1_dist_m": [
+    8.78,
+    9.39
+   ],
+   "seq_range": [
+    3,
+    63
+   ]
+  }
+ },
+ "map_native_ms1": {
+  "injected": false,
+  "map_asset_modified": false,
+  "world_position_estimate_m": {
+   "x": 3.0,
+   "y": 4.0,
+   "top_z": 1.78
+  },
+  "class1_rule": "MS1 is class1 and must never map to the central-tower landmark_id; class1 keypoint is always unavailable (v=0)",
+  "green_visibility_notes": {
+   "f5_ms1_near_NE_view": "strict green 0 px in all 45 pool frames (lamp not visible from the NE viewpoint)",
+   "f6_ms1_far": "green 0-7 px, visible in 33/66 raw frames",
+   "f7_tower": "tower green mostly sub-threshold at 13-16 m (1/51 raw frames), MS1 green visible in 50/51"
+  }
+ },
+ "injection_used": false,
+ "dedup": {
+  "pool_size": 373,
+  "unique_sha": 373,
+  "within_pool_duplicates": 0,
+  "existing_runs_checked": 22,
+  "overlaps": {
+   "debug_all6_sensor": 0,
+   "debug_static4_sensor": 0,
+   "debug_static5_sensor": 0,
+   "debug_static6_sensor": 0,
+   "debug_static7_sensor": 0,
+   "formal6_sensor": 0,
+   "geo_test_sensor": 0,
+   "gui_evidence2_sensor": 0,
+   "gui_evidence_sensor": 0,
+   "lm_dev_capture_20261104_sensor": 0,
+   "lm_dev_hn_capture_20261104_sensor": 0,
+   "lm_dev_identity_capture_20261104_sensor": 0,
+   "lm_dev_identity_capture_t25_20261104_formal_sensor": 0,
+   "lm_dev_identity_capture_t25_20261104_sensor": 0,
+   "lm_dev_smoke2_20261104_sensor": 0,
+   "lm_dev_smoke_hn1b_20261104_sensor": 0,
+   "lm_devid_smoke_20261104_sensor": 0,
+   "lm_final_candidate_20261104_sensor": 0,
+   "lm_final_smoke_20261104_sensor": 0,
+   "lm_independence_sensor": 0,
+   "lm_pilot_north_sensor": 0,
+   "lm_pilot_sensor": 0
+  },
+  "zero_overlap": true
+ },
+ "gui_evidence": {
+  "window_screenshot": "t30_gui_window.png",
+  "desktop_full": "outputs/sensor_shadow/lm_two_class_train_20261105/_evidence/desktop_t30_run.png",
+  "manifest_fields": "t30_manifest.json: gui_mode=true, headless=false"
+ },
+ "overlap_vs_existing_families": "t30_overlap_vs_existing_families.json",
+ "failures": "none in this batch (8/8 SUCCESS, run.complete PASS, no retries)",
+ "limitations": [
+  "synthetic asset + SIM_RENDER_RGB pinhole camera (PROPOSED); not OV9782/real arena",
+  "T30 is training data only: no annotations/training/model/consumer evaluation is claimed here; annot2 labels under the frozen two-class label spec v1",
+  "f5 MS1 near is captured from the NE where the green lamp is not visible; class1 has no keypoint by spec, so this is recorded not corrected",
+  "f7 tower green light is at/below the strict green threshold at 13-16 m; tower presence/structure cues remain visible on both sides of the MS1 foreground",
+  "raw accepted (492) exceeded the 420 upper bound; a deterministic 3-of-4 per-case rule gave the 373-frame pool (documented, no selection by model quality)"
+ ],
+ "artifacts_sha256": {
+  "case_config": "14617bcab878bfe7eae1586ab5e6dfd1c46057ee9efac626bbf9a47f4d057db7",
+  "run_manifest": "6d339aa1d4ba2ac803c57892cb748b1c11b60a8b020edcd6ba7fa0d524c4c321",
+  "run_complete": "26eae5d76696488ff7aa629b524fdc25b7185fcb5a920346b277bc7ddf0f111d",
+  "sensor_observations": "1c85360e85777b996b225324a33fb4c33833e59ae7d0abd36f8097b03c40f4d4",
+  "frame_conditions": "d2fbfb50beead5a03bfb84e37b77425f661964b0594375346d5f5f59e4c4b8f3",
+  "pool_selection": "d5f2066af7900928bdddec7471ec2ff35deb9d65f7ece40c0595a07ec0ae3a06"
+ }
+}

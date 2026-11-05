@@ -1,0 +1,1349 @@
+{
+  "schema_version": "boom_birds.map_cases.v2",
+  "map_asset_id": "rmuc2027-isaacsim-20261028",
+  "purpose": "T30 two-class training capture (2026-11-05): 8 new independent trajectory families for the two-class (central tower vs map-native MS1) identity channel; training-only, internal bounded research",
+  "families": [
+    {
+      "family": "f1_tower_near_alone",
+      "case_id": "lmf_t30_f1_tower_near_alone_0",
+      "conditions": [
+        "tower_only",
+        "near_1.5_3m"
+      ],
+      "predicted_frames": 52,
+      "predicted_path_m": 5.85
+    },
+    {
+      "family": "f2_tower_mid_alone",
+      "case_id": "lmf_t30_f2_tower_mid_alone_0",
+      "conditions": [
+        "tower_only",
+        "mid_3_6m"
+      ],
+      "predicted_frames": 49,
+      "predicted_path_m": 5.5
+    },
+    {
+      "family": "f3_tower_far_alone",
+      "case_id": "lmf_t30_f3_tower_far_alone_0",
+      "conditions": [
+        "tower_only",
+        "far_8_12m"
+      ],
+      "predicted_frames": 53,
+      "predicted_path_m": 6.28
+    },
+    {
+      "family": "f4_tower_edge_trunc",
+      "case_id": "lmf_t30_f4_tower_edge_trunc_0",
+      "conditions": [
+        "tower_only",
+        "near_1.5_3m",
+        "edge_truncation"
+      ],
+      "predicted_frames": 50,
+      "predicted_path_m": 5.65
+    },
+    {
+      "family": "f5_ms1_near_alone",
+      "case_id": "lmf_t30_f5_ms1_near_alone_0",
+      "conditions": [
+        "ms1_only",
+        "near_mid_3_6m"
+      ],
+      "predicted_frames": 47,
+      "predicted_path_m": 5.19
+    },
+    {
+      "family": "f6_ms1_far_trunc",
+      "case_id": "lmf_t30_f6_ms1_far_trunc_0",
+      "conditions": [
+        "ms1_only",
+        "far_8_12m",
+        "edge_truncation"
+      ],
+      "predicted_frames": 52,
+      "predicted_path_m": 5.92
+    },
+    {
+      "family": "f7_both_near_far",
+      "case_id": "lmf_t30_f7_both_near_far_0",
+      "conditions": [
+        "tower_and_ms1_same_frame",
+        "near_to_far",
+        "partial_overlap"
+      ],
+      "predicted_frames": 47,
+      "predicted_path_m": 5.58
+    },
+    {
+      "family": "f8_target_absent_neg",
+      "case_id": "lmf_t30_f8_target_absent_neg_0",
+      "conditions": [
+        "target_absent",
+        "negative"
+      ],
+      "predicted_frames": 47,
+      "predicted_path_m": 5.21
+    }
+  ],
+  "regions": [
+    {
+      "region_id": "CAP_FIELD",
+      "x_min": -10.6,
+      "x_max": 10.6,
+      "y_min": -7.0,
+      "y_max": 7.0,
+      "ground_z_min": -0.3,
+      "ground_z_max": 3.0,
+      "note": "data-collection observation zone used only for capture-case validation; NOT a real region in the V2.2 region topology"
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "t30_f1_tower_near_alone",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          9.3,
+          -0.3,
+          1.1
+        ],
+        [
+          8.9,
+          -0.7,
+          1.1
+        ],
+        [
+          9.6,
+          -0.6,
+          1.05
+        ],
+        [
+          9.7,
+          0.2,
+          1.1
+        ],
+        [
+          9.2,
+          0.5,
+          1.1
+        ],
+        [
+          8.8,
+          0.1,
+          1.1
+        ],
+        [
+          9.4,
+          -0.1,
+          1.1
+        ],
+        [
+          9.0,
+          -0.5,
+          1.05
+        ],
+        [
+          9.6,
+          0.0,
+          1.1
+        ],
+        [
+          9.0,
+          -0.2,
+          1.1
+        ]
+      ],
+      "note": "tower alone near 1.5-3 m (1.84-2.73 m)"
+    },
+    {
+      "route_id": "t30_f2_tower_mid_alone",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          6.6,
+          0.4,
+          1.15
+        ],
+        [
+          6.2,
+          0.1,
+          1.15
+        ],
+        [
+          6.9,
+          0.2,
+          1.1
+        ],
+        [
+          6.4,
+          0.8,
+          1.15
+        ],
+        [
+          6.8,
+          0.6,
+          1.1
+        ],
+        [
+          6.3,
+          -0.1,
+          1.15
+        ],
+        [
+          6.7,
+          0.0,
+          1.15
+        ],
+        [
+          6.5,
+          0.5,
+          1.1
+        ],
+        [
+          6.2,
+          0.6,
+          1.15
+        ],
+        [
+          6.8,
+          -0.1,
+          1.15
+        ]
+      ],
+      "note": "tower alone mid 4.6-5.4 m"
+    },
+    {
+      "route_id": "t30_f3_tower_far_alone",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          1.0,
+          -1.3,
+          1.1
+        ],
+        [
+          0.5,
+          -1.0,
+          1.1
+        ],
+        [
+          1.4,
+          -1.6,
+          1.1
+        ],
+        [
+          0.9,
+          -0.7,
+          1.05
+        ],
+        [
+          1.3,
+          -1.9,
+          1.1
+        ],
+        [
+          0.6,
+          -1.5,
+          1.1
+        ],
+        [
+          1.1,
+          -1.0,
+          1.1
+        ],
+        [
+          0.7,
+          -1.7,
+          1.1
+        ]
+      ],
+      "note": "tower alone far 8-12 m (10.2-11.1 m)"
+    },
+    {
+      "route_id": "t30_f4_tower_edge_trunc",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          9.0,
+          -1.1,
+          1.05
+        ],
+        [
+          8.7,
+          -1.4,
+          1.05
+        ],
+        [
+          9.3,
+          -1.0,
+          1.05
+        ],
+        [
+          8.9,
+          -0.7,
+          1.05
+        ],
+        [
+          9.4,
+          -1.5,
+          1.05
+        ],
+        [
+          9.1,
+          -1.2,
+          1.05
+        ],
+        [
+          8.8,
+          -0.9,
+          1.05
+        ],
+        [
+          9.2,
+          -1.6,
+          1.05
+        ],
+        [
+          9.0,
+          -0.8,
+          1.05
+        ],
+        [
+          9.3,
+          -1.3,
+          1.05
+        ]
+      ],
+      "note": "tower edge truncation near 2.4-3.2 m"
+    },
+    {
+      "route_id": "t30_f5_ms1_near_alone",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          5.0,
+          6.5,
+          1.1
+        ],
+        [
+          4.6,
+          6.7,
+          1.1
+        ],
+        [
+          5.3,
+          6.6,
+          1.1
+        ],
+        [
+          5.0,
+          6.1,
+          1.05
+        ],
+        [
+          4.8,
+          6.9,
+          1.1
+        ],
+        [
+          5.2,
+          6.3,
+          1.1
+        ],
+        [
+          4.7,
+          6.4,
+          1.1
+        ],
+        [
+          5.1,
+          6.8,
+          1.1
+        ],
+        [
+          5.0,
+          6.3,
+          1.1
+        ],
+        [
+          4.9,
+          6.6,
+          1.05
+        ]
+      ],
+      "note": "MS1 alone near/mid 3.0-3.6 m, central tower out of FOV"
+    },
+    {
+      "route_id": "t30_f6_ms1_far_trunc",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          -6.0,
+          1.0,
+          1.15
+        ],
+        [
+          -6.3,
+          0.7,
+          1.15
+        ],
+        [
+          -5.7,
+          1.3,
+          1.1
+        ],
+        [
+          -6.1,
+          1.5,
+          1.15
+        ],
+        [
+          -6.4,
+          1.2,
+          1.05
+        ],
+        [
+          -5.8,
+          0.5,
+          1.15
+        ],
+        [
+          -6.2,
+          0.9,
+          1.15
+        ],
+        [
+          -5.9,
+          1.4,
+          1.1
+        ],
+        [
+          -6.3,
+          0.6,
+          1.15
+        ],
+        [
+          -5.7,
+          1.1,
+          1.1
+        ]
+      ],
+      "note": "MS1 alone far 9.1-9.9 m + edge truncation; tower out of FOV"
+    },
+    {
+      "route_id": "t30_f7_both_near_far",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          -0.5,
+          6.2,
+          1.2
+        ],
+        [
+          -1.5,
+          6.4,
+          1.15
+        ],
+        [
+          -2.5,
+          6.5,
+          1.15
+        ],
+        [
+          -3.5,
+          6.4,
+          1.15
+        ],
+        [
+          -2.0,
+          6.1,
+          1.15
+        ],
+        [
+          -1.0,
+          6.3,
+          1.15
+        ]
+      ],
+      "note": "tower+MS1 same frame, near->far, partial overlap, key cues visible (overlap 0.14-0.31, tower light outside MS1 silhouette except one waypoint)"
+    },
+    {
+      "route_id": "t30_f8_target_absent_neg",
+      "start_region": "CAP_FIELD",
+      "goal_region": "CAP_FIELD",
+      "kind": "two_class_training_family",
+      "corridor_waypoints": [
+        [
+          8.0,
+          -3.5,
+          1.05
+        ],
+        [
+          7.7,
+          -3.8,
+          1.05
+        ],
+        [
+          8.3,
+          -3.4,
+          1.05
+        ],
+        [
+          7.9,
+          -3.1,
+          1.05
+        ],
+        [
+          8.2,
+          -3.7,
+          1.05
+        ],
+        [
+          7.8,
+          -3.5,
+          1.05
+        ],
+        [
+          8.1,
+          -3.2,
+          1.05
+        ],
+        [
+          7.6,
+          -3.6,
+          1.05
+        ],
+        [
+          8.4,
+          -3.6,
+          1.05
+        ],
+        [
+          7.9,
+          -3.9,
+          1.05
+        ]
+      ],
+      "note": "target absent negative (tower and MS1 both out of FOV); normal background"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "lmf_t30_f1_tower_near_alone_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f1_tower_near_alone",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        9.3,
+        -0.3,
+        1.1
+      ],
+      "start_yaw_rad": 0.25,
+      "goal_position_world_m": [
+        9.0,
+        -0.2,
+        1.1
+      ],
+      "waypoints": [
+        [
+          9.3,
+          -0.3,
+          1.1
+        ],
+        [
+          8.9,
+          -0.7,
+          1.1
+        ],
+        [
+          9.6,
+          -0.6,
+          1.05
+        ],
+        [
+          9.7,
+          0.2,
+          1.1
+        ],
+        [
+          9.2,
+          0.5,
+          1.1
+        ],
+        [
+          8.8,
+          0.1,
+          1.1
+        ],
+        [
+          9.4,
+          -0.1,
+          1.1
+        ],
+        [
+          9.0,
+          -0.5,
+          1.05
+        ],
+        [
+          9.6,
+          0.0,
+          1.1
+        ],
+        [
+          9.0,
+          -0.2,
+          1.1
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "tower alone near 1.5-3 m (1.84-2.73 m); two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f2_tower_mid_alone_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f2_tower_mid_alone",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        6.6,
+        0.4,
+        1.15
+      ],
+      "start_yaw_rad": -0.1,
+      "goal_position_world_m": [
+        6.8,
+        -0.1,
+        1.15
+      ],
+      "waypoints": [
+        [
+          6.6,
+          0.4,
+          1.15
+        ],
+        [
+          6.2,
+          0.1,
+          1.15
+        ],
+        [
+          6.9,
+          0.2,
+          1.1
+        ],
+        [
+          6.4,
+          0.8,
+          1.15
+        ],
+        [
+          6.8,
+          0.6,
+          1.1
+        ],
+        [
+          6.3,
+          -0.1,
+          1.15
+        ],
+        [
+          6.7,
+          0.0,
+          1.15
+        ],
+        [
+          6.5,
+          0.5,
+          1.1
+        ],
+        [
+          6.2,
+          0.6,
+          1.15
+        ],
+        [
+          6.8,
+          -0.1,
+          1.15
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "tower alone mid 4.6-5.4 m; two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f3_tower_far_alone_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f3_tower_far_alone",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        1.0,
+        -1.3,
+        1.1
+      ],
+      "start_yaw_rad": 0.15,
+      "goal_position_world_m": [
+        0.7,
+        -1.7,
+        1.1
+      ],
+      "waypoints": [
+        [
+          1.0,
+          -1.3,
+          1.1
+        ],
+        [
+          0.5,
+          -1.0,
+          1.1
+        ],
+        [
+          1.4,
+          -1.6,
+          1.1
+        ],
+        [
+          0.9,
+          -0.7,
+          1.05
+        ],
+        [
+          1.3,
+          -1.9,
+          1.1
+        ],
+        [
+          0.6,
+          -1.5,
+          1.1
+        ],
+        [
+          1.1,
+          -1.0,
+          1.1
+        ],
+        [
+          0.7,
+          -1.7,
+          1.1
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "tower alone far 8-12 m (10.2-11.1 m); two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f4_tower_edge_trunc_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f4_tower_edge_trunc",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        9.0,
+        -1.1,
+        1.05
+      ],
+      "start_yaw_rad": -0.25,
+      "goal_position_world_m": [
+        9.3,
+        -1.3,
+        1.05
+      ],
+      "waypoints": [
+        [
+          9.0,
+          -1.1,
+          1.05
+        ],
+        [
+          8.7,
+          -1.4,
+          1.05
+        ],
+        [
+          9.3,
+          -1.0,
+          1.05
+        ],
+        [
+          8.9,
+          -0.7,
+          1.05
+        ],
+        [
+          9.4,
+          -1.5,
+          1.05
+        ],
+        [
+          9.1,
+          -1.2,
+          1.05
+        ],
+        [
+          8.8,
+          -0.9,
+          1.05
+        ],
+        [
+          9.2,
+          -1.6,
+          1.05
+        ],
+        [
+          9.0,
+          -0.8,
+          1.05
+        ],
+        [
+          9.3,
+          -1.3,
+          1.05
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "tower edge truncation near 2.4-3.2 m; two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f5_ms1_near_alone_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f5_ms1_near_alone",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        5.0,
+        6.5,
+        1.1
+      ],
+      "start_yaw_rad": -2.246,
+      "goal_position_world_m": [
+        4.9,
+        6.6,
+        1.05
+      ],
+      "waypoints": [
+        [
+          5.0,
+          6.5,
+          1.1
+        ],
+        [
+          4.6,
+          6.7,
+          1.1
+        ],
+        [
+          5.3,
+          6.6,
+          1.1
+        ],
+        [
+          5.0,
+          6.1,
+          1.05
+        ],
+        [
+          4.8,
+          6.9,
+          1.1
+        ],
+        [
+          5.2,
+          6.3,
+          1.1
+        ],
+        [
+          4.7,
+          6.4,
+          1.1
+        ],
+        [
+          5.1,
+          6.8,
+          1.1
+        ],
+        [
+          5.0,
+          6.3,
+          1.1
+        ],
+        [
+          4.9,
+          6.6,
+          1.05
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "MS1 alone near/mid 3.0-3.6 m, central tower out of FOV; two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f6_ms1_far_trunc_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f6_ms1_far_trunc",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        -6.0,
+        1.0,
+        1.15
+      ],
+      "start_yaw_rad": 1.0896,
+      "goal_position_world_m": [
+        -5.7,
+        1.1,
+        1.1
+      ],
+      "waypoints": [
+        [
+          -6.0,
+          1.0,
+          1.15
+        ],
+        [
+          -6.3,
+          0.7,
+          1.15
+        ],
+        [
+          -5.7,
+          1.3,
+          1.1
+        ],
+        [
+          -6.1,
+          1.5,
+          1.15
+        ],
+        [
+          -6.4,
+          1.2,
+          1.05
+        ],
+        [
+          -5.8,
+          0.5,
+          1.15
+        ],
+        [
+          -6.2,
+          0.9,
+          1.15
+        ],
+        [
+          -5.9,
+          1.4,
+          1.1
+        ],
+        [
+          -6.3,
+          0.6,
+          1.15
+        ],
+        [
+          -5.7,
+          1.1,
+          1.1
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "MS1 alone far 9.1-9.9 m + edge truncation; tower out of FOV; two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f7_both_near_far_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f7_both_near_far",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        -0.5,
+        6.2,
+        1.2
+      ],
+      "start_yaw_rad": -0.519,
+      "goal_position_world_m": [
+        -1.0,
+        6.3,
+        1.15
+      ],
+      "waypoints": [
+        [
+          -0.5,
+          6.2,
+          1.2
+        ],
+        [
+          -1.5,
+          6.4,
+          1.15
+        ],
+        [
+          -2.5,
+          6.5,
+          1.15
+        ],
+        [
+          -3.5,
+          6.4,
+          1.15
+        ],
+        [
+          -2.0,
+          6.1,
+          1.15
+        ],
+        [
+          -1.0,
+          6.3,
+          1.15
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "tower+MS1 same frame, near->far, partial overlap, key cues visible (overlap 0.14-0.31, tower light outside MS1 silhouette except one waypoint); two-class training family; no injection"
+    },
+    {
+      "case_id": "lmf_t30_f8_target_absent_neg_0",
+      "kind": "dynamic_route",
+      "scenario_class": "A",
+      "expected_behavior": "SUCCESS",
+      "route_id": "t30_f8_target_absent_neg",
+      "region_id": "CAP_FIELD",
+      "goal_region_id": "CAP_FIELD",
+      "ground_z_m": -0.05,
+      "start_position_world_m": [
+        8.0,
+        -3.5,
+        1.05
+      ],
+      "start_yaw_rad": -2.0,
+      "goal_position_world_m": [
+        7.9,
+        -3.9,
+        1.05
+      ],
+      "waypoints": [
+        [
+          8.0,
+          -3.5,
+          1.05
+        ],
+        [
+          7.7,
+          -3.8,
+          1.05
+        ],
+        [
+          8.3,
+          -3.4,
+          1.05
+        ],
+        [
+          7.9,
+          -3.1,
+          1.05
+        ],
+        [
+          8.2,
+          -3.7,
+          1.05
+        ],
+        [
+          7.8,
+          -3.5,
+          1.05
+        ],
+        [
+          8.1,
+          -3.2,
+          1.05
+        ],
+        [
+          7.6,
+          -3.6,
+          1.05
+        ],
+        [
+          8.4,
+          -3.6,
+          1.05
+        ],
+        [
+          7.9,
+          -3.9,
+          1.05
+        ]
+      ],
+      "timeout_s": 90.0,
+      "repeats": 1,
+      "obstacle": {
+        "obstacle_id": "obs_t30_far",
+        "size_m": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "kind": "linear",
+        "start_position_world_m": [
+          0.0,
+          0.0,
+          50.0
+        ],
+        "velocity_world_mps": [
+          0,
+          0,
+          0
+        ],
+        "start_time_s": 0,
+        "end_time_s": 1000,
+        "observation_delay_s": 0.05
+      },
+      "note": "target absent negative (tower and MS1 both out of FOV); normal background; two-class training family; no injection"
+    }
+  ],
+  "scene_injections": {},
+  "sampling_rule": {
+    "status": "FROZEN_BEFORE_CAPTURE",
+    "rule": "N=1; keep all accepted RGB frames unless the measured total exceeds 420, then one fixed per-case stride k=ceil(total/420) applied in sequence order; no detector-score or random selection"
+  },
+  "conditions_matrix": {
+    "f1_tower_near_alone": [
+      "tower_only",
+      "near_1.5_3m"
+    ],
+    "f2_tower_mid_alone": [
+      "tower_only",
+      "mid_3_6m"
+    ],
+    "f3_tower_far_alone": [
+      "tower_only",
+      "far_8_12m"
+    ],
+    "f4_tower_edge_trunc": [
+      "tower_only",
+      "near_1.5_3m",
+      "edge_truncation"
+    ],
+    "f5_ms1_near_alone": [
+      "ms1_only",
+      "near_mid_3_6m"
+    ],
+    "f6_ms1_far_trunc": [
+      "ms1_only",
+      "far_8_12m",
+      "edge_truncation"
+    ],
+    "f7_both_near_far": [
+      "tower_and_ms1_same_frame",
+      "near_to_far",
+      "partial_overlap"
+    ],
+    "f8_target_absent_neg": [
+      "target_absent",
+      "negative"
+    ]
+  },
+  "notes": [
+    "New independent families distinct from the T19 identity 7 cases, T25 2 cases, dev/val families and the holdout draft (see two_class_train_20261105/t30_overlap_vs_existing_families.json).",
+    "No synthetic injection; MS1 is map-native (never mapped to the central-tower landmark_id); map asset unchanged.",
+    "CAP_FIELD is a collection-only observation zone, not a real region topology node; two-class labels are produced later by annot2 under the frozen label spec v1."
+  ]
+}

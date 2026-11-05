@@ -1,0 +1,630 @@
+{
+  "schema_version": "dsh.two_class_r2_pilot_record.v1",
+  "status": "R2_PILOT_GATE_FAIL_STOPPED",
+  "created_at": "2026-11-05",
+  "decision": {
+    "pilot_gate": "FAIL",
+    "hard_fail": "official detector-side same-frame <0.60 (val 15/47=0.319, identity 13/26=0.500)",
+    "on_fail": "reject/stop R2; no 3-seed, no holdout capture/evaluation",
+    "ms1_recall_status": "PASS (identity 20/35=0.571; R1 0.286 -> fixed)",
+    "consumer_holdout": "not triggered (pilot gate FAIL); if it were, identity reference false-ref 0.500 (>0.10) and val negative claims 2/39=0.051 (>0.05) would fail"
+  },
+  "gate_definitions": {
+    "official_same_frame": "detector-side double match: same frame has class0 tower det IoU>=0.3 with GT tower AND every class1 MS1 GT matched by class1 det IoU>=0.3 (train evaluate_two_class)",
+    "consumer_same_frame_diagnostic": "tower claim correctly matched to GT tower (consumer evaluator); reported as claim-condition accuracy only, MUST NOT replace official gate metric",
+    "keypoint_confidence_rule": "tau_kpt=0.5 on keypoint_confidence; valid kpt conf min 0.509/median 0.999, conf vs no-conf identical",
+    "cross_version_rule": "official same-frame is the only cross-version gate metric; R1 previous gate narrative used consumer same-frame and is not directly comparable",
+  "train_confirmed_cross_version_note": "R1 FAIL is independent of the metric definition: R1 consumer-gate used 0.787/1.000, but canonical detector-side R1 last is 0.340/0.385 (also <0.60), and R1 MS1 recall 0.257 was a hard fail anyway; R2 fixed MS1 recall but regressed same-frame/reference -> also FAIL"
+  },
+  "official_same_frame": {
+    "R1_last": {
+      "val": {
+        "correct": 16,
+        "denominator": 47,
+        "rate": 0.3404255319148936
+      },
+      "identity": {
+        "correct": 10,
+        "denominator": 26,
+        "rate": 0.38461538461538464
+      }
+    },
+    "R1_best": {
+      "val": {
+        "correct": 13,
+        "denominator": 47,
+        "rate": 0.2765957446808511
+      },
+      "identity": {
+        "correct": 6,
+        "denominator": 26,
+        "rate": 0.23076923076923078
+      }
+    },
+    "R2_last": {
+      "val": {
+        "correct": 15,
+        "denominator": 47,
+        "rate": 0.3191489361702128
+      },
+      "identity": {
+        "correct": 13,
+        "denominator": 26,
+        "rate": 0.5
+      }
+    },
+    "R2_best": {
+      "val": {
+        "correct": 14,
+        "denominator": 47,
+        "rate": 0.2978723404255319
+      },
+      "identity": {
+        "correct": 9,
+        "denominator": 26,
+        "rate": 0.34615384615384615
+      }
+    }
+  },
+  "consumer_same_frame_diagnostic": {
+    "R2_last": {
+      "val": 0.8085106382978723,
+      "identity": 0.9615384615384616
+    },
+    "R2_best": {
+      "val": 0.6382978723404256,
+      "identity": 0.5384615384615384
+    }
+  },
+  "selection": {
+    "rule": "r2_joint",
+    "rule_sha256": "4d486b3e",
+    "rule_description": "tower recall + MS1 recall (equal weight) -> same-frame -> name",
+    "selected": "last",
+    "weights_sha256": "64ac38229adc658b96213b2a19a3ff84b39839c8d234a09233cc17df9cbeabdc"
+  },
+  "selected_last": {
+    "val_main": {
+      "counts": {
+        "frames": 163,
+        "all_positive": 121,
+        "observable_positive": 95,
+        "reference_available": 41,
+        "negatives": 39
+      },
+      "classes": {
+        "0": {
+          "name": "central_tower",
+          "tp": 81,
+          "fp": 18,
+          "fn": 14,
+          "gt_instances": 95,
+          "precision": 0.8181818181818182,
+          "recall": 0.8526315789473684
+        },
+        "1": {
+          "name": "similar_structure_ms1",
+          "tp": 21,
+          "fp": 11,
+          "fn": 26,
+          "gt_instances": 47,
+          "precision": 0.65625,
+          "recall": 0.44680851063829785
+        }
+      },
+      "identity": {
+        "claims": 85,
+        "raw_claims": 85,
+        "correct_claims": 81,
+        "wrong_claims": 4,
+        "precision": 0.9529411764705882,
+        "recall": 0.8526315789473684,
+        "wrong_claim_denominator": 39,
+        "false_match_rate": 0.05128205128205128,
+        "wrong_claim_categories": {
+          "GT_UNOBSERVABLE": 2,
+          "NEGATIVE": 2
+        },
+        "ms1_only_frames": 0,
+        "ms1_only_wrong_claims": 0,
+        "class1_mapped_violations": 0
+      },
+      "same_frame_consumer": {
+        "denominator": 47,
+        "tower_selected": 38,
+        "ms1_selected": 0,
+        "not_selected": 9,
+        "tower_selection_rate": 0.8085106382978723
+      },
+      "reference": {
+        "available_denominator": 41,
+        "unavailable_denominator": 54,
+        "emitted": 38,
+        "coverage": 0.926829268292683,
+        "declaration_rate": 0.9629629629629629,
+        "false_reference": 2,
+        "false_reference_rate": 0.037037037037037035,
+        "bearing": {
+          "count": 38,
+          "tau_bearing_deg": 3.0,
+          "pass": 38,
+          "pass_rate_of_emitted": 1.0,
+          "median_deg": 0.8020469845858802,
+          "p90_deg": 1.9685070446119575,
+          "max_deg": 2.4917250749687057
+        }
+      },
+      "domains": {
+        "all_positive": {
+          "denominator": 121,
+          "success": 78,
+          "success_rate": 0.6446280991735537,
+          "unknown_or_rejected": 0,
+          "tower_claim": 81,
+          "no_keypoint": 81
+        },
+        "observable_positive": {
+          "denominator": 95,
+          "success": 78,
+          "success_rate": 0.8210526315789474,
+          "unknown_or_rejected": 0,
+          "tower_claim": 81,
+          "no_keypoint": 55
+        },
+        "reference_available": {
+          "denominator": 41,
+          "success": 38,
+          "success_rate": 0.926829268292683,
+          "unknown_or_rejected": 0,
+          "tower_claim": 39,
+          "no_keypoint": 3
+        },
+        "negatives": {
+          "denominator": 39,
+          "success": 37,
+          "success_rate": 0.9487179487179487,
+          "unknown_or_rejected": 0,
+          "tower_claim": 2,
+          "no_keypoint": 39
+        }
+      },
+      "gt_unobservable": {
+        "frames": 29,
+        "tower_claims": 2,
+        "keypoints": 0,
+        "improper_claims": 2,
+        "correct_abstentions": 27
+      },
+      "metrics_sha256": "9238deaa4f1a07e58d1a5cb084f1e3d80502b6ee73a497dfec511d5534e4d1e0",
+      "rows_sha256": "2e928d28c47f5f4452ab21ab21486692f9cec1a918326786c0e4fc5c2dd27cf7"
+    },
+    "identity": {
+      "counts": {
+        "frames": 62,
+        "all_positive": 53,
+        "observable_positive": 44,
+        "reference_available": 18,
+        "negatives": 0
+      },
+      "classes": {
+        "0": {
+          "name": "central_tower",
+          "tp": 43,
+          "fp": 14,
+          "fn": 1,
+          "gt_instances": 44,
+          "precision": 0.7543859649122807,
+          "recall": 0.9772727272727273
+        },
+        "1": {
+          "name": "similar_structure_ms1",
+          "tp": 20,
+          "fp": 0,
+          "fn": 15,
+          "gt_instances": 35,
+          "precision": 1.0,
+          "recall": 0.5714285714285714
+        }
+      },
+      "identity": {
+        "claims": 41,
+        "raw_claims": 41,
+        "correct_claims": 41,
+        "wrong_claims": 0,
+        "precision": 1.0,
+        "recall": 0.9318181818181818,
+        "wrong_claim_denominator": 9,
+        "false_match_rate": 0.0,
+        "wrong_claim_categories": {},
+        "ms1_only_frames": 9,
+        "ms1_only_wrong_claims": 0,
+        "class1_mapped_violations": 0
+      },
+      "same_frame_consumer": {
+        "denominator": 26,
+        "tower_selected": 25,
+        "ms1_selected": 0,
+        "not_selected": 1,
+        "tower_selection_rate": 0.9615384615384616
+      },
+      "reference": {
+        "available_denominator": 18,
+        "unavailable_denominator": 26,
+        "emitted": 18,
+        "coverage": 1.0,
+        "declaration_rate": 0.5,
+        "false_reference": 13,
+        "false_reference_rate": 0.5,
+        "bearing": {
+          "count": 18,
+          "tau_bearing_deg": 3.0,
+          "pass": 12,
+          "pass_rate_of_emitted": 0.6666666666666666,
+          "median_deg": 1.043410574557495,
+          "p90_deg": 4.3178704689356735,
+          "max_deg": 4.374266148493717
+        }
+      },
+      "domains": {
+        "all_positive": {
+          "denominator": 53,
+          "success": 23,
+          "success_rate": 0.4339622641509434,
+          "unknown_or_rejected": 0,
+          "tower_claim": 41,
+          "no_keypoint": 22
+        },
+        "observable_positive": {
+          "denominator": 44,
+          "success": 23,
+          "success_rate": 0.5227272727272727,
+          "unknown_or_rejected": 0,
+          "tower_claim": 41,
+          "no_keypoint": 13
+        },
+        "reference_available": {
+          "denominator": 18,
+          "success": 11,
+          "success_rate": 0.6111111111111112,
+          "unknown_or_rejected": 0,
+          "tower_claim": 16,
+          "no_keypoint": 0
+        },
+        "negatives": {
+          "denominator": 0,
+          "success": 0,
+          "success_rate": null,
+          "unknown_or_rejected": 0,
+          "tower_claim": 0,
+          "no_keypoint": 0
+        }
+      },
+      "gt_unobservable": {
+        "frames": 9,
+        "tower_claims": 0,
+        "keypoints": 0,
+        "improper_claims": 0,
+        "correct_abstentions": 9
+      },
+      "metrics_sha256": "a960b542a291b164ab0ad7fe6bf56b22be4c6476df13e015b2537b61e0da3a1a",
+      "rows_sha256": "e3d2811b55f1480ac2ec1ebd8c4592ad54db01f6491748eca90ee45bc3afcc1d"
+    }
+  },
+  "best": {
+    "val_main": {
+      "counts": {
+        "frames": 163,
+        "all_positive": 121,
+        "observable_positive": 95,
+        "reference_available": 41,
+        "negatives": 39
+      },
+      "classes": {
+        "0": {
+          "name": "central_tower",
+          "tp": 73,
+          "fp": 8,
+          "fn": 22,
+          "gt_instances": 95,
+          "precision": 0.9012345679012346,
+          "recall": 0.7684210526315789
+        },
+        "1": {
+          "name": "similar_structure_ms1",
+          "tp": 19,
+          "fp": 10,
+          "fn": 28,
+          "gt_instances": 47,
+          "precision": 0.6551724137931034,
+          "recall": 0.40425531914893614
+        }
+      },
+      "identity": {
+        "claims": 73,
+        "raw_claims": 73,
+        "correct_claims": 72,
+        "wrong_claims": 1,
+        "precision": 0.9863013698630136,
+        "recall": 0.7578947368421053,
+        "wrong_claim_denominator": 39,
+        "false_match_rate": 0.0,
+        "wrong_claim_categories": {
+          "GT_UNOBSERVABLE": 1
+        },
+        "ms1_only_frames": 0,
+        "ms1_only_wrong_claims": 0,
+        "class1_mapped_violations": 0
+      },
+      "same_frame_consumer": {
+        "denominator": 47,
+        "tower_selected": 30,
+        "ms1_selected": 0,
+        "not_selected": 17,
+        "tower_selection_rate": 0.6382978723404256
+      },
+      "reference": {
+        "available_denominator": 41,
+        "unavailable_denominator": 54,
+        "emitted": 36,
+        "coverage": 0.8780487804878049,
+        "declaration_rate": 0.9814814814814815,
+        "false_reference": 1,
+        "false_reference_rate": 0.018518518518518517,
+        "bearing": {
+          "count": 36,
+          "tau_bearing_deg": 3.0,
+          "pass": 36,
+          "pass_rate_of_emitted": 1.0,
+          "median_deg": 0.5734892688325655,
+          "p90_deg": 2.0150545501498973,
+          "max_deg": 2.7555607415011254
+        }
+      },
+      "domains": {
+        "all_positive": {
+          "denominator": 121,
+          "success": 70,
+          "success_rate": 0.5785123966942148,
+          "unknown_or_rejected": 0,
+          "tower_claim": 72,
+          "no_keypoint": 84
+        },
+        "observable_positive": {
+          "denominator": 95,
+          "success": 70,
+          "success_rate": 0.7368421052631579,
+          "unknown_or_rejected": 0,
+          "tower_claim": 72,
+          "no_keypoint": 58
+        },
+        "reference_available": {
+          "denominator": 41,
+          "success": 36,
+          "success_rate": 0.8780487804878049,
+          "unknown_or_rejected": 0,
+          "tower_claim": 37,
+          "no_keypoint": 5
+        },
+        "negatives": {
+          "denominator": 39,
+          "success": 39,
+          "success_rate": 1.0,
+          "unknown_or_rejected": 0,
+          "tower_claim": 0,
+          "no_keypoint": 39
+        }
+      },
+      "gt_unobservable": {
+        "frames": 29,
+        "tower_claims": 1,
+        "keypoints": 0,
+        "improper_claims": 1,
+        "correct_abstentions": 28
+      },
+      "metrics_sha256": "e2888259aef3eb6ead44c82efc0a62428869701aa15ce9045f47c91b3ba77542",
+      "rows_sha256": "45fe45abc68cc0a31581fc36eedf7a9a711878be062935b469711a35d8c0bbf4"
+    },
+    "identity": {
+      "counts": {
+        "frames": 62,
+        "all_positive": 53,
+        "observable_positive": 44,
+        "reference_available": 18,
+        "negatives": 0
+      },
+      "classes": {
+        "0": {
+          "name": "central_tower",
+          "tp": 32,
+          "fp": 9,
+          "fn": 12,
+          "gt_instances": 44,
+          "precision": 0.7804878048780488,
+          "recall": 0.7272727272727273
+        },
+        "1": {
+          "name": "similar_structure_ms1",
+          "tp": 19,
+          "fp": 0,
+          "fn": 16,
+          "gt_instances": 35,
+          "precision": 1.0,
+          "recall": 0.5428571428571428
+        }
+      },
+      "identity": {
+        "claims": 31,
+        "raw_claims": 31,
+        "correct_claims": 30,
+        "wrong_claims": 1,
+        "precision": 0.967741935483871,
+        "recall": 0.6818181818181818,
+        "wrong_claim_denominator": 9,
+        "false_match_rate": 0.0,
+        "wrong_claim_categories": {
+          "SAME_FRAME": 1
+        },
+        "ms1_only_frames": 9,
+        "ms1_only_wrong_claims": 0,
+        "class1_mapped_violations": 0
+      },
+      "same_frame_consumer": {
+        "denominator": 26,
+        "tower_selected": 14,
+        "ms1_selected": 1,
+        "not_selected": 11,
+        "tower_selection_rate": 0.5384615384615384
+      },
+      "reference": {
+        "available_denominator": 18,
+        "unavailable_denominator": 26,
+        "emitted": 17,
+        "coverage": 0.9444444444444444,
+        "declaration_rate": 1.0,
+        "false_reference": 0,
+        "false_reference_rate": 0.0,
+        "bearing": {
+          "count": 17,
+          "tau_bearing_deg": 3.0,
+          "pass": 13,
+          "pass_rate_of_emitted": 0.7647058823529411,
+          "median_deg": 1.0709616644976603,
+          "p90_deg": 3.5064270197319445,
+          "max_deg": 3.7493053078820644
+        }
+      },
+      "domains": {
+        "all_positive": {
+          "denominator": 53,
+          "success": 26,
+          "success_rate": 0.49056603773584906,
+          "unknown_or_rejected": 0,
+          "tower_claim": 31,
+          "no_keypoint": 36
+        },
+        "observable_positive": {
+          "denominator": 44,
+          "success": 26,
+          "success_rate": 0.5909090909090909,
+          "unknown_or_rejected": 0,
+          "tower_claim": 31,
+          "no_keypoint": 27
+        },
+        "reference_available": {
+          "denominator": 18,
+          "success": 12,
+          "success_rate": 0.6666666666666666,
+          "unknown_or_rejected": 0,
+          "tower_claim": 16,
+          "no_keypoint": 1
+        },
+        "negatives": {
+          "denominator": 0,
+          "success": 0,
+          "success_rate": null,
+          "unknown_or_rejected": 0,
+          "tower_claim": 0,
+          "no_keypoint": 0
+        }
+      },
+      "gt_unobservable": {
+        "frames": 9,
+        "tower_claims": 0,
+        "keypoints": 0,
+        "improper_claims": 0,
+        "correct_abstentions": 9
+      },
+      "metrics_sha256": "d0ad77f350cd1b0737da62c5831201af88c4a7832e107a8b83a6743e2664eac0",
+      "rows_sha256": "a6501a57ad2f7440bad8f593bcc8b73bcd65dd146a65f3030312e363373ce029"
+    }
+  },
+  "regressions_vs_R1": [
+    "identity GT-unavailable false-reference 13/26=0.500, declaration 0.500 (consumer holdout false-ref <=0.10 fails)",
+    "identity consumer all-positive 0.698 -> 0.434 (reference-available success 0.611, 6/18 bearing>3deg)",
+    "val negatives wrong claim 2/39=0.051 (>0.05); categories NEGATIVE 2",
+    "val GT_UNOBS improper claims 2 (29 GT_UNOBS frames)",
+    "official same-frame R1 0.340/0.385 -> R2 0.319/0.500; both <0.60"
+  ],
+  "consumer_holdout_fields_info": {
+    "val_main_last": {
+      "all_positive": 0.6446280991735537,
+      "identity_precision": 0.9529411764705882,
+      "wrong_claims_negatives": "2/39",
+      "same_frame_consumer": 0.8085106382978723,
+      "bearing_median": 0.8020469845858802,
+      "bearing_p90": 1.9685070446119575,
+      "ref_declaration": 0.9629629629629629,
+      "false_reference": 0.037037037037037035,
+      "worst_family": "hn2 0/26"
+    },
+    "identity_last": {
+      "all_positive": 0.4339622641509434,
+      "wrong_claims_ms1_only": "0/9",
+      "same_frame_consumer": 0.9615384615384616,
+      "bearing_median": 1.043410574557495,
+      "bearing_p90": 4.3178704689356735,
+      "ref_declaration": 0.5,
+      "false_reference": 0.5,
+      "worst_family": "both_scale_lateral 0/8, full_occlusion 0/9"
+    }
+  },
+  "evidence": {
+    "predictions": {
+      "val_main_last": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\two_class_pilot_v7b\\seed0\\predictions_val_main_last.jsonl",
+        "sha256": "52fa71f5275dbb9f313d0ba2c81add1700461f05d2fed808caa8b4de27dfeed6"
+      },
+      "val_main_best": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\two_class_pilot_v7b\\seed0\\predictions_val_main_best.jsonl",
+        "sha256": "b6f29eb1c7d1671133d3eb8c91bb13f237b3f296959f91d189412d637b6cb78d"
+      },
+      "identity_last": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\two_class_pilot_v7b\\seed0\\predictions_identity_last.jsonl",
+        "sha256": "595cc5a5e0c0ff2de116e892d2f9c85b4a247cde4df7866bf588af8b7436fd1a"
+      },
+      "identity_best": {
+        "path": "E:\\isaac\\proj_boom_birds\\outputs\\landmark_train\\runs\\two_class_pilot_v7b\\seed0\\predictions_identity_best.jsonl",
+        "sha256": "6d87ae555f31204107b3639b3e181c23cd4a47d09eb9a1a5c85160158f7fd5d5"
+      }
+    },
+    "weights": {
+      "last": "64ac38229adc658b96213b2a19a3ff84b39839c8d234a09233cc17df9cbeabdc",
+      "best": "f55ec1386e1d8332da6bd24b10a1f840f0b4f9981f6ab85ece21a9f03d8aea4d"
+    },
+    "train_side": {
+      "two_class_pilot_seed0.json": "a6ef7fdbbdd1d7d26d91137da71b6bc303b578dc22ddcd90e66a42d746f35e1e",
+      "run_snapshot.json": "76ba28b8177909cceca8069cea875b693890733bf0839411833a99183bcc98ba",
+      "train_reported_snapshot": "93ee18fc",
+      "train_reported_config": "5daef982",
+      "train_report_sha": "74c372a2"
+    },
+    "canonical_docs": {
+      "val_main": "d6c6a25249c1c8fd2bf334ae7f9e399e9f69b7ebe0534c79e98fb2fefd934436",
+      "identity": "7471c408e84c0774425ad852e2c4ab99b14ea1968210f09fbd6b9ff8035d8b17"
+    },
+    "canonical_union": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/labels_union_eval_frozen.json",
+      "sha256": "a188fca7d11ea2bad7cc8325a6dc5baf1d7e643b77d9469543050def69b62768",
+      "handoff_sha256": "cc59fcc9d81fe0e9f18f61ce036553b07a480f2dac0c32208cf7d585aae9371c"
+    },
+    "evaluator_outputs": {
+      "summary": "outputs/perception/two_class_eval_20261105/pilot_v7b_canonical/pilot_v7b_canonical_summary.json",
+      "summary_sha256": "a0e2cf06f2b4c4995ecc79f1f6368aadcff165a1dfae06bd2f446dd17a88e74e",
+      "evidence_shas": "outputs/perception/two_class_eval_20261105/pilot_v7b_canonical/pilot_v7b_canonical_evidence_shas.json",
+      "evidence_shas_sha256": "5c0bcb1f9b287c1e2b4351f8ab85b9ff3d16ede95d88879ea90d0da024b54cdd"
+    },
+    "p2_poison_r2_model": {
+      "path": "outputs/perception/two_class_eval_20261105/p2_smoke/run_r2_last_union_a188fca7_v4/poison_smoke_evidence_v3.json",
+      "sha256": "e3853c99c49e9f62987d0e20fc7917fccb104218af38f798d9fa89781e9e49a7"
+    },
+    "code": {
+      "module": "183b6d22f4438488ffcb1f947aed370bff82c58fdbf17adc02eae5d8c5257789",
+      "cli": "006c5e09e5dc60dab69b6b67128bee23cd4a05451c1bca4a37b0272a1b9abe6e",
+      "tests": "a101eb4398733edb3a714f6539e483e186adda1900327f0c73c86f259b9c3e26"
+    },
+    "report": {
+      "path": "docs/reports/perception/TWO_CLASS_EVAL_20261105.md",
+      "sha256": "912dbff04c335407c8d42dab6b64d726c01165e9c694764fbaa5365431328ee8"
+    }
+  }
+}

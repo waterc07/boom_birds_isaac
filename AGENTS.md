@@ -123,3 +123,16 @@ PX4 保留飞控权限；策略不能直接解锁、改模式或改参数。官�
 ## 单环境动态评价默认升级（2026-11-03）
 
 `scripts/run_dynamic_eval.py` 的单环境评价默认已升级为 `--geometry-policy reference_origin_v2 --contact-mode measured_hard_reset`。历史复现必须显式传 `--geometry-policy legacy --contact-mode legacy_inference`；旧 v1 raw-hash/旧 boundary/latency freeze 在新默认下会被明确拒绝，不自动回退。新 freeze schema v2 记录 hash algorithm、实际生效配置与 default/explicit 来源。只影响该单环境评价入口，不影响训练/多环境/官方 smoke。证据见 `docs/reports/map_eval/contact_envelope/DSH_DYNAMIC_DEFAULT_UPGRADE_20261103.md`。
+
+## 当前状态补充（2026-11-05，two-class 工作包结果）
+
+- 2026-11-05 启动新的 two-class 身份通道 + 消费者验证工作包（预注册 configs/perception/landmark_two_class_protocol_v1.json、标签规范 landmark_two_class_label_spec_v1.json、新预算/新 snapshot v7）；上一包 47d1063 封闭，旧模型/协议/输出/hash 不改。
+- 历史“训练启动 BLOCKED”等描述属于 2026-11-04 训练前闭环包的当时状态，不再代表当前；当前训练在“仅内部有界研究”授权下进行。
+- two-class 只做“中央塔 vs 已验证相似结构 MS1”的限定域辨识，不是开放集身份识别；class1 永不映射中央塔 ID；无板卡/独立人工标注/分发决策不阻塞内部研究，但相关认证仍 INCOMPLETE/UNKNOWN。
+
+### 2026-11-05 two-class 工作包收尾（STOP）
+
+- 新预注册 two-class（中央塔 vs 已验证 map-native MS1）+ 消费者验证已完成两套 pilot：R1 MS1 recall 0.286<0.50 FAIL；R2 近距 MS1 数据把 MS1 recall 修复到 0.571，但官方 same-frame 0.319/0.500<0.60 FAIL（consumer-side claim 口径仅诊断，diag 裁定不得替代），且 identity false-ref 0.500、consumer all 0.434、negative claims 2/39、GT_UNOBS improper 2 回退。
+- 按协议停止本版 two-class 实验：2 次 pilot、0 次完整训练、不进入 3-seed、不触发新 holdout（v3 SPEC_FROZEN_NOT_TRIGGERED）；旧包/旧模型/旧协议/hash 不改。
+- 近距 MS1 数据方向有效但不足；下版需新预注册修复 same-frame 消歧、reference availability、negatives/GT_UNOBS claim 与 class1/kpt 干扰，才能再评估。
+- 当前交付基线仍为单类检测 + identity 显式 UNKNOWN + bearing-primary 诊断；two-class 不是开放集身份识别能力。

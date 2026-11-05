@@ -820,6 +820,18 @@ FREEZE_V5_PATH = (REPO_ROOT / 'configs' / 'perception'
                   / 'landmark_split_freeze_v5.json')
 HOLDOUT_V2_PATH = (REPO_ROOT / 'configs' / 'perception'
                    / 'landmark_holdout_freeze_v2.json')
+HOLDOUT_V3_PATH = (REPO_ROOT / 'configs' / 'perception'
+                   / 'landmark_holdout_freeze_v3.json')
+FREEZE_V6_PATH = (REPO_ROOT / 'configs' / 'perception'
+                  / 'landmark_split_freeze_v6.json')
+FREEZE_V6_1_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_split_freeze_v6_1.json')
+FREEZE_V6_2_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_split_freeze_v6_2.json')
+SNAPSHOT_V7B_PATH = (REPO_ROOT / 'configs' / 'perception'
+                     / 'landmark_run_snapshot_v7b.json')
+SNAPSHOT_V7_PATH = (REPO_ROOT / 'configs' / 'perception'
+                    / 'landmark_run_snapshot_v7.json')
 SNAPSHOT_V5_PATH = (REPO_ROOT / 'configs' / 'perception'
                     / 'landmark_run_snapshot_v5.json')
 HOLDOUT_PATH = (REPO_ROOT / 'configs' / 'perception'
@@ -1060,3 +1072,38 @@ def test_snapshot_v5_manifest_covers_frozen_inputs():
     for item in document['tracked_artifacts']:
         assert not item['path'].startswith(('C:', '/', '\\\\'))
         assert item['kind']
+
+
+@pytest.mark.skipif(not HOLDOUT_V3_PATH.is_file(), reason='holdout v3 absent')
+def test_holdout_v3_two_class_spec_is_frozen_but_not_triggered():
+    document = json.loads(HOLDOUT_V3_PATH.read_text(encoding='utf-8'))
+    assert document['schema_version'] == 'dsh.landmark_holdout_freeze.v3'
+    assert document['status'] == 'SPEC_FROZEN_NOT_TRIGGERED'
+    assert document['captured'] is False
+    spec = document['specification']
+    assert spec['min_new_families'] >= 3
+    assert spec['frames_range'] == [200, 400]
+    conditions = {item['condition'] for item in spec['required_conditions']}
+    assert {'ms1_confuser_alone', 'central_tower_alone',
+            'same_frame_tower_and_ms1', 'edge_truncation',
+            'partial_or_full_occlusion', 'target_absent'} <= conditions
+    assert sum(item['min_frames']
+               for item in spec['required_conditions']) == 210
+    assert spec['sampling_rule']['frozen_before_capture'] is True
+    assert spec['sampling_rule']['no_prediction_based_selection'] is True
+    assert spec['annotation_rule']['class1_keypoint'].startswith('keypoint v=0')
+    assert spec['evaluation_rule']['runs'] == 1
+    assert spec['evaluation_rule']['no_retune'] is True
+
+
+
+@pytest.mark.skipif(not (FREEZE_V6_PATH.is_file() and RAW_FORMAL6.is_file()),
+                    reason='raw sensor outputs are ignored and absent here')
+def test_committed_v6_two_class_a_plan_historical():
+    freeze = json.loads(FREEZE_V6_PATH.read_text(encoding='utf-8'))
+    report = validate_freeze(freeze, REPO_ROOT, verify_input_hashes=True,
+                             require_images=False)
+    assert report.ok, [issue.code + ': ' + issue.message
+                       for issue in report.errors]
+    assert freeze['freeze_id'] == 'landmark_split_freeze_v6'
+    assert report.stats['split_frame_counts']['train'] == 2288

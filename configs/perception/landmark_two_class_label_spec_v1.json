@@ -1,0 +1,65 @@
+{
+  "schema_version": "dsh.landmark_two_class_label_spec.v1",
+  "status": "FROZEN_2026_11_05_BEFORE_LABELLING",
+  "classes": {
+    "0": "central_tower",
+    "1": "similar_structure_ms1"
+  },
+  "annotation_units": "per visible and decidable instance; same-frame frames must contain all visible instances of both classes",
+  "bbox": {
+    "class0": "tight bbox around visible central-tower body (tower silhouette incl. roof-light housing); truncated edges follow annotator visual judgement",
+    "class1": "tight bbox around visible MS1 structure (thin tall flat-top column with side green light and blue side strip)"
+  },
+  "keypoint": {
+    "class0": {
+      "name": "green_roof_light",
+      "visibility": "v=1 only when the green roof light centre is visible and locatable; v=0 otherwise; never interpolate from bbox",
+      "x": "source-image pixels normalized to [0,1]"
+    },
+    "class1": {
+      "name": "NOT_AVAILABLE",
+      "visibility": "v=0 always; no keypoint guess; bbox centre is forbidden as a substitute; keypoint loss must exclude class1 instances (verify mask)"
+    }
+  },
+  "fields": {
+    "frame": [
+      "frame_id",
+      "family",
+      "tower_present",
+      "ms1_present",
+      "identity_ambiguity",
+      "gt_uncertainty",
+      "occlusion",
+      "notes"
+    ],
+    "instance": [
+      "class",
+      "bbox_xyxy",
+      "truncated_edges",
+      "occluded",
+      "keypoint_x",
+      "keypoint_y",
+      "v",
+      "reference_available",
+      "verified_source"
+    ]
+  },
+  "rules": [
+    "MS1 instances must never be treated as background in a same-frame image",
+    "target partially occluded but decidable -> label visible part + occluded flag; fully occluded -> tower_present=true, no bbox, GT_UNOBSERVABLE (not a negative)",
+    "MS1 only (tower absent/out of view): tower_present=false + class1 instance; this is the MS1 confuser case",
+    "do not delete hard frames; TINY/small-scale frames are labelled and reported separately",
+    "the green-light centroid annotation is a proxy/algorithmic-assisted reference (same green cue family); it is not independent physical truth and must be recorded as such",
+    "annotation is agent-proxy, not independent human GT"
+  ],
+  "qa": {
+    "require": [
+      "1:1 image<->label",
+      "class instance counts",
+      "same-frame counts",
+      "v distribution per class",
+      "keypoint mask test"
+    ],
+    "fail_loud": true
+  }
+}

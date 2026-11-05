@@ -1,0 +1,86 @@
+{
+ "existing_case_count": 47,
+ "new_cases": [
+  {
+   "case_id": "lmf_t30_f1_tower_near_alone_0",
+   "nearest_existing_start": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_backoff_0",
+    "distance_m": 0.206,
+    "yaw_difference_rad": 0.25
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f2_tower_mid_alone_0",
+   "nearest_existing_start": {
+    "run": "final_pool_v1",
+    "case_id": "lmf_similar_negative_0",
+    "distance_m": 1.457,
+    "yaw_difference_rad": 3.042
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f3_tower_far_alone_0",
+   "nearest_existing_start": {
+    "run": "identity_v1",
+    "case_id": "lmf_devid_both_mid_similar_scale_0",
+    "distance_m": 1.565,
+    "yaw_difference_rad": 0.69
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f4_tower_edge_trunc_0",
+   "nearest_existing_start": {
+    "run": "geo_test",
+    "case_id": "geo_test_static_c",
+    "distance_m": 0.112,
+    "yaw_difference_rad": 2.892
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f5_ms1_near_alone_0",
+   "nearest_existing_start": {
+    "run": "holdout_draft",
+    "case_id": "holdout_ms1_confuser_alone_0",
+    "distance_m": 4.301,
+    "yaw_difference_rad": 1.112
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f6_ms1_far_trunc_0",
+   "nearest_existing_start": {
+    "run": "identity_v1",
+    "case_id": "lmf_devid_ms1_far_0",
+    "distance_m": 3.163,
+    "yaw_difference_rad": 1.09
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f7_both_near_far_0",
+   "nearest_existing_start": {
+    "run": "identity_v1",
+    "case_id": "lmf_devid_both_same_bearing_0",
+    "distance_m": 1.02,
+    "yaw_difference_rad": 0.061
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t30_f8_target_absent_neg_0",
+   "nearest_existing_start": {
+    "run": "holdout_draft",
+    "case_id": "holdout_both_ambiguous_0",
+    "distance_m": 2.067,
+    "yaw_difference_rad": 3.043
+   },
+   "identical_waypoint_sequence": []
+  }
+ ],
+ "note": "start-pose proximity is not trajectory identity; the T30 families use new patrol lines and poses; image sha dedup is in t30_dedup_vs_existing.json"
+}

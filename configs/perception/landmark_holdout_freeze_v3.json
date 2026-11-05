@@ -1,0 +1,140 @@
+{
+  "schema_version": "dsh.landmark_holdout_freeze.v3",
+  "status": "SPEC_FROZEN_NOT_TRIGGERED",
+  "generated_at": "2026-11-04T16:19:37.324500+00:00",
+  "generated_by": "datafreeze (T36 two-class holdout pre-registration)",
+  "supersedes_placeholder": {
+    "path": "configs/perception/landmark_holdout_freeze_v2.json",
+    "note": "v2 (single-class spec) stays untouched as history; v3 is the two-class spec and remains NOT_TRIGGERED until the two-class consumer development-to-holdout gate passes"
+  },
+  "frozen_inputs": {
+    "two_class_protocol": {
+      "path": "configs/perception/landmark_two_class_protocol_v1.json",
+      "sha256": "b37014618de3dbbbedf5d2093ba051f17c0c271210f4b63937878dae278acd8e"
+    },
+    "two_class_label_spec": {
+      "path": "configs/perception/landmark_two_class_label_spec_v1.json",
+      "sha256": "8e544efca0e8feb22ab193479a52d4f0131f6556a1144a41f559f65a0f7c7f57"
+    },
+    "trigger_gate": "landmark_two_class_protocol_v1.json#stage_gates.consumer_development_to_holdout"
+  },
+  "trigger": {
+    "rule": "freeze the val-selected two-class model/thresholds/decoder/eval rules after the 3-seed phase; the lead triggers only after every consumer_development_to_holdout condition passes",
+    "conditions": [
+      "consumer confirmed success (all-positive 121) >= 0.50 (two-class identity available, not raw unvalidated claim)",
+      "identity precision (class0 claims) >= 0.95 and MS1 false central-tower claims <= 0.05 on the MS1/negative denominator",
+      "same-frame target disambiguation correct >= 0.70",
+      "bearing median <= 3.0 deg and P90 <= 5.0 deg on reference-available emitted frames",
+      "reference declaration correct rate (GT-unavailable refusal) >= 0.50 and false-reference rate <= 0.10",
+      "worst-group consumer success not worse than frozen single-class baseline worst group by more than 0.05",
+      "consumer success exceeds frozen single-class raw-claim upper bound (0.479 val_main) by no requirement; but must be a confirmed-identity number (supplementary comparison reported)"
+    ],
+    "current_state": "NOT_TRIGGERED: two-class implementation/training not run yet; no capture may start before the gate passes",
+    "trigger_owner": "lead"
+  },
+  "specification": {
+    "min_new_families": 3,
+    "frames_range": [
+      200,
+      400
+    ],
+    "coverage": [
+      "ms1 confuser alone",
+      "central tower alone",
+      "same-frame tower+MS1",
+      "scale variation (near/far)",
+      "edge truncation",
+      "partial/full occlusion",
+      "target absent"
+    ],
+    "required_conditions": [
+      {
+        "condition": "ms1_confuser_alone",
+        "definition": "verified map-native MS1 alone (tower absent/out of view), green light visible; MS1 must never be a central-tower claim",
+        "min_frames": 30
+      },
+      {
+        "condition": "central_tower_alone",
+        "definition": "central tower alone, near/mid/far scale mix; class0 bbox + green-light keypoint when visible",
+        "min_frames": 30
+      },
+      {
+        "condition": "same_frame_tower_and_ms1",
+        "definition": "both classes visible and decidable in the same frame, incl. partial depth overlap; both instances labelled",
+        "min_frames": 30
+      },
+      {
+        "condition": "scale_near",
+        "definition": "near range approx 1.5-3.0 m (expected LARGE)",
+        "min_frames": 25
+      },
+      {
+        "condition": "scale_far_small",
+        "definition": "far/small range >=8 m or green light <=3 px; reference may be UNAVAILABLE and labelled as such",
+        "min_frames": 25
+      },
+      {
+        "condition": "edge_truncation",
+        "definition": "at least one visible instance touching an image edge; four-edge flags from capture geometry + visual check",
+        "min_frames": 25
+      },
+      {
+        "condition": "partial_or_full_occlusion",
+        "definition": "partial occlusion labelled with occluded flag; full occlusion of the tower -> tower_present=true, no bbox, GT_UNOBSERVABLE (not a negative)",
+        "min_frames": 25
+      },
+      {
+        "condition": "target_absent",
+        "definition": "neither class present (or both fully out of view); explicit empty/negative frame",
+        "min_frames": 20
+      }
+    ],
+    "coverage_budget_note": "condition minima sum to 210, inside 200-400; the frozen per-family mix and per-condition counts must be recorded before capture; actual denominators reported per condition",
+    "family_rule": "each family is an independent physical trajectory/pose composition; no group/frame split across train/val/holdout; no reuse of any existing dev/exploratory/T19 identity/two-class training frame; new families distinct from all existing sets and from the capture draft",
+    "sampling_rule": {
+      "frozen_before_capture": true,
+      "method": "per family: accepted frames sorted by integer sequence; midpoint systematic idx=floor((i+0.5)*n/k); force-include family endpoints and extreme-condition frames using capture-derived distance/truncation/green metadata only",
+      "k": "derived from the frozen total budget before capture and recorded in the holdout manifest",
+      "no_prediction_based_selection": true,
+      "no_post_hoc_resampling": true
+    },
+    "annotation_rule": {
+      "spec": "configs/perception/landmark_two_class_label_spec_v1.json (or later frozen two-class spec only)",
+      "classes": "class0 central_tower, class1 similar_structure_ms1; same-frame rule: label every visible and decidable instance of both classes",
+      "class1_keypoint": "keypoint v=0 always, excluded from keypoint loss; bbox centre forbidden as keypoint substitute",
+      "labels_location": "gitignored external outputs; repository keeps manifest + sha256 + statistics",
+      "who_viewed": "record executor, purpose, time and evidence hash for every batch",
+      "qa": "two-class label QA PASS; no merge into train/val files",
+      "independence_boundary": "process-isolated holdout (same-agent execution), not third-party sealed/certification",
+      "gt_handling": "GT_UNOBSERVABLE and ambiguous frames reported separately, never counted as positive/negative localization"
+    },
+    "evaluation_rule": {
+      "runs": 1,
+      "precondition": "two-class model/thresholds/decoder/eval rules frozen before the single holdout evaluation",
+      "no_callback": true,
+      "no_retune": true,
+      "no_rerun": true,
+      "reports": [
+        "two-class confusion + per-class P/R",
+        "central-tower identity claim P/R/false-match",
+        "MS1-only wrong tower claims",
+        "same-frame correct target selection",
+        "reference availability + bearing error + coverage",
+        "all-positive consumer confirmed success with UNKNOWN/REJECTED retained in denominator",
+        "GT-uncertain/occluded improper identity claims"
+      ],
+      "failure": "FAIL/INCOMPLETE with denominators; no reinterpretation as navigation/board/Gate acceptance"
+    }
+  },
+  "captured": false,
+  "captured_run": null,
+  "holdout_hash": null,
+  "state_note": "specification only; when triggered, the executor writes a NEW holdout freeze (v4 or later) with captured_run/frames/hashes; this v3 file is never rewritten",
+  "boundaries": [
+    "internal bounded research only; distribution decision pending",
+    "two-class limited-domain identity, not open-set recognition",
+    "class1 never maps to central tower ID",
+    "no control/PPO/Gate promotion",
+    "RKNN/board/real camera UNKNOWN"
+  ]
+}

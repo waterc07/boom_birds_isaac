@@ -1,0 +1,177 @@
+{
+ "schema_version": "dsh.landmark_t38_capture_provenance.v1",
+ "status": "CAPTURE_PASS_DATA_ONLY",
+ "task": "task-38 near-MS1 supplement (R2 fix): 2 new two-class MS1-alone near families (1.3-2.2 m, target bbox height 140-220 px)",
+ "operator": "teammate capture",
+ "generated_at_local": "2026-11-05",
+ "repo": {
+  "branch": "feat/v2.2-simulation-perception",
+  "head_commit": "47d1063b94dc779e87e1f6be7d6210b489a85395"
+ },
+ "case_config": {
+  "file": "configs/scenarios/landmark_two_class_near_ms1_cases_v1.json",
+  "sha256": "eabe2169aed9063c0bbaffeae24089127c6f02b23f62b16e31f39ac9707b5998",
+  "schema": "boom_birds.map_cases.v2",
+  "case_count": 2,
+  "loader": "PASS",
+  "regions": "CAP_FIELD is a collection-only observation zone, not a real V2.2 region topology node"
+ },
+ "runtime": {
+  "gui_mode": true,
+  "headless": false,
+  "renderer": "DirectX/D3D12 (--/app/vulkan=false)",
+  "isaac_sim": "5.1.0",
+  "gpu": "NVIDIA RTX 5080 16GB",
+  "gpu_driver": "581.80",
+  "sensor_config": "configs/sensors/sensor_shadow_v1.json",
+  "sensor_config_sha256": "06a479621765ae996759f260b4479b1c24700144ab7a8177874ead03bd1c5a55"
+ },
+ "run": {
+  "dir": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105",
+  "sensor_dir": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor",
+  "command": "scripts/run_dynamic_eval.py --cases configs/scenarios/landmark_two_class_near_ms1_cases_v1.json --methods follow_only --execution-path v2 --geometry-policy reference_origin_v2 --contact-mode measured_hard_reset --sensor-shadow outputs/sensor_shadow/lm_two_class_near_ms1_20261105_sensor --sensor-shadow-config configs/sensors/sensor_shadow_v1.json --screenshots --device cuda:0 --kit_args=--/app/vulkan=false --code-commit 47d1063b94dc779e87e1f6be7d6210b489a85395 --working-tree T38 near-MS1 two-class supplement (2 new families); branch feat/v2.2-simulation-perception; HEAD 47d1063 --gpu-driver NVIDIA 581.80 (RTX 5080, nvidia-smi) --output outputs/sensor_shadow/lm_two_class_near_ms1_20261105",
+  "started_at": "2026-11-05T12:26:41.977606+08:00",
+  "finished_at": "2026-11-05T12:27:43.373997+08:00",
+  "outcomes": {
+   "follow_only": {
+    "SUCCESS": 2,
+    "COLLISION": 0,
+    "TIMEOUT": 0,
+    "OUT_OF_BOUNDS": 0,
+    "ABORT": 0,
+    "INVALID": 0
+   }
+  },
+  "run_complete": true,
+  "summary_error_file": false,
+  "raw_accepted_rgb": 108
+ },
+ "pool": {
+  "dir": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105_pool/images",
+  "size": 108,
+  "rule": "N=1: measured 108 accepted <= 120, all frames kept",
+  "fits_budget_90_120": true,
+  "per_case": {
+   "lmf_t38_f1_ms1_near_sw_0-follow_only": {
+    "frames": 55,
+    "ms1_in_fov": 55,
+    "ms1_green_frames": 55,
+    "tower_in_fov": 0,
+    "bbox_height_px": [
+     180.0,
+     213.5
+    ],
+    "bbox_width_px": [
+     41.4,
+     64.0
+    ],
+    "ms1_distance_m": [
+     1.56,
+     1.77
+    ],
+    "trunc_bottom_frames": 3,
+    "trunc_left": 0,
+    "trunc_right": 0,
+    "trunc_top": 0
+   },
+   "lmf_t38_f2_ms1_near_se_0-follow_only": {
+    "frames": 53,
+    "ms1_in_fov": 53,
+    "ms1_green_frames": 0,
+    "tower_in_fov": 0,
+    "bbox_height_px": [
+     181.0,
+     230.6
+    ],
+    "bbox_width_px": [
+     43.2,
+     73.4
+    ],
+    "ms1_distance_m": [
+     1.54,
+     1.75
+    ],
+    "trunc_bottom_frames": 7,
+    "trunc_left": 0,
+    "trunc_right": 0,
+    "trunc_top": 0
+   }
+  }
+ },
+ "ms1_bbox_target": {
+  "target_height_px": [
+   140,
+   220
+  ],
+  "note": "f1 not-truncated 180.0-211.8 px; f2 not-truncated 181.0-221.4 px (max 1.4 px above 220 in one projected frame); the 10 bottom-truncated frames have projected corner height up to 230.6 px because the projected bbox extends below the image; the visible bbox is smaller. Recorded, not corrected."
+ },
+ "map_native_ms1": {
+  "injected": false,
+  "map_asset_modified": false,
+  "world_position_estimate_m": {
+   "x": 3.0,
+   "y": 4.0,
+   "top_z": 1.78
+  },
+  "class1_rule": "MS1 is class1 and must never map to the central-tower landmark_id; class1 keypoint always v=0",
+  "green_visibility": {
+   "f1_sw": "green lamp visible in 55/55 frames (22-40 px)",
+   "f2_se": "green lamp NOT visible (0 px in 53/53 frames)"
+  }
+ },
+ "injection_used": false,
+ "dedup": {
+  "pool_size": 108,
+  "unique_sha": 108,
+  "within_pool_duplicates": 0,
+  "existing_runs_checked": 23,
+  "overlaps": {
+   "debug_all6_sensor": 0,
+   "debug_static4_sensor": 0,
+   "debug_static5_sensor": 0,
+   "debug_static6_sensor": 0,
+   "debug_static7_sensor": 0,
+   "formal6_sensor": 0,
+   "geo_test_sensor": 0,
+   "gui_evidence2_sensor": 0,
+   "gui_evidence_sensor": 0,
+   "lm_dev_capture_20261104_sensor": 0,
+   "lm_dev_hn_capture_20261104_sensor": 0,
+   "lm_dev_identity_capture_20261104_sensor": 0,
+   "lm_dev_identity_capture_t25_20261104_formal_sensor": 0,
+   "lm_dev_identity_capture_t25_20261104_sensor": 0,
+   "lm_dev_smoke2_20261104_sensor": 0,
+   "lm_dev_smoke_hn1b_20261104_sensor": 0,
+   "lm_devid_smoke_20261104_sensor": 0,
+   "lm_final_candidate_20261104_sensor": 0,
+   "lm_final_smoke_20261104_sensor": 0,
+   "lm_independence_sensor": 0,
+   "lm_pilot_north_sensor": 0,
+   "lm_pilot_sensor": 0,
+   "lm_two_class_train_20261105_sensor": 0
+  },
+  "zero_overlap": true
+ },
+ "gui_evidence": {
+  "window_screenshot": "t38_gui_window.png",
+  "desktop_full": "outputs/sensor_shadow/lm_two_class_near_ms1_20261105/_evidence/desktop_t38_run.png",
+  "manifest_fields": "t38_manifest.json: gui_mode=true, headless=false"
+ },
+ "overlap_vs_existing_families": "t38_overlap_vs_existing_families.json",
+ "failures": "none in this batch (2/2 SUCCESS, run.complete PASS, no retries)",
+ "limitations": [
+  "synthetic asset + SIM_RENDER_RGB pinhole camera (PROPOSED); not OV9782/real arena",
+  "R2 diagnostic OOD target: MS1 near 1.3-2.2 m; this capture supplies near-distance training data only, no training/model/consumer result is claimed",
+  "f2 SE view has no green lamp visible (class1 keypoint is unavailable by spec, so this does not remove supervision for class1 bbox)",
+  "bbox height is a capture-side corner projection, not annotation truth; truncated frames overestimate the visible bbox height",
+  "new data only: labels pending annot2 under the frozen two-class label spec v1"
+ ],
+ "artifacts_sha256": {
+  "case_config": "eabe2169aed9063c0bbaffeae24089127c6f02b23f62b16e31f39ac9707b5998",
+  "run_manifest": "e6e0c7a8a4aa9169a1589279fe8df139bef356059472719189ae35a199d126c4",
+  "run_complete": "05db34dfd3dd57bc3283d21dd54fcfe64609d184c07cdb7ddf427cf8f7d60012",
+  "sensor_observations": "fe4cf5152740707ad457d582d615cb8b68628efecad3b46fb6e27451f9e1fd8c",
+  "frame_conditions": "2fdd8ea0c408eada5db1c5011647b738bb5b302488a91493b85bb820db187b54",
+  "pool_selection": "48304e1a979cfb1ae03cfb19ba5674e9100c02a4d72f8dd00ad3940654f0df9d"
+ }
+}

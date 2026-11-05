@@ -39,6 +39,12 @@ dist/
 /docs/reports/perception/annotation_verify_20261104/pilot/identity_t25/*.png
 /docs/reports/perception/capture_dev_20261104/*.log
 
+# Large annotation contact sheets stay outside version control
+/docs/reports/perception/annotation_verify_20261104/pilot/**/*.png
+
+# Run logs are evidence pointers only, not committed
+/docs/reports/**/*.log
+
 # Local editor and operating-system files
 .vscode/settings.json
 .DS_Store

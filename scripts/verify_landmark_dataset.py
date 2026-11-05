@@ -207,6 +207,21 @@ DATASETS = [
                     'failed (CUDA OOM) and the pilot poses are unconfirmed, so '
                     'v5 EXCLUDES this dataset; keep it pending for a later '
                     'freeze only after capture confirmation'},
+    {'dataset': 'lm_two_class_train_20261105_sensor',
+     'run': 'lm_two_class_train_20261105',
+     'role': 'two_class_train',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v6',
+     'description': 'T30 two-class training capture: 8 new independent '
+                    'families covering tower alone near/mid/far/edge, MS1 '
+                    'alone near/far+trunc, same-frame tower+MS1, target '
+                    'absent; training-only'},
+    {'dataset': 'lm_two_class_near_ms1_20261105_sensor',
+     'run': 'lm_two_class_near_ms1_20261105',
+     'role': 'two_class_train_near_ms1',
+     'in_inventory': False, 'empty_capture': False, 'introduced_in': 'v6_2',
+     'description': 'T38 near-MS1 supplement: 2 new independent families '
+                    '(MS1 alone near 1.3-2.2 m, tower out of FOV, SW/SE '
+                    'views); training-only, v6.2'},
 ]
 
 #: dataset episode-id -> group id.  Every episode must be mapped exactly once.
@@ -285,6 +300,20 @@ EPISODE_GROUPS = {
     'lm_dev_identity_capture_t25_20261104_sensor': {
         'lmf_devid_mutual_overlap_0': 'g_devid_mutual_overlap',
         'lmf_devid_ms1_far_0': 'g_devid_ms1_far',
+    },
+    'lm_two_class_train_20261105_sensor': {
+        'lmf_t30_f1_tower_near_alone_0': 'g_t30_f1_tower_near_alone',
+        'lmf_t30_f2_tower_mid_alone_0': 'g_t30_f2_tower_mid_alone',
+        'lmf_t30_f3_tower_far_alone_0': 'g_t30_f3_tower_far_alone',
+        'lmf_t30_f4_tower_edge_trunc_0': 'g_t30_f4_tower_edge_trunc',
+        'lmf_t30_f5_ms1_near_alone_0': 'g_t30_f5_ms1_near_alone',
+        'lmf_t30_f6_ms1_far_trunc_0': 'g_t30_f6_ms1_far_trunc',
+        'lmf_t30_f7_both_near_far_0': 'g_t30_f7_both_near_far',
+        'lmf_t30_f8_target_absent_neg_0': 'g_t30_f8_target_absent_neg',
+    },
+    'lm_two_class_near_ms1_20261105_sensor': {
+        'lmf_t38_f1_ms1_near_north_0': 'g_t38_f1_ms1_near_north',
+        'lmf_t38_f2_ms1_near_se_0': 'g_t38_f2_ms1_near_se',
     },
 }
 
@@ -531,6 +560,81 @@ GROUP_DEFS = [
      'route': 'far MS1 (about 8-12 m), green visibility recorded',
      'notes': 'T25 far-MS1 development case; TINY/small-target identity '
               'reporting must record UNKNOWN where green is unreadable'},
+    # --- T30 two-class training families (v6, train) ---
+    {'group_id': 'g_t30_f1_tower_near_alone',
+     'family_id': 'fm_t30_f1_tower_near_alone',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'tower alone near 1.5-3 m',
+     'notes': 'T30 two-class training family'},
+    {'group_id': 'g_t30_f2_tower_mid_alone',
+     'family_id': 'fm_t30_f2_tower_mid_alone',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'tower alone mid 3-6 m',
+     'notes': 'T30 two-class training family'},
+    {'group_id': 'g_t30_f3_tower_far_alone',
+     'family_id': 'fm_t30_f3_tower_far_alone',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'tower alone far 8-12 m',
+     'notes': 'T30 two-class training family'},
+    {'group_id': 'g_t30_f4_tower_edge_trunc',
+     'family_id': 'fm_t30_f4_tower_edge_trunc',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'tower alone near + edge truncation',
+     'notes': 'T30 two-class training family'},
+    {'group_id': 'g_t30_f5_ms1_near_alone',
+     'family_id': 'fm_t30_f5_ms1_near_alone',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'MS1 alone near/mid, tower out of FOV',
+     'notes': 'T30 two-class training family; class1 never maps to tower ID'},
+    {'group_id': 'g_t30_f6_ms1_far_trunc',
+     'family_id': 'fm_t30_f6_ms1_far_trunc',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'MS1 alone far + edge truncation',
+     'notes': 'T30 two-class training family; class1 never maps to tower ID'},
+    {'group_id': 'g_t30_f7_both_near_far',
+     'family_id': 'fm_t30_f7_both_near_far',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': 't30_both', 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'tower+MS1 same frame, near-to-far, partial overlap',
+     'notes': 'T30 two-class training family; same-frame rule applies'},
+    {'group_id': 'g_t30_f8_target_absent_neg',
+     'family_id': 'fm_t30_f8_target_absent_neg',
+     'dataset': 'lm_two_class_train_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'target absent negative',
+     'notes': 'T30 two-class training family; explicit negative'},
+    {'group_id': 'g_t38_f1_ms1_near_north',
+     'family_id': 'fm_t38_f1_ms1_near_north',
+     'dataset': 'lm_two_class_near_ms1_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6_2',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'MS1 alone near 1.4-1.8 m from north viewpoint; tower outside '
+              'FOV (final run, pilot discarded)',
+     'notes': 'T38 near-MS1 training family; class1 only, never maps to '
+              'central tower ID'},
+    {'group_id': 'g_t38_f2_ms1_near_se',
+     'family_id': 'fm_t38_f2_ms1_near_se',
+     'dataset': 'lm_two_class_near_ms1_20261105_sensor', 'split': 'train',
+     'view_cluster': None, 'introduced_in': 'v6_2',
+     'dataset_role': 'TWO_CLASS_TRAIN',
+     'route': 'MS1 alone near 1.4-1.8 m from south-east viewpoint; tower '
+              'about 165 deg outside FOV',
+     'notes': 'T38 near-MS1 training family; class1 only, never maps to '
+              'central tower ID'},
 ]
 
 #: Named dev-split profiles.  'v1' keeps the original split; 'conservative'
@@ -570,6 +674,16 @@ PROFILE_OVERRIDES = {
         'g_devid_target_near_trunc': 'train',
         'g_devid_ms1_alone': 'train',
     },
+    # v6 keeps all T19 identity groups in VAL (two-class identity metrics) and
+    # adds the T30 two-class training families to TRAIN.
+    'v6': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+    },
+    'v6_2': {
+        'g_lm_ind_staticEtest': 'train',
+        'g_geo_staticE': 'train',
+    },
 }
 PROFILE_DESCRIPTIONS = {
     'v1': 'val = north corridor family + E static test viewpoint cluster '
@@ -593,6 +707,13 @@ PROFILE_DESCRIPTIONS = {
           'target_near_trunc / ms1_alone move to TRAIN (identity positives/'
           'negatives), both_* + full_occlusion + T25 mutual-occlusion / '
           'far-MS1 stay in val_identity; no group crosses split',
+    'v6': 'two-class v6: train = v4.1 tower train + T30 two-class training '
+          'families; val = val_main (tower + MS1 add-on labels) + all T19 '
+          'identity groups for two-class identity metrics; no group crosses '
+          'split',
+    'v6_2': 'two-class v6.2: v6.1 (B-lite) data plus the T38 near-MS1 '
+            'training families; val unchanged; new snapshot v7b; v6/v6.1 are '
+            'history',
 }
 PROFILE_FREEZE_IDS = {
     'v1': 'landmark_split_freeze_v1',
@@ -602,10 +723,12 @@ PROFILE_FREEZE_IDS = {
     'v4_1': 'landmark_split_freeze_v4_1',
     'v4_2': 'landmark_split_freeze_v4_2',
     'v5': 'landmark_split_freeze_v5',
+    'v6': 'landmark_split_freeze_v6',
+    'v6_2': 'landmark_split_freeze_v6_2',
 }
 #: Profiles are cumulative: v4 includes everything introduced up to v3 and v4.
 PROFILE_ORDER = {'v1': 1, 'conservative': 2, 'v3': 3, 'v4': 4, 'v4_1': 5,
-                 'v4_2': 6, 'v5': 7, 'v5_t25': 8}
+                 'v4_2': 6, 'v5': 7, 'v5_t25': 100, 'v6': 9, 'v6_2': 11}
 
 
 def profile_includes(profile, introduced_in):
@@ -715,6 +838,26 @@ FAMILY_DEFS = [
      'description': 'identity dev: target/MS1 mutual overlap (T25)'},
     {'family_id': 'devid_ms1_far', 'introduced_in': 'v5_t25',
      'description': 'identity dev: far MS1 about 8-12 m (T25)'},
+    {'family_id': 'fm_t30_f1_tower_near_alone', 'introduced_in': 'v6',
+     'description': 'two-class train: tower near alone'},
+    {'family_id': 'fm_t30_f2_tower_mid_alone', 'introduced_in': 'v6',
+     'description': 'two-class train: tower mid alone'},
+    {'family_id': 'fm_t30_f3_tower_far_alone', 'introduced_in': 'v6',
+     'description': 'two-class train: tower far alone'},
+    {'family_id': 'fm_t30_f4_tower_edge_trunc', 'introduced_in': 'v6',
+     'description': 'two-class train: tower edge truncation'},
+    {'family_id': 'fm_t30_f5_ms1_near_alone', 'introduced_in': 'v6',
+     'description': 'two-class train: MS1 near alone'},
+    {'family_id': 'fm_t30_f6_ms1_far_trunc', 'introduced_in': 'v6',
+     'description': 'two-class train: MS1 far+truncation'},
+    {'family_id': 'fm_t30_f7_both_near_far', 'introduced_in': 'v6',
+     'description': 'two-class train: same-frame tower+MS1'},
+    {'family_id': 'fm_t30_f8_target_absent_neg', 'introduced_in': 'v6',
+     'description': 'two-class train: target absent negative'},
+    {'family_id': 'fm_t38_f1_ms1_near_north', 'introduced_in': 'v6_2',
+     'description': 'two-class train: near MS1 alone north (T38 final)'},
+    {'family_id': 'fm_t38_f2_ms1_near_se', 'introduced_in': 'v6_2',
+     'description': 'two-class train: near MS1 alone SE (T38)'},
 ]
 
 
@@ -1797,6 +1940,473 @@ def build_freeze(repo_root, profile='v1'):
                 'v5: identity-only/negative groups moved to train; both-in-'
                 'frame/occlusion/new hard cases stay val_identity; val_main '
                 'unchanged. Identity data is DEVELOPMENT, never final/sealed.')
+        elif profile == 'v6':
+            v5_path = root / 'configs/perception/landmark_split_freeze_v5.json'
+            supersedes = None
+            delta = {
+                'base_path': 'configs/perception/landmark_split_freeze_v5.json',
+                'base_canonical_sha256': None,
+                'new_groups': [],
+                'new_frames': None,
+                'split_changes': [],
+                'frame_total': sum(len(group.get('frames') or [])
+                                   for group in groups),
+                'split_frame_counts': {
+                    split: sum(len(group.get('frames') or [])
+                               for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'split_group_counts': {
+                    split: sum(1 for group in groups
+                               if group.get('split') == split)
+                    for split in SPLITS},
+                'note': 'v6 adds the T30 two-class training families to train '
+                        'and keeps all T19 identity groups in val for two-class '
+                        'identity/class1 metrics; val_main unchanged; no group '
+                        'crosses split',
+            }
+            v5_splits = {}
+            if v5_path.is_file():
+                v5_document = load_json(v5_path)
+                supersedes = {
+                    'path': 'configs/perception/landmark_split_freeze_v5.json',
+                    'canonical_sha256': freeze_sha256(v5_document),
+                    'reason': 'v6 adds the T30 two-class training families and '
+                              'returns the three T19 identity-only groups to val '
+                              'so the two-class identity channel can be '
+                              'evaluated on all 7 identity cases',
+                }
+                delta['base_canonical_sha256'] = freeze_sha256(v5_document)
+                for split in SPLITS:
+                    for group_id in (v5_document.get('splits') or {}).get(
+                            split) or []:
+                        v5_splits[group_id] = split
+                v5_group_ids = {group['group_id']
+                                for group in v5_document.get('groups') or []}
+                v6_group_ids = {group['group_id'] for group in groups}
+                delta['new_groups'] = sorted(v6_group_ids - v5_group_ids)
+                v5_frame_total = sum(len(group.get('frames') or [])
+                                     for group in
+                                     v5_document.get('groups') or [])
+                delta['new_frames'] = delta['frame_total'] - v5_frame_total
+                for group in groups:
+                    previous = v5_splits.get(group['group_id'])
+                    if previous and previous != group.get('split'):
+                        delta['split_changes'].append({
+                            'group_id': group['group_id'],
+                            'from': previous,
+                            'to': group.get('split'),
+                        })
+            freeze['supersedes'] = supersedes
+            freeze['delta_from_v5'] = delta
+            annotation_lists = _annot2_alignment(
+                root, groups,
+                ignore_prefixes=('lmf_devid_', 'lmf_t30_'))
+            freeze['annotation_frame_lists'] = annotation_lists
+            if annotation_lists['status'] != 'PASS':
+                raise SystemExit(
+                    'annot2 train/val frame lists are not consistent with the '
+                    'v6 split: %d mismatches, %d unresolved'
+                    % (len(annotation_lists['mismatches']),
+                       len(annotation_lists['unresolved_frames'])))
+            validation_entry = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_val_validation163.json')
+            identity_labels = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_identity_dev.json')
+            val_ms1_entry = _file_entry_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_val_main_ms1.json')
+            val_ms1_counts = {}
+            if val_ms1_entry:
+                ms1_doc = load_json(root / val_ms1_entry['path'])
+                ms1_frames = ms1_doc.get('frames') or []
+                ms1_counts = {
+                    'frames': len(ms1_frames),
+                    'ms1_present': 0,
+                    'same_frame_both': 0,
+                    'truncated': 0,
+                    'far_small_flagged': 0,
+                }
+                for frame in ms1_frames:
+                    if frame.get('ms1_present'):
+                        ms1_counts['ms1_present'] += 1
+                        if frame.get('tower_present'):
+                            ms1_counts['same_frame_both'] += 1
+                        if frame.get('ms1_truncated_edges'):
+                            ms1_counts['truncated'] += 1
+                        if str(frame.get('gt_uncertainty') or '').startswith(
+                                'FAR_SMALL'):
+                            ms1_counts['far_small_flagged'] += 1
+                val_ms1_counts = ms1_counts
+            # T35 risk: v4.1 training inputs with projected MS1 >=8px must carry
+            # a class1 addendum or an explicit INSTANCE_UNRESOLVED entry.
+            risk_entry = _json_if_exists(
+                root, 'docs/reports/perception/posteval_20261104/'
+                      'V41_UNLABELED_MS1_RISK_20261105.json')
+            v41_sidecar = (root / 'outputs/landmark_train/dataset/dev_v4_1/'
+                                  'sidecars/train_sidecar.jsonl')
+            v41_included = set()
+            if v41_sidecar.is_file():
+                for line in v41_sidecar.read_text(
+                        encoding='utf-8').splitlines():
+                    if not line.strip():
+                        continue
+                    row = json.loads(line)
+                    if row.get('included_in_training'):
+                        frame_id = (row.get('frame_id') or
+                                    row.get('image') or '')
+                        v41_included.add(Path(str(frame_id)).name)
+            affected_ms1_frames = []
+            if risk_entry:
+                for frame in risk_entry[0].get('frames') or []:
+                    frame_id = Path(str(frame.get('frame_id') or '')).name
+                    if (frame.get('ms1_visible') and
+                            frame_id in v41_included):
+                        affected_ms1_frames.append(frame_id)
+            addendum_candidates = []
+            for path in sorted(
+                    (root / 'outputs/perception/dev_annotations_20261104')
+                    .rglob('*.json')):
+                name = path.name.lower()
+                if ('addend' not in name and 'v41' not in name):
+                    continue
+                if 'val_main' in name:
+                    continue
+                entry = _file_entry_if_exists(
+                    root, str(path.relative_to(root)).replace('\\', '/'))
+                if entry:
+                    addendum_candidates.append(entry)
+            addendum_gate = {
+                'affected_frames': len(affected_ms1_frames),
+                'addendum_files': addendum_candidates,
+                'frames_with_class1': 0,
+                'frames_with_instance_unresolved': 0,
+                'missing': [],
+                'status': ('A_EXCLUSION_APPLIED' if not addendum_candidates
+                           else 'PASS'),
+            }
+            if addendum_candidates:
+                coverage = {}
+                for entry in addendum_candidates:
+                    document = load_json(root / entry['path'])
+                    frames = (document.get('frames')
+                              or document.get('annotations') or [])
+                    for frame in frames:
+                        frame_id = Path(str(frame.get('frame_id') or '')).name
+                        classes = [item.get('class')
+                                   for item in frame.get('instances') or []
+                                   if isinstance(item, dict)]
+                        has_class1 = (1 in classes or
+                                      bool(frame.get('ms1_present')))
+                        unresolved = any(
+                            str(item.get('status')
+                                or item.get('resolution') or '').upper()
+                            == 'INSTANCE_UNRESOLVED'
+                            for item in frame.get('instances') or []
+                            if isinstance(item, dict))
+                        unresolved = unresolved or bool(
+                            frame.get('instance_unresolved')
+                            or frame.get('ms1_instance_unresolved'))
+                        unresolved = unresolved or (
+                            str(frame.get('resolution') or '').upper()
+                            == 'INSTANCE_UNRESOLVED')
+                        if has_class1:
+                            coverage[frame_id] = 'class1'
+                        elif unresolved and frame_id not in coverage:
+                            coverage[frame_id] = 'INSTANCE_UNRESOLVED'
+                for frame_id in affected_ms1_frames:
+                    state = coverage.get(frame_id)
+                    if state == 'class1':
+                        addendum_gate['frames_with_class1'] += 1
+                    elif state == 'INSTANCE_UNRESOLVED':
+                        addendum_gate['frames_with_instance_unresolved'] += 1
+                    else:
+                        addendum_gate['missing'].append(frame_id)
+                if addendum_gate['missing']:
+                    addendum_gate['status'] = 'FAIL'
+                    raise SystemExit(
+                        'two-class MS1 addendum gate FAIL: %d v4.1 frames with '
+                        'projected MS1 >=8px lack class1/INSTANCE_UNRESOLVED '
+                        '(first: %s)'
+                        % (len(addendum_gate['missing']),
+                           addendum_gate['missing'][:3]))
+            identity_doc = _json_if_exists(
+                root, 'outputs/perception/dev_annotations_20261104/'
+                      'labels_identity_dev.json')
+            per_case_labels = {}
+            if identity_doc:
+                for item in (identity_doc[0].get('annotations')
+                             or identity_doc[0].get('labels') or []):
+                    case = str(item.get('frame_id', '')).split(
+                        '-follow_only')[0]
+                    per_case_labels[case] = per_case_labels.get(case, 0) + 1
+            identity_groups = {}
+            for group in groups:
+                if not str(group.get('dataset')).startswith(
+                        'lm_dev_identity'):
+                    continue
+                identity_groups[group['group_id']] = {
+                    'split': group.get('split'),
+                    'family_id': group.get('family_id'),
+                    'frames': len(group.get('frames') or []),
+                    'accepted': len([frame for frame in
+                                     group.get('frames') or []
+                                     if frame.get('accepted')]),
+                }
+            identity_val_groups = sorted(
+                group_id for group_id, info in identity_groups.items()
+                if info['split'] == 'val')
+            identity_labels_val = sum(
+                per_case_labels.get(episode, 0)
+                for group in groups
+                for episode in group.get('episodes') or []
+                if group['group_id'] in identity_val_groups)
+            two_class_label_files = []
+            two_class_aux = []
+            for base in (
+                    root / 'outputs/perception/dev_annotations_20261104',
+                    root / 'outputs/perception/dev_annotations_20261105'):
+                if not base.is_dir():
+                    continue
+                for path in sorted(base.rglob('labels_v1.json')):
+                    if 'two_class' not in str(path):
+                        continue
+                    entry = _file_entry_if_exists(
+                        root, str(path.relative_to(root)).replace('\\', '/'))
+                    if entry:
+                        two_class_label_files.append(entry)
+                for name in ('qa_v1.json', 'qa_full.json', 'selection.json',
+                             'selection_v1.json', 'manifest.json'):
+                    for path in sorted(base.rglob(name)):
+                        if 'two_class' not in str(path):
+                            continue
+                        entry = _file_entry_if_exists(
+                            root, str(path.relative_to(root)).replace('\\', '/'))
+                        if entry:
+                            two_class_aux.append(entry)
+            two_class_counts = {
+                'files': len(two_class_label_files),
+                'frames': 0,
+                'class0_instances': 0,
+                'class1_instances': 0,
+                'same_frame_instances': 0,
+                'by_group': {},
+                'unresolved_frames': [],
+            }
+            episode_group = {}
+            for group in groups:
+                for episode in group.get('episodes') or []:
+                    episode_group[episode] = group['group_id']
+            for entry in two_class_label_files:
+                doc = load_json(root / entry['path'])
+                frames = (doc.get('frames') or doc.get('annotations') or [])
+                for frame in frames:
+                    two_class_counts['frames'] += 1
+                    frame_id = str(frame.get('frame_id') or '')
+                    parsed = parse_frame_id(frame_id) or {}
+                    group_id = episode_group.get(parsed.get('episode_id'))
+                    if group_id not in {group['group_id'] for group in groups}:
+                        two_class_counts['unresolved_frames'].append(frame_id)
+                        continue
+                    bucket = two_class_counts['by_group'].setdefault(
+                        group_id, {'frames': 0, 'class0': 0, 'class1': 0,
+                                   'same_frame': 0})
+                    bucket['frames'] += 1
+                    instances = frame.get('instances') or []
+                    classes = [int(item.get('class', -1))
+                               for item in instances]
+                    c0 = classes.count(0)
+                    c1 = classes.count(1)
+                    two_class_counts['class0_instances'] += c0
+                    two_class_counts['class1_instances'] += c1
+                    bucket['class0'] += c0
+                    bucket['class1'] += c1
+                    if c0 and c1:
+                        two_class_counts['same_frame_instances'] += 1
+                        bucket['same_frame'] += 1
+            # Plan A: exclude the 69 v4.1 training inputs whose projected MS1 is
+            # >=8 px (diag T35 risk list); addendum (plan B) would be v6.1.
+            v41_risk_entry = _file_entry_if_exists(
+                root, 'docs/reports/perception/dataset_freeze_20261104/'
+                      'two_class_v41_ms1_risk_20261105.json')
+            v41_exclusion = {'status': 'NOT_APPLIED', 'excluded_frames': [],
+                             'excluded_count': 0, 'included_frames': 436,
+                             'rule': None}
+            if v41_risk_entry:
+                risk_doc = load_json(root / v41_risk_entry['path'])
+                excluded = [item.get('frame_id')
+                            for item in risk_doc.get('frames') or []]
+                v41_exclusion = {
+                    'status': 'APPLIED_A_EXCLUSION',
+                    'risk_evidence': v41_risk_entry,
+                    'excluded_frames': excluded,
+                    'excluded_count': len(excluded),
+                    'included_frames': 436 - len(excluded),
+                    'rule': 'exclude every v4.1 actual training input whose '
+                            'projected map-native MS1 height is >=8 px from the '
+                            'two-class training pass; the excluded frames stay '
+                            'in the v6 freeze as tower data but MUST NOT be used '
+                            'as two-class training samples until a class1 '
+                            'addendum exists (then v6.1; v6 stays frozen)',
+                    'addendum_plan_b': 'PENDING_V6_1_IF_DELIVERED',
+                }
+            protocol_entry = _file_entry_if_exists(
+                root, 'configs/perception/landmark_two_class_protocol_v1.json')
+            label_spec_entry = _file_entry_if_exists(
+                root, 'configs/perception/landmark_two_class_label_spec_v1.json')
+            # T30 capture-level training pool (373 accepted frames selected by a
+            # rule frozen BEFORE capture; not by detector score).
+            t30_dir = ('docs/reports/perception/capture_dev_20261104/'
+                       'two_class_train_20261105')
+            t30_conditions = _json_if_exists(
+                root, t30_dir + '/t30_frame_conditions.json')
+            t30_selection = _file_entry_if_exists(
+                root, t30_dir + '/t30_pool_selection.json')
+            t30_provenance = _file_entry_if_exists(
+                root, t30_dir + '/t30_provenance_20261105.json')
+            t30_dedup = _file_entry_if_exists(
+                root, t30_dir + '/t30_dedup_vs_existing.json')
+            t30_overlap = _file_entry_if_exists(
+                root, t30_dir + '/t30_overlap_vs_existing_families.json')
+            pool_counts = {'raw_rgb': 0, 'raw_accepted': 0, 'pool_frames': 0,
+                           'by_group': {}}
+            if t30_conditions:
+                cond_doc = t30_conditions[0]
+                cond_frames = (cond_doc.get('frames')
+                               if isinstance(cond_doc, dict) else cond_doc)
+                for frame in cond_frames or []:
+                    pool_counts['raw_rgb'] += 1
+                    if frame.get('accepted') or frame.get('gate_accepted'):
+                        pool_counts['raw_accepted'] += 1
+                    if not frame.get('in_pool'):
+                        continue
+                    pool_counts['pool_frames'] += 1
+                    episode = (frame.get('episode')
+                               or str(frame.get('frame_id') or '').split(
+                                   '-follow_only')[0])
+                    group_id = episode_group.get(episode)
+                    if group_id:
+                        bucket = pool_counts['by_group'].setdefault(
+                            group_id, 0)
+                        pool_counts['by_group'][group_id] = bucket + 1
+            freeze['two_class'] = {
+                'protocol': protocol_entry,
+                'label_spec': label_spec_entry,
+                'train_pool': {
+                    'selection': t30_selection,
+                    'frame_conditions': t30_conditions[1]
+                    if t30_conditions else None,
+                    'provenance': t30_provenance,
+                    'dedup_vs_existing': t30_dedup,
+                    'overlap_vs_existing_families': t30_overlap,
+                    'counts': pool_counts,
+                    'rule': 'pool selection was frozen before capture (keep '
+                            'i%4!=3 over the ordered sequence when raw '
+                            'accepted > 420); not selected by detector score '
+                            'or randomness; raw frames are enumerated in the '
+                            'freeze, training uses only in_pool frames',
+                    'note': 'the freeze lists all raw RGB frames of the T30 '
+                            'dataset; the 373-frame pool and the T31/T32 '
+                            'label files define the actual training subset',
+                },
+                'train_label_files': two_class_label_files,
+                'train_label_aux': two_class_aux,
+                'train_label_counts': two_class_counts,
+                'train_v41_exclusion': v41_exclusion,
+                'val_main_ms1': val_ms1_entry,
+                'val_main_ms1_counts': val_ms1_counts,
+                'v41_train_ms1_addendum_gate': addendum_gate,
+                'v41_train_ms1_risk_reference': risk_entry,
+                'note': 'two-class labels: class0 central_tower, class1 '
+                        'similar_structure_ms1 (class1 keypoint v=0 always, '
+                        'never mapped to the central tower ID)',
+            }
+            val_main_groups = []
+            for group in groups:
+                if group.get('split') != 'val':
+                    continue
+                if group['group_id'] in identity_val_groups:
+                    continue
+                val_main_groups.append(group['group_id'])
+            train_groups = sorted(group['group_id'] for group in groups
+                                  if group.get('split') == 'train')
+            freeze['splits_subset'] = {
+                'train_main': {
+                    'groups': train_groups,
+                    'role': 'development training: v4.1 tower train + reused '
+                            'exploratory + T30 two-class training families',
+                },
+                'val_main': {
+                    'groups': sorted(val_main_groups),
+                    'role': 'validation for threshold/selection (same 163 '
+                            'frame labels as v4.1/v4.2) + MS1 add-on labels',
+                },
+                'val_identity': {
+                    'groups': sorted(identity_val_groups),
+                    'role': 'identity/class1 two-class metrics; all seven T19 '
+                            'identity groups; 62 representative labels',
+                },
+            }
+            freeze['identity_split'] = {
+                'dataset_role': 'DEVELOPMENT',
+                'rule': 'whole identity case = one group; group moves only, '
+                        'never split frames of one case',
+                'train_groups': [],
+                'val_groups': identity_val_groups,
+                'groups_detail': identity_groups,
+                'labels_val_identity_frames': identity_labels_val,
+                'labels_file': identity_labels,
+                'note': 'all T19 identity groups are in val_identity for '
+                        'two-class identity/class1 metrics; no identity frames '
+                        'in train in v6',
+            }
+            freeze['annotation_label_sources'] = {
+                'train': {
+                    'dev_labelled_frames': 160,
+                    'reused_exploratory_labelled_frames': 279,
+                    'two_class_train_labelled_frames': two_class_counts['frames'],
+                    'note': 'actual two-class image<->label and instance counts '
+                            'are recorded under two_class.train_label_counts; '
+                            'do not use pool frame counts',
+                },
+                'val_main': {
+                    'frames': 163,
+                    'labels': validation_entry,
+                    'ms1_addendum': val_ms1_entry,
+                    'ms1_counts': val_ms1_counts,
+                },
+                'val_identity': {
+                    'frames': identity_labels_val,
+                    'labels': identity_labels,
+                },
+            }
+            freeze['run_snapshot_reference'] = {
+                'path': 'configs/perception/landmark_run_snapshot_v7.json',
+                'status': 'FROZEN_BY_T36_IMMUTABLE',
+                'note': 'train creates/verifies the v7 snapshot from this '
+                        'manifest at pre_train/pre_selection/post_train; any '
+                        'hash mismatch marks the run INVALID',
+            }
+            freeze['exposure_registry'] = {
+                'path': 'configs/perception/landmark_exposure_registry_v2.json',
+                'status': 'PRODUCED_SEPARATELY_WITH_ITS_OWN_VERIFY_EVIDENCE',
+            }
+            freeze['holdout_reference'] = {
+                'path': 'configs/perception/landmark_holdout_freeze_v3.json',
+                'status': 'SPEC_FROZEN_NOT_TRIGGERED',
+                'note': 'two-class holdout spec frozen; triggered only after '
+                        'the two-class consumer development-to-holdout gate '
+                        'passes',
+            }
+            freeze['identity_cases_pending'] = False
+            freeze['notes'].append(
+                'v6: T30 two-class training families in train; all T19 identity '
+                'groups in val_identity; val_main + MS1 add-on labels; v3 '
+                'holdout spec frozen but NOT_TRIGGERED. Two-class is limited '
+                'domain identity, never open-set; class1 never maps to the '
+                'central tower ID.')
         else:
             v1_path = root / DEFAULT_FREEZE
             supersedes = None

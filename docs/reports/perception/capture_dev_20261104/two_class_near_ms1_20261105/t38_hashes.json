@@ -1,0 +1,146 @@
+{
+ "final_files": [
+  {
+   "path": "T38_NEAR_MS1_CAPTURE_20261105.md",
+   "sha256": "4f83560b433f45f9a8ad4459a9071ad115bec3af93f8c05f58dbc01681c09d65",
+   "bytes": 7762
+  },
+  {
+   "path": "t38_cases_manifest.json",
+   "sha256": "5c34ab2edf1092ed193b658f192d43169a44bfb7615773aa16a51f39621e31f3",
+   "bytes": 8640
+  },
+  {
+   "path": "t38_complete.json",
+   "sha256": "e2105e1d2d3fec0bed9260bbbbed273f7b3db577227c3a69488ff03096b7dc6a",
+   "bytes": 194
+  },
+  {
+   "path": "t38_dedup_vs_existing.json",
+   "sha256": "9da66472a19e5306ae9b6db6daf6e236e0f3ba9f1d3a0d8232a79338aff0a1fe",
+   "bytes": 1052
+  },
+  {
+   "path": "t38_episode_conditions.json",
+   "sha256": "febb8ee4d95fa949cac23ce35ec84bde43394271968c4eb0a21f45972f75ca4b",
+   "bytes": 899
+  },
+  {
+   "path": "t38_frame_conditions.json",
+   "sha256": "a172676378e3ec19915a3bd3d9eafd900d53a5bdc5803eff093d70d006fbb449",
+   "bytes": 128181
+  },
+  {
+   "path": "t38_gui.log",
+   "sha256": "d28a9be1879841cf9218a67e668e3736af4184c590f8bdca4b37796a10e894c5",
+   "bytes": 10686
+  },
+  {
+   "path": "t38_gui_window.png",
+   "sha256": "005de2bd484d0ce0b8fd4caf44af4fc49b6c7fe9c390d63f2fb295c45da39b34",
+   "bytes": 552667
+  },
+  {
+   "path": "t38_manifest.json",
+   "sha256": "057c7f7d66c929c51b10d13ec15e02ca78b82f1c46e8d3326086c0c746af2e32",
+   "bytes": 15652
+  },
+  {
+   "path": "t38_overlap_vs_existing_families.json",
+   "sha256": "0e0b7ef14d187cb8945f0f02cac76c2efbaf739ad63ff2c38b3224e3a597a183",
+   "bytes": 706
+  },
+  {
+   "path": "t38_pool_selection.json",
+   "sha256": "9aa86768a8f5b35f9b6a274b9685aba61010c01ec1d2041ebcdc370044c3315a",
+   "bytes": 5857
+  },
+  {
+   "path": "t38_provenance_20261105.json",
+   "sha256": "6840fb552a962fc629da9f32aa8a1aab08dac2488f389dfd07db102b7f045f50",
+   "bytes": 8945
+  },
+  {
+   "path": "t38_sensor_summary.json",
+   "sha256": "0a0ebdb4e3bfcbecd723078dfe9ae8cbc957111895470c0ff36b46934bfa8171",
+   "bytes": 15305
+  },
+  {
+   "path": "t38_summary.json",
+   "sha256": "d137dd18681fac0ecad6f8f828fc1c7045253070a0c3c57f2f6895eab94181e5",
+   "bytes": 28150
+  }
+ ],
+ "discarded_pilot_files": [
+  {
+   "path": "pilotA_discarded/t38_cases_manifest.json",
+   "sha256": "eabe2169aed9063c0bbaffeae24089127c6f02b23f62b16e31f39ac9707b5998",
+   "bytes": 8723
+  },
+  {
+   "path": "pilotA_discarded/t38_complete.json",
+   "sha256": "05db34dfd3dd57bc3283d21dd54fcfe64609d184c07cdb7ddf427cf8f7d60012",
+   "bytes": 194
+  },
+  {
+   "path": "pilotA_discarded/t38_dedup_vs_existing.json",
+   "sha256": "7ada7a4a5e81d68ef6cb9fc4ed09b799060e086d7819b47d1ff62ed38fc8667f",
+   "bytes": 988
+  },
+  {
+   "path": "pilotA_discarded/t38_episode_conditions.json",
+   "sha256": "2ec9b574a157d43e1bcdffc4a7610e3519c2ec4817c8fd4dd21bc1b54bf32585",
+   "bytes": 898
+  },
+  {
+   "path": "pilotA_discarded/t38_frame_conditions.json",
+   "sha256": "2fdd8ea0c408eada5db1c5011647b738bb5b302488a91493b85bb820db187b54",
+   "bytes": 137784
+  },
+  {
+   "path": "pilotA_discarded/t38_gui.log",
+   "sha256": "cfbba10f018dd6c4ee801de9601721c398624f5bb867ef4a9e2ddc38c80b8a03",
+   "bytes": 10688
+  },
+  {
+   "path": "pilotA_discarded/t38_gui_window.png",
+   "sha256": "7192f8823101af7450d24b70dac91588d90dd8634fb33dd606ec52628ef24896",
+   "bytes": 527700
+  },
+  {
+   "path": "pilotA_discarded/t38_hashes.json",
+   "sha256": "1ab5c5fcf49088f26c23c6447349e6d87b3b37faa5da1b9ba461a03fc2b6cdcb",
+   "bytes": 3177
+  },
+  {
+   "path": "pilotA_discarded/t38_manifest.json",
+   "sha256": "e6e0c7a8a4aa9169a1589279fe8df139bef356059472719189ae35a199d126c4",
+   "bytes": 15628
+  },
+  {
+   "path": "pilotA_discarded/t38_overlap_vs_existing_families.json",
+   "sha256": "85f7ccc1242da6aabdfad1567abb9501603dd9e6542b06ba893aabd8e6393e42",
+   "bytes": 695
+  },
+  {
+   "path": "pilotA_discarded/t38_pool_selection.json",
+   "sha256": "48304e1a979cfb1ae03cfb19ba5674e9100c02a4d72f8dd00ad3940654f0df9d",
+   "bytes": 6025
+  },
+  {
+   "path": "pilotA_discarded/t38_provenance_20261105.json",
+   "sha256": "d1c2c57ac43050b672558de29450e4da5944ecad3ff8f0a4d789a538530e4b72",
+   "bytes": 6902
+  },
+  {
+   "path": "pilotA_discarded/t38_sensor_summary.json",
+   "sha256": "a1a784c5afee1df8c8dc453dc52da756666aa2515e813c0939a4d459024d5ba5",
+   "bytes": 15878
+  },
+  {
+   "path": "pilotA_discarded/t38_summary.json",
+   "sha256": "32b2876d3e6b426f17674c2632b84591938d4bf6fa6d3c064268afa5c5375301",
+   "bytes": 29164
+  }
+ ]
+}

@@ -1,0 +1,155 @@
+{
+  "schema_version": "dsh.landmark_export.v1",
+  "status": "PILOT_ONLY_NOT_SELECTED_VALIDATED",
+  "created_at": "2026-11-05",
+  "purpose": "Reproducible host-side ONNX export and three-path parity policy for the two-class identity channel (central_tower vs similar_structure_ms1). Prepared before the selected two-class weights exist; the weight sha/class table/preprocessing/decoder are bound at run time and recorded in evidence.",
+  "scope": {
+    "model": "YOLOv8n-pose two-class (nc=2), selected weights from the two-class 3-seed phase (model_freeze_v3) - PENDING",
+    "paths": [
+      "pt_square",
+      "onnx_native_square",
+      "raw_ort_square"
+    ],
+    "legacy_paths_for_explanation": [
+      "pt_default_rect",
+      "onnx_native_default"
+    ],
+    "out_of_scope": [
+      "RKNN conversion",
+      "board latency",
+      "accuracy certification",
+      "control/PPO",
+      "holdout evaluation"
+    ]
+  },
+  "export": {
+    "source_weights": "outputs/landmark_train/runs/two_class_pilot_v7b/seed0/train_seed0/weights/last.pt",
+    "source_weights_sha256": "64ac38229adc658b96213b2a19a3ff84b39839c8d234a09233cc17df9cbeabdc",
+    "output": "outputs/perception/onnx_parity_20261105/t37_two_class/exports/two_class_pilot_v7b_last_opset18.onnx",
+    "format": "onnx",
+    "opset": 18,
+    "imgsz": 640,
+    "simplify": true,
+    "dynamic": false,
+    "device": "cpu",
+    "num_classes": 2,
+    "class_table": {
+      "0": "central_tower",
+      "1": "similar_structure_ms1"
+    },
+    "expected_input_shape": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "expected_output_channels": 9,
+    "expected_output_layout": "(1, 9, 8400) = [cx, cy, w, h, score_class0, score_class1, kpt_x, kpt_y, kpt_conf]; class argmax over channels 4..5",
+    "expected_keypoint_count": 1,
+    "keypoint_table": {
+      "0": "green_roof_light (v=1 visible / v=0 unavailable)",
+      "1": "NOT_AVAILABLE (v=0 always; no bearing; bbox centre forbidden)"
+    },
+    "overwrite_existing": false,
+    "verification": {
+      "raw_torch_vs_onnxruntime_max_abs_diff_relative": 0.001,
+      "raw_relative_note": "absolute max diff is dominated by the coordinate channels whose values span 0..640; 0.001 relative = 0.64 input px",
+      "class_argmax_mismatch_max": 0,
+      "class_argmax_note": "per-anchor argmax over the two class scores between torch and onnxruntime must match on every compared canvas; any mismatch is a fail, not a warning",
+      "expected_output_channels": 9,
+      "opset_expected": 18
+    }
+  },
+  "parity": {
+    "paths": [
+      "pt_square",
+      "onnx_native_square",
+      "raw_ort_square"
+    ],
+    "table": "parity.rows are appended under t37_two_class in docs/reports/perception/onnx_parity_20261104.json; the T14/T29 top-level sections are not modified",
+    "preprocessing": "one shared square center letterbox: auto=False, stride=32, pad=114, imgsz=640; every path consumes the same canvas PNG / float tensor",
+    "decoding": {
+      "num_classes": 2,
+      "class_table": {
+        "0": "central_tower",
+        "1": "similar_structure_ms1"
+      },
+      "keypoint_count": 1,
+      "class1_keypoint": "never emitted; raw keypoint columns for class1 are ignored; no bearing for class1",
+      "solver": "src/boom_birds/evaluation/landmark_onnx.py decode_two_class_rows / decode_ultralytics_two_class_result"
+    },
+    "nms": {
+      "conf_thres": "configurable; default 0.01 so the frozen tau_det is applied once in decode",
+      "iou_thres": 0.7,
+      "max_det": 300,
+      "agnostic": false,
+      "class_aware": true,
+      "max_wh": 7680,
+      "note": "class-aware offsets (class*max_wh) reproduce ultralytics multi-class NMS: overlapping boxes of different classes are both kept"
+    },
+    "thresholds_file": "configs/perception/landmark_model_freeze_v3.json",
+    "thresholds_expected_source": "frozen two-class model/thresholds; values are read at run time from the freeze file, not invented here",
+    "tolerances": {
+      "raw_max_abs_diff_relative": 0.001,
+      "box_max_px": 0.5,
+      "keypoint_max_px": 0.5,
+      "class_argmax_mismatch_max": 0,
+      "decision_flip_count_max": 0,
+      "bearing_flip_tolerance_deg": 0.01,
+      "note": "primary three-path parity requires zero flips on all two-class decision layers; legacy preprocessing mismatch is reported separately"
+    },
+    "sample_policy": {
+      "val_frames_max": 163,
+      "final_frames_max": 0,
+      "identity_frames_max": 62,
+      "near_threshold_frames_max": 16,
+      "near_threshold_window": 0.05,
+      "synthetic_base_frames": 0,
+      "scenarios": [
+        "val_main",
+        "identity_ms1_only",
+        "identity_same_frame",
+        "near_far",
+        "edge_truncation",
+        "target_absent",
+        "near_threshold",
+        "aspect",
+        "multi_candidate"
+      ],
+      "source_policy": "val_main 163 + T19 identity 7 groups/190 frames + old exploratory pool read-only if needed; no holdout read",
+      "sources": {
+        "val_main_two_class_truth": {
+          "path": "outputs/perception/two_class_eval_20261105/pilot_v61/val_main_two_class_pilot_truth.json",
+          "status": "PILOT_DERIVED_EVAL_DOC_NOT_FROZEN",
+          "frames": 163
+        },
+        "identity_two_class_truth": {
+          "path": "outputs/perception/two_class_eval_20261105/identity62_two_class_truth.json",
+          "status": "PROVISIONAL_DIAGNOSTIC_ONLY_BUILT_FROM_DEVELOPMENT_POOL",
+          "frames": 62
+        }
+      }
+    },
+    "outputs": {
+      "evidence_json": "docs/reports/perception/onnx_parity_20261104.json",
+      "run_dir": "outputs/perception/onnx_parity_20261105/t37_two_class"
+    },
+    "thresholds_note": "model_freeze_v3 does not exist for a rejected pilot; the run uses the T34 evaluator defaults tau_det=0.25/tau_margin=0.10/tau_kpt=0.5/tau_iou=0.3 (+tau_px=3.0 for the shared 2D diagnostic) and records them as PROPOSED_PILOT_DEFAULTS_NOT_FROZEN"
+  },
+  "environment_pins": {
+    "python": "3.11.9",
+    "torch": "2.7.0+cu128",
+    "ultralytics": "8.2.0",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.31.1",
+    "numpy": "1.26.4",
+    "onnxsim": "0.8.1",
+    "note": "the Isaac venv stays untouched; the isolated .venv/landmark-train is used for the run"
+  },
+  "license_and_usage": {
+    "license_route": "internal bounded research authorised by the user; distribution undecided; AGPL obligations unresolved; this is not a legal conclusion",
+    "usage_boundary": "host-side parity evidence only; no RK3576/board, no accuracy/identity certification, no navigation/Gate claim"
+  },
+  "candidate_label": "NOT_SELECTED_VALIDATED_PILOT_ONLY",
+  "candidate_note": "R2 pilot last checkpoint (two_class_pilot_v7b/seed0); the pilot gate FAILED (same-frame disambiguation 0.50 < 0.60), so this is NOT a selected or validated model. T37 evidence is host-side ONNX/decoder parity only and must not be read as effect/identity/board evidence."
+}

@@ -1,0 +1,33 @@
+{
+ "pool_size": 102,
+ "unique_sha": 102,
+ "within_pool_duplicates": 0,
+ "existing_runs_checked": 24,
+ "overlaps": {
+  "debug_all6_sensor": 0,
+  "debug_static4_sensor": 0,
+  "debug_static5_sensor": 0,
+  "debug_static6_sensor": 0,
+  "debug_static7_sensor": 0,
+  "formal6_sensor": 0,
+  "geo_test_sensor": 0,
+  "gui_evidence2_sensor": 0,
+  "gui_evidence_sensor": 0,
+  "lm_dev_capture_20261104_sensor": 0,
+  "lm_dev_hn_capture_20261104_sensor": 0,
+  "lm_dev_identity_capture_20261104_sensor": 0,
+  "lm_dev_identity_capture_t25_20261104_formal_sensor": 0,
+  "lm_dev_identity_capture_t25_20261104_sensor": 0,
+  "lm_dev_smoke2_20261104_sensor": 0,
+  "lm_dev_smoke_hn1b_20261104_sensor": 0,
+  "lm_devid_smoke_20261104_sensor": 0,
+  "lm_final_candidate_20261104_sensor": 0,
+  "lm_final_smoke_20261104_sensor": 0,
+  "lm_independence_sensor": 0,
+  "lm_pilot_north_sensor": 0,
+  "lm_pilot_sensor": 0,
+  "lm_two_class_near_ms1_20261105_pilotA_discarded_sensor": 0,
+  "lm_two_class_train_20261105_sensor": 0
+ },
+ "zero_overlap": true
+}

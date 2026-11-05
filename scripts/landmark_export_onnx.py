@@ -150,6 +150,24 @@ def export_onnx(weights_path, output_path, *, config=None, opset=None,
     started = time.perf_counter()
     from ultralytics import YOLO
     exporter = YOLO(str(weights_path), task='pose')
+    model_names = {int(key): str(value)
+                   for key, value in (getattr(exporter, 'names', {}) or {}).items()}
+    expected_num_classes = export_cfg.get('num_classes')
+    if expected_num_classes is not None:
+        expected_num_classes = int(expected_num_classes)
+        if expected_num_classes != len(model_names):
+            raise ValueError(
+                'config export.num_classes=%d but the checkpoint declares %d '
+                'classes (%r); refusing to export an unbound class table'
+                % (expected_num_classes, len(model_names), model_names))
+    configured_table = export_cfg.get('class_table')
+    if configured_table:
+        normalized = {int(key): str(value)
+                      for key, value in configured_table.items()}
+        if normalized != model_names:
+            raise ValueError('config class_table %r does not match the '
+                             'checkpoint classes %r'
+                             % (normalized, model_names))
     exported = Path(str(exporter.export(format='onnx', opset=opset,
                                         imgsz=imgsz, simplify=simplify,
                                         device=device)))
@@ -160,9 +178,23 @@ def export_onnx(weights_path, output_path, *, config=None, opset=None,
     model_onnx = onnx.load(str(output_path))
     opsets = {(item.domain or 'ai.onnx'): int(item.version)
               for item in model_onnx.opset_import}
+    expected_channels = export_cfg.get('expected_output_channels')
+    actual_channels = None
+    if evidence_outputs := [tensor.type.tensor_type.shape.dim
+                            for tensor in model_onnx.graph.output]:
+        dims = [dim.dim_value for dim in evidence_outputs[0]]
+        if len(dims) >= 2:
+            actual_channels = int(dims[1])
+    channels_ok = (expected_channels is None or actual_channels is None
+                   or int(actual_channels) == int(expected_channels))
     evidence = {
         'schema_version': 'dsh.landmark_onnx_export.v1',
         'status': 'EXPORTED_HOST_SIDE',
+        'classes': {str(key): value for key, value in model_names.items()},
+        'num_classes': len(model_names),
+        'output_channels': {'actual': actual_channels,
+                            'expected': expected_channels,
+                            'ok': channels_ok},
         'generated_at': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
         'generated_by': 'scripts/landmark_export_onnx.py',
         'weights': {'path': str(weights_path),
@@ -192,7 +224,9 @@ def export_onnx(weights_path, output_path, *, config=None, opset=None,
         'requested': {'opset': opset, 'imgsz': imgsz, 'simplify': simplify,
                       'device': device},
     }
-    verdict = {'opset_expected': opsets.get('ai.onnx') == opset}
+    verdict = {'opset_expected': opsets.get('ai.onnx') == opset,
+               'class_table_ok': True,
+               'output_channels_ok': bool(channels_ok)}
     if verify:
         numeric = _raw_numeric_check(weights_path, output_path, imgsz)
         verification = (config.get('export') or {}).get('verification') or {}

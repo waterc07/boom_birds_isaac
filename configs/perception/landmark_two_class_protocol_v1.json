@@ -1,0 +1,215 @@
+{
+  "schema_version": "dsh.landmark_two_class_protocol.v1",
+  "status": "PRE_REGISTERED_2026_11_05_BEFORE_TRAINING",
+  "supersedes": null,
+  "stays_within": "internal bounded research only; shadow only; no control/PPO/Gate promotion; old packages untouched",
+  "objective": "add a two-class identity channel (central tower vs verified similar structure MS1) and test whether it restores the consumer chain (identity + reference availability + horizontal bearing + fresh observation) within the new budget",
+  "classes": {
+    "0": {
+      "name": "central_tower",
+      "semantics": "central tower class evidence inside the bounded asset domain; mapping to landmark_id RMUC2027_CENTRAL_TOWER_PROPOSED requires recorded applicability assumptions and rejection rules",
+      "keypoint": "green roof-light reference point; v=1 visible, v=0 unavailable; never inferred"
+    },
+    "1": {
+      "name": "similar_structure_ms1",
+      "semantics": "verified map-native similar structure MS1 (world (3.0,4.0), z_top approx 1.78 m); this class must NEVER be mapped to the central tower landmark_id",
+      "keypoint": "no same-semantic reference point -> v=0 always; pose/keypoint loss masked; bbox centre must NOT be used as a keypoint"
+    },
+    "note": "class1 is NOT an open-set catch-all for unknown objects; a two-class model does not claim open-set identity recognition"
+  },
+  "data_spec": {
+    "spec_id": "dsh.landmark_two_class_label_spec.v1",
+    "same_frame_rule": "every visible and decidable instance of both classes must be labelled; MS1 must never be left as background in a frame where it is visible/decidable",
+    "keypoint_rules": [
+      "class0: one green roof-light keypoint; v=1 only when the reference is visible and locatable",
+      "class1: keypoint explicitly unavailable (v=0) and excluded from the keypoint loss; no guessing, no bbox-centre substitution",
+      "if a class0 reference is not visible -> keypoint v=0 and reference_available=false (refusal is correct)"
+    ],
+    "per_frame_fields": [
+      "tower_present",
+      "ms1_present",
+      "instances[class,bbox,truncation,occluded,keypoint,v,reference_available]",
+      "identity_ambiguity",
+      "gt_uncertainty",
+      "notes"
+    ],
+    "denominators": "all-domain counts retained; observable-domain reported separately; no deletion of hard frames; TINY kept in all-domain",
+    "tiny_policy": "TINY results reported separately; not used to remove frames"
+  },
+  "training_data": {
+    "train_rule": "v4.1 one-class tower train (16 groups/1772 frames) + new two-class training families captured 2026-11-05; all new two-class families are independent trajectories not used by val/T19 identity/holdout",
+    "val_rule": "val_main 163 (tower metrics; MS1 additionally labelled where visible) + T19 identity 7 groups/190 frames (62 labelled; both classes) for identity/class1 metrics; no train/val group overlap",
+    "label_audit": "actual training inputs = image<->label 1:1 counts, not pool frame counts; report per-class instance counts, per-group counts, same-frame counts",
+    "immutable": "freeze v6 split + labels + spec + protocol; snapshot manifest v7 (new, not reusing exhausted v1/v5 budgets); pre_train/pre_selection/post_train hash checks; any drift -> INVALID"
+  },
+  "recipes": {
+    "max_recipes": 2,
+    "default": "R1: direct two-class fine-tune from frozen single-class v2 weights (stage_verify_v5/seed2 last, sha 6b86ef1f) on two-class train set; same imgsz/batch/warmup/patience",
+    "second_recipe_condition": "enable R2 only on explicit pilot failure evidence (e.g. class1 recall collapse or class0 catastrophic regression) with a written cause; do not switch to larger models/segmentation without evidence",
+    "budget": {
+      "pilot_seeds": 1,
+      "pilot_epochs_max": 15,
+      "winner_seeds": [
+        0,
+        1,
+        2
+      ],
+      "winner_epochs_max": 60,
+      "complete_trainings_max": 4,
+      "extra_candidates": "not allowed"
+    }
+  },
+  "stage_gates": {
+    "note": "stage-specific; a later gate must never be used to reject an earlier stage (2026-11-04 errata)",
+    "engineering_smoke": {
+      "applies_to": "before any quality training result",
+      "conditions": [
+        "two-class label loader valid (nc=2, kpt_shape[1,3])",
+        "class1 keypoint v=0 excluded from keypoint loss, class0 keypoint supervised (verified by loss-mask test)",
+        "tiny overfit on <=20 images reduces total loss",
+        "inference identity uses predicted boxes/classes/RGB only (no GT box/position/file name/oracle region)",
+        "existing single-class interfaces remain explicitly compatible (no silent label swap)",
+        "targeted tests pass"
+      ],
+      "on_fail": "fix implementation/data defect; not evidence about the method"
+    },
+    "pilot_to_three_seed": {
+      "applies_to": "single seed <=15 epoch pilot of a recipe, evaluated on validation only, thresholds frozen before evaluation",
+      "conditions": [
+        "tower class recall (observable val_main 95) >= 0.70",
+        "MS1 class recall (identity 62 MS1 objects 35) >= 0.50",
+        "wrong central-tower claims on MS1-only frames (9) <= 1 frame",
+        "same-frame target disambiguation correct (both-visible frames denominator) >= 0.60",
+        "two-class identity precision (class0 claims correct) >= 0.95",
+        "consumer confirmed success all-positive >= 0.30 (trend; not the final gate)",
+        "bearing median <= 3.0 deg on reference-available emitted frames",
+        "tower recall not worse than frozen single-class baseline (0.821) by more than 0.08"
+      ],
+      "on_pass": "promote the winning recipe to seeds 0/1/2, <=60 epochs each",
+      "on_fail": "reject recipe; stop that recipe; do not add epochs/seeds/candidates"
+    },
+    "three_seed_report": {
+      "applies_to": "winner across seeds",
+      "rule": "report every seed, worst seed, worst condition group; selection only on validation; no consumer callback; no separate advance condition"
+    },
+    "consumer_development_to_holdout": {
+      "applies_to": "val-selected two-class model/thresholds/decoder/eval rules frozen after the 3-seed phase",
+      "conditions": [
+        "consumer confirmed success (all-positive 121) >= 0.50 (two-class identity available, not raw unvalidated claim)",
+        "identity precision (class0 claims) >= 0.95 and MS1 false central-tower claims <= 0.05 on the MS1/negative denominator",
+        "same-frame target disambiguation correct >= 0.70",
+        "bearing median <= 3.0 deg and P90 <= 5.0 deg on reference-available emitted frames",
+        "reference declaration correct rate (GT-unavailable refusal) >= 0.50 and false-reference rate <= 0.10",
+        "worst-group consumer success not worse than frozen single-class baseline worst group by more than 0.05",
+        "consumer success exceeds frozen single-class raw-claim upper bound (0.479 val_main) by no requirement; but must be a confirmed-identity number (supplementary comparison reported)"
+      ],
+      "on_fail": "STOP this two-class version: no new holdout capture/evaluation; keep failure evidence; do not claim the architecture is falsified",
+      "on_pass": "freeze and capture a new holdout"
+    }
+  },
+  "holdout": {
+    "version": "landmark_holdout_freeze_v3 (new; v2 unchanged NOT_TRIGGERED)",
+    "min_new_families": 3,
+    "frames_range": [
+      200,
+      400
+    ],
+    "coverage": [
+      "ms1 confuser alone",
+      "central tower alone",
+      "same-frame tower+MS1",
+      "scale variation (near/far)",
+      "edge truncation",
+      "partial/full occlusion",
+      "target absent"
+    ],
+    "rules": "sampling/annotation frozen before capture; no selection by model quality; one evaluation after model/thresholds/labels/evaluator frozen; no callback; process-isolated holdout (same-agent), not third-party sealed/certification"
+  },
+  "identity_output_rules": {
+    "tower_claim": "class0 detection with score>=tau_det and no class conflict -> may claim RMUC2027_CENTRAL_TOWER_PROPOSED with recorded assumption; otherwise UNKNOWN/REJECTED",
+    "ms1_claim": "class1 must never map to central tower ID; if class1 and class0 both detected, evaluate whether the classes are correctly assigned (correct disambiguation is NOT an automatic rejection; reject only when the model cannot distinguish)",
+    "rejection": "low confidence, class conflict on the same object, multi-target ambiguity, unavailable reference -> explicit UNKNOWN/REJECTED with reason",
+    "forbidden_inputs": [
+      "GT bbox",
+      "GT position",
+      "file name",
+      "oracle region",
+      "label files at inference"
+    ]
+  },
+  "evaluation": {
+    "reports": [
+      "two-class confusion matrix + per-class recall/precision",
+      "tower identity claim precision/recall/false match",
+      "MS1-only wrong tower claims",
+      "same-frame correct-target selection rate",
+      "reference availability + bearing error + success coverage",
+      "all-positive consumer success with UNKNOWN/REJECTED",
+      "improper identity claims under GT-uncertain/fully-occluded frames",
+      "2D pixel error diagnostic only"
+    ],
+    "denominator_policy": "UNKNOWN/REJECTED/no-output stay in their applicable success denominators; GT_UNOBSERVABLE kept in all-domain and reported separately; no deletion of hard frames",
+    "baseline": "frozen single-class model v2 (sha 6b86ef1f) on the same consumer metrics; strict_unknown success=0 is a baseline fact, not the only improvement target"
+  },
+  "evidence": {
+    "plan": "docs/superpowers/plans/2026-11-05-landmark-two-class.md",
+    "report": "docs/reports/perception/LANDMARK_TWO_CLASS_RESULTS_20261105.md",
+    "freeze": "configs/perception/landmark_split_freeze_v6.json",
+    "label_spec": "configs/perception/landmark_two_class_label_spec_v1.json",
+    "model_freeze": "configs/perception/landmark_model_freeze_v3.json",
+    "snapshot": "configs/perception/landmark_run_snapshot_v7.json",
+    "holdout": "configs/perception/landmark_holdout_freeze_v3.json"
+  },
+  "r1_pilot_result": {
+    "recipe": "R1 direct two-class fine-tune from frozen single-class v5 weights on v6.1 train (class1 183 instances)",
+    "status": "GATE_FAIL_REJECTED",
+    "evidence": {
+      "ms1_recall_identity_current": "10/35=0.286",
+      "ms1_recall_val_main_current": "20/47=0.426",
+      "ms1_only_wrong_tower_claims_identity": "last 2/9",
+      "same_frame_identity_best": 0.385,
+      "tower_recall_val_main": "last 0.779 / best 0.758",
+      "consumer_confirmed_all_positive": "val last 0.579 / identity last 0.660",
+      "bearing_median_deg": "1.18/1.27",
+      "note": "metrics recomputed from the final prediction snapshot (shas recorded by evaltool); an earlier stale snapshot (overwritten at 12:19:54) is discarded"
+    },
+    "cause_analysis": {
+      "primary": "near-range MS1 (1.4-2.0 m) is out of the training size domain: class1 training bbox heights max 114.1 px (~2.6 m) vs identity MS1 18/35 >114.1 px and 17/35 >146 px (~<2.0 m); MS1 recall tracks this OOD proportion",
+      "secondary": [
+        "class1 final classification conv re-initialised (6 tensors) while 391 backbone/neck/box/DFL/kpt tensors transfer; 15 epoch pilot remains in low-LR ramp-up",
+        "training val had class1=0 instances -> checkpoint selection/fitness blind to class1",
+        "checkpoint instability: last vs best differ strongly on tower recall/same-frame/MS1 recall -> a single frozen selection rule is required"
+      ],
+      "rejected_causes": [
+        "class0 keypoint [0,0] is a label v=0 placeholder, not a model regression: saved observations contain 0 [0,0] keypoints; decoder/export must add a hard guard to drop v=0/class1 references"
+      ],
+      "evidence": "diag T41-style read-only review (TWO_CLASS pilot cause review, 2026-11-05)"
+    }
+  },
+  "r2_amendment": {
+    "status": "PRE_REGISTERED_2026_11_05_BEFORE_R2_RESULTS",
+    "single_change": "add two new near-range MS1 training families (1.3-2.2 m, MS1 bbox height target 140-220 px) to the v6.1 train set; keep R1 recipe, base weights, epochs=15, batch/imgsz, warmup/patience unchanged",
+    "unchanged": [
+      "pilot gate conditions (MS1 recall >=0.50, wrong MS1-only tower claims <=1/9, same-frame >=0.60, tower recall >=0.70, identity precision >=0.95, consumer confirmed success >=0.30, bearing median <=3 deg, tower recall not worse than single-class 0.821 by >0.08)",
+      "no epoch/seed/candidate increase",
+      "no larger model, no segmentation, no threshold stacking",
+      "holdout only if the development gate passes"
+    ],
+    "checkpoint_selection_rule_frozen": {
+      "candidates": [
+        "last",
+        "best"
+      ],
+      "score": "0.5 * tower_recall_observable_val_main + 0.5 * MS1_recall_identity_62",
+      "tie_break": [
+        "higher same_frame_disambiguation on val_main+identity",
+        "higher tower recall",
+        "lower mean bearing error"
+      ],
+      "rule": "computed on validation only, after R2 training, before any holdout/ONNX/consumer-gate decision; the selected checkpoint is frozen for all downstream evaluation; no consumer or holdout data participates in selection",
+      "consumer_metrics_role": "reporting and development-gate decision only, never checkpoint selection"
+    },
+    "expected_outcome": "improves near-range class1 recall; if MS1 recall stays <0.50 the recipe is rejected and the two-class version stops (no 3-seed, no holdout)",
+    "evidence_basis": "diag cause review: near-range MS1 OOD (training max height 114.1 px vs identity 18/35 >114.1 px), class1 conv re-init and val class1=0 selection blindness"
+  }
+}

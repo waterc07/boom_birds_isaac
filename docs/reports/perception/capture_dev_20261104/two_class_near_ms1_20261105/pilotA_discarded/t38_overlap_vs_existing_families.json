@@ -1,0 +1,26 @@
+{
+ "existing_case_count": 55,
+ "new_cases": [
+  {
+   "case_id": "lmf_t38_f1_ms1_near_sw_0",
+   "nearest_existing_start": {
+    "run": "identity_v1",
+    "case_id": "lmf_devid_ms1_alone_0",
+    "distance_m": 0.438,
+    "yaw_difference_rad": 0.235
+   },
+   "identical_waypoint_sequence": []
+  },
+  {
+   "case_id": "lmf_t38_f2_ms1_near_se_0",
+   "nearest_existing_start": {
+    "run": "identity_v1",
+    "case_id": "lmf_devid_ms1_alone_0",
+    "distance_m": 1.893,
+    "yaw_difference_rad": 1.502
+   },
+   "identical_waypoint_sequence": []
+  }
+ ],
+ "note": "MS1 near families: new poses around MS1; none identical to T19 identity / T30 / holdout draft waypoint sequences"
+}
