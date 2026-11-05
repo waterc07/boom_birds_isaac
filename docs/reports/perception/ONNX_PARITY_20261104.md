@@ -200,7 +200,7 @@
 | src/boom_birds/evaluation/landmark_onnx.py | 纯 numpy/cv2 库：letterbox 几何、NMS、raw 解码、决策比较、配对；供测试与脚本复用 | 6c409587… |
 | configs/perception/landmark_export_v1.json | 导出/对齐策略与容差；仅 repo 相对路径，无本机私有绝对路径 | 50ca3676… |
 | tests/evaluation/test_landmark_onnx.py | 18 条回归（红→绿，含 venv 端到端集成 1 条） | 3dd73fa7… |
-| docs/reports/perception/onnx_parity_20261104.json | 版本化证据 JSON（T14 输出 + artifact_notes；T29 追加 t29_candidate_A 段后 sha 更新，T14 顶层字段/数字未改） | fd820c1d… |
+| docs/reports/perception/onnx_parity_20261104.json | 版本化证据 JSON（T14 输出 + artifact_notes；T29 追加 t29_candidate_A 段后 sha 更新，T14 顶层字段/数字未改） | 44e30cda… |
 
 训练/停止器/阈值冻结/数据准备 CLI 由 teammate “train” 交付（scripts/landmark_train_cli.py、scripts/landmark_freeze_thresholds.py、configs/perception/landmark_train_cli_v1.json）；本任务未重写该文件，只在其 --help 冒烟层验证可执行。两文件写域已通过 team message 协调。
 
@@ -245,7 +245,7 @@ $env:TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD = '1'
 
 ## 9. 交付核对（本次实际结果）
 
-- 版本化证据：本文件 ONNX_PARITY_20261104.md + [onnx_parity_20261104.json](onnx_parity_20261104.json)（sha fd820c1d…，286904 bytes；含 artifact_notes 与 T29 追加段；T14 顶层字段/数字未改，合并前副本 sha 4cbcabc0… 存于 ignored outputs）。
+- 版本化证据：本文件 ONNX_PARITY_20261104.md + [onnx_parity_20261104.json](onnx_parity_20261104.json)（sha 44e30cda…，286904 bytes；含 artifact_notes 与 T29 追加段；T14 顶层字段/数字未改，合并前副本 sha 4cbcabc0… 存于 ignored outputs）。
 - ignored 运行产物：outputs/perception/onnx_parity_20261104/{full/parity_detail.json, export/export_evidence.json, gpu_repeatability.json, parity_run.log, pytest_full.log}；版本化 JSON + 版本化脚本/配置即可复现，不依赖 ignored 脚本。
 - 全部关键数字带分母：126 帧总样本 / 72 GT 帧 / 90 关键点配对 / 17 legacy observation 翻转 / 18 legacy joint 翻转 / 7 near-threshold / 8 multi-candidate。
 - 未提升 Gate、未接控制、未跑 PPO、未改 Isaac venv、未 commit/push。
@@ -347,5 +347,104 @@ $env:TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD = '1'
 - 与 T22 关系：候选 A 3 seed 阶段验证的选模只来自 val_main；本 T29 结果只是“导出/解码不改变判定”，不改 T22 的阶段门结论。
 - 工具扩展：landmark_onnx.py 新增 identity/rejection/bearing 决策层；landmark_onnx_parity.py 新增 identity 文档/MS1/多候选场景、--candidate-label/--selection-json/--tau-bearing-deg/--expected-pt-sha；self_check 增加 10 层 0 翻转门。向后兼容 T14 字段。
 - 验证：tests/evaluation/test_landmark_onnx.py **18 passed**（含 venv 端到端集成）；全仓 pytest **1101 passed**（T29 时点，4:29；T14 时点为 1058，历史保留）；scripts/planning/audit_documents.py PASS。
-- JSON 合并：docs/reports/perception/onnx_parity_20261104.json 追加 t29_candidate_A 段（T14 顶层字段/数字未改；合并前副本 sha 4cbcabc0… 存于 outputs/perception/onnx_parity_20261104/t29_candidateA/t14_evidence_before_candidateA_merge.json；合并后 sha fd820c1d…）。
+- JSON 合并：docs/reports/perception/onnx_parity_20261104.json 追加 t29_candidate_A 段（T14 顶层字段/数字未改；合并前副本 sha 4cbcabc0… 存于 outputs/perception/onnx_parity_20261104/t29_candidateA/t14_evidence_before_candidateA_merge.json；合并后 sha 44e30cda…）。
 - 证据路径：ignored outputs/perception/onnx_parity_20261104/t29_candidateA/{candidateA_last_opset18.onnx, export_evidence.json, parity/evidence.json, parity/parity_detail.json, parity.log}。
+
+---
+
+## 13. T37 增量：two-class（central_tower + MS1）Pilot 权重的 ONNX 三路径对齐
+
+> **状态：** PILOT_ONLY_NOT_SELECTED_VALIDATED（host 端导出/解码/消费者路径一致性证据；**不是**效果、身份或板端证据）
+> **来源章节：** configs/perception/landmark_two_class_protocol_v1.json（PRE-REGISTERED 2026-11-05）、training_20261104/TWO_CLASS_R2_PILOT_20261105.md（pilot gate FAIL）、configs/perception/landmark_export_two_class_v1.json
+> **证据域：** 隔离 .venv/landmark-train 实际运行；val_main two-class pilot truth 163 帧 + identity62 two-class truth 62 帧（共 225 帧）；无 final/holdout、无 RKNN/板端/实机
+> **最后核对：** 2026-11-05
+
+### 13.1 对象与状态（必须先读）
+
+| 项 | 值 |
+| --- | --- |
+| 权重 | outputs/landmark_train/runs/two_class_pilot_v7b/seed0/train_seed0/weights/last.pt；sha256 **64ac3822…**（6403273 bytes） |
+| 来源 | R2 two-class pilot（v6.2 数据 + 近距 MS1；15 ep seed0；snapshot v7b 三阶段 VALID） |
+| pilot 门 | **FAIL → R2 配方被拒，版本停止**：official same-frame（detector-side 双匹配）val **15/47=0.319**、identity **13/26=0.500** < 0.60；identity false-reference 0.077→0.500；consumer all-positive 0.698→0.434 |
+| 标签 | **NOT_SELECTED_VALIDATED_PILOT_ONLY**：本段所有数字只用于“导出/解码/路径是否改变判定”，**不得**读作模型效果、身份能力或板端可用性 |
+| 后续 | 不进入 3 seed / holdout；旧包与最终 artifact sha 不改写 |
+
+### 13.2 导出（two-class）
+
+- 命令：scripts/landmark_export_onnx.py --config configs/perception/landmark_export_two_class_v1.json --verify（config 已绑定上述权重 sha；status=PILOT_ONLY_NOT_SELECTED_VALIDATED）。
+- ONNX：outputs/perception/onnx_parity_20261105/t37_two_class/exports/two_class_pilot_v7b_last_opset18.onnx；sha256 **8bc01a40…**；12550526 bytes；opset **18**；graph nodes **272**；simplify=true。
+- 类别表绑定：{'0':'central_tower','1':'similar_structure_ms1'}（与 checkpoint names 一致）；输出通道 **9**（4+2+3，expected=actual=9，ok）。
+- 数值校验：torch(CPU) vs onnxruntime(CPU) 同画布 raw 相对差 **1.097e-6**；verdict：opset/class_table/output_channels/numeric 全部 true。
+
+### 13.3 样本与阈值（PILOT 口径）
+
+| 项 | 值 |
+| --- | --- |
+| 样本 | **225 帧** = val_main two-class pilot truth **163**（状态 PILOT_DERIVED_EVAL_DOC_NOT_FROZEN）+ identity62 two-class truth **62**（状态 PROVISIONAL_DIAGNOSTIC_ONLY_BUILT_FROM_DEVELOPMENT_POOL）；无 final/holdout/合成变体 |
+| near_threshold | 6 帧 |
+| 阈值 | T34 evaluator 默认：tau_det=0.25、tau_margin=0.10、tau_kpt=0.5、tau_iou=0.3、tau_px=3.0；**PROPOSED_PILOT_DEFAULTS_NOT_FROZEN**（pilot 被拒，无 model_freeze_v3） |
+| NMS | conf=0.01、IoU=0.7、max_det=300、**class-aware**（class×max_wh=7680 offset；跨类重叠不互抑） |
+| class1 规则 | 永不映射 central tower landmark id；keypoint 恒不可用（不发射、无 bearing；bbox 中心不作替代） |
+
+### 13.4 三路径决策层（两类，225 帧）
+
+三对 primary（pt_square / onnx_native_square / raw_ort_square）的 **12 个两类决策层全部 0 翻转**（分母 225 帧）：
+
+| 层 | A↔B | A↔C | B↔C |
+| --- | ---: | ---: | ---: |
+| status | 0 | 0 | 0 |
+| tower_present | 0 | 0 | 0 |
+| ms1_present | 0 | 0 | 0 |
+| tower_count | 0 | 0 | 0 |
+| ms1_count | 0 | 0 | 0 |
+| tower_claim | 0 | 0 | 0 |
+| ms1_maps_tower（必须恒 false） | 0 | 0 | 0 |
+| reference_available | 0 | 0 | 0 |
+| bearing_presence | 0 | 0 | 0 |
+| bearing（Δ°） | 0 | 0 | 0 |
+| class_conflict | 0 | 0 | 0 |
+| reject_reason | 0 | 0 | 0 |
+
+- tower keypoint：A↔B/A↔C max **9.92e-5 px**；B↔C **0.0 px**。
+- MS1 bbox 配对 IoU 最小值 **1.0**（A↔B/A↔C/B↔C）。
+- bearing：A↔B/A↔C max |Δ| **2.44e-5°**；B↔C **0.0°**。
+- raw（torch vs onnxruntime，同画布）：max |Δ| **0.04797**、mean 3.29e-5、相对 **7.496e-5**（≤1e-3，pass）；per-channel box [0.0044,0.0092,0.0158,0.0480]、class scores [5.87e-6,6.59e-6]、kpt [0.0020,0.0040,3.72e-5]；per-anchor class argmax mismatch **339/1,890,000 = 1.79e-4**（≤0.1% 门限；class score max |Δ|=6.59e-6，均发生在近 tie anchor），pass。
+- 结论：**导出图/冻结图与 raw 解码在两类判定上等价**；三路径 PASS（self_check.passed=true）。
+
+### 13.5 Consumer 成功判定（T34 evaluator，路径一致性）
+
+- 定义来源：src/boom_birds/evaluation/landmark_two_class_eval.py（T34，evaluate_saved；identity_policy=confirmed_only）；本工具只写 T34 prediction 行并比较路径，不新增口径。
+- 三对 primary 的 **12 个 consumer 行级字段全部 0 翻转**：success / tower_claim / raw_claim / tower_claim_correct / wrong_claim / class1_mapped_violation / reference_correct / false_reference / bearing_ok / keypoint_emitted / class1_keypoint_emitted / improper_claim。
+- 三路径诊断数字（每条路径完全相同；分母/口径为 T34 evaluator，非 official pilot consumer 报告，不可与 pilot 官方 0.645/0.434 直接对比）：
+
+| 指标 | 值 |
+| --- | --- |
+| consumer success（all_positive） | 49/174 = 0.282（unknown_or_rejected 0） |
+| consumer success（observable_positive） | 49/139 = 0.353 |
+| consumer success（reference_available） | 49/59 = 0.831 |
+| negatives 正确拒绝 | 51/51 = 1.000 |
+| class0（tower）TP/FP/FN、P/R | 122/31/17、P 0.797、R 0.878（GT 139） |
+| class1（MS1）TP/FP/FN、P/R | 43/9/39、P 0.827、R 0.524（GT 82） |
+| identity claims / correct / precision / FMR | 116 / 116 / 1.000 / 0.000 |
+| MS1-only 错误塔 claim | 0/9 |
+| class1→tower 违规 | 0 |
+| same-frame（T34 消费者口径，塔被选中） | 59/73 = 0.808（诊断；pilot gate 用 detector-side 双匹配 0.319/0.500，二者不可互换） |
+| reference coverage | 57/59 = 0.966；false_reference 66/80 = 0.825；class1 keypoint emissions 0 |
+| bearing（emitted 57） | pass≤3° 51/57=0.895；median 0.675°、P90 3.237°、max 4.556° |
+
+- 说明：以上数字是 **pilot 权重的路径等价诊断**（三路径相同），其中 false_reference 0.825、same-frame 0.319/0.500 等项目正是 pilot 被拒的相关现象；不得用它们宣称身份通道有效或模型达标。
+
+### 13.6 结论与边界
+
+- **PASS（host 端）**：two-class pilot 权重的 ONNX 导出（类别表/9 通道绑定）、ultralytics 原生 ONNX 路径、raw-ORT class-aware NMS/解码路径在 225 帧上产生**完全相同的 12 层决策与 12 个 consumer 判定**；tower/MS1 检测、identity claim、拒绝 reason、reference/bearing、consumer 成功判定均无路径差异。
+- **不证明**：模型效果、身份能力、pilot 门通过、板端/RKNN 可部署或导航可用；R2 已被 gate 拒绝、版本停止；标签未冻结（PILOT_DERIVED/PROVISIONAL）；阈值是 PROPOSED pilot 默认值。
+- 与旧段关系：T14（单类）与 T29（单类候选 A）数字不改；本段仅追加 t37_two_class。
+- 验证：scripts/landmark_onnx_parity.py（--two-class）实际运行 **169.3 s**；离线单元测试 31 passed（不含模型集成）；全仓 pytest 结果见 §13.7（T37 时点）。
+- 证据：docs/reports/perception/onnx_parity_20261104.json 追加 t37_two_class 段（合并前副本 sha 存于 ignored；旧顶层字段未改）；ignored outputs/perception/onnx_parity_20261105/t37_two_class/{export_evidence.json, parity/evidence.json, parity/parity_detail.json, parity.log}。
+- 工具：src/boom_birds/evaluation/landmark_onnx.py（class-aware NMS、decode_two_class_rows、decode_ultralytics_two_class_result、two_class_decision_diff）；scripts/landmark_onnx_parity.py（--two-class*、consumer parity）；scripts/landmark_export_onnx.py（类别表/通道校验）；configs/perception/landmark_export_two_class_v1.json。
+
+### 13.7 验证（T37 时点）
+
+- tests/evaluation/test_landmark_onnx.py -k 'not end_to_end'：**31 passed**（CPU 轻量）。
+- 全仓 pytest：**1161 passed in 140.72 s**（T37 时点；含本任务 31 条离线单测与 1 条模型集成测试）
+- scripts/planning/audit_documents.py：**PASS**（exit 0）。

@@ -586,6 +586,8 @@ def consumer_predictions_rows(records, path_name):
                 'keypoint_confidence': item.get('keypoint_confidence'),
             })
         rows.append({'frame_id': frame_id,
+                     'status': observation.get('status'),
+                     'reject_reason': observation.get('reject_reason'),
                      'detections': detections,
                      'landmark_id': observation.get('landmark_id')})
     return rows
@@ -685,8 +687,7 @@ def run_consumer_parity(records, labels_path, protocol_path, *,
         'evaluator': 'src/boom_birds/evaluation/landmark_two_class_eval.py '
                      '(T34; evaluate_saved)',
         'identity_policy': identity_policy,
-        'labels': str(labels_path),
-        'labels_sha256': parity.sha256_file(labels_path),
+        'labels': labels_meta,
         'protocol': str(protocol_path),
         'protocol_sha256': (parity.sha256_file(protocol_path)
                             if Path(protocol_path).is_file() else None),
@@ -1559,7 +1560,8 @@ def main(argv=None):
                 total_abs += float(difference.sum())
                 count += int(difference.size)
                 per_channel = np.maximum(
-                    per_channel, _per_channel_max_abs(difference))
+                    per_channel,
+                    _per_channel_max_abs(difference, expected_channels))
             relative = max_diff / float(args.imgsz)
             relative_atol = float(tolerances.get(
                 'raw_max_abs_diff_relative', 1e-3))
@@ -1599,11 +1601,21 @@ def main(argv=None):
                                                       for tensor in tensors],
                                                      len(class_table))
                 raw_parity['class_argmax'] = class_stats
-                class_mismatch_max = int(((tolerances or {}).get(
-                    'class_argmax_mismatch_max', 0)))
-                class_ok = bool(class_stats.get('anchor_mismatch') is not None
-                                and class_stats['anchor_mismatch']
-                                <= class_mismatch_max)
+                rate_max = (tolerances or {}).get(
+                    'class_argmax_mismatch_rate_max')
+                mismatch_count = int(((tolerances or {}).get(
+                    'class_argmax_mismatch_max') or 0))
+                class_stats['rate_max'] = rate_max
+                class_stats['count_max'] = mismatch_count
+                if rate_max is not None and class_stats.get(
+                        'class_argmax_mismatch_rate') is not None:
+                    class_ok = bool(
+                        class_stats['class_argmax_mismatch_rate']
+                        <= float(rate_max))
+                else:
+                    class_ok = bool(class_stats.get('anchor_mismatch') is not None
+                                    and class_stats['anchor_mismatch']
+                                    <= mismatch_count)
             else:
                 class_ok = True
             raw_parity['class_argmax_ok'] = class_ok
@@ -1722,16 +1734,18 @@ def main(argv=None):
         primary_pair_names = ['pt_square_vs_onnx_native_square',
                               'pt_square_vs_raw_ort_square',
                               'onnx_native_square_vs_raw_ort_square']
-        for pair_name in primary_pair_names:
-            pair = pairs.get(pair_name)
-            if pair is None:
-                continue
-            checks[pair_name] = {
-                'decision_flips_ok': pair['observation_decision_flips']
-                <= flip_tolerance,
-                'keypoint_ok': (pair['keypoint_max_px'] is None
-                                or pair['keypoint_max_px'] <= keypoint_tolerance),
-            }
+        if not two_class:
+            for pair_name in primary_pair_names:
+                pair = pairs.get(pair_name)
+                if pair is None:
+                    continue
+                checks[pair_name] = {
+                    'decision_flips_ok': pair['observation_decision_flips']
+                    <= flip_tolerance,
+                    'keypoint_ok': (pair['keypoint_max_px'] is None
+                                    or pair['keypoint_max_px']
+                                    <= keypoint_tolerance),
+                }
         layer_checks = {}
         if two_class:
             for pair_name in primary_pair_names:
@@ -1912,7 +1926,21 @@ def main(argv=None):
                     'consumer success is evaluated by the T34 artifacts, not '
                     'here' if two_class else None),
             },
-            'limitations': [
+            'limitations': ([
+                'PILOT ONLY: the checkpoint is the R2 pilot last weights '
+                '(two_class_pilot_v7b/seed0); the pilot gate FAILED, so it is '
+                'NOT_SELECTED_VALIDATED_PILOT_ONLY and no effect/identity/board '
+                'conclusion may be drawn',
+                'two-class GT labels are PILOT_DERIVED_EVAL_DOC_NOT_FROZEN / '
+                'PROVISIONAL_DIAGNOSTIC_ONLY (not frozen v6)',
+                'thresholds are T34 evaluator defaults (tau_det=0.25, '
+                'tau_margin=0.10, tau_kpt=0.5, tau_iou=0.3, tau_px=3.0) because '
+                'no two-class model_freeze_v3 exists for a rejected pilot',
+                'consumer metrics are T34-evaluator derived and are path-parity '
+                'diagnostics on the sampled labels, not a gate evaluation',
+                'RKNN/board, real camera, accuracy certification remain out of '
+                'scope (UNKNOWN)',
+            ] if two_class else [
                 'synthetic aspect/edge/multi-candidate variants have no GT, so '
                 'their comparison is observation-level only',
                 'near-threshold selection uses the raw ORT top score on the '
@@ -1921,7 +1949,7 @@ def main(argv=None):
                 'single one-shot evaluation; no new final metrics were produced',
                 'RKNN/board, real camera, accuracy certification remain out of '
                 'scope (UNKNOWN)',
-            ],
+            ]),
         }
         detail_path = parity.dump_json(out_dir / 'parity_detail.json', {
             'schema_version': 'dsh.landmark_onnx_parity_detail.v1',

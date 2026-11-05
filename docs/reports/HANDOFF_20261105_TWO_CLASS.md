@@ -20,7 +20,7 @@
 
 - T30 two-class 373 帧（class0 232/class1 123/同框 39）+ v4.1 addendum 60 + T38 近距 MS1 102（class1 102，h 184–227px）；T38 discarded pilot 不登记。
 - v6.1 canonical 3532df1a…（P2 eval union 225 帧，五类 139/9/73/38/39、train 重叠 0）；v6.2 canonical d8ad5ca0…（train 2396/val 1006，class1 285）；snapshot v7b 5daef982…（34 artifacts VALID）；泄漏/外部索引 PASS。
-- P2 GT-poison PASS（225 帧 differing=0，模型 R1 last 508a0430…）；ONNX two-class 对 R2 pilot last 的导出/对齐（若完成见 ONNX_PARITY t37 段；否则 NOT_RUN）。
+- P2 GT-poison PASS（225 帧 differing=0，模型 R1 last 508a0430…；R2 last 为 second-model 加固）；ONNX two-class 对 R2 pilot last（NOT_SELECTED_VALIDATED_PILOT_ONLY）导出+三路径 12 决策层 × 3 对 0 翻转（225 帧，ONNX 8bc01a40…），仅证明路径等价。
 - 训练证据（ignored）：outputs/landmark_train/runs/two_class_pilot_v61/、two_class_pilot_v7b/；评测：outputs/perception/two_class_eval_20261105/。
 
 ## 下一版建议

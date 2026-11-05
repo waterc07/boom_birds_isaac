@@ -102,7 +102,7 @@
 
 ## 7. ONNX 与工程边界
 
-- ONNX：**NOT_RUN（本包未执行）**——两套 two-class 配方均被 pilot 门拒绝，**不存在最终选定/验证的 two-class 权重**；按“为最终选定权重导出”的定义无可导出对象。若仅需工程一致性证据，可对 R2 pilot last（64ac3822…）导出并为 NOT_SELECTED_VALIDATED_PILOT_ONLY，但不得作为效果/身份证据（本包未做）。
+- ONNX：对 R2 pilot last（权重 `64ac3822…`，**NOT_SELECTED_VALIDATED_PILOT_ONLY**）做了 two-class 导出+三路径决策层对齐：ONNX `8bc01a40…`（opset18/272 nodes/simplify，类别表与 checkpoint 一致、输出通道 9）；225 帧（val_main 163 + identity 62）上 pt/原生 ONNX/raw-ORT 的 **12 个两类决策层 × 3 对 primary 全部 0 翻转**（status/tower_present/ms1_present/counts/tower_claim/ms1_maps_tower/reference/bearing_presence/bearing/class_conflict/reject_reason）；kpt max 9.92e-5 px、MS1 IoU min 1.0、bearing max |Δ| 2.44e-5°；consumer 12 字段路径间 0 翻转；self_check PASS。仅证明导出/解码路径等价，**不证明效果/身份/板端**；因无最终选定权重，按 NOT_SELECTED_VALIDATED_PILOT_ONLY 归档。
 - P2 GT-poison：R1 last 模型 225 帧 PASS（见 §3）；R2 权重不改变管线语义。
 - RKNN/板端/真实相机/INT8/延迟：UNKNOWN（无板卡）；许可仍仅内部有界研究。
 

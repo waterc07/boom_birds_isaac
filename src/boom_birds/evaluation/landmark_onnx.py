@@ -532,6 +532,8 @@ def build_two_class_observation(detections, *, thresholds, intrinsics=None,
     """
     from boom_birds.evaluation import landmark_yolo as yolo
     table = normalize_class_table(class_table)
+    if landmark_id is None:
+        landmark_id = yolo.DEFAULT_LANDMARK_ID
     tau_det = float(thresholds.get('tau_det', 0.5))
     tau_margin = float(thresholds.get('tau_margin', 0.1))
     tau_kpt = float(thresholds.get('tau_kpt', 0.5))

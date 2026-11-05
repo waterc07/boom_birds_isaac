@@ -95,6 +95,7 @@
 - R1（v6.1，15ep）：MS1 recall identity 0.286 <0.50 → pilot gate FAIL（近距 MS1 OOD；class1 head 重初始化+15ep+warmup）。
 - R2（v6.2+近距 MS1，15ep）：MS1 recall 修复到 0.571、tower 0.853，但官方 same-frame 0.319/0.500 <0.60 → pilot gate FAIL；且 identity false-ref 0.077→0.500、consumer all 0.698→0.434、val negative claims 2/39、GT_UNOBS improper 2 → 回退项进一步阻止 promotion。
 - 预算：2 次 pilot（≤15ep），**0 次完整训练**；未 3-seed、未 holdout。
+- ONNX：对 R2 pilot last（NOT_SELECTED_VALIDATED_PILOT_ONLY）导出并做 two-class 三路径对齐，225 帧 12 决策层 × 3 对 0 翻转（kpt max 9.92e-5 px、ONNX `8bc01a40…`）；仅证明路径等价，不证明效果/身份/板端。
 - 可保留正面证据：近距 MS1 数据方向有效（MS1 recall 0.286→0.571）；但 same-frame 消歧与 reference availability/负例/不可观测 claim 是本版失败点。
 - 下一版若继续 two-class 需新预注册（same-frame 监督、参考通道 guard、negatives/GT_UNOBS claim、class1 不干扰 kpt 分支），不是本 R2 的延续；当前可交付基线仍是单类 + identity 显式 UNKNOWN + bearing-primary 诊断。
 - 旧包 47d1063 封闭、旧模型/协议/hash 不改；`CURRENT_STATUS`/`AGENTS` 中历史“训练 BLOCKED/下一项”表述已在本包开头按日期更正（历史保留）。
